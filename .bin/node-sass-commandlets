@@ -1,0 +1,17 @@
+#!/bin/bash
+
+return 
+
+## SHORTCUTS/ALIASES
+
+node-sass -r -w $STYLE_SRC_PATH/$STYLE_INPUT --output-stype exapanded -o $STYLE_DEST_PATH
+
+node-sass --include-path "$PROJ_ROOT/source/styles/**{theme,style_modules,library,components}" --output-style expanded source/styles/style.scss
+
+node-sass --include-path "$PWD" --output-style expanded source/styles/style.scss
+
+node-sass style.scss --output-format expanded ../../public/content/themes/
+
+node-sass source/styles/style.scss --output-style expanded --indent-type space --indent-width 2 -o --linefeed lf --precision 4 --output="./public/content/"
+
+node-sass --output-style expanded --indent-type space --indent-width 2 --linefeed lf --precision 4 --output ./public/content/themes/fnh/  source/styles/style.scss

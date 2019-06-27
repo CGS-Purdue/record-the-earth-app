@@ -1,0 +1,195 @@
+#!/bin/bash
+
+#
+#  EXAMPLE ONE-LINER ROUGH EXAMPLE
+#   `find . ! -path "*dist/*" -type f -name "*func*" | xargs -n1 cat | grep -v "@import" > .dist/functions.scss `
+#
+#
+
+#  cat $STYLESHEET_ENTRY | grep -v  "^\/\/" | grep "@import " | sed 's/@import //; s/\.scss//' \
+#   | tr -d "'\";" | sed 's/\//*/; s/^/".\//; s/$/*"/'  \
+#   | xargs -n1 find -path | xargs cat \
+#   | grep -v "^[/][/*]" > combined-library.scss
+
+# cat index.scss | grep -v  "^\/\/" | grep "@import " | sed 's/@import //; s/\.scss//' | tr -d "'\";" | sed 's/\//*/; s/^/".\//; s/$/*"/' \
+# \ | xargs -n1 find -path | xargs cat | grep  -v -E "^[\/][\/\*]|^[[:space:]]*[\/][\/]|^\*\/|^[[:space:]]*$*[[:space:]]*$"
+
+# sed 's/@/\n\n@/g; s/}/}\n/g'
+# 's/^\@/\n\@/;s/^\}/\}\n/'
+## MAKE INDEX
+# find ./ -type f -printf "%f\n " | sort --version-sort
+
+## MATCH BLOCK COMMENTS
+
+## | tr -d '\n' | sed 's/\([\/][\*][[:space:][:alnum:]!@#$%\^&\*()_+-= ]*[\*][\/]\)/\n\n__STARTCOM__\1__ENDCOM__\n\n/g;'
+
+# STEP ONE - READ IMPORTED FILES AND CLEAN THEM FOR INPUT
+# cat index.scss| grep import | grep -v -E "classes|^\/\/" | sed 's/@import //; s/\.scss//' | tr -d "';\""
+#
+# STEP 2
+# cat index.scss| grep import | grep -E "classes|^\/\/" | sed 's/@import //; s/\.scss//' | tr -d "';\"" |  sed  's/\//*/g; s/^/"\*/; s/$/.scss"/;' | xargs -n1 find -path | xargs cat > $STYLESHEET_DEST/Layouts.classes.scss
+
+# SASS LIBRARY
+_library () {
+
+  cat $STYLESHEET_ENTRY \
+    | grep -v  "^\/\/" \
+    | grep "@import " \
+    | sed 's/@import //; s/\.scss//' \
+    | tr -d "'\";" \
+    | sed 's/\//*/g; s/^/"*\//; s/$/.scss"/;'  \
+    | xargs -n1 find $STYLE_SRC -path \
+    | xargs cat \
+    | grep -v -E "@import" \
+    | grep -v -E "^[/][/]|^[[:space:]]*[\/][\/]|^[[:space:]]*$"
+#    | sed 's/[\/][\/].*//; s/\s*$//; s/^\@/\n\@/;s/^\}/\}\n/' \
+
+}
+
+# SASS LIBRARY - CLASSES ONLY
+_classes () {
+
+  cat $STYLESHEET_ENTRY \
+    | grep -v  "^\/\/" \
+    | grep "@import" \
+    | grep classes \
+    | sed 's/@import //; s/\.scss//' \
+    | tr -d "'\";" \
+    | sed 's/\//*/g; s/^/"*\//; s/$/.scss"/;'  \
+    | xargs -n1 find $STYLE_SRC -path \
+    | xargs cat \
+    | grep -v -E "^[/][/]|^[[:space:]]*[\/][\/]|^[[:space:]]*$" \
+    | sed 's/[\/][\/].*//; s/\s*$//; s/^\@/\n\@/;s/^\}/\}\n/'
+
+}
+
+# SASS LIBRARY - FUNCTIONS ONLY
+_functions () {
+
+  cat $STYLESHEET_ENTRY \
+    | grep -v  "^\/\/" \
+    | grep "@import" \
+    | grep -v classes \
+    | sed 's/@import //; s/\.scss//' \
+    | tr -d "'\";" \
+    | sed 's/\//*/g; s/^/"*\//; s/$/.scss"/;'  \
+    | xargs -n1 find $STYLE_SRC -path \
+    | xargs cat \
+    | grep -v -E "^[/][/]|^[[:space:]]*[\/][\/]|^[[:space:]]*$" \
+    | sed 's/[\/][\/].*//; s/\s*$//; s/^\@/\n\@/;s/^\}/\}\n/'
+
+}
+
+# SASS LIBRARY - FUNCTIONS ONLY
+_mixins () {
+
+  cat $STYLESHEET_ENTRY \
+    | grep -v  "^\/\/" \
+    | grep "@import" \
+    | grep -v classes \
+    | sed 's/@import //; s/\.scss//' \
+    | tr -d "'\";" \
+    | sed 's/\//*/g; s/^/"*\//; s/$/.scss"/;'  \
+    | xargs -n1 find $STYLE_SRC -path \
+    | xargs cat \
+    | grep -v -E "^[/][/]|^[[:space:]]*[\/][\/]|^[[:space:]]*$" \
+    | sed 's/[\/][\/].*//; s/\s*$//; s/^\@/\n\@/;s/^\}/\}\n/'
+
+}
+
+
+
+# SASS LIBRARY - VARIABLES ONLY
+_variables () {
+
+  cat $STYLESHEET_ENTRY \
+    | grep -v  "^\/\/" \
+    | grep "@import " \
+    | sed 's/@import //; s/\.scss//' \
+    | tr -d "'\";" \
+    | sed 's/\//*/g; s/^/"*\//; s/$/.scss"/;'  \
+    | xargs -n1 find $STYLE_SRC -path \
+    | xargs cat \
+    | grep -v -E "^[/][/]|^[[:space:]]*[\/][\/]|^[[:space:]]*$" \
+    | sed 's/[\/][\/].*//; s/\s*$//; s/^\@/\n\@/;s/^\}/\}\n/' \
+    | tr -d "\n" \
+    | sed -E 's/[ ]+/ /g' \
+    | sed 's/@import/\n@import/g; s/@function/\n@function/g; s/@mixin/\n@mixin/g' \
+    | sed 's/";/";\n/g;' \
+    | sed "s/';/';\n/g;" \
+    | sed 's/!default;/!default;\n/g;' \
+    | sed 's/\;\$/\;\n\$/g;' \
+    | sed 's/\} \&/\}\n  \&/g;' \
+    | sed -E 's/[^#]\{/\{\n  /g;'
+
+    # | sed 's/[;]/;\n/g; s/[}]/}\n /g'
+
+    # | sed -E 's/\n//g;'
+    # | grep  -E "^[\$]"
+
+}
+
+
+# CFG_BUILD_DIR="${npm_config_BUILD_DIR}"
+
+_help () {
+  echo "
+  Create SASS/SCSS master file for reference and optimization
+
+  [usage]
+  build2library <option>
+
+    functions
+    library
+    classes
+    variables
+"
+}
+
+# SASS LIBRARY
+SRC=${1:-"./"}
+DEST=${2:-"$SRC"}
+
+# GET VALUES FROM ENVIRONMENT
+if [ -f "$(npm prefix)/.npmrc" ]; then
+  . "$(npm prefix)/.npmrc"
+fi
+
+# THEME_SRC="$STYLE_SRC/**/*.scss"
+#SRC=$STYLE_LIB_ENTRY
+STYLESHEET_ENTRY="$STYLE_SRC/$STYLE_NAME"
+STYLESHEET_DEST="$STYLE_SRC/.dist/"
+
+# ====
+# main
+# ====
+SELECT="${1:-help}"
+case $1 in
+  functions)
+    _functions > $STYLESHEET_DEST/Library.functions.scss
+    ;;
+
+  mixins)
+    _mixins > $STYLESHEET_DEST/Library.mixins.scss
+    ;;
+
+  library)
+    _library > $STYLESHEET_DEST/Library.scss
+    ;;
+  classes)
+    _classes > $STYLESHEET_DEST/Library.classes.scss
+    ;;
+  variables)
+    _variables > $STYLESHEET_DEST/Library.variables.scss
+    ;;
+  help)
+    _help
+    ;;
+  *)
+   _library
+    #_library > $STYLESHEET_DEST/Library.scss
+
+    ;;
+esac
+
+exit 0

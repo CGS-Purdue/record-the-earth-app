@@ -1,0 +1,76 @@
+
+.color {
+  color: inherit;
+   &-black {      color : $black !important;   }
+   &-blue-100 {   color : $blu_100 !important; }
+   &-blue-200 {   color : $blu_200 !important; }
+   &-blue-300 {   color : $blu_300 !important; }
+   &-blue-400 {   color : $blu_400 !important; }
+   &-blue-500 {   color : $blu_500 !important; }
+   &-blue-600 {   color : $blu_600 !important; }
+   &-cyan {       color : $cyan !important;    }
+   &-green-100 {  color : $grn_100 !important; }
+   &-green-200 {  color : $grn_200 !important; }
+   &-green-300 {  color : $grn_300 !important; }
+   &-green-400 {  color : $grn_400 !important; }
+   &-green-500 {  color : $grn_500 !important; }
+   &-green-600 {  color : $grn_600 !important; }
+   &-grey {       color : $grey !important;    }
+   &-grey-100 {   color : $gra_100 !important; }
+   &-grey-200 {   color : $gra_200 !important; }
+   &-grey-300 {   color : $gra_300 !important; }
+   &-grey-400 {   color : $gra_400 !important; }
+   &-grey-500 {   color : $gra_500 !important; }
+   &-grey-600 {   color : $gra_600 !important; }
+   &-red-100 {    color : $red_100 !important; }
+   &-red-200 {    color : $red_200 !important; }
+   &-red-300 {    color : $red_300 !important; }
+   &-red-400 {    color : $red_400 !important; }
+   &-red-500 {    color : $red_500 !important; }
+   &-red-600 {    color : $red_600 !important; }
+   &-white {      color : $white !important;   }
+   &-yellow-100 { color : $yel_100 !important; }
+   &-yellow-200 { color : $yel_200 !important; }
+   &-yellow-300 { color : $yel_300 !important; }
+   &-yellow-400 { color : $yel_400 !important; }
+   &-yellow-500 { color : $yel_500 !important; }
+   &-yellow-600 { color : $yel_600 !important; }
+}
+
+.bg {
+  color: inherit;
+   &-black {      background-color : $black !important;   }
+   &-blue-100 {   background-color : $blu_100 !important; }
+   &-blue-200 {   background-color : $blu_200 !important; }
+   &-blue-300 {   background-color : $blu_300 !important; }
+   &-blue-400 {   background-color : $blu_400 !important; }
+   &-blue-500 {   background-color : $blu_500 !important; }
+   &-blue-600 {   background-color : $blu_600 !important; }
+   &-cyan {       background-color : $cyan !important;    }
+   &-green-100 {  background-color : $grn_100 !important; }
+   &-green-200 {  background-color : $grn_200 !important; }
+   &-green-300 {  background-color : $grn_300 !important; }
+   &-green-400 {  background-color : $grn_400 !important; }
+   &-green-500 {  background-color : $grn_500 !important; }
+   &-green-600 {  background-color : $grn_600 !important; }
+   &-grey {       background-color : $grey !important;    }
+   &-grey-100 {   background-color : $gra_100 !important; }
+   &-grey-200 {   background-color : $gra_200 !important; }
+   &-grey-300 {   background-color : $gra_300 !important; }
+   &-grey-400 {   background-color : $gra_400 !important; }
+   &-grey-500 {   background-color : $gra_500 !important; }
+   &-grey-600 {   background-color : $gra_600 !important; }
+   &-red-100 {    background-color : $red_100 !important; }
+   &-red-200 {    background-color : $red_200 !important; }
+   &-red-300 {    background-color : $red_300 !important; }
+   &-red-400 {    background-color : $red_400 !important; }
+   &-red-500 {    background-color : $red_500 !important; }
+   &-red-600 {    background-color : $red_600 !important; }
+   &-white {      background-color : $white !important;   }
+   &-yellow-100 { background-color : $yel_100 !important; }
+   &-yellow-200 { background-color : $yel_200 !important; }
+   &-yellow-300 { background-color : $yel_300 !important; }
+   &-yellow-400 { background-color : $yel_400 !important; }
+   &-yellow-500 { background-color : $yel_500 !important; }
+   &-yellow-600 { background-color : $yel_600 !important; }
+}

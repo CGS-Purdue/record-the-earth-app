@@ -1,20 +1,24 @@
-import { configure, addDecorator } from '@storybook/react';
+import { configure, addParameters, addDecorator } from '@storybook/react';
+////
+// import { AppRegistry } from 'react-native';
+// import { getStorybookUI, configure } from '@storybook/react-native';
+////
 import requireContext from 'require-context.macro';
-import { addParameters } from '@storybook/react';
+import { addReadme } from 'storybook-readme';
+import registerWithPanelTitle from 'storybook-readme/registerWithPanelTitle';
+
 import { themes } from '@storybook/theming';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
-import { addReadme } from 'storybook-readme';
+import brandTheme from './theme';
 
 import '../src/index.css';
 
 
 function loadStories() {
-
-  require('../src/stories/index');
-
+  require('./stories/index');
+  // require('../src/stories/theme');
   req.keys().forEach(filename => req(filename));
 }
-
 
 const newViewports = {
   responsiveView: {
@@ -31,24 +35,44 @@ const newViewports = {
 };
 
 
-const req = requireContext('../src/components', true, /\.stories\.js$/);
 
-addDecorator(addReadme);
+// addParameters({
+// })
+// addParameters({
+//   darkMode: {
+//     dark: { ...themes.dark, appBg: 'black' },
+//     light: { ...themes.normal, appBg: '#efefef' },
+//   }
+// })
+// addParameters({
+// })
+
+
+// registerWithPanelTitle('Docs');
 
 addParameters({
+  options: {
+    theme: brandTheme,
+    showPanel: true,
+    panelPosition: 'bottom',
+  },
   viewport: {
     viewports: {
       ...INITIAL_VIEWPORTS,
       ...newViewports,
     }
   },
+  readme: {
+    // codeTheme: 'atom-dark',
+    codeTheme: 'Pojoaque',
+    // You can exclude prop tables globally here.
+    // See `propTables` example for more info
+    // excludePropTables: [YourImportedReactComponent],
+  },
 });
-// addParameters({
-//   darkMode: {
-//       // Override the default dark theme
-//       dark: { ...themes.dark, appBg: 'black' },
-//       // Override the default light theme
-//       light: { ...themes.normal, appBg: 'red' }
-//     }
-// });
+
+addDecorator(addReadme);
+
+const req = requireContext('../src/components', true, /\.stories\.js$/);
+
 configure(loadStories, module);

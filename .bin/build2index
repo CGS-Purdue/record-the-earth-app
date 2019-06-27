@@ -1,0 +1,179 @@
+#!/bin/bash
+
+
+example_start_document () {
+  cp  $PWD/.docs/.templates/head.html $PWD/.build/index.html
+}
+example_include_stylesheet () {
+  echo -e "<link rel=\"stylesheet\" href=\styles.css\">\n" >> .build/index.html
+}
+example_open_content () {
+  cat  $PWD/.docs/.templates/content-open.html >> $PWD/.build/index.html
+}
+example_close_content () {
+  cat $PWD/.docs/.templates/content-close.html >> $PWD/.build/$BUILD_DIR/index.html
+}
+example_close_document () {
+  cat $PWD/.docs/.templates/foot.html >> $PWD/.build/$BUILD_DIR/index.html
+}
+
+_append_index_link () {
+    CONTENTPATH="${1:?content path required for link}"
+    TARGETFILE="${2:-.build/index.html}"
+    echo "<li><a href=\"$CONTENTPATH\">$CONTENTPATH</a></li>\n" >> "$TARGETFILE"
+}
+
+## HELPER FUNCTION HANLDES INPUT OUTPUT
+_call_build_runner () {
+  infile="$1"
+  outfile="$2"
+  echo "$PWD/.bin/build $infile $outfile \n"
+}
+
+
+##
+_build_index () {
+  example_start_document
+  example_include_stylesheet
+  example_open_content
+
+  find $PWD/.build/ -name "*.html"  \
+    -type f ! -name ".build.html" \
+    -printf "<li><a href=\"%P\">%P</a></li>\n" >> .build/index.html
+
+  example_close_content
+  example_close_document
+}
+
+
+## work in progress
+_init_build_content () {
+  for e in "${@:2}";
+  do
+    local e
+    if [ "$e" == "$1" ]; then
+      return 0;
+    else
+    if [ -d ".build/$e" ]; then
+        echo ".build/$e exists, skipping"
+    else
+        echo "$PWD/.build/$e does not exist, adding now"
+        mkdir --parents "$PWD/.build/$e"
+        _append_index_link "$e" "$PWD/.build/index.html"
+    fi
+  fi
+  done
+}
+
+## SENDS EACH FILE RECEIVED ON STD IN TO THE
+## BUILDER
+_build_content_html () {
+
+  echo "@" "${@}"
+  xargs
+  echo "* $*"
+  echo "* $#"
+  while [[ "$*" -gt 0 ]];
+  do
+      echo -e "$PWD/.bin/build $infile $outfile \n"
+      shift
+  done
+  # ;;
+  # for infile in "${@:2}";
+  # mkdir --parents "$PWD/.build/$e"
+  # # ADD COMMAND LINE OPTIONS
+  # do
+  #   local infile
+  #   local out
+  #   if [ "$infile" == "$1" ]; then
+  #     return 0;
+  #   else
+  #       # _append_index_link "$e" "$PWD/.build/index.html"
+  #   fi
+  # done
+}
+
+
+
+# MAIN
+
+SELECT="${1:-help}"
+CFG_BUILD_DIR="${npm_config_BUILD_DIR}"
+
+case $1 in
+  --save)
+      ;;
+  --initbuild)
+      _init_build_dir
+      ;;
+  --index)
+      _build_index
+      ;;
+  --buildcontent)
+      echo "building content"
+      # _init_build_content
+      DIRPATH=$2
+      grep -r --no-filename -E -e '\s*\/\/\/\/?.*$' $DIRPATH \
+        | sed 's/^\s*\/\/\/\//\n---\n/; s/@group/##/g; s/\s*\/\/\/\s\{,2\}//g' \
+        >> $PWD/.build/$DIRPATH/build.html
+        #li# -name ".build.html" \      #   -printf "<li><a href=\"%P\">%P</a></li>\n" > .build/index.html      # find $PWD/.build/ -name "*.html"   -type f ! \
+      ;;
+  --init)
+      find ./ -maxdepth 3 ! -path "*/node_modules/*" -name index.scss \
+        printf "%P\n" | sort --version-sort \
+        | xargs dirname \
+        | tee .build/index.text \
+        | xargs .bin/utils --buildcontent
+      ;;
+  --buildcontenthtml)
+      find -mindepth 1 -name "*index.scss" ! -path "*/node_modules*" \
+        -type f -exec $PWD/.bin/build {} \;
+      ;;
+  --clearfiles)
+      find ./.build -name index.html -delete
+      ;;
+  --docs)
+      ./buid2docs $1
+      ;;
+  --config)
+      echo "SHOW THE CONFIG"
+      ;;
+  *)
+      echo "no selection was made"
+      exit 0
+      ;;
+esac
+
+_build_index
+
+exit 0
+
+
+
+
+# find "$ENTRYPOINT" -name index.scss -printf "%h\n" | sort --version-sort | tr -d "\n\"\))'"
+# $(find library/ -name index.scss -printf "%h\n") \  test/"$(echo'$(find library/ -name index.scss -printf \"%h \n\"' | sort --version-sort\  \
+## find $ENTRYPOINT -name index.scss -printf "%h\n\" | sort --version-sort
+# test/$(echo'$(find library/ -name index.scss -printf "%h setup  docs index page index.scss -printf "%h\n") test/$(echo'$(find library/ -name index.scss -printf "%h
+# sort --version-sort   | $(find library/ -name index.scss -printf "%h\n")
+
+## ALTERNATIVE
+
+# while [[ $# -gt 0 ]]; do
+#   key="$1"
+#   echo $key
+#   echo "smarter key"
+#   [[ ${$key$##}
+#   case key in
+#     -h|--help) # _show_help # exit 0 # ;;
+#     -v|--version) # echo "Version $PROGVERSION" # exit 0 # ;;
+#        --build_index) #  build_index # shift #  ;;`
+#        --debug) #   DEBUG_MANDOWN="yes" #  shift #  ;;`
+#     -i|--input) #   MAN_FILE="$2" # shift # shift #  ;;
+#     -o|--output) #  OUTPUT="yes"  # OUT_FILE="$2" #  shift #  shift # ;;
+#     --) # shift # break # ;;
+#     *) # MAN_PAGE=$key #  shift # ;;
+#    esac
+# done
+#  from : find ./ ! -path "*/node_modules/*" -name index.scss -printf "%P\n"| sort --version-sort  -revese | xargs dirname | tee .build/index.text
+# find ./ ! -path "*/node_modules/*" -name index.scss -printf "%P\n"| sort --version-sort | xargs dirname | tee .build/index.text | xargs .bin/utils

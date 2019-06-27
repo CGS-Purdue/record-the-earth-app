@@ -1,0 +1,48 @@
+#!/bin/bash
+
+
+# sed 's/@/\n\n@/g; s/}/}\n/g'
+# 's/^\@/\n\@/;s/^\}/\}\n/'
+
+## MAKE INDEX
+# find ./ -type f -printf "%f\n " | sort --version-sort
+
+# MATCH BLOCK COMMENTS
+## | tr -d '\n' | sed 's/\([\/][\*][[:space:][:alnum:]!@#$%\^&\*()_+-= ]*[\*][\/]\)/\n\n__STARTCOM__\1__ENDCOM__\n\n/g;'
+
+# STEP ONE - READ IMPORTED FILES AND CLEAN THEM FOR INPUT
+# cat index.scss| grep import | grep -v -E "classes|^\/\/" | sed 's/@import //; s/\.scss//' | tr -d "';\""
+
+# STEP 2
+# cat index.scss| grep import | grep -E "classes|^\/\/" | sed 's/@import //; s/\.scss//' | tr -d "';\"" |  sed  's/\//*/g; s/^/"\*/; s/$/.scss"/;' | xargs -n1 find -path | xargs cat > .dist/Layouts.classes.scss
+
+
+
+# SASS LIBRARY
+SRC=${1:-"./"}
+DEST=${2:-"$SRC"}
+
+# GET VALUES FROM ENVIRONMENT
+if [ -f "$(npm prefix)/.npmrc" ]; then
+  . "$(npm prefix)/.npmrc"
+fi
+
+# THEME_SRC="$STYLE_SRC/**/*.scss"
+
+#SRC=$STYLE_LIB_ENTRY
+STYLESHEET_ENTRY="$STYLE_SRC/style.scss"
+cat $STYLESHEET_ENTRY \
+  | grep -v "^\/\/" \
+  | grep "@import " \
+  | sed 's/@import //; s/\.scss//' \
+  | tr -d "'\";" \
+  | sed 's/\//*/g; s/^/"*\//; s/$/.scss"/;' \
+  | xargs -n1 find $STYLE_SRC -path \
+  | xargs cat \
+  | grep -v -E "^[/][/]|^[[:space:]]*[\/][\/]|^[[:space:]]*$" \
+  | sed 's/[\/][\/].*//; s/\s*$//; s/^\@/\n\@/;s/^\}/\}\n/' \
+  | grep -v -e "^[[:space:]]*$" \
+    > $STYLE_SRC/.dist/Library.scss
+
+  # grep -v "^[/][/*]" \
+  # grep  -v -E "^[\/][\/\*]|^[[:space:]]*[\/][\/]|^\*\/|^[[:space:]]*$*[[:space:]]*$"

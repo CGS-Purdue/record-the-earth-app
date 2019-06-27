@@ -1,0 +1,273 @@
+#!/bin/bash
+
+## COMANND BOOKMARKS
+# . .npmrc && BUILD_DEBUG=YES .bin/build "$STYLE_SRC/style.scss" "$THEME_DEST"
+# $(npm config list --local)
+# INPUT_DIR="$(dirname $INPUT)"
+# THISDIR=$(dirname "$(readlink -f "$0")")
+
+# ---
+# PROJ_ROOT="$(npm prefix)"
+# BUILD_DIR=".build"
+# DIST_DIR=".dist"
+# DOCS_DIR=".docs"
+# ---
+
+# PARSE INPUT BEFORE READING ENV
+INPUT=${1?"error input required"}
+OUTDIR="${2:-$(dirname $INPUT)}"
+DEST_BUILD="$OUTDIR/$BUILD_DIR"
+
+# GET VALUES FROM ENVIRONMENT
+# NOTE: WHEN RUN AS NPM SCRIPT .NPMRC IS
+# SOURCED BEFORE COMMAND TO SET DEFAULT
+# INPUT AND OUTPUT ARGUMENTS WHEN COMMAND
+# IS CALLED
+if [ -f "$(npm prefix)/.npmrc" ]; then
+  echo "Loading project env"
+  . "$(npm prefix)/.npmrc"
+fi
+
+
+debug_env () {
+  echo -e "ENV\n_____\n"
+  echo "INPUT: $INPUT"
+  echo "OUTDIR: $OUTDIR"
+  echo "PROJ_ROOT: $PROJ_ROOT"
+  echo "SRC_DIR: $SRC_DIR"
+  echo "THEME_DEST: $THEME_DEST"
+  echo "DEST_BUILD: $OUTDIR/$BUILD_DIR"
+  echo "DEST_DIST: $OUTDIR/$DIST_DIR"
+  echo "STYLE_SRC: $STYLE_SRC"
+  echo "STYLE_DIR: $STYLE_DIR"
+  echo "npm_config_STYLE_DIR: $npm_config_STYLE_DIR"
+  echo "npm_config_STYLE_SRC: $npm_config_STYLE_SRC"
+  echo "npm_config_SRC_DIR: $npm_config_SRC_DIR"
+  echo "OUTPUT DIR: $OUTDIR"
+  echo "DEST_BUILD: $DEST_BUILD"
+  echo "DEST_DIST: $DEST_DIST"
+  echo "$PROJ_ROOT/$SRC_DIR/$STYLE_DIR"
+  echo ""
+}
+
+no_emptylines () {
+  grep -v -e "^[[:space:]]*$"
+}
+select_lines () {
+  grep "^/\*\?//"
+}
+strip_markers () {
+  sed -r 's/^[*\/]+\s?//g; s/\*\/$/  /g'
+}
+line_ending_spaces () {
+  sed -r 's/\s*$/  /g'
+}
+
+clean_build () {
+  command rm $DEST_BUILD/.build.css
+  command rm $DEST_BUILD/.build.md
+  command rm $DEST_BUILD/.build.html
+}
+
+# NODE-SASS - SSCSS TO CSS
+# INTENDED TO OUTPUT TO STDOUT
+# TO PIPE INTO OTHER COMMANDS
+scss_to_css () {
+  INPUT=$1
+
+  node-sass \
+    --output-style expanded \
+    --indent-type space \
+    --indent-width 2 \
+    --linefeed lf \
+    --precision 4 \
+    $INPUT
+}
+
+# NODE-SASS - WATCH SCSS TO CSS
+# REQUIRES FIXED FILE OUTPUT FILE ARGUEMENT #
+# SELF CONTAINED, THIS WILL BE EVERYTIHNG THATS RUN
+# WHEN THE WATCH FLAG IS ACTIVE
+scss_to_css_watch () {
+  echo "WATCHING: $INPUT"
+  echo "OUTPUT: $OUTDIR"
+
+  node-sass \
+    --output-style compact \
+    --indent-type space \
+    --indent-width 2 \
+    --linefeed lf \
+    --precision 4 \
+    --recursive \
+    --output "$OUTDIR" \
+    --watch "$INPUT"
+}
+
+## DOCUMENT FUNCTIONS
+css_to_md () {
+  select_lines \
+    | strip_markers \
+    | line_ending_spaces
+}
+
+md_to_html () {
+  markdown --html4tags
+}
+
+css_clean () {
+  strip_comments \
+    | line_ending_spaces  \
+    | no_emptylines
+}
+
+css_prefix () {
+  postcss \
+    --no-map \
+    --use autoprefixer
+}
+
+css_min () {
+  postcss \
+    --no-map \
+    $POSTCSS_PLUGIN_AUTOPREFIXER \
+    -u cssnano
+}
+
+css_prod () {
+  postcss "$DEST_BUILD/style.css" \
+    --no-map \
+    -u postcss-single-line  \
+    -u postcss-discard-comments \
+    -u autoprefixer \
+    --output "$DEST_BUILD/index.css"
+}
+
+if [[ "$BUILD_LIVE" == "YES" ]]; then
+  DEST_DIST="$THEME_DEST"
+else
+  DEST_DIST="$OUTDIR/$DIST_DIR"
+fi
+
+# SETS FINAL OUTPUT TO THE LIVE THEME FOLDER
+# INSTEAD OF LIBRARY BUILD/DIST AREA
+[[ "$BUILD_MINIFIY" = "YES" ]] && POSTCSS_PLUGIN_CSSNANO="-u cssnano"
+[[ "$BUILD_AUTOPREFIX" = "YES" ]] && POSTCSS_PLUGIN_AUTOPREFIXER="-u autoprefixer"
+[[ ! "$BUILD_SOURCEMAPS" = "YES" ]] && POSTCSS_FLAGS="--no-map"
+
+# =============================================================================
+#  MAIN
+# =============================================================================
+# BUILD: TEST
+# -----------------------------------------------------------------------------
+if [[ "$BUILD_ENV" = "TEST" ]]; then
+
+  # CHECK BUILD BEFORE RUNNING FULL PROCESS. OUTPUTS TO STD OUT
+  echo "Pre Build Test"
+  node-sass \
+    --output-style compact \
+    $INPUT \
+    | no_emptylines
+
+
+# BUILD: PRODUCTION
+# -----------------------------------------------------------------------------
+elif [[ "$BUILD_ENV" = "PROD" ]]; then
+
+  # BUILD: PROD - MINIFIED
+  # ---------------------------------------------------------------------------
+  if [[ "$BUILD_MINIFIY" = "YES" ]]; then
+    echo "Production Minify Build "
+    scss_to_css \
+      | tee "$DEST_BUILD/.build.css" \
+      | postcss \
+        --no-map \
+        --use postcss-single-line  \
+        --use postcss-discard-comments \
+        --use autoprefixer \
+          | no_emptylines \
+          | tee "$DEST_DIST/style.css" \
+          | css_min  \
+          > "$DEST_DIST/style.min.css"
+
+  # BUILD: PROD - NOT MINIFIED
+  # ---------------------------------------------------------------------------
+  else
+    echo "Production Build No Minify"
+    scss_to_css \
+      | tee "$DEST_BUILD/.build.css" \
+      | postcss \
+       --no-map \
+       -u postcss-single-line  \
+       -u postcss-discard-comments \
+       -u autoprefixer \
+        | no_emptylines \
+        > "$THEME_DEST/style.css"
+  fi
+
+# BUILD: (DEV) NOT PROD BUILD
+# ---------------------------------------------------------------------------
+else
+
+  # PRINT INFO FOR DEBUGGING
+  if [[ "$BUILD_DEBUG" = "YES" ]]; then
+    echo "Development Build"
+    echo "INPUT: $INPUT"
+    echo "BUILD: $DEST_BUILD"
+    echo "DEST: $DEST_DIST"
+  fi
+
+
+  if [[ "$BUILD_WATCH" == "YES" ]]; then
+    echo  "STARTING WATCH TASK"
+    scss_to_css_watch
+  else
+    scss_to_css $INPUT \
+      | tee "$DEST_BUILD/build.css" \
+      | no_emptylines \
+      | postcss \
+        --no-map \
+        --use postcss-single-line \
+        --use postcss-discard-comments \
+        --output "$DEST_DIST/style.css"
+  fi
+fi
+
+
+# MOVE OUTPUT STYLESHEET FROM DEFAULT .DIST TO THEME LOCATION
+if [[ "$BUILD_EXPORT" = "YES" ]]; then
+    command cp -v "$DEST_DIST/style.css" "$THEME_DEST/style.css"
+fi
+
+# EXTRACT COMMENTS TO MARKDOWN FILES
+# PROCESSES MARKDOWN TO HTML AND
+# BUILD EXAMPLE HTML WITH INJECTED STYLES
+if [[ "$BUILD_STYLEGUIDE" = "YES" ]]; then
+    BASE_DIR=$OUTDIR
+    DEST_DOCS="$OUTDIR/$DOCS_DIR"
+    echo "BUILD_STYLEGUIDE"
+
+    scss_to_css \
+      | tee "$DEST_BUILD/.build.css" \
+      | css_to_md  \
+        | tee "$DEST_BUILD/.build.md" \
+        | md_to_html \
+        > "$DEST_BUILD/.build.html"
+
+    cat  "$DEST_BUILD/.build.css" \
+      | css_min \
+      > "$DEST_BUILD/build.min.css"
+
+    source "$BASE_DIR/.bin/build2docs" $OUTDIR \
+      > "$DEST_DOCS/index.html"
+fi
+
+
+if [[ "$BUILD_DEBUG" = "YES" ]]; then
+  debug_env
+  echo "____"
+fi
+
+echo -e "Source: $INPUT"
+echo -e "Destination: $DEST_DIST"
+
+exit 0

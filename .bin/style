@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# $(npm config list --local)
+
+no_emptylines () {
+  grep -v -e "^[[:space:]]*$"
+}
+select_lines () {
+  grep "^/\*\?//"
+}
+line_ending_spaces () {
+  sed -r 's/\s*$/  /g'
+}
+strip_markers () {
+  sed -r 's/^[*\/]+\s?//g; s/\*\/$/  /g'
+}
+line_ending_spaces () {
+  sed -r 's/>$/  /g'
+}
+
+[[ "$BUILD_WATCH" = "YES" ]] && NODESASS_WATCH_FLAGS="--recursive --watch"
+[[ ! "$BUILD_SOURCEMAPS" = "YES" ]] && BUILD_POSTCSS_FLAGS="--no-map"
+
+if [ "$BUILD_ENV" = "PROD" ]; then
+
+  source .npmrc && \
+    node-sass \
+    --output-style expanded \
+    --indent-type space \
+    --indent-width 2 \
+    --linefeed lf \
+    --precision 4 \
+    $NODESASS_WATCH_FLAGS $STYLE_SRC/style.scss \
+      | postcss \
+        --no-map \
+        -u postcss-single-line  \
+        | tee "$BUILD_PATH/theme/build.css" \
+          | postcss \
+            --no-map \
+            -u postcss-discard-comments  \
+            -u autoprefixer \
+              | no_emptylines \
+              > "$STYLE_DEST/style.css" && \
+
+    cat "$BUILD_PATH/theme/build.css" \
+      | select_lines \
+      | strip_markers \
+      | line_ending_spaces \
+      | no_emptylines \
+        > "$BUILD_PATH/theme/.build.md"
+
+else
+  # WE DO NOT NEED POST PROCESING AND FORMATING DURING DEVELOPMENT
+  source .npmrc && \
+    node-sass \
+    $BUILD_NODESASS_FLAGS \
+    --output-style expanded \
+    --indent-type space \
+    --indent-width 2 \
+    --linefeed lf \
+    --precision 4 \
+    $NODESASS_WATCH_FLAGS $STYLE_SRC/style.scss \
+    --output $STYLE_DEST
+fi

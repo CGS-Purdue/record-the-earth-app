@@ -4,6 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { PureTaskList } from './TaskList';
 import { task, actions } from './Task.stories';
 import { withKnobs, object } from '@storybook/addon-knobs/react';
+import { withSmartKnobs } from 'storybook-addon-smart-knobs';
 import { withInfo } from '@storybook/addon-info';
 
 export const defaultTasks = [
@@ -27,6 +28,7 @@ export const withKnobsTasks = [
 
 
 storiesOf('TaskList', module)
+  .addDecorator(withSmartKnobs)
   .addDecorator(withKnobs)
   .addDecorator(withInfo)
   .addDecorator(story => <div style={{ padding: '3rem' }}>{story()}</div>)

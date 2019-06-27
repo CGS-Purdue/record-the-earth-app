@@ -4,10 +4,11 @@ import { action } from '@storybook/addon-actions';
 import { Provider } from 'react-redux';
 
 import { PureInboxScreen } from './InboxScreen';
-// import PureInboxScreenReadme from './InboxScreen.md';
+import PureInboxScreenReadme from './InboxScreen.md';
 import { defaultTasks } from './TaskList.stories';
 import { withKnobs } from '@storybook/addon-knobs/react';
 import { withInfo } from '@storybook/addon-info';
+import { withSmartKnobs } from 'storybook-addon-smart-knobs';
 
 // A super-simple mock of a redux store
 const store = {
@@ -24,13 +25,14 @@ const store = {
 
 
 storiesOf('InboxScreen', module)
+  .addDecorator(withSmartKnobs)
   .addDecorator(withKnobs)
   .addParameters({
       readme: {
         // Show readme before story
-        // content: PureInboxScreenReadme,
+        content: PureInboxScreenReadme,
         // Show readme at the addons panel
-        sidebar: '# test',
+        sidebar: PureInboxScreenReadme
       },
     })
   .addDecorator(withInfo({
