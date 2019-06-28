@@ -13,16 +13,18 @@ if [ -f "$(npm prefix)/.npmrc" ]; then
 fi
 
 
+
 node-sass \
     --output "${BASE_DIR}/${DEST_PATH}" \
-    --output-style compressed \
-    --source-map false \
+    --output-style expanded \
+    --source-map ${BASE_DIR}/${DEST_PATH} \
     "${BASE_DIR}/${STYLE_SRC}/${STYLE_FILE}"
+
 
 node-sass \
     --watch \
     --recursive \
     --output "${BASE_DIR}/${DEST_PATH}" \
-    --output-style compressed \
-    --source-map false \
+    --output-style expanded \
+    --source-map ${BASE_DIR}/${DEST_PATH} \
     "${BASE_DIR}/${STYLE_SRC}/${STYLE_FILE}"
