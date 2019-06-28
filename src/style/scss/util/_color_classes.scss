@@ -1,6 +1,5 @@
 
 .color {
-  color: inherit;
    &-black {      color : $black !important;   }
    &-blue-100 {   color : $blu_100 !important; }
    &-blue-200 {   color : $blu_200 !important; }
@@ -32,13 +31,12 @@
    &-yellow-100 { color : $yel_100 !important; }
    &-yellow-200 { color : $yel_200 !important; }
    &-yellow-300 { color : $yel_300 !important; }
-   &-yellow-400 { color : $yel_400 !important; }
    &-yellow-500 { color : $yel_500 !important; }
+   &-yellow-400 { color : $yel_400 !important; }
    &-yellow-600 { color : $yel_600 !important; }
 }
 
 .bg {
-  color: inherit;
    &-black {      background-color : $black !important;   }
    &-blue-100 {   background-color : $blu_100 !important; }
    &-blue-200 {   background-color : $blu_200 !important; }

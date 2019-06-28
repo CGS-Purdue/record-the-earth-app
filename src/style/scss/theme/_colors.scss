@@ -49,38 +49,37 @@ $colorSchemes :(
   greens : $greenColors,
 );
 
-
-$white : #FFFFFF;
-$black : #000000;
-$cyan : #00E9FF;
-$grey : #AAAAAA;
-$red_100 : #A60000;
-$red_200 : #B72E3E;
-$red_300 : #BF3030;
-$red_400 : #FA3E54;
-$red_500 : #FF0000;
-$red_600 : #FF4040;
-$blu_100 : #04346C;
-$blu_200 : #0B5FA5;
-$blu_300 : #0E53A7;
-$blu_400 : #274E7D;
-$blu_500 : #4284D3;
-$blu_600 : #6899D3;
-$grn_100 : #00CC00;
-$grn_200 : #008500;
-$grn_300 : #1D8C00;
-$grn_400 : #269926;
-$grn_500 : #41A128;
-$grn_600 : #64DF85;
-$yel_100 : #A66F00;
-$yel_200 : #A67300;
-$yel_300 : #BF8F30;
-$yel_400 : #FFA200;
-$yel_500 : #FFAA00;
-$yel_600 : #FFB100;
-$gra_100 : darken(#FFFFFF,10%);
-$gra_200 : darken(#FFFFFF,20%);
-$gra_300 : darken(#FFFFFF,30%);
-$gra_400 : darken(#FFFFFF,40%);
-$gra_500 : darken(#FFFFFF,50%);
-$gra_600 : darken(#FFFFFF,60%);
+$white   : #FFFFFF; ///name:$white
+$black   : #000000; ///name:$black
+$cyan    : #00E9FF; ///name:$cyan
+$grey    : #AAAAAA; ///name:$silverchalice
+$red_100 : #A60000; ///name:$brightred
+$red_200 : #B72E3E; ///name:$wellread
+$red_300 : #BF3030; ///name:$wellread
+$red_400 : #FA3E54; ///name:$radicalred
+$red_500 : #FF0000; ///name:$red
+$red_600 : #FF4040; ///name:$coraled
+$blu_100 : #04346C; ///name:$catalinalue
+$blu_200 : #0B5FA5; ///name:$torylue
+$blu_300 : #0E53A7; ///name:$torylue
+$blu_400 : #274E7D; ///name:$bayfany
+$blu_500 : #4284D3; ///name:$havelocklue
+$blu_600 : #6899D3; ///name:$danube
+$grn_100 : #00CC00; ///name:$green
+$grn_200 : #008500; ///name:$japaneseaurel
+$grn_300 : #1D8C00; ///name:$japaneseaurel
+$grn_400 : #269926; ///name:$forestreen
+$grn_500 : #41A128; ///name:$forestreen
+$grn_600 : #64DF85; ///name:$pastelreen
+$yel_100 : #A66F00; ///name:$chelseaem
+$yel_200 : #A67300; ///name:$pirateold
+$yel_300 : #BF8F30; ///name:$marigold
+$yel_400 : #FFA200; ///name:$orangeeel
+$yel_500 : #FFAA00; ///name:$webrange
+$yel_600 : #FFB100; ///name:$selectiveellow
+$gra_100 : #E6E6E6; ///name:$mercury
+$gra_200 : #CCCCCC; ///name:$silver
+$gra_300 : #B3B3B3; ///name:$nobel
+$gra_400 : #808080; ///name:$gray
+$gra_500 : #999999; ///name:$dustyray
+$gra_600 : #666666; ///name:dovegray 
