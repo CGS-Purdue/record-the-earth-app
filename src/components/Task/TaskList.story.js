@@ -1,11 +1,12 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { PureTaskList } from './TaskList';
-import { task, actions } from './Task.stories';
+import { withInfo }          from '@storybook/addon-info';
 import { withKnobs, object } from '@storybook/addon-knobs/react';
-import { withSmartKnobs } from 'storybook-addon-smart-knobs';
-import { withInfo } from '@storybook/addon-info';
+// import { withSmartKnobs }    from 'storybook-addon-smart-knobs';
+
+import { PureTaskList } from './TaskList';
+import { task, actions } from './Task.story';
 
 export const defaultTasks = [
   { ...task, id: '1', title: 'Task 1', info: 'This is a task info' },
@@ -28,7 +29,7 @@ export const withKnobsTasks = [
 
 
 storiesOf('TaskList', module)
-  .addDecorator(withSmartKnobs)
+  // .addDecorator(withSmartKnobs)
   .addDecorator(withKnobs)
   .addDecorator(withInfo)
   .addDecorator(story => <div style={{ padding: '3rem' }}>{story()}</div>)

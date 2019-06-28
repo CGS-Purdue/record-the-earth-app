@@ -1,4 +1,8 @@
 
+<!-- STORY -->
+
+      <Button>Click</Button>
+
 ### imports
 
   - 'React' from `react`
@@ -6,7 +10,7 @@
   - `connect` from `react-redux`
   - `TaskList` from `./TaskList`
 
-\`\`\`js import { TaskList } from './TaskList'; \`\`\`
+\`\`\`js import { TaskList } from '../../components/Task/TaskList'; \`\`\`
 
 ### exports
 

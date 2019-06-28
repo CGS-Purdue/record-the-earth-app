@@ -1,4 +1,4 @@
-# UploadEntry 
+# UploadEntry
 
 ### Recording Properties/
 

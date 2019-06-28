@@ -2,7 +2,7 @@
 
 <!-- STORY -->
 
-<div class="flex-row" style="height: 20rem">
+<div class="flex-row">
   <div class="logo-box">
     <h3 class="logo-name">Original</h3>
     <i class="logo scaled">
@@ -22,16 +22,3 @@
     </i>
   </div>
 </div>
-
-
-<!-- PROPS -->
-
-
-```html
-<div class="logo-box">
-  <h3 class="logo-name">Original</h3>
-  <i class="logo scaled">
-    <img src="/assets/img/logo-rte.png">
-  </i>
-</div>
-```

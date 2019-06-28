@@ -6,7 +6,6 @@ import { configure, addParameters, addDecorator } from '@storybook/react';
 import requireContext from 'require-context.macro';
 import { addReadme } from 'storybook-readme';
 import registerWithPanelTitle from 'storybook-readme/registerWithPanelTitle';
-
 import { themes } from '@storybook/theming';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import brandTheme from './theme';
@@ -30,23 +29,9 @@ const newViewports = {
       marginLeft: "auto",
       marginRight: "auto",
     },
-    type: 'mobile',
+    type: 'desktop',
   }
 };
-
-
-
-// addParameters({
-// })
-// addParameters({
-//   darkMode: {
-//     dark: { ...themes.dark, appBg: 'black' },
-//     light: { ...themes.normal, appBg: '#efefef' },
-//   }
-// })
-// addParameters({
-// })
-
 
 // registerWithPanelTitle('Docs');
 
@@ -54,12 +39,12 @@ addParameters({
   options: {
     theme: brandTheme,
     showPanel: true,
-    panelPosition: 'bottom',
+    panelPosition: 'right',
   },
   viewport: {
     viewports: {
-      ...INITIAL_VIEWPORTS,
       ...newViewports,
+      ...INITIAL_VIEWPORTS,
     }
   },
   readme: {
@@ -72,7 +57,9 @@ addParameters({
 });
 
 addDecorator(addReadme);
-
-const req = requireContext('../src/components', true, /\.stories\.js$/);
-
+const req = requireContext(
+  '../src/components',
+   true,
+   /\.stories\.js$/
+);
 configure(loadStories, module);

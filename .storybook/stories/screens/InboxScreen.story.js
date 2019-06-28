@@ -1,14 +1,17 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import { Provider } from 'react-redux';
+import { storiesOf } from '@storybook/react';
 
-import { PureInboxScreen } from './InboxScreen';
-import PureInboxScreenReadme from './InboxScreen.md';
-import { defaultTasks } from './TaskList.stories';
-import { withKnobs } from '@storybook/addon-knobs/react';
+import { action } from '@storybook/addon-actions';
 import { withInfo } from '@storybook/addon-info';
-import { withSmartKnobs } from 'storybook-addon-smart-knobs';
+import { withKnobs } from '@storybook/addon-knobs/react';
+// import { withSmartKnobs } from 'storybook-addon-smart-knobs';
+
+import PureInboxScreenReadme from './InboxScreen.md';
+import { PureInboxScreen } from '../../../src/components/Screens/InboxScreen';
+
+import { defaultTasks } from    '../../../src/components/Task/TaskList.story';
+
 
 // A super-simple mock of a redux store
 const store = {
@@ -24,8 +27,8 @@ const store = {
 
 
 
-storiesOf('InboxScreen', module)
-  .addDecorator(withSmartKnobs)
+storiesOf('Screens|InboxScreen', module)
+  // .addDecorator(withSmartKnobs)
   .addDecorator(withKnobs)
   .addParameters({
       readme: {

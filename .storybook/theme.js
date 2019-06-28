@@ -8,7 +8,7 @@ export default create({
   // linear-gradient(0deg,#383838 21%,#5A5A5A 92%)
   // UI
   appBg: '#5A5A5A',
-  appContentBg: 'silver',
+  appContentBg: 'rgba(0,0,0,.2)',
   appBorderColor: 'grey',
   appBorderRadius: 4,
 
