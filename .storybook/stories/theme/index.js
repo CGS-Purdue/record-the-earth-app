@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import centered from '@storybook/addon-centered';
+import centered from '@storybook/addon-centered/react';
 
 import imageUrl from  '../../../static/assets/icon/icons.svg';
 import { Boxes } from '../../../src/components';
@@ -15,18 +15,15 @@ import theme_colors_notifications from './theme.colors.notifications.md';
 import theme_colors_named from         './theme.colors.named.md';
 
 
-storiesOf('Theme', module)
+storiesOf('Theme|Logo', module)
   .addDecorator(centered)
-  // .addDecorator(withKnobs)
-  .add('Logo', () => <h2>Theme Logo</h2>, {
+  .add('white', () => <h2>Theme Logo</h2>, {
       notes:  'A very simple example of addon notes',
       readme: {
-        title: 'theme logo title',
         content: theme_logo_content,
-        codeTheme: 'xcode'
       },
     })
-  .add('Icons', () => <Boxes.ImageBox label="Theme Icons" source={imageUrl} />)
+  .add('Icons', () => <Boxes.ImgBox label="Theme Icons" source={imageUrl} />)
 
 
 storiesOf('Theme|Font', module)
@@ -36,6 +33,7 @@ storiesOf('Theme|Font', module)
       content: theme_font_styles,
     },
   })
+  .addDecorator(centered)
   .add('Headings', () => <h2>Font Headings</h2>, {
     readme: {
       content: theme_font_headings,
@@ -44,21 +42,24 @@ storiesOf('Theme|Font', module)
 
 storiesOf('Theme|Colors', module)
   .addDecorator(centered)
-  .add('Base', () => null, {
+  .add('Base', () => <Boxes.Box />, {
     readme: {
       content: theme_colors_base,
     }
   })
+  .addDecorator(centered)
   .add('Named', () => null, {
     readme: {
       content: theme_colors_named,
     }
   })
+  .addDecorator(centered)
   .add('Interface', () => null, {
     readme: {
       content: theme_colors_ui,
     }
   })
+  .addDecorator(centered)
   .add('Notifications', () => null, {
     readme: {
       content: theme_colors_notifications,

@@ -1,3 +1,6 @@
+// $frame_body_bg: #26c6da;
+$frame_body_bg: #5f7881;
+
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -16,7 +19,7 @@ body {
   @include type-normal;
   color: $color-full;
   font-size: 16px;
-  background-color: #26c6da;
+  background-color: $frame_body_bg;
 }
 h1, h2, h3, h4, h5, h6 {
   @include type-normal;

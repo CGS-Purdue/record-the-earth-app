@@ -10,8 +10,11 @@
     "@bit/wiredjs.wired-elements.wired-card": "^1.0.0",
     "@bit/wiredjs.wired-elements.wired-checkbox": "^1.0.0",
     "@bit/wiredjs.wired-elements.wired-icon-button": "^1.0.0",
+    "@bit/wiredjs.wired-elements.wired-listbox": "^1.0.0",
     "@bit/wiredjs.wired-elements.wired-radio": "^1.0.0",
     "@bit/wiredjs.wired-elements.wired-radio-group": "^1.0.0",
+    "@bit/wiredjs.wired-elements.wired-tabs": "^1.0.0",
+    "@bit/wiredjs.wired-elements.wired-textarea": "^1.0.0",
     "@material-ui/core": "^4.1.3",
     "@storybook/addon-actions": "^5.1.9",
     "@storybook/addon-centered": "^5.1.9",
@@ -26,9 +29,11 @@
     "@storybook/react": "^5.1.9",
     "@storybook/theming": "^5.1.9",
     "babel-loader": "8.0.5",
+    "prop-types": "^15.5.4",
     "react": "^16.8.6",
     "react-chromatic": "^0.8.1",
     "react-dom": "^16.8.6",
+    "react-particles-js": "^2.6.0",
     "react-redux": "^7.1.0",
     "react-scripts": "3.0.1",
     "react-test-renderer": "^16.8.3",
@@ -37,20 +42,23 @@
     "require-context.macro": "^1.0.4",
     "storybook-addon-smart-knobs": "^4.1.2",
     "storybook-dark-mode": "^0.1.3",
-    "storybook-readme": "^5.0.5"
+    "storybook-readme": "^5.0.5",
+    "wired-button": "^1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "bump": "npm version",
-    "build:book": "build-storybook -s static",
-    "build:app": "react-scripts build",
+    "build:book": "./node_modules/.bin/build-storybook --config-dir .storybook --static-dir static --output-dir deploy --no-dll",
+    "book:help":  "./node_modules/.bin/build-storybook --help",
+    "book":       "start-storybook -p 9009 -s static --debug-webpack",
+    "build:app":  "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "style:debug": ".bin/build.debug",
     "style:dev": ".bin/build.dev",
-    "style":     ".bin/build",
+    "style": ".bin/build.dev",
     "preinstall": ".bin/preinstall",
-    "printenv": ".bin/printenv",
-    "book": "start-storybook -p 9009 -s static --debug-webpack"
+    "printenv": ".bin/printenv"
   },
   "eslintConfig": {
     "extends": "react-app"

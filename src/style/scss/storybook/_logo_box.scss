@@ -1,14 +1,11 @@
 .logo-box {
   display: inline-block;
-  margin: 1em;
   text-align: center;
 
   .flex-row & {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     flex-direction: column;
-    margin: 1rem 1em;
-    height: 20rem;
     flex: 1;
     text-align: center;
     position: relative;

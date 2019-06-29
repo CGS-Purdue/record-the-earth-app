@@ -1,0 +1,8 @@
+#!/bin/bash
+
+THEME_STYLE_SRC="./src/less/default"
+THEME_STYLE_MAIN="${THEME_STYLE_SRC}/styles.less"
+THEME_STYLE_DEST="public/assets/css/style.css"
+
+# FROM TERMINAL
+. $(npm prefix)/.env && lessc  ${THEME_STYLE_SRC} ${THEME_STYLE_DEST}

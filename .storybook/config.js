@@ -15,7 +15,6 @@ import '../src/index.css';
 
 function loadStories() {
   require('./stories/index');
-  // require('../src/stories/theme');
   req.keys().forEach(filename => req(filename));
 }
 
@@ -39,7 +38,8 @@ addParameters({
   options: {
     theme: brandTheme,
     showPanel: true,
-    panelPosition: 'right',
+    showNav: true,
+    panelPosition: 'bottom', //bottom|right
   },
   viewport: {
     viewports: {
@@ -48,10 +48,7 @@ addParameters({
     }
   },
   readme: {
-    // codeTheme: 'atom-dark',
-    codeTheme: 'Pojoaque',
-    // You can exclude prop tables globally here.
-    // See `propTables` example for more info
+    codeTheme: 'vs',
     // excludePropTables: [YourImportedReactComponent],
   },
 });
