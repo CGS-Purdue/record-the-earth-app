@@ -1,0 +1,3 @@
+[submodule "deploy/current"]
+	path = deploy/current
+	url = git@github.com:centerforglobalsoundscapes/rte3-storybook.git
