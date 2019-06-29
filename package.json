@@ -1,6 +1,6 @@
 {
   "name": "taskbox",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "config": {
     "use_yarn": true,
@@ -49,9 +49,9 @@
     "start": "react-scripts start",
     "bump": "npm version",
     "build:book": "./node_modules/.bin/build-storybook --config-dir .storybook --static-dir static --output-dir deploy --no-dll",
-    "book:help":  "./node_modules/.bin/build-storybook --help",
-    "book":       "start-storybook -p 9009 -s static --debug-webpack",
-    "build:app":  "react-scripts build",
+    "book:help": "./node_modules/.bin/build-storybook --help",
+    "book": "start-storybook -p 9009 -s static --debug-webpack",
+    "build:app": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "style:debug": ".bin/build.debug",
