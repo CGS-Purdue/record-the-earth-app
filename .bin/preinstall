@@ -37,7 +37,7 @@ else
   if [ ! "$(basename $npm_execpath)" == "yarn.js" ]; then
     echo "** NPM_PROJECT_USES_YARN  **"
     echo "Project uses yarn but the install exec path is set to $npm_execpath"
-    echo -e "\nYou should use 'yarn' to install with this project\n"
+    echo "\nYou should use 'yarn' to install with this project\n"
     exit 1
   fi
   exit 0
