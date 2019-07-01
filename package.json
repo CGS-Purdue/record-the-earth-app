@@ -45,20 +45,24 @@
     "storybook-readme": "^5.0.5",
     "wired-button": "^1.0.0"
   },
+
   "scripts": {
-    "start": "react-scripts start",
-    "bump": "npm version",
-    "build:book": "./node_modules/.bin/build-storybook --config-dir .storybook --static-dir static --output-dir deploy --no-dll",
-    "book:help": "./node_modules/.bin/build-storybook --help",
-    "book": "start-storybook -p 9009 -s static --debug-webpack",
-    "build:app": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "style:debug": ".bin/build.debug",
-    "style:dev": ".bin/build.dev",
-    "style": ".bin/build.dev",
-    "preinstall": ".bin/preinstall",
-    "printenv": ".bin/printenv"
+    "bump":            "npm version",
+    "react:scripts:start":  "react-scripts start",
+    "book":            ".bin/book",
+    "book:help":       "./node_modules/.bin/build-storybook --help",
+    "book:start":      ".bin/book-start",
+    "book:build":      ".bin/book-build",
+    "book:postbuild":  ".bin/book-postbuild",
+    "book:serve":      ".bin/book-serve",
+    "style:debug":     ".bin/build.debug",
+    "style:dev":       ".bin/build.dev",
+    "style":           ".bin/build.dev",
+    "preinstall":      ".bin/preinstall",
+    "printenv":        ".bin/printenv",
+    "build:app":       "react-scripts build",
+    "test":            "react-scripts test",
+    "eject":           "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
