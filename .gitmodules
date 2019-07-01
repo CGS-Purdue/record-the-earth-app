@@ -1,3 +1,6 @@
 [submodule "storybook-gh-pages"]
 	path = deploy/storybook/dist
 	url = https://github.com/centerforglobalsoundscapes/rte3-storybook
+[submodule "charrismatic-style-library"]
+	path = src/style/library
+	url = https://github.com/charrismatic/charrismatic-style-library
