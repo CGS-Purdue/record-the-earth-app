@@ -1,3 +1,5 @@
 [submodule "deploy/current"]
 	path = deploy/current
 	url = git@github.com:centerforglobalsoundscapes/rte3-storybook.git
+[submodule "src/style/library"]
+	url = https://github.com/charrismatic/charrismatic-style-library
