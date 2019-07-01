@@ -16,4 +16,8 @@ storiesOf('Screens|Article/', module)
       <Boxes.ImgBox format={heroFormat} source={mainbg} />
       <Welcome showApp={linkTo('Button')} />
     </Boxes.CenterBox>
-  ));
+  ), {
+    viewport: {
+      defaultViewport: 'iphone6'
+    }
+  });

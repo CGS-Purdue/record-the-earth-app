@@ -1,9 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-
 import centered from '@storybook/addon-centered/react';
 
 import imageUrl from  '../../../static/assets/icon/icons.svg';
+import { withInfo } from '@storybook/addon-info';
 import { Boxes } from '../../../src/components';
 
 import theme_logo_content from         './theme.logo.md';
@@ -14,17 +14,9 @@ import theme_colors_base from          './theme.colors.base.md';
 import theme_colors_notifications from './theme.colors.notifications.md';
 import theme_colors_named from         './theme.colors.named.md';
 
-
-storiesOf('Theme|Logo', module)
-  .addDecorator(centered)
-  .add('white', () => <h2>Theme Logo</h2>, {
-      notes:  'A very simple example of addon notes',
-      readme: {
-        content: theme_logo_content,
-      },
-    })
-  .add('Icons', () => <Boxes.ImgBox label="Theme Icons" source={imageUrl} />)
-
+import logo_rte              from '../../../static/assets/img/logo/logo-rte.png';
+import logo_emblem_svg       from '../../../static/assets/img/logo/logo-emblem.svg';
+import logo_rte_stacked      from '../../../static/assets/img/logo/logo-rte-stacked.png';
 
 storiesOf('Theme|Font', module)
   .addDecorator(centered)
@@ -65,3 +57,18 @@ storiesOf('Theme|Colors', module)
       content: theme_colors_notifications,
     }
   })
+
+
+
+storiesOf('Theme|Icons', module)
+  .addDecorator(centered)
+  .addDecorator(
+    withInfo({inline:false,header: true})
+  )
+  .add('Logo Variations', () => (
+    <Boxes.Box>
+      <Boxes.ImgBox format="contain" label="long" source={logo_rte} />
+      <Boxes.ImgBox format="contain" label="stacked" source={logo_rte_stacked} />
+      <Boxes.ImgBox format="contain" label="emblem" source={logo_emblem_svg} />
+    </Boxes.Box>
+  ));
