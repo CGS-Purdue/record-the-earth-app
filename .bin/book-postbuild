@@ -8,24 +8,26 @@ _clean () {
    echo "processing $1"
 
    postcss "$1" --no-map -u postcss-discard-comments --replace
-   echo "processing 3"
+   echo "Removing comments"
 
    postcss "$1" --no-map -u postcss-single-line --replace
-   echo "processing 2"
+   echo "Reformatting single line operations"
 
    sed --in-place '/^$/d' "$1"
-   echo "processing 1"
+   echo "Removing unncessary newlines"
 
 }
 
 export -f _clean
 
-find "deploy/${BOOK_PACKAGE_VERSION}" -name "*.map" \
+## NO VARIABLES FOR PATHS WHEN DELETING FILES **
+
+find "deploy/storybook/${BOOK_PACKAGE_VERSION}" -name "*.map" \
   -printf "deleting map files %P \n" \
   -delete
 
 
-find "deploy/${BOOK_PACKAGE_VERSION}" -name "*.css" \
+find "deploy/storybook/${BOOK_PACKAGE_VERSION}" -name "*.css" \
   -printf "%P \n" \
   -exec bash -c '_clean "$0"' {} \;
 

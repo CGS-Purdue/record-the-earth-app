@@ -4,7 +4,7 @@ BASE_DIR="$(npm prefix)"
 
 BOOK_STATIC_DIR="static"
 BOOK_CONFIG_DIR=".storybook"
-BOOK_OUTPUT_DIR="deploy"
+BOOK_OUTPUT_DIR="deploy/storybook"
 
 BOOK_PACKAGE_VERSION="$(npm run env | grep npm_package_version= | sed 's/npm_package_version=/v/')"
 
