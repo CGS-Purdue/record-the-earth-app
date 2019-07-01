@@ -4,7 +4,7 @@ BASE_DIR="$(npm prefix)"
 
 SERVE_TARGET="${1:-current}"
 
-BOOK_OUTPUT_DIR="deploy"
+BOOK_OUTPUT_DIR="deploy/storybook"
 BOOK_DEPLOY_DIR="${BOOK_OUTPUT_DIR}/${SERVE_TARGET}"
 
 # ALLOW LOCAL .NPMRC OR .ENV FILE TO OVERRIDE
