@@ -1,8 +1,47 @@
+# Record the Earth React Native
+
+Rebuild of the Record the Earth Application with React Native
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
-In the project directory, you can run:
+
+## Storybook Commands
+
+### `npm run book`
+
+Show storybook cli help command and config info
+
+### `npm run book:help`
+
+Show storybook cli help command
+
+### `npm run book:start`
+
+Builds the project storybook and serves the files for live editing
+
+### `npm run book:build`
+
+Builds the project storybook files and exports static files to the deploy folder by version.
+
+The versioned folders let us go back and view previous verions with the storybook-version add-on.
+
+### `npm run book:postbuild`
+
+Cleans exported files, removes .map files and can optionally minify .js and .css files. (disabled by default to track changes better in git.)
+
+### `npm run book:serve`
+
+Serves the static files in the export folder. This command is used to preview the static build before pushing changes up to the live storybook page.
+
+
+
+
+---
+
+## React Commands
 
 ### `npm start`
 
@@ -42,6 +81,9 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+Lean more about Storybook development and UI components [Storybook documentation](https://storybook.js.org/docs/basics/introduction/)
+
 
 ### Code Splitting
 

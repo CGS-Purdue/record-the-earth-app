@@ -37,20 +37,20 @@
     "wired-button": "^1.0.0"
   },
   "scripts": {
-    "bump": "npm version",
-    "react:scripts:start": "react-scripts start",
+    "bump": "npm version patch",
     "book": ".bin/book",
     "book:help": "./node_modules/.bin/build-storybook --help",
     "book:start": ".bin/book-start",
     "book:build": ".bin/book-build",
     "book:postbuild": ".bin/book-postbuild",
     "book:serve": ".bin/book-serve",
+    "style": ".bin/build.dev",
     "style:debug": ".bin/build.debug",
     "style:dev": ".bin/build.dev",
-    "style": ".bin/build.dev",
     "preinstall": ".bin/preinstall",
     "printenv": ".bin/printenv",
     "build:app": "react-scripts build",
+    "react:scripts:start": "react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
