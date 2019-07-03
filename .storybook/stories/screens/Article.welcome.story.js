@@ -9,7 +9,7 @@ import mainbg from '../../../static/assets/img/bg/bg-main.png';
 
 var heroFormat={format:'hero'};
 
-storiesOf('Screens|Article/', module)
+storiesOf('Screens|Article View', module)
   .addDecorator(centered)
   .add('Welcome', () => (
     <Boxes.CenterBox>

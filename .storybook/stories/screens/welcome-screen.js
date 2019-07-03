@@ -17,8 +17,8 @@ var wrapStyle={
 var imgStyle={width: '60%', position: 'absolute', left: '20%', zIndex: 10}
 var mainImgStyle={width: '100%', height: '100%', position: 'absolute', left:'0', top: 0, zIndex: 1, opacity: .1}
 
-storiesOf('Welcome', module)
-  .add('Intro Screen', () =>
+storiesOf('Screens|Misc', module)
+  .add('Storybook Intro', () =>
     <div style={wrapStyle}>
       <img src={mainbg} style={mainImgStyle} />
       <img src={logo} style={imgStyle} />

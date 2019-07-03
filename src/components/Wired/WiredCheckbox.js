@@ -1,5 +1,13 @@
-import React from 'react';
-import { WiredCheckbox } from '@bit/wiredjs.wired-elements.wired-checkbox';
+import React, { Component } from "react";
+import centered from '@storybook/addon-centered/react';
+import { action } from '@storybook/addon-actions';
+import { linkTo } from '@storybook/addon-links';
+import { withInfo } from '@storybook/addon-info';
+import { withKnobs } from '@storybook/addon-knobs/react';
+import { storiesOf } from '@storybook/react';
+import {
+  WiredCheckBox
+} from "react-wired";
 
 // const WiredCheckboxComponent = new WiredCheckbox();
 // export default function (prop) {
@@ -10,9 +18,9 @@ import { WiredCheckbox } from '@bit/wiredjs.wired-elements.wired-checkbox';
 //
 
 export default (
-	<>
-		<wired-checkbox>Checkbox One</wired-checkbox>
-		<wired-checkbox checked>Checkbox Two</wired-checkbox>
-		<wired-checkbox disabled>Disabled checkbox</wired-checkbox>
-	</>
+  <div className="demoAppLayout">
+      <WiredCheckBox text="Checkbox Checked" checked={isChecked} onClick={action('clicked')} />
+      <WiredCheckBox text="Checkbox Unchecked" checked={notChecked} onClick={action('clicked')} />
+      <WiredCheckBox text="Checkbox Disabled" checked={notChecked} disabled />
+  </div>
 )

@@ -1,10 +1,9 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import centered from '@storybook/addon-centered/react';
-
-import imageUrl from  '../../../static/assets/icon/icons.svg';
-import { withInfo } from '@storybook/addon-info';
 import { Boxes } from '../../../src/components';
+
+import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
 
 import theme_logo_content from         './theme.logo.md';
 import theme_font_styles from          './theme.font-styles.md';
@@ -14,6 +13,7 @@ import theme_colors_base from          './theme.colors.base.md';
 import theme_colors_notifications from './theme.colors.notifications.md';
 import theme_colors_named from         './theme.colors.named.md';
 
+import imageUrl from  '../../../static/assets/icon/icons.svg';
 import logo_rte              from '../../../static/assets/img/logo/logo-rte.png';
 import logo_emblem_svg       from '../../../static/assets/img/logo/logo-emblem.svg';
 import logo_rte_stacked      from '../../../static/assets/img/logo/logo-rte-stacked.png';

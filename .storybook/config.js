@@ -15,7 +15,8 @@ import '../src/index.css';
 
 function loadStories() {
   require('./stories/index');
-  req.keys().forEach(filename => req(filename));
+  // reqStories.keys().forEach(filename => req(filename));
+  // reqStory.keys().forEach(filename => req(filename));
 }
 
 const newViewports = {
@@ -54,9 +55,7 @@ addParameters({
 });
 
 addDecorator(addReadme);
-const req = requireContext(
-  '../src/components',
-   true,
-   /\.stories\.js$/
-);
+// const reqStories = requireContext('../src/components', true, /\.stories\.js$/);
+// const reqStory = requireContext('../src/components', true, /\.story\.js$/);
+
 configure(loadStories, module);
