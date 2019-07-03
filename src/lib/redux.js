@@ -5,12 +5,14 @@ import { createStore } from 'redux';
 // The actions are the "names" of the changes that can happen to the store
 export const actions = {
   ARCHIVE_TASK: 'ARCHIVE_TASK',
+  SELECT_ITEM: 'SELECT_ITEM',
   PIN_TASK: 'PIN_TASK',
 };
 
 // The action creators are how you bundle actions with the data required to execute them
 export const archiveTask = id => ({ type: actions.ARCHIVE_TASK, id });
 export const pinTask = id => ({ type: actions.PIN_TASK, id });
+export const selectItem = id => ({ type: actions.SELECT_ITEM, id });
 
 // All our reducers simply change the state of a single task.
 function taskStateReducer(taskState) {
@@ -29,6 +31,8 @@ export const reducer = (state, action) => {
   switch (action.type) {
     case actions.ARCHIVE_TASK:
       return taskStateReducer('TASK_ARCHIVED')(state, action);
+    case actions.SELECT_ITEM:
+      return taskStateReducer('ITEM_SELECTED')(state, action);
     case actions.PIN_TASK:
       return taskStateReducer('TASK_PINNED')(state, action);
     default:
@@ -44,6 +48,12 @@ const defaultTasks = [
   { id: '3', title: 'Something else', state: 'TASK_INBOX' },
   { id: '4', title: 'Something again', state: 'TASK_INBOX' },
 ];
+const defaultItems = [
+  { id: '1', title: 'Something', state: 'SURVEY_ITEM' },
+  { id: '2', title: 'Something more', state: 'SURVEY_ITEM' },
+  { id: '3', title: 'Something else', state: 'SURVEY_ITEM' },
+  { id: '4', title: 'Something again', state: 'SURVEY_ITEM' },
+];
 
 // We export the constructed redux store
-export default createStore(reducer, { tasks: defaultTasks });
+export default createStore(reducer, { tasks: defaultTasks, items:defaultItems });
