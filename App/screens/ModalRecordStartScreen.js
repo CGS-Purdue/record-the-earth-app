@@ -25,4 +25,4 @@ ModalRecordStartScreen.navigationOptions = {
   tabBarVisible: false
 };
 
-export default ModalRecordStartScreen
+export { ModalRecordStartScreen }

@@ -5,18 +5,23 @@ const REL_PATH = '..';
 const ASSET_DIR = 'assets';
 const FONT_DIR = 'assets';
 const IMAGE_DIR = 'images';
+const ICON_DIR = 'icons';
+
+const ICON_ASSETS = {
+  record:    require('../assets/icons/stop.png'),
+  recording: require('../assets/icons/record.png'),
+  play:      require('../assets/icons/play.png'),
+  pause:     require('../assets/icons/pause.png'),
+  stop:      require('../assets/icons/stop.png'),
+  muted:     require('../assets/icons/muted.png'),
+  unmuted:   require('../assets/icons/unmuted.png'),
+  thumb1:    require('../assets/icons/thumb1.png'),
+  track1:    require('../assets/icons/track1.png'),
+  thumb2:    require('../assets/icons/thumb2.png'),
+}
 
 const IMAGE_ASSETS = {
-  record:    require('../assets/images/stop_button.png'),
-  recording: require('../assets/images/record_icon.png'),
-  play:      require('../assets/images/play_button.png'),
-  pause:     require('../assets/images/pause_button.png'),
-  stop:      require('../assets/images/stop_button.png'),
-  muted:     require('../assets/images/muted_button.png'),
-  unmuted:   require('../assets/images/unmuted_button.png'),
-  thumb_1:   require('../assets/images/thumb_1.png'),
-  track_1:   require('../assets/images/track_1.png'),
-  thumb_2:   require('../assets/images/thumb_2.png'),
+
 }
 
 const FONT_ASSETS = {
@@ -27,13 +32,13 @@ const FONT_ASSETS = {
 
 
 async function loadResourcesAsync() {
-  const loadImages = (images) => {
+  const loadIcons = (images) => {
     for (image_module of Object.values(images)) {
       Asset.fromModule(image_module).downloadAsync();
     }
   };
   await Promise.all([
-    loadImages(IMAGE_ASSETS),
+    loadIcons(ICON_ASSETS),
     loadFontsAsync(FONT_ASSETS),
   ]);
 }
@@ -41,5 +46,6 @@ async function loadResourcesAsync() {
 export {
   IMAGE_ASSETS,
   FONT_ASSETS,
+  ICON_ASSETS,
   loadResourcesAsync,
 }

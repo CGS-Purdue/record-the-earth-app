@@ -29,10 +29,24 @@ export default function App(props) {
   }
 }
 
+function debugLogger(msg) {
+  console.log('process.env', process.env);
+  if (process.env.DEBUG_LOGGING) {
+    console.log(`Debug Logging : ${process.env.DEBUG_LOGGING}`);
+    console.log(msg);
+  } else {
+    return;
+  }
+}
+
+App.debugLogger = debugLogger;
+
 function handleLoadingError(error) {
   console.warn(error);
 }
 
 function handleFinishLoading(setLoadingComplete) {
   setLoadingComplete(true);
+  console.log('is __DEV__', __DEV__);
+  debugLogger('Finished Loading');
 }

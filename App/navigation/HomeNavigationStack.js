@@ -1,19 +1,55 @@
 import React from 'react';
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator, NavigationScreenProp } from 'react-navigation';
 import { Platform } from 'react-native';
 
-import { RootNavigationStack } from './RootNavigationStack';
 import TabBarIcon from '../components/TabBarIcon';
+import { HomeScreen } from '../screens/HomeScreen';
 
-const config = Platform.select({
+import { ModalRecordStack } from './ModalRecordStack';
+
+
+const homeConfig = Platform.select({
   web: { headerMode: 'screen' },
   default: {},
 });
 
+
+const RootNavigationStack = createStackNavigator({
+    Home: { screen: HomeScreen },
+    Record: { screen: ModalRecordStack },
+  }, {
+    initialRouteName: 'Home',
+    mode: 'modal',
+    headerMode: 'none',
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerTintColor: '#123',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
+  }
+);
+
+RootNavigationStack.navigationOptions = ({ navigation }) => {
+  // let tabBarVisible = true;
+  let tabBarVisible = false;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+  return {
+    tabBarVisible,
+  };
+};
+
+
+
 const HomeNavigationStack = createStackNavigator({
     Home: RootNavigationStack,
   },
-  config
+  homeConfig
 );
 
 HomeNavigationStack.navigationOptions = ({ navigation }) => {

@@ -11,22 +11,36 @@ import {
 import { Asset } from 'expo-asset';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
-import * as Font from 'expo-font';
 import * as Permissions from 'expo-permissions';
+import * as Font from 'expo-font';
 
-import { Icons, Layout } from '../Theme';
+import { ThemeIcons } from '../Theme/Icons';
 import { ThemeFonts } from '../Theme/Fonts';
+import { RecorderStylesheet } from './RecorderStylesheet';
+
+var styles = RecorderStylesheet;
 
 const BACKGROUND_COLOR = '#FFF8ED';
 const LIVE_COLOR = '#FF0000';
 const DISABLED_OPACITY = 0.5;
 const RATE_SCALE = 3.0;
 
-let recorder_fontmap = {};
-recorder_fontmap[ThemeFonts.BODY_FONT] = ThemeFonts[ThemeFonts.BODY_FONT];
-console.log(recorder_fontmap);
+// <Text style={[styles.timestamp, { fontFamily: 'cutive-mono' }]}>Rate:</Text>
+// <Slider
+//   style={styles.rateSlider}
+//   trackImage={ThemeIcons.TRACK_1.module}
+//   thumbImage={ThemeIcons.THUMB_1.module}
+//   value={this.state.rate / RATE_SCALE}
+//   onSlidingComplete={this._onRateSliderSlidingComplete}
+//   disabled={!this.state.isPlaybackAllowed || this.state.isLoading}
+// />
 
-class Recorder extends React.Component {
+let recorder_fontmap = {};
+
+recorder_fontmap[ThemeFonts.BODY_FONT] = ThemeFonts[ThemeFonts.BODY_FONT];
+
+export default class Recorder extends React.Component {
+
   constructor(props) {
     super(props);
     this.recording = null;
@@ -57,10 +71,10 @@ class Recorder extends React.Component {
   componentDidMount() {
     (async () => {
       await Font.loadAsync({
-        'font' : 22
+          'cutive-mono': require('../assets/fonts/CutiveMono-Regular.ttf'),
       });
-      this.setState({ fontLoaded: true });
     })();
+    this.setState({ fontLoaded: true });
     this._askForPermissions();
   }
 
@@ -141,7 +155,8 @@ class Recorder extends React.Component {
     recording.setOnRecordingStatusUpdate(this._updateScreenForRecordingStatus);
 
     this.recording = recording;
-    await this.recording.startAsync(); // Will call this._updateScreenForRecordingStatus to update the screen.
+    // Will call this._updateScreenForRecordingStatus to update the screen.
+    await this.recording.startAsync();
     this.setState({
       isLoading: false,
     });
@@ -313,13 +328,13 @@ class Recorder extends React.Component {
 
     if (!this.state.haveRecordingPermissions){
         return (
-            <View style={styles.container}>
-                <View />
-                <Text style={[styles.noPermissionsText, { fontFamily: 'cutive-mono-regular' }]}>
-                  You must enable audio recording permissions in order to use this app.
-                </Text>
-                <View />
-            </View>
+          <View style={styles.container}>
+            <View />
+              <Text style={[styles.noPermissionsText, { fontFamily: 'cutive-mono' }]}>
+                You must enable audio recording permissions in order to use this app.
+              </Text>
+            <View />
+          </View>
         )
     }
 
@@ -340,19 +355,19 @@ class Recorder extends React.Component {
               style={styles.wrapper}
               onPress={this._onRecordPressed}
               disabled={this.state.isLoading}>
-              <Image style={styles.image} source={Icons.RECORD_BUTTON.module} />
+              <Image style={styles.image} source={ThemeIcons.record.module} />
             </TouchableHighlight>
             <View style={styles.recordingDataContainer}>
               <View />
-              <Text style={[styles.liveText, { fontFamily: 'cutive-mono-regular' }]}>
+              <Text style={[styles.liveText, { fontFamily: 'cutive-mono' }]}>
                 {this.state.isRecording ? 'LIVE' : ''}
               </Text>
               <View style={styles.recordingDataRowContainer}>
                 <Image
                   style={[styles.image, { opacity: this.state.isRecording ? 1.0 : 0.0 }]}
-                  source={Icons.RECORDING.module}
+                  source={ThemeIcons.recording.module}
                 />
-                <Text style={[styles.recordingTimestamp, { fontFamily: 'cutive-mono-regular' }]}>
+                <Text style={[styles.recordingTimestamp, { fontFamily: 'cutive-mono' }]}>
                   {this._getRecordingTimestamp()}
                 </Text>
               </View>
@@ -374,14 +389,14 @@ class Recorder extends React.Component {
           <View style={styles.playbackContainer}>
             <Slider
               style={styles.playbackSlider}
-              trackImage={Icons.TRACK_1.module}
-              thumbImage={Icons.THUMB_1.module}
+              trackImage={ThemeIcons.track1.module}
+              thumbImage={ThemeIcons.thumb1.module}
               value={this._getSeekSliderPosition()}
               onValueChange={this._onSeekSliderValueChange}
               onSlidingComplete={this._onSeekSliderSlidingComplete}
               disabled={!this.state.isPlaybackAllowed || this.state.isLoading}
             />
-            <Text style={[styles.playbackTimestamp, { fontFamily: 'cutive-mono-regular' }]}>
+            <Text style={[styles.playbackTimestamp, { fontFamily: 'cutive-mono' }]}>
               {this._getPlaybackTimestamp()}
             </Text>
           </View>
@@ -394,13 +409,13 @@ class Recorder extends React.Component {
                 disabled={!this.state.isPlaybackAllowed || this.state.isLoading}>
                 <Image
                   style={styles.image}
-                  source={this.state.muted ? Icons.MUTED_BUTTON.module : Icons.UNMUTED_BUTTON.module}
+                  source={this.state.muted ? ThemeIcons.muted.module : ThemeIcons.unmuted.module}
                 />
               </TouchableHighlight>
               <Slider
                 style={styles.volumeSlider}
-                trackImage={Icons.TRACK_1.module}
-                thumbImage={Icons.THUMB_2.module}
+                trackImage={ThemeIcons.track1.module}
+                thumbImage={ThemeIcons.thumb2.module}
                 value={1}
                 onValueChange={this._onVolumeSliderValueChange}
                 disabled={!this.state.isPlaybackAllowed || this.state.isLoading}
@@ -414,7 +429,7 @@ class Recorder extends React.Component {
                 disabled={!this.state.isPlaybackAllowed || this.state.isLoading}>
                 <Image
                   style={styles.image}
-                  source={this.state.isPlaying ? Icons.PAUSE_BUTTON.module : Icons.PLAY_BUTTON.module}
+                  source={this.state.isPlaying ? ThemeIcons.pause.module : ThemeIcons.play.module}
                 />
               </TouchableHighlight>
               <TouchableHighlight
@@ -422,27 +437,19 @@ class Recorder extends React.Component {
                 style={styles.wrapper}
                 onPress={this._onStopPressed}
                 disabled={!this.state.isPlaybackAllowed || this.state.isLoading}>
-                <Image style={styles.image} source={Icons.STOP_BUTTON.module} />
+                <Image style={styles.image} source={ThemeIcons.stop.module} />
               </TouchableHighlight>
             </View>
             <View />
           </View>
           <View style={[styles.buttonsContainerBase, styles.buttonsContainerBottomRow]}>
-            <Text style={[styles.timestamp, { fontFamily: 'cutive-mono-regular' }]}>Rate:</Text>
-            <Slider
-              style={styles.rateSlider}
-              trackImage={Icons.TRACK_1.module}
-              thumbImage={Icons.THUMB_1.module}
-              value={this.state.rate / RATE_SCALE}
-              onSlidingComplete={this._onRateSliderSlidingComplete}
-              disabled={!this.state.isPlaybackAllowed || this.state.isLoading}
-            />
+
             <TouchableHighlight
               underlayColor={BACKGROUND_COLOR}
               style={styles.wrapper}
               onPress={this._onPitchCorrectionPressed}
               disabled={!this.state.isPlaybackAllowed || this.state.isLoading}>
-              <Text style={[{ fontFamily: 'cutive-mono-regular' }]}>
+              <Text style={[{ fontFamily: 'cutive-mono' }]}>
                 PC: {this.state.shouldCorrectPitch ? 'yes' : 'no'}
               </Text>
             </TouchableHighlight>
@@ -454,130 +461,7 @@ class Recorder extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  emptyContainer: {
-    alignSelf: 'stretch',
-    backgroundColor: BACKGROUND_COLOR,
-  },
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    backgroundColor: BACKGROUND_COLOR,
-    minHeight: Layout.DEVICE_HEIGHT,
-    maxHeight: Layout.DEVICE_HEIGHT,
-  },
-  noPermissionsText: {
-    textAlign: 'center',
-  },
-  wrapper: {},
-  halfScreenContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    minHeight: Layout.DEVICE_HEIGHT / 2.0,
-    maxHeight: Layout.DEVICE_HEIGHT / 2.0,
-  },
-  recordingContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    minHeight: Icons.RECORD_BUTTON.height,
-    maxHeight: Icons.RECORD_BUTTON.height,
-  },
-  recordingDataContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    minHeight: Icons.RECORD_BUTTON.height,
-    maxHeight: Icons.RECORD_BUTTON.height,
-    minWidth: Icons.RECORD_BUTTON.width * 3.0,
-    maxWidth: Icons.RECORD_BUTTON.width * 3.0,
-  },
-  recordingDataRowContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    minHeight: Icons.RECORDING.height,
-    maxHeight: Icons.RECORDING.height,
-  },
-  playbackContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    minHeight: Icons.THUMB_1.height * 2.0,
-    maxHeight: Icons.THUMB_1.height * 2.0,
-  },
-  playbackSlider: {
-    alignSelf: 'stretch',
-  },
-  liveText: {
-    color: LIVE_COLOR,
-  },
-  recordingTimestamp: {
-    paddingLeft: 20,
-  },
-  playbackTimestamp: {
-    textAlign: 'right',
-    alignSelf: 'stretch',
-    paddingRight: 20,
-  },
-  image: {
-    backgroundColor: BACKGROUND_COLOR,
-  },
-  textButton: {
-    backgroundColor: BACKGROUND_COLOR,
-    padding: 10,
-  },
-  buttonsContainerBase: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  buttonsContainerTopRow: {
-    maxHeight: Icons.MUTED_BUTTON.height,
-    alignSelf: 'stretch',
-    paddingRight: 20,
-  },
-  playStopContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    minWidth: (Icons.PLAY_BUTTON.width + Icons.STOP_BUTTON.width) * 3.0 / 2.0,
-    maxWidth: (Icons.PLAY_BUTTON.width + Icons.STOP_BUTTON.width) * 3.0 / 2.0,
-  },
-  volumeContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    minWidth: Layout.DEVICE_WIDTH / 2.0,
-    maxWidth: Layout.DEVICE_WIDTH / 2.0,
-  },
-  volumeSlider: {
-    width: Layout.DEVICE_WIDTH / 2.0 - Icons.MUTED_BUTTON.width,
-  },
-  buttonsContainerBottomRow: {
-    maxHeight: Icons.THUMB_1.height,
-    alignSelf: 'stretch',
-    paddingRight: 20,
-    paddingLeft: 20,
-  },
-  rateSlider: {
-    width: Layout.DEVICE_WIDTH / 2.0,
-  },
-});
-
+Recorder.defaultProps = {
+  recordingSettings: JSON.parse(JSON.stringify(Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY)),
+};
 export { Recorder }

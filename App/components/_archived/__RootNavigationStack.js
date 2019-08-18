@@ -2,12 +2,12 @@ import React from 'react';
 import { createStackNavigator, NavigationScreenProp } from 'react-navigation';
 
 import { SurveyStackNavigation } from './SurveyStackNavigation';
-import ModalRecordScreen from '../screens/ModalRecordScreen';
+import { ModalRecordStack } from './ModalRecordStack';
 import HomeScreen from '../screens/HomeScreen';
 
 const RootNavigationStack = createStackNavigator({
     Home: { screen: HomeScreen },
-    Record: { screen: ModalRecordScreen },
+    Record: { screen: ModalRecordStack },
     Survey: { screen: SurveyStackNavigation },
   }, {
     mode: 'modal',

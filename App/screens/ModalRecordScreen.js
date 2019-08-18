@@ -1,11 +1,6 @@
 import React from 'react';
 import { Audio } from 'expo-av';
-import {
-  Button,
-  Text,
-  View,
-} from 'react-native';
-
+import { Button, Text, View, } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 
 import Recorder from '../components/Recorder';

@@ -7,8 +7,7 @@ import {
 
 import { NavigationScreenProp } from 'react-navigation';
 
-import Survey from '../components/Survey';
-
+import CombinedSurvey from './Survey/CombinedSurvey';
 
 const SurveyScreen0 = ({
   navigation
@@ -20,9 +19,13 @@ const SurveyScreen0 = ({
       <Text style={{ fontSize: 30 }}>modal</Text>
       <Button
         title="Start"
-        onPress={() => navigation.navigate('Start')}
+        onPress={() => navigation.navigate('SurveyStart')}
       />
     </View>
+    <Button
+      title="Update the title"
+      onPress={() => this.props.navigation.setParams({otherParam: 'Updated!'})}
+    />
     <View>
       <Text style={{ fontSize: 30 }}>back button</Text>
       <Button style={{ color: 'black' }}
@@ -34,25 +37,32 @@ const SurveyScreen0 = ({
 );
 SurveyScreen0.navigationOptions = {
   header: null,
-  tabBarVisible: false
+  tabBarVisible: false,
+  headerStyle: {
+    backgroundColor: '#f4511e',
+  },
+  headerTintColor: '#ff0000',
+  headerTitleStyle: {
+    fontWeight: 'bold',
+  }
 };
 
 
-const StartScreen = ({
+const SurveyStartScreen = ({
   navigation
 }:{
   navigation: NavigationScreenProp<NavigationState & any>;
 }) => (
   <View style={{display:'flex', flex:1, justifyContent:'center', flexDirection: 'column'}}>
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Survey />
+      <CombinedSurvey />
       <Button
         onPress={() => navigation.navigate('SurveyScreen1')}
         title="go 1" />
     </View>
   </View>
 );
-StartScreen.navigationOptions = {
+SurveyStartScreen.navigationOptions = {
   header: null,
   tabBarVisible: false
 };
@@ -136,7 +146,7 @@ const SurveyScreen4 = ({
       style={{flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text style={{ fontSize: 30 }}>survey 4</Text>
       <Button
-        onPress={() => navigation.navigate('Main')}
+        onPress={() => navigation.navigate('SurveyMain')}
         title="done"
       />
     </View>
@@ -148,7 +158,7 @@ SurveyScreen4.navigationOptions = {
 };
 
 export {
-  StartScreen,
+  SurveyStartScreen,
   SurveyScreen0,
   SurveyScreen1,
   SurveyScreen2,
