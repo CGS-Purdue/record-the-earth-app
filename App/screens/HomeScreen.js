@@ -1,5 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
+import { NavigationScreenProp } from 'react-navigation';
 import {
   Image,
   StyleSheet,
@@ -10,20 +11,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {
-  createStackNavigator,
-  NavigationScreenProp
-} from 'react-navigation';
 
 
 import MonoText from '../components/StyledText';
-
-import SurveyStackNavigation from '../navigation/SurveyStackNavigation';
-import ModalRecordScreen from './ModalRecordScreen';
 import { Icons, Layout } from '../Theme';
 
 const DISABLED_OPACITY = 0.5;
-
+const BACKGROUND_COLOR = '#FFF8ED';
+const LIVE_COLOR = '#FF0000';
 const RATE_SCALE = 3.0;
 
 
@@ -56,27 +51,6 @@ HomeScreen.navigationOptions = {
   tabBarVisible: false
 };
 
-
-const RootStack = createStackNavigator({
-    Home: { screen: HomeScreen, },
-    Record: { screen: ModalRecordScreen, },
-    Survey: { screen: SurveyStackNavigation, },
-  }, {
-    mode: 'modal',
-    tabBarVisible: false,
-    headerMode: 'none',
-  }
-);
-RootStack.navigationOptions = ({ navigation }) => {
-  // let tabBarVisible = true;
-  let tabBarVisible = false;
-  if (navigation.state.index > 0) {
-    tabBarVisible = false;
-  }
-  return {
-    tabBarVisible,
-  };
-};
 
 
 function handleLearnMorePress() {
@@ -311,4 +285,4 @@ const styles = StyleSheet.create({
 
 
 
-export default RootStack;
+export default HomeScreen;

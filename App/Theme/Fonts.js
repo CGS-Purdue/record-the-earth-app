@@ -1,36 +1,35 @@
-import * as Font from 'expo-font';
+import { FONT_ASSETS } from './Assets';
 
+function getFont(name) {
+  const font_map = {
+    'ionicons': { cssname: 'ionicons', filename: 'SpaceMono-Regular.ttf', src: FONT_ASSETS['ionicons']},
+    'cutive-mono': { cssname: 'cutive-mono', filename: 'CutiveMono-Regular.ttf', src: FONT_ASSETS['cutive-mono'] },
+    'space-mono': {  cssname: 'space-mono',  filename: 'SpaceMono-Regular.ttf', src: FONT_ASSETS['space-mono']},
+  };
 
-const asyncLoad = Font.loadAsync;
-
-const spacemono = { name:'spacemono', file: '../assets/fonts/SpaceMono-Regular.ttf'};
-const cutivemono = { name:'cutivemono', file: '../assets/fonts/CutiveMono-Regular.ttf'};
-
-function getFont(_font) {
-  return [
-    _font.name,
-    require(_font._file)
-  ];
+  let font = font_map[name]
+  return font;
 }
 
-function getThemeFonts(_font_array) {
-  let theme_fonts = [];
-  let theme_font;
-  for (font of _font_array) {
-    theme_fonts.push(getFont(font));
+function getThemeFonts(fonts) {
+  let map = {};
+  for (let item of fonts) {
+    let font = getFont(item);
+    map[item] = font;
   }
-
-  return theme_fonts;
+  return map;
 }
 
-const TITLE_FONT = {spacemono};
-const BODY_FONT = {cutivemon};
+const ThemeFonts = getThemeFonts([
+  'space-mono',
+  'cutive-mono',
+  'ionicons',
+]);
 
+ThemeFonts.TITLE_FONT = 'space-mono',
+ThemeFonts.BODY_FONT = 'cutive-mono';
+ThemeFonts.ICON_FONT = 'ionicons';
 
-export {
-  getThemeFonts,
-  getFont,
-  asyncLoad,
-  TITLE_FONT,
-  BODY_FONT
-}
+export { ThemeFonts }
+
+export default ThemeFonts

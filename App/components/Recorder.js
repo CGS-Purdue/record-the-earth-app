@@ -14,14 +14,19 @@ import * as FileSystem from 'expo-file-system';
 import * as Font from 'expo-font';
 import * as Permissions from 'expo-permissions';
 
-import { Icons, Fonts, Layout } from '../Theme';
+import { Icons, Layout } from '../Theme';
+import { ThemeFonts } from '../Theme/Fonts';
 
 const BACKGROUND_COLOR = '#FFF8ED';
 const LIVE_COLOR = '#FF0000';
 const DISABLED_OPACITY = 0.5;
 const RATE_SCALE = 3.0;
 
-export default class Recorder extends React.Component {
+let recorder_fontmap = {};
+recorder_fontmap[ThemeFonts.BODY_FONT] = ThemeFonts[ThemeFonts.BODY_FONT];
+console.log(recorder_fontmap);
+
+class Recorder extends React.Component {
   constructor(props) {
     super(props);
     this.recording = null;
@@ -52,7 +57,7 @@ export default class Recorder extends React.Component {
   componentDidMount() {
     (async () => {
       await Font.loadAsync({
-        'cutive-mono-regular': Fonts.CUTIVEMONO,
+        'font' : 22
       });
       this.setState({ fontLoaded: true });
     })();
@@ -574,3 +579,5 @@ const styles = StyleSheet.create({
     width: Layout.DEVICE_WIDTH / 2.0,
   },
 });
+
+export { Recorder }

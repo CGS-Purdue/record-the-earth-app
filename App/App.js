@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
 import { AppLoading } from 'expo';
-import { Asset } from 'expo-asset';
-
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, View } from 'react-native';
 import AppNavigator from './navigation/AppNavigator';
-import { Icons } from './Theme';
-
-import * as Font from 'expo-font';
-
-const Ionicons = Icons.Ionicons;
-
+import { loadResourcesAsync } from './Theme/Assets';
+import styles from './Theme/Stylesheet';
 
 export default function App(props) {
   const [
@@ -35,19 +29,6 @@ export default function App(props) {
   }
 }
 
-async function loadResourcesAsync() {
-  await Promise.all([
-    Asset.loadAsync([
-      require('./assets/images/robot-dev.png'),
-      require('./assets/images/robot-prod.png'),
-    ]),
-    Font.loadAsync({
-      ...Ionicons.font,
-      'spacemono': require('../assets/fonts/SpaceMono-Regular.ttf'),
-    }),
-  ]);
-}
-
 function handleLoadingError(error) {
   console.warn(error);
 }
@@ -55,10 +36,3 @@ function handleLoadingError(error) {
 function handleFinishLoading(setLoadingComplete) {
   setLoadingComplete(true);
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});

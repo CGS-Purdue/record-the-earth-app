@@ -7,12 +7,3 @@ export default createAppContainer(
     Main: MainTabNavigator,
   })
 );
-
-// const switch_nav_config = {
-//   // initialRouteName: 'main'
-//   // navigationOptions: {}
-//   // defaultNavigationOptions: {}
-//   // resetOnBlur: true,
-//   // paths: {},
-//   // backBehavior: initialRoute|order|history|none
-// }

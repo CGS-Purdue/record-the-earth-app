@@ -1,14 +1,15 @@
 import React from 'react';
+import { Audio } from 'expo-av';
 import {
   Button,
   Text,
   View,
 } from 'react-native';
 
-import { createStackNavigator,  NavigationScreenProp } from 'react-navigation';
+import { NavigationScreenProp } from 'react-navigation';
 
-import { Audio } from 'expo-av';
 import Recorder from '../components/Recorder';
+
 
 const recorderSettings = {
   recording: null,
@@ -41,8 +42,9 @@ const ModalRecordScreen= ({
 }) => (
   <View style={{display:'flex', flex:1, justifyContent:'center', flexDirection: 'column'}}>
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ fontSize: 30 }}>modal</Text>
-      <Recorder recording={recorderSettings.recording}
+      <Text style={{ fontSize: 30 }}>Recorder</Text>
+      <Recorder
+       recording={recorderSettings.recording}
        sound={recorderSettings.sound}
        isSeeking={recorderSettings.isSeeking}
        shouldPlayAtEndOfSeek={recorderSettings.shouldPlayAtEndOfSeek}
@@ -51,46 +53,11 @@ const ModalRecordScreen= ({
     </View>
   </View>
 );
-ModalRecordScreennavigationOptions = {
+ModalRecordScreen.navigationOptions = {
   header: null,
   tabBarVisible: false
 };
 
 
-const StartScreen = ({
-  navigation
-}:{
-  navigation: NavigationScreenProp<NavigationState & any>;
-}) => (
-  <View
-     style={{display:'flex', flex:1, justifyContent:'center', flexDirection: 'column'}}>
-    <View
-      style={{flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ fontSize: 30 }}>start</Text>
-      <Button
-        onPress={() => navigation.navigate('SurveyScreen1')}
-        title="go 1"
-      />
-    </View>
-  </View>
-);
-StartScreen.navigationOptions = {
-  header: null,
-  tabBarVisible: false
-};
 
-const ModalStack = createStackNavigator({
-    Main: { screen: ModalRecordScreen },
-    Start: { screen: StartScreen },
-  }, {
-    headerMode: 'none',
-  }
-);
-ModalStack.navigationOptions = ({ navigation }) => {
-  let tabBarVisible = false;
-  return {
-    tabBarVisible,
-  };
-};
-
-export default ModalStack
+export { ModalRecordScreen }

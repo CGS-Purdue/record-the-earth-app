@@ -1,1 +1,13 @@
-{}
+{
+  "root_files": [
+    ".watchmanconfig",
+    ".git",
+    "package.json"
+  ],
+  "ignore_dirs": [
+    "build",
+    "node_modeules",
+    "tmp",
+    "temp",
+  ]
+}

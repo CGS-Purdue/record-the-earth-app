@@ -4,8 +4,8 @@ import { createStackNavigator } from 'react-navigation';
 import * as SurveyScreens from '../screens/SurveyScreens';
 
 const SurveyStackNavigation = createStackNavigator({
-    Main: {          screen: SurveyScreens.SurveyScreen0 },
-    Start: {         screen: SurveyScreens.StartScreen },
+    SurverMain: {    screen: SurveyScreens.SurveyScreen0 },
+    SurveyStart: {   screen: SurveyScreens.StartScreen },
     SurveyScreen1: { screen: SurveyScreens.SurveyScreen1 },
     SurveyScreen2: { screen: SurveyScreens.SurveyScreen2 },
     SurveyScreen3: { screen: SurveyScreens.SurveyScreen3 },
@@ -20,4 +20,4 @@ SurveyStackNavigation.navigationOptions = ({ navigation }) => {
     tabBarVisible,
   };
 };
-export default SurveyStackNavigation
+export { SurveyStackNavigation }
