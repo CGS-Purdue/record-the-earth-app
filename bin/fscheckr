@@ -1,0 +1,11 @@
+#!/bin/bash
+
+find -type f \
+   | grep -i --color google # -exec cat {} \;  \
+   | tr -cd "[a-zA-Z0-9!@#$%^&*()_+-=,./<>?:;[]{}\|\s \n]" \
+   | grep -i --color
+
+f.changed
+
+find . -type f -printf "%G %U %M %m %P \n"
+find . -type f ! -perm 644 -printf "%G %U %M %m %P \n"

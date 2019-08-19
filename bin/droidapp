@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+adb install -t outputs/apk/release/app-release-unsigned.apk

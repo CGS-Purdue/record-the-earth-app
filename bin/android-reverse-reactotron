@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# ANDROID-BUILD
+# -------------
+# BUILD THE ANDROID PROJECT FROM THE ./android directory
+
+# Config: settings.gradle
+# Outputs: bundle.jar
+
+BASE_DIR="$(npm prefix)"
+ANDROID_SERIAL="025abd11727717ac"
+
+$ANDROID_HOME/platform-tools/adb reverse tcp:9090 tcp:9090

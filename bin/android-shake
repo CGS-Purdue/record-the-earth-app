@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# ANDROID-BUILD
+# -------------
+# BUILD THE ANDROID PROJECT FROM THE ./android directory
+
+# Config: settings.gradle
+# Outputs: bundle.jar
+
+BASE_DIR="$(npm prefix)"
+ANDROID_SERIAL="025abd11727717ac"
+
+$ANDROID_HOME/platform-tools/adb devices \
+  | grep '\\t' \
+  | awk '{print $1}' \
+  | sed 's/\\s//g' \
+  | xargs -I {} "$ANDROID_HOME/platform-tools/adb" audit \
+    $HOME/platform-tools/adb -s {} shell input keyevent 82
