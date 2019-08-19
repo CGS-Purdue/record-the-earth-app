@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-} from 'react-native';
-import { Recorder } from '../components/Recorder';
+import { Text, View, } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
+
+import { Recorder } from '../../Components/Recorder';
 
 class RecordScreen extends Component {
   constructor(props) {

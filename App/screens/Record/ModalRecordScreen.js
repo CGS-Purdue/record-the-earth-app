@@ -1,10 +1,10 @@
 import React from 'react';
 import { Audio } from 'expo-av';
-import { Button, Text, View, } from 'react-native';
+import { StyleSheet, Button, Text, View, } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
-
-import Recorder from '../components/Recorder';
-
+import Recorder from '../../Components/Recorder';
+import { CenterView, CenterColView } from '../../Views/CenterView';
+import { RootView } from '../../Views/RootView';
 
 const recorderSettings = {
   recording: null,
@@ -35,18 +35,16 @@ const ModalRecordScreen= ({
 }:{
   navigation: NavigationScreenProp<NavigationState & any>;
 }) => (
-  <View style={{display:'flex', flex:1, justifyContent:'center', flexDirection: 'column'}}>
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ fontSize: 30 }}>Recorder</Text>
-      <Recorder
-       recording={recorderSettings.recording}
+  <RootView>
+    <CenterView>
+      <Recorder recording={recorderSettings.recording}
+       recordingSettings={recorderSettings.recordingSettings}
        sound={recorderSettings.sound}
        isSeeking={recorderSettings.isSeeking}
        shouldPlayAtEndOfSeek={recorderSettings.shouldPlayAtEndOfSeek}
-       recordingSettings={recorderSettings.recordingSettings}
       />
-    </View>
-  </View>
+    </CenterView>
+  </RootView>
 );
 ModalRecordScreen.navigationOptions = {
   header: null,

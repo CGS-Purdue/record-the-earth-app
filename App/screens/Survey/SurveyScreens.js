@@ -6,8 +6,7 @@ import {
 } from 'react-native';
 
 import { NavigationScreenProp } from 'react-navigation';
-
-import CombinedSurvey from './Survey/CombinedSurvey';
+import CombinedSurvey from './CombinedSurvey';
 
 const SurveyScreen0 = ({
   navigation

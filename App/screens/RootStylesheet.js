@@ -1,8 +1,8 @@
 import React from 'react';
 import{ StyleSheet, Platform } from 'react-native';
 import { ThemeIcons } from '../Theme/Icons';
+import { ThemeFonts } from '../Theme/Fonts';
 import { Layout } from '../Theme/Layout';
-
 
 const DISABLED_OPACITY = 0.5;
 const BACKGROUND_COLOR = '#FFF8ED';
@@ -10,23 +10,12 @@ const LIVE_COLOR = '#FF0000';
 const RATE_SCALE = 3.0;
 
 
-
-const HomeStylesheet = StyleSheet.create({
+const RootStylesheet = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: BACKGROUND_COLOR,
   },
-  scrollContainer: {
-    flex: 1,
-    backgroundColor: BACKGROUND_COLOR,
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
+
   welcomeContainer: {
     alignItems: 'center',
     marginTop: 10,
@@ -46,7 +35,31 @@ const HomeStylesheet = StyleSheet.create({
     lineHeight: 24,
     textAlign: 'center',
   },
-
+  tabBarInfoContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    ...Platform.select({
+      ios: {
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: -3 },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+      },
+      android: {
+        elevation: 20,
+      },
+    }),
+    alignItems: 'center',
+    backgroundColor: '#fbfbfb',
+    paddingVertical: 20,
+  },
+  tabBarInfoText: {
+    fontSize: 17,
+    color: 'rgba(96,100,109, 1)',
+    textAlign: 'center',
+  },
   navigationFilename: {
     marginTop: 5,
   },
@@ -64,20 +77,8 @@ const HomeStylesheet = StyleSheet.create({
   emptyContainer: {
     alignSelf: 'stretch',
     backgroundColor: BACKGROUND_COLOR,
-  },
-  noPermissionsText: {
-    textAlign: 'center',
-  },
-  wrapper: {},
-
-  image: {
-    backgroundColor: BACKGROUND_COLOR,
-  },
-  textButton: {
-    backgroundColor: BACKGROUND_COLOR,
-    padding: 10,
-  },
+  }
 });
 
 
-export { HomeStylesheet }
+export { RootStylesheet }

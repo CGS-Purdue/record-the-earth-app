@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
 
-export default function LinksScreen() {
+function LinksScreen() {
   return (
     <ScrollView style={styles.container}>
       <ExpoLinksView />
@@ -21,3 +21,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
+
+export { LinksScreen }

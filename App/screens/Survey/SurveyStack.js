@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { FlatList, StyleSheet, Text, Button, View } from 'react-native';
-
 import { createAppContainer, createStackNavigator } from 'react-navigation';
-import { SurveyScreen } from '../../components/SurveyScreen'
+import { SurveyScreen } from './SurveyScreen'
 import { SurveyMainScreen } from './SurveyMainScreen'
 import SurveyBioScreen from './SurveyBioScreen'
 import SurveyGeoScreen from './SurveyGeoScreen'
@@ -28,4 +27,4 @@ SurveyStack.navigationOptions = ({ navigation }) => {
     tabBarVisible,
   };
 };
-export default SurveyStack;
+export { SurveyStack }
