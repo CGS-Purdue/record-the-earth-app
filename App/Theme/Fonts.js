@@ -29,6 +29,7 @@ const ThemeFonts = getThemeFonts([
 ThemeFonts.TITLE_FONT = 'space-mono',
 ThemeFonts.BODY_FONT = 'cutive-mono';
 ThemeFonts.ICON_FONT = 'ionicons';
+ThemeFonts.MONO_FONT = 'space-mono';
 
 export { ThemeFonts }
 

@@ -1,8 +1,7 @@
 import ColorLib from './ColorLib'
 
-const ColorTheme = {
-  // MAIN THEME
-  PRIMARY : ColorLib.green,
+const Colors = {
+  PRIMARY   : ColorLib.green,
   SECONDARY : ColorLib.dodgerblue,
   HIGHLIGHT : ColorLib.cyanaqua,
   // red
@@ -40,6 +39,10 @@ const ColorTheme = {
   GRA_400 : ColorLib.gray,          // #808080
   GRA_500 : ColorLib.dustyray,      // #999999
   GRA_600 : ColorLib.ovegray,       // #666666
+
+  WHITE : ColorLib.white,
+  BLACK : ColorLib.black,
+
   // NOTICES AND WARNINGS
   MESSAGE_PRIMARY   : ColorLib.green,
   MESSAGE_SECONDARY : ColorLib.danube,
@@ -50,17 +53,22 @@ const ColorTheme = {
 };
 
 
-const Colors = {
-  tintColor: ColorTheme.PRIMARY,
-  BACKGROUND_COLOR: ColorTheme.BG,
-  LIVE_COLOR: ColorTheme.RED_600,
-  tabIconSelected: ColorTheme.PRIMARY,
-  tabIconDefault: ColorTheme.GRA_200,
-  tabBar: '#fefefe',
-  errorBackground: ColorTheme.RED_500,
-  errorText: '#fff',
+const ThemeColors = {
+  BACKGROUND_COLOR: '#FFF8ED',
+  TEXT_COLOR:       '#333333',
+  tintcolor:         Colors.PRIMARY,
+  bgMain:            Colors.BLU_400,
+  colorMain:         Colors.BLU_400,
+  LIVE_COLOR:        Colors.RED_600,
+  tabIconSelected:   Colors.PRIMARY,
+  tabIconDefault:    Colors.GRA_200,
+  tabBar:            '#fefefe',
+  errorBackground:   Colors.RED_500,
+  errorText:         '#fff',
   warningBackground: '#EAEB5E',
-  warningText: '#666804',
-  noticeBackground: ColorTheme.PRIMARY,
-  noticeText: '#fff',
+  warningText:       '#666804',
+  noticeBackground:  Colors.PRIMARY,
+  noticeText:        '#fff',
 };
+
+export{ ThemeColors, Colors }
