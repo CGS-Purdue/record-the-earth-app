@@ -1,7 +1,8 @@
+import { rntool } from './init';
 import React, { useState } from 'react';
 import { AppLoading } from 'expo';
-import { Platform, StatusBar, View } from 'react-native';
-import AppNavigator from './navigation/AppNavigator';
+import { Platform, StatusBar, View, StyleSheet } from 'react-native';
+import RootNavigation from './screens/RootNavigation';
 import { loadResourcesAsync } from './Theme/Assets';
 import styles from './Theme/Stylesheet';
 
@@ -12,6 +13,7 @@ export default function App(props) {
   ] = useState(false);
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
+
     return (
       <AppLoading
         startAsync={loadResourcesAsync}
@@ -23,7 +25,7 @@ export default function App(props) {
     return (
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
+        <RootNavigation />
       </View>
     );
   }
@@ -38,8 +40,6 @@ function debugLogger(msg) {
     return;
   }
 }
-
-App.debugLogger = debugLogger;
 
 function handleLoadingError(error) {
   console.warn(error);
