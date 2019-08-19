@@ -1,10 +1,8 @@
 import React from 'react';
 import{ StyleSheet, Platform } from 'react-native';
-
 import { ThemeIcons } from '../Theme/Icons';
-import { Layout } from '../Theme/Layout';
 import { ThemeFonts } from '../Theme/Fonts';
-
+import { Layout } from '../Theme/Layout';
 
 const BACKGROUND_COLOR = '#FFF8ED';
 const LIVE_COLOR = '#FF0000';
