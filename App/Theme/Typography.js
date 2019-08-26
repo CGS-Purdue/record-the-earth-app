@@ -17,7 +17,7 @@
 // [font generator](http://www.fontsquirrel.com/fontface/generator)
 //
 //
-// In order to refer to a specific style of the font in your stylesheets as
+// In order to refer to a specific style of the font in your Stylesheets as
 // e.g. "font-style: italic;",  you may add a couple of @font-face includes
 // containing the respective font files for each style and specying
 // respective the _style parameter.

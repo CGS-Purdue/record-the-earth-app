@@ -1,23 +1,36 @@
-import * as Fonts from './Fonts';
+import { ThemeFonts } from './Fonts';
 import Layout from './Layout';
-import * as Icons from './Icons';
-import Colors from './Colors';
-import { Typography } from './Typography';
+import { Ionicons, ThemeIcons } from './Icons';
+import { Colors } from './Colors';
+import { Styles } from './Stylesheet';
+import {
+  ThemeColors,
+  ThemeVariables,
+  ThemeDefaultVariables
+} from './Variables';
+
+// import { Typography } from './Typography';
 
 const Theme = {
-  Fonts: Fonts,
+  Fonts: ThemeFonts,
   Layout: Layout,
-  Icons: Icons,
-  Colors: Colors,
-  Typography: Typography,
+  Icons: ThemeIcons,
+  Colors: ThemeColors,
+  Variables: ThemeVariables,
+  // Typography: Typography,
 };
 
 export {
-  Fonts,
-  Layout,
-  Icons,
   Colors,
-  Typography
+  Ionicons,
+  ThemeIcons,
+  ThemeFonts,
+  ThemeColors,
+  ThemeVariables,
+  ThemeDefaultVariables,
+  Styles,
+  Layout,
+  // Typography,
 }
 
 

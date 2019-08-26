@@ -32,6 +32,7 @@ const ICON_MAP = {
   'play':      ['play.png', 34, 51],
   'pause':     ['pause.png', 34, 51],
   'stop':      ['stop.png', 22, 22],
+  'list':      ['list.png', 50, 50],
   'muted':     ['muted.png', 67, 58],
   'unmuted':   ['unmuted.png', 67, 58],
   'thumb1':   ['thumb1.png', 18, 19],

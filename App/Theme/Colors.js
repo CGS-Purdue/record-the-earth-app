@@ -1,9 +1,6 @@
 import ColorLib from './ColorLib'
 
 const Colors = {
-  PRIMARY   : ColorLib.green,
-  SECONDARY : ColorLib.dodgerblue,
-  HIGHLIGHT : ColorLib.cyanaqua,
   // red
   RED_100 : ColorLib.brightred,     // #a60000
   RED_200 : ColorLib.wellread,      // #b72e3e
@@ -39,10 +36,12 @@ const Colors = {
   GRA_400 : ColorLib.gray,          // #808080
   GRA_500 : ColorLib.dustyray,      // #999999
   GRA_600 : ColorLib.ovegray,       // #666666
-
-  WHITE : ColorLib.white,
-  BLACK : ColorLib.black,
-
+  //
+  WHITE   : ColorLib.white,
+  BLACK   : ColorLib.black,
+  PRIMARY   : ColorLib.green,
+  SECONDARY : ColorLib.dodgerblue,
+  HIGHLIGHT : ColorLib.cyanaqua,
   // NOTICES AND WARNINGS
   MESSAGE_PRIMARY   : ColorLib.green,
   MESSAGE_SECONDARY : ColorLib.danube,
@@ -52,23 +51,7 @@ const Colors = {
   MESSAGE_INFO      : ColorLib.torylue,
 };
 
+Colors.TRANSPARENT = 'rgba(0,0,0,0)';
 
-const ThemeColors = {
-  BACKGROUND_COLOR: '#FFF8ED',
-  TEXT_COLOR:       '#333333',
-  tintcolor:         Colors.PRIMARY,
-  bgMain:            Colors.BLU_400,
-  colorMain:         Colors.BLU_400,
-  LIVE_COLOR:        Colors.RED_600,
-  tabIconSelected:   Colors.PRIMARY,
-  tabIconDefault:    Colors.GRA_200,
-  tabBar:            '#fefefe',
-  errorBackground:   Colors.RED_500,
-  errorText:         '#fff',
-  warningBackground: '#EAEB5E',
-  warningText:       '#666804',
-  noticeBackground:  Colors.PRIMARY,
-  noticeText:        '#fff',
-};
 
-export{ ThemeColors, Colors }
+export{ Colors }

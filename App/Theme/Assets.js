@@ -1,9 +1,10 @@
 import LogoMain  from '../assets/img/logo/logo-rte-lg.png';
 import BgMain  from '../assets/img/bg.jpg';
 import Splash  from '../assets/img/splash.jpg';
+import JungleBg  from '../assets/img/jungle-geometry2.png';
 
 
-import { loadAsync as loadFontsAsync}  from 'expo-font';
+import { loadAsync as loadFontsAsync } from 'expo-font';
 import { Asset } from 'expo-asset';
 
 // import '../static/assets/img/logo/logo-rte.png'                as logo_default;
@@ -24,34 +25,8 @@ import { Asset } from 'expo-asset';
 //   btn_rec_stop,
 //   btn_mic,
 // };
-
-// // fonts
-//
-// import 'NunitoSans-Black.ttf'                  as nunitosans_black_ttf;
-// import 'Daniel-Black.otf'                      as daniel_black_otf;
-// import 'NunitoSans-Regular.ttf'                as nunitosans_regular_ttf ;
-// import 'NunitoSans-Bold.ttf'                   as nunitosans_bold_ttf;
-// import 'OpenSans-Light-webfont.ttf'            as opensans_lightwebfont_ttf;
-// import 'OpenSans-Regular-webfont.woff'         as opensans_regularwebfont_woff;
-// import 'OpenSans-Light-webfont.svg'            as opensans_lightwebfont_svg;
-// import 'OpenSans-Regular-webfont.svg'          as opensans_regularwebfont_svg;
-// import 'OpenSans-Regular-webfont.eot'          as opensans_regularwebfont_eot;
-// import 'OpenSans-Light-webfont.eot'            as opensans_lightwebfont_eot;
-// import 'OpenSans-Light-webfont.woff'           as opensans_lightwebfont_woff;
 // import 'OpenSans-Regular-webfont.ttf'          as opensans_regularwebfont_ttf;
-//
-//
-// const OpenSans = {
-//   { opensans_lightwebfont_ttf  }
-//   { opensans_regularwebfont_woff  }
-//   { opensans_lightwebfont_svg  }
-//   { opensans_regularwebfont_svg  }
-//   { opensans_regularwebfont_eot  }
-//   { opensans_lightwebfont_eot  }
-//   { opensans_lightwebfont_woff  }
-//   { opensans_regularwebfont_ttf  }
-//
-// }
+// import 'OpenSans-Light-webfont.ttf'            as opensans_lightwebfont_ttf;
 
 
 
@@ -62,19 +37,21 @@ const IMAGE_DIR = 'images';
 const ICON_DIR = 'icons';
 
 const ICON_ASSETS = {
+  list:      require('../assets/icons/list.png'),
+  muted:     require('../assets/icons/muted.png'),
+  pause:     require('../assets/icons/pause.png'),
+  play:      require('../assets/icons/play.png'),
   record:    require('../assets/icons/record.png'),
   recording: require('../assets/icons/recording.png'),
-  play:      require('../assets/icons/play.png'),
-  pause:     require('../assets/icons/pause.png'),
   stop:      require('../assets/icons/stop.png'),
-  muted:     require('../assets/icons/muted.png'),
-  unmuted:   require('../assets/icons/unmuted.png'),
   thumb1:    require('../assets/icons/thumb1.png'),
-  track1:    require('../assets/icons/track1.png'),
   thumb2:    require('../assets/icons/thumb2.png'),
+  track1:    require('../assets/icons/track1.png'),
+  unmuted:   require('../assets/icons/unmuted.png'),
 }
 
 const IMAGE_ASSETS = {
+  JungleBg,
   LogoMain,
   BgMain,
   Splash,

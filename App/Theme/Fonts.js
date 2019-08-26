@@ -20,6 +20,19 @@ function getThemeFonts(fonts) {
   return map;
 }
 
+
+// const OpenSans = {
+//   { opensans_lightwebfont_ttf  }
+//   { opensans_regularwebfont_woff  }
+//   { opensans_lightwebfont_svg  }
+//   { opensans_regularwebfont_svg  }
+//   { opensans_regularwebfont_eot  }
+//   { opensans_lightwebfont_eot  }
+//   { opensans_lightwebfont_woff  }
+//   { opensans_regularwebfont_ttf  }
+// }
+
+
 const ThemeFonts = getThemeFonts([
   'space-mono',
   'cutive-mono',

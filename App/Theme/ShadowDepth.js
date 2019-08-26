@@ -162,19 +162,19 @@ function depth_map($depth) {
 
 
 
-.overlay
-  .light {
+'.overlay': {
+  '.light': {
     include_overlay('light', .15)
-  }
-  .dark {
+  },
+  '.dark': {
     include_overlay('dark', .15)
   }
+}
 
 
 
 
 
-/*
 /// ---
 /// title: Depth
 /// section: Effects
@@ -189,12 +189,12 @@ function depth_map($depth) {
 /// - depth-4
 /// - depth-5
 /// - depth-6
-.depth-0 { @include depth("0"); }
-.depth-1 { @include depth("1"); }
-.depth-2 { @include depth("2"); }
-.depth-3 { @include depth("3"); }
-.depth-4 { @include depth("4"); }
-.depth-5 { @include depth("5"); }
-.depth-6 { @include depth("6"); }
+depth0 { @include depth("0"); }
+depth1 { @include depth("1"); }
+depth2 { @include depth("2"); }
+depth3 { @include depth("3"); }
+depth4 { @include depth("4"); }
+depth5 { @include depth("5"); }
+depth6 { @include depth("6"); }
 // HOVER EFFECT
-.hover { @include hover(); }
+hover {  @include hover(); }

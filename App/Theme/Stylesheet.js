@@ -1,34 +1,97 @@
 import { StyleSheet } from 'react-native';
+import { Colors } from './Colors';
+import ViewStyles from './styles/view';
 
 
-const styles = StyleSheet.create({
+const MainStyles = {
   container: {
     flex: 1,
     backgroundColor: '#fff',
     // backgroundImage: './App/assets/img/bg.jpg',
     // color: '#fff',
   },
+  rootContainer:{
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    position: 'relative',
+    padding: 0,
+    margin: 0,
+    flexGrow: 1,
+    flexShrink: 0,
+    flexBasis: '100%',
+  },
+  absoluteRootContainer: {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0 ,
+    left: 0,
+    padding: 0,
+    margin: 0,
+    flexGrow: 1,
+    flexShrink: 0,
+    flexBasis: '100%',
+  },
+  user: {
+      flex: 1,
+  },
+  image: {
+      flex: 1,
+  },
+  name: {
+      flex: 1,
+  },
+}
+
+
+const debugStyles = StyleSheet.create({
+  highlight: {
+    borderColor : '#FF0000',
+    borderWidth : 1,
+    borderStyle : 'solid',
+  }
 });
 
+const UtilityStyles = StyleSheet.create({
+  container: {
+    borderRadius: 4,
+    borderWidth: 0.5,
+    borderColor: '#d6d7da',
+  },
+  title: {
+    fontSize: 19,
+    fontWeight: 'bold',
+  },
+  activeTitle: {
+    color: 'red',
+  },
+  listItem: {
+    flex: 1,
+    fontSize: 16,
+    color: 'white',
+  },
+  selectedListItem: {
+    color: 'green',
+  },
+  separator: {
+    borderBottomColor: '#bbb',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  border: {
+    borderColor : '#FF0000',
+    borderWidth : 1,
+    borderStyle : 'solid',
+  }
 
-const debug_outline = StyleSheet.create({
-  borderBottomColor       :  '#FF0000',
-  borderBottomWidth       :  '1px',
-  borderColor             :  '#FF0000',
-  borderEndColor          :  '#FF0000',
-  borderEndWidth          :  '1px',
-  borderLeftColor         :  '#FF0000',
-  borderLeftWidth         :  '1px',
-  borderRightColor        :  '#FF0000',
-  borderRightWidth        :  '1px',
-  borderStartColor        :  '#FF0000',
-  borderStartWidth        :  '1px',
-  borderStyle             :  'solid',
-  borderTopColor          :  '#FF0000',
-  borderTopWidth          :  '1px',
-  borderWidth             :  '1px',
 });
 
+let combined = Object.assign(ViewStyles, MainStyles);
+const Styles = StyleSheet.create(combined);
 
-export { debug_outline }
-export default styles;
+export default Styles;
+
+export { UtilityStyles, debugStyles, Styles }
