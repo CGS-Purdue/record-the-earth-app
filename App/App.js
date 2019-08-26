@@ -1,10 +1,13 @@
-import { rntool } from './init';
+if(__DEV__) {
+  import('./Utilities/ReactotronConfig').then(() => console.log('Reactotron Configured'))
+}
 import React, { useState } from 'react';
 import { AppLoading } from 'expo';
 import { Platform, StatusBar, View, StyleSheet } from 'react-native';
 import RootNavigation from './screens/RootNavigation';
+import { initalAppSetup } from './LifeCycle/InitialSetup';
+import Styles from './Theme/Stylesheet';
 import { loadResourcesAsync } from './Theme/Assets';
-import styles from './Theme/Stylesheet';
 
 export default function App(props) {
   const [
@@ -23,7 +26,7 @@ export default function App(props) {
     );
   } else {
     return (
-      <View style={styles.container}>
+      <View style={Styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <RootNavigation />
       </View>
@@ -47,6 +50,7 @@ function handleLoadingError(error) {
 
 function handleFinishLoading(setLoadingComplete) {
   setLoadingComplete(true);
+  initalAppSetup();
   console.log('is __DEV__', __DEV__);
   debugLogger('Finished Loading');
 }

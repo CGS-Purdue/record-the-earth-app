@@ -39,7 +39,12 @@
       },
     },
     "android" : {
-      "package" : "org.recordtheearth.expo"
+      "package" : "org.recordtheearth.expo",
+      "permissions": [
+        "RECORD_AUDIO",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "githubUrl": "https://github.com/charrismatic/record-the-earth-reach-native",
     "extra": {},
