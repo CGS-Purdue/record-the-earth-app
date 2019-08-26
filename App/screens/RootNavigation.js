@@ -5,14 +5,9 @@ import {
   createAppContainer,
   createSwitchNavigator
 } from 'react-navigation';
-
-
-
-// import { HomeStack } from './Main/HomeStack';
-import { MainTabNavigator } from './Main/MainTabNavigator';
 import { RecordStack } from './Record/RecordStack';
 import { SurveyStack } from './Survey/SurveyStack';
-
+import { MainTabNavigator } from './Main/MainTabNavigator';
 
 const RootNavigation = createSwitchNavigator({
     Home: { screen: MainTabNavigator },

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Text, View, } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
-
 import { Recorder } from '../../Components/Recorder';
+import { RootView } from '../../Views/RootView';
+import { CenterView } from '../../Views/CenterView';
+
 
 class RecordScreen extends Component {
   constructor(props) {
     super(props);
-    this.color = null;
-    this.state = { counter: 0 };
   }
 
   componentDidMount() {
@@ -17,16 +17,17 @@ class RecordScreen extends Component {
 
   render() {
     return (
-      <View>
-      <Text style={{ fontSize: 30 }}>Recorder</Text>
-      <Recorder />
-      </View>
+      <RootView>
+        <CenterView>
+          <Recorder />
+        </CenterView>
+      </RootView>
     )
   }
 }
 
 RecordScreen.defaultProps = {
-  color: 'blue'
+  color: 'green'
 };
 
 RecordScreen.navigationOptions = {

@@ -4,7 +4,7 @@ import { ExpoLinksView } from '@expo/samples';
 
 function LinksScreen() {
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={Styles.container}>
       <ExpoLinksView />
     </ScrollView>
   );
@@ -14,7 +14,7 @@ LinksScreen.navigationOptions = {
   title: 'Links',
 };
 
-const styles = StyleSheet.create({
+const Styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,

@@ -6,13 +6,10 @@ import TabBarIcon from '../../Components/TabBarIcon';
 import { HomeScreen } from './HomeScreen';
 import { LinksStack } from './LinksStack';
 
-
 const homeConfig = Platform.select({
-  web: { headerMode: 'screen' },
+  // web: { headerMode: 'screen' },
   default: {},
 });
-
-
 
 const HomeStack = createStackNavigator({
     Home: HomeScreen,

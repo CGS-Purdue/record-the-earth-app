@@ -55,8 +55,8 @@ export default class SurveyGeoScreen extends React.Component {
   render() {
 
     return (
-      <View style={styles.container}>
-         <Text style={styles.writeup}>
+      <View style={Styles.container}>
+         <Text style={Styles.writeup}>
           Did you hear any of these sounds?
         </Text>
 
@@ -95,8 +95,8 @@ export default class SurveyGeoScreen extends React.Component {
           />
         </View>
 
-        <View style={styles.innerview}>
-          <TouchableOpacity style={styles.options} onPress={this.selectAll.bind(this)}>
+        <View style={Styles.innerview}>
+          <TouchableOpacity style={Styles.options} onPress={this.selectAll.bind(this)}>
             <Text>Select All</Text>
           </TouchableOpacity>
         </View>
@@ -105,7 +105,7 @@ export default class SurveyGeoScreen extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+const Styles = StyleSheet.create({
   container: {
     flex: 1,
     display: 'flex',

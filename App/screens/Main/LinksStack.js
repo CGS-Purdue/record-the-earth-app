@@ -1,12 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 import { Platform } from 'react-native';
-
 import TabBarIcon from '../../Components/TabBarIcon';
 import { LinksScreen } from './LinksScreen';
 
 const config = Platform.select({
-  web: { headerMode: 'screen' },
   default: {},
 });
 

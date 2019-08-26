@@ -1,22 +1,24 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-
-
+import {
+  createStackNavigator,
+  createBottomTabNavigator
+} from 'react-navigation';
 import { HomeStack } from './HomeStack';
 import { LinksStack } from './LinksStack';
+import { ThemeColors } from '../../Theme';
 
 const MainTabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
 }, {
-    tabBarOptions: {
+  tabBarOptions: {
     activeTintColor: '#e91e63',
     labelStyle: {
       fontSize: 12,
     },
     style: {
-      backgroundColor: 'blue',
+      backgroundColor: ThemeColors.tintcolor,
     },
   }
 });

@@ -7,14 +7,14 @@ import { ModalRecordStartScreen } from './ModalRecordStartScreen';
 import { ModalRecordEndScreen } from './ModalRecordEndScreen';
 
 const RecordStack = createStackNavigator({
-    RecordA: { screen: RecordScreen },
+    Record: { screen: RecordScreen },
     RecordMain: { screen: ModalRecordScreen },
-    RecordStart: { screen: ModalRecordStartScreen },
+    Recording: { screen: ModalRecordStartScreen },
     RecordEnd: { screen: ModalRecordEndScreen },
   }, {
     mode: 'modal',
     headerMode: 'none',
-    initialRouteName: 'RecordMain',
+    initialRouteName: 'Record',
     tabBarVisible: false,
 
   }

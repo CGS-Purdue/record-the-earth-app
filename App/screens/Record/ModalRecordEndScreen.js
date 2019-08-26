@@ -1,24 +1,47 @@
-import React from 'react';
-import { Button, Text, View, } from 'react-native';
+import React, {Component} from 'react';
+import { Button, Text, View } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
+import Modal from "react-native-modal";
 
-const ModalRecordEndScreen = ({
-  navigation
-}:{
-  navigation: NavigationScreenProp<NavigationState & any>;
-}) => (
-  <View
-     style={{display:'flex', flex:1, justifyContent:'center', flexDirection: 'column'}}>
-    <View
-      style={{flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ fontSize: 30 }}>finish</Text>
-      <Button
-        onPress={() => navigation.navigate('RecordMain')}
-        title="go back to main"
-      />
-    </View>
-  </View>
-);
+import { CenterView, CenterColView } from '../../Views/CenterView';
+import { RootView } from '../../Views/RootView';
+
+class ModalRecordEndScreen extends Component {
+  state = {
+    isModalVisible: false
+  };
+
+  toggleModal = () => {
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+  };
+
+  render() {
+    const { navigate } = this.props.navigation;
+    return (
+    <RootView>
+      <CenterView>
+      <View style={{ flex: 1 }}>
+        <Button title="Show modal" onPress={this.toggleModal} />
+        <Modal
+          onBackdropPress={() => this.setState({ isVisible: false })}
+          isVisible={this.state.isModalVisiUtilities/Filesystemble}
+          backdropTransitionOutTiming={0}
+        >
+         <View style={{ flex: 1 }}>
+         <Text>Hello!</Text>
+         <Button title="Hide modal" onPress={this.toggleModal}/>
+         </View>
+
+
+        </Modal>
+      </View>
+      </CenterView>
+    </RootView>
+    );
+  }
+}
+
+
 
 ModalRecordEndScreen.navigationOptions = {
   header: null,
