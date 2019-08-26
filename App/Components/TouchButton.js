@@ -1,74 +1,56 @@
-import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { View, Text, TouchableOpacity, TouchableHighlight } from 'react-native';
+import { ThemeColors } from '../Theme';
+import { ThemeFonts } from  '../Theme/Fonts';
 
-import { ThemeColors } from '../Theme/Colors';
-import { ThemeFonts } from '../Theme/Fonts';
 
+const touchButtonStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: 10,
+  margin: 0,
+};
 
-export function TouchButton({ children }, props) {
-    // backgroundColor: '#778899'
+export default class TouchButton extends Component {
+  constructor(props) {
+    super(props);
+    this.active = false;
+    this.state= {
+      active: false,
 
-  let touchButtonStyle = {
-
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    padding: 0,
-    margin: 0,
-    fontFamily: ThemeFonts.MONO_FONT,
-    flex: 1,
-  };
-
-  if (props.background) {
-    style.background = props.background;
-  } else {
-    style.color = ThemeColors.bgMain;
-    style.background = ThemeColors.colorMain;
+    };
+    this.text = false;
+    this.image = false;
+    this.disabled = false;
+    this.underlayColor = '#333'
   }
 
-  function toggleState() {
-    if (this.state.active) {
-      this.setState(false);
-    } else {
-      this.setState(true);
-    }
-  };
+  toggleState() {
+      if (this.state.active) {
+        this.setState(false);
+      } else {
+        this.setState(true);
+      }
+  }
 
-  if (props.hightlight) {
+
+  render() {
+    this.underlayColor = this.props.color;
+    this.onPress = this.props.onPress;
+
     return (
-      <TouchableHighlight {...props}  style={touchButtonStyle}>
-        {children}
+      <View style={{borderColor : 'blue',borderWidth:1,borderStyle:'solid'}}>
+      <TouchableHighlight
+        style={[touchButtonStyle]}
+        underlayColor={this.props.color}
+        onPress={this.props.onPress}>
+          {this.props.children}
       </TouchableHighlight>
-    )
-  } else {
-    return (
-      <TouchableOpacity {...props} style={touchButtonStyle}>
-        {children}
-      </TouchableOpacity>
+    </View>
     )
   }
 }
 
-
-TouchButton.defaultProps = {
-  error: null,
-  highlight: false,
-  color: ThemeColors.BACKGROUND_COLOR,
-  action: toggleState,
-  disabled: false,
-};
-
-TouchButton.propTypes = {
-  task: PropTypes.shape({
-    highlight: PropTypes.boolean,
-    action: PropTypes.function,
-    state: PropTypes.string,
-  }),
-  onArchiveTask: PropTypes.func,
-  onPinTask: PropTypes.func,
-  error: PropTypes.string,
-  disabled: PropTypes.boolean,
-};
+export { TouchButton }
