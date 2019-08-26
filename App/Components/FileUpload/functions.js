@@ -27,7 +27,7 @@ function uploadForm() {
       { cancelable: false }
     );
   })
-  .catch(err => {
+  .catch(err => {Colors
     console.error("error uploading images: ", err);
   });
 }

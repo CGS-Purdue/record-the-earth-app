@@ -28,9 +28,9 @@ export default class App extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Upload Test</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
+      <View style={Styles.container}>
+        <Text style={Styles.welcome}>Upload Test</Text>
+        <Text style={Styles.instructions}>To get started, edit App.js</Text>
         <Button
           onPress={xhrUpload}
           title="UPLOAD"
@@ -108,7 +108,7 @@ function xhrUpload() {
 
 }
 
-const styles = StyleSheet.create({
+const Styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
