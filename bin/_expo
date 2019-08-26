@@ -7,15 +7,22 @@ BASE_DIR="$(npm prefix)"
 
 [[ -z $ANDROID_HOME ]] && echo 'ANDROID_HOME is not set. Skipping command' && exit 0
 
-
 ABD_PATH="${ANDROID_HOME}/platform-tools"
 ANDROID_SERIAL="025abd11727717ac"
 # RCT_METRO_PORT=8081
-$ANDROID_HOME/platform-tools/adb reverse tcp:9090 tcp:9090
 
 # /data/apps/reactotron/Reactotron.2.17.0.AppImage
+
+$ANDROID_HOME/platform-tools/adb reverse tcp:19001 tcp:19001
+$ANDROID_HOME/platform-tools/adb reverse tcp:19000 tcp:19000
+# Reactotron
+$ANDROID_HOME/platform-tools/adb reverse tcp:9090 tcp:9090
+# React Native Devtools
+$ANDROID_HOME/platform-tools/adb reverse tcp:8097 tcp:8097
+
 DEBUG_LOGGING="yes"
 export DEBUG_LOGGING
+
 EDITOR="atom" REACT_EDITOR="${EDITOR}" EXPO_DEBUG="true" DEV_ENV="expo" DEBUG_LOGGING="${DEBUG_LOGGING}" expo \
   start --clear \
     --max-workers 3 \
