@@ -7,6 +7,9 @@
     "start": "expo start",
     "dev": "../bin/_expo",
     "adb": "../bin/_adb",
+    "pretty:check": "../bin/prettier --check",
+    "pretty:fix": "../bin/prettier --write",
+    "pretty:list": "../bin/prettier --list",
     "ios": "expo start --ios",
     "web": "expo start --web",
     "react-devtools": "react-devtools",
@@ -51,12 +54,16 @@
     "url": "https://github.com/charrismatic/record-the-earth-react-native-snack/issues"
   },
   "devDependencies": {
+    "@react-native-community/eslint-config": "0.0.5",
     "babel-preset-expo": "^6.0.0",
     "eslint": "^6.2.0",
+    "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.3",
     "jest-expo": "^34.0.0",
     "react-devtools": "^3.6.3",
-    "reactotron-react-native": "^3.6.4"
+    "reactotron-react-native": "^3.6.4",
+    "reactotron-redux": "^3.1.1",
+    "remote-redux-devtools": "^0.5.16"
   },
   "private": true
 }

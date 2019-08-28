@@ -13,14 +13,21 @@ class PaperTabs extends React.Component {
   };
 
   render() {
-    return <Paper square>
-        <Tabs value={this.state.value} indicatorColor="primary" textColor="primary" onChange={this.handleChange}>
+    return (
+      <Paper square>
+        <Tabs
+          value={this.state.value}
+          onChange={this.handleChange}
+          textColor="primary"
+          indicatorColor="primary"
+        >
           <Tab label="Active" />
           <Tab label="Disabled" disabled />
           <Tab label="Active" />
         </Tabs>
-      </Paper>;
+      </Paper>
+    );
   }
 }
 
-export default PaperTabs;
+export default { PaperTabs };

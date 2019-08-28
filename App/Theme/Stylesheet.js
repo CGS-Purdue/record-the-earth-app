@@ -1,59 +1,78 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from './Colors';
-import ViewStyles from './styles/view';
+import { ColorLib } from './ColorLib';
+import { ThemeColors } from './Colors';
+import { Layout } from './Layout';
+import { ViewStyles } from './styles/view';
+import { FormStyles } from './styles/forms';
+import { ButtonStyles } from './styles/button';
 
+
+var key, color_key, color;
+var colorRange10 = [];
+var ColorSet= Object.values(ColorLib);
+var colors_length = ColorSet.length;
+
+for (var i=0; i<11; i++) {
+  key = Math.random();
+  color_key = Math.floor(key * colors_length);
+  color = ColorSet[color_key];
+  colorRange10[i] = color;
+}
+
+const StyleSheetLayout = Layout;
 
 const MainStyles = {
+  user: {flex: 1},
+  image: {flex: 1},
+  name: {flex: 1},
+
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    // backgroundImage: './App/assets/img/bg.jpg',
-    // color: '#fff',
+    backgroundColor: ThemeColors.WHITE
   },
+
   rootContainer:{
-    width: '100%',
-    height: '100%',
+    width: StyleSheetLayout.PERCENT_100,
+    height: StyleSheetLayout.PERCENT_100,
     display: 'flex',
     position: 'relative',
     padding: 0,
     margin: 0,
     flexGrow: 1,
     flexShrink: 0,
-    flexBasis: '100%',
+    flexBasis: '100%'
   },
-  absoluteRootContainer: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
+
+  padView: {
+    backgroundColor: ThemeColors.TRANSPARENT,
+    flexBasis: StyleSheetLayout.PERCENT_100,
+    width: StyleSheetLayout.PERCENT_100,
+    height: StyleSheetLayout.PERCENT_100,
     position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0 ,
-    left: 0,
-    padding: 0,
-    margin: 0,
-    flexGrow: 1,
+    display: 'flex',
     flexShrink: 0,
-    flexBasis: '100%',
-  },
-  user: {
-      flex: 1,
-  },
-  image: {
-      flex: 1,
-  },
-  name: {
-      flex: 1,
-  },
+    flexGrow: 1,
+    bottom: 0,
+    margin: 0,
+    right: 0,
+    left: 0,
+    top: 0
+  }
 }
 
-
-const debugStyles = StyleSheet.create({
+const DebugStyles = StyleSheet.create({
   highlight: {
-    borderColor : '#FF0000',
-    borderWidth : 1,
-    borderStyle : 'solid',
+    borderColor: '#FF0000',
+    borderWidth: 1,
+    borderStyle: 'solid'
+  },
+
+  outlineAll: {
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: colorRange10[(Math.floor(Math.random() * 10))],
   }
+
 });
 
 const UtilityStyles = StyleSheet.create({
@@ -82,16 +101,24 @@ const UtilityStyles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   border: {
-    borderColor : '#FF0000',
-    borderWidth : 1,
-    borderStyle : 'solid',
-  }
-
+    borderColor: '#FF0000',
+    borderWidth: 1,
+    borderStyle: 'solid'
+  },
 });
+// #e1c0c8
+let combined = Object.assign(ViewStyles, MainStyles, FormStyles, ButtonStyles);
 
-let combined = Object.assign(ViewStyles, MainStyles);
 const Styles = StyleSheet.create(combined);
 
-export default Styles;
 
-export { UtilityStyles, debugStyles, Styles }
+export default Styles;
+//
+export {
+  ButtonStyles,
+  MainStyles,
+  FormStyles,
+  UtilityStyles,
+  DebugStyles,
+  Styles,
+};

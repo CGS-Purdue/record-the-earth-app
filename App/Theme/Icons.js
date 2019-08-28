@@ -1,4 +1,4 @@
-import Ionicons from '@expo/vector-icons';
+import Ionicons from "@expo/vector-icons"
 import { Asset } from 'expo-asset';
 import { ICON_ASSETS } from './Assets';
 

@@ -83,20 +83,16 @@ function staticFormUpload() {
     console.log(res)
   }).catch(error => {
     console.error(error)
-  })
-
+  });
 }
 
 function xhrUpload() {
   const formData = getFormData();
-
   var request = new XMLHttpRequest();
-
   request.onreadystatechange = (e) => {
-    if (request.readyState !== 4) {
-      return;
-    }
-
+  if (request.readyState !== 4) {
+    return;
+  }
     if (request.status === 200) {
       console.log('success', request.responseText);
     } else {

@@ -28,8 +28,6 @@ import { Asset } from 'expo-asset';
 // import 'OpenSans-Regular-webfont.ttf'          as opensans_regularwebfont_ttf;
 // import 'OpenSans-Light-webfont.ttf'            as opensans_lightwebfont_ttf;
 
-
-
 const REL_PATH = '..';
 const ASSET_DIR = 'assets';
 const FONT_DIR = 'assets';

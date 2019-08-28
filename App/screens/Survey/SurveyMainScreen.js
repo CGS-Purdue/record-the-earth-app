@@ -1,5 +1,11 @@
-import React, {Component} from 'react';
-import { FlatList, StyleSheet, Text, Button, View } from 'react-native';
+import React, { Component } from 'react';
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  Button,
+  View
+} from 'react-native';
 
 
 class SurveyMainScreen extends React.Component {
@@ -44,10 +50,9 @@ class SurveyMainScreen extends React.Component {
           title="Survey Emo"
           onPress={() => navigate('EmoSurvey', { name: 'EmoSurvey' })}
         />
-
       </View>
     );
   }
 }
 
-export { SurveyMainScreen } 
+export { SurveyMainScreen }

@@ -2,31 +2,47 @@
 
 # EXPO HELPER
 # -------------
-# BUILD THE ANDROID PROJECT FROM THE ./android directory
+# device reverse tunnel        exp://127.0.0.1:19000
+# Metro Bundler on                        port 19001
+# Expo DevTools is running at http://localhost:19002
 BASE_DIR="$(npm prefix)"
 
+echo "Checking Android path ..."
 [[ -z $ANDROID_HOME ]] && echo 'ANDROID_HOME is not set. Skipping command' && exit 0
 
+# The debugger will receive a list of all project roots, separated by a space. For example, if you set
+# REACT_DEBUGGER="node /path/to/launchDebugger.js --port 2345 --type ReactNative",
+# node /path/to/launchDebugger.js --port 2345 --type ReactNative /path/to/reactNative/app
+# will be used to start your debugger.
+# Custom debugger commands executed this way should be short-lived processes,
+# and they shouldn't produce more than 200 kilobytes of output.
+APP_DIR="/data/apps"
 ABD_PATH="${ANDROID_HOME}/platform-tools"
+# __REACT_DEVTOOLS_PORT__
 ANDROID_SERIAL="025abd11727717ac"
+
+echo "Settings up additional devtools..."
+# REACTOTRON
+[[ ! -z $RUN_REACTOTRON ]] &&  $ANDROID_HOME/platform-tools/adb reverse tcp:9090 tcp:9090 && ${APP_DIR}/reactotron/Reactotron.2.17.0.AppImage &
+# REACT DEVTOOLS
+[[ ! -z $RUN_REACTDEVTOOLS ]] && $ANDROID_HOME/platform-tools/adb reverse tcp:8097 tcp:8097 && node $BASE_PATH/node_modules/.bin/react-devtools
+
+# echo "Configuring extra ports..."
 # RCT_METRO_PORT=8081
+# $ANDROID_HOME/platform-tools/adb reverse tcp:19002 tcp:19002
+# $ANDROID_HOME/platform-tools/adb reverse tcp:19001 tcp:19001
+# $ANDROID_HOME/platform-tools/adb reverse tcp:19000 tcp:19000
 
-# /data/apps/reactotron/Reactotron.2.17.0.AppImage
-
-$ANDROID_HOME/platform-tools/adb reverse tcp:19001 tcp:19001
-$ANDROID_HOME/platform-tools/adb reverse tcp:19000 tcp:19000
-# Reactotron
-$ANDROID_HOME/platform-tools/adb reverse tcp:9090 tcp:9090
-# React Native Devtools
-$ANDROID_HOME/platform-tools/adb reverse tcp:8097 tcp:8097
-
+# CHROME
+# $ANDROID_HOME/platform-tools/adb reverse tcp:8081 tcp:8081
 DEBUG_LOGGING="yes"
-export DEBUG_LOGGING
-
-EDITOR="atom" REACT_EDITOR="${EDITOR}" EXPO_DEBUG="true" DEV_ENV="expo" DEBUG_LOGGING="${DEBUG_LOGGING}" expo \
+DEV_ENV="expo"
+# --offline
+EDITOR="atom --add" REACT_EDITOR="${EDITOR}" EXPO_DEBUG="true" DEBUG_LOGGING="${DEBUG_LOGGING}" expo \
   start --clear \
-    --max-workers 3 \
+    --max-workers 4 \
     --no-minify \
-    --host localhost \
+    --no-https \
     --dev \
+    --host localhost \
     --android

@@ -30,7 +30,6 @@ function checkDb() {
 
   let onSuccess = (tx, result) => {
     // this.setState({ data: result.rows._array});
-    console.log(result)
   };
 
   let onError = (tx, error) => {
@@ -49,14 +48,13 @@ function checkDb() {
   // })()
 
   // var logHealthCheck = (() => {
-    console.log('checking insert action');
     let timestamp = new Date();
     db.transaction(tx => {
       tx.executeSql(
         'INSERT INTO HealthCheck (date) VALUES (?)',
         [timestamp],
         (tx, result) => {
-          console.log(result)
+          // console.log(result)
         },
         (error) => {
           console.log(error);
@@ -66,7 +64,6 @@ function checkDb() {
   // })();
 
   // var checkResults = (() => {
-    console.log('checking select action');
     db.transaction((tx)=>{
       tx.executeSql(
         'SELECT * FROM HealthCheck ORDER BY id DESC LIMIT 1',

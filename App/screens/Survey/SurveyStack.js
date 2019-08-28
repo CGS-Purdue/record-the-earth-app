@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { FlatList, StyleSheet, Text, Button, View } from 'react-native';
-import { createAppContainer, createStackNavigator } from 'react-navigation';
-import { SurveyScreen } from './SurveyScreen'
-import { SurveyMainScreen } from './SurveyMainScreen'
-import SurveyBioScreen from './SurveyBioScreen'
-import SurveyGeoScreen from './SurveyGeoScreen'
-import SurveyAntScreen from './SurveyAntScreen'
-import SurveyEmoScreen from './SurveyEmoScreen'
-import CombinedSurvey from './CombinedSurvey'
+import { createStackNavigator } from 'react-navigation';
+import { SurveyScreen } from './SurveyScreen';
+import { SurveyMainScreen } from './SurveyMainScreen';
+import SurveyBioScreen from './SurveyBioScreen';
+import SurveyGeoScreen from './SurveyGeoScreen';
+import SurveyAntScreen from './SurveyAntScreen';
+import SurveyEmoScreen from './SurveyEmoScreen';
+import CombinedSurvey from './CombinedSurvey';
 
 const SurveyStack = createStackNavigator({
   SurveyHome: { screen: SurveyScreen },
@@ -19,12 +18,12 @@ const SurveyStack = createStackNavigator({
   CombinedSurvey: { screen: CombinedSurvey },
 }, {
   headerMode: 'none',
-  initialRouteName: 'SurveyHome',
+  initialRouteName: 'SurveyHome'
 });
+
 SurveyStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = false;
-  return {
-    tabBarVisible,
-  };
+  return { tabBarVisible };
 };
-export { SurveyStack }
+
+export { SurveyStack };

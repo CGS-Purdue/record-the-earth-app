@@ -1,4 +1,4 @@
-import { Colors } from '../Colors';
+import { ThemeColors } from "../Colors";
 
 //// --------------------------------------------------------------------------
 /// # View Style Props
@@ -20,9 +20,9 @@ import { Colors } from '../Colors';
 ///  - backgroundColor
 ///  - backfaceVisibility
 ///
-export default style = {
+const ViewStyles = {
   centered_outer: {
-    backgroundColor: Colors.TRANSPARENT,
+    backgroundColor: ThemeColors.TRANSPARENT,
     flex: 1,
     width: '100%',
     height: '100%',
@@ -33,7 +33,7 @@ export default style = {
   },
 
   centered_inner: {
-    backgroundColor: Colors.TRANSPARENT,
+    backgroundColor: ThemeColors.TRANSPARENT,
     flexBasis: '100%',
     flexGrow: 1,
     flexShrink: 0,
@@ -46,7 +46,7 @@ export default style = {
   },
 
   center_row: {
-    backgroundColor: Colors.TRANSPARENT,
+    backgroundColor: ThemeColors.TRANSPARENT,
     flex: 1,
     display: 'flex',
     alignItems: 'center',
@@ -54,7 +54,7 @@ export default style = {
   },
 
   center_col: {
-    backgroundColor: Colors.TRANSPARENT,
+    backgroundColor: ThemeColors.TRANSPARENT,
     flexBasis: '100%',
     width: '100%',
     height: '100%',
@@ -64,6 +64,8 @@ export default style = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-
+  }
 }
+
+
+export { ViewStyles }

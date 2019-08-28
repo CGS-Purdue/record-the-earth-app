@@ -1,44 +1,27 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { View } from 'react-native';
-import { ThemeColors } from '../Theme';
-import { Styles } from '../Theme/Stylesheet';
+import { ThemeColors, Styles } from '../Theme';
 
-export default class RootView extends React.Component {
+export default class RootView extends Component {
   constructor(props) {
     super(props);
-    this.viewRef = React.createRef();
-    this.background = 'rbga(0,0,0,0)';
+    this.view_ref = React.createRef();
+    this.backgroundColor = ThemeColors.TRANSPARENT;
     this.absolute = false;
   }
 
-  componentDidMount() {
+  // componentDidMount() {}
 
-  }
-  componentWillUnmount(){
-
-  }
-
-  getContainerStyle () {
-    if (this.props.absolute) {
-      return Styles.rootContainer;
-    } else {
-      return Styles.absoluteRootContainer;
-    }
-  }
+  // componentWillUnmount(){}
 
   render() {
-  const baseStyle = this.getContainerStyle();
-  const userStyle = this.props.style;
-
     return (
-      <View {...this.props}
-        ref={this.viewRef}
-        style={[userStyle,baseStyle]}>
+      <View ref={this.view_ref} style={Styles.rootContainer} {...this.props}>
         {this.props.children}
       </View>
-    )
+    );
   }
 }
 
-export { RootView }
+
+export { RootView };

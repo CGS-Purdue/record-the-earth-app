@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# -------------------------
+# react-native run-android
+# -------------------------
+BASE_PATH="$(npm prefix)"
+NODE_RUN_ENV=""
+NODE_RUN_FLAGS=""
+# --config path::String
+# --env
+# --rulesdir
+# --plugin
+
+${NODE_RUN_ENV} node ${NODE_RUN_FLAGS} $BASE_PATH/node_modules/.bin/eslint --ignore-pattern "*node_modules*" "$@"

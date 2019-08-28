@@ -1,30 +1,15 @@
 import React from 'react';
-import {
-  Dimensions,
-  Image,
-  Alert,
-  Slider,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View
-} from 'react-native';
-import { Asset } from 'expo-asset';
-import { Audio } from 'expo-av';
 import * as Font from 'expo-font';
 import * as FileSystem from 'expo-file-system';
 import * as Permissions from 'expo-permissions';
-import {
-  ThemeColors,
-  ThemeIcons,
-  Colors,
-  ThemeFonts,
-  ThemeVariables
-} from '../Theme';
+import { Asset } from 'expo-asset';
+import { Audio } from 'expo-av';
+import { Dimensions, Image, Alert, Slider, Text, TouchableHighlight, View } from 'react-native';
+import { ThemeIcons, ThemeColors, ThemeFonts, ThemeVariables, Styles } from '../Theme';
+import { saveAudioRecordingFile } from '../Utilities/Filesystem';
 import { CenterColView, CenterView } from '../Views/CenterView';
 import { RootView } from '../Views/RootView';
-import { saveAudioRecordingFile } from '../Utilities/Filesystem';
-import MonoText from './StyledText';
+import { MonoText } from './Text/MonoText';
 
 const recordStyles = {
   recordButton: {
@@ -42,6 +27,7 @@ const touchButtonStyle = {
   padding: 10,
   margin: 0,
 };
+
 export default class Recorder extends React.Component {
   constructor(props) {
     super(props);
@@ -52,7 +38,7 @@ export default class Recorder extends React.Component {
     this.isRecording = null;
     this.onRecordEnd = null;
     this.state = {
-      syncing : false,
+      syncing: false,
       disabled: false,
       error: null,
       haveRecordingPermissions: false,
@@ -118,18 +104,13 @@ export default class Recorder extends React.Component {
 
   async _saveRecording() {
     let sound_file = this.recording_info.uri;
-    console.log('confirmed saving audio', this.recording_info);
     let success = await saveAudioRecordingFile(sound_file);
     console.log(success);
   }
 
-  _cancelRecording(){
+  _cancelRecording(){}
 
-  }
-
-  _resetRecorder(){
-
-  }
+  _resetRecorder(){}
 
   _onRecordEnd(){
     console.log('ended');
@@ -152,12 +133,11 @@ export default class Recorder extends React.Component {
     return this.profile;
   }
 
-
   getAudioFormat() {
     return JSON.parse(JSON.stringify(this.format))
   }
 
-  async prepareAudio () {
+  async prepareAudio() {
     if (this.sound !== null) {
       await this.sound.unloadAsync();
       this.sound.setOnPlaybackStatusUpdate(null);
@@ -170,7 +150,7 @@ export default class Recorder extends React.Component {
     }
   }
 
-  async recordStart () {
+  async recordStart() {
     if (this.state.syncing){return false}
     this.setState({syncing:true});
 
@@ -235,7 +215,6 @@ export default class Recorder extends React.Component {
     this.recording_info = info;
     this._onRecordEnd();
     console.log({info});
-
     this.setState({syncing: false})
   }
 
@@ -244,11 +223,7 @@ export default class Recorder extends React.Component {
     const totalSeconds = millis / 1000;
     const seconds = Math.floor(totalSeconds % 60).toString();
     const minutes = Math.floor(totalSeconds / 60).toString();
-    return [
-      minutes.padStart(2,'0'),
-      ':',
-      seconds.padStart(2,'0')
-    ].join('');
+    return [minutes.padStart(2,'0'),':', seconds.padStart(2,'0')].join('');
   }
 
   getRecordingTimestamp() {
@@ -267,7 +242,6 @@ export default class Recorder extends React.Component {
     }
   }
 
-
   render() {
     if (!this.state.haveRecordingPermissions) {
       return (
@@ -278,26 +252,36 @@ export default class Recorder extends React.Component {
             </MonoText>
           </CenterView>
         </RootView>
-      )
+      );
+
     } else {
       return (
-        <CenterColView style={[{backgroundColor: Colors.GRN_300}]}>
+        <CenterColView backgroundColor={ThemeColors.BLU_300}>
           <View style={{borderColor:'blue',borderWidth:1,borderStyle:'solid'}}>
             <TouchableHighlight
-                style={[touchButtonStyle]}
-                underlayColor={Colors.GRN_300}
-                onPress={this.handleRecordButton}
-                disabled={this.state.syncing}>
-              <Image style={recordStyles.recordButton} source={ThemeIcons.record.module}/>
+              style={[touchButtonStyle]}
+              underlayColor={ThemeColors.GRN_300}
+              onPress={this.handleRecordButton}
+              disabled={this.state.syncing}>
+              <Image
+                style={recordStyles.recordButton}
+                source={ThemeIcons.record.module}
+              />
             </TouchableHighlight>
-            <MonoText style={[{color: Colors.MESSAGE_DANGER,textAlign:'center'}]}>
+
+            <MonoText style={[{
+                color: ThemeColors.MESSAGE_DANGER,
+                textAlign:'center'}]}>
               {this.state.isRecording ? 'LIVE' : ''}
             </MonoText>
-            <Image style={[{opacity: this.state.isRecording ? 1.0 : 0.0}]}
-              source={ThemeIcons.recording.module}/>
+
+            <Image
+              style={[{opacity: this.state.isRecording ? 1.0 : 0.0}]}
+              source={ThemeIcons.recording.module}
+            />
             <MonoText>{this.getRecordingTimestamp()}</MonoText>
-           </View>
-         </CenterColView>
+          </View>
+        </CenterColView>
       )
     }
   }

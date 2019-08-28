@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# -------------------------
+# react-native run-android
+# -------------------------
+BASE_PATH="$(npm prefix)"
+NODE_RUN_ENV=
+NODE_RUN_FLAGS=
+
+NODE_ENV="development" node $BASE_PATH/node_modules/.bin/react-devtools

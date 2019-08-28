@@ -1,0 +1,77 @@
+#!/bin/bash
+
+# =========================
+#  PRETTIER FORMAT UTILITY
+# -------------------------
+# CONFIG
+# -------------------------
+BASE_PATH="$(npm prefix)"
+PRETTIER_IGNORE_PATH=""
+PRETTIER_CONFIG_PATH="${BASE_PATH}/.prettierrc.toml"
+PRETTY_INCLUDE_PATHS=""
+#  ====================
+# COMMANDS
+#  ====================
+# -c, --check              Check if the given files are formatted, print a human-friendly summary
+#                          message and paths to unformatted files (see also --list-different).
+# -l, --list-different     Print the names of files that are different from Prettier's formatting (see also --check).
+# --write                  Edit files in-place. (Beware!)
+# --config path
+# --env
+# --rulesdir
+# --plugin
+# --parser <string>
+# --require-pragma
+# --stdin-filepath <string>
+# --with-node-modules      Process files inside 'node_modules' directory.
+# --ignore-path <path>
+# --find-config-path <path>
+# --config
+#  ====================
+#  RULES
+#  ====================
+
+unset PRETTY_FLAGS
+
+PRETTY_FLAGS=""
+PRETTY_FLAGS="--config ${PRETTIER_CONFIG_PATH}"
+PRETTY_FLAGS="${PRETTY_FLAGS} --arrow-parens always"
+PRETTY_FLAGS="${PRETTY_FLAGS} --end-of-line lf"
+PRETTY_FLAGS="${PRETTY_FLAGS} --html-whitespace-sensitivity strict"
+PRETTY_FLAGS="${PRETTY_FLAGS} --jsx-single-quote"
+# PRETTY_FLAGS="${PRETTY_FLAGS} --no-braces-spacing"
+PRETTY_FLAGS="${PRETTY_FLAGS} --no-bracket-spacing"
+PRETTY_FLAGS="${PRETTY_FLAGS} --no-semi"
+PRETTY_FLAGS="${PRETTY_FLAGS} --print-width 100"
+PRETTY_FLAGS="${PRETTY_FLAGS} --prose-wrap=always"
+# PRETTY_FLAGS="${PRETTY_FLAGS} --quote-props consistent"
+PRETTY_FLAGS="${PRETTY_FLAGS} --single-quote"
+PRETTY_FLAGS="${PRETTY_FLAGS} --trailing-comma none"
+
+export PRETTY_FLAGS
+
+$BASE_PATH/node_modules/.bin/prettier ${PRETTY_FLAGS}  "$@"
+
+#
+# # --check
+# # --list-different
+# $BASE_PATH/node_modules/.bin/prettier \
+#   -ignore-pattern "*node_modules*" \
+#   --no-bracket-spacing \
+# PRETTY_FLAGS="${PRETTY_FLAGS} --space-before-function-paren"
+#   --no-braces-sppacing \
+#   --end-of-line lf \
+#   --no-space-empty-fn \
+#   --space-before-function-paren \
+#   --prose-wrap \
+#   --quote-props consistent \
+#   --no-semi \
+#   --single-quote \
+#   --jsx-single-quote \
+#   --trailing-comma none \
+#   --no-bracket-spacing \
+#   --arrow-parens always \
+#   --prose-wrap=always \
+#   --html-whitespace-sensitivity strict \
+#   --print-width 100 \
+#   --write Components/**/*.js

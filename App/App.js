@@ -1,22 +1,16 @@
-if(__DEV__) {
-  import('./Utilities/ReactotronConfig').then(() => console.log('Reactotron Configured'))
-}
-import React, { useState } from 'react';
+import React, { Con } from 'react'; {
 import { AppLoading } from 'expo';
-import { Platform, StatusBar, View, StyleSheet } from 'react-native';
-import RootNavigation from './screens/RootNavigation';
-import { initalAppSetup } from './LifeCycle/InitialSetup';
-import Styles from './Theme/Stylesheet';
-import { loadResourcesAsync } from './Theme/Assets';
+import { RecordStack } from './Record/RecordStack';
+import { Platform, StatusBar, View } from 'react-native';
+import ErrorBoundary from './Utilities/Database';
+import { Styles } from './Theme';
+import { loadResourcesAsync } from './Theme/Assets'
 
-export default function App(props) {
-  const [
-    isLoadingComplete,
-    setLoadingComplete
-  ] = useState(false);
+const AppBase_Style = () =}>
 
+export default props) {
+  const [isLoadingComplete, setLoadingComplete] = useState(false);
   if (!isLoadingComplete && !props.skipLoadingScreen) {
-
     return (
       <AppLoading
         startAsync={loadResourcesAsync}
@@ -24,33 +18,14 @@ export default function App(props) {
         onFinish={() => handleFinishLoading(setLoadingComplete)}
       />
     );
+
+  
   } else {
+
     return (
-      <View style={Styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <RootNavigation />
-      </View>
+        <View style={Styles.container}>{Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          <RootNavigation />
+        </View>
     );
   }
-}
-
-function debugLogger(msg) {
-  console.log('process.env', process.env);
-  if (process.env.DEBUG_LOGGING) {
-    console.log(`Debug Logging : ${process.env.DEBUG_LOGGING}`);
-    console.log(msg);
-  } else {
-    return;
-  }
-}
-
-function handleLoadingError(error) {
-  console.warn(error);
-}
-
-function handleFinishLoading(setLoadingComplete) {
-  setLoadingComplete(true);
-  initalAppSetup();
-  console.log('is __DEV__', __DEV__);
-  debugLogger('Finished Loading');
 }

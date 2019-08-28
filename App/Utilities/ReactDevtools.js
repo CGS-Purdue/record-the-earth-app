@@ -3,7 +3,6 @@ if (__DEV__) {
     localhost: 'localhost',
     port: 8097,
   })
-  console.log('ReactDevtools', test);
 }
 
 // require('react-devtools-core/standalone')

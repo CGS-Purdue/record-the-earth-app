@@ -29,8 +29,3 @@ const RootNavigation = createSwitchNavigator({
     },
   }
 );
-RootNavigation.navigationOptions = {
-
-};
-
-export default createAppContainer(RootNavigation);

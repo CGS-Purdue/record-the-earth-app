@@ -18,9 +18,8 @@ const Styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#fff',
-  },
-});
-
+    backgroundColor:'#fff'
+  }
+})
 
 export { LinksScreen }

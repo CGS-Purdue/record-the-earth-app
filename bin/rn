@@ -26,7 +26,26 @@
 #   run-ios [options]               builds your app and starts it on iOS simulator
 #   log-android                     starts logkitty
 #   run-android [options]           builds your app and starts it on a connected Android emulator or device
-#
+# node_modules/.bin/react-native log-android --help
+
+# react-native run-android [options]
+# builds your app and starts it on a connected Android emulator or device
+#   --install-debug
+#   --root [string]             Override the root directory for the android build (which contains the android directory) (default: "")
+#   --flavor [string]           --flavor has been deprecated. Use --variant instead
+#   --variant [string]           (default: "debug")
+#   --appFolder [string]        Specify a different application folder name for the android source. If not, we assume is "app" (default: "app")
+#   --appId [string]            Specify an applicationId to launch after build. (default: "")
+#   --appIdSuffix [string]      Specify an applicationIdSuffix to launch after build. (default: "")
+#   --main-activity [string]    Name of the activity to start (default: "MainActivity")
+#   --deviceId [string]         builds your app and starts it on a specific device/simulator with the given device id (listed by running "adb devices" on the command line).
+#   --no-packager               Do not launch packager while building
+#   --port [number]              (default: 8081)
+#   --terminal [string]         Launches the Metro Bundler in a new window using the specified terminal path. (default: "")
+#   --projectRoot [string]      Path to the root of the project
+#   --reactNativePath [string]  Path to React Native
+
+
 
 NODE_RUN_ENV=""
 NODE_RUN_FLAGS=""

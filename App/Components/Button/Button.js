@@ -3,6 +3,20 @@ import PropTypes from 'prop-types';
 import { TouchableNativeFeedback, Button } from 'react-native';
 import { ThemeDefaultVariables } from '../../Themre/Variables';
 
+// Props
+// accessibilityLabel
+// color  - Color of the text (iOS), or background color of the button (Android)
+// disabled
+// hasTVPreferredFocus
+// nextFocusDown
+// nextFocusForward
+// nextFocusLeft
+// nextFocusRight
+// nextFocusUp
+// onPress
+// testID
+// title
+// touchSoundDisabled
 
 
 export default function TouchableNativeButton({ onPress, children }) {
@@ -35,7 +49,7 @@ const button_style = {
   margin: 10,
 };
 
-const Button = ( props ) => {
+BButton = ( props ) => {
   if (props.style) {
     Object.assign(button_style, props.style);
   }
@@ -48,7 +62,7 @@ const Button = ( props ) => {
   );
 };
 
-Button.defaultProps = {
+BButton.defaultProps = {
   children: null,
   onPress: null,
   onClick: () => { console.log('clicked')},
@@ -58,13 +72,13 @@ Button.defaultProps = {
   borderRadius: ThemeDefaultVariables.ButtonBorderRadius,
   backgroundColor: ThemeDefaultVariables.ButtonBackgroundColor,
 };
-Button.displayName = 'Button';
+BButton.displayName = 'Button';
 
 
-Button.propTypes = {
+BButton.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
 };
 
 
-export default { Button, TouchableNativeButton };
+export { BButton, TouchableNativeButton };

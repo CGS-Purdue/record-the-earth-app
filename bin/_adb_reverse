@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# ANDROID-BUILD
+# -------------
+# BUILD THE ANDROID PROJECT FROM THE ./android directory
+
+# Config: settings.gradle
+# Outputs: bundle.jar
+
+
+$ANDROID_HOME/platform-tools/adb reverse tcp:9090 tcp:9090
+$ANDROID_HOME/platform-tools/adb reverse tcp:19001 tcp:19001
+$ANDROID_HOME/platform-tools/adb reverse tcp:19000 tcp:19000
+# Reactotron
+$ANDROID_HOME/platform-tools/adb reverse tcp:9090 tcp:9090
+# React Native Devtools
+$ANDROID_HOME/platform-tools/adb reverse tcp:8097 tcp:8097
+# REACT-NATIVE CLI
+$ANDROID_HOME/platform-tools/adb reverse tcp:8081 tcp:8081

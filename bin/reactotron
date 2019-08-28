@@ -1,0 +1,3 @@
+#!/bin/bash
+
+${APP_DIR}/reactotron/Reactotron.2.17.0.AppImage &

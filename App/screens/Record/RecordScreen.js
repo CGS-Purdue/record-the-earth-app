@@ -3,8 +3,7 @@ import { Text, View, } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Recorder } from '../../Components/Recorder';
 import { RootView } from '../../Views/RootView';
-import { CenterView } from '../../Views/CenterView';
-
+import { CenterView } from '../../Views/CenterView'
 
 class RecordScreen extends Component {
   constructor(props) {
@@ -17,7 +16,7 @@ class RecordScreen extends Component {
 
   render() {
     return (
-      <RootView>
+      <RootView backgroundColor="blue">
         <CenterView>
           <Recorder />
         </CenterView>
