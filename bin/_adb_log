@@ -1,28 +1,17 @@
 #!/bin/bash
 
-BASE_DIR="$(npm prefix)"
-
 # Android Debug Bridge version 1.0.41
 # Version 29.0.2-5738569
 # Installed as /data/projects/5_Android_Projects/AndroidSDK/platform-tools/adb
-#
-ViewManager
-
 # # react
 # #   -e <expr>, --regex=<expr>  Only print lines where the log message matches <expr>
 # #   -m <count>, --max-count=<count> where <expr> is a regular expression
-# experience.ExperienceActivity to host.exp.exponent/host.exp.exponent.experience.ExperienceActivity#1
-# 08-27 19:01:19.135 14525 14677 E unknown:ViewManager: 	at abi34_0_0.com.facebook.react.bridge.queue.MessageQueueThreadHandler.dispatchMessage(MessageQueueThreadHandler.java:29)
-# 08-27 19:01:20.000 14525 14556 W OkHttpClient: A connection to http://127.0.0.1:19001/ was leaked. Did you forget to close a response body?
-# 08-27 19:01:19.138 14525 14677 E unknown:ReactNative: 	at abi34_0_0.com.facebook.react.bridge.queue.MessageQueueThreadHandler.dispatchMessage(MessageQueueThreadHandle
-# facebook.react.bridge.WritableNativeMap abi34_0_0.com.facebook.react.bridge.Arguments.makeNativeMap(java.util.Map) due to JIT
-#
-# 08-27 19:01:00.713 14525 14677 D SoLoader
-# data/app/host.exp.exponent-tXtQ_3PArMZukPoiSRObdQ==/lib/arm
-# /data/data/host.exp.exponent/lib-main
-# SoLoader
-
-# global options:
+#         experience.ExperienceActivity to host.exp.exponent/host.exp.exponent.experience.ExperienceActivity#1
+#         08-27 19:01:19.135 14525 14677 E unknown:ViewManager: 	at abi34_0_0.com.facebook.react.bridge.queue.MessageQueueThreadHandler.dispatchMessage(MessageQueueThreadHandler.java:29)
+#         08-27 19:01:20.000 14525 14556 W OkHttpClient: A connection to http://127.0.0.1:19001/ was leaked. Did you forget to close a response body?
+#         08-27 19:01:19.138 14525 14677 E unknown:ReactNative: 	at abi34_0_0.com.facebook.react.bridge.queue.MessageQueueThreadHandler.dispatchMessage(MessageQueueThreadHandle
+#         facebook.react.bridge.WritableNativeMap abi34_0_0.com.facebook.react.bridge.Arguments.makeNativeMap(java.util.Map) due to JIT
+#         global options:
 #  -a         listen on all network interfaces, not just localhost
 #  -d         use USB device (error if multiple devices connected)
 #  -e         use TCP/IP device (error if multiple TCP/IP devices available)
@@ -31,41 +20,7 @@ ViewManager
 #  -H         name of adb server host [default=localhost]
 #  -P         port of adb server [default=5037]
 #  -L SOCKET  listen on given socket for adb server [default=tcp:localhost:5037
-
-
-[[ -z $ANDROID_HOME ]] && echo 'ANDROID_HOME is not set. Skipping command' && exit 0
-
-ABD_PATH="${ANDROID_HOME}/platform-tools"
-ANDROID_SERIAL="025abd11727717ac"
-
-# RCT_METRO_PORT=8081
-$ANDROID_HOME/platform-tools/adb "$@"
-
-
-# /data/apps/reactotron/Reactotron.2.17.0.AppImage
-# DEBUG_LOGGING="yes"
-# export DEBUG_LOGGING
-# EDITOR="atom" REACT_EDITOR="${EDITOR}" EXPO_DEBUG="true" DEV_ENV="expo" DEBUG_LOGGING="${DEBUG_LOGGING}" expo \
-#   start --clear \
-#     --max-workers 3 \
-#     --no-minify \
-#     --host localhost \
-#     --dev \
-#     --android
-# #
-
-
- # sync [all|data|odm|oem|product|system|system_ext|vendor]
- #     sync a local build from $ANDROID_PRODUCT_OUT to the device (default all)
- #     -l: list but don't copy
- # jdwp                     list pids of processes hosting a JDWP transport
- # logcat                   show device log (logcat --help for more)
- #
-#
-# connect HOST[:PORT]
-#
-#
-#
+# logcat                   show device log (logcat --help for more)
 # Usage: logcat [options] [filterspecs]
 # options include:
 #   -s              Set default filter to silent. Equivalent to filterspec '*:S'
@@ -125,10 +80,7 @@ $ANDROID_HOME/platform-tools/adb "$@"
 #   --wrap          Sleep for 2 hours or when buffer about to wrap whichever
 #                   comes first. Improves efficiency of polling by providing
 #                   an about-to-wrap wakeup.
-#
-# filterspecs are a series of
-#   <tag>[:priority]
-#
+# filterspecs are a series of <tag>[:priority]
 # where <tag> is a log component tag (or * for all) and priority is:
 #   V    Verbose (default for <tag>)
 #   D    Debug (default for '*')
@@ -137,12 +89,21 @@ $ANDROID_HOME/platform-tools/adb "$@"
 #   E    Error
 #   F    Fatal
 #   S    Silent (suppress all output)
-#
 # '*' by itself means '*:D' and <tag> by itself means <tag>:V.
 # If no '*' filterspec or -s on command line, all filter defaults to '*:V'.
 # eg: '*:S <tag>' prints only <tag>, '<tag>:S' suppresses all <tag> log messages.
-#
 # If not specified on the command line, filterspec is set from ANDROID_LOG_TAGS.
-#
 # If not specified with -v on command line, format is set from ANDROID_PRINTF_LOG
 # or defaults to "threadtime"
+
+BASE_DIR="$(npm prefix)"
+
+[[ -f .npmrc ]] && source .npmrc
+
+[[ -z $ANDROID_HOME ]] && echo 'ANDROID_HOME is not set. Skipping command' && exit 0
+
+ABD_PATH="${ANDROID_HOME}/platform-tools"
+ANDROID_SERIAL="025abd11727717ac"
+
+# RCT_METRO_PORT=8081
+${ABD_PATH}/adb logcat ReactNative:V WifiService:S

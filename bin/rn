@@ -4,13 +4,11 @@
 # react-native-cli
 # ----------------
 # Usage: cli [options] [command]
-#
-# Options:
+## Options:
 #   --version                       Print CLI version
 #   --verbose                       Increase logging verbosity
 #   -h, --help                      output usage information
-#
-# Commands:
+## Commands:
 #   sta rt [options]                 starts the webserver
 #   bundle [options]                builds the javascript bundle for offline use
 #   ram-bundle [options]            builds javascript as a "Random Access Module" bundle for offline use
@@ -27,7 +25,6 @@
 #   log-android                     starts logkitty
 #   run-android [options]           builds your app and starts it on a connected Android emulator or device
 # node_modules/.bin/react-native log-android --help
-
 # react-native run-android [options]
 # builds your app and starts it on a connected Android emulator or device
 #   --install-debug
@@ -44,11 +41,12 @@
 #   --terminal [string]         Launches the Metro Bundler in a new window using the specified terminal path. (default: "")
 #   --projectRoot [string]      Path to the root of the project
 #   --reactNativePath [string]  Path to React Native
+BASE_PATH="$(npm prefix)"
 
-
+[[ -f .npmrc ]] && source .npmrc
 
 NODE_RUN_ENV=""
 NODE_RUN_FLAGS=""
 REACT_NATIVE_FLAGS="$@"
 
-${NODE_RUN_ENV} node ${NODE_RUN_FLAGS} ./node_modules/react-native/local-cli/cli.js "${REACT_NATIVE_FLAGS}"
+${NODE_RUN_ENV} node ${NODE_RUN_FLAGS} ${BASE_PATH}/./node_modules/react-native/local-cli/cli.js "${REACT_NATIVE_FLAGS}"

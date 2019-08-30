@@ -3,10 +3,7 @@
 # -------------------------
 # react-native run-android
 # -------------------------
-#
 # builds your app and starts it on a connected Android emulator or device
-#
-# Options:
 #   --root [string]           Override the root directory for the android build
 #                             (which contains the android directory) (default: "")
 #   --variant [string]        Specify your app's build variant (default: "debug")
@@ -25,10 +22,12 @@
 #                             support AndroidX yet. See more at: https://www.npmjs.com/package/jetifier.
 #   -h, --help                output usage information
 #
-
 BASE_PATH="$(npm prefix)"
+
+[[ -f .npmrc ]] && source .npmrc
+
 NODE_RUN_ENV=""
 NODE_RUN_FLAGS=""
 
 
-${NODE_RUN_ENV} node ${NODE_RUN_FLAGS} "$BASE_PATH/node_modules/react-native/local-cli/cli.js" run-android
+${NODE_RUN_ENV} node ${NODE_RUN_FLAGS} ${BASE_PATH}/./node_modules/react-native/local-cli/cli.js run-android

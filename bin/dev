@@ -1,0 +1,69 @@
+#!/bin/bash
+
+# EXPO HELPER
+# -------------
+# device reverse tunnel        exp://127.0.0.1:19000
+# Metro Bundler on                        port 19001
+# Expo DevTools is running at http://localhost:19002
+# echo "Configuring extra ports..."
+# RCT_METRO_PORT=8081
+# The debugger will receive a list of all project roots, separated by a space. For example, if you set
+# REACT_DEBUGGER="node /path/to/launchDebugger.js --port 2345 --type ReactNative",
+# node /path/to/launchDebugger.js --port 2345 --type ReactNative /path/to/reactNative/app
+# will be used to start your debugger.
+# Custom debugger commands executed this way should be short-lived processes,
+# ','-separated list of core modules that should print debug information
+# ':'-separated list of directories prefixed to the module search path
+# --redirect-warnings=...                   write warnings to file instead of stderr
+# --title=...                               the process title to use on startup
+# -r, --require=...                         module to preload (option can be repeated)
+# --loader=...                              (with --experimental-modules) use the specified file as a custom loader
+# --icu-data-dir=...                        set ICU data load path to dir (overrides NODE_ICU_DATA)
+# --inspect[=[host:]port]                   activate inspector on host:port (default: 127.0.0.1:9229)
+# --inspect-brk[=[host:]port]               activate inspector on host:port and break at start of user script
+# --debug-port, --inspect-port=[host:]port  set host:port for inspector
+# -                                         script read from stdin (default if no file name is provided, interactive mode if a tty)
+# --                                        indicate the end of node options
+# set CLI options in the environment via a space-separated list
+# and they shouldn't produce more than 200 kilobytes of output.
+
+BASE_DIR="$(npm prefix)"
+
+[[ -f .npmrc ]] && source .npmrc
+
+echo "Checking Android path ..."
+[[ -z $ANDROID_HOME ]] && echo 'ANDROID_HOME is not set. Skipping command' && exit 0
+
+APP_DIR="/data/apps"
+ABD_PATH="${ANDROID_HOME}/platform-tools"
+# __REACT_DEVTOOLS_PORT__
+ANDROID_SERIAL="025abd11727717ac"
+echo "Settings up additional devtools..."
+
+# REACTOTRON
+[[ ! -z $RUN_REACTOTRON ]] &&  $ANDROID_HOME/platform-tools/adb reverse tcp:9090 tcp:9090 && ${APP_DIR}/reactotron/Reactotron.2.17.0.AppImage &
+# REACT DEVTOOLS
+[[ ! -z $RUN_REACTDEVTOOLS ]] && $ANDROID_HOME/platform-tools/adb reverse tcp:8097 tcp:8097 && node $BASE_PATH/node_modules/.bin/react-devtools
+
+NODE_PATH="$NODE_PATH:preload_modules:node_modules"
+NODE_DEBUG='react-native,expo'
+NODE_OPTIONS="--require=./preload_modules/test"
+DEBUG_LOGGING="yes"
+REACT_EDITOR="${EDITOR}"
+DEV_ENV="expo"
+# --offlineeslint-plugin-eslint-comments
+export REACT
+
+# NODE_PATH="${NODE_PATH}"
+
+DEV_ENV="expo" \
+NODE_ENV="development" NODE_OPTIONS="${NODE_OPTIONS}" NODE_DEBUG="${NODE_DEBUG}" REACT_EDITOR="${EDITOR}" \
+EXPO_DEBUG="true" DEBUG_LOGGING="${DEBUG_LOGGING}" \
+  ${BASE_DIR}/node_modules/.bin/expo start \
+    --clear \
+    --max-workers 5 \
+    --no-minify \
+    --no-https \
+    --dev \
+    --host localhost \
+    --android \

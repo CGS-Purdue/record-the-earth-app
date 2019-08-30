@@ -6,6 +6,9 @@
 # CONFIG
 # -------------------------
 BASE_PATH="$(npm prefix)"
+
+[[ -f .npmrc ]] && source .npmrc
+
 PRETTIER_IGNORE_PATH=""
 PRETTIER_CONFIG_PATH="${BASE_PATH}/.prettierrc.toml"
 PRETTY_INCLUDE_PATHS=""

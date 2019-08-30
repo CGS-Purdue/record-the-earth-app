@@ -5,6 +5,9 @@
 # BUILD THE ANDROID PROJECT FROM THE ./android directory
 BASE_DIR="$(npm prefix)"
 
+[[ -f .npmrc ]] && source .npmrc
+
+
 [[ -z $ANDROID_HOME ]] && echo 'ANDROID_HOME is not set. Skipping command' && exit 0
 
 ABD_PATH="${ANDROID_HOME}/platform-tools"
@@ -18,8 +21,6 @@ $ANDROID_HOME/platform-tools/adb "$@"
 # ANDROID_SERIAL     |    serial number to connect to (see -s)
 # ANDROID_LOG_TAGS             | tags to be used by logcat (see logcat --help)
 # ADB_LOCAL_TRANSPORT_MAX_PORT | max emulator scan port (default 5585, 16 emus)
-ANDROID_SERIAL="025abd11727717ac"
-
 # DEBUG_LOGGING="yes"
 # export DEBUG_LOGGING
 # EDITOR="atom" REACT_EDITOR="${EDITOR}" EXPO_DEBUG="true" DEV_ENV="expo" DEBUG_LOGGING="${DEBUG_LOGGING}" expo \

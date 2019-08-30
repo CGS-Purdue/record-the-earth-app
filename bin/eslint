@@ -4,6 +4,9 @@
 # react-native run-android
 # -------------------------
 BASE_PATH="$(npm prefix)"
+
+[[ -f .npmrc ]] && source .npmrc
+
 NODE_RUN_ENV=""
 NODE_RUN_FLAGS=""
 # --config path::String

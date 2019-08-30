@@ -7,7 +7,7 @@
 # "peer dep missing"
 # "UNMET PEER DEPENDENCY"
 
-npm ls  | grep -vi optional | grep -i 'unmet peer'
+npm ls | grep -vi optional | grep -i 'unmet peer'
 
 # |  grep -i --color unmet
 # npm ls | grep -vi optional | grep  -i "invalid\|err\|peer\|missing" | sort
