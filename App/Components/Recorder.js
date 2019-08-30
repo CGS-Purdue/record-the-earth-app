@@ -5,11 +5,10 @@ import * as Permissions from 'expo-permissions';
 import { Asset } from 'expo-asset';
 import { Audio } from 'expo-av';
 import { Dimensions, Image, Alert, Slider, Text, TouchableHighlight, View } from 'react-native';
-import { ThemeIcons, ThemeColors, ThemeFonts, ThemeVariables, Styles } from '../Theme';
 import { saveAudioRecordingFile } from '../Utilities/Filesystem';
-import { CenterColView, CenterView } from '../Views/CenterView';
-import { RootView } from '../Views/RootView';
-import { MonoText } from './Text/MonoText';
+import { ThemeIcons, ThemeColors, ThemeFonts, ThemeVariables, Styles } from '../Theme';
+import { CenterColView, CenterView, RootView } from '../Views';
+import { MonoText } from './Text';
 
 const recordStyles = {
   recordButton: {
@@ -99,8 +98,8 @@ export default class Recorder extends React.Component {
       isRecording: status.isRecording,
       isDoneRecording: status.isDoneRecording,
       durationMillis: status.durationMillis,
-    })
-  };
+    });
+  }
 
   async _saveRecording() {
     let sound_file = this.recording_info.uri;

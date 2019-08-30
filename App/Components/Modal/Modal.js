@@ -28,3 +28,5 @@ class ModalRecordEndScreen extends Component {
     );
   }
 }
+
+export { ModalRecordEndScreen }

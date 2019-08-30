@@ -1,9 +1,6 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import {
-  createStackNavigator,
-  createBottomTabNavigator
-} from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation';
 import { HomeStack } from './HomeStack';
 import { LinksStack } from './LinksStack';
 import { ThemeColors } from '../../Theme';

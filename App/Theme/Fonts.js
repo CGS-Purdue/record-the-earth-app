@@ -1,4 +1,4 @@
-import { FONT_ASSETS } from './Assets';
+import { FontAssets } from './Assets';
 
 // =============================================================================
 // Fonts
@@ -23,12 +23,12 @@ import { FONT_ASSETS } from './Assets';
 
 function getFont(name) {
   const font_map = {
-       'ionicons': { family_name: 'ionicons',    file_name: 'SpaceMono-Regular.ttf',  src: FONT_ASSETS['ionicons'] },
-    'cutive-mono': { family_name: 'cutive-mono', file_name: 'CutiveMono-Regular.ttf', src: FONT_ASSETS['cutive-mono'] },
-     'space-mono': { family_name: 'space-mono',  file_name: 'SpaceMono-Regular.ttf',  src: FONT_ASSETS['space-mono'] },
+       'ionicons': { family_name: 'ionicons',    file_name: 'SpaceMono-Regular.ttf',  src: FontAssets.ionicicons },
+    'cutive-mono': { family_name: 'cutive-mono', file_name: 'CutiveMono-Regular.ttf', src: FontAssets.cutivemono_regular },
+     'space-mono': { family_name: 'space-mono',  file_name: 'SpaceMono-Regular.ttf',  src: FontAssets.spacemono_regular },
   };
 
-  let font = font_map[name]
+  let font = font_map[name];
   return font;
 }
 
@@ -62,15 +62,15 @@ const FONT_WEIGHTS = {
   WEIGHT_600: { weight: 600, name: 'semibold' },
   WEIGHT_700: { weight: 700, name: 'bold' },
   WEIGHT_800: { weight: 800, name: 'extrabold' },
-  WEIGHT_900: { weight: 900, name: 'superbold '}
-}
+  WEIGHT_900: { weight: 900, name: 'superbold '},
+};
 
-const getScaleFontSize = (scale, tag, units="em") => {
+const getScaleFontSize = (scale, tag, units = "em") => {
   var size = scale[tag];
-  if (! size) {
+  if (!size) {
     size = scale.body;
   }
-  return `${size}${units}`
+  return `${size}${units}`;
 };
 
 
@@ -79,16 +79,12 @@ const getScaleFontSize = (scale, tag, units="em") => {
 // // TYPOGRPHIC SCALES
 
 
-const Typography = {
-  mono_font: 'space-mono'
-};
-
 const FONT_STYLES = {
   ITALIC: { name: 'italic' },
-  NORMAL: { name: 'normal' }
+  NORMAL: { name: 'normal' },
 };
 
-var font_data = getThemeFonts (['space-mono', 'cutive-mono', 'ionicons']);
+var font_data = getThemeFonts(['space-mono', 'cutive-mono', 'ionicons']);
 
 let theme_fonts = {};
 theme_fonts.TITLE_FONT = 'space-mono';
@@ -96,8 +92,13 @@ theme_fonts.BODY_FONT = 'cutive-mono';
 theme_fonts.ICON_FONT = 'ionicons';
 theme_fonts.MONO_FONT = 'space-mono';
 
+
+const Typography = {
+  mono_font: 'space-mono',
+};
+
 const ThemeFonts = Object.assign(font_data, theme_fonts);
 
-export { ThemeFonts }
+export { Typography, ThemeFonts, FONT_WEIGHTS, FONT_STYLES, getScaleFontSize };
 
-export default ThemeFonts
+export default ThemeFonts;

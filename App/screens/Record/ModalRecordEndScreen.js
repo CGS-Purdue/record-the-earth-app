@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import { Button, Text, View } from "react-native";
 import { NavigationScreenProp } from 'react-navigation';
 import Modal from "react-native-modal";
-
-import { CenterView, CenterColView } from '../../Views/CenterView';
-import { RootView } from '../../Views/RootView';
+import { CenterView, CenterColView, RootView } from '../../Views';
 
 class ModalRecordEndScreen extends Component {
   state = {

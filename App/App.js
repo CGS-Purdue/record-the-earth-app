@@ -1,31 +1,27 @@
-import React, { Con } from 'react'; {
+import React, { Con } from 'react';
 import { AppLoading } from 'expo';
-import { RecordStack } from './Record/RecordStack';
+import { RootNavigation } from './screens/RootNavigation';
 import { Platform, StatusBar, View } from 'react-native';
-import ErrorBoundary from './Utilities/Database';
+import ErrorBoundary from './Utilities/ErrorBoundary';
 import { Styles } from './Theme';
-import { loadResourcesAsync } from './Theme/Assets'
+import { ThemeAssets } from './Theme/Assets'
 
-const AppBase_Style = () =}>
-
-export default props) {
+export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return (
       <AppLoading
-        startAsync={loadResourcesAsync}
+        startAsync={ThemeAssets}
         onError={handleLoadingError}
         onFinish={() => handleFinishLoading(setLoadingComplete)}
       />
     );
-
-  
   } else {
-
     return (
-        <View style={Styles.container}>{Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <RootNavigation />
-        </View>
+      <View style={Styles.container}>
+        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        <RootNavigation />
+     </View>
     );
   }
 }

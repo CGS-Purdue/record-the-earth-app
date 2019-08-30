@@ -1,10 +1,8 @@
 import React from 'react';
 import { NavigationScreenProp } from 'react-navigation';
-import Recorder from '../../Components/Recorder';
-import { CenterView } from '../../Views/CenterView';
-import { RootView } from '../../Views/RootView';
-import { DebugStyles } from '../../Theme/Stylesheet';
-import { ThemeColors } from '../../Theme';
+import { Recorder } from '../../Components/Recorder';
+import { CenterView, RootView } from '../../Views';
+import { ThemeColors, DebugStyles } from '../../Theme';
 
 const ModalRecordScreen = ({ navigaion }: {
   navigation: NavigationScreenProp<NavigationState & any>

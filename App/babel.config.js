@@ -8,9 +8,9 @@ module.exports = function(api) {
           "NODE_ENV",
           'NODE_ENV',
           'DEBUG_LOGGING',
-          'DEV_ENV'
-        ]}
-      ]
-    ]
-  }
+          'DEV_ENV',
+        ]},
+      ],
+    ],
+  };
 };

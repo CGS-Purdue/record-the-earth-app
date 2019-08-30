@@ -6,7 +6,7 @@
   ],
   "ignore_dirs": [
     "build",
-    "node_modeules",
+    "node_modules",
     "tmp",
     "temp",
   ]

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { ThemeColors } from '../Theme';
-import { ThemeFonts } from  '../Theme/Fonts';
 
 
 const touchButtonStyle = {
@@ -39,7 +38,6 @@ export default class TouchButton extends Component {
   render() {
     this.underlayColor = this.props.color;
     this.onPress = this.props.onPress;
-
     return (
       <View style={{borderColor : 'blue',borderWidth:1,borderStyle:'solid'}}>
       <TouchableHighlight

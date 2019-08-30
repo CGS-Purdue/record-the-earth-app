@@ -1,8 +1,6 @@
 import React from 'react';
 import{ StyleSheet, Platform } from 'react-native';
-import { ThemeIcons } from '../Theme/Icons';
-import { ThemeFonts } from '../Theme/Fonts';
-import { Layout } from '../Theme/Layout';
+import { ThemeIcons, ThemeFonts, Layout } from '../Theme';
 
 const DISABLED_OPACITY = 0.5;
 const BACKGROUND_COLOR = '#FFF8ED';

@@ -6,14 +6,16 @@ import { BoxX } from './BoxX';
 import { BoxY} from './BoxY';
 import { ImgBox } from './ImgBox';
 
-export default UtilityViews = {
+const UtilityViews = {
   CenterBox: CenterBox,
   RootView: RootView,
   ImgBox: ImgBox,
   PadView: PadView,
   BoxX: BoxX,
-  BoxY: BoxY
-}
+  BoxY: BoxY,
+};
+
+export default UtilityViews;
 
 export {
   BoxX,

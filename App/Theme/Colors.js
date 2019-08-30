@@ -70,8 +70,6 @@ const ShadeDark = {
   SHADE_DARKER_04: 'rgba(0,0,0,0.04)',
   SHADE_DARKER_05: 'rgba(0,0,0,0.05)',
   SHADE_DARKER_06: 'rgba(0,0,0,0.06)',
-  SHADE_DARKER_05: 'rgba(0,0,0,0.05)',
-  SHADE_DARKER_06: 'rgba(0,0,0,0.06)',
   SHADE_DARKER_07: 'rgba(0,0,0,0.07)',
   SHADE_DARKER_08: 'rgba(0,0,0,0.08)',
   SHADE_DARKER_09: 'rgba(0,0,0,0.09)',
@@ -88,8 +86,6 @@ const ShadeLight = {
   SHADE_LIGHTER_02: 'rgba(255,255,255,0.02)',
   SHADE_LIGHTER_03: 'rgba(255,255,255,0.03)',
   SHADE_LIGHTER_04: 'rgba(255,255,255,0.04)',
-  SHADE_LIGHTER_05: 'rgba(255,255,255,0.05)',
-  SHADE_LIGHTER_06: 'rgba(255,255,255,0.06)',
   SHADE_LIGHTER_05: 'rgba(255,255,255,0.05)',
   SHADE_LIGHTER_06: 'rgba(255,255,255,0.06)',
   SHADE_LIGHTER_07: 'rgba(255,255,255,0.07)',
@@ -112,7 +108,7 @@ const Messages = {
   MESSAGE_SUCCESS: ColorLib.forestreen,
   MESSAGE_DANGER: ColorLib.coraled,
   MESSAGE_WARNING: ColorLib.selectiyellow,
-  MESSAGE_INFO: ColorLib.torylue
+  MESSAGE_INFO: ColorLib.torylue,
 };
 
 
@@ -166,4 +162,4 @@ const Colors = {
 
 const ThemeColors = Object.assign(Colors, ColorScheme);
 
-export{ ThemeColors }
+export { ThemeColors }

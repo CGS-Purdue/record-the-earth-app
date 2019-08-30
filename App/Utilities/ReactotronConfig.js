@@ -4,7 +4,6 @@ import { COMMAND_SET } from './ReactotronCommands';
 import { reactotronRedux } from 'reactotron-redux'
 import { composeWithDevTools } from 'remote-redux-devtools'
 
-// if (__DEV__) {  }
 const middleware = [];
 const HOST='127.0.0.1:9090';
 const ASYNC_IGNORE = [''];
@@ -32,8 +31,6 @@ if (__DEV__) {
 
 var Tron = new LogUtils;
 console.tron = Reactotron.log;
-
-
 
 export default Reactotron
   .configure({

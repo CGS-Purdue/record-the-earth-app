@@ -18,7 +18,7 @@ const ThemeDefaultVariables = {
   ButtonColor: '#eeeeee',
   ButtonIconStyle: "{marginRight: 10}",
   ButtonBorderRadius: 5,
-  ButtonBackgrThemeDefaultVariablesoundColor: '#007AFF'
+  ButtonBackgrThemeDefaultVariablesoundColor: '#007AFF',
 };
 
 export { ThemeColors, ThemeVariables, ThemeDefaultVariables };

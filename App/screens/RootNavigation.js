@@ -1,10 +1,5 @@
 import React, {Component} from 'react';
-import {
-  NavigationScreenProp,
-  SwitchActions,
-  createAppContainer,
-  createSwitchNavigator
-} from 'react-navigation';
+import { NavigationScreenProp, SwitchActions, createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { RecordStack } from './Record/RecordStack';
 import { SurveyStack } from './Survey/SurveyStack';
 import { MainTabNavigator } from './Main/MainTabNavigator';
@@ -29,3 +24,6 @@ const RootNavigation = createSwitchNavigator({
     },
   }
 );
+
+
+export { RootNavigation }

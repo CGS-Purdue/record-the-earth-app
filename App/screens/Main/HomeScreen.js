@@ -1,23 +1,13 @@
-import * as WebBrowser from 'expo-web-browser';
 import React, {Component} from 'react';
+import { Image, Button, Text, ImageBackground, Dimensions, TouchableOpacity, View } from 'react-native';
 import { NavigationScreenProp, SwitchActions, NavigationActions } from 'react-navigation';
-import {
-  Image,
-  Button,
-  Text,
-  ImageBackground,
-  Dimensions,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { CenterColView, RootView } from '../../Views';
+import { ThemeAssets, ThemeIcons } from '../../Theme';
 import { HomeStylesheet } from './HomeStylesheet';
-import { IMAGE_ASSETS } from '../../Theme/Assets';
-import { ThemeIcons } from '../../Theme/Icons';
-import { CenterColView } from '../../Views/CenterView';
-import { RootView } from '../../Views/RootView';
 
 
 class HomeScreen extends Component {
+
   constructor(props) {
     super(props);
     this.state = {};
@@ -29,12 +19,12 @@ class HomeScreen extends Component {
   };
 
  render() {
-   console.log('IMAGE_ASSETS.JungleBg', {IMAGE_ASSETS});
+   console.log('ThemeAssets.JungleBg', {ThemeAssets});
    const { navigate } = this.props.navigation;
 
   return (
   <RootView>
-    <ImageBackground style={{width:'100%', height:'100%'}} source={IMAGE_ASSETS.JungleBg}>
+    <ImageBackground style={{width:'100%', height:'100%'}} source={ThemeAssets.JungleBg}>
 
     <CenterColView>
       <View style={HomeStylesheet.welcomeContainer}>

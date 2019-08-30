@@ -9,7 +9,7 @@
       "ios",
       "android"
     ],
-    "entryPoint": "node_modules/expo/AppEntry.js",
+    "entryPoint": "init.js",
     "splash": {
       "icon": "./icon.png",
       "hideExponentText": false
@@ -28,7 +28,7 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
-      "**/*"
+      "Theme/Assets/**/*"
     ],
     "ios": {
       "supportsTablet": false,

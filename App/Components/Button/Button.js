@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TouchableNativeFeedback, Button } from 'react-native';
-import { ThemeDefaultVariables } from '../../Themre/Variables';
+import { ThemeDefaultVariables } from '../../Theme/Variables';
 
 // Props
 // accessibilityLabel
@@ -49,7 +49,7 @@ const button_style = {
   margin: 10,
 };
 
-BButton = ( props ) => {
+const ThemeButton = ( props ) => {
   if (props.style) {
     Object.assign(button_style, props.style);
   }
@@ -62,23 +62,23 @@ BButton = ( props ) => {
   );
 };
 
-BButton.defaultProps = {
+ThemeButton.defaultProps = {
   children: null,
   onPress: null,
-  onClick: () => { console.log('clicked')},
+  onClick: () => { console.log('clicked');},
   size: ThemeDefaultVariables.ButtonSize,
   color: ThemeDefaultVariables.ButtonColor,
   iconStyle: ThemeDefaultVariables.ButtonIconStyle,
   borderRadius: ThemeDefaultVariables.ButtonBorderRadius,
   backgroundColor: ThemeDefaultVariables.ButtonBackgroundColor,
 };
-BButton.displayName = 'Button';
+ThemeButton.displayName = 'Button';
 
 
-BButton.propTypes = {
+ThemeButton.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
 };
 
 
-export { BButton, TouchableNativeButton };
+export { ThemeButton, TouchableNativeButton };

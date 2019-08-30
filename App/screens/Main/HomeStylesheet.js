@@ -1,8 +1,6 @@
 import React from 'react';
 import{ StyleSheet, Platform } from 'react-native';
-import { ThemeIcons } from '../../Theme/Icons';
-
-import { Layout } from '../../Theme/Layout';
+import { Layout, ThemeIcons } from '../../Theme';
 
 
 const DISABLED_OPACITY = 0.5;

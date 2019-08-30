@@ -4,7 +4,6 @@ import { NavigationScreenProp } from 'react-navigation';
 import { RootView, CenterView, PadView } from '../../Views';
 import { ThemeColors, Styles, DebugStyles } from '../../Theme';
 
-
 var debugOutline = DebugStyles.outlineAll;
 var debugOutline2 = DebugStyles.outlineAll;
 var debugOutline3 = DebugStyles.outlineAll;
@@ -21,22 +20,7 @@ class SurveyScreen extends React.Component {
   }
 
   render() {
-
-    RootNavigation.navigationOptions = {
-
-      export default createAppContainer(RootNavigation);
-      <ErrorBoundary>
-    }
-    import RootNavigation from './screens/RootNavigation';
-    console.log(debugOutline, debugOutline2, debugOutline3);
-    const { navigate } = this.props.navigation;
-
-    const handle_submit_description = () => {
-      navigate('SurveyMain', { description: this.state.text })
-    };
-    </ErrorBoundary>
-
-    return (
+  return (
       <RootView>
 
         <PadView padding={[1]}>

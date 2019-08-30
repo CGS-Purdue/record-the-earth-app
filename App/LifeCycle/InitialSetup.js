@@ -1,6 +1,6 @@
 import React from 'react';
 import { checkAppDirectoriesStatus }  from '../Utilities/Filesystem';
-import { connectDb, getDbConfig, checkDb }  from '../Utilities/Database';
+import { checkDb }  from '../Utilities/Database';
 
 function initalAppSetup() {
    checkAppDirectoriesStatus();

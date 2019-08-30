@@ -1,24 +1,9 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  Image,
-  Modal,
-  TouchableHighlight,
-  Alert,
-} from 'react-native';
+import { Text, View, Image, Modal, TouchableHighlight, Alert } from 'react-native';
+import { Card, ListItem, Button, Icon, ThemeProvider } from 'react-native-elements';
 import { NavigationScreenProp } from 'react-navigation';
-import { CenterView, CenterColView } from '../../Views/CenterView';
-import { RootView } from '../../Views/RootView';
-import { Styles } from '../../Theme/Stylesheet';
-import { ThemeColors } from '../../Theme';
-import {
-  Card,
-  ListItem,
-  Button,
-  Icon,
-  ThemeProvider,
-} from 'react-native-elements';
+import { RootView, CenterColView, CenterView  } from '../../Views';
+import { ThemeColors, Styles } from '../../Theme';
 
 class ModalRecordStartScreen extends Component {
   constructor(props) {

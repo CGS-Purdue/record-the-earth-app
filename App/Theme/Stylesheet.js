@@ -2,9 +2,9 @@ import { StyleSheet } from 'react-native';
 import { ColorLib } from './ColorLib';
 import { ThemeColors } from './Colors';
 import { Layout } from './Layout';
-import { ViewStyles } from './styles/view';
-import { FormStyles } from './styles/forms';
-import { ButtonStyles } from './styles/button';
+import { ViewStyles } from './Styles/ViewStyles';
+import { FormStyles } from './Styles/FormStyles';
+import { ButtonStyles } from './Styles/ButtonStyles';
 
 
 var key, color_key, color;
@@ -106,14 +106,14 @@ const UtilityStyles = StyleSheet.create({
     borderStyle: 'solid'
   },
 });
-// #e1c0c8
+
 let combined = Object.assign(ViewStyles, MainStyles, FormStyles, ButtonStyles);
 
 const Styles = StyleSheet.create(combined);
 
 
 export default Styles;
-//
+
 export {
   ButtonStyles,
   MainStyles,
