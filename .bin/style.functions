@@ -1,0 +1,50 @@
+#!/bin/bash
+
+
+# ===========
+# FORMATTERS
+# ===========
+no_emptylines () {
+  grep -v -e "^[[:space:]]*$"
+}
+select_lines () {
+  grep "^/\*\?//"
+}
+strip_markers () {
+  sed -r 's/^[*\/]+\s?//g; s/\*\/$/  /g'
+}
+line_ending_spaces () {
+  sed -r 's/>$/  /g'
+}
+
+
+# ===========
+# SASS FUNCTIONS
+# ===========
+scss_to_css () {
+  SRC=${1?'input required'}
+
+  node-sass  \
+    --output-style expanded \
+    --indent-type space \
+    --indent-width 2 \
+    --linefeed lf \
+    --precision 4 \
+    $SRC
+}
+
+# SASS DIRECTORY INDEX
+#  LIST ALL FILES IN CURRENT DIRECTORY RECURSIVELY
+#  PRINT AND SORT BY GROUP AND ORDER IN STYLESHEET
+#  IMPORT ORDER, THEN APPEND TO BOTTOM OF CURRENT INDEX FILE
+style_create_sass_index () {
+  SRC="${1:-.}"
+  echo "Building directory index file: $SRC"
+
+  find $SRC \
+    -type f \
+    -printf "%f\n" \
+    | sort --version-sort --reverse \
+    | sed 's/^[[:space:]]*_//; s/^/@import "/; s/\.scss//; s/$/";/' \
+    >> $SRC/index.scss
+}

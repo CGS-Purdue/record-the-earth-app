@@ -1,0 +1,16 @@
+#!/bin/bash
+
+INPUT=${1?"error input required"}
+INPUT_DIR="$(dirname $INPUT)"
+OUTDIR="${2:-$(dirname $INPUT)}"
+
+echo "INPUT $INPUT"
+echo "OUTDIR $OUTDIR"
+INPUT=${1?"error input required"}
+INPUT_DIR="$(dirname $INPUT)"
+OUTDIR="${2:-$(dirname $INPUT)}"
+
+echo "INPUT $INPUT"
+echo "OUTDIR $OUTDIR"
+
+node-sass $INPUT --output-style compact

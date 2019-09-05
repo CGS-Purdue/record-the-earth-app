@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+# OUTPUT_DIR=${2:?"error output directory"}
+BASE_DIR="$(npm prefix)"
+STYLE_SRC="./src/style/scss"
+STYLE_FILE="index.scss"
+DEST_PATH="./src"
+
+# GET VALUES FROM ENVIRONMENT
+if [ -f "$(npm prefix)/.npmrc" ]; then
+  . "$(npm prefix)/.npmrc"
+fi
+
+
+
+node-sass \
+    --output "${BASE_DIR}/${DEST_PATH}" \
+    --output-style expanded \
+    --source-map ${BASE_DIR}/${DEST_PATH} \
+    "${BASE_DIR}/${STYLE_SRC}/${STYLE_FILE}"
+
+
+node-sass \
+    --watch \
+    --recursive \
+    --output "${BASE_DIR}/${DEST_PATH}" \
+    --output-style expanded \
+    --source-map ${BASE_DIR}/${DEST_PATH} \
+    "${BASE_DIR}/${STYLE_SRC}/${STYLE_FILE}"

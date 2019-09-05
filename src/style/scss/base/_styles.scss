@@ -1,0 +1,45 @@
+// $frame_body_bg: #26c6da;
+$frame_body_bg: #5f7881;
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+html,
+button,
+input,
+textarea,
+select {
+  outline: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body {
+  @include type-normal;
+  color: $color-full;
+  font-size: 16px;
+  background-color: $frame_body_bg;
+}
+h1, h2, h3, h4, h5, h6 {
+  @include type-normal;
+  margin: 0;
+  padding: 0;
+}
+h1 { @include font-l1; }
+h2 { @include font-m3; }
+h3 { @include font-m2; }
+h4 { @include font-m1; }
+h5 {
+  @include font-s2;
+  color: $color-medium-rare;
+  text-transform: uppercase;
+}
+h6 { color: $color-medium; }
+p { @include font-s3; }
+sub,
+sup { font-size: 0.8em; }
+sub { bottom: -0.2em; }
+sup { top: -0.2em; }
+b { font-weight: bold; }
+em { font-style: italic; }

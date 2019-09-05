@@ -1,0 +1,115 @@
+#!/bin/bash
+
+# $(npm config list --local)
+# THISDIR=$(dirname "$(readlink -f "$0")")
+
+INPUT="${1:-$STYLE_SRC/style.scss}"
+INPUT_DIR="$(dirname $INPUT)"
+OUTDIR="${2:-$STYLE_DEST}"
+
+BUILD_DIR=".build"
+DIST_DIR=".dist"
+DOCS_DIR=".docs"
+
+DEST_BUILD="$OUTDIR/$BUILD_DIR"
+DEST_DOC="$OUTDIR/$DOCS_DIR"
+DEST_DIST="$OUTDIR/$DIST_DIR"
+
+echo "INPUT - $INPUT"
+echo "OUTDIR - $OUTDIR"
+echo "DEST_BUILD - $DEST_BUILD"
+echo "DEST_DOC - $DEST_DOC"
+echo "DEST_DIST - $DEST_DIST"
+
+echo "BUILD_WATCH - $BUILD_WATCH"
+
+
+
+no_emptylines () {
+  grep -v -e "^[[:space:]]*$"
+}
+select_lines () {
+  grep "^/\*\?//"
+}
+line_ending_spaces () {
+  sed -r 's/\s*$/  /g'
+}
+strip_markers () {
+  sed -r 's/^[*\/]+\s?//g; s/\*\/$/  /g'
+}
+
+prepare_dirs () {
+  # if not dirs then make
+  echo "$OUTDIR/$BUILD_DIR"
+  echo "$OUTDIR/$DOCS_DIR"
+  echo "$OUTDIR/$DIST_DIR"
+}
+
+scss_to_css () {
+  node-sass $INPUT \
+    --output-style expanded \
+      | postcss \
+      --no-map \
+      -u postcss-single-line autoprefixer \
+      | no_emptylines \
+      | tee $PWD/.build/$OUTDIR/.build.css
+}
+css_to_md () {
+  select_lines \
+    | strip_markers \
+    | line_ending_spaces \
+    tee $DEST_BUILD/.build.md
+}
+md_to_html () {
+  markdown \
+    --html4tags \
+    > $DEST_BUILD/.build.html
+}
+
+
+[[ "$BUILD_WATCH" = "YES" ]] && NODESASS_WATCH_FLAGS="--recursive --watch"
+[[ "$BUILD_MINIFIY" = "YES" ]] && BUILD_POSTCSS_PLUGINS="$BUILD_POSTCSS_PLUGINS -u cssnano"
+[[ "$BUILD_AUTOPREFIX" = "YES" ]] && BUILD_POSTCSS_PLUGINS="$BUILD_POSTCSS_PLUGINS -u autoprefixer"
+[[ ! "$BUILD_SOURCEMAPS" = "YES" ]] && BUILD_POSTCSS_FLAGS="--no-map"
+
+if [ "$BUILD_ENV" = "PROD" ]; then
+
+  source .npmrc && \
+    node-sass \
+    --output-style expanded \
+    --indent-type space \
+    --indent-width 2 \
+    --linefeed lf \
+    --precision 4 \
+    $NODESASS_WATCH_FLAGS $STYLE_SRC/style.scss \
+      | postcss \
+        --no-map \
+        -u postcss-single-line  \
+        | tee "$BUILD_PATH/theme/build.css" \
+          | postcss \
+            --no-map \
+            -u postcss-discard-comments  \
+            -u autoprefixer \
+              | no_emptylines \
+              > "$STYLE_DEST/style.css" && \
+
+    cat "$BUILD_PATH/theme/build.css" \
+      | select_lines \
+      | strip_markers \
+      | line_ending_spaces \
+      | no_emptylines \
+        > "$BUILD_PATH/theme/.build.md"
+
+else
+  # WE DO NOT NEED POST PROCESING AND FORMATING DURING DEVELOPMENT
+  source .npmrc && \
+    node-sass \
+    $BUILD_NODESASS_FLAGS \
+    --output-style expanded \
+    --indent-type space \
+    --indent-width 2 \
+    --linefeed lf \
+    --precision 4 \
+    $NODESASS_WATCH_FLAGS $STYLE_SRC/style.scss \
+    --output $STYLE_DEST
+fi

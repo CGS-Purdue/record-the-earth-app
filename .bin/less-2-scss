@@ -1,0 +1,15 @@
+#!/bin/bash
+
+INPUT_DIR=${1?"error input required"}
+OUTPUT_DIR=${2:?"./scss"}
+
+echo "$INPUT_DIR -> $OUTPUT_DIR"
+
+postcss \
+  $INPUT_DIR/**/*.less \
+  -d ${OUTPUT_DIR} \
+  --no-map \
+  --parser postcss-less \
+  -u postcss-less2scss
+
+

@@ -1,0 +1,114 @@
+
+$text_dark_color: #000000;
+$text_light_color: #ffffff;
+
+// LAYOUT
+.swatch_group {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  max-width: 100%;
+
+  &__title {
+    text-transform: capitalize;
+    font-size: 1.5em;
+    font-family: sans-serif;
+    padding: 0.3rem;
+    margin: 0;
+    font-size: 300;
+    line-height: 1.2;
+    border-bottom: 1px dashed;
+    line-height: 2rem;
+    text-align: right;
+  }
+
+  .swatch {
+    position: relative;
+    height: auto;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.swatch {
+  display: flex;
+  max-width: 100%;
+
+  &__name { flex: 1 1 15%; }
+  &__color { flex: 1 1 15%; }
+  &__bg { flex: 1 1 50%; }
+}
+
+.swatch_group__title {
+  background: $text_dark_color;
+}
+.swatch {
+  .swatch__name {
+      color: $text_light_color;
+
+    .light-theme & {
+      color: $text_dark_color;
+    }
+  }
+}
+// COLOR SWATCH
+.swatch {
+  font-size: 1em;
+  font-weight: 400;
+  border-bottom: 1px solid;
+  font-family: monospace;
+  text-align: center;
+  border-left: 2em solid;
+
+  // COLOR NAME (VARIABLE NAME)
+  &__name {
+    font-size: 1em;
+    margin: 0;
+    white-space: nowrap;
+    padding-left: 0.5em;
+    // text-align: left;
+  }
+
+  // COLOR VALUE
+  &__color {
+    display: flex;
+    color: inherit;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    font-size: 1em;
+    text-align: center;
+    justify-content: space-around;
+
+    // EXAMPLE TEXT IN COLOR OVER LIGHT AND DARK BG
+    &::before,
+    &::after {
+      content: attr(data-color);
+      color: inherit;
+      border-left: 1em solid;
+      display: inline-block;
+      flex: 1;
+    }
+
+    &::before { background-color: $text_dark_color; }
+    &::after { background-color: $text_light_color; }
+  }
+
+  // BACKGROUND COLOR
+  &__bg {
+    background-color: currentColor;
+    margin: 0;
+
+    &::before,
+    &::after {
+      content: attr(data-color-name);
+      display: inline;
+      text-transform: uppercase;
+      font-family: monospace;
+      padding: 0 1em;
+    }
+
+    &::before { color: $text_light_color; }
+    &::after { color: $text_dark_color; }
+  }
+}

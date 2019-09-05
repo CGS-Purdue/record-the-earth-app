@@ -1,0 +1,82 @@
+#!/bin/bash
+
+##BUILD STYLESHEET - dev
+
+source .npmrc && node-sass -w -r \
+    --output-style expanded \
+    --indent-type space \
+    --indent-width 2 \
+    --linefeed lf \
+    --precision 4 ./source/styles/style.scss \
+        | postcss --no-map -u postcss-single-line  \
+        | grep -v -e "^[[:space:]]*$" \
+        > "$STYLE_DEST/styles.css"
+
+
+
+##BUILD STYLESHEET - staging
+
+source .npmrc && node-sass \
+    --output-style expanded \
+    --indent-type space \
+    --indent-width 2 \
+    --linefeed lf \
+    --precision 4 ./source/styles/style.scss \
+          | postcss --no-map -u postcss-single-line  \
+          | tee "$BUILD_PATH/theme/build.css" \
+          | postcss --no-map -u postcss-discard-comments \
+          | grep -v -e "^[[:space:]]*$" \
+          > "$STYLE_DEST/style.css"
+
+
+
+
+
+
+# ===========
+# FORMATTERS
+# ===========
+no_emptylines () {
+  grep -v -e "^[[:space:]]*$"
+}
+select_lines () {
+  grep "^/\*\?//"
+}
+strip_markers () {
+  sed -r 's/^[*\/]+\s?//g; s/\*\/$/  /g'
+}
+line_ending_spaces () {
+  sed -r 's/>$/  /g'
+}
+
+# ===========
+# SASS FUNCTIONS
+# ===========
+scss_to_css () {
+  SRC=${1?'input required'}
+  node-sass \
+    --output-style expanded \
+    --indent-type space \
+    --indent-width 2 \
+    --linefeed lf \
+    --precision 4 \
+    $SRC
+}
+
+# OUTPUTS MASTER MARKDOWN/EXAMPLES FILE
+# AND COMBINED AND CLEANED CSS MASTER FILE
+scss_to_css $INPUT \
+  | postcss \
+    --no-map \
+    --use postcss-single-line \
+    | no_emptylines \
+    | tee "$OUTPUT_DIR/.build.css" \
+        | select_lines \
+        | strip_markers \
+        | line_ending_spaces \
+          > tee "$OUTPUT_DIR/index.md" && \
+          postcss $OUTPUT_DIR/.build.css \
+          --no-map \
+          --use postcss-discard-comments \
+          --use postcss-single-line \
+          --output "$OUTPUT_DIR/index.css"

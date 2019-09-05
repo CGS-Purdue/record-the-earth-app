@@ -1,0 +1,39 @@
+#!/bin/bash
+
+BASE_DIR="$(npm prefix)"
+BOOK_PACKAGE_VERSION="$(npm run env | grep npm_package_version= | sed 's/npm_package_version=/v/')"
+
+BOOK_OUTPUT_DIR="deploy/storybook"
+BOOK_ARCHIVE_DIR="$BOOK_OUTPUT_DIR/$BOOK_PACKAGE_VERSION"
+BOOK_DEPLOY_DIR="dist"
+
+cd ${BOOK_OUTPUT_DIR}
+
+BOOK_CURRENT_DIRLINK="$(readlink current)"
+
+if [ -z ${BOOK_CURRENT_DIRLINK} ]; then
+  echo "Warning: missing link to current version."
+  echo "Updating.."
+
+  ln -s ${BOOK_PACKAGE_VERSION} current
+  BOOK_CURRENT_DIRLINK="$(readlink current)"
+fi
+
+echo "Current Working Dir:  $PWD"
+echo "Current Pkg Version:  $BOOK_PACKAGE_VERSION"
+echo "Current Dir Refernce: $BOOK_CURRENT_DIRLINK"
+
+
+[[ ! "$BOOK_CURRENT_DIRLINK" == "$BOOK_PACKAGE_VERSION" ]] && echo "Package version does not match current build reference"
+
+## REMOVE LINK AND RELINK TO CURRENT VERSION FROM PACKAGE.JSON
+
+## PREPARE FILES TO UPDATE DIST AND GIT SUMODULE
+# -THIS PROJECT SERVES THE LIVE EXAMPLE FROM GITHUB PAGES
+# rm  dist/*.{css,js,html,json}
+# rm -r dist/assets dist/static
+# **use rsync**
+# cp v0.1.1/*.{css,js,html,json} dist/
+# cp -r v0.1.1/static dist/
+# cp -r v0.1.1/assets dist/
+# diff dist v*.*.*

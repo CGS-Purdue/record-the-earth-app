@@ -1,0 +1,85 @@
+// COLOR SELECTORS
+
+$redColors: (
+  red_100 : #A60000,
+  red_200 : #B72E3E,
+  red_300 : #BF3030,
+  red_400 : #FA3E54,
+  red_500 : #FF0000,
+  red_600 : #FF4040,
+);
+$blueColors: (
+  blue_100: #04346C,
+  blue_200: #0B5FA5,
+  blue_300: #0E53A7,
+  blue_400: #274E7D,
+  blue_500: #4284D3,
+  blue_600: #6899D3
+);
+$greenColors: (
+  green_100 : #00CC00,
+  green_200 : #008500,
+  green_300 : #1D8C00,
+  green_400 : #269926,
+  green_500 : #41A128,
+  green_600 : #64DF85
+);
+$yellowColors: (
+  yellow_100 : #A66F00,
+  yellow_200 : #A67300,
+  yellow_300 : #BF8F30,
+  yellow_400 : #FFA200,
+  yellow_500 : #FFAA00,
+  yellow_600 : #FFB100
+);
+$greyColors: (
+  grey_100: darken(#FFFFFF, 10%),
+  grey_200: darken(#FFFFFF, 20%),
+  grey_300: darken(#FFFFFF, 30%),
+  grey_400: darken(#FFFFFF, 40%),
+  grey_500: darken(#FFFFFF, 50%),
+  grey_600: darken(#FFFFFF, 60%),
+);
+
+$colorSchemes :(
+  reds : $redColors,
+  blues : $blueColors,
+  greys : $greyColors,
+  yellows : $yellowColors,
+  greens : $greenColors,
+);
+
+$white   : #FFFFFF; ///name:$white
+$black   : #000000; ///name:$black
+$cyan    : #00E9FF; ///name:$cyan
+$grey    : #AAAAAA; ///name:$silverchalice
+$red_100 : #A60000; ///name:$brightred
+$red_200 : #B72E3E; ///name:$wellread
+$red_300 : #BF3030; ///name:$wellread
+$red_400 : #FA3E54; ///name:$radicalred
+$red_500 : #FF0000; ///name:$red
+$red_600 : #FF4040; ///name:$coraled
+$blu_100 : #04346C; ///name:$catalinalue
+$blu_200 : #0B5FA5; ///name:$torylue
+$blu_300 : #0E53A7; ///name:$torylue
+$blu_400 : #274E7D; ///name:$bayfany
+$blu_500 : #4284D3; ///name:$havelocklue
+$blu_600 : #6899D3; ///name:$danube
+$grn_100 : #00CC00; ///name:$green
+$grn_200 : #008500; ///name:$japaneseaurel
+$grn_300 : #1D8C00; ///name:$japaneseaurel
+$grn_400 : #269926; ///name:$forestreen
+$grn_500 : #41A128; ///name:$forestreen
+$grn_600 : #64DF85; ///name:$pastelreen
+$yel_100 : #A66F00; ///name:$chelseaem
+$yel_200 : #A67300; ///name:$pirateold
+$yel_300 : #BF8F30; ///name:$marigold
+$yel_400 : #FFA200; ///name:$orangeeel
+$yel_500 : #FFAA00; ///name:$webrange
+$yel_600 : #FFB100; ///name:$selectiveellow
+$gra_100 : #E6E6E6; ///name:$mercury
+$gra_200 : #CCCCCC; ///name:$silver
+$gra_300 : #B3B3B3; ///name:$nobel
+$gra_400 : #808080; ///name:$gray
+$gra_500 : #999999; ///name:$dustyray
+$gra_600 : #666666; ///name:dovegray 
