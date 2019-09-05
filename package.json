@@ -1,5 +1,5 @@
 {
-  "name": "taskbox",
+  "name": "record-the-earth-react-native",
   "version": "0.1.2",
   "private": true,
   "config": {
@@ -24,6 +24,7 @@
     "react": "^16.8.6",
     "react-chromatic": "^0.8.1",
     "react-dom": "^16.8.6",
+    "react-navigation": "^3.11.0",
     "react-particles-js": "^2.6.0",
     "react-redux": "^7.1.0",
     "react-scripts": "3.0.1",
@@ -50,7 +51,7 @@
     "preinstall": ".bin/preinstall",
     "printenv": ".bin/printenv",
     "build:app": "react-scripts build",
-    "react:scripts:start": "react-scripts start",
+    "start": "react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
