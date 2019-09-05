@@ -12,6 +12,13 @@
 #         08-27 19:01:19.138 14525 14677 E unknown:ReactNative: 	at abi34_0_0.com.facebook.react.bridge.queue.MessageQueueThreadHandler.dispatchMessage(MessageQueueThreadHandle
 #         facebook.react.bridge.WritableNativeMap abi34_0_0.com.facebook.react.bridge.Arguments.makeNativeMap(java.util.Map) due to JIT
 #         global options:
+#         Sets log print format verb and adverbs, where <format> is:
+                  #   brief help long process raw tag thread threadtime time
+                  # and individually flagged modifying adverbs can be added:
+                  #   color descriptive epoch monotonic printable uid
+                  #   usec UTC year zone
+                  # Multiple -v parameters or comma separated list of format and
+                  # format modifiers are allowed.
 #  -a         listen on all network interfaces, not just localhost
 #  -d         use USB device (error if multiple devices connected)
 #  -e         use TCP/IP device (error if multiple TCP/IP devices available)
@@ -26,7 +33,7 @@
 #   -s              Set default filter to silent. Equivalent to filterspec '*:S'
 #   -f <file>, --file=<file>               Log to file. Default is stdout
 #   -r <kbytes>, --rotate-kbytes=<kbytes>
-#                   Rotate log every kbytes. Requires -f option
+#                   Rotate log every kbytes. Requires -f optionWifiService:
 #   -n <count>, --rotate-count=<count>
 #                   Sets max number of rotated logs to <count>, default 4
 #   --id=<id>       If the signature id for logging to file changes, then clear
@@ -106,4 +113,4 @@ ABD_PATH="${ANDROID_HOME}/platform-tools"
 ANDROID_SERIAL="025abd11727717ac"
 
 # RCT_METRO_PORT=8081
-${ABD_PATH}/adb logcat ReactNative:V WifiService:S
+${ABD_PATH}/adb logcat ReactNative:V WifiService:S ConnectivityService:S -v long,color,printable  -v monotonic,color,descriptive -vprocess,color

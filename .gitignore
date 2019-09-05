@@ -13,3 +13,5 @@ web-report/
 .archived
 .docs
 _archived/
+*.tar.xz
+docs/

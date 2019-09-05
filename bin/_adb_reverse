@@ -3,6 +3,12 @@
 # ANDROID-BUILD
 # -------------
 # BUILD THE ANDROID PROJECT FROM THE ./android directory
+
+BASE_DIR="$(npm prefix)"
+
+[[ -f .npmrc ]] && source .npmrc
+[[ -f .env ]] && source .env
+
 # REACTOTRON
 [[ ! -z $RUN_REACTOTRON ]] &&  $ANDROID_HOME/platform-tools/adb reverse tcp:9090 tcp:9090
 # REACT DEVTOOLS
@@ -12,3 +18,10 @@
 # REACT-NATIVE CLI
 $ANDROID_HOME/platform-tools/adb reverse tcp:19001 tcp:19001
 $ANDROID_HOME/platform-tools/adb reverse tcp:19000 tcp:19000
+
+[[ ! -z $RUN_REACT_NATIVE_DEBUGGER ]] \
+  && $ANDROID_HOME/platform-tools/adb reverse tcp:8081 tcp:8081
+
+
+
+$ANDROID_HOME/platform-tools/adb reverse --list

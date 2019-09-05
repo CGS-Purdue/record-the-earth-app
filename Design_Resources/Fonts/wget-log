@@ -1,0 +1,11 @@
+--2019-08-20 16:44:14--  https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i
+Resolving fonts.googleapis.com (fonts.googleapis.com)... 216.58.192.138, 2607:f8b0:4009:80c::200a
+Connecting to fonts.googleapis.com (fonts.googleapis.com)|216.58.192.138|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/css]
+Saving to: ‘css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i’
+
+          css?famil     [<=>                 ]       0  --.-KB/s               css?family=Open+San     [ <=>                ]   2.45K  --.-KB/s    in 0s      
+
+2019-08-20 16:44:14 (32.0 MB/s) - ‘css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i’ saved [2509]
+

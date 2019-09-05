@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# -------------------------
+# react-native run-android
+# -------------------------
+BASE_PATH="$(npm prefix)"
+
+[[ -f .npmrc ]] && source .npmrc
+
+NODE_RUN_ENV=""
+NODE_RUN_FLAGS=""
+
+# ${NODE_RUN_ENV} node ${NODE_RUN_FLAGS} \
+
+LINT_DIRS="Components,Lib,LifeCycle,Theme,Utilities,Views,preload_modules,screens"
+
+$BASE_PATH/./node_modules/.bin/eslint \
+  --ext '.js' \
+  --cache \
+  --cache-file '.eslintcache' \
+  --ignore-pattern '!node_modules' \
+  ./*.js \
+  ./{$LINT_DIRS}/*.js \
+  ./{$LINT_DIRS}/**/*.js \
+  ./{$LINT_DIRS}/**/**/*.js \
+  ./{$LINT_DIRS}/**/**/**/*.js
+
+exit 0
