@@ -2,6 +2,10 @@
 // clear
 // isFocused
 
+// Note that some props are only available with multiline={true/false}.
+//  Additionally, border styles that apply to only one side of the element
+//  (e.g., borderBottomColor, borderLeftWidth, etc.) will not be applied if multiline=false. To achieve the same effect, you can wrap your TextInput in a View:
+
 const TextInputProps = [
   'allowFontScaling',
   'autoCapitalize',

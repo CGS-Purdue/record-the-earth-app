@@ -54,11 +54,11 @@ const ThemeButton = ( props ) => {
     Object.assign(button_style, props.style);
   }
   return (
-    <button
+    <Button
       onClick={props.onClick}
       style={button_style}>
         {props.children}
-    </button>
+    </Button>
   );
 };
 

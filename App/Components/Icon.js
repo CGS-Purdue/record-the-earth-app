@@ -1,10 +1,15 @@
 import { Asset } from 'expo-asset';
 
 export default class Icon {
-  constructor(module, width, height) {
+
+  constructor(name, module, width, height) {
+    this.name = name
     this.module = module;
     this.width = width;
     this.height = height;
-    Asset.fromModule(this.module).downloadAsync();
+    this._asset = Asset.fromModule(this.module);
+    this._asset.downloadAsync();
   }
 }
+
+export { Icon }

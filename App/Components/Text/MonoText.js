@@ -1,20 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text } from 'react-native';
-import PropTypes from 'prop-types';
+import { Theme } from '../../Theme'
 
+const _styles = Theme.Styles;
+const _fonts = Theme.Fonts;
 
-export default function MonoText(props) {
-  return (
-    <Text {...props} style={[props.style, { fontFamily: 'space-mono' }]} />
-  );
+class MonoText extends Component {
+  state = {
+    appIsReady: false,
+  };
+
+  // TODO: FUTURE WORK
+  // REF https://github.com/expo/new-project-template/blob/d6a440b01801fbeb323265e39a155d969ab6827f/App.js
+  componentWillMount () {
+    this._loadAssetsAsync();
+  }
+  async _loadAssetsAsync() {
+    try {
+      // await cacheAssetsAsync({fonts: [_fonts.FontType.MONO_FONT]});
+    } catch (e) {
+      console.warn(
+        'There was an error caching assets (see: main.js), perhaps due to a ' +
+        'network timeout, so we skipped caching. Reload the app to try again.'
+      );
+      console.log(e.message);
+    } finally {
+      this.setState({ appIsReady: true });
+    }
+  }
+
+  render() {
+    return (
+      <Text {...this.props} style={[this.props.style, _styles.font.font_mono]} />
+    );
+  }
 }
 
-MonoText.propTypes = {
-  error: PropTypes.string,
-};
-
-MonoText.defaultProps = {
-  error: null,
-};
 
 export { MonoText }

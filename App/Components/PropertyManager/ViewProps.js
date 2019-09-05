@@ -35,6 +35,7 @@ const ViewProps = [
   'nextFocusLeft',
   'nextFocusRight',
   'nextFocusUp',
+
   'needsOffscreenAlphaCompositing',
 
   'onAccessibilityEscape',
@@ -52,6 +53,7 @@ const ViewProps = [
   'onResponderTerminationRequest',
   'onStartShouldSetResponder',
   'onStartShouldSetResponderCapture',
+
   'pointerEvents',
 
   'renderToHardwareTextureAndroid',
@@ -65,20 +67,23 @@ const ViewProps = [
 
 const ViewStyleProps [
   ['Layout Props'],
+  // flex              (number)
+  // flexDirection     row, column
+  // justifyContent    flex-start, center, flex-end, space-around, space-between
+  // alignItems        flex-start, center, flex-end, stretch
+  // width             (number)
+  // height            (number)
+  // margin            (number) [marginTop marginBottom marginLeft marginRight]
+  // padding           (number) [paddingTop paddingBottom paddingLeft paddingRight]
   ['Shadow Props'],
   ['Transforms'],
-  ['borderEndColor', 'borderStartColor','borderLeftColor', 'borderLeftWidth', 'borderRightColor', 'borderRightWidth'],
-  ['borderBottomColor', 'borderBottomEndRadius', 'borderBottomLeftRadius', 'borderBottomRightRadius', 'borderBottomStartRadius', 'borderBottomWidth'],
-  ['borderTopColor', 'borderTopEndRadius', 'borderTopLeftRadius', 'borderTopRightRadius', 'borderTopStartRadius', 'borderTopWidth'],
-  ['opacity', 'backfaceVisibility'],
-
-  'borderStyle',
-  'borderWidth',
-  'borderColor',
-  'borderRadius',
-
   'backgroundColor',
-
+  'borderStyle',
+  'borderColor', [ 'borderTopColor', 'borderEndColor', 'borderBottomColor', 'borderLeftColor', 'borderStartColor', 'borderRightColor'],
+  'borderWidth', ['borderBottomWidth' 'borderTopWidth' 'borderLeftWidth', 'borderRightWidth'],
+  'borderRadius', [[ 'borderBottomEndRadius' 'borderBottomLeftRadius' 'borderBottomRightRadius' 'borderBottomStartRadius'],[ 'borderTopEndRadius', 'borderTopLeftRadius', 'borderTopRightRadius', 'borderTopStartRadius']],
+  'opacity',
+  'backfaceVisibility',
   'elevation',  // ANDROID ONLY
 ]
 

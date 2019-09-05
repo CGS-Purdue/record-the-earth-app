@@ -1,6 +1,6 @@
-import { MonoText } from '/MonoText'
-import { TitleText } from '/TitleText'
-import { HeadingText } from '/HeadingText'
+import { MonoText } from './MonoText';
+import { TitleText } from './TitleText';
+import { HeadingText } from './HeadingText';
 
 const TextComponents = {
   MonoText,
@@ -9,4 +9,4 @@ const TextComponents = {
 };
 
 export default TextComponents;
-export {MonoText, TitleText, HeadingText }
+export {MonoText, TitleText, HeadingText };

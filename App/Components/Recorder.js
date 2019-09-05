@@ -1,23 +1,28 @@
 import React from 'react';
-import * as Font from 'expo-font';
 import * as FileSystem from 'expo-file-system';
 import * as Permissions from 'expo-permissions';
-import { Asset } from 'expo-asset';
 import { Audio } from 'expo-av';
-import { Dimensions, Image, Alert, Slider, Text, TouchableHighlight, View } from 'react-native';
+import { Image, Alert, Slider, Text, TouchableHighlight, View } from 'react-native';
 import { saveAudioRecordingFile } from '../Utilities/Filesystem';
-import { ThemeIcons, ThemeColors, ThemeFonts, ThemeVariables, Styles } from '../Theme';
-import { CenterColView, CenterView, RootView } from '../Views';
+import { ThemeIcons, ThemeColors, Theme } from '../Theme';
+import { CenterColView, CenterView, RootView } from './Views';
 import { MonoText } from './Text';
+
+const _styles = Theme.Styles;
+
+let _ic_record = ThemeIcons.Icons.icon_record;
+let _ic_recording = ThemeIcons.Icons.icon_recording;
+const RecordIcon = ThemeIcons.createIcon(_ic_record.name, _ic_record.module, _ic_record.width, _ic_record.height);
+const IsRecordingIcon = ThemeIcons.createIcon(_ic_recording.name, _ic_recording.module, _ic_recording.width, _ic_recording.height);
 
 const recordStyles = {
   recordButton: {
-    width: ThemeIcons.record.width,
-    height: ThemeIcons.record.height,
+    width: RecordIcon.width,
+    height: RecordIcon.height,
     resizeMode: 'contain',
     margin: 5,
-  }
-}
+  },
+};
 
 const touchButtonStyle = {
   display: 'flex',
@@ -264,19 +269,18 @@ export default class Recorder extends React.Component {
               disabled={this.state.syncing}>
               <Image
                 style={recordStyles.recordButton}
-                source={ThemeIcons.record.module}
+                source={RecordIcon.module}
               />
             </TouchableHighlight>
 
             <MonoText style={[{
-                color: ThemeColors.MESSAGE_DANGER,
-                textAlign:'center'}]}>
+                color: ThemeColors.MESSAGE_DANGER, textAlign:'center'}]}>
               {this.state.isRecording ? 'LIVE' : ''}
             </MonoText>
 
             <Image
               style={[{opacity: this.state.isRecording ? 1.0 : 0.0}]}
-              source={ThemeIcons.recording.module}
+              source={IsRecordingIcon.module}
             />
             <MonoText>{this.getRecordingTimestamp()}</MonoText>
           </View>
