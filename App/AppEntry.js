@@ -7,6 +7,4 @@ if (__DEV__) {
   activateKeepAwake();
 }
 
-console.log(registerRootComponent);
-
 registerRootComponent(App);

@@ -1,6 +1,5 @@
-import { Reactotron } from 'reactotron-react-native';
 import { React } from 'react';
-import { YellowBox, LogProps, NativeModules } from 'react-native';
+import { Reactotron } from 'reactotron-react-native';
 
 class LogUtils {
   static log(message, ...args) {
@@ -28,26 +27,6 @@ class LogUtils {
       value: { message, args },
       important: true,
     });
-  }
-
-  static DebugComponent(component) {
-    React.forwardRef((props, ref) => {
-      return <LogProps {...props} forwardedRef={ref} />;
-    })
-  }
-
-  static logProps(component) {
-    class LogProps extends React.Component {
-      // ...
-    }
-    function forwardRef(props, ref) {
-      return <LogProps {...props} forwardedRef={ref} />;
-    }
-    // Give this component a more helpful display name in DevTools.
-    const name = Component.displayName || Component.name;
-    // e.g. "ForwardRef(logProps(MyComponent))"
-    forwardRef.displayName = `logProps(${name})`;
-    return React.forwardRef(forwardRef);
   }
 }
 

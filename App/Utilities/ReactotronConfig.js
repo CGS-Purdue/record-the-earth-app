@@ -4,6 +4,11 @@ import { COMMAND_SET } from './ReactotronCommands';
 import { reactotronRedux } from 'reactotron-redux'
 import { composeWithDevTools } from 'remote-redux-devtools'
 
+//  IGNORE WARNINGS {
+//  AsyncStorage
+//  async-storage-moved
+//  }
+
 const middleware = [];
 const HOST='127.0.0.1:9090';
 const ASYNC_IGNORE = [''];

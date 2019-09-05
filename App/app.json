@@ -1,42 +1,57 @@
 {
   "expo": {
     "name": "RecordTheEarthExpo",
-    "slug": "record-the-earth-expo",
     "description": "Updating RtE react-native app to be fully managed with expo.",
+    "entryPoint": "init.js",
+    "icon": "./icon.png",
+    "orientation": "portrait",
+    "platforms": [ "ios", "android" ],
+    "primaryColor": "#cccccc",
     "privacy": "unlisted",
     "sdkVersion": "34.0.0",
-    "platforms": [
-      "ios",
-      "android"
-    ],
-    "entryPoint": "init.js",
-    "splash": {
-      "icon": "./icon.png",
-      "hideExponentText": false
-    },
+    "slug": "record-the-earth-expo",
+
     "androidShowExponentNotificationInShellApp": true,
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "primaryColor": "#cccccc",
-    "icon": "./icon.png",
-    "splash": {
-      "image": "./splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+    "androidStatusBar": {
+        "barStyle": "dark-content",
+        "backgroundColor": "#000000",
+
     },
+
+    "notification": {
+        "icon": "./icon.png",
+        "color": "#000000",
+        "androidMode": "default",
+    },
+
+    "splash": {
+      "image": "./splash.jpg",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+
+    "version": "1.0.0",
+
     "updates": {
       "fallbackToCacheTimeout": 0
     },
+
     "assetBundlePatterns": [
-      "Theme/Assets/**/*"
+      "./Theme/Assets/btn/*.png",
+      "./Theme/Assets/fonts/*.ttf",
+      "./Theme/Assets/icons/*.png",
+      "./Theme/Assets/img/*.png",
+      "./Theme/Assets/img/*.jpg",
+      "./Theme/Assets/logo/*.png",
+      "./Theme/Assets/logo/*.svg"
     ],
     "ios": {
       "supportsTablet": false,
       "splash": {
-          "backgroundColor": "#ffffff",
+          "backgroundColor": "#000000",
           "resizeMode": "contain",
-          "image": "./splash.png",
-      },
+          "image": "./splash.jpg"
+      }
     },
     "android" : {
       "package" : "org.recordtheearth.expo",
@@ -47,13 +62,19 @@
       ]
     },
     "githubUrl": "https://github.com/charrismatic/record-the-earth-reach-native",
-    "extra": {},
+    "extra": {
+
+    },
+    "hooks" : {
+
+    },
     "rnCliPath": "",
     "packagerOpts": {
       "assetExts": [
         "ttf",
-        "otf",
         "xml",
+        "jpg",
+        "svg",
         "png"
       ]
     }

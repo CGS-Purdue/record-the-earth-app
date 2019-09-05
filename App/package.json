@@ -4,65 +4,95 @@
   "description": "record the earth react native project files for expo and snack",
   "author": "Matt Harris <charrismatic@protonmail.com> (https://charrismatic.github.io/)",
   "scripts": {
-    "adb"            :  "../bin/_adb"  ,
-    "dev"            :  "../bin/dev"   ,
-    "expo"           :  "../bin/dev"   ,
-    "ios"            :  "expo start --ios",
-    "logcat"         :  "../bin/_adb_log",
-    "pretty:check"   : "../bin/prettier --check",
-    "pretty:fix"     : "../bin/prettier --write",
-    "pretty:list"    : "../bin/prettier --list",
-    "react-devtools" : "react-devtools",
-    "start"          : "expo start",
-    "test"           : "jest --watchAll",
-    "web"            : "expo start --web"
-  },
-  "jest": {
-    "preset": "jest-expo"
+    "adb": "../bin/_adb",
+    "dev": "../bin/dev",
+    "expo": "../bin/dev",
+    "lint": "../bin/eslint",
+    "lint:project": "../bin/eslint-project",
+    "lint:watch": "../bin/eslint-watch",
+    "logcat": "../bin/_adb_log",
+    "pretty:check": "../bin/prettier --check",
+    "pretty:fix": "../bin/prettier --write",
+    "pretty:list": "../bin/prettier --list",
+    "react-devtools": "../bin/react_devtools",
+    "start": "../bin/_expo",
+    "test": "echo changed \"$1\"",
+    "info": "./.run/info.js",
+    "watch": "./.run/watch"
   },
   "react-devtool": "react-devtools",
   "keywords": [
     "react-native",
     "sound-recording",
     "expo",
-    "sncak"
+    "snack"
   ],
+  "eslintConfig": {
+    "extends": "@react-native-community/eslint-config"
+  },
+  "watch": {
+    "test": "App.js",
+    "lint": {
+      "patterns": [
+        "*.js",
+        "Components",
+        "Lib",
+        "LifeCycle",
+        "Theme",
+        "Utilities",
+        "Views",
+        "screens"
+      ],
+      "recursive": true,
+      "ignore": "node_modules",
+      "quiet": false,
+      "legacyWatch": true,
+      "delay": 1000,
+      "runOnChangeOnly": false
+    }
+  },
   "dependencies": {
-    "@expo/samples": "~3.0.3",
     "@expo/vector-icons": "^10.0.3",
-    "acorn": "^6.3.0",
-    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
+    "@types/react-native": "^0.60.9",
     "expo": "^34.0.1",
     "expo-asset": "^6.0.0",
     "expo-av": "^6.0.0",
     "expo-constants": "6.0.0",
     "expo-file-system": "^6.0.2",
     "expo-font": "~6.0.0",
-    "zprop-types": "^15.7.2",
+    "expo-web-browser": "^6.0.0",
+    "prop-types": "^15.7.2",
     "react": "16.8.3",
     "react-dom": "^16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.0.tar.gz",
     "react-native-elements": "^1.1.0",
-    "react-native-gesture-handler": "~1.3.0",
+    "react-native-gesture-handler": "^1.3.0",
     "react-native-modal": "^11.3.1",
+    "react-native-platform-touchable": "^1.1.1",
+    "react-native-reanimated": "^1.1.0",
     "react-native-vector-icons": "^6.6.0",
     "react-native-web": "^0.11.4",
-    "react-navigation": "^3.11.0"
+    "react-navigation": "^3.11.0",
+    "typescript": "^3.6.2"
   },
   "bugs": {
     "url": "https://github.com/charrismatic/record-the-earth-react-native-snack/issues"
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "0.0.5",
+    "@typescript-eslint/parser": "^1.13.0",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "babel-preset-expo": "^6.0.0",
-    "eslint": "^6.2.0",
+    "eslint": "^5.16.0",
     "eslint-plugin-eslint-comments": "^3.1.2",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.3",
-    "jest-expo": "^34.0.0",
+    "node-watch": "^0.6.3",
     "react-devtools": "^3.6.3",
+    "reactotron-core-client": "^2.8.3",
     "reactotron-react-native": "^3.6.4",
     "reactotron-redux": "^3.1.1",
+    "redux": "^4.0.4",
     "remote-redux-devtools": "^0.5.16"
   },
   "private": true
