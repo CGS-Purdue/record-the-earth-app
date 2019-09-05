@@ -16,8 +16,8 @@ const FormStyles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     fontSize: 24,
-    backgroundColor: ThemeColors.TRANSPARENT
-  }
-})
+    backgroundColor: ThemeColors.TRANSPARENT,
+  },
+});
 
-export { FormStyles }
+export { FormStyles };

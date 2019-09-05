@@ -1,4 +1,5 @@
-import { ThemeColors } from "../Colors";
+import { ThemeColors } from '../Colors';
+import { Layout } from '../Layout';
 
 //// --------------------------------------------------------------------------
 /// # View Style Props
@@ -55,17 +56,45 @@ const ViewStyles = {
 
   center_col: {
     backgroundColor: ThemeColors.TRANSPARENT,
+    flexGrow: 1,
+    flexShrink: 0,
     flexBasis: '100%',
     width: '100%',
     height: '100%',
     display: 'flex',
-    flexGrow: 1,
-    flexShrink: 0,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-  }
-}
+  },
 
+  container: {
+    flex: 1,
+    backgroundColor: ThemeColors.WHITE,
+  },
 
-export { ViewStyles }
+  appContainer: {
+    width: Layout.PERCENT_100,
+    height: Layout.PERCENT_100,
+    display: 'flex',
+    position: 'relative',
+    padding: 0,
+    margin: 0,
+    flexGrow: 1,
+    flexShrink: 0,
+    flexBasis: '100%',
+  },
+
+  rootContainer: {
+    width: Layout.PERCENT_100,
+    height: Layout.PERCENT_100,
+    display: 'flex',
+    position: 'relative',
+    padding: 0,
+    marginTop: 0,
+    flexGrow: 1,
+    flexShrink: 0,
+    flexBasis: '100%',
+  },
+};
+
+export { ViewStyles };

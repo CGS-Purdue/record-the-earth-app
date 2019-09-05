@@ -1,12 +1,12 @@
 import { ThemeColors } from './Colors';
+import { ThemeFonts } from './Fonts';
 
 const ThemeVariables = {
   BASE: 'dark',
-  FONTCODE: 'monospace',
-  FONTBASE: 'open-sans',
+  FONTCODE: ThemeFonts.MONO_FONT,
+  FONTBASE: ThemeFonts.SANS_FONT,
   BRANDTITLE: 'Record the Earth',
   BRANDURL: 'https://www.recordtheearth.org',
-  BACKGROUND_COLOR: '#FFF8ED',
   INPUTBORDERRADIUS: 4,
   APPBORDERRADIUS: 4,
   RATE_SCALE: 3.0,
@@ -18,7 +18,7 @@ const ThemeDefaultVariables = {
   ButtonColor: '#eeeeee',
   ButtonIconStyle: "{marginRight: 10}",
   ButtonBorderRadius: 5,
-  ButtonBackgrThemeDefaultVariablesoundColor: '#007AFF',
+  ButtonBackgroundColor: '#007AFF',
 };
 
-export { ThemeColors, ThemeVariables, ThemeDefaultVariables };
+export { ThemeVariables, ThemeDefaultVariables };

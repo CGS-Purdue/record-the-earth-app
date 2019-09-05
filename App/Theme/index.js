@@ -1,35 +1,30 @@
+import { ThemeAssets } from './Assets';
 import { ThemeFonts } from './Fonts';
-import { Layout } from './Layout';
 import { Ionicons, ThemeIcons } from './Icons';
-import { Styles, DebugStyles } from './Stylesheet';
-import { ButtonAssets, LogoAssets, FontAssets, ImageAssets, IconAssets } from './Assets';
+import { Layout } from './Layout';
 import { ThemeColors } from './Colors';
 import { ThemeVariables, ThemeDefaultVariables } from './Variables';
+import { ThemeStylesheets, ThemeStyles } from './Stylesheet';
 
-const Theme = {
-  Fonts: ThemeFonts,
-  Layout: Layout,
-  Icons: ThemeIcons,
-  ThemeColors: ThemeColors,
-  Styles: Styles,
-  Variables: ThemeVariables,
-};
+const Theme = Object.create(null);
+Theme.Assets = ThemeAssets;
+Theme.Fonts = ThemeFonts;
+Theme.Icons = ThemeIcons;
+Theme.Layout = Layout;
+Theme.Colors = ThemeColors;
+Theme.Variables = ThemeVariables;
+Theme.Stylesheets = ThemeStylesheets;
+Theme.Styles = ThemeStyles;
 
 export {
-  ButtonAssets,
-  LogoAssets,
-  FontAssets,
-  ImageAssets,
-  IconAssets,
+  ThemeStyles,
+  ThemeStylesheets,
+  ThemeAssets,
   Ionicons,
   ThemeIcons,
-  ThemeFonts,
   ThemeColors,
   ThemeVariables,
   ThemeDefaultVariables,
-  Styles,
   Layout,
-  DebugStyles
+  Theme,
 };
-
-export default Theme;

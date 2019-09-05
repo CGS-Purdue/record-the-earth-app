@@ -1,4 +1,4 @@
-import { ColorLib } from './ColorLib'
+import { ColorLib } from './ColorLib';
 
 /// =====================
 /// ## THEME COLOR SCALES
@@ -19,7 +19,7 @@ const Reds = {
   RED_300: ColorLib.wellread,
   RED_400: ColorLib.radicalred,
   RED_500: ColorLib.red,
-  RED_600: ColorLib.coraled
+  RED_600: ColorLib.coralred,
 };
 
 // green ----------------------------------
@@ -27,19 +27,19 @@ const Greens = {
   GRN_100: ColorLib.green,
   GRN_200: ColorLib.japaneseaurel,
   GRN_300: ColorLib.japaneseaurel,
-  GRN_400: ColorLib.forestreen,
-  GRN_500: ColorLib.forestreen,
-  GRN_600: ColorLib.pastelreen
+  GRN_400: ColorLib.forestgreen,
+  GRN_500: ColorLib.forestgreen,
+  GRN_600: ColorLib.pastelreen,
 };
 
 // blue -----------------------------------
 const Blues = {
   BLU_100: ColorLib.catalinalue,
   BLU_200: ColorLib.denim,
-  BLU_300: ColorLib.torylue,
+  BLU_300: ColorLib.toryblue,
   BLU_400: ColorLib.bayfany,
   BLU_500: ColorLib.havelocklue,
-  BLU_600: ColorLib.danube
+  BLU_600: ColorLib.danube,
 };
 
 // yellow ---------------------------------
@@ -48,8 +48,8 @@ const Yellows = {
   YEL_200: ColorLib.pirateold,
   YEL_300: ColorLib.marigold,
   YEL_400: ColorLib.orangeeel,
-  YEL_500: ColorLib.webrange,
-  YEL_600: ColorLib.selectiyellow
+  YEL_500: ColorLib.weborange,
+  YEL_600: ColorLib.selectiyellow,
 };
 
 // grey -----------------------------------
@@ -58,8 +58,8 @@ const Grays = {
   GRA_200: ColorLib.silver,
   GRA_300: ColorLib.nobel,
   GRA_400: ColorLib.gray,
-  GRA_500: ColorLib.dustyray,
-  GRA_600: ColorLib.ovegray
+  GRA_500: ColorLib.dustygray,
+  GRA_600: ColorLib.ovegray,
 };
 
 // TRANSPARENT DARKER ---------------------
@@ -98,68 +98,73 @@ const ShadeLight = {
   SHADE_LIGHTER_50: 'rgba(255,255,255,0.50)',
 };
 
-const ColorScheme = Object.assign(Reds, Greens, Blues, Yellows, Grays, ShadeDark, ShadeLight);
-
-
 // NOTICES AND WARNINGS -------------------
 const Messages = {
-  MESSAGE_PRIMARY: ColorLib.green,
-  MESSAGE_SECONDARY: ColorLib.danube,
-  MESSAGE_SUCCESS: ColorLib.forestreen,
-  MESSAGE_DANGER: ColorLib.coraled,
-  MESSAGE_WARNING: ColorLib.selectiyellow,
-  MESSAGE_INFO: ColorLib.torylue,
+  MESSAGE_PRIMARY:   Greens.GRN_100,
+  MESSAGE_SECONDARY: Blues.BLU_600,
+  MESSAGE_SUCCESS:   Greens.GRN_400,
+  MESSAGE_DANGER:    Reds.RED_600,
+  MESSAGE_WARNING:   Yellows.YEL_600,
+  MESSAGE_INFO:      Blues.BLU_300,
 };
-
 
 // const Grays = {
 // ----------------------------------------
 
 const Colors = {
-  TRANSPARENT       : 'rgba(0,0,0,0)',
-  WHITE             : ColorLib.white,
-  BLACK             : ColorLib.black,
-  PRIMARY           : ColorLib.green,
-  SECONDARY         : ColorLib.dodgerblue,
-  HIGHLIGHT         : ColorLib.cyanaqua,
-  ERROR_TEXT         : ColorLib.white,
-  ERROR_BACKGROUND   : Messages.MESSAGE_DANGER,
-  WARNING_TEXT       : ColorLib.white,
-  WARNING_BACKGROUND : Messages.MESSAGE_WARNING,
-  NOTICE_TEXT        : ColorLib.white,
-  NOTICE_BACKGROUND  : Messages.MESSAGE_SECONDARY,
-
-  APP_BG             : '#507988',
-  APP_CONTENTBG      : '#2d5e929e',
-  APP_BORDERCOLOR    : 'rgba(50,50,50,.3)',
-  BACKGROUND_COLOR  : '#FFF8ED',
-  TEXT_COLOR        :  '#333333',
-  COLOR_PRIMARY      : '#227b4c',
-  COLOR_SECONDARY    : '#080808',
-  TEXT_INVERSE_COLOR : 'rgba(255,255,255,0.9)',
+  TRANSPARENT: 'rgba(0,0,0,0)',
+  WHITE: ColorLib.white,
+  BLACK: ColorLib.black,
+  PRIMARY: ColorLib.green,
+  SECONDARY: ColorLib.dodgerblue,
+  HIGHLIGHT: ColorLib.cyanaqua,
+  ERROR_TEXT: ColorLib.white,
+  ERROR_BACKGROUND: Messages.MESSAGE_DANGER,
+  WARNING_TEXT: ColorLib.white,
+  WARNING_BACKGROUND: Messages.MESSAGE_WARNING,
+  NOTICE_TEXT: ColorLib.white,
+  NOTICE_BACKGROUND: Messages.MESSAGE_SECONDARY,
+  APP_BG: '#507988',
+  APP_CONTENTBG: '#2d5e929e',
+  APP_BORDERCOLOR: 'rgba(50,50,50,.3)',
+  BACKGROUND_COLOR: '#FFF8ED',
+  TEXT_COLOR: '#333333',
+  COLOR_PRIMARY: '#227b4c',
+  COLOR_SECONDARY: '#080808',
+  TEXT_INVERSE_COLOR: 'rgba(255,255,255,0.9)',
 
   // Toolbar
-  BAR_BG             : '#000000',
-  BAR_TEXT_COLOR      : '#ffffff',
-  BAR_SELECTEDCOLOR  : '#44797D',
-  TAB_CON_SELECTED  :  ColorLib.green,
-  TAB_CON_DEFAULT   :  ColorLib.silver,
-  TAB_BG           :  ColorLib.torylue,
-  TAB_BAR          :  '#fefefe',
-  TAB_COLOR        :  ColorLib.white,
+  TAB_BAR_BG: Grays.GRA_100,
+  TAB_BAR_ACTIVE_BG: Grays.GRA_200,
+  TAB_BAR_COLOR: Grays.GRA_200,
+  TAB_BAR_ACTIVE_COLOR: ColorLib.dodgerblue,
+  TAB_BAR_BORDER_COLOR: '#44797D',
 
   // Form colors
-  INPUT_BG           : '#ffffff',
-  INPUT_BORDER       : '#aaaaaa',
-  INPUT_TEXTCOLOR    : '#000000',
+  INPUT_BG: '#ffffff',
+  INPUT_BORDER: '#aaaaaa',
+  INPUT_TEXTCOLOR: '#000000',
 
   // BRAND COLORS
-  BG_MAIN          :  ColorLib.bayfany,
-  TINT_COLOR       :  ColorLib.torylue,
-  LIVE_COLOR       :  ColorLib.coraled,
-  COLOR_MAIN       :  ColorLib.bayfany,
+  BG_MAIN: ColorLib.bayfany,
+  TINT_COLOR: Blues.BLU_300,
+  LIVE_COLOR: Reds.RED_600,
+  COLOR_MAIN: ColorLib.bayfany,
 };
 
-const ThemeColors = Object.assign(Colors, ColorScheme);
+const EmptyColors = Object.create(null);
 
-export { ThemeColors }
+const ColorScheme = Object.assign(
+  EmptyColors,
+  Reds,
+  Greens,
+  Blues,
+  Yellows,
+  Grays,
+  ShadeDark,
+  ShadeLight
+);
+
+const ThemeColors = Object.assign(EmptyColors, ColorScheme, Colors);
+
+export { ThemeColors };

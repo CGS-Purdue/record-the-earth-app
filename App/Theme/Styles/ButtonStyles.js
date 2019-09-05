@@ -12,6 +12,6 @@ const ButtonStyles = StyleSheet.create({
     height: '100%',
     padding: '5px',
   },
-})
+});
 
-export { ButtonStyles }
+export { ButtonStyles };

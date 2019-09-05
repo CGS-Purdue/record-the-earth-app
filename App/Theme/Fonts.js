@@ -1,104 +1,149 @@
 import { FontAssets } from './Assets';
+import * as Font from 'expo-font';
 
 // =============================================================================
-// Fonts
+// Fonts -
 // =============================================================================
-// Cross-browser support for @font-face. Supports IE,playfair' Gecko, Webkit, Opera.
-// * _name is required, arbitrary, and what you will use in font stacks.
-// * _font-files is required using font-files('relative/location', 'format').
-//   for best results use this order: woff, opentype/truetype, svg
-// * _eot is required by IE, and is a relative location of the eot file.
-// * _weight shows if the font is bold, defaults to normal
-// * _style defaults to normal, might be also italic
-// * For android 2.2 Compatiblity, please ensure that your web page has
-//   a meta viewport tag.
+// @font-face Cross-browser support for IE, playfair' Gecko, Webkit, Opera.
+// _name   - is required, arbitrary, and what you will use in font stacks.
+// _font-files  - is required using font-files('relative/location', 'format').
+//   for best results use this order: [woff, opentype/truetype, svg]
+//   _eot    - is required by IE, and is a relative location of the eot file.
+//   _weight - shows if the font is bold, defaults to [normal]
+//   _style  - defaults to [normal], might be also [italic]
+// * For android 2.2 Compatiblity, please ensure that your web page has a meta viewport tag.
 // * To support iOS < 4.2, an SVG file must be provided
 // If you need to generate other formats check out the Font Squirrel
-// [font generator](http://www.fontsquirrel.com/fontface/generator)
 // In order to refer to a specific style of the font in your Stylesheets as
-// e.g. "font-style: italic;",  you may add a couple of @font-face includes
-// containing the respective font files for each style and specying
-// respective the _style parameter.
-// Order of the includes matters, and it is: normal, bold, italic, bold+italic.
+// font-style: italic
+// you may add a couple of @font-face includes containing the respective font files
+// for each style respective the _style parameter.
+// Order of the includes matters, and it is: [normal, bold, italic, bold+italic]
 
-function getFont(name) {
+function _getFont(name) {
+  const _font_assets = FontAssets;
   const font_map = {
-       'ionicons': { family_name: 'ionicons',    file_name: 'SpaceMono-Regular.ttf',  src: FontAssets.ionicicons },
-    'cutive-mono': { family_name: 'cutive-mono', file_name: 'CutiveMono-Regular.ttf', src: FontAssets.cutivemono_regular },
-     'space-mono': { family_name: 'space-mono',  file_name: 'SpaceMono-Regular.ttf',  src: FontAssets.spacemono_regular },
+    cutivemono_regular: {
+      src: _font_assets.cutivemono_regular,
+      name: 'cutive-mono-regular',
+      file: 'CutiveMono-Regular.ttf',
+    },
+    ionicicons: {
+      src: _font_assets.ionicicons,
+      name: 'ionicicons',
+      file: 'ionicicons.ttf',
+    },
+    opensans_light_webfont: {
+      src: _font_assets.opensans_light_webfont,
+      name: 'opensans-light-webfont',
+      file: 'OpenSans-Light-webfont.ttf',
+    },
+    opensans_regular_webfont: {
+      src: _font_assets.opensans_regular_webfont,
+      name: 'opensans-regular-webfont',
+      file: 'OpenSans-Regular-webfont.ttf',
+    },
+    spacemono_regular: {
+      src: _font_assets.spacemono_regular,
+      name: 'spacemono-regular',
+      file: 'SpaceMono-Regular.ttf',
+    },
   };
 
-  let font = font_map[name];
-  return font;
+  if (!name) {
+    return font_map;
+  } else {
+    let font = font_map[name];
+    return font;
+  }
 }
 
-function getThemeFonts(fonts) {
-  let map = {};
+function _getThemeFonts(fonts) {
+  let map = [];
   for (let item of fonts) {
-    let font = getFont(item);
-    map[item] = font;
+    let font = _getFont(item);
+    let fontname = font.name;
+    let obj = {};
+    obj[fontname] = font.src;
+    map.push(obj);
   }
   return map;
 }
 
+const loadFont = (font_set) => {
+  return {
+    name: Object.keys(font_set)[0],
+    asset: Promise.resolve(Font.loadAsync(font_set)),
+  };
+};
 
-// const OpenSans = {
-//   { opensans_lightwebfont_ttf  }
-//   { opensans_regularwebfont_woff  }
-//   { opensans_lightwebfont_svg  }
-//   { opensans_regularwebfont_svg  }
-//   { opensans_regularwebfont_eot  }0
-//   { opensans_lightwebfont_eot  }
-//   { opensans_lightwebfont_woff  }
-//   { opensans_regularwebfont_ttf  }
-// }
+const loadFontMap = (fontMap) => {
+  let fonts = fontMap.map((font_set) => {
+    return loadFont(font_set);
+  });
+  return fonts;
+};
 
-const FONT_WEIGHTS = {
+const FontDictionary = {
   WEIGHT_100: { weight: 100, name: 'thin' },
   WEIGHT_200: { weight: 200, name: 'extralight' },
   WEIGHT_300: { weight: 300, name: 'light' },
   WEIGHT_400: { weight: 400, name: 'regular' },
-  WEIGHT_500: { weight: 500, name: 'Medium' },
+  WEIGHT_500: { weight: 500, name: 'medium' },
   WEIGHT_600: { weight: 600, name: 'semibold' },
   WEIGHT_700: { weight: 700, name: 'bold' },
   WEIGHT_800: { weight: 800, name: 'extrabold' },
-  WEIGHT_900: { weight: 900, name: 'superbold '},
+  WEIGHT_900: { weight: 900, name: 'superbold' },
 };
 
-const getScaleFontSize = (scale, tag, units = "em") => {
-  var size = scale[tag];
-  if (!size) {
-    size = scale.body;
-  }
-  return `${size}${units}`;
-};
-
-
-// // TYPOGRPHICSCALES
-// // Sizes generated at http://www.modularscale.com
-// // TYPOGRPHIC SCALES
-
+function getFontWeights(fw_dict) {
+  var result = [];
+  var empty = Object.create(null);
+  Object.values(fw_dict).forEach(function(item) {
+    var fontobj = empty;
+    fontobj[item.name] = item.weight;
+    result.push(fontobj);
+  });
+  return Object.assign(empty, ...result);
+}
 
 const FONT_STYLES = {
   ITALIC: { name: 'italic' },
   NORMAL: { name: 'normal' },
 };
 
-var font_data = getThemeFonts(['space-mono', 'cutive-mono', 'ionicons']);
-
-let theme_fonts = {};
-theme_fonts.TITLE_FONT = 'space-mono';
-theme_fonts.BODY_FONT = 'cutive-mono';
-theme_fonts.ICON_FONT = 'ionicons';
-theme_fonts.MONO_FONT = 'space-mono';
-
-
-const Typography = {
-  mono_font: 'space-mono',
+const FONT_TYPEFACE = {
+  TITLE_FONT: 'spacemono-regular',
+  HEADING_FONT: 'spacemono-regular',
+  BODY_FONT: 'cutive-mono-regular',
+  SANS_FONT: 'opensans-regular-webfont',
+  SANS_LIGHT_FONT: 'opensans-light-webfont',
+  ICON_FONT: 'ionicons',
+  MONO_FONT: 'spacemono-regular',
 };
 
-const ThemeFonts = Object.assign(font_data, theme_fonts);
+const FONT_WEIGHTS = getFontWeights(FontDictionary);
+const FontVariables = {
+  weights: FONT_WEIGHTS,
+  styles: FONT_STYLES,
+  type: FONT_TYPEFACE,
+};
 
-export { Typography, ThemeFonts, FONT_WEIGHTS, FONT_STYLES, getScaleFontSize };
+const ThemeFontMap = _getThemeFonts([
+  'cutivemono_regular',
+  'ionicicons',
+  'opensans_light_webfont',
+  'opensans_regular_webfont',
+  'spacemono_regular',
+]);
 
-export default ThemeFonts;
+const ThemeFonts = {
+  FontMap: ThemeFontMap,
+  FontType: FONT_TYPEFACE,
+  FontWeights: FONT_WEIGHTS,
+  loadFontMap: loadFontMap,
+  loadFont: loadFont,
+  Variables: FontVariables,
+};
+
+export { ThemeFonts, FontVariables };
