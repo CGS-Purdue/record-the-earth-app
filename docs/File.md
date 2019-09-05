@@ -3,20 +3,23 @@ FileSystem.getInfoAsync()
 
 Arguments
 
-fileUri (string) -- file:// URI to the file or directory, or a URI returned by CameraRoll.getPhotos().
-options (object) -- A map of options:
-md5 (boolean) -- Whether to return the MD5 hash of the file. false by default.
-size (boolean) -- Whether to include the size of the file if operating on a source from CameraRoll.getPhotos() (skipping this can prevent downloading the file if it's stored in iCloud, for example). The size is always returned for file:// locations.
+`fileUri` (string) -- file:// URI to the file or directory, or a URI returned by CameraRoll.getPhotos().
+`options` (object) -- A map of options:
+`md5` (boolean) -- Whether to return the MD5 hash of the file. false by default.
+`size` (boolean) -- Whether to include the size of the file if operating on a source from CameraRoll.getPhotos() (skipping this can prevent downloading the file if it's stored in iCloud, for example). The size is always returned for file:// locations.
 
 Returns
 
-If no item exists at this URI, returns a Promise that resolves to { exists: false, isDirectory: false }. Else returns an object with the following fields:
-exists (boolean) -- true.
-isDirectory (boolean) -- true if this is a directory, false if it is a file
-modificationTime (number) -- The last modification time of the file expressed in seconds since epoch.
-size (number) -- The size of the file in bytes. If operating on a source from CameraRoll.getPhotos(), only present if the size option was truthy.
-uri (string) -- A file:// URI pointing to the file. This is the same as the fileUri input parameter.
-md5 (string) -- Present if the md5 option was truthy. Contains the MD5 hash of the file.
+If no item exists at this URI, returns a Promise that resolves to `{ exists: false, isDirectory: false }`.
+
+Else returns an object with the following fields:
+
+`exists` (boolean) -- true.
+`isDirectory` (boolean) -- true if this is a directory, false if it is a file
+`modificationTime` (number) -- The last modification time of the file expressed in seconds since epoch.
+`size` (number) -- The size of the file in bytes. If operating on a source from CameraRoll.getPhotos(), only present if the size option was truthy.
+`uri` (string) -- A file:// URI pointing to the file. This is the same as the fileUri input parameter.
+`md5` (string) -- Present if the md5 option was truthy. Contains the MD5 hash of the file.
 
 
 
@@ -35,6 +38,7 @@ __Arguments__
 
 
 __Returns__
+
 A Promise that resolves to a string containing the entire contents of the file.
 FileSystem.writeAsStringAsync(fileUri, contents, options)
 Write the entire contents of a file as a string.

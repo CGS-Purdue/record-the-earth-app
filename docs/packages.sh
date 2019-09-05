@@ -6,7 +6,9 @@
 
 # scripts directory
 THIS_DIR=$(cd -P "$(dirname "$(readlink "${BASH_SOURCE[0]}" || echo "${BASH_SOURCE[0]}")")" && pwd)
+
 REACT_NATIVE_ROOT="$THIS_DIR/.."
+
 # Application root directory - General use case: react-native is a dependency
 PROJECT_ROOT="$THIS_DIR/../../.."
 
@@ -18,6 +20,9 @@ if [ ! -d "$PROJECT_ROOT/node_modules/react-native" ];
 then
   PROJECT_ROOT="$THIS_DIR/.."
 fi
+
 # Start packager from PROJECT_ROOT
+
 cd "$PROJECT_ROOT" || exit
+
 node "$REACT_NATIVE_ROOT/cli.js" start "$@"

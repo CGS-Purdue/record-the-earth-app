@@ -4,17 +4,21 @@
 
 
   **initialRouteName**        - Sets the default screen of the stack.
-                             Must match one of the keys in route configs.
+                              Must match one of the keys in route configs.
 
   **initialRouteParams**      - The params for the initial route
 
+
   **initialRouteKey**         - Optional identifier of the initial route
+
 
   **navigationOptions**       - Navigation options for the navigator itself,
                                to configure a parent navigator
-  **title**                        String that can be used as a fallback for headerTitle. Additionally, will be used as a fallback for tabBarLabel (if nested in a TabNavigator) or drawerLabel (if nested in a DrawerNavigator).
 
-   **header**                       React Element or a function that given HeaderProps returns a React Element, to display as a header. Setting to null hides header.
+  **title**                    String that can be used as a fallback for headerTitle. Additionally, will be used as a fallback for tabBarLabel (if nested in a TabNavigator) or drawerLabel (if nested in a DrawerNavigator).
+
+
+   **header**                  React Element or a function that given HeaderProps returns a React Element, to display as a header. Setting to null hides header.
 
    **headerTitle**                  String, React Element or React Component used by the header. Defaults to scene title. When a component is used, it receives allowFontScaling, style and children props. The title string is passed in children.
 
@@ -26,9 +30,12 @@
 
    **headerBackTitle**              Title string used by the back button on iOS, or null to disable label. Defaults to the previous scene's headerTitle. headerBackTitle has to be defined in the origin screen, not in the destination screen. For instance, when you have a transition A to B and you want to disable the headerBackTitle on B:
 
+
   **defaultNavigationOptions** - Default navigation options to use for screens
 
+
   **paths** - A mapping of overrides for the paths set in the route configs
+
 
   **disableKeyboardHandling** - If true, the keyboard will NOT automatically dismiss when navigating to a new screen.
                           Defaults to false. This is ignored in the web platform.
