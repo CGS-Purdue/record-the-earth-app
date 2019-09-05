@@ -1,0 +1,56 @@
+{
+  "expo": {
+    "name": "RecordTheEarthExpo",
+    "slug": "record-the-earth-expo",
+    "description": "Updating RtE react-native app to be fully managed with expo.",
+    "privacy": "unlisted",
+    "sdkVersion": "34.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "entryPoint": "node_modules/expo/AppEntry.js",
+    "splash": {
+      "icon": "https://d1wp6m56sqw74a.cloudfront.net/~assets/c9aa1be8a6a6fe81e20c3ac4106a2ebc",
+      "hideExponentText": false
+    },
+    "androidShowExponentNotificationInShellApp": true,
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "primaryColor": "#cccccc",
+    "icon": "./icon.png",
+    "splash": {
+      "image": "./splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "splash": {
+          "backgroundColor": "#ffffff",
+          "resizeMode": "contain",
+          "image": "./splash.png",
+      },
+    },
+    "android" : {
+      "package" : "org.recordtheearth.expo"
+    },
+    "githubUrl": "https://github.com/charrismatic/record-the-earth-reach-native",
+    "extra": {},
+    "rnCliPath": "",
+    "packagerOpts": {
+      "assetExts": [
+        "ttf",
+        "otf",
+        "xml",
+        "png"
+      ]
+    }
+  }
+}
