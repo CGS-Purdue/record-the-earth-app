@@ -28,10 +28,12 @@ echo "Current Dir Refernce: $BOOK_CURRENT_DIRLINK"
 
 ## REMOVE LINK AND RELINK TO CURRENT VERSION FROM PACKAGE.JSON
 
-
 ## PREPARE FILES TO UPDATE DIST AND GIT SUMODULE
 # -THIS PROJECT SERVES THE LIVE EXAMPLE FROM GITHUB PAGES
 # rm  dist/*.{css,js,html,json}
-# **use rsync** cp -r v0.1.1/assets dist/
+# rm -r dist/assets dist/static
+# **use rsync**
+# cp v0.1.1/*.{css,js,html,json} dist/
 # cp -r v0.1.1/static dist/
-# diff dist v***
+# cp -r v0.1.1/assets dist/
+# diff dist v*.*.*
