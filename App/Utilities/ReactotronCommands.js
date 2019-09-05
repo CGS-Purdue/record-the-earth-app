@@ -6,9 +6,7 @@ import { Reactotron } from 'reactotron-react-native'
  *   1. Global timers (via `setTimeout` etc).
  *   2. Global console object.
  *   3. Hooks for printing stack traces with source maps.
- *
- * Leaves enough room in the environment for implementing your own:
- *
+  * Leaves enough room in the environment for implementing your own:
  *   1. Require system.
  *   2. Bridged modules.
  *  InitializeCore

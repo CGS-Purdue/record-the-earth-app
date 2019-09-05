@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import { Platform, StatusBar } from 'react-native';
-import { AppNavContainer } from './screens/RootNavigation';
+import { AppNavContainer } from './Screens/RootNavigation';
 import { Theme } from './Theme';
 import { RootView } from './Components/Views';
 import { Log } from './Utilities/Log';
