@@ -1,133 +1,99 @@
-import * as React from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity
-} from 'react-native';
+import React, { Component } from 'react';
+import { Button } from 'react-native';
+import { NavigationScreenProp } from 'react-navigation';
+import { RootView, CenterColView, PadView } from '../../Components/Views';
+import { HeadingText } from '../../Components/Text/HeadingText';
+import { CheckButton } from '../../Components/Button/CheckButton';
+import { Theme } from '../../Theme';
 
-import { CheckBox } from 'react-native-elements';
+const _colors = Theme.Colors;
+const _styles  = Theme.Styles;
 
-export default class SurveyGeoScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Geo Survey Screen',
-    style: {
-      display: 'flex',
-      flexDirection: 'row',
-      backgroundColor: '#000000'
-    }
-  };
-
+class SurveyGeoScreen extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      ischeckedRain: true,
-      ischeckedWind: false,
-      ischeckedWater: false,
-      ischeckedThunder: true,
+      rain: true,
+      wind: false,
+      water: false,
+      thunder: true,
     };
+    this.state._survey = this.props.navigation.state.params;
   }
 
-  onChangeCheckRain() {  this.setState({ ischeckedRain: !this.state.ischeckedRain });  }
-  onChangeCheckWind() {  this.setState({ ischeckedWind: !this.state.ischeckedWind });  }
-  onChangeCheckWater() {  this.setState({ ischeckedWater: !this.state.ischeckedWater });  }
-  onChangeCheckThunder() {  this.setState({ ischeckedThunder: !this.state.ischeckedThunder });   }
-
-  selectAll() {
-    this.setState({
-      ischeckedRain: true,
-      ischeckedWind: true,
-      ischeckedWater: true,
-      ischeckedThunder: true
-    });
+  getSurveyState = () => {
+    let empty = Object.create(null);
+    let surveyGeo = {
+      rain: this.state.rain,
+      wind: this.state.wind,
+      water: this.state.water,
+      thunder: this.state.thunder,
+    };
+    let survey_data = Object.assign(empty, this.state._survey, {surveyGeo});
+     console.log('survey_data',survey_data);
+     return survey_data;
   }
 
-  unSelectAll() {
-    this.setState({
-      ischeckedRain: false,
-      ischeckedWind: false,
-      ischeckedWater: false,
-      ischeckedThunder: false
-    });
+  _setSuveryItemState = (item) => {
+    let newState = Object.create(null);
+    newState[item.id] = item.checked;
+    this.setState(newState);
   }
+
+  _setPreviousSurveyData = (data) => {
+    this.setState({ _survey : data });
+  }
+
 
   render() {
-
+    const { navigate } = this.props.navigation;
     return (
-      <View style={Styles.container}>
-         <Text style={Styles.writeup}>
-          Did you hear any of these sounds?
-        </Text>
-
-        <View style={StyleSheet.create({ flex: 1 })}>
-          <CheckBox
-            title="Rain"
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
-            value={this.state.ischeckedRain}
-            checked={this.state.ischeckedRain}
-            onPress={this.onChangeCheckRain.bind(this)}
-          /> 
-          <CheckBox
-            title="Wind"
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
-            checked={this.state.ischeckedWind}
-            value={this.state.ischeckedWind}
-            onPress={this.onChangeCheckWind.bind(this)}
-          />
-          <CheckBox
-            title="Rushing Water"
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
-            checked={this.state.ischeckedWater}
-            value={this.state.ischeckedWater}
-            onPress={this.onChangeCheckWater.bind(this)}
-          />
-          <CheckBox
-            title="Thunder"
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
-            value={this.state.ischeckedThunder}
-            checked={this.state.ischeckedThunder}
-            onPress={this.onChangeCheckThunder.bind(this)}
-          />
-        </View>
-
-        <View style={Styles.innerview}>
-          <TouchableOpacity style={Styles.options} onPress={this.selectAll.bind(this)}>
-            <Text>Select All</Text>
-          </TouchableOpacity>
-        </View>
-       </View>
+      <RootView>
+        <CenterColView>
+          <PadView padding={[1,2]}>
+            <HeadingText level={3}>
+               Did you hear any of these sounds?
+            </HeadingText>
+            <CheckButton
+              id={'rain'}
+              onchecked={this._setSuveryItemState}
+              text={'Rain'}
+            />
+            <CheckButton
+              id={'wind'}
+              onchecked={this._setSuveryItemState}
+              text={'Wind'}
+            />
+            <CheckButton
+              id={'water'}
+              onchecked={this._setSuveryItemState}
+              text={'Rushing Water'}
+            />
+            <CheckButton
+              id={'thunder'}
+              onchecked={this._setSuveryItemState}
+              text={'Thunder'}
+            />
+            <Button
+              title={"Continue Button"}
+              style={_styles.button_default}
+              color={_colors.PRIMARY}
+              accessibilityLabel="Go to next"
+              onPress={() => {
+                let result = this.getSurveyState();
+                navigate('SurveyAnt', { survey_data: result })
+              }}
+            />
+          </PadView>
+        </CenterColView>
+      </RootView>
     );
   }
 }
 
-const Styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  options: {
-    flex: 1,
-    alignItems: 'flex-start',
-    borderColor: '#008080'
-  },
-  writeup: {
-    flex: 0,
-    backgroundColor: '#FFE4B5',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    padding: 8
-  },
-  innerview: {
-    flex: 0.4,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'center'
-  },
-});
+
+SurveyGeoScreen.navigationOptions = {
+  title: 'SurveyGeoScreen',
+};
+
+export { SurveyGeoScreen }

@@ -1,25 +1,24 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { createStackNavigator } from 'react-navigation';
-import { SurveyScreen } from './SurveyScreen';
-import { SurveyMainScreen } from './SurveyMainScreen';
-import SurveyBioScreen from './SurveyBioScreen';
-import SurveyGeoScreen from './SurveyGeoScreen';
-import SurveyAntScreen from './SurveyAntScreen';
-import SurveyEmoScreen from './SurveyEmoScreen';
-import CombinedSurvey from './CombinedSurvey';
+import { SurveyDescriptionScreen } from './SurveyDescriptionScreen';
+import { SurveyBioScreen } from './SurveyBioScreen';
+import { SurveyEmoScreen } from './SurveyEmoScreen';
+import { SurveyGeoScreen } from './SurveyGeoScreen';
+import { SurveyAntScreen } from './SurveyAntScreen';
+import { SurveyEndScreen } from './SurveyEndScreen';
 
 const SurveyStack = createStackNavigator({
-  SurveyHome: { screen: SurveyScreen },
-  SurveyMain: { screen: SurveyMainScreen },
-  BioSurvey: { screen: SurveyBioScreen },
-  EmoSurvey: { screen: SurveyEmoScreen },
-  GeoSurvey: { screen: SurveyGeoScreen },
-  AntSurvey: { screen: SurveyAntScreen },
-  CombinedSurvey: { screen: CombinedSurvey },
-}, {
-  headerMode: 'none',
-  initialRouteName: 'SurveyHome'
-});
+    SurveyDescription: { screen: SurveyDescriptionScreen },
+    SurveyBio: { screen: SurveyBioScreen },
+    SurveyEmo: { screen: SurveyEmoScreen },
+    SurveyGeo: { screen: SurveyGeoScreen },
+    SurveyAnt: { screen: SurveyAntScreen },
+    SurveyEnd: { screen: SurveyEndScreen },
+  }, {
+    headerMode: 'none',
+    initialRouteName: 'SurveyDescription',
+  }
+);
 
 SurveyStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = false;

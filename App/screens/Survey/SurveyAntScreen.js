@@ -1,131 +1,96 @@
-import * as React from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity
-} from 'react-native';
-import { CheckBox } from 'react-native-elements';
+import React, { Component } from 'react';
+import { Button } from 'react-native';
+import { NavigationScreenProp } from 'react-navigation';
+import { RootView, CenterColView, PadView } from '../../Components/Views';
+import { HeadingText } from '../../Components/Text/HeadingText';
+import { CheckButton } from '../../Components/Button/CheckButton';
+import { Theme } from '../../Theme';
 
-export default class SurveyBioScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Human Survey Screen',
-    style: {
-      display: 'flex',
-      flexDirection: 'row',
-      backgroundColor: '#FFD700'
-    }
-  };
+const _colors = Theme.Colors;
+const _styles  = Theme.Styles;
 
+class SurveyAntScreen extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      ischeckedTalking: true,
-      ischeckedVehicles: false,
-      ischeckedAlarms: false,
-      ischeckedMachines: true,
+      talking: true,
+      vehicles: false,
+      alarms: false,
+      machines: true,
     };
+    this.state._survey = this.props.navigation.state.params;
+    console.log('update survey', this.state._survey);
   }
 
-  onChangeCheckTalking() {   this.setState({ ischeckedTalking: !this.state.ischeckedTalking });  }
-  onChangeCheckVehicles() {  this.setState({ ischeckedVehicles: !this.state.ischeckedVehicles });  }
-  onChangeCheckAlarms() {    this.setState({ ischeckedAlarms: !this.state.ischeckedAlarms });  }
-  onChangeCheckMachines() {  this.setState({ ischeckedMachines: !this.state.ischeckedMachines });  }
+  getSurveyState = () => {
+    let empty = Object.create(null);
+    let surveyAnt = {
+      talking: this.state.happy,
+      vehicles: this.state.relax,
+      alarms: this.state.stress,
+      machines: this.state.curious,
+    };
 
-  selectAll() {
-    this.setState({
-      ischeckedTalking: true,
-      ischeckedVehicles: true,
-      ischeckedAlarms: true,
-      ischeckedMachines: true
-    });
+    let survey_data = Object.assign(empty, this.state._survey, {surveyAnt});
+     console.log('survey_data',survey_data);
+     return survey_data;
   }
 
-  unSelectAll() {
-    this.setState({
-      ischeckedTalking: false,
-      ischeckedVehicles: false,
-      ischeckedAlarms: false,
-      ischeckedMachines: false
-    });
+  _setSuveryItemState = (item) => {
+    let newState = Object.create(null);
+    newState[item.id] = item.checked;
+    this.setState(newState);
+  }
+
+  _setPreviousSurveyData = (data) => {
+    this.setState({ _survey : data });
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
-      <View style={Styles.container}>
-         <Text style={Styles.writeup}>
-          Did you hear any of these sounds?
-        </Text>
+        <RootView>
+          <CenterColView>
+            <PadView padding={[1,2]}>
+              <HeadingText level={3}>
+                 Did you hear any of these sounds?
+              </HeadingText>
+              <CheckButton id={'talking'}
+                onchecked={this._setSuveryItemState}
+                text={'Talking'}
+              />
+              <CheckButton id={'vehicles'}
+                onchecked={this._setSuveryItemState}
+                text={'Vehicles'}
+              />
+              <CheckButton id={'alarms'}
+                onchecked={this._setSuveryItemState}
+                text={'Sirens or Alarms'}
+              />
+              <CheckButton id={'machines'}
+                onchecked={this._setSuveryItemState}
+                text={'Machines'}
+              />
 
-        <View style={StyleSheet.create({ flex: 1 })}>
-          <CheckBox
-            title="Talking"
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
-            value={this.state.ischeckedTalking}
-            checked={this.state.ischeckedTalking}
-            onPress={this.onChangeCheckTalking.bind(this)}
-          /> 
-          <CheckBox
-            title="Vehicles"
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
-            checked={this.state.ischeckedVehicles}
-            value={this.state.ischeckedVehicles}
-            onPress={this.onChangeCheckVehicles.bind(this)}
-          />
-          <CheckBox
-            title="Alarms"
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
-            checked={this.state.ischeckedAlarms}
-            value={this.state.ischeckedAlarms}
-            onPress={this.onChangeCheckAlarms.bind(this)}
-          />
-          <CheckBox
-            title="Machines"
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
-            value={this.state.ischeckedMachines}
-            checked={this.state.ischeckedMachines}
-            onPress={this.onChangeCheckMachines.bind(this)}
-          />
-        </View>
-
-        <View style={Styles.innerview}>
-          <TouchableOpacity style={Styles.options} onPress={this.selectAll.bind(this)}>
-            <Text>Select All</Text>
-          </TouchableOpacity>
-        </View>
-       </View>
+              <Button
+                title={"Continue Button"}
+                style={_styles.button_default}
+                color={_colors.PRIMARY}
+                accessibilityLabel="Go to next"
+                onPress={() => {
+                  let result = this.getSurveyState();
+                  navigate('SurveyEnd', { survey_data: result })
+                }}
+              />
+          </PadView>
+        </CenterColView>
+      </RootView>
     );
   }
 }
 
-const Styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  options: {
-    flex: 1,
-    alignItems: 'center',
-    borderColor: '#008080'
-  },
-  writeup: {
-    flex: 0,
-    backgroundColor: '#FFE4B5',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 8
-  },
-  innerview: {
-    flex: 0.4,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-});
+SurveyAntScreen.navigationOptions = {
+  title: 'SurveyAntScreen',
+}
+
+export { SurveyAntScreen }

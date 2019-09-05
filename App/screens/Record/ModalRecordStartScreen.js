@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, Image, Modal, TouchableHighlight, Alert } from 'react-native';
-import { Card, ListItem, Button, Icon, ThemeProvider } from 'react-native-elements';
+import { Text, Image, Modal, TouchableHighlight, Alert } from 'react-native';
+import { Card, Button  } from 'react-native-elements';
 import { NavigationScreenProp } from 'react-navigation';
-import { RootView, CenterColView, CenterView  } from '../../Views';
+import { CenterView, RootView } from '../../Components/Views';
 import { ThemeColors, Styles } from '../../Theme';
 
 class ModalRecordStartScreen extends Component {
@@ -13,7 +13,7 @@ class ModalRecordStartScreen extends Component {
     };
   }
   componentDidMount() {
-    this.setState({ modalVisible: false });
+    // this.setState({ modalVisible: false });
   }
 
   componentWillUnmount() {
@@ -32,7 +32,7 @@ class ModalRecordStartScreen extends Component {
           <Modal
             animationType="fade"
             transparent={false}
-            onDismiss={() => navigation.navigate('RecordEnd')}
+            onDismiss={() => this.props.navigation.navigate('RecordEnd')}
             visible={this.state.modalVisible}
             onRequestClose={() => {
               Alert.alert('Modal has been closed.');
@@ -43,8 +43,7 @@ class ModalRecordStartScreen extends Component {
                 style={Styles.image}
                 resizeMode="cover"
                 source={{
-                  uri:
-                    'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg'
+                  uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg',
                 }}
               />
               <Text style={Styles.name}>
@@ -61,7 +60,7 @@ class ModalRecordStartScreen extends Component {
                     name: 'arrow-forward',
                     size: 25,
                     raised: true,
-                    color: "green"
+                    color: 'green',
                   }}
                 />
               </TouchableHighlight>
@@ -83,7 +82,7 @@ class ModalRecordStartScreen extends Component {
 
 ModalRecordStartScreen.navigationOptions = {
   header: null,
-  tabBarVisible: false
+  tabBarVisible: false,
 };
 
 export { ModalRecordStartScreen };

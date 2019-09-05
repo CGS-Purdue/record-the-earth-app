@@ -1,25 +1,94 @@
+import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import { StyleSheet, Image, Text, View } from 'react-native';
+import Touchable from 'react-native-platform-touchable';
+import { Ionicons } from '@expo/vector-icons';
+import { Theme } from '../../Theme';
+import { Log } from '../../Utilities/Log';
 
-function LinksScreen() {
-  return (
-    <ScrollView style={Styles.container}>
-      <ExpoLinksView />
-    </ScrollView>
-  );
+Log._info('LinksScreen');
+
+const _styles = Theme.Styles;
+const _assets = Theme.Assets;
+
+export default class LinksScreen extends React.Component {
+  render() {
+    return (
+      <View>
+        <Text style={LinksScreenStyles.optionsTitleText}>Resources</Text>
+
+        <Touchable
+          style={LinksScreenStyles.option}
+          background={Touchable.Ripple('#ccc', false)}
+          onPress={this._handlePressDocs}>
+          <View style={{ flexDirection: 'row' }}>
+            <View style={LinksScreenStyles.optionIconContainer}>
+              <Image
+                source={_assets.icons.icon_list}
+                resizeMode="contain"
+                fadeDuration={0}
+                style={{ width: 20, height: 20, marginTop: 1 }}
+              />
+            </View>
+            <View style={LinksScreenStyles.optionTextContainer}>
+              <Text style={LinksScreenStyles.optionText}>Read the Expo documentation</Text>
+            </View>
+          </View>
+        </Touchable>
+
+        <Touchable
+          style={LinksScreenStyles.option}
+          background={Touchable.Ripple('#ccc', false)}
+          onPress={this._handlePressForums}>
+          <View style={{ flexDirection: 'row' }}>
+            <View style={LinksScreenStyles.optionIconContainer}>
+              <Ionicons name="ios-chatboxes" size={22} color="#ccc" />
+            </View>
+            <View style={LinksScreenStyles.optionTextContainer}>
+              <Text style={LinksScreenStyles.optionText}>Ask a question on the Expo forums</Text>
+            </View>
+          </View>
+        </Touchable>
+      </View>
+    );
+  }
+
+  _handlePressDocs = () => {
+    WebBrowser.openBrowserAsync('http://docs.expo.io');
+  };
+
+  _handlePressForums = () => {
+    WebBrowser.openBrowserAsync('http://forums.expo.io');
+  };
 }
 
-LinksScreen.navigationOptions = {
-  title: 'Links',
-};
 
-const Styles = StyleSheet.create({
+const LinksScreenStyles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor:'#fff'
-  }
-})
+  },
+  optionsTitleText: {
+    fontSize: 16,
+    marginLeft: 15,
+    marginTop: 9,
+    marginBottom: 12,
+  },
+  optionIconContainer: {
+    marginRight: 9,
+  },
+  option: {
+    backgroundColor: '#fdfdfd',
+    paddingHorizontal: 15,
+    paddingVertical: 15,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#EDEDED',
+  },
+  optionText: {
+    fontSize: 15,
+    marginTop: 1,
+  },
+});
 
-export { LinksScreen }
+
+export { LinksScreen };

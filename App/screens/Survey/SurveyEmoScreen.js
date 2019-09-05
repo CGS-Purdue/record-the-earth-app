@@ -1,132 +1,96 @@
-import * as React from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity
-} from 'react-native';
-import { CheckBox } from 'react-native-elements';
+import React, { Component } from 'react';
+import { Button } from 'react-native';
+import { NavigationScreenProp } from 'react-navigation';
+import { RootView, CenterColView, PadView } from '../../Components/Views';
+import { HeadingText } from '../../Components/Text/HeadingText';
+import { CheckButton } from '../../Components/Button/CheckButton';
+import { Theme } from '../../Theme';
 
-export default class SurveyEmoScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Emo Survey Screen',
-    style: {
-      display: 'flex',
-      flexDirection: 'row',
-      backgroundColor: '#000000'
-    }
-  };
+const _colors = Theme.Colors;
+const _styles  = Theme.Styles;
 
+class SurveyEmoScreen extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      ischeckedHappy: true,
-      ischeckedRelax: false,
-      ischeckedStress: false,
-      ischeckedCurious: true,
+      happy: true,
+      relax: false,
+      stress: false,
+      curious: true,
     };
+    this.state._survey = this.props.navigation.state.params;
+    console.log('update survey', this.state._survey);
   }
 
-  onChangeCheckHappy() {   this.setState({ ischeckedHappy: !this.state.ischeckedHappy });  }
-  onChangeCheckRelax() {   this.setState({ ischeckedRelax: !this.state.ischeckedRelax });  }
-  onChangeCheckStress() {  this.setState({ ischeckedStress: !this.state.ischeckedStress });  }
-  onChangeCheckCurious() { this.setState({ ischeckedCurious: !this.state.ischeckedCurious });   }
-
-  selectAll() {
-    this.setState({
-      ischeckedHappy: true,
-      ischeckedRelax: true,
-      ischeckedStress: true,
-      ischeckedCurious: true
-    });
+  getSurveyState = () => {
+    let empty = Object.create(null);
+    let surveyEmo = {
+      happy: this.state.happy,
+      relax: this.state.relax,
+      stress: this.state.stress,
+      curious: this.state.curious,
+    };
+    let survey_data = Object.assign(empty, this.state._survey, {surveyEmo});
+     console.log('survey_data',survey_data);
+     return survey_data;
   }
 
-  unSelectAll() {
-    this.setState({
-      ischeckedHappy: false,
-      ischeckedRelax: false,
-      ischeckedStress: false,
-      ischeckedCurious: false
-    });
+  _setSuveryItemState = (item) => {
+    let newState = Object.create(null);
+    newState[item.id] = item.checked;
+    this.setState(newState);
+  }
+
+  _setPreviousSurveyData = (data) => {
+    this.setState({ _survey : data });
   }
 
   render() {
-
+    const { navigate } = this.props.navigation;
     return (
-      <View style={Styles.container}>
-         <Text style={Styles.writeup}>
-          Did you hear any of these sounds?
-        </Text>
+      <RootView>
+        <CenterColView>
+          <PadView padding={[1,2]}>
+            <HeadingText level={3}>
+               Did you hear any of these sounds?
+            </HeadingText>
+            <CheckButton id={'happy'}
+              onchecked={this._setSuveryItemState}
+              text={'Make me happy'}
+            />
+            <CheckButton id={'relax'}
+              onchecked={this._setSuveryItemState}
+              text={'Relax me'}
+            />
+            <CheckButton id={'curious'}
+              onchecked={this._setSuveryItemState}
+              text={'Make me curious'}
+            />
+            <CheckButton id={'stress'}
+              onchecked={this._setSuveryItemState}
+              text={'Stress me out'}
+            />
 
-        <View style={StyleSheet.create({ flex: 1 })}>
-          <CheckBox
-            title="Make me happy"
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
-            value={this.state.ischeckedHappy}
-            checked={this.state.ischeckedHappy}
-            onPress={this.onChangeCheckHappy.bind(this)}
-          /> 
-          <CheckBox
-            title="Relax me"
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
-            checked={this.state.ischeckedRelax}
-            value={this.state.ischeckedRelax}
-            onPress={this.onChangeCheckRelax.bind(this)}
-          />
-          <CheckBox
-            title="Stress me out"
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
-            checked={this.state.ischeckedStress}
-            value={this.state.ischeckedStress}
-            onPress={this.onChangeCheckStress.bind(this)}
-          />
-          <CheckBox
-            title="Make me curious"
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
-            value={this.state.ischeckedCurious}
-            checked={this.state.ischeckedCurious}
-            onPress={this.onChangeCheckCurious.bind(this)}
-          />
-        </View>
-
-        <View style={Styles.innerview}>
-          <TouchableOpacity style={Styles.options} onPress={this.selectAll.bind(this)}>
-            <Text>Select All</Text>
-          </TouchableOpacity>
-        </View>
-       </View>
+            <Button
+              title={"Continue Button"}
+              style={_styles.button_default}
+              color={_colors.PRIMARY}
+              accessibilityLabel="Go to next"
+                onPress={() => {
+                  let result = this.getSurveyState();
+                  navigate('SurveyGeo', { survey_data: result })
+                }}
+            />
+        </PadView>
+      </CenterColView>
+    </RootView>
     );
   }
 }
 
-const Styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  options: {
-    flex: 1,
-    alignItems: 'center',
-    borderColor: '#008080'
-  },
-  writeup: {
-    flex: 0,
-    backgroundColor: '#FFE4B5',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 8
-  },
-  innerview: {
-    flex: 0.4,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-});
+
+SurveyEmoScreen.navigationOptions = {
+  title: 'SurveyEmoScreen',
+}
+
+export { SurveyEmoScreen }

@@ -2,31 +2,26 @@ import React, { Component } from 'react';
 import { Text, View, } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Recorder } from '../../Components/Recorder';
-import { RootView, CenterView } from '../../Views/RootView';
+import { CenterView, RootView } from '../../Components/Views';
 
 class RecordScreen extends Component {
   constructor(props) {
     super(props);
   }
-
   componentDidMount() {
     console.log('LOADED');
   }
 
   render() {
     return (
-      <RootView backgroundColor="blue">
+      <RootView>
         <CenterView>
           <Recorder />
         </CenterView>
       </RootView>
-    )
+    );
   }
 }
-
-RecordScreen.defaultProps = {
-  color: 'green'
-};
 
 RecordScreen.navigationOptions = {
   header: null,
