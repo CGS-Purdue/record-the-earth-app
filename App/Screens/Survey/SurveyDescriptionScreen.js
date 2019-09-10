@@ -1,51 +1,60 @@
 import React, { Component } from 'react';
 import { View, Button } from 'react-native';
-import { NavigationScreenProp } from 'react-navigation';
+// import { NavigationScreenProp } from 'react-navigation';
 import { Theme } from '../../Theme';
-import { RootView, CenterView, PadView } from '../../Components/Views';
-import { StyledTextArea } from '../../Components/Forms/TextArea';
+import { RootView, CenterColView, PadView } from '../../Components/Views';
+import { StyledTextArea } from '../../Components/Forms/StyledTextArea';
+import { HeadingText } from '../../Components/Text/HeadingText';
 
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
+const ButtonStyles = Object.assign(
+  _styles.button_default,
+);
+const flexi = { flex: 0 };
 
 class SurveyDescriptionScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      text: 'Description',
-      name: 'soundscape_description',
-      error: false,
-    };
-  }
+    this.ref = React.createRef();
+    this.handle_submit_description = this.handle_submit_description.bind(this);
+    this.forwardedTextRef = React.createRef();
 
-  handle_submit_description(text) {
-    console.log(text);
+    this.state = {
+      text: '',
+    };
+   }
+
+  handle_submit_description = () => {
+    console.log('handle submit');
+    console.log(this.state);
+    let surveyDescription = this.state.text;
+    this.props.navigation.navigate('SurveyBio', { survey_data: { description: surveyDescription } })
   }
 
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <RootView>
-        <PadView padding={[1]}>
-          <CenterView>
-            <View>
+        <CenterColView >
+          <PadView padding={[1]}>
+            <HeadingText>Describe the sounds you heard</HeadingText>
               <StyledTextArea
-                containerStyle={_styles.form_text_input_container}
-                inputContainerStyle={_styles.form_text_input}
-                value={this.state.text}
+                ref={this.forwardedTextRef}
+                placeholder={'Sounds of ...'}
                 onChangeText={text => this.setState({ text })}
+                value={this.state.text}
               />
 
               <Button
                 title="Continue"
-                style={_styles.button_default}
+                style={ButtonStyles}
                 color={_colors.PRIMARY}
                 accessibilityLabel="Go to next"
-                onPress={() => navigate('SurveyBio', { survey_data: this.state.text })}
+                onPress={this.handle_submit_description}
               />
-            </View>
-          </CenterView>
-        </PadView>
+
+              </PadView>
+          </CenterColView>
       </RootView>
     );
   }

@@ -98,6 +98,7 @@ const ShadeLight = {
   SHADE_LIGHTER_50: 'rgba(255,255,255,0.50)',
 };
 
+
 // NOTICES AND WARNINGS -------------------
 const Messages = {
   MESSAGE_PRIMARY:   Greens.GRN_100,
@@ -142,8 +143,9 @@ const Colors = {
 
   // Form colors
   INPUT_BG: '#ffffff',
-  INPUT_BORDER: '#aaaaaa',
+  INPUT_BORDER: ShadeDark.SHADE_DARKER_05,
   INPUT_TEXTCOLOR: '#000000',
+  INPUT_PLACEHOLDER: '#000000',
 
   // BRAND COLORS
   BG_MAIN: ColorLib.bayfany,

@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 23841,
+  "expoServerNgrokUrl": "https://n2-gxq.matt-harris.app.exp.direct",
+  "packagerNgrokUrl": "https://packager.n2-gxq.matt-harris.app.exp.direct",
+  "ngrokPid": 23873,
   "webpackServerPort": null
 }

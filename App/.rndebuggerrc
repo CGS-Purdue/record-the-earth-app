@@ -10,5 +10,5 @@
   defaultRNPackagerPorts: [8081],
   // editor: '',
   defaultReactDevToolsTheme: 'RNDebugger',
-  defaultNetworkInspect: false,
+  defaultNetworkInspect: false
 }

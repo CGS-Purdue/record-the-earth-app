@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button } from 'react-native';
-import { NavigationScreenProp } from 'react-navigation';
 import { RootView, CenterColView, PadView } from '../../Components/Views';
 import { HeadingText } from '../../Components/Text/HeadingText';
 import { CheckButton } from '../../Components/Button/CheckButton';
@@ -18,8 +17,8 @@ class SurveyEmoScreen extends Component {
       stress: false,
       curious: true,
     };
-    this.state._survey = this.props.navigation.state.params;
-    console.log('update survey', this.state._survey);
+    this.surveyEmoRef = React.createRef();
+    this.state._survey = this.props.navigation.state.params.survey_data;
   }
 
   getSurveyState = () => {
@@ -30,9 +29,11 @@ class SurveyEmoScreen extends Component {
       stress: this.state.stress,
       curious: this.state.curious,
     };
-    let survey_data = Object.assign(empty, this.state._survey, {surveyEmo});
-     console.log('survey_data',survey_data);
-     return survey_data;
+
+    let _survey_data = this.state._survey;
+    console.log(_survey_data);
+    _survey_data.tags = Object.assign(empty, this.state._survey.tags, {emo: surveyEmo});
+    return _survey_data;
   }
 
   _setSuveryItemState = (item) => {
@@ -77,8 +78,8 @@ class SurveyEmoScreen extends Component {
               color={_colors.PRIMARY}
               accessibilityLabel="Go to next"
                 onPress={() => {
-                  let result = this.getSurveyState();
-                  navigate('SurveyGeo', { survey_data: result })
+                  let _survey_data = this.getSurveyState();
+                  navigate('SurveyGeo', { survey_data: _survey_data })
                 }}
             />
         </PadView>

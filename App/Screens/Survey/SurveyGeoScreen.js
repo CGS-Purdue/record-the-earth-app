@@ -18,7 +18,8 @@ class SurveyGeoScreen extends Component {
       water: false,
       thunder: true,
     };
-    this.state._survey = this.props.navigation.state.params;
+    this.surveyGeoRef = React.createRef();
+    this.state._survey = this.props.navigation.state.params.survey_data;
   }
 
   getSurveyState = () => {
@@ -29,9 +30,10 @@ class SurveyGeoScreen extends Component {
       water: this.state.water,
       thunder: this.state.thunder,
     };
-    let survey_data = Object.assign(empty, this.state._survey, {surveyGeo});
-     console.log('survey_data',survey_data);
-     return survey_data;
+    let _survey_data = this.state._survey;
+      console.log(_survey_data);
+    _survey_data.tags = Object.assign(empty, this.state._survey.tags, {geo: surveyGeo});
+     return _survey_data;
   }
 
   _setSuveryItemState = (item) => {
@@ -80,8 +82,8 @@ class SurveyGeoScreen extends Component {
               color={_colors.PRIMARY}
               accessibilityLabel="Go to next"
               onPress={() => {
-                let result = this.getSurveyState();
-                navigate('SurveyAnt', { survey_data: result })
+                let _survey_data = this.getSurveyState();
+                navigate('SurveyAnt', { survey_data: _survey_data })
               }}
             />
           </PadView>

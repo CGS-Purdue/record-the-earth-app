@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { AsyncStorage } from 'react-native';
 import { ErrorRecovery, ErrorUtils } from 'expo';
 
 // In Development: If you're serving your app from Expo CLI,
@@ -31,7 +32,7 @@ class ErrorBoundary extends Component {
     const lastError = await AsyncStorage.getItem('lastError');
     // dispatch error to logs
     if (lastError) {
-      log({
+      console.log({
         sender: 'mobile-ops',
         message: 'Fatal error !',
         info: {
@@ -57,7 +58,7 @@ const myErrorHandler = (e, isFatal) => {
   // define your code here...
   // after all, if you want to forward to default error handler
   // just call the variable we stored in the previous step
-  defaultErrorHandler(e, isFatal)
+  // defaultErrorHandler(e, isFatal)
 }
 
 const defaultHandler = (ErrorUtils.getGlobalHandler && ErrorUtils.getGlobalHandler()) || ErrorUtils._globalHandler;

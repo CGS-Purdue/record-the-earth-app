@@ -1,9 +1,10 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
-import { StyleSheet, Image, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Image, Text, View, Button } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import { Ionicons } from '@expo/vector-icons';
 import { Theme } from '../../Theme';
+import { ProgressCircle, AnimatedSpring } from '../../Components/Animated/ProgressCircle';
 import { Log } from '../../Utilities/Log';
 
 Log._info('LinksScreen');
@@ -11,55 +12,68 @@ Log._info('LinksScreen');
 const _styles = Theme.Styles;
 const _assets = Theme.Assets;
 
-export default class LinksScreen extends React.Component {
+
+
+export default class LinksScreen extends Component {
+  state = {
+    progressValue : 0,
+    syncing: false,
+  }
+
+  _handlePressButton = () => {
+    if (this.state.syncing) {return false;}
+    this.setState({ syncing: true });
+    try {
+      this.setState({progressValue: ((this.state.progressValue + .13) % 1)});
+    } catch (error) {
+      this.setState({ error });
+    }
+    this.setState({ syncing: false });
+  };
+
+  _handleLongDelay = (e) => {
+    this.longPressDelayTimeout = null;
+    // var curState = this.state.touchable.touchState;
+    // if (curState !== States.RESPONDER_ACTIVE_PRESS_IN &&
+        // curState !== States.RESPONDER_ACTIVE_LONG_PRESS_IN) {
+      // console.error('Attempted to transition from state `' + curState + '` to `' +
+    //   console.log('Attempted to transition from state `' + curState + '` to `' +
+    //     States.RESPONDER_ACTIVE_LONG_PRESS_IN + '`, which is not supported. This is ' +
+    //     'most likely due to `Touchable.longPressDelayTimeout` not being cancelled.');
+    // } else {
+      // this._receiveSignal(Signals.LONG_PRESS_DETECTED, e);
+    // }
+  }
+
   render() {
     return (
       <View>
-        <Text style={LinksScreenStyles.optionsTitleText}>Resources</Text>
+        <Text style={LinksScreenStyles.optionsTitleText}>Test Area</Text>
+        <ProgressCircle
+          value={this.state.progressValue}
+        />
+        <AnimatedSpring
+          value={this.state.progressValue}
+        />
+        <Button
+          title={'button'}
+          _handleLongDelay={this._handleLongDelay}
 
-        <Touchable
-          style={LinksScreenStyles.option}
-          background={Touchable.Ripple('#ccc', false)}
-          onPress={this._handlePressDocs}>
-          <View style={{ flexDirection: 'row' }}>
-            <View style={LinksScreenStyles.optionIconContainer}>
-              <Image
-                source={_assets.icons.icon_list}
-                resizeMode="contain"
-                fadeDuration={0}
-                style={{ width: 20, height: 20, marginTop: 1 }}
-              />
-            </View>
-            <View style={LinksScreenStyles.optionTextContainer}>
-              <Text style={LinksScreenStyles.optionText}>Read the Expo documentation</Text>
-            </View>
-          </View>
-        </Touchable>
-
-        <Touchable
-          style={LinksScreenStyles.option}
-          background={Touchable.Ripple('#ccc', false)}
-          onPress={this._handlePressForums}>
-          <View style={{ flexDirection: 'row' }}>
-            <View style={LinksScreenStyles.optionIconContainer}>
-              <Ionicons name="ios-chatboxes" size={22} color="#ccc" />
-            </View>
-            <View style={LinksScreenStyles.optionTextContainer}>
-              <Text style={LinksScreenStyles.optionText}>Ask a question on the Expo forums</Text>
-            </View>
-          </View>
-        </Touchable>
+          onPress={this._handlePressButton}
+          onPressIn ={()=>{
+            console.log('TouchableOpacity onPressIn');
+            console.log(Date.now())
+          }}
+          onLongPress ={(e)=>{
+           console.log(' onLongPress');
+           console.log(Date.now());
+           console.log(e.type); //undefined
+          }}
+        />
       </View>
+
     );
   }
-
-  _handlePressDocs = () => {
-    WebBrowser.openBrowserAsync('http://docs.expo.io');
-  };
-
-  _handlePressForums = () => {
-    WebBrowser.openBrowserAsync('http://forums.expo.io');
-  };
 }
 
 
@@ -74,6 +88,7 @@ const LinksScreenStyles = StyleSheet.create({
     marginTop: 9,
     marginBottom: 12,
   },
+
   optionIconContainer: {
     marginRight: 9,
   },

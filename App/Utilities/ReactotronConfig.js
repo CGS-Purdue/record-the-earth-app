@@ -1,4 +1,4 @@
-import Reactotron, { networking, openInEditor, asyncStorage, createStore  } from 'reactotron-react-native'
+import Reactotron, { networking, openInEditor, createStore  } from 'reactotron-react-native'
 import { LogUtils } from './ReactotronLog';
 import { COMMAND_SET } from './ReactotronCommands';
 import { reactotronRedux } from 'reactotron-redux'
@@ -41,9 +41,6 @@ export default Reactotron
   .configure({
     name: "RecordTheEarthExpo"
   })
-  .use(asyncStorage({
-    ignore: ASYNC_IGNORE
-  }))
   .use(reactotronRedux({
     except: REDUX_EXCEPT,
     isActionImportant: REDUX_IMPORTANT,

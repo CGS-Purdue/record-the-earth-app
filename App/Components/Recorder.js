@@ -2,7 +2,7 @@ import React from 'react';
 import * as FileSystem from 'expo-file-system';
 import * as Permissions from 'expo-permissions';
 import { Audio } from 'expo-av';
-import { Image, Alert, Slider, Text, TouchableHighlight, View } from 'react-native';
+import { Image, Alert, Slider, Text, TouchableHighlight, ActivityIndicator, View } from 'react-native';
 import { saveAudioRecordingFile } from '../Utilities/Filesystem';
 import { ThemeIcons, ThemeColors, Theme } from '../Theme';
 import { CenterColView, CenterView, RootView } from './Views';
@@ -262,6 +262,16 @@ export default class Recorder extends React.Component {
       return (
         <CenterColView backgroundColor={ThemeColors.BLU_300}>
           <View style={{borderColor:'blue',borderWidth:1,borderStyle:'solid'}}>
+            <View style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              flex: 1
+            }}>
+              <ActivityIndicator
+                color={ThemeColors.GRN_300}
+                animating={true}
+                size={'large'}
+              />
             <TouchableHighlight
               style={[touchButtonStyle]}
               underlayColor={ThemeColors.GRN_300}
@@ -283,6 +293,7 @@ export default class Recorder extends React.Component {
               source={IsRecordingIcon.module}
             />
             <MonoText>{this.getRecordingTimestamp()}</MonoText>
+            </View>
           </View>
         </CenterColView>
       )

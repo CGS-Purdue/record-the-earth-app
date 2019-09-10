@@ -9,7 +9,7 @@ module.exports = function(api) {
           'DEV_ENV',
           'DEBUG_LOGGING',
           'RUN_REACT_DEVTOOLS',
-          'RUN_REACTOTRON',
+          'RUN_REACT_REACTOTRON',
           'APP_REACT_DEVTOOLS_RUNNING',
           'APP_DEBUG_APPDATA',
           'npm_config_DEV_ENV',

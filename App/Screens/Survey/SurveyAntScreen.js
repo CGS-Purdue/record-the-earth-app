@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button } from 'react-native';
-import { NavigationScreenProp } from 'react-navigation';
 import { RootView, CenterColView, PadView } from '../../Components/Views';
 import { HeadingText } from '../../Components/Text/HeadingText';
 import { CheckButton } from '../../Components/Button/CheckButton';
@@ -18,22 +17,23 @@ class SurveyAntScreen extends Component {
       alarms: false,
       machines: true,
     };
-    this.state._survey = this.props.navigation.state.params;
-    console.log('update survey', this.state._survey);
+    this.surveyAntRef = React.createRef();
+    this.state._survey = this.props.navigation.state.params.survey_data;
   }
 
   getSurveyState = () => {
     let empty = Object.create(null);
     let surveyAnt = {
-      talking: this.state.happy,
-      vehicles: this.state.relax,
-      alarms: this.state.stress,
-      machines: this.state.curious,
+      talking: this.state.talking,
+      vehicles: this.state.vehicles,
+      alarms: this.state.alarms,
+      machines: this.state.machines,
     };
 
-    let survey_data = Object.assign(empty, this.state._survey, {surveyAnt});
-     console.log('survey_data',survey_data);
-     return survey_data;
+    let _survey_data = this.state._survey;
+    console.log(_survey_data);
+    _survey_data.tags = Object.assign(empty, this.state._survey.tags, {ant: surveyAnt});
+     return _survey_data;
   }
 
   _setSuveryItemState = (item) => {
@@ -78,8 +78,8 @@ class SurveyAntScreen extends Component {
                 color={_colors.PRIMARY}
                 accessibilityLabel="Go to next"
                 onPress={() => {
-                  let result = this.getSurveyState();
-                  navigate('SurveyEnd', { survey_data: result })
+                  let _survey_data = this.getSurveyState();
+                  navigate('SurveyEnd', { survey_data: _survey_data })
                 }}
               />
           </PadView>

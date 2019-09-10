@@ -21,6 +21,14 @@ const m = {
   x55: { marginLeft: 55, marginRight: 55 },
 };
 
+const br = {
+  br_top: { borderTopWidth: 1 },
+  br_left: { LeftWidth: 1 },
+  br_right: { RightWidth: 1 },
+  br_bottom: { BottomWidth: 1 },
+  br_w1 : { borderTopWidth: 1 , borderLeftWidth: 1 , borderRightWidth: 1 , borderBottomWidth: 1  }
+};
+
 const p = {
   y10: { paddingTop: 10, paddingBottom: 10 },
   y15: { paddingTop: 15, paddingBottom: 15 },
@@ -42,6 +50,6 @@ const textalign = {
   justify: { textAlign: 'justify' },
 };
 
-const LayoutStyles = { m, p, textalign };
+const LayoutStyles = { m, p, br, textalign };
 
-export { LayoutStyles, m, p, textalign };
+export { LayoutStyles, br, m, p, textalign };

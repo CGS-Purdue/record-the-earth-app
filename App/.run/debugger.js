@@ -2,8 +2,6 @@ createStore(rootReducer, compose(
 	createDebugger(),
 	applyMiddleware(...middlewares)
 ));
-
-
 // createDebugger({
 // 	isVisible:  true,
 // 	allowServerLogging:  true,

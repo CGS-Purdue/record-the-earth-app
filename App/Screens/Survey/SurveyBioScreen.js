@@ -18,7 +18,8 @@ class SurveyBioScreen extends Component {
       mammals: false,
       frogs: false,
     };
-    this.state._survey = this.props.navigation.state.params;
+    this.surveyBioRef = React.createRef();
+    this.state._survey = this.props.navigation.state.params.survey_data;
   }
 
   getSurveyState = () => {
@@ -29,9 +30,11 @@ class SurveyBioScreen extends Component {
        mammals: this.state.mammals,
        frogs: this.state.frogs,
      };
-     let survey_data = Object.assign(empty, this.state._survey, {surveyBio});
-     console.log('survey_data',survey_data);
-     return survey_data;
+
+     let _survey_data = this.state._survey;
+     console.log(_survey_data);
+     _survey_data.tags = Object.assign(empty, {bio: surveyBio});
+     return _survey_data;
   }
 
   _setSuveryItemState = (item) => {
@@ -41,13 +44,12 @@ class SurveyBioScreen extends Component {
   }
 
   _setPreviousSurveyData = (data) => {
-    this.setState({ _survey : data });
+    this.setState({ survey_data : data });
   }
 
   render() {
     const { navigate } = this.props.navigation;
     let survey_data = this.props.navigation.getParam('survey_data', {});
-    console.log('survey_data', survey_data);
     return (
       <RootView>
         <CenterColView>
@@ -83,8 +85,8 @@ class SurveyBioScreen extends Component {
             color={_colors.PRIMARY}
             accessibilityLabel="Go to next"
             onPress={() => {
-              let result = this.getSurveyState();
-              navigate('SurveyEmo', { survey_data: result })
+              let _survey_data = this.getSurveyState();
+              navigate('SurveyEmo', { survey_data: _survey_data })
             }}
           />
           </PadView>

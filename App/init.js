@@ -1,7 +1,7 @@
 import { registerRootComponent } from 'expo';
 import { YellowBox } from 'react-native';
+import { initalAppSetup } from './LifeCycle/InitialSetup';
 import { activateKeepAwake } from 'expo-keep-awake';
-import { getAppData } from './Utilities/AppData';
 import { Log } from './Utilities/Log';
 import App from './App';
 
@@ -32,73 +32,47 @@ import App from './App';
 //      -- packModuleId: packModuleId(value)
 //      -- registerHook: registerHook(cb)
 //      -- unpackModuleId: unpackModuleId(moduleId)
-//
 // __registerSegment: ƒ registerSegment(segmentID, moduleDefiner)
 
 Log._info('Init');
 
 if (__DEV__) {
-
-  Log._data({
-    title: 'YellowBox',
-    src: './init.js',
-    data: {YellowBox},
-  });
-
   YellowBox.ignoreWarnings([
-    'Warning: ...'
+    'Warning: ...',
+    'Warning: Async Storage',
+    'Warning: NetInfo',
   ]);
 
+  console.log(this.process.env);
 
   if (this.process.env.npm_config_RUN_REACT_DEVTOOLS) {
     // if (!this.process.env.APP_REACT_DEVTOOLS_CONNECTED) {
-    console.log('loading react-devtools');
-    const devtools_config = {localhost: 'localhost', port: 8097};
-    const { connectToDevTools } = require("react-devtools-core");
-    const react_devtool = connectToDevTools({devtools_config});
-    console.log('react_devtool', react_devtool, this.__REACT_DEVTOOLS_GLOBAL_HOOK__);
-    this.process.env.APP_REACT_DEVTOOLS_CONNECTED = 'true';
-
-  } else if (this.process.env.RUN_REACT_NAVTIVE_DEVTOOLS) {
-
+    // console.log('loading react-devtools');
+    // const devtools_config = {localhost: 'localhost', port: 8097};
+    // const { connectToDevTools } = require("react-devtools-core");
+    // const react_devtool = connectToDevTools({devtools_config});
+    // console.log('react_devtool', react_devtool, this.__REACT_DEVTOOLS_GLOBAL_HOOK__);
+    // this.process.env.APP_REACT_DEVTOOLS_CONNECTED = 'true';
+  } else if (this.process.env.RUN_REACT_DEVTOOLS) {
+      console.log('run react DevTools true');
   } else {
-
+    // console.log('__REACT_DEVTOOLS_PORT__', window.__REACT_DEVTOOLS_PORT__);
+    // console.log('__REACT_DEVTOOLS_GLOBAL_HOOK__', window.__REACT_DEVTOOLS_GLOBAL_HOOK__);
+    // window.__REDUX_DEVTOOLS_EXTENSION__.connect
+    // console.log( this.__REACT_DEVTOOLS_PORT__);
   }
-  //  window.__REDUX_DEVTOOLS_EXTENSION__
+
+  // window.__REDUX_DEVTOOLS_EXTENSION__
   // window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-  // window.__REDUX_DEVTOOLS_EXTENSION__.connect
   // this.window.__fbBatchedBridgeConfig.remoteModuleConfig
-  // console.log( this.__REACT_DEVTOOLS_PORT__);
-  if (this.process.env.APP_DEBUG_APPDATA) {
-    let appData = getAppData();
-    Log._data({
-      title: 'AppData',
-      src: './init.js',
-      data: appData,
-    });
-  }
-
   Log._data({
     title: 'Process Env',
     src: './init.js',
     data: this.process.env,
   });
 
-  Log._data({
-    title: 'This',
-    src: './init.js',
-    data: this,
-  });
-
-  Log._data({
-    title: '__DEV__',
-    src: './init.js',
-    data: __DEV__,
-  });
-
-
-
   activateKeepAwake();
 }
 
 registerRootComponent(App);
+initalAppSetup();

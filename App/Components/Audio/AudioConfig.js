@@ -29,11 +29,10 @@ const config = {
     shouldDuckAndroid: true,
     interruptionModeAndroid: INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
     playThroughEarpieceAndroid: false,
-  };
-}
+  }
+};
 
 const soundObject = new Expo.Audio.Sound();
-
 try {
   await soundObject.loadAsync(require('./assets/sounds/hello.mp3'));
   await soundObject.playAsync();

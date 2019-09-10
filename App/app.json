@@ -10,32 +10,25 @@
     "privacy": "unlisted",
     "sdkVersion": "34.0.0",
     "slug": "record-the-earth-expo",
-
     "androidShowExponentNotificationInShellApp": true,
     "androidStatusBar": {
         "barStyle": "dark-content",
         "backgroundColor": "#000000",
-
     },
-
     "notification": {
         "icon": "./icon.png",
         "color": "#000000",
-        "androidMode": "default",
+        "androidMode": "default"
     },
-
     "splash": {
       "image": "./splash.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
-
     "version": "1.0.0",
-
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-
     "assetBundlePatterns": [
       "./Theme/Assets/btn/*.png",
       "./Theme/Assets/fonts/*.ttf",
@@ -62,12 +55,8 @@
       ]
     },
     "githubUrl": "https://github.com/charrismatic/record-the-earth-reach-native",
-    "extra": {
-
-    },
-    "hooks" : {
-
-    },
+    "extra": {},
+    "hooks" : {},
     "rnCliPath": "",
     "packagerOpts": {
       "assetExts": [

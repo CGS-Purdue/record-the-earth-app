@@ -1,4 +1,4 @@
-import Constants from 'expo-constants';
+import { Constants, Platform } from 'expo-constants';
 
 // -----------------
 // Constants - Expo Documentation
@@ -24,8 +24,8 @@ import Constants from 'expo-constants';
 
 // let getWebViewUserAgent = Constants.getWebViewUserAgentAsync;
 
-const getAppData = () => {
-  const app_data = {
+function getAppData () {
+  return {
     appOwnership: Constants.appOwnership,
     expoVersion: Constants.expoVersion,
     installationId: Constants.installationId,
@@ -39,8 +39,12 @@ const getAppData = () => {
     statusBarHeight: Constants.statusBarHeight,
     systemFonts: Constants.systemFonts,
     manifest: Constants.manifest,
-  };
-  return app_data;
-};
+    _platform: { Platform },
+  }
+}
+
+
+
+// const APP_DATA = getAppData();
 
 export { getAppData }
