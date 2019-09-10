@@ -1,5 +1,0 @@
-#!/bin/bash
-
-BASE_DIR="$(npm prefix)"
-
-printenv | sort | grep -i --color=always npm

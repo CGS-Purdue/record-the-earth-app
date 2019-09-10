@@ -24,13 +24,13 @@ LINT_ARGS="$@"
 cd $INIT_CWD
 
 [[ -z $LINT_ARGS ]] &&  LINT_ARGS="./"
-# ${NODE_RUN_ENV} node ${NODE_RUN_FLAGS} \
 
-$BASE_PATH/./node_modules/.bin/eslint \
-  --ext '.js' \
-  --cache \
-  --cache-file $BASE_PATH/.eslintcache \
-  --ignore-pattern '!node_modules' \
-  $LINT_ARGS
+${NODE_RUN_ENV} node ${NODE_RUN_FLAGS} \
+  $BASE_PATH/./node_modules/.bin/eslint \
+    --ext '.js' \
+    --cache \
+    --cache-file $BASE_PATH/.eslintcache \
+    --ignore-pattern '!node_modules' \
+      $LINT_ARGS
 
 exit 0

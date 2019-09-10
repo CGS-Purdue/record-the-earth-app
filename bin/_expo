@@ -20,10 +20,8 @@ echo "Checking Android path ..."
 [[ -z $ANDROID_HOME ]] && echo 'ANDROID_HOME is not set. Skipping command' && exit 0
 
 APP_DIR="/data/apps"
-ABD_PATH="${ANDROID_HOME}/platform-tools"
-ANDROID_SERIAL="025abd11727717ac"
+
 DEBUG_LOGGING="yes"
-DEV_ENV="expo"
 EXPO_HOST="localhost"
 
 # The debugger will receive a list of all project roots, separated by a space. For example, if you set
@@ -35,30 +33,10 @@ EXPO_HOST="localhost"
 echo "Settings up additional devtools..."
 # $ANDROID_HOME/platform-tools/adb reverse tcp:8081 tcp:8081
 
-# REACTOTRON
-[[ ! -z $RUN_REACTOTRON ]] \
-    &&  $ANDROID_HOME/platform-tools/adb reverse tcp:9090 tcp:9090 \
-    && ${APP_DIR}/reactotron/Reactotron.2.17.0.AppImage &
-
-# REACT DEVTOOLS
-[[ ! -z $RUN_REACTDEVTOOLS ]] \
-    && $ANDROID_HOME/platform-tools/adb reverse tcp:8097 tcp:8097 \
-    && npm run react-devtools &
-
-# CHROME
-[[ ! -z $RUN_CHROMEDEVTOOLS ]] \
-    && $ANDROID_HOME/platform-tools/adb reverse tcp:8081 tcp:8081
-
 # EXPO_HOST="lan"
 # --offline
 # eslint-plugin-eslint-comments
 
-REACT_EDITOR="atom"
 
-NODE_DEBUG="" REACT_EDITOR="${REACT_EDITOR}" EXPO_DEBUG="true" DEBUG_LOGGING="${DEBUG_LOGGING}" expo \
-  start --clear \
-    --max-workers 4 \
-    --no-minify \
-    --no-https \
-    --dev \
-    --host $EXPO_HOST \
+EXPO_DEBUG="true" \
+DEBUG_LOGGING="${DEBUG_LOGGING}" expo "$@"

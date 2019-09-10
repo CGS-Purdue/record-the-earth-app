@@ -4,8 +4,8 @@
 # -------------
 # device reverse tunnel        exp://127.0.0.1:19000
 # Metro Bundler on                        port 19001
+# RCT_METRO_PORTL                              :8081
 # Expo DevTools is            http://localhost:19002
-# RCT_METRO_PORTL                             :8081
 # The debugger will receive a list of all project roots, separated by a space. For example, if you set
 # REACT_DEBUGGER="node /path/to/launchDebugger.js --port 2345 --type ReactNative",
 # node /path/to/launchDebugger.js --port 2345 --type ReactNative /path/to/reactNative/app
@@ -18,65 +18,73 @@
 # -                                         script read from stdin (default if no file name is provided, interactive mode if a tty)
 # --                                        indicate the end of node options
 BASE_DIR="$(npm prefix)"
-APP_DIR="/data/apps"
-ABD_PATH="${ANDROID_HOME}/platform-tools"
-ANDROID_SERIAL="025abd11727717ac"
-APP_DEBUG_APPDATA="yes"
-DEBUG_LOGGING="yes"
-DEV_ENV="expo"
-EXPO_DEBUG="true"
-NODE_DEBUG='react-native,react,expo'
-NODE_ENV="development"
-NODE_OPTIONS="--require=./preload_modules/test"
-NODE_PATH="$NODE_PATH:preload_modules:node_modules"
-REACT_DEBUGGER="/data/library/React_Library/react-native-debugger/npm-package/bin/rndebugger-open --expo --open"
-REACT_EDITOR="atom"
-# __REACT_DEVTOOLS_PORT__
-# __DEV__
 
-export REACT_DEBUGGER
+ABD_PATH="${ANDROID_HOME}/platform-tools"
+
+# unset REACT_EDITOR
+# unset REACT_DEBUGGER
 
 [[ -f .npmrc ]] && source .npmrc
 [[ -f .env ]] && source .env
 
+NODE_ENV="development"
+
 echo "Checking Android path ..."
 [[ -z $ANDROID_HOME ]] && echo 'ANDROID_HOME is not set. Skipping command' && exit 0
 
+npm run adb:reverse
+
 echo "Settings up additional devtools..."
 # REACTOTRON
-[[ ! -z $RUN_REACTOTRON ]] \
-    &&  $ANDROID_HOME/platform-tools/adb reverse tcp:9090 tcp:9090 \
-    && ${APP_DIR}/reactotron/Reactotron.2.17.0.AppImage &
+[[ ! -z $RUN_REACT_REACTOTRON ]] \
+    && npm run util:reactotron &
+
+# REACT DEBUGGER
+[[ ! -z $RUN_REACT_DEBUGGER ]] \
+    && REACT_DEBUGGER="node /data/library/React_Library/react-native-debugger/npm-package/bin/rndebugger-open --expo --open" \
+    && npm run util:debugger &
 
 # REACT DEVTOOLS
 [[ ! -z $RUN_REACT_DEVTOOLS ]] \
-    && $ANDROID_HOME/platform-tools/adb reverse tcp:8097 tcp:8097 \
-    && npm run react-devtools &
+    && npm run util:devtools &
+
 
 echo "
-  NODE_ENV  ${NODE_ENV}
-  NODE_PATH $NODE_PATH
-  NODE_OPTIONS  ${NODE_OPTIONS}
-  NODE_DEBUG  ${NODE_DEBUG}
-  DEV_ENV  ${DEV_ENV}
-  EXPO_DEBUG  ${EXPO_DEBUG}
-  REACT_DEBUGGER=${REACT_DEBUGGER}
-  DEBUG_LOGGING  ${DEBUG_LOGGING}
   APP_DEBUG_APPDATA  ${APP_DEBUG_APPDATA}
+  APP_REACT_DEBUGGER_RUNNING ${APP_REACT_DEBUGGER_RUNNING}
+  APP_REACT_DEVTOOLS_RUNNING ${APP_REACT_DEVTOOLS_RUNNING}
+  APP_REACT_REACTOTRON_RUNNING ${APP_REACT_REACTOTRON_RUNNING}
+  DEBUG_LOGGING  ${DEBUG_LOGGING}
+  DEV_ENV ${DEV_ENV}
+  EDITOR ${EDITOR}
+  EXPO_DEBUG  ${EXPO_DEBUG}
+  NODE_DEBUG  ${NODE_DEBUG}
+  NODE_ENV  ${NODE_ENV}
+  NODE_OPTIONS  ${NODE_OPTIONS}
+  NODE_PATH $NODE_PATH
+  REACT_DEBUGGER ${REACT_DEBUGGER}
   REACT_EDITOR  ${REACT_EDITOR}
+  RUN_CHROMEDEVTOOLS ${RUN_CHROMEDEVTOOLS}
+  RUN_REACT_REACTOTRON ${RUN_REACT_REACTOTRON}
+  RUN_REACT_DEBUGGER ${RUN_REACT_DEBUGGER}
+  RUN_REACT_DEVTOOLS ${RUN_REACT_DEVTOOLS}
+  RUN_ENV ${RUN_ENV}
 "
 
+
+
+DEBUG_LOGGING="${DEBUG_LOGGING}" \
+APP_DEBUG_APPDATA="${APP_DEBUG_APPDATA}" \
 NODE_PATH="${NODE_PATH}" \
 NODE_ENV="${NODE_ENV}" \
 NODE_OPTIONS="${NODE_OPTIONS}" \
 NODE_DEBUG="${NODE_DEBUG}" \
-DEV_ENV="${DEV_ENV}" \
+RUN_REACT_REACTOTRON="${RUN_REACT_REACTOTRON}" \
+RUN_REACT_DEBUGGER="${RUN_REACT_DEBUGGER}" \
+RUN_REACT_DEVTOOLS="${RUN_REACT_DEVTOOLS}" \
 REACT_DEBUGGER=${REACT_DEBUGGER} \
-APP_DEBUG_APPDATA="${APP_DEBUG_APPDATA}" \
 REACT_EDITOR="${REACT_EDITOR}" \
-REACT_DEBUGGER="${REACT_DEBUGGER}" \
 EXPO_DEBUG="${EXPO_DEBUG}" \
-DEBUG_LOGGING="${DEBUG_LOGGING}" \
   node ${BASE_DIR}/node_modules/.bin/expo start \
     --clear \
     --max-workers 5 \

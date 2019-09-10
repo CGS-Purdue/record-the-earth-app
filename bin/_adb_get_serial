@@ -1,0 +1,15 @@
+#!/bin/bash
+
+BASE_DIR="$(npm prefix)"
+
+[[ -f .npmrc ]] && source .npmrc
+[[ -f .env ]] && source .env
+
+ABD_PATH="${ANDROID_HOME}/platform-tools"
+ANDROID_SERIAL="$(${ABD_PATH}/adb devices | grep -e '\bdevice\b' | awk '{print $1}')"
+
+export ANDROID_SERIAL
+
+echo "$ANDROID_SERIAL"
+
+exit 0
