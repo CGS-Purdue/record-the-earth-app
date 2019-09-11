@@ -1,5 +1,4 @@
 import React, { Component, forwardRef } from 'react';
-import { YellowBox, LogProps } from 'react-native';
 
 class Log {
   static _log(message, ...args) {

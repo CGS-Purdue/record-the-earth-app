@@ -61,7 +61,7 @@ const mainTabRefNav = createRef();
 
 const MainTabNavigator = createBottomTabNavigator({
     Home: HomeScreen,
-    Links: LinksScreen,
+    Links: SurveyEndScreen,
     Config: ConfigScreen,
   }, {
     navigationOptions: {
@@ -102,7 +102,7 @@ HomeScreen.navigationOptions = ({ navigation }) => ({
   tabBarVisible: true,
 });
 
-LinksScreen.navigationOptions = ({ navigation }) => ({
+SurveyEndScreen.navigationOptions = ({ navigation }) => ({
   tabBarIcon: ({ focused, horizontal, tintColor }) => {
     let iconPrefix = Platform.OS === 'ios' ? 'ios' : 'md';
     let iconName = `${iconPrefix}-information-circle${focused ? '' : '-outline'}`;

@@ -5,7 +5,6 @@ import { activateKeepAwake } from 'expo-keep-awake';
 import { Log } from './Utilities/Log';
 import App from './App';
 
-// __BUNDLE_START_TIME__: 15675
 Log._info('Init');
 
 if (__DEV__) {

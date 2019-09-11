@@ -1,4 +1,5 @@
 #!/bin/bash
 
 REACT_DEBUGGER="/data/library/React_Library/react-native-debugger/npm-package/bin/rndebugger-open --expo --open"
+
 export REACT_DEBUGGER

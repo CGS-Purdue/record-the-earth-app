@@ -7,4 +7,10 @@ const DB_CONFIG = {
   DATABASE_VERSION: '1.0.0',
 };
 
-export { DB_CONFIG };
+const CHECKDB_CONFIG = {
+  NAME: "SystemCheck",
+  DESCRIPTION: 'Minimal database connection check',
+  VERSION: '1.0.0'
+};
+
+export { DB_CONFIG, CHECKDB_CONFIG };

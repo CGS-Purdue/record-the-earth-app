@@ -26,3 +26,4 @@ touch $BASE_DIR/.devtools-lock
 
 export REACT_DEBUGGER
 export APP_REACT_DEBUGGER_RUNNING
+echo "REACT_DEBUGGER=${REACT_DEBUGGER}"

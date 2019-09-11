@@ -2,14 +2,58 @@ import React, { Component, createRef } from 'react';
 import { View, Button } from 'react-native';
 import { Theme } from '../../Theme';
 import { RootView, CenterView, PadView } from '../../Components/Views';
-import { SoundDB } from '../../Database/Models/SoundDB';
+import { soundDB } from '../../Database/Models/SoundDB';
 import { MonoText } from '../../Components/Text/MonoText';
 
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
-
-const sdb = SoundDB;
+console.log(soundDB);
+const sdb = soundDB();
 console.log(sdb);
+
+
+let suvery = {
+  tags: {
+    suveryBio: {
+      "birds": false,
+      "frogs": false,
+      "insects": false,
+      "mammals": false,
+    },
+    suveryEmo: {
+      "curious": true,
+      "happy": true,
+      "relax": true,
+      "stress": false,
+    },
+    suveryGeo: {
+      "rain": true,
+      "thunder": true,
+      "water": true,
+      "wind": false,
+    },
+    suveryAnt: {
+      "alarms": false,
+      "machines": true,
+      "talking": true,
+      "vehicles": false,
+    }
+  },
+  description: "",
+};
+
+let survey_data = {
+  "ant": "talking,machines",
+  "bio": "",
+  "description": "year",
+  "emo": "happy,relax,curious",
+  "geo": "rain,water,thunder",
+}
+
+let survery_string = '{"description":"year","bio":"","emo":"happy,relax,curious","geo":"rain,water,thunder","ant":"talking,machines"}';
+
+
+
 class SurveyEndScreen extends Component {
   constructor(props) {
     super(props);
@@ -18,8 +62,7 @@ class SurveyEndScreen extends Component {
       upload_complete: false,
       result : '',
     };
-    this.state._survey = this.props.navigation.state.params.survey_data;
-    sdb.create();
+    this.state._survey = suvery;
   }
 
   dataToString = (data) => {

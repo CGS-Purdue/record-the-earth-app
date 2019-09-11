@@ -6,69 +6,15 @@ import { getDbConfig } from '../DBConfig';
 class MetaDB  extends Component {
   constructor() {
     this.config = getDbConfig();
-
     this.db = this.getDbConnection(this.config);
-
     this.tablename = 'Meta';
-
     this.state = {
       isConnected : false,
       isError : false,
     };
 
-    this.schema = {
-      id: {
-        type: 'integer',
-        info: 'primary_key',
-      },
-      key: {
-        type: 'string',
-        info: 'meta-property-key-name',
-      },
-      value: {
-        type: 'string',
-        info: 'meta-property-key-value',
-      },
-      lastUpdated: {
-        type: 'date',
-        info: 'date entry was updated',
-      },
-    };
 
-    this.statements = {
-      create: `CREATE TABLE
-        IF NOT EXISTS Meta (
-          id integer primary key autoincrement,
-          key text,
-          value text,
-          lastUpdated date );`,
-      insert: `INSERT
-        INTO Meta (
-          key,
-          value,
-          lastUpdated)
-         VALUES (?);`,
-      insertMany: `INSERT
-        INTO Meta (
-          key,
-          value,
-          date )
-        VALUES (?);`,
-      select: `SELECT *
-          FROM Meta
-          WHERE key = ?
-          LIMIT 1;`,
-      all: `SELECT * FROM Meta;`,
-    };
-  }
 
-  onSuccess(tx, result) {
-    this.setState({data: result.rows._array});
-  }
-
-  onError(tx, error) {
-    console.log(tx, error);
-  }
   getDbConnection(config){
     let _db = connectDb(config);
     this.setState({ isConnected: true })
