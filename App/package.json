@@ -1,6 +1,6 @@
 {
   "name": "record-the-earth-react-native",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "record the earth react native project files for expo and snack",
   "author": "Matt Harris <charrismatic@protonmail.com> (https://charrismatic.github.io/)",
   "scripts": {
@@ -13,7 +13,7 @@
     "dev": "../bin/dev",
     "expo": "../bin/_expo",
     "env:reset": "../bin/env-reset",
-    "env:print": "../bin/env-print",
+    "env:user": "../bin/env-print",
     "env:npm": "../bin/env-print-npm",
     "info": "./.run/info.js",
     "info:env": "./.run/info.js -- env",
@@ -33,6 +33,7 @@
     "test": "npm run test:run -- arg1=PASS --opt1",
     "watch": "./.run/watch"
   },
+
   "react-devtool": "react-devtools",
   "keywords": [
     "react-native",

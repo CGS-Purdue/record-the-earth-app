@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'React';
 import { checkAppDirectoriesStatus }  from '../Utilities/Filesystem';
 import { checkDB }  from '../Database/CheckDB';
 

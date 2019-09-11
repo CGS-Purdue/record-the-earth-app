@@ -29,7 +29,6 @@ if (__DEV__) {
   // const ReactotronMiddleware = Reactotron.createEnhancer();
   // middleware.push(ReactotronMiddleware);
 }
-
 // const store = createStore(
 //   compose(...middleware),
 // );
@@ -38,9 +37,7 @@ var Tron = new LogUtils;
 console.tron = Reactotron.log;
 
 export default Reactotron
-  .configure({
-    name: "RecordTheEarthExpo"
-  })
+  .configure({ name: "RecordTheEarthExpo" })
   .use(reactotronRedux({
     except: REDUX_EXCEPT,
     isActionImportant: REDUX_IMPORTANT,

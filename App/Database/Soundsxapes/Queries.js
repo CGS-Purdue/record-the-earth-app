@@ -1,5 +1,40 @@
 
 export default= const statements = {
+changes
+ va   commit:9dead4
+    WIP on master
+          id,
+          datetime,
+          filepath,
+          filename,
+          description,
+          duration,
+          location,
+          emotion,
+          biophony,
+          geophony,
+          anthrophony,
+          cultural,
+          pid,Database objects are returned by calls to SQLite.openDatabase(). Such an object represents a connection to a database on your device. They support one method:
+          isuploaded
+        FROMT Soundscapes
+        WHERE id = ?;`,
+        all: `SELECT
+          id,
+          datetime,
+          filepath,
+          filename,
+          description,
+          duration,
+          location
+        FROM Soundscapes
+        SORT BY pid DESC
+        LIMIT 20;`,
+        pidUpdate: `UPDATE Soundscapes
+          SET (rowId, pid, isUploaded)
+          VALUES ?
+          WHERE id = ?;`,
+
     create: `CREATE TABLE
       IF NOT EXISTS Soundscapes (
         id integer primary key autoincrement,
@@ -89,38 +124,4 @@ export default= const statements = {
       pid: {
         type: 'text',
         info: 'id from recordtheearth website',
-104 file changes in working directory
-View changes
-commit:9dead4
-WIP on master
-      id,
-      datetime,
-      filepath,
-      filename,
-      description,
-      duration,
-      location,
-      emotion,
-      biophony,
-      geophony,
-      anthrophony,
-      cultural,
-      pid,Database objects are returned by calls to SQLite.openDatabase(). Such an object represents a connection to a database on your device. They support one method:
-      isuploaded
-    FROMT Soundscapes
-    WHERE id = ?;`,
-    all: `SELECT
-      id,
-      datetime,
-      filepath,
-      filename,
-      description,
-      duration,
-      location
-    FROM Soundscapes
-    SORT BY pid DESC
-    LIMIT 20;`,
-    pidUpdate: `UPDATE Soundscapes
-      SET (rowId, pid, isUploaded)
-      VALUES ?
-      WHERE id = ?;`,
+    View 

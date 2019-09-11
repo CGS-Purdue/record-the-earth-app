@@ -45,7 +45,7 @@ module.exports = {
     'no-div-regex': 1, // disallow division operators explicitly at beginning of regular expression (off by default)
     'no-else-return': 0, // disallow else after a return in an if (off by default)
     'no-eq-null': 0, // disallow comparisons to null without a type-checking operator (off by default)
-    'no-eval': 2, // disallow use of eval()
+    'no-eval': 2, // disallow use of eval() 
     'no-extend-native': 1, // disallow adding to native types
     'no-extra-bind': 1, // disallow unnecessary function binding
     'no-fallthrough': 1, // disallow fallthrough of case statements
