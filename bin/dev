@@ -17,10 +17,12 @@
 # --debug-port, --inspect-port=[host:]port  set host:port for inspector
 # -                                         script read from stdin (default if no file name is provided, interactive mode if a tty)
 # --                                        indicate the end of node options
+
 BASE_DIR="$(npm prefix)"
 
 ABD_PATH="${ANDROID_HOME}/platform-tools"
 
+set -a REACT_DEBUGGER
 # unset REACT_EDITOR
 # unset REACT_DEBUGGER
 
@@ -41,12 +43,18 @@ echo "Settings up additional devtools..."
 
 # REACT DEBUGGER
 [[ ! -z $RUN_REACT_DEBUGGER ]] \
-    && REACT_DEBUGGER="node /data/library/React_Library/react-native-debugger/npm-package/bin/rndebugger-open --expo --open" \
     && npm run util:debugger &
 
+if [ ! -z $RUN_REACT_DEBUGGER ]; then
+
+  REACT_DEBUGGER="/data/library/React_Library/react-native-debugger/npm-package/bin/rndebugger-open --expo --open"
+
+fi
+
+
+
 # REACT DEVTOOLS
-[[ ! -z $RUN_REACT_DEVTOOLS ]] \
-    && npm run util:devtools &
+[[ ! -z $RUN_REACT_DEVTOOLS ]] && npm run util:devtools &
 
 
 echo "
