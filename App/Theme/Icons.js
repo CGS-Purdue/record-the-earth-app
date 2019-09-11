@@ -8,7 +8,7 @@ import { IconAssets } from './Assets';
 //     this.module = module;
 //     this.width = width;
 //     this.height = height;
-//     Asset.fromModule(this.module).downloadAsync();
+//     Asset.fromModule(this.module).dzownloadAsync();
 //   }
 // };
 

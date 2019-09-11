@@ -11,7 +11,7 @@
     "adb:reverse": "../bin/_adb_reverse",
     "bump": "npm version patch",
     "dev": "../bin/dev",
-    "expo": "../bin/expo",
+    "expo": "../bin/_expo",
     "env:reset": "../bin/env-reset",
     "env:print": "../bin/env-print",
     "env:npm": "../bin/env-print-npm",

@@ -1,33 +1,47 @@
-import React from 'react';
-import { checkAppDirectoriesStatus }  from '../Utilities/Filesystem';
-// import { CheckDB }  from '../Database/Models/CheckDB';
 
-function initalAppSetup() {
-   checkAppDirectoriesStatus();
-  // return CheckDB;
-}
-
-
-// console.log(checkResults);
-// appVersion
-// deviceModel
-// osVersion
-// AppData.appOwnership                 // Constants.appOwnership,
-// AppData.expoVersion                 // Constants.expoVersion,
-// AppData.installationId                 // Constants.installationId,
-// AppData.deviceName                 // Constants.deviceName,
-// AppData.deviceYearClass                 // Constants.deviceYearClass,
-// AppData.isDevice                 // Constants.isDevice,
-// AppData.nativeAppVersion                 // Constants.nativeAppVersion,
-// AppData.nativeBuildVersion                 // Constants.nativeBuildVersion,
-// AppData.platform                 // Constants.platform,
-// AppData.sessionId                 // Constants.sessionId,
-// AppData.statusBarHeight                 // Constants.statusBarHeight,
-// AppData.systemFonts                 // Constants.systemFonts,
-// AppData.manifest                 // Constants.manifest,
-// AppData._platform                 // { Platform },
-
-	// final static String UPLOAD_SERVER_URI = "https://www.recordtheearth.org/soundscape-android.php";
-
-
-export { initalAppSetup }
+export default= const statements = {
+    create: `CREATE TABLE
+      IF NOT EXISTS Soundscapes (
+        id integer primary key autoincrement,
+        datetime text not null,
+        path text not null,
+        filename text not null,
+        description text not null,
+        duration text not null,
+        location not null,
+        emotion text not null,
+        biophony text not null,
+        geophony text not null,
+        anthrophony text not null,
+        cultural text not null,
+        pid text,
+        isUploaded text not null);`,
+    drop: `DROP TABLE IF EXISTS Soundscapes;`,
+    insert: `INSERT
+      INTO Soundscapes (
+        anthrophony,
+        biophony,
+        cultural,
+        datetime,
+        description,
+        duration,
+        emotion,
+        filename,
+        geophony,
+        isUploaded
+        location,
+        path,
+        pid)
+      VALUES (?);`,
+    delete: `DELETE
+      FROM Soundscapes
+      WHERE id = ?;`,
+    select: `SELECT
+      id,
+      datetime,
+      filepath,
+      filename,
+      description,
+      duration,
+      location,
+      emotion,

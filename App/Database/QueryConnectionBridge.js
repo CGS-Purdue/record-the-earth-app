@@ -1,0 +1,4 @@
+ name: DB_CONFIG.DATABASE_NAME,
+ version: DB_CONFIG.DATABASE_TABLE,
+ description: DB_CONFIG.DATABASE_VERSION,
+ size: null,
