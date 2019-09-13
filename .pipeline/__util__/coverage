@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# ANDROID-BUILD
+# -------------
+# BUILD THE ANDROID PROJECT FROM THE ./android directory
+
+# Config: settings.gradle
+# Outputs: bundle.jar
+
+BASE_DIR="$(npm prefix)"
+
+jest --coverage \
+  && open coverage/lcov-report/index.html \
+  || xdg-open coverage/lcov-report/index.html

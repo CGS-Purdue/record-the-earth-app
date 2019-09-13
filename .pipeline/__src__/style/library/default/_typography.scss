@@ -1,0 +1,29 @@
+html,
+body {
+  @include font_family($default_font_body);
+  font-size: $default_font_size;
+  line-height: 1.375em;
+}
+
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @include font_family($default_font_heading);
+  font-size: 100%;
+  font-weight: normal;
+  margin: 0;
+  padding: 0
+}
+
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 { @include font_family($default_font_heading) }

@@ -1,0 +1,70 @@
+/// GROUP base
+/// @PACKAGE library core set
+/// ===================================
+
+
+///
+/// FUNCTIONS
+///
+
+@import 'functions/index';
+@import 'colors/functions';
+@import "fonts/functions";
+@import 'layouts/functions';
+@import 'icons/functions';
+
+///
+/// VARIABLES
+///
+
+@import 'colors/variables';
+@import 'flex/variables';
+@import "fonts/variables";
+
+///
+/// MIXINS
+///
+
+@import 'layouts/mixins';
+@import 'flex/mixins';
+@import "fonts/mixins";
+@import 'effects/mixins';
+@import 'utilities/mixins';
+@import 'icons/mixins';
+
+@import 'motion/index';
+@import 'format/index';
+
+/// /* ICONS */
+@import 'icons/lib/fontawesome';
+@import "icons/icon_map";
+@import 'effects/variables';
+
+
+
+///
+/// CLASSES
+///
+
+// CORE CLASSES
+@import 'default/layout';
+@import 'default/content';
+@import 'default/typography';
+@import 'default/reset';
+
+
+// ICONS
+@import "icons/classes_icon";
+@import "icons/classes_icons_core";
+@import "icons/classes_icons_social";
+@import "icons/classes_icons_htmlentities";
+
+@import 'colors/classes';
+@import "fonts/classes";
+@import "utilities/classes";
+@import 'layouts/classes';
+@import 'flex/classes';
+@import 'effects/classes';
+
+@import 'layouts/templates';
+@import 'flex/templates';

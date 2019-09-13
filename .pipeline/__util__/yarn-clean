@@ -1,0 +1,11 @@
+#!/bin/bash
+
+BASE_DIR="$(npm prefix)"
+NPM_MODULE_DIR=node_modules
+# REACT_MODULES_PATTERN=/react-*
+
+# REACT_MODULES_PATH="$BASE_DIR/${REACT_TEMP_DIR}/${REACT_MODULES_PATTERN}"
+# NPM_MODULE_PATH="${BASE_DIR}/${NPM_MODULE_DIR}"
+# --use-yarnrc <path>
+
+yarn autoclean --no-default-rc --verbose --non-interactive 

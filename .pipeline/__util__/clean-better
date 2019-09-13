@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# - dont actually run this
+exit 0
+
+BASE_DIR="$(npm prefix)"
+IOS_DIR=ios
+IOS_BUILD_DIR=build
+NPM_MODULE_DIR=node_modules
+REACT_MODULES_PATTERN=/react-*
+REACT_TEMP_DIR="$TMPDIR"
+TIMESTAMP="$(date +'%y%m%d.%H%M%S')"
+
+REACT_MODULES_PATH="$BASE_DIR/${REACT_TEMP_DIR}/${REACT_MODULES_PATTERN}"
+NPM_MODULE_PATH="${BASE_DIR}/${NPM_MODULE_DIR}"
+IOS_BUILD_PATH="$BASE_DIR/${IOS_DIR}/${IOS_BUILD_DIR}"
+
+# WE SHOULD HAVE ALREADY STARTED HERE BUT THIS IS JUST TO MAKE SURE AND FOLLOW SOME LOGICAL STEPS
+
+cd ${BASE_DIR}
+
+[[ ! -d "${BASE_DIR}/.removed/" ]] && mkdir "${BASE_DIR}/.removed/"
+
+
+mkdir "./.removed/${TIMESTAMP}"
+
+[[ -d "$REACT_MODULES_PATH" ]] && mv "${REACT_MODULES_PATH}"  "./.removed/${TIMESTAMP}/"
+[[ -d "$NPM_MODULE_PATH" ]] && mv "${NPM_MODULE_PATH}"  "./.removed/${TIMESTAMP}/"
+[[ -d "$IOS_BUILD_PATH" ]] && mv "${IOS_BUILD_PATH}"  "./.removed/${TIMESTAMP}/"
+
+
+cd .removed
+
+rm --one-file-system --preserve-root -rf "./${TIMESTAMP}"
+
+npm audit
+
+npm outdated
+
+echo "Done."

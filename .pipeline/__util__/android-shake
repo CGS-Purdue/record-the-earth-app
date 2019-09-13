@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# ANDROID-BUILD
+# -------------
+# BUILD THE ANDROID PROJECT FROM THE ./android directory
+
+# Config: settings.gradle
+# Outputs: bundle.jar
+
+BASE_DIR="$(npm prefix)"
+
+[[ -z $ANDROID_HOME ]] && echo 'ANDROID_HOME is not set. Skipping command' && exit 0
+
+ABD_PATH="${ANDROID_HOME}/platform-tools"
+
+${ABD_PATH}/adb devices \
+  | grep  -v -i "List of devices attached" \
+  | grep  -v -i "adb server version" \
+  | grep  -v -i "* daemon" \
+  | grep --only-matching --color -E "^[a-zA-Z0-9]+" \
+  | xargs --replace ${ABD_PATH}/adb -s {} shell input keyevent 82

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+## START THE REACT-NATIVE SERVER
+
+
+```sh
+    --port [number]
+    --host [string]                                                (default: "")
+    --watchFolders [list]                                         Specify any additional folders to be added to the watch list
+    --assetPlugins [list]                                         Specify any additional asset plugins to be used by the packager by full filepath
+    --assetExts [list]                                            Specify any additional asset extensions to be used by the packager
+    --sourceExts [list]                                           Specify any additional source extensions to be used by the packager
+    --platforms [list]                                            Specify any additional platforms to be used by the packager
+    --providesModuleNodeModules [list]                            Specify any npm packages that import dependencies with providesModule
+    --max-workers [number]                                        Specifies the maximum number of workers the worker-pool will spawn for transforming files.
+                                                                  This defaults to the number of the cores available on your machine.
+    --skipflow                                                    Disable flow checks
+    --nonPersistent                                               Disable file watcher
+    --transformer [string]                                        Specify a custom transformer to be used
+    --reset-cache, --resetCache                                   Removes cached files
+    --custom-log-reporter-path,
+    --customLogReporterPath [string]                              Path to a JavaScript file that exports a log reporter as a replacement for TerminalReporter
+    --verbose                                                     Enables logging
+    --https                                                       Enables https connections to the server
+    --key [path]                                                  Path to custom SSL key
+    --cert [path]                                                 Path to custom SSL cert
+    --config [string]                                             Path to the CLI configuration file
+    --projectRoot [string]                                        Path to the root of the project
+    --reactNativePath [string]                                    Path to React Native
+    -h, --help                                                    output usage information 0.0.1 ⬢  data
+```

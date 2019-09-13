@@ -1,0 +1,41 @@
+////
+/// @name keyframes
+/// @description Mixin to to define animation keyframes
+///
+/// @example
+///
+/// @include keyframes(slide-down) {
+///   0% { opacity: 1; }
+///   90% { opacity: 0; }
+///  }
+///
+///  .element {
+///  width: 100px;
+///  height: 100px;
+///  background: black;
+///  @include animation('slide-down 5s 3');
+///  }
+
+
+// PREFIXED
+@mixin keyframes_prefixed($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+
+// NON-PREFIXED
+@mixin keyframes($animation_name) {
+  @keyframes #{$animation_name} {
+    @content;
+  }
+}

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# USE THE `source` COMMAND TO SET ENV VARIABLES IN THE CURRENT SHELL SESSION
+
+# REACT-NAVTIVE REQUIRES JAVA VERSION 8
+# JAVA_V8 env variable is set to Android studio Java path
+export JAVA_HOME="${JAVA_V8}"
+echo "Setting JAVA_HOME: ${JAVA_HOME}"

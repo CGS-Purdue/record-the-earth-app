@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# ANDROID-BUILD
+# -------------
+# BUILD THE ANDROID PROJECT FROM THE ./android directory
+
+# Config: settings.gradle
+# Outputs: bundle.jar
+
+BASE_DIR="$(npm prefix)"
+
+echo "$BASE_DIR"
+
+GRADE_FLAGS="--stacktrace --debug --dry-run --debug --refresh-dependencies --console verbose"
+
+cd android
+
+./gradlew ${GRADE_FLAGS} assembleRelease
+
+
+echo -e "BASE_DIR: $BASE_DIR\n"
+
+echo -e "GRADLE FLAGS: $GRADE_FLAGS\n"

@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/main.css",
+    "main.js": "/main.d5701f0b688cb0c5144a.bundle.js",
+    "main.css.map": "/main.css.map",
+    "main.js.map": "/main.d5701f0b688cb0c5144a.bundle.js.map",
+    "runtime~main.js": "/runtime~main.d5701f0b688cb0c5144a.bundle.js",
+    "runtime~main.js.map": "/runtime~main.d5701f0b688cb0c5144a.bundle.js.map",
+    "vendors~main.css": "/vendors~main.css",
+    "vendors~main.js": "/vendors~main.d5701f0b688cb0c5144a.bundle.js",
+    "vendors~main.css.map": "/vendors~main.css.map",
+    "vendors~main.js.map": "/vendors~main.d5701f0b688cb0c5144a.bundle.js.map",
+    "iframe.html": "/iframe.html",
+    "precache-manifest.02e4f4b444611e3cdb7fc57b302ec119.js": "/precache-manifest.02e4f4b444611e3cdb7fc57b302ec119.js",
+    "service-worker.js": "/service-worker.js",
+    "static/media/bg-main.png": "/static/media/bg-main.e73ead82.png",
+    "static/media/btn-record-rec.png": "/static/media/btn-record-rec.05b9cf91.png",
+    "static/media/btn-record-stop.png": "/static/media/btn-record-stop.293335a5.png",
+    "static/media/icons.svg": "/static/media/icons.113f312c.svg",
+    "static/media/logo-rte-stacked.png": "/static/media/logo-rte-stacked.ba498941.png"
+  }
+}
