@@ -1,13 +1,12 @@
 import React, { Component, createRef } from 'react';
-import { View, Button } from 'react-native';
+import { ImageBackground, View, Button } from 'react-native';
 import { Theme } from '../../Theme';
 import { RootView, CenterView, PadView } from '../../Components/Views';
 // import { SoundDB } from '../../Database/Model/SoundDB';
 import { MonoText } from '../../Components/Text/MonoText';
-
-const _styles = Theme.Styles;
 const _colors = Theme.Colors;
-
+const _assets = Theme.Assets;
+const _styles  = Theme.Styles;
 const SoundDB = {};
 const sdb = SoundDB;
 
@@ -69,6 +68,7 @@ class SurveyEndScreen extends Component {
     console.log('sdb', sdb);
     const { navigate } = this.props.navigation;
     return (
+      <ImageBackground style={_styles.bgImg} source={_assets.images.img_bg_cliff}>
       <RootView>
         <PadView padding={[1]}>
           <CenterView>
@@ -85,6 +85,7 @@ class SurveyEndScreen extends Component {
           </CenterView>
         </PadView>
       </RootView>
+      </ImageBackground>
     );
   }
 }

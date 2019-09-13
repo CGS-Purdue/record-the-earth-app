@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, } from 'react-native';
+import { ImageBackground, Text, View } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
-import { Recorder } from '../../Components/Recorder';
 import { CenterView, RootView } from '../../Components/Views';
+import { AudioRecord } from '../../Components/Audio/AudioRecord';
+import { Theme } from '../../Theme';
+const _assets = Theme.Assets;
+const _styles = Theme.Styles;
 
 class RecordScreen extends Component {
   constructor(props) {
@@ -14,11 +17,13 @@ class RecordScreen extends Component {
 
   render() {
     return (
+    <ImageBackground style={_styles.bgImg} source={_assets.images.img_background}>
       <RootView>
         <CenterView>
-          <Recorder />
+          <AudioRecord />
         </CenterView>
       </RootView>
+    </ImageBackground>
     );
   }
 }

@@ -83,31 +83,18 @@ class CheckButton extends Component {
     }
   };
 
+  // backgroundColor={_colors.SHADE_DARKER_04}
   render() {
     return (
-      <TouchableOpacity
-          onPress={this._toggleCheckedState}
-        >
-          <View
-            style={checkBtnStyles._checkbtn_container_inner}
-            backgroundColor={_colors.SHADE_DARKER_02}
-            >
-
-            <Ionicons name={
-              Platform.OS === 'ios'
-                ? `ios-ios-checkmark${focused ? '' : '-outline'}`
-                : 'md-checkmark'
-              }
+      <TouchableOpacity onPress={this._toggleCheckedState}>
+          <View backgroundColor={_colors.SHADE_LIGHTER_02}
+              style={checkBtnStyles._checkbtn_container_inner}
+          >
+            <Ionicons name={Platform.OS === 'ios' ? `ios-ios-checkmark${focused ? '' : '-outline'}` : 'md-checkmark' }
               size={_layout.TEXT_SIZE_5}
               style={checkBtnStyles._checkbtn_icon}
-              color={this.state.checked ? '#00ff00' : _colors.SHADE_DARKER_07 }
-              backgroundColor={_colors.SHADE_DARKER_04 }
-              // borderRadius
-              // iconStyle
-            />
-            <Text style={checkBtnStyles._checkbtn_text}>
-              {this.props.text}
-            </Text>
+              color={this.state.checked ? '#00ff00' : _colors.SHADE_DARKER_07}/>
+            <Text style={checkBtnStyles._checkbtn_text}>{this.props.text}</Text>
           </View>
         </TouchableOpacity>
     )

@@ -1,13 +1,59 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Constants from 'expo-constants';
+import { SQLite } from 'expo-sqlite';
 import { SectionList, Image, StyleSheet, ScrollView, Text, View } from 'react-native';
 import { Theme } from '../../Theme';
 import { Log } from '../../Utilities/Log';
+import { SoundDB } from '../../Components/Database/SoundDB';
 
 const _styles = Theme.Styles;
 const _assets = Theme.Assets;
 
+
 export default class ConfigScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    // this.dbConnection = new SoundDB({autoconnect: true});
+    // this.getSoundscapesList();
+    // this.state = [soundscapes, setSoundscapes] = useState([]);
+    // this.dataSource = new SoundDB({autoconnect: true});
+    this.state = {
+        soundscapes: null
+      }
+
+    this.dbConnection = new SoundDB({ autoconnect: true});
+
+  }
+
+  getSoundscapesList(){
+    this.updateSoundscapes()
+  }
+
+  updateSoundscapes(){
+    // let _soundData = this.soundData
+    this.dataSource.transaction(tx => {
+      tx.executeSql('select * from Soundscapes;', [], (_, { rows }) =>
+        this.setState({
+          soundscapes: rows._array
+        })
+      );
+    });
+    console.log(this.state);
+  }
+
+  onComponentDidMount(){
+    this.dataSource = this.dbConnection.getConnection()
+    console.log('connectionStatus', this.dataSource.connectionStatus);
+    console.log(this.state);
+    this.updateSoundscapes()
+  }
+  onComponentDidUpate(){
+    // console.log(this.dataSource);
+    // this.updateSoundscapes()
+    // console.log('connectionStatus', this.dataSource.connectionStatus);
+    console.log(this.state);
+  }
+
  render() {
     return (
       <ScrollView style={ConfigScreenStyles.container}>
@@ -18,47 +64,28 @@ export default class ConfigScreen extends React.Component {
 }
 
 
-
 class ConfigView extends React.Component {
   render() {
+
     const { manifest = {} } = Constants;
-    const sections = [
+      const sections = [
       { data: [{ value: manifest.sdkVersion }], title: 'sdkVersion' },
       { data: [{ value: manifest.privacy }], title: 'privacy' },
       { data: [{ value: manifest.version }], title: 'version' },
       { data: [{ value: manifest.orientation }], title: 'orientation' },
-      {
-        data: [{ value: manifest.primaryColor, type: 'color' }],
-        title: 'primaryColor',
-      },
-      {
-        data: [{ value: manifest.splash && manifest.splash.image }],
-        title: 'splash.image',
-      },
-      {
-        data: [
-          {
-            value: manifest.splash && manifest.splash.backgroundColor,
-            type: 'color',
-          },
-        ],
+      { data: [{ value: manifest.primaryColor, type: 'color' }], title: 'primaryColor', },
+      { data: [{ value: manifest.splash && manifest.splash.image }], title: 'splash.image', },
+      { data: [ {
+        value: manifest.splash && manifest.splash.backgroundColor,
+        type: 'color',
+        },],
         title: 'splash.backgroundColor',
       },
-      {
-        data: [
-          {
-            value: manifest.splash && manifest.splash.resizeMode,
-          },
-        ],
-        title: 'splash.resizeMode',
+      { title: 'splash.resizeMode',
+        data: [ {value: manifest.splash && manifest.splash.resizeMode,},],
       },
-      {
-        data: [
-          {
-            value: manifest.ios && manifest.ios.supportsTablet ? 'true' : 'false',
-          },
-        ],
-        title: 'ios.supportsTablet',
+      { title: 'ios.supportsTablet',
+        data: [ { value: manifest.ios && manifest.ios.supportsTablet ? 'true' : 'false',}, ],
       },
     ];
 

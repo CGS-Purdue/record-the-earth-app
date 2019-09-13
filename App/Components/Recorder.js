@@ -260,13 +260,9 @@ export default class Recorder extends React.Component {
 
     } else {
       return (
-        <CenterColView backgroundColor={ThemeColors.BLU_300}>
+        <CenterColView>
           <View style={{borderColor:'blue',borderWidth:1,borderStyle:'solid'}}>
-            <View style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              flex: 1
-            }}>
+            <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
               <ActivityIndicator
                 color={ThemeColors.GRN_300}
                 animating={true}

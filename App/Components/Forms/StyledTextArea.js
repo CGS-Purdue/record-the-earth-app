@@ -15,6 +15,8 @@ const TextAreaStyle = Object.assign(
     borderBottomRightRadius: 1 ,
     borderTopLeftRadius: 1 ,
     borderTopRightRadius: 1 ,
+    width: '100%',
+    margin: 1,
   },
   _styles.br.br_w1,
   _styles.form_input_multiline_text_3

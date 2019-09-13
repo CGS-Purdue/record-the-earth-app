@@ -2,9 +2,9 @@ import React, { createRef } from 'react';
 import { Platform } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
 import { TabBarIcon } from '../../Components/TabBar/TabBarIcon';
+import { SurveyEndScreen } from '../Survey/SurveyEndScreenDev';
 import { HomeScreen } from './HomeScreen';
 import { LinksScreen } from './LinksScreen';
-import { SurveyEndScreen } from '../Survey/SurveyEndScreenDev';
 import { ConfigScreen } from './ConfigScreen';
 import { Theme } from '../../Theme';
 
@@ -61,14 +61,13 @@ const mainTabRefNav = createRef();
 
 const MainTabNavigator = createBottomTabNavigator({
     Home: HomeScreen,
-    Links: SurveyEndScreen,
+    Links: LinksScreen,
+    SurveyTab: SurveyEndScreen,
     Config: ConfigScreen,
   }, {
     navigationOptions: {
       initialRouteName: 'Home',
     },
-    // defaultNavigationOptions: {
-    // }
     tabBarOptions: {
       inactiveTintColor: _colors.TAB_BAR_COLOR,
       activeTintColor: _colors.TAB_BAR_ACTIVE_COLOR,
@@ -103,6 +102,26 @@ HomeScreen.navigationOptions = ({ navigation }) => ({
 });
 
 SurveyEndScreen.navigationOptions = ({ navigation }) => ({
+  tabBarIcon: ({ focused, horizontal, tintColor }) => {
+    let iconPrefix = Platform.OS === 'ios' ? 'ios' : 'md';
+    let iconName = `${iconPrefix}-information-circle${focused ? '' : '-outline'}`;
+    return (
+      <TabBarIcon
+        name={iconName}
+        style={TabBarStyles.tabbar_icon}
+        size={TAB_BAR_ICON_SIZE}
+        color={tintColor}
+        focused={focused}
+      />
+    );
+  },
+  tabBarLabel: 'SurveyTab',
+  label: 'SurveyTab',
+  tabBarVisible: true,
+  title: 'SurveyTab',
+});
+
+LinksScreen.navigationOptions = ({ navigation }) => ({
   tabBarIcon: ({ focused, horizontal, tintColor }) => {
     let iconPrefix = Platform.OS === 'ios' ? 'ios' : 'md';
     let iconName = `${iconPrefix}-information-circle${focused ? '' : '-outline'}`;

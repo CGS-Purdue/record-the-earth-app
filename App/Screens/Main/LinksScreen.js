@@ -1,11 +1,12 @@
-import * as WebBrowser from 'expo-web-browser';
 import React, { Component } from 'react';
-import { StyleSheet, Image, Text, View, Button } from 'react-native';
-import Touchable from 'react-native-platform-touchable';
+import * as WebBrowser from 'expo-web-browser';
 import { Ionicons } from '@expo/vector-icons';
+import { ImageBackground, StyleSheet, Image, Text, View, Button } from 'react-native';
+import Touchable from 'react-native-platform-touchable';
+import LocationFunctions from '../../Utilities/LocationFunctions';
+import { Log } from '../../Utilities/Log';
 import { Theme } from '../../Theme';
 import { ProgressCircle, AnimatedSpring } from '../../Components/Animated/ProgressCircle';
-import { Log } from '../../Utilities/Log';
 
 const _styles = Theme.Styles;
 const _assets = Theme.Assets;
@@ -43,7 +44,9 @@ export default class LinksScreen extends Component {
 
   render() {
     return (
+      <ImageBackground style={_styles.bgImg} source={_assets.images.img_background}>
       <View>
+        <LocationFunctions></LocationFunctions>
         <Text style={LinksScreenStyles.optionsTitleText}>Test Area</Text>
         <ProgressCircle
           value={this.state.progressValue}
@@ -54,7 +57,6 @@ export default class LinksScreen extends Component {
         <Button
           title={'button'}
           _handleLongDelay={this._handleLongDelay}
-
           onPress={this._handlePressButton}
           onPressIn ={()=>{
             console.log('TouchableOpacity onPressIn');
@@ -67,7 +69,7 @@ export default class LinksScreen extends Component {
           }}
         />
       </View>
-
+      </ImageBackground>
     );
   }
 }

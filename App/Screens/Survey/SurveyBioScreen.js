@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button } from 'react-native';
+import { ImageBackground, StyleSheet, Button } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { CenterColView, RootView, PadView } from '../../Components/Views';
 import { HeadingText } from '../../Components/Text/HeadingText';
 import { CheckButton } from '../../Components/Button/CheckButton';
 import { Theme } from '../../Theme';
-
+const _assets = Theme.Assets;
+const _styles = Theme.Styles;
 const _colors = Theme.Colors;
-const _styles  = Theme.Styles;
 
 class SurveyBioScreen extends Component {
   constructor(props) {
@@ -51,6 +51,7 @@ class SurveyBioScreen extends Component {
     const { navigate } = this.props.navigation;
     let survey_data = this.props.navigation.getParam('survey_data', {});
     return (
+    <ImageBackground style={_styles.bgImg} source={_assets.images.img_bg_cliff}>
       <RootView>
         <CenterColView>
           <PadView padding={[2, 2]}>
@@ -92,6 +93,7 @@ class SurveyBioScreen extends Component {
           </PadView>
         </CenterColView>
       </RootView>
+      </ImageBackground>
     );
   }
 }

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Button } from 'react-native';
+import { ImageBackground, Button } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { RootView, CenterColView, PadView } from '../../Components/Views';
 import { HeadingText } from '../../Components/Text/HeadingText';
 import { CheckButton } from '../../Components/Button/CheckButton';
 import { Theme } from '../../Theme';
-
+const _assets = Theme.Assets;
 const _colors = Theme.Colors;
 const _styles  = Theme.Styles;
 
@@ -50,6 +50,7 @@ class SurveyGeoScreen extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
+      <ImageBackground style={_styles.bgImg} source={_assets.images.img_bg_cliff}>
       <RootView>
         <CenterColView>
           <PadView padding={[1,2]}>
@@ -89,6 +90,7 @@ class SurveyGeoScreen extends Component {
           </PadView>
         </CenterColView>
       </RootView>
+      </ImageBackground>
     );
   }
 }

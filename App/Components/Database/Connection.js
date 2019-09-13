@@ -1,6 +1,6 @@
-import React, { Component } from 'React';
+import { Component } from 'react';
 import { SQLite } from 'expo-sqlite';
-import { ConnectionQuery } from './ConnectionQuery';
+// import { ConnectionQuery } from './ConnectionQuery';
 
 class Connection extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class Connection extends Component {
     this.connectionError = false;
     this.connect = this.connect.bind(this);
     this.disconnect = this.disconnect.bind(this);
-    this.configQuery = this.configQuery.bind(this);
+    // this.configQuery = this.configQuery.bind(this);
   }
 
   connect() {
@@ -23,15 +23,15 @@ class Connection extends Component {
     let _description = this.props.description;
     let _size = this.props.size;
     try {
-      const _connection = SQLite.openDatabase(_name, _version, _description, _size);
-      this.connection = _connection;
-      if (this.connection) {
+      const _dbConn = SQLite.openDatabase(_name, _version, _description, _size);
+      this.db = _dbConn;
+      if (this.db) {
         this.connectionStatus = 'connected';
       }
 
       if (this.props.onConnect) {
         console.log('Getting Database Connection;');
-        console.log('Connection Details: ', _connection);
+        console.log('Connection Details: ', _dbConn);
         this.props.onConnect(this);
       }
     }
@@ -45,6 +45,31 @@ class Connection extends Component {
     }
   }
 
+  onSuccess(tx, result) {
+    console.log(tx, result);
+    this.setState({data: result.rows._array});
+  }
+
+  onError(tx, error) {
+    console.log(error);
+  }
+
+  dbSuccess(data, options){
+    console.log('query transaction completed onSuccessfully');
+    console.log('data', data);
+    this.querystate.data = data.result.rows._array;
+  }
+
+  txSuccess(tx, result, options){
+     // { insertId, rowsAffected, rows: { length, item(), _array, }, }
+    console.log('result set', result);
+    console.log('tx resultset', result);
+    this.querystate.data = result.rows._array;
+  }
+  txError(tx, error){
+    console.log(tx, error);
+  }
+
   disconnect() {
     if (this.connection === 'undefined') {
       return Promise.reject("Database was not open; unable to close.");
@@ -54,14 +79,14 @@ class Connection extends Component {
       this.connection = undefined;
     });
   }
-
-  configQuery(statement, args, options) {
-    return new ConnectionQuery({
-      statement: statement,
-      args: args,
-      options: options
-    });
-  }
+  //
+  // configQuery(statement, args, options) {
+  //   return new ConnectionQuery({
+  //     statement: statement,
+  //     args: args,
+  //     options: options
+  //   });
+  // }
 }
 
 

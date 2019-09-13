@@ -18,6 +18,13 @@ import ICONS_THUMB2 from './icons/thumb2.png';
 import ICONS_TRACK1 from './icons/track1.png';
 import ICONS_UNMUTED from './icons/unmuted.png';
 import IMG_BG from './img/bg.jpg';
+import IMG_BG_CAR from './img/BG_Car.png';
+import IMG_BG_CHEER from './img/BG_Cheer.jpg';
+import IMG_BG_CLIFF from './img/BG_Cliff.png';
+import IMG_BG_CUDDLING from './img/BG_Cuddling.jpg';
+import IMG_BG_EARTH from './img/BG_Earth.png';
+import IMG_BG_FROG from './img/BG_Frog.png';
+import IMG_BG_LILYFLOWER from './img/BG_Lilyflower.jpg';
 import IMG_JUNGLE_GEOMETRY from './img/jungle-geometry.png';
 import IMG_JUNGLE_GEOMETRY2 from './img/jungle-geometry2.png';
 import IMG_JUNGLE_GEOMETRY3 from './img/jungle-geometry3.png';
@@ -64,6 +71,13 @@ const FontAssets = {
 
 const ImageAssets = {
   img_background: IMG_BG,
+  img_bg_car: IMG_BG_CAR,
+  img_bg_cheer: IMG_BG_CHEER,
+  img_bg_cliff: IMG_BG_CLIFF,
+  img_bg_cuddling: IMG_BG_CUDDLING,
+  img_bg_earth: IMG_BG_EARTH,
+  img_bg_frog: IMG_BG_FROG,
+  img_bg_lilyflower: IMG_BG_LILYFLOWER,
   img_splash: IMG_SPLASH,
   img_jungle_geometry: IMG_JUNGLE_GEOMETRY,
   img_jungle_geometry2: IMG_JUNGLE_GEOMETRY2,

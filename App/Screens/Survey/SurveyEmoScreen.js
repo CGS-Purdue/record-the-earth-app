@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Button } from 'react-native';
+import { ImageBackground, Button } from 'react-native';
 import { RootView, CenterColView, PadView } from '../../Components/Views';
 import { HeadingText } from '../../Components/Text/HeadingText';
 import { CheckButton } from '../../Components/Button/CheckButton';
 import { Theme } from '../../Theme';
 
 const _colors = Theme.Colors;
+const _assets = Theme.Assets;
 const _styles  = Theme.Styles;
 
 class SurveyEmoScreen extends Component {
@@ -49,6 +50,7 @@ class SurveyEmoScreen extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
+      <ImageBackground style={_styles.bgImg} source={_assets.images.img_bg_cliff}>
       <RootView>
         <CenterColView>
           <PadView padding={[1,2]}>
@@ -84,7 +86,8 @@ class SurveyEmoScreen extends Component {
             />
         </PadView>
       </CenterColView>
-    </RootView>
+      </RootView>
+    </ImageBackground>
     );
   }
 }

@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import { checkAppDirectoriesStatus }  from '../Utilities/Filesystem';
 import { StatusDB }  from '../Components/Database/StatusDB';
 
@@ -17,20 +17,9 @@ import { StatusDB }  from '../Components/Database/StatusDB';
 // }
 
 function initalAppSetup() {
-  console.log('StatusDB', StatusDB);
-
   checkAppDirectoriesStatus();
-
-  const initstatus = new StatusDB({
-    autoconnect: true
-  });
-
-
-  console.log('\n\n INIT STATUS\n\n', initstatus);
-  // initstatus.connect();
-
-  // return  initstatus;
-
+  const statusDB = new StatusDB({autoconnect: true});
+    // return  initstatus;
     // __idMount = ;
     // __didConnect__,
     // __didIupdate__,

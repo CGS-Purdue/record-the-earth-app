@@ -9,6 +9,15 @@ import { Log } from '../../Utilities/Log';
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
 
+const LogoStyles={
+  flex: 1,
+  width: 300,
+  height: '20%',
+  top: '10%',
+  position: 'absolute',
+  resizeMode: 'contain',
+};
+
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
@@ -33,8 +42,9 @@ class HomeScreen extends Component {
       <ImageBackground style={_styles.bgImg} source={_assets.images.img_background}>
       <RootView>
          <PadView padding={(2, 3)}>
-           <CenterColView>
-             <View style={_styles.BtnContainer}>
+            <CenterColView>
+            <Image style={LogoStyles} source={_assets.logos.logo_large}/>
+            <View style={_styles.BtnContainer}>
                <TouchableOpacity
                  style={_styles.BtnBox}
                  onPress={() => navigate({ routeName: 'Survey', params: { name: 'Test' } })}

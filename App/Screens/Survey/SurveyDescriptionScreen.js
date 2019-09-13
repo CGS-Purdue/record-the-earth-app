@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Button } from 'react-native';
+import { ImageBackground, View, Button } from 'react-native';
 // import { NavigationScreenProp } from 'react-navigation';
 import { Theme } from '../../Theme';
 import { RootView, CenterColView, PadView } from '../../Components/Views';
@@ -7,6 +7,7 @@ import { StyledTextArea } from '../../Components/Forms/StyledTextArea';
 import { HeadingText } from '../../Components/Text/HeadingText';
 
 const _styles = Theme.Styles;
+const _assets = Theme.Assets;
 const _colors = Theme.Colors;
 const ButtonStyles = Object.assign(
   _styles.button_default,
@@ -34,28 +35,30 @@ class SurveyDescriptionScreen extends Component {
 
   render() {
     return (
+      <ImageBackground style={_styles.bgImg} source={_assets.images.img_background}>
       <RootView>
         <CenterColView >
           <PadView padding={[1]}>
             <HeadingText>Describe the sounds you heard</HeadingText>
-              <StyledTextArea
-                ref={this.forwardedTextRef}
-                placeholder={'Sounds of ...'}
-                onChangeText={text => this.setState({ text })}
-                value={this.state.text}
-              />
-
-              <Button
-                title="Continue"
-                style={ButtonStyles}
-                color={_colors.PRIMARY}
-                accessibilityLabel="Go to next"
-                onPress={this.handle_submit_description}
-              />
-
-              </PadView>
-          </CenterColView>
+            <View>
+            <StyledTextArea
+              ref={this.forwardedTextRef}
+              placeholder={'Sounds of ...'}
+              onChangeText={text => this.setState({ text })}
+              value={this.state.text}
+            />
+            <Button
+              title="Continue"
+              style={ButtonStyles}
+              color={_colors.PRIMARY}
+              accessibilityLabel="Go to next"
+              onPress={this.handle_submit_description}
+            />
+            </View>
+          </PadView>
+        </CenterColView>
       </RootView>
+    </ImageBackground>
     );
   }
 }
