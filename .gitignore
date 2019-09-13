@@ -22,3 +22,4 @@ node_modules/**/*
 npm-debug.*
 yarn-debug.log*
 yarn-error.log*
+App/node_modules/

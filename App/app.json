@@ -1,24 +1,28 @@
 {
   "expo": {
-    "name": "RecordTheEarthExpo",
+    "name": "RecordTheEarthExpoDevelopment",
     "description": "Updating RtE react-native app to be fully managed with expo.",
     "entryPoint": "init.js",
     "icon": "./icon.png",
     "orientation": "portrait",
-    "platforms": [ "ios", "android" ],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "primaryColor": "#cccccc",
     "privacy": "unlisted",
     "sdkVersion": "34.0.0",
     "slug": "record-the-earth-expo",
     "androidShowExponentNotificationInShellApp": true,
     "androidStatusBar": {
-        "barStyle": "dark-content",
-        "backgroundColor": "#000000"
+      "barStyle": "dark-content",
+      "backgroundColor": "#000000"
     },
     "notification": {
-        "icon": "./icon.png",
-        "color": "#000000",
-        "androidMode": "default"
+      "icon": "./icon.png",
+      "color": "#000000",
+      "androidMode": "default"
     },
     "splash": {
       "image": "./splash.jpg",
@@ -41,21 +45,21 @@
     "ios": {
       "supportsTablet": false,
       "splash": {
-          "backgroundColor": "#000000",
-          "resizeMode": "contain",
+        "backgroundColor": "#000000",
+        "resizeMode": "contain"
       }
     },
-    "android" : {
-      "package" : "org.recordtheearth.expo",
+    "android": {
+      "package": "org.recordtheearth.expo",
       "permissions": [
         "RECORD_AUDIO",
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE"
       ]
     },
-    "githubUrl": "https://github.com/charrismatic/record-the-earth-reach-native",
+    "githubUrl": "https://github.com/charrismatic/record-the-earth-expo-react-native",
     "extra": {},
-    "hooks" : {},
+    "hooks": {},
     "rnCliPath": "",
     "packagerOpts": {
       "assetExts": [
