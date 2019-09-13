@@ -1,0 +1,38 @@
+#!/bin/bash
+
+BASE_DIR="$(npm prefix)"
+
+[[ -f .npmrc ]] && source .npmrc
+
+# Android Debug Bridge version 1.0.41
+# Version 29.0.2-5738569
+# Installed as /data/projects/5_Android_Projects/AndroidSDK/platform-tools/adb
+# global options:
+#  -a         listen on all network interfaces, not just localhost
+#  -d         use USB device (error if multiple devices connected)
+#  -e         use TCP/IP device (error if multiple TCP/IP devices available)
+#  -s SERIAL  use device with given serial (overrides $ANDROID_SERIAL)
+#  -t ID      use device with given transport id
+#  -H         name of adb server host [default=localhost]
+#  -P         port of adb server [default=5037]
+#  -L SOCKET  listen on given socket for adb server [default=tcp:localhost:5037
+
+[[ -z $ANDROID_HOME ]] && echo 'ANDROID_HOME is not set. Skipping command' && exit 0
+ABD_PATH="${ANDROID_HOME}/platform-tools"
+
+ANDROID_SERIAL="025abd11727717ac"
+
+# RCT_METRO_PORT=8081
+${ABD_PATH}/adb devices -l
+
+# $ANDROID_HOME/platform-tools/adb "$@"
+# $ANDROID_HOME/platform-tools/adb connect localhost:19000
+${ABD_PATH}/adb reconnect
+
+#${ABD_PATH}/adb kill-server
+#${ABD_PATH}/adb start-server
+${ABD_PATH}/adb devices -l
+
+# /data/apps/reactotron/Reactotron.2.17.0.AppImage
+# DEBUG_LOGGING="yes"
+# export DEBUG_LOGGING

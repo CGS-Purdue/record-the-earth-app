@@ -5,7 +5,7 @@ import { SurveyBioScreen } from './SurveyBioScreen';
 import { SurveyEmoScreen } from './SurveyEmoScreen';
 import { SurveyGeoScreen } from './SurveyGeoScreen';
 import { SurveyAntScreen } from './SurveyAntScreen';
-import { SurveyEndScreen } from './SurveyEndScreen';
+import { SurveyEndScreen } from './SurveyEndScreenDev';
 
 const SurveyStack = createStackNavigator({
     SurveyDescription: { screen: SurveyDescriptionScreen },

@@ -3,9 +3,7 @@ import Constants from 'expo-constants';
 import { SectionList, Image, StyleSheet, ScrollView, Text, View } from 'react-native';
 import { Theme } from '../../Theme';
 import { Log } from '../../Utilities/Log';
-import { getAppData } from '../../Utilities/AppData';
 
-Log._info('ConfigScreen');
 const _styles = Theme.Styles;
 const _assets = Theme.Assets;
 

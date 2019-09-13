@@ -1,53 +1,21 @@
+import React from 'react';
+import { Text } from 'react-native';
+import { ThemeFonts } from '../../Theme';
+import PropTypes from 'prop-types';
+export default function TitleText(props) {
+ return (
+   <Text {...this.props} style={[this.props.style, { fontFamily: ThemeFonts.Config.TITLE_FONT }]} />
+ );
+ }
 
-    schema: {
-      id: {
-        type: 'integer',
-        info: 'primarykey',
-      },
-      datetime: {
-        type: 'text',
-        info: 'recording datetime',
-      },
-      path: {
-        type: 'text',
-        info: 'sounds file path',
-      },
-      filename: {
-        type: 'text',
-        info: 'sound file name',
-      },
-      description: {
-        type: 'text',
-        info: 'survey description',
-      },
-      duration: {
-        type: 'text',
-        info: 'recording length length',
-      },
-      location: {
-        type: 'not',
-        info: 'recording latlong',
-      },
-      emotion: {
-        type: 'text',
-        info: ' survey emo tags',
-      },
-      biophony: {
-        type: 'text',
-        info: 'survey bio tags',
-      },
-      geophony: {
-        type: 'text',
-        info: 'survey geo tags',
-      },
-      anthrophony: {
-        type: 'text',
-        info: 'survey man tags',
-      },
-      cultural: {
-        type: 'text',
-        info: 'survey culture tags',
-      },
-      pid: {
-        type: 'text',
-        info: 'id from recordtheearth website',
+TitleText.propTypes = {
+ error: PropTypes.string,
+};
+
+
+ TitleText.defaultProps = {
+   error: null,
+ };
+
+
+export { TitleText }

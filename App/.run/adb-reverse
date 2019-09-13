@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# ANDROID-BUILD
+# -------------
+# BUILD THE ANDROID PROJECT FROM THE ./android directory
+
+BASE_DIR="$(npm prefix)"
+ABD_PATH="${ANDROID_HOME}/platform-tools"
+
+[[ -f .npmrc ]] && source .npmrc
+[[ -f .env ]] && source .env
+
+# REACTOTRON
+[[ ! -z $RUN_REACT_REACTOTRON ]] &&  echo "Setting TCP:9090 For: 'REACTOTRON'" && ${ABD_PATH}/adb reverse tcp:9090 tcp:9090
+# REACT DEVTOOLS
+[[ ! -z $RUN_REACT_DEVTOOLS ]] &&  echo "Setting TCP:8097 For: 'REACT-DEVTOOLS'" && ${ABD_PATH}/adb reverse tcp:8097 tcp:8097
+# CHROME
+[[ ! -z $RUN_CHROMEDEVTOOLS ]] &&  echo "Setting TCP:8081 For: 'CHROME-DEVTOOLS'" && ${ABD_PATH}/adb reverse tcp:8081 tcp:8081
+# REACT DEBUGGER
+[[ ! -z $RUN_REACT_DEBUGGER ]] &&  echo "Setting TCP:8081 For: 'REACT-DEBUGGER'" && ${ABD_PATH}/adb reverse tcp:8081 tcp:8081
+
+# REACT-NATIVE CLI
+echo "Setting TCP:19001 For: 'EXPO-SERVER'"
+${ABD_PATH}/adb reverse tcp:19000 tcp:19000
+
+echo "Setting TCP:19000 For: 'EXPO-BUNDLER'"
+${ABD_PATH}/adb reverse tcp:19001 tcp:19001
+
+echo "Setting TCP:19000 For: 'EXPO-BUNDLER'"
+${ABD_PATH}/adb reverse tcp:19003 tcp:19003
+
+
+echo -e "\n\tREVERSE PORT LIST\n---------------------------------"
+${ABD_PATH}/adb reverse --list

@@ -7,12 +7,8 @@ import { Theme } from '../../Theme';
 import { ProgressCircle, AnimatedSpring } from '../../Components/Animated/ProgressCircle';
 import { Log } from '../../Utilities/Log';
 
-Log._info('LinksScreen');
-
 const _styles = Theme.Styles;
 const _assets = Theme.Assets;
-
-
 
 export default class LinksScreen extends Component {
   state = {

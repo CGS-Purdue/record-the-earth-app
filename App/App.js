@@ -20,13 +20,13 @@ class App extends Component {
   };
 
   _appLoadingOnFinished = () => {
-    this._info('App Loading finished');
+    // this._info('App Loading finished');
     this.setState({isReady: true});
-    this._data({
-      title: 'App',
-      src: './App',
-      data: this,
-    });
+    // this._data({
+    //   title: 'App',
+    //   src: './App',
+    //   data: this,
+    // });
   }
 
   _appLoadingOnError = (err) => {

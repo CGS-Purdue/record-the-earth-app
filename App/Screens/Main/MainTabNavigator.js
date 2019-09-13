@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from 'react-navigation';
 import { TabBarIcon } from '../../Components/TabBar/TabBarIcon';
 import { HomeScreen } from './HomeScreen';
 import { LinksScreen } from './LinksScreen';
-// import { LinksScreen } from './LinksScreen';
+import { SurveyEndScreen } from '../Survey/SurveyEndScreenDev';
 import { ConfigScreen } from './ConfigScreen';
 import { Theme } from '../../Theme';
 

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# EXPO HELPER
+# -------------
+# device reverse tunnel        exp://127.0.0.1:19000
+# Metro Bundler on                        port 19001
+# Expo DevTools is running at http://localhost:19002
+# echo "Configuring extra ports..."
+# RCT_METRO_PORT=8081
+BASE_DIR="$(npm prefix)"
+BIN_DIR="$(npm bin)"
+
+[[ -f .npmrc ]] && source .npmrc
+[[ -f .env ]] && source .env
+
+DEBUG_LOGGING="yes"
+
+unset RUN_EXPO_ENV
+unset RUN_NODE_ENV
+
+[[ ! -z $NODE_ENV ]] && RUN_NODE_ENV="${RUN_NODE_ENV},NODE_ENV=${NODE_ENV}"
+[[ ! -z $NODE_PATH ]] && RUN_NODE_ENV="${RUN_NODE_ENV},NODE_PATH=${NODE_PATH}"
+[[ ! -z $NODE_DEBUG ]] && RUN_NODE_ENV="${RUN_NODE_ENV},NODE_DEBUG=${NODE_DEBUG}"
+[[ ! -z $NODE_OPTIONS ]] && RUN_NODE_ENV="${RUN_NODE_ENV},NODE_OPTIONS=${NODE_OPTIONS}"
+
+[[ ! -z $NODE_PATH ]] && RUN_EXPO_ENV="${RUN_EXPO_ENV},NODE_PATH=${NODE_PATH}"
+[[ ! -z $NODE_OPTIONS ]] && RUN_EXPO_ENV="${RUN_EXPO_ENV},NODE_OPTIONS=${NODE_OPTIONS}"
+[[ ! -z $NODE_DEBUG ]] && RUN_EXPO_ENV="${RUN_EXPO_ENV},NODE_DEBUG=${NODE_DEBUG}"
+[[ ! -z $DEBUG_LOGGING ]] && RUN_EXPO_ENV="${RUN_EXPO_ENV},DEBUG_LOGGING=${DEBUG_LOGGING}"
+[[ ! -z $REACT_DEBUGGER ]] && RUN_EXPO_ENV="${RUN_EXPO_ENV},REACT_DEBUGGER=${REACT_DEBUGGER}"
+[[ ! -z $REACT_EDITOR ]] && RUN_EXPO_ENV="${RUN_EXPO_ENV},REACT_EDITOR=${REACT_EDITOR}"
+[[ ! -z $EXPO_DEBUG ]] && RUN_EXPO_ENV="${RUN_EXPO_ENV},EXPO_DEBUG=${EXPO_DEBUG}"
+
+RUN_NODE_ENV="${RUN_NODE_ENV//,/ }"
+RUN_EXPO_ENV="${RUN_EXPO_ENV//,/ }"
+
+RUN_EXPO_FLAGS="$@"
+
+echo -e "NODE ENV:\n${RUN_NODE_ENV}"
+echo -e "EXPO ENV:\n${RUN_EXPO_ENV}"
+echo -e "EXPO FLAGS:\n${RUN_EXPO_FLAGS}"
+
+export ${RUN_EXPO_ENV} && node ${BASE_DIR}/node_modules/.bin/expo ${RUN_EXPO_FLAGS}

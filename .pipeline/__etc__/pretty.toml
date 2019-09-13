@@ -1,0 +1,23 @@
+# .prettierrc.toml
+#  ====================
+#  PRETTIRE CONFIG FILE
+#  ====================
+#filepath = "<string>"
+arrowParens  = 'always'
+bracketSpacing = true
+endOfLine = 'lf'
+htmlWhitespaceSensitivity = 'strict'
+jsxBracketSameLine = false
+jsxSingleQuote = true
+printWidth = 100
+proseWrap = 'always'
+semi = true
+singleQuote = true
+tabWidth = 2
+trailingComma = "es5"
+useTabs = false
+#bracesSpacing = true
+#quoteProps = 'consistent'
+#alignObjectProperties = true
+#spaceBeforeFunctionParen = true
+

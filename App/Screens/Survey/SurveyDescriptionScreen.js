@@ -65,4 +65,3 @@ SurveyDescriptionScreen.navigationOptions = {
 };
 
 export { SurveyDescriptionScreen };
- ll

@@ -2,15 +2,13 @@ import React, { Component, createRef } from 'react';
 import { View, Button } from 'react-native';
 import { Theme } from '../../Theme';
 import { RootView, CenterView, PadView } from '../../Components/Views';
-import { soundDB } from '../../Database/Models/SoundDB';
+// import { SoundDB } from '../../Model/SoundDB';
 import { MonoText } from '../../Components/Text/MonoText';
 
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
-console.log(soundDB);
-const sdb = soundDB();
-console.log(sdb);
-
+const SoundDB = {};
+console.log(SoundDB);
 
 let suvery = {
   tags: {
@@ -94,7 +92,9 @@ class SurveyEndScreen extends Component {
   }
 
   submitSurvey = () => {
-    console.log('sdb', sdb);
+
+    console.log('SoundDB', SoundDB);
+
     let { tags, ...rest } = this.state._survey;
     let surveyTags = this.mapSurveyToTags(tags);
     let survey = Object.assign({...rest}, surveyTags);
@@ -106,7 +106,8 @@ class SurveyEndScreen extends Component {
 
 
   render() {
-    console.log('sdb', sdb);
+    console.log('SoundDB', SoundDB);
+
     const { navigate } = this.props.navigation;
     return (
       <RootView>

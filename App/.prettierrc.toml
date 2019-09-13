@@ -1,27 +1,7 @@
-# .prettierrc.toml
-# filepath = "<string>"
-arrowParens  = 'always'
-bracketSpacing = true
-endOfLine = 'lf'
-htmlWhitespaceSensitivity = 'strict'
-jsxBracketSameLine = false
-jsxSingleQuote = true
-printWidth = 100
-proseWrap = 'always'
-semi = true
-singleQuote = true
-tabWidth = 2
-trailingComma = "es5"
-useTabs = false
-
-
-# bracesSpacing = true
-# quoteProps = 'consistent'
-# alignObjectProperties = true
-# spaceBeforeFunctionParen = true
-#  ====================
-#  CLI EQUIVALENT FLAGS
-#  ====================
+# ==============================
+#  RETTIRE CONFIGIGURABLE SCRIPT
+# ==============================
+# [FLAGS]
 # --no-bracket-spacing
 # --end-of-line lf
 # --no-space-empty-fn
@@ -40,3 +20,4 @@ useTabs = false
 # --stdin-filepath <string>
 # --parser <string>
 # --require-pragma
+

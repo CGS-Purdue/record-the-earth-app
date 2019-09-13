@@ -13,7 +13,7 @@
     "androidShowExponentNotificationInShellApp": true,
     "androidStatusBar": {
         "barStyle": "dark-content",
-        "backgroundColor": "#000000",
+        "backgroundColor": "#000000"
     },
     "notification": {
         "icon": "./icon.png",
@@ -43,7 +43,6 @@
       "splash": {
           "backgroundColor": "#000000",
           "resizeMode": "contain",
-          "image": "./splash.jpg"
       }
     },
     "android" : {

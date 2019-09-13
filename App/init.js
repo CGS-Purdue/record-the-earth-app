@@ -1,12 +1,14 @@
 import { registerRootComponent } from 'expo';
 import { activateKeepAwake } from 'expo-keep-awake';
-import { YellowBox } from 'react-native';
-// import { initalAppSetup } from './LifeCycle/InitialSetup';
+// import { YellowBox } from 'react-native';
+import { initalAppSetup } from './LifeCycle/InitialSetup';
 // import { Log } from './Utilities/Log';
+import { EXPO_CONSTANTS } from './Utilities/AppData';
+
 import App  from './App';
 
 // Log._info('Init');
-// if (__DEV__) {
+if (__DEV__) {
 //   YellowBox.ignoreWarnings([
 //     'Warning: ...',
 //     'Warning: Async Storage',
@@ -42,6 +44,6 @@ import App  from './App';
 
   activateKeepAwake();
 
-
+}
 initalAppSetup();
 registerRootComponent(App);

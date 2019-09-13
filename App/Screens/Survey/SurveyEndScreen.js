@@ -2,14 +2,17 @@ import React, { Component, createRef } from 'react';
 import { View, Button } from 'react-native';
 import { Theme } from '../../Theme';
 import { RootView, CenterView, PadView } from '../../Components/Views';
-import { SoundDB } from '../../Database/Models/SoundDB';
+// import { SoundDB } from '../../Database/Model/SoundDB';
 import { MonoText } from '../../Components/Text/MonoText';
 
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
 
+const SoundDB = {};
 const sdb = SoundDB;
-console.log(sdb);
+
+
+
 class SurveyEndScreen extends Component {
   constructor(props) {
     super(props);

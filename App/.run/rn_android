@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# -------------------------
+# react-native run-android
+# -------------------------
+# builds your app and starts it on a connected Android emulator or device
+#   --root [string]           Override the root directory for the android build
+#                             (which contains the android directory) (default: "")
+#   --variant [string]        Specify your app's build variant (default: "debug")
+#   --appFolder [string]      Specify a different application folder name for the android source.
+#                             If not, we assume is "app" (default: "app")
+#   --appId [string]          Specify an applicationId to launch after build. (default: "")
+#   --appIdSuffix [string]    Specify an applicationIdSuffix to launch after build. (default: "")
+#   --main-activity [string]  Name of the activity to start (default: "MainActivity")
+#   --deviceId [string]       builds your app and starts it on a specific device/simulator with the given device id (listed by running "adb devices" on the command line).
+#   --no-packager             Do not launch packager while building
+#   --port [number]            (default: 8081)
+#   --terminal [string]       Launches the Metro Bundler in a new window using the specified terminal path.
+#   --tasks [list]            Run custom Gradle tasks. By default it's "installDebug"
+#   --no-jetifier             Do not run "jetifier" – the AndroidX transition tool.
+#                             By default it runs before Gradle to ease working with libraries that don't
+#                             support AndroidX yet. See more at: https://www.npmjs.com/package/jetifier.
+#   -h, --help                output usage information
+#
+BASE_PATH="$(npm prefix)"
+
+[[ -f .npmrc ]] && source .npmrc
+
+NODE_RUN_ENV=""
+NODE_RUN_FLAGS=""
+
+
+${NODE_RUN_ENV} node ${NODE_RUN_FLAGS} ${BASE_PATH}/./node_modules/react-native/local-cli/cli.js run-android

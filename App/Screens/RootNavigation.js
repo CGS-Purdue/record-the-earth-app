@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { MainTabNavigator } from './Main/MainTabNavigator';
-import { RecordStack } from './Record/RecordStack';
+import { RecordScreen } from './Record/RecordScreen';
 import { SurveyStack } from './Survey/SurveyStack';
 
 const RootNavigation = createSwitchNavigator({
     Main: { screen: MainTabNavigator },
-    Record: { screen: RecordStack },
+    Record: { screen: RecordScreen },
     Survey: { screen: SurveyStack },
   },
   {
@@ -26,7 +26,7 @@ const RootNavigation = createSwitchNavigator({
 //     fontWeight: 'bold',
 //   },
 // },
-//
+
 const AppNavContainer = createAppContainer(RootNavigation);
 
 export { AppNavContainer };
