@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { ImageBackground, StyleSheet, Button } from 'react-native';
+import { Button,ImageBackground, StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
-import { CenterColView, RootView, PadView } from '../../Components/Views';
-import { HeadingText } from '../../Components/Text/HeadingText';
+
 import { CheckButton } from '../../Components/Button/CheckButton';
+import { HeadingText } from '../../Components/Text/HeadingText';
+import { CenterColView, PadView,RootView } from '../../Components/Views';
 import { Theme } from '../../Theme';
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
@@ -87,7 +88,7 @@ class SurveyBioScreen extends Component {
             accessibilityLabel="Go to next"
             onPress={() => {
               let _survey_data = this.getSurveyState();
-              navigate('SurveyEmo', { survey_data: _survey_data })
+              navigate('SurveyEmo', { survey_data: _survey_data });
             }}
           />
           </PadView>
@@ -99,7 +100,7 @@ class SurveyBioScreen extends Component {
 }
 SurveyBioScreen.navigationOptions = {
   title: 'SurveyBioScreen',
-}
+};
 
 
 // <View style={Styles.innerview}>

@@ -13,7 +13,7 @@ const dbSchema = {
       type: 'boolean',
       info: 'server responded',
     },
-  }
+  },
 };
 
-export { dbSchema }
+export { dbSchema };

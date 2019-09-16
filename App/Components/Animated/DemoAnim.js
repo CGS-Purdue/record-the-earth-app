@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import {
+  Animated,
   StyleSheet,
   View,
-  Animated,
 } from "react-native";
 
 
@@ -64,4 +64,4 @@ const styles = StyleSheet.create({
 });
 
 
-export { DemoAnim }
+export { DemoAnim };

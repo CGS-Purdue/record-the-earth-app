@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { Platform, Text, View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
+import React, { Component } from 'react';
+import { Platform, StyleSheet,Text, View } from 'react-native';
 
 export default class LocationFunctions extends Component {
   state = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Platform } from 'react-native';
+import { Platform,StyleSheet } from 'react-native';
 
 const BACKGROUND_COLOR = '#FFF8ED';
 

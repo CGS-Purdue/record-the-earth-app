@@ -1,6 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
+
 import TaskList from './CheckList';
 
 export function CheckListScreen({ error }) {

@@ -3,7 +3,7 @@ import { Reactotron } from 'reactotron-react-native';
 
 class LogUtils {
   static log(message, ...args) {
-    if (__DEV__) return;
+    if (__DEV__) {return;}
     Reactotron.display({
       name: 'LOG',
       preview: message,
@@ -11,7 +11,7 @@ class LogUtils {
     });
   }
   static warn(message, ...args) {
-    if (__DEV__) return;
+    if (__DEV__) {return;}
     Reactotron.display({
       name: 'WARN',
       preview: message,
@@ -20,7 +20,7 @@ class LogUtils {
     });
   }
   static error(message, ...args) {
-    if (__DEV__) return;
+    if (__DEV__) {return;}
     Reactotron.display({
       name: 'ERROR',
       preview: message,
@@ -30,4 +30,4 @@ class LogUtils {
   }
 }
 
-export { LogUtils }
+export { LogUtils };

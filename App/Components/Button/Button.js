@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { TouchableNativeFeedback, Button } from 'react-native';
+import React, { Component } from 'react';
+import { Button,TouchableNativeFeedback } from 'react-native';
+
 import { ThemeDefaultVariables } from '../../Theme/Variables';
 
 // Props

@@ -57,8 +57,8 @@ function _forward(Wrapped) {
   const name = Wrapped.displayName || Wrapped.name;
   passForward.displayName = `WrappedComponent(${name})`;
 
-  return forwardRef(passForward)
+  return forwardRef(passForward);
 }
 
 
-export { _forward, logProps, logLayout, logStyle }
+export { _forward, logProps, logLayout, logStyle };

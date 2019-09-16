@@ -1,10 +1,12 @@
-import React, { Component, createRef } from 'React';
 import { SQLite } from 'expo-sqlite';
+
+import React, { Component, createRef } from 'React';
+
 import { Connection } from '../../../Database/Connection';
+import { Database } from '../../Database/Model/SoundDB';
 import { SoundscapeDBConfig as DBConfig } from './Props/SoundscapeConfig';
 import { SoundscapeSchema } from './Props/SoundscapeSchema';
 import { StatusStatements } from './Props/SoundscapeStatements';
-import { Database } from '../../Database/Model/SoundDB';
 
 const _config = DBConfig;
 const _db_name = _config.name;
@@ -74,4 +76,4 @@ class SoundDB extends Component {
 }
 
 
-export { SoundDB }
+export { SoundDB };

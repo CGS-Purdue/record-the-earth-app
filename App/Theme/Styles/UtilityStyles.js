@@ -34,4 +34,4 @@ const UtilityStyles = StyleSheet.create({
 });
 
 
-export { UtilityStyles }
+export { UtilityStyles };

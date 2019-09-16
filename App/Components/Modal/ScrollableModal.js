@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {
+  Button,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
-  Button,
   View,
-  SafeAreaView,
 } from 'react-native';
 import Modal from 'react-native-modal';
 

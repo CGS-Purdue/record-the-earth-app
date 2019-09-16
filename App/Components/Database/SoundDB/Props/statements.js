@@ -125,7 +125,7 @@ const _arguments = {
   select: { args: 1, type: 'id' , required: false },
   updatePid: { args: 0, type: null , required: false },
   all : { args: 0, type: null , required: false },
-}
+};
 
 const dbStatements = _statements;
 dbStatements._arguments = _arguments;

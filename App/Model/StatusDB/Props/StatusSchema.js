@@ -13,7 +13,7 @@ const StatusSchema = {
       type: 'boolean',
       info: 'server responded',
     },
-  }
+  },
 };
 
-export { StatusSchema }
+export { StatusSchema };

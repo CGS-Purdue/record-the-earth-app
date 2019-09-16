@@ -26,8 +26,8 @@
     },
     "splash": {
       "image": "./splash.jpg",
-      "resizeMode": "contain",
-      "backgroundColor": "#000000"
+      "backgroundColor": "#000000",
+      "resizeMode": "contain"
     },
     "version": "1.0.0",
     "updates": {

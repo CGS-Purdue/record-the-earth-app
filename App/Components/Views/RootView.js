@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, SafeAreaView } from 'react-native';
+import { SafeAreaView,View } from 'react-native';
+
 import { Theme } from  '../../Theme';
 
 const _styles = Theme.Styles;

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Text } from 'react-native';
+
 import { Theme } from '../../Theme';
 
 const _styles = Theme.Styles;
@@ -25,7 +26,7 @@ class HeadingText extends Component {
     let head_style = this.getHeadingStyle();
     return (
       <Text {...this.props} style={[this.props.style, _styles.font.font_title, head_style]} />
-    )
+    );
   }
 }
 
@@ -35,4 +36,4 @@ HeadingText.defaultProps = {
   level: 3,
 };
 
-export { HeadingText }
+export { HeadingText };

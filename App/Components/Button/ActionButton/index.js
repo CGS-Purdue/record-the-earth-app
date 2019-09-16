@@ -1,7 +1,7 @@
-import React, { Component, ReactElement } from 'react'
+import React, { Component, ReactElement } from 'react';
 
-import { ActionButtonItem } from './lib/ActionButtonItem'
-import { ActionButton } from './lib/ActionButton'
+import { ActionButton } from './lib/ActionButton';
+import { ActionButtonItem } from './lib/ActionButtonItem';
 
 // export class ActionButtonItem extends Component <ActionButtonItemProperties> {}
 
@@ -9,4 +9,4 @@ import { ActionButton } from './lib/ActionButton'
 //   static Item: typeof ActionButtonItem
 // }
 
-export { ActionButton, ActionButtonItem}
+export { ActionButton, ActionButtonItem};

@@ -1,0 +1,33 @@
+#!/bin/bashs
+
+# -----------------s
+ if [ "$BASE_PATH" == "$INIT_CWD" ];
+# then
+
+
+if [ $# = 0 ];  then
+
+    LINT_ARGs="\"./*.js\" \"${INIT_CWD}/./*.j\s\" \"${INIT_CWD}/./**/*.js\""
+
+
+else
+
+    LINT_ARGS="$@"
+
+fi
+
+
+${NODE_RUN_ENV} node ${NODE_RUN_FLAGS} \
+    ${BASE_PATH}/./node_modules/.bin/eslint  \
+      --config "${BASE_PATH}/.eslintrc.js" \
+      --ignore-pattern '!node_modules' \
+      --ext js'\
+      --cache false \
+      --fix \
+        ${LINT_ARGS}
+
+
+
+
+
+exit 0

@@ -1,6 +1,6 @@
 import { dbConfig } from './config';
-import { dbStatements } from './statements';
 import { dbSchema }  from './schema';
+import { dbStatements } from './statements';
 
 export const DBProps = {
   config: Object.freeze(dbConfig),

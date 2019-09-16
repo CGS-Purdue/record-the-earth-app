@@ -1,6 +1,6 @@
+import { FontVariables } from '../Fonts';
 import { Layout } from '../Layout';
 import { m, p } from './LayoutStyles';
-import { FontVariables } from '../Fonts';
 
 const _font_vars = FontVariables;
 const _layout = Layout;

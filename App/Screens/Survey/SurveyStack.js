@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { createStackNavigator } from 'react-navigation';
-import { SurveyDescriptionScreen } from './SurveyDescriptionScreen';
-import { SurveyBioScreen } from './SurveyBioScreen';
-import { SurveyEmoScreen } from './SurveyEmoScreen';
-import { SurveyGeoScreen } from './SurveyGeoScreen';
+
 import { SurveyAntScreen } from './SurveyAntScreen';
+import { SurveyBioScreen } from './SurveyBioScreen';
+import { SurveyDescriptionScreen } from './SurveyDescriptionScreen';
+import { SurveyEmoScreen } from './SurveyEmoScreen';
 import { SurveyEndScreen } from './SurveyEndScreenDev';
+import { SurveyGeoScreen } from './SurveyGeoScreen';
 
 const SurveyStack = createStackNavigator({
     SurveyDescription: { screen: SurveyDescriptionScreen },

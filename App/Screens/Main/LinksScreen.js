@@ -1,12 +1,9 @@
-import React, { Component } from 'react';
 import * as WebBrowser from 'expo-web-browser';
-import { Ionicons } from '@expo/vector-icons';
-import { ImageBackground, StyleSheet, Image, Text, View, Button } from 'react-native';
-import Touchable from 'react-native-platform-touchable';
-import LocationFunctions from '../../Utilities/LocationFunctions';
-import { Log } from '../../Utilities/Log';
+import React, { Component } from 'react';
+import { Button,ImageBackground, StyleSheet, Text, View } from 'react-native';
+
+import { AnimatedSpring,ProgressCircle } from '../../Components/Animated/ProgressCircle';
 import { Theme } from '../../Theme';
-import { ProgressCircle, AnimatedSpring } from '../../Components/Animated/ProgressCircle';
 
 const _styles = Theme.Styles;
 const _assets = Theme.Assets;
@@ -21,7 +18,7 @@ export default class LinksScreen extends Component {
     if (this.state.syncing) {return false;}
     this.setState({ syncing: true });
     try {
-      this.setState({progressValue: ((this.state.progressValue + .13) % 1)});
+      this.setState({progressValue: ((this.state.progressValue + 0.13) % 1)});
     } catch (error) {
       this.setState({ error });
     }
@@ -46,7 +43,6 @@ export default class LinksScreen extends Component {
     return (
       <ImageBackground style={_styles.bgImg} source={_assets.images.img_background}>
       <View>
-        <LocationFunctions></LocationFunctions>
         <Text style={LinksScreenStyles.optionsTitleText}>Test Area</Text>
         <ProgressCircle
           value={this.state.progressValue}
@@ -60,12 +56,12 @@ export default class LinksScreen extends Component {
           onPress={this._handlePressButton}
           onPressIn ={()=>{
             console.log('TouchableOpacity onPressIn');
-            console.log(Date.now())
+            console.log(Date.now());
           }}
           onLongPress ={(e)=>{
            console.log(' onLongPress');
            console.log(Date.now());
-           console.log(e.type); //undefined
+           console.log(e.type);
           }}
         />
       </View>

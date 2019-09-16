@@ -18,4 +18,4 @@ const defaultSoundscape = {
 };
 
 
-export { defaultSoundscape }
+export { defaultSoundscape };

@@ -1,8 +1,9 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
-import CheckListItem from './CheckListItem';
+
 import { selectItem } from '../../Lib/redux';
+import CheckListItem from './CheckListItem';
 
 export function CheckList({ loading, items, onSelectedItem }) {
   const events = {
@@ -66,9 +67,9 @@ CheckList.defaultProps = {
 };
 
 
-const listStyle={
-  backgroundColor: 'red'
-}
+const listStyle = {
+  backgroundColor: 'red',
+};
 
 export default connect(
   ({ items }) => ({

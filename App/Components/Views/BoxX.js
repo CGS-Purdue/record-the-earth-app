@@ -4,7 +4,7 @@ import React from 'react';
 export default function BoxX({ children }, props) {
   const boxStyle = {
     display: 'flex',
-    padding: '1em'
+    padding: '1em',
   };
 
   const boxInStyle = {

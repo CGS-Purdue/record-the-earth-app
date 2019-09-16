@@ -56,8 +56,8 @@ const dbSchema = {
       isUploaded: {
         type: 'bool',
         info: 'is the file uploaded',
-      }
+      },
     },
   };
 
-  export { dbSchema }
+  export { dbSchema };

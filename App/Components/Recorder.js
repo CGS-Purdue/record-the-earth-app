@@ -1,12 +1,13 @@
-import React from 'react';
+import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import * as Permissions from 'expo-permissions';
-import { Audio } from 'expo-av';
-import { Image, Alert, Slider, Text, TouchableHighlight, ActivityIndicator, View } from 'react-native';
+import React from 'react';
+import { ActivityIndicator, Alert, Image, Slider, Text, TouchableHighlight, View } from 'react-native';
+
+import { Theme,ThemeColors, ThemeIcons } from '../Theme';
 import { saveAudioRecordingFile } from '../Utilities/Filesystem';
-import { ThemeIcons, ThemeColors, Theme } from '../Theme';
-import { CenterColView, CenterView, RootView } from './Views';
 import { MonoText } from './Text';
+import { CenterColView, CenterView, RootView } from './Views';
 
 const _styles = Theme.Styles;
 
@@ -127,7 +128,7 @@ export default class Recorder extends React.Component {
           style: 'cancel',
       },{
           text: 'OK',
-          onPress: () => this._saveRecording()
+          onPress: () => this._saveRecording(),
       }],
       {cancelable: false},
     );
@@ -138,7 +139,7 @@ export default class Recorder extends React.Component {
   }
 
   getAudioFormat() {
-    return JSON.parse(JSON.stringify(this.format))
+    return JSON.parse(JSON.stringify(this.format));
   }
 
   async prepareAudio() {
@@ -155,7 +156,7 @@ export default class Recorder extends React.Component {
   }
 
   async recordStart() {
-    if (this.state.syncing){return false}
+    if (this.state.syncing){return false;}
     this.setState({syncing:true});
 
     await this.prepareAudio();
@@ -173,43 +174,43 @@ export default class Recorder extends React.Component {
       const statusUpdater = (status) => {
         this.setState({recordingState:status});
         if (status.durationMillis >= MAX_DURATION) {
-          this.recordStop()
+          this.recordStop();
         } else if (this.state.stopRequested) {
-          this.recordStop()
+          this.recordStop();
         }
         this.updateRecorderState();
       };
 
       this.recorder.setProgressUpdateInterval(2000);
-      this.recorder.setOnRecordingStatusUpdate((status)=>{statusUpdater(status)});
-      await this.startAsyncRecord()
+      this.recorder.setOnRecordingStatusUpdate((status)=>{statusUpdater(status);});
+      await this.startAsyncRecord();
 
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
 
     this.setState({syncing:false});
-  };
+  }
 
   async startAsyncRecord(){
-    await this.recorder.startAsync()
-    this.setState({recordingStarted:true})
+    await this.recorder.startAsync();
+    this.setState({recordingStarted:true});
   }
 
   async stopAsyncRecord(){
-    await this.recorder.stopAndUnloadAsync()
-    this.setState({recordingStarted:false})
-    this.setState({stopRequested:false})
+    await this.recorder.stopAndUnloadAsync();
+    this.setState({recordingStarted:false});
+    this.setState({stopRequested:false});
   }
 
   async recordStop () {
-    if (this.state.syncing){return false}
-    this.setState({syncing:true})
-    this.setState({stopRequested:true})
+    if (this.state.syncing){return false;}
+    this.setState({syncing:true});
+    this.setState({stopRequested:true});
 
     try {
-      this.recorder.setProgressUpdateInterval(0)
-      this.recorder.setOnRecordingStatusUpdate(null)
+      this.recorder.setProgressUpdateInterval(0);
+      this.recorder.setOnRecordingStatusUpdate(null);
       await this.stopAsyncRecord();
     } catch (error) {
       console.log(error);
@@ -219,7 +220,7 @@ export default class Recorder extends React.Component {
     this.recording_info = info;
     this._onRecordEnd();
     console.log({info});
-    this.setState({syncing: false})
+    this.setState({syncing: false});
   }
 
 
@@ -292,7 +293,7 @@ export default class Recorder extends React.Component {
             </View>
           </View>
         </CenterColView>
-      )
+      );
     }
   }
 }
@@ -304,4 +305,4 @@ Recorder.defaultProps = {
   )),
 };
 
-export { Recorder }
+export { Recorder };

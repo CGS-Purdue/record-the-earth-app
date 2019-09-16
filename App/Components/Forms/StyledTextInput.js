@@ -1,5 +1,6 @@
-import React, { Component, forwardRef, createRef } from 'react';
+import React, { Component, createRef,forwardRef } from 'react';
 import { TextInput, View} from 'react-native';
+
 import { Theme } from '../../Theme';
 
 
@@ -9,7 +10,7 @@ const _colors = Theme.Colors;
 
 const formDefaultProps = {
   placeholderTextColor: _colors.GRA_600,
-}
+};
 
 const TextInputStyle = Object.assign(
   {
@@ -37,7 +38,7 @@ class StyledTextInput extends Component {
   render() {
     const { style, ...rest } = this.props;
 
-    return(
+    return (
       <TextInput
         ref={this.forwardedRef}
         style={TextInputStyle}
@@ -47,4 +48,4 @@ class StyledTextInput extends Component {
   }
 }
 
-export { StyledTextInput }
+export { StyledTextInput };

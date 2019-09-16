@@ -1,8 +1,9 @@
-import Reactotron, { networking, openInEditor, createStore  } from 'reactotron-react-native'
-import { LogUtils } from './ReactotronLog';
+import Reactotron, { createStore,networking, openInEditor  } from 'reactotron-react-native';
+import { reactotronRedux } from 'reactotron-redux';
+import { composeWithDevTools } from 'remote-redux-devtools';
+
 import { COMMAND_SET } from './ReactotronCommands';
-import { reactotronRedux } from 'reactotron-redux'
-import { composeWithDevTools } from 'remote-redux-devtools'
+import { LogUtils } from './ReactotronLog';
 
 //  IGNORE WARNINGS {
 //  AsyncStorage
@@ -10,7 +11,7 @@ import { composeWithDevTools } from 'remote-redux-devtools'
 //  }
 
 const middleware = [];
-const HOST='127.0.0.1:9090';
+const HOST = '127.0.0.1:9090';
 const ASYNC_IGNORE = [''];
 const NETWORKING_IGNORE_TYPES = /^(image)\/.*$/i;
 const NETWORKING_IGNORE_URLS = /\/(logs|symbolicate)$/;
@@ -33,7 +34,7 @@ if (__DEV__) {
 //   compose(...middleware),
 // );
 
-var Tron = new LogUtils;
+var Tron = new LogUtils();
 console.tron = Reactotron.log;
 
 export default Reactotron
@@ -59,4 +60,4 @@ Reactotron.onCustomCommand(COMMAND_SET.devtools_open);
 Reactotron.onCustomCommand(COMMAND_SET.devtools_reload);
 Reactotron.onCustomCommand(COMMAND_SET.test);
 
-export { Reactotron }
+export { Reactotron };

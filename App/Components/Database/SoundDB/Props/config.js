@@ -12,4 +12,4 @@ const dbConfig = {
   size : ConfigSize,
 };
 
-export { dbConfig }
+export { dbConfig };

@@ -26,7 +26,7 @@ const br = {
   br_left: { LeftWidth: 1 },
   br_right: { RightWidth: 1 },
   br_bottom: { BottomWidth: 1 },
-  br_w1 : { borderTopWidth: 1 , borderLeftWidth: 1 , borderRightWidth: 1 , borderBottomWidth: 1  }
+  br_w1 : { borderTopWidth: 1 , borderLeftWidth: 1 , borderRightWidth: 1 , borderBottomWidth: 1  },
 };
 
 const p = {

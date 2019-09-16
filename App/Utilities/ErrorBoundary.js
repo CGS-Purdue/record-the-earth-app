@@ -1,6 +1,6 @@
+import { ErrorRecovery, ErrorUtils } from 'expo';
 import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
-import { ErrorRecovery, ErrorUtils } from 'expo';
 
 // In Development: If you're serving your app from Expo CLI,
 // the fatal JS error will be reported to the React Native RedBox and no other action will be taken.
@@ -36,7 +36,7 @@ class ErrorBoundary extends Component {
         sender: 'mobile-ops',
         message: 'Fatal error !',
         info: {
-          error: lastError
+          error: lastError,
         }});
       await AsyncStorage.removeItem('lastError');
     }
@@ -59,7 +59,7 @@ const myErrorHandler = (e, isFatal) => {
   // after all, if you want to forward to default error handler
   // just call the variable we stored in the previous step
   // defaultErrorHandler(e, isFatal)
-}
+};
 
 const defaultHandler = (ErrorUtils.getGlobalHandler && ErrorUtils.getGlobalHandler()) || ErrorUtils._globalHandler;
 const customErrorHandler = async (err, isFatal) => {
@@ -71,4 +71,4 @@ ErrorUtils.setGlobalHandler(customErrorHandler);
 
 
 
-export { ErrorBoundary }
+export { ErrorBoundary };

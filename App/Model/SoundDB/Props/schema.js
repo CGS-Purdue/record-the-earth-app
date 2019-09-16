@@ -56,8 +56,8 @@ const SoundscapeSchema = {
       isUploaded: {
         type: 'bool',
         info: 'is the file uploaded',
-      }
+      },
     },
   };
 
-  export { SoundscapeSchema }
+  export { SoundscapeSchema };

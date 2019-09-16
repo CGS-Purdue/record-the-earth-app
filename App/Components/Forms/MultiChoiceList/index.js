@@ -1,16 +1,16 @@
 'use strict';
 
-import React, { PropTypes } from 'react'
+import React, { PropTypes } from 'react';
 import {
+  Image,
+  ListView,
   Text,
   TouchableOpacity,
   View,
-  Image,
-  ListView
 } from 'react-native';
 
-import BaseComponent from './BaseComponent'
-import Styles from './styles'
+import BaseComponent from './BaseComponent';
+import Styles from './styles';
 
 const propTypes = {
     options: React.PropTypes.array.isRequired,
@@ -23,7 +23,7 @@ const propTypes = {
     renderText: React.PropTypes.func,
     style: View.propTypes.style,
     optionStyle: View.propTypes.style,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
 };
 const defaultProps = {
     options: [],
@@ -31,7 +31,7 @@ const defaultProps = {
     onSelection(option){},
     style:{},
     optionStyle:{},
-    disabled: false
+    disabled: false,
 };
 
 class MultipleChoice extends BaseComponent {
@@ -45,7 +45,7 @@ class MultipleChoice extends BaseComponent {
         this.state = {
             dataSource: ds.cloneWithRows(this.props.options),
             selectedOptions: this.props.selectedOptions || [],
-            disabled: this.props.disabled
+            disabled: this.props.disabled,
         };
 
         this._bind(
@@ -59,13 +59,13 @@ class MultipleChoice extends BaseComponent {
     componentWillReceiveProps(nextProps) {
         this._updateSelectedOptions(nextProps.selectedOptions);
         this.setState({
-            disabled: nextProps.disabled
+            disabled: nextProps.disabled,
         });
     }
     _updateSelectedOptions(selectedOptions) {
         this.setState({
             selectedOptions,
-            dataSource: this.ds.cloneWithRows(this.props.options)
+            dataSource: this.ds.cloneWithRows(this.props.options),
         });
     }
 
@@ -104,7 +104,7 @@ class MultipleChoice extends BaseComponent {
 
     _renderIndicator(option) {
         if (this._isSelected(option)) {
-            if(typeof this.props.renderIndicator === 'function') {
+            if (typeof this.props.renderIndicator === 'function') {
                 return this.props.renderIndicator(option);
             }
 
@@ -119,16 +119,16 @@ class MultipleChoice extends BaseComponent {
 
     _renderSeparator(option) {
 
-        if(typeof this.props.renderSeparator === 'function') {
+        if (typeof this.props.renderSeparator === 'function') {
             return this.props.renderSeparator(option);
         }
 
-        return (<View style={Styles.separator}></View>);
+        return (<View style={Styles.separator} />);
     }
 
     _renderText(option) {
 
-        if(typeof this.props.renderText === 'function') {
+        if (typeof this.props.renderText === 'function') {
             return this.props.renderText(option);
         }
 
@@ -137,7 +137,7 @@ class MultipleChoice extends BaseComponent {
 
     _renderRow(option) {
 
-        if(typeof this.props.renderRow === 'function') {
+        if (typeof this.props.renderRow === 'function') {
             return this.props.renderRow(option);
         }
 
@@ -147,7 +147,7 @@ class MultipleChoice extends BaseComponent {
             <View style={this.props.optionStyle}>
                 <TouchableOpacity
                     activeOpacity={disabled ? 1 : 0.7}
-                    onPress={!disabled ? ()=>{this._selectOption(option)} : null}
+                    onPress={!disabled ? ()=>{this._selectOption(option);} : null}
                 >
                     <View>
                         <View
@@ -172,7 +172,7 @@ class MultipleChoice extends BaseComponent {
             />
         );
     }
-};
+}
 
 MultipleChoice.propTypes = propTypes;
 MultipleChoice.defaultProps = defaultProps;

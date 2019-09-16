@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+
 import { ColorLib } from '../ColorLib';
 
 var key, color_key, color;
@@ -28,4 +29,4 @@ const DebugStyles = StyleSheet.create({
 });
 
 
-export { DebugStyles }
+export { DebugStyles };

@@ -70,4 +70,4 @@ const SoundscapeStatements = {
       WHERE id = ?;`,
 };
 
-export { SoundscapeStatements }
+export { SoundscapeStatements };

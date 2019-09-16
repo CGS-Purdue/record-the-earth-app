@@ -3,7 +3,7 @@ import { Asset } from 'expo-asset';
 export default class Icon {
 
   constructor(name, module, width, height) {
-    this.name = name
+    this.name = name;
     this.module = module;
     this.width = width;
     this.height = height;
@@ -12,4 +12,4 @@ export default class Icon {
   }
 }
 
-export { Icon }
+export { Icon };

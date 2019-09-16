@@ -23,4 +23,4 @@ const MainStyles = {
 };
 
 
-export { MainStyles }
+export { MainStyles };

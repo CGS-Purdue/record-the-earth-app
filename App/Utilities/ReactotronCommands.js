@@ -1,5 +1,5 @@
-import { React } from "react"
-import { Reactotron } from 'reactotron-react-native'
+import { React } from "react";
+import { Reactotron } from 'reactotron-react-native';
 
 /* Sets up global variables typical in most JavaScript environments.
  *

@@ -16,7 +16,7 @@ FROM Status
 ORDER BY id
 DESC LIMIT ?;`;
 
-const _all = `SELECT * FROM Status;`
+const _all = `SELECT * FROM Status;`;
 
 const StatusStatements = {
   create: _create,
@@ -25,7 +25,7 @@ const StatusStatements = {
   all: _all,
 };
 
-export { StatusStatements }
+export { StatusStatements };
 
 
 // data: NULL,

@@ -1,10 +1,10 @@
-import { RootView } from './RootView';
-import { CenterView, CenterColView, CenterRowView } from './CenterView';
-import { CenterBox } from './CenterBox';
-import { PadView } from './PadView';
 import { BoxX } from './BoxX';
 import { BoxY} from './BoxY';
+import { CenterBox } from './CenterBox';
+import { CenterColView, CenterRowView,CenterView } from './CenterView';
 import { ImgBox } from './ImgBox';
+import { PadView } from './PadView';
+import { RootView } from './RootView';
 
 const UtilityViews = {
   CenterBox: CenterBox,
@@ -27,4 +27,4 @@ export {
   ImgBox,
   PadView,
   RootView,
-}
+};

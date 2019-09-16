@@ -1,20 +1,21 @@
-import React, { Component } from "react";
 import PropTypes from "prop-types";
+import React, { Component } from "react";
 import {
+  Animated,
   StyleSheet,
   Text,
-  View,
-  Animated,
   TouchableOpacity,
+  View,
 } from "react-native";
+
 import ActionButtonItem from "./ActionButtonItem";
 import {
-  shadowStyle,
   alignItemsMap,
+  DEFAULT_ACTIVE_OPACITY,
   getTouchableComponent,
   isAndroid,
+  shadowStyle,
   touchableBackground,
-  DEFAULT_ACTIVE_OPACITY
 } from "./shared";
 
 export default class ActionButton extends Component {
@@ -23,7 +24,7 @@ export default class ActionButton extends Component {
 
     this.state = {
       resetToken: props.resetToken,
-      active: props.active
+      active: props.active,
     };
 
     this.anim = new Animated.Value(props.active ? 1 : 0);
@@ -42,7 +43,7 @@ export default class ActionButton extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.resetToken !== this.state.resetToken) {
       if (nextProps.active === false && this.state.active === true) {
-        if (this.props.onReset) this.props.onReset();
+        if (this.props.onReset) {this.props.onReset();}
         Animated.spring(this.anim, { toValue: 0 }).start();
         setTimeout(
           () =>
@@ -60,7 +61,7 @@ export default class ActionButton extends Component {
 
       this.setState({
         resetToken: nextProps.resetToken,
-        active: nextProps.active
+        active: nextProps.active,
       });
     }
   }
@@ -76,7 +77,7 @@ export default class ActionButton extends Component {
   getOffsetXY() {
     return {
       // paddingHorizontal: this.props.offsetX,
-      paddingVertical: this.props.offsetY
+      paddingVertical: this.props.offsetY,
     };
   }
 
@@ -88,8 +89,8 @@ export default class ActionButton extends Component {
         zIndex: this.props.zIndex,
         justifyContent: this.props.verticalOrientation === "up"
           ? "flex-end"
-          : "flex-start"
-      }
+          : "flex-start",
+      },
     ];
   }
 
@@ -111,9 +112,9 @@ export default class ActionButton extends Component {
               backgroundColor: this.props.bgColor,
               opacity: this.anim.interpolate({
                 inputRange: [0, 1],
-                outputRange: [0, this.props.bgOpacity]
-              })
-            }
+                outputRange: [0, this.props.bgOpacity],
+              }),
+            },
           ]}
         >
           {this.props.backdrop}
@@ -123,7 +124,7 @@ export default class ActionButton extends Component {
           style={[
             this.getOverlayStyles(),
             this.getOrientation(),
-            this.getOffsetXY()
+            this.getOffsetXY(),
           ]}
         >
           {this.state.active &&
@@ -148,16 +149,16 @@ export default class ActionButton extends Component {
         {
           scale: this.anim.interpolate({
             inputRange: [0, 1],
-            outputRange: [1, this.props.outRangeScale]
-          })
+            outputRange: [1, this.props.outRangeScale],
+          }),
         },
         {
           rotate: this.anim.interpolate({
             inputRange: [0, 1],
-            outputRange: ["0deg", this.props.degrees + "deg"]
-          })
-        }
-      ]
+            outputRange: ["0deg", this.props.degrees + "deg"],
+          }),
+        },
+      ],
     };
 
     const wrapperStyle = {
@@ -165,12 +166,12 @@ export default class ActionButton extends Component {
         inputRange: [0, 1],
         outputRange: [
           this.props.buttonColor,
-          this.props.btnOutRange || this.props.buttonColor
-        ]
+          this.props.btnOutRange || this.props.buttonColor,
+        ],
       }),
       width: this.props.size,
       height: this.props.size,
-      borderRadius: this.props.size / 2
+      borderRadius: this.props.size / 2,
     };
 
     const buttonStyle = {
@@ -178,7 +179,7 @@ export default class ActionButton extends Component {
       height: this.props.size,
       borderRadius: this.props.size / 2,
       alignItems: "center",
-      justifyContent: "center"
+      justifyContent: "center",
     };
 
     const Touchable = getTouchableComponent(this.props.useNativeFeedback);
@@ -188,7 +189,7 @@ export default class ActionButton extends Component {
           right: this.props.offsetX,
           zIndex: this.props.zIndex,
           borderRadius: this.props.size / 2,
-          width: this.props.size
+          width: this.props.size,
         }
       : { marginHorizontal: this.props.offsetX, zIndex: this.props.zIndex };
 
@@ -196,7 +197,7 @@ export default class ActionButton extends Component {
       <View style={[
         parentStyle,
         !this.props.hideShadow && shadowStyle,
-        !this.props.hideShadow && this.props.shadowStyle
+        !this.props.hideShadow && this.props.shadowStyle,
       ]}
       >
         <Touchable
@@ -211,7 +212,7 @@ export default class ActionButton extends Component {
           onLongPress={this.props.onLongPress}
           onPress={() => {
             this.props.onPress();
-            if (this.props.children) this.animateButton();
+            if (this.props.children) {this.animateButton();}
           }}
           onPressIn={this.props.onPressIn}
           onPressOut={this.props.onPressOut}
@@ -230,7 +231,7 @@ export default class ActionButton extends Component {
 
   _renderButtonIcon() {
     const { icon, renderIcon, btnOutRangeTxt, buttonTextStyle, buttonText } = this.props;
-    if (renderIcon) return renderIcon(this.state.active);
+    if (renderIcon) {return renderIcon(this.state.active);}
     if (icon) {
       console.warn('react-native-action-button: The `icon` prop is deprecated! Use `renderIcon` instead.');
       return icon;
@@ -246,9 +247,9 @@ export default class ActionButton extends Component {
           {
             color: this.anim.interpolate({
               inputRange: [0, 1],
-              outputRange: [textColor, btnOutRangeTxt || textColor]
-            })
-          }
+              outputRange: [textColor, btnOutRangeTxt || textColor],
+            }),
+          },
         ]}
       >
         {buttonText}
@@ -259,11 +260,11 @@ export default class ActionButton extends Component {
   _renderActions() {
     const { children, verticalOrientation } = this.props;
 
-    if (!this.state.active) return null;
+    if (!this.state.active) {return null;}
 
     let actionButtons = !Array.isArray(children) ? [children] : children;
 
-    actionButtons = actionButtons.filter( actionButton => (typeof actionButton == 'object') )
+    actionButtons = actionButtons.filter( actionButton => (typeof actionButton === 'object') );
 
     const actionStyle = {
       flex: 1,
@@ -273,7 +274,7 @@ export default class ActionButton extends Component {
       paddingTop: this.props.verticalOrientation === "down"
         ? this.props.spacing
         : 0,
-      zIndex: this.props.zIndex
+      zIndex: this.props.zIndex,
     };
 
     return (
@@ -313,7 +314,7 @@ export default class ActionButton extends Component {
   //////////////////////
 
   animateButton(animate = true) {
-    if (this.state.active) return this.reset();
+    if (this.state.active) {return this.reset();}
 
     if (animate) {
       Animated.spring(this.anim, { toValue: 1 }).start();
@@ -325,7 +326,7 @@ export default class ActionButton extends Component {
   }
 
   reset(animate = true) {
-    if (this.props.onReset) this.props.onReset();
+    if (this.props.onReset) {this.props.onReset();}
 
     if (animate) {
       Animated.spring(this.anim, { toValue: 0 }).start();
@@ -355,7 +356,7 @@ ActionButton.propTypes = {
   shadowStyle: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array,
-    PropTypes.number
+    PropTypes.number,
   ]),
 
   renderIcon: PropTypes.func,
@@ -386,7 +387,7 @@ ActionButton.propTypes = {
 
   testID: PropTypes.string,
   accessibilityLabel: PropTypes.string,
-  accessible: PropTypes.bool
+  accessible: PropTypes.bool,
 };
 
 ActionButton.defaultProps = {
@@ -417,7 +418,7 @@ ActionButton.defaultProps = {
   nativeFeedbackRippleColor: "rgba(255,255,255,0.75)",
   testID: undefined,
   accessibilityLabel: undefined,
-  accessible: undefined
+  accessible: undefined,
 };
 
 const styles = StyleSheet.create({
@@ -427,14 +428,14 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
   },
   btnText: {
     marginTop: -4,
     fontSize: 24,
-    backgroundColor: "transparent"
-  }
+    backgroundColor: "transparent",
+  },
 });
 
 
-export { ActionButton }
+export { ActionButton };

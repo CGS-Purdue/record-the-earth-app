@@ -1,6 +1,7 @@
-import React from 'react'
-import { Text } from 'react-native'
-import ProgressCircle from './ProgressCircle'
+import React from 'react';
+import { Text } from 'react-native';
+
+import ProgressCircle from './ProgressCircle';
 
 const AnimatedSpring = ({ value }) => (
 
@@ -17,6 +18,6 @@ const AnimatedSpring = ({ value }) => (
       {`${Math.floor(value * 100)}%`}
     </Text>
   </ProgressCircle>
-)
+);
 
-export { AnimatedSpring }
+export { AnimatedSpring };

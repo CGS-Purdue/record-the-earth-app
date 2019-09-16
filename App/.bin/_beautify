@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+js-beautify \
+  --indent-size 2 \
+  --brace-style end-expand,preserve-inline \
+  --max-preserve-newlines 2 \
+  --space_after_named_function \
+  --break-chained-methods \
+  --good-stuff \
+  --replace beauty \
+  "$@"

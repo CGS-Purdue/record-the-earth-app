@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import * as Permissions from 'expo-permissions';
-import { Audio } from 'expo-av';
+import React, { Component } from 'react';
+import { ActivityIndicator, Alert, Image, Platform, TouchableHighlight, View } from 'react-native';
 
-import { Image, Alert, Platform, TouchableHighlight, ActivityIndicator, View } from 'react-native';
+import { Theme,ThemeColors, ThemeIcons } from '../../Theme';
 import { saveAudioRecordingFile } from '../../Utilities/Filesystem';
-import { ThemeIcons, ThemeColors, Theme } from '../../Theme';
-import { CenterColView, CenterView, RootView } from '../Views';
 import { MonoText } from '../Text';
+import { CenterColView, CenterView, RootView } from '../Views';
 
 const _styles = Theme.Styles;
 
@@ -26,12 +26,12 @@ const recordStyles = {
   recordCenterColInner:  {
     borderColor:'blue',
     borderWidth:1,
-    borderStyle:'solid'
+    borderStyle:'solid',
   },
   recordCenterColInnerCentered: {
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1
+    flex: 1,
   },
 
 };
@@ -92,7 +92,7 @@ class AudioRecord extends Component {
 
   async askForPermissions(){
     let response = {
-      status: 'granted'
+      status: 'granted',
     };
     if (Platform.OS === 'web') {
       this.setState({
@@ -150,7 +150,7 @@ class AudioRecord extends Component {
           style: 'cancel',
       },{
           text: 'OK',
-          onPress: () => this._saveRecording()
+          onPress: () => this._saveRecording(),
       }],
       {cancelable: false},
     );
@@ -161,7 +161,7 @@ class AudioRecord extends Component {
   }
 
   getAudioFormat() {
-    return JSON.parse(JSON.stringify(this.format))
+    return JSON.parse(JSON.stringify(this.format));
   }
 
   async prepareAudio() {
@@ -178,7 +178,7 @@ class AudioRecord extends Component {
   }
 
   async recordStart() {
-    if (this.state.syncing){return false}
+    if (this.state.syncing){return false;}
     this.setState({syncing:true});
 
     await this.prepareAudio();
@@ -196,45 +196,45 @@ class AudioRecord extends Component {
       const statusUpdater = (status) => {
         this.setState({recordingState:status});
         if (status.durationMillis >= MAX_DURATION) {
-          this.recordStop()
+          this.recordStop();
         } else if (this.state.stopRequested) {
-          this.recordStop()
+          this.recordStop();
         }
         this.updateRecorderState();
       };
 
       this.recorder.setProgressUpdateInterval(2000);
-      this.recorder.setOnRecordingStatusUpdate((status)=>{statusUpdater(status)});
-      await this.startAsyncRecord()
+      this.recorder.setOnRecordingStatusUpdate((status)=>{statusUpdater(status);});
+      await this.startAsyncRecord();
 
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
 
     this.setState({syncing:false});
-  };
+  }
 
   async startAsyncRecord(){
-    await this.recorder.startAsync()
-    this.setState({recordingStarted:true})
+    await this.recorder.startAsync();
+    this.setState({recordingStarted:true});
   }
 
   async stopAsyncRecord(){
-    await this.recorder.stopAndUnloadAsync()
+    await this.recorder.stopAndUnloadAsync();
     this.setState({
       recordingStarted:false,
-      stopRequested:false
-    })
+      stopRequested:false,
+    });
   }
 
   async recordStop () {
-    if (this.state.syncing){return false}
-    this.setState({syncing:true})
-    this.setState({stopRequested:true})
+    if (this.state.syncing){return false;}
+    this.setState({syncing:true});
+    this.setState({stopRequested:true});
 
     try {
-      this.recorder.setProgressUpdateInterval(0)
-      this.recorder.setOnRecordingStatusUpdate(null)
+      this.recorder.setProgressUpdateInterval(0);
+      this.recorder.setOnRecordingStatusUpdate(null);
       await this.stopAsyncRecord();
     } catch (error) {
       console.log(error);
@@ -244,7 +244,7 @@ class AudioRecord extends Component {
     this.recording_info = info;
     this._onRecordEnd();
     console.log({info});
-    this.setState({syncing: false})
+    this.setState({syncing: false});
   }
 
 
@@ -313,7 +313,7 @@ class AudioRecord extends Component {
             </View>
           </View>
         </CenterColView>
-      )
+      );
     }
   }
 }
@@ -325,4 +325,4 @@ AudioRecord.defaultProps = {
   )),
 };
 
-export { AudioRecord }
+export { AudioRecord };

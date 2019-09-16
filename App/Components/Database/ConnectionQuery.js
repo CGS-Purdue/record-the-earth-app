@@ -10,7 +10,7 @@ class ConnectionQuery extends Component {
       hasNewResult: false,
       resultCache : [],
       lastError: null,
-    }
+    };
 
     // this.dbSuccess = this.onConnect.bind(this);
     // this.dbError = this.onSuccess.bind(this);
@@ -29,12 +29,12 @@ class ConnectionQuery extends Component {
 
     if (cbOptions.wrapCb) {
       let _preQuery = cbOptions.preQuery;
-      return () => { return _preQuery(callbackFn) };
+      return () => { return _preQuery(callbackFn); };
     }
 
     if (cbOptions.returnCb) {
       let _returnCb = cbOptions.preQuery;
-      return ()=>{ return callbackFn(_returnCb) };
+      return ()=>{ return callbackFn(_returnCb); };
 
     } else {
       return callbackFn(this.querystate);
@@ -66,15 +66,15 @@ class ConnectionQuery extends Component {
       console.log('resultset', result);
       console.log('tx resultset', result);
       this.querystate.data = result.rows._array;
-    }
+    };
 
     const _db_error = (tx, error) => {
       console.log(tx, error);
-    }
+    };
 
     const _tx_error = (tx, error) => {
       console.log(tx, error);
-    }
+    };
 
     // insertId,
     // rowsAffected,
@@ -101,7 +101,7 @@ class ConnectionQuery extends Component {
       if (this.options.callback){
         return this.options.callback(data);
       }
-    }
+    };
 
 
     let dbSuccess = this.configCb(dbSuccess, options.callbackDb);

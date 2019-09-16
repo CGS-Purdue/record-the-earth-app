@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import {
+  Animated,
   StyleSheet,
-  View,
   Text,
-  Animated
+  View,
 } from "react-native";
 
 class ColorAnim extends Component {
@@ -21,7 +21,7 @@ class ColorAnim extends Component {
   render() {
     const interpolatedColorAnimation = this._animatedValue.interpolate({
       inputRange: [0, 100],
-      outputRange: ['rgba(255,255,255, 1)', 'rgba(51,156,177, 1)']
+      outputRange: ['rgba(255,255,255, 1)', 'rgba(51,156,177, 1)'],
     });
 
     return (
@@ -36,15 +36,15 @@ class ColorAnim extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   box: {
     position: 'absolute',
     top: 100,
     left: 100,
     width: 100,
-    height: 100
-  }
+    height: 100,
+  },
 });
 
-export { ColorAnim }
+export { ColorAnim };

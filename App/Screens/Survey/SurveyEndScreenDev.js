@@ -1,9 +1,10 @@
 import React, { Component, createRef } from 'react';
-import { ImageBackground, View, Button } from 'react-native';
-import { Theme } from '../../Theme';
-import { RootView, CenterView, PadView } from '../../Components/Views';
+import { Button,ImageBackground, View } from 'react-native';
+
 import { SoundDB } from '../../Components/Database/SoundDB';
 import { MonoText } from '../../Components/Text/MonoText';
+import { CenterView, PadView,RootView } from '../../Components/Views';
+import { Theme } from '../../Theme';
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
@@ -34,7 +35,7 @@ let suvery = {
       "machines": true,
       "talking": true,
       "vehicles": false,
-    }
+    },
   },
   description: "test",
 };
@@ -46,7 +47,7 @@ let survey_data = {
   "description": "year",
   "emo": "happy,relax,curious",
   "geophony": "rain,water,thunder",
-}
+};
 let survery_string = '{"description":"year","bio":"","emo":"happy,relax,curious","geo":"rain,water,thunder","ant":"talking,machines"}';
 
 
@@ -86,7 +87,7 @@ class SurveyEndScreen extends Component {
 
   onComponentDidMount(){
     this.dbConnection.setConnection();
-    let connection = this.dbConnection.getConnection()
+    let connection = this.dbConnection.getConnection();
     console.log(connection);
     console.log('connectionStatus', this.dbConnection.connectionStatus);
     this.connection = connection;
@@ -124,7 +125,7 @@ class SurveyEndScreen extends Component {
       insertData.anthrophony,
       insertData.cultural,
       insertData.pid,
-      insertData.isUploaded
+      insertData.isUploaded,
     ];
 
     console.log('insertArgs');
@@ -143,7 +144,7 @@ class SurveyEndScreen extends Component {
       let taglist = [];
       for (let tag of Object.keys(values)) {
         if (values[tag]) {
-          taglist.push(tag)
+          taglist.push(tag);
         }
       }
       // let returnItem = Object.create({});
@@ -152,10 +153,10 @@ class SurveyEndScreen extends Component {
       //   writable: false,expo
       // });
       // return returnItem;
-        return {[item]:taglist.join(',')}
+        return {[item]:taglist.join(',')};
     });
 
-    return Object.assign(...tagData)
+    return Object.assign(...tagData);
   }
 
   submitSurvey = () => {
@@ -167,8 +168,8 @@ class SurveyEndScreen extends Component {
     this.saveSurvey(survey);
     let surveyString = this.dataToString(survey);
     console.log(surveyString);
-    this.props.navigation.navigate('Home')
-    this.setState({result : surveyString })
+    this.props.navigation.navigate('Home');
+    this.setState({result : surveyString });
   }
 
 

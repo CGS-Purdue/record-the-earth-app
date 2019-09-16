@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+
 import { Theme } from '../../Theme';
 
 const _layout = Theme.Layout;
@@ -21,28 +22,28 @@ export default class PadView extends Component {
           paddingTop: pad[0] * _layout.SPACING_UNIT_1,
           paddingRight: pad[0] * _layout.SPACING_UNIT_1,
           paddingBottom: pad[0] * _layout.SPACING_UNIT_1,
-          paddingLeft: pad[0] * _layout.SPACING_UNIT_1
+          paddingLeft: pad[0] * _layout.SPACING_UNIT_1,
         };
       case 2:
         return {
           paddingTop: pad[0] * _layout.SPACING_UNIT_1,
           paddingRight: pad[1] * _layout.SPACING_UNIT_1,
           paddingBottom: pad[0] * _layout.SPACING_UNIT_1,
-          paddingLeft: pad[1] * _layout.SPACING_UNIT_1
+          paddingLeft: pad[1] * _layout.SPACING_UNIT_1,
         };
       case 4:
         return {
           paddingTop: pad[0] * _layout.SPACING_UNIT_1,
           paddingRight: pad[1] * _layout.SPACING_UNIT_1,
           paddingBottom: pad[2] * _layout.SPACING_UNIT_1,
-          paddingLeft: pad[3] * _layout.SPACING_UNIT_1
+          paddingLeft: pad[3] * _layout.SPACING_UNIT_1,
         };
       default:
         return {
           paddingTop: pad[0] * _layout.SPACING_UNIT_1,
           paddingRight: pad[0] * _layout.SPACING_UNIT_1,
           paddingBottom: pad[0] * _layout.SPACING_UNIT_1,
-          paddingLeft: pad[0] * _layout.SPACING_UNIT_1
+          paddingLeft: pad[0] * _layout.SPACING_UNIT_1,
         };
     }
   }

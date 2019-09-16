@@ -1,7 +1,8 @@
-import React from 'react';
-import { StyleSheet, Image, Text, View } from 'react-native';
-import Touchable from 'react-native-platform-touchable';
 import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import Touchable from 'react-native-platform-touchable';
+
 import { Theme } from '../../Theme';
 
 const _styles = Theme.Styles;

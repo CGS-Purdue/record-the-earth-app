@@ -1,7 +1,8 @@
-import * as React from 'react';
 import { AppLoading } from 'expo';
-import * as Font from 'expo-font';
 import { Asset } from 'expo-asset';
+import * as Font from 'expo-font';
+import * as React from 'react';
+
 import { Theme } from '../../Theme';
 
 async function loadResourcesAsync() {
@@ -15,7 +16,7 @@ async function loadResourcesAsync() {
   var asset_keyed_array = Array.from(Object.entries(all_assets).map(function(pair){
     var obj = {};
     obj[pair[0]] = pair[1];
-    return obj
+    return obj;
   }));
 
   await Promise.all([

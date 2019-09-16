@@ -1,6 +1,6 @@
 
-import { Platform } from 'react-native';
 import Constants from 'expo-constants';
+import { Platform } from 'react-native';
 
 // -----------------
 // Constants - Expo Documentation
@@ -41,8 +41,8 @@ function getAppData () {
     systemFonts: Constants.systemFonts,
     manifest: Constants.manifest,
     _platform: { Platform },
-  }
-};
+  };
+}
 
 const EXPO_CONSTANTS = Constants;
 console.log('Constants', EXPO_CONSTANTS);
@@ -63,4 +63,4 @@ console.log('Constants', EXPO_CONSTANTS);
 //   manifest: Constants.manifest,
 // }
 
-export { getAppData, EXPO_CONSTANTS }
+export { getAppData, EXPO_CONSTANTS };

@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# -------------------------
+# ESLINT
+# -------------------------
+BASE_PATH="$(npm prefix)"
+[[ -f .npmrc ]] && source .npmrc
+
+$LINTARGS="$@"
+
+if [ "$BASE_PATH" == "$INIT_CWD" ];
+    RUN_LINT_DIRS="Config,Life,Model,Screens,Theme,Utilities,Components"
+
+    ${PROJ_ROOTS} node ${NODE_RUN_FLAGS} \
+      $BASE_PATH/./node_modules/.bin/eslint \
+        --config "${BASE_PATH}/.eslintrc.js" \
+        --ext '.js' \
+        --cache false \
+        --fix \
+        --ignore-pattern '!node_modules' \
+          -- \
+            "./*.js" \
+            "./{$PROJ_ROOTS}/*.js" \
+            "./{$PROJ_ROOTS}/**/*.js" \
+            "./{$PROJ_ROOTS}/**/**/*.js" \
+            "./{$PROJ_ROOTS}/**/**/**/*.js"
+
+
+else
+
+    ${NODE_RUN_ENV} node ${NODE_RUN_FLAGS} \
+      $BASE_PATH/./node_modules/.bin/eslint {$LINTARGS}"  \
+        --ext '.js' \
+        --fix \
+        --config "${BASE_PATH}/.eslintrc.js" \
+        --cache false \
+        --ignore-pattern '!node_modules' \
+          -- \
+            "./*.js" \
+            "${INIT_CWD}/./*.js" \
+            "${INIT_CWD}/./**/*.js" \
+            "${INIT_CWD}/./**/**/*.js" \
+            "${INIT_CWD}/./**/**/**/*.js"
+fi
+
+
+exit 0

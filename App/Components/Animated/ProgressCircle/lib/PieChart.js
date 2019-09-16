@@ -1,18 +1,19 @@
-import React from 'react'
-import { View } from 'react-native'
-import ProgressCircle from './ProgressCircle'
+import React from 'react';
+import { View } from 'react-native';
+
+import ProgressCircle from './ProgressCircle';
 
 const PieChart = ({ size, data }) => {
-  const total = data.reduce((acc, { value }) => (acc += value), 0)
+  const total = data.reduce((acc, { value }) => (acc += value), 0);
 
   return (
     <View style={{ width: size, height: size }}>
       {data.map(({ value, color }, index) => {
-        const percentage = value / total
+        const percentage = value / total;
         const totalCurrentPercentage = data
           .slice(0, index)
-          .reduce((acc, { value }) => (acc += value / total), 0)
-        const rotate = `${totalCurrentPercentage * 360}deg`
+          .reduce((acc, { value }) => (acc += value / total), 0);
+        const rotate = `${totalCurrentPercentage * 360}deg`;
 
         return (
           <ProgressCircle
@@ -26,10 +27,10 @@ const PieChart = ({ size, data }) => {
               transform: [{ rotate }],
             }}
           />
-        )
+        );
       })}
     </View>
-  )
-}
+  );
+};
 
-export { PieChart }
+export { PieChart };

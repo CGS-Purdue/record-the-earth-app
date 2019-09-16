@@ -19,7 +19,6 @@ unset REACT_DEBUGGER
 set -a REACT_DEBUGGER
 
 BASE_DIR="$(npm prefix)"
-
 ABD_PATH="${ANDROID_HOME}/platform-tools"
 
 [[ -f .npmrc ]] && source .npmrc
@@ -90,7 +89,7 @@ REACT_EDITOR="${REACT_EDITOR}" \
 EXPO_DEBUG="${EXPO_DEBUG}" \
   node ${BASE_DIR}/node_modules/.bin/expo start \
     --clear \
-    --max-workers 5 \
+    --max-workers 8 \
     --no-minify \
     --no-https \
     --dev \

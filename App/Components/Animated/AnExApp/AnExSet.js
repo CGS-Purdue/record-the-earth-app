@@ -6,6 +6,7 @@ import {
   Text,
   View,
 } from 'react-native';
+
 import { AnExBobble } from './AnExBobble';
 import { AnExChained } from './AnExChained';
 import { AnExScroll } from './AnExScroll';
@@ -135,4 +136,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export { AnExSet }
+export { AnExSet };

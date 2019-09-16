@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { DBProps } from './Props';
+
 import { Connection } from '../Connection';
 import { ConnectionQuery } from '../ConnectionQuery';
+import { DBProps } from './Props';
 
 const _config = DBProps.config;
 const _schema = DBProps.schema;
@@ -43,7 +44,7 @@ class SoundDB extends Component {
     this.queryReporters = {
       dbSuccess: (data) => {
         console.log('query transaction completed onSuccessfully');
-        if(data){ console.log(data); }
+        if (data){ console.log(data); }
       },
       txSuccess: (tx, result) => {
         // { insertId, rowsAffected, rows: { length, item(), _array, }, }
@@ -56,13 +57,13 @@ class SoundDB extends Component {
         );
       },
       selectSuccess: (tx, result) => {
-        console.log('Selected', tx, result)
+        console.log('Selected', tx, result);
         this.queryStoreData.all = result;
         return result;
       },
-      dbError: (tx, err) => { console.log('error', tx, err) },
-      txError: (tx, err ) => { console.log(tx, err) },
-    }
+      dbError: (tx, err) => { console.log('error', tx, err); },
+      txError: (tx, err ) => { console.log(tx, err); },
+    };
 
     this.setConnection(this.config, this.onConnected);
   }
@@ -143,7 +144,7 @@ class SoundDB extends Component {
   }
   queryStore(key, args) {
     let _store = {
-      create: (connection, reporters, statement, args=null) => {
+      create: (connection, reporters, statement, args = null) => {
         console.log('create', reporters);
         connection.db.transaction(
           tx => {
@@ -158,7 +159,7 @@ class SoundDB extends Component {
           reporters.dbSuccess,
         );
       },
-      drop: (connection, reporters, statement, args=null) => {
+      drop: (connection, reporters, statement, args = null) => {
         console.log('drop', reporters);
         connection.db.transaction(
           tx => {
@@ -173,7 +174,7 @@ class SoundDB extends Component {
           reporters.dbSuccess,
         );
       },
-      all: (connection, reporters, statement, args=null) => {
+      all: (connection, reporters, statement, args = null) => {
         console.log('all', connection, reporters, statement);
         connection.db.transaction(
           tx => {
@@ -207,7 +208,7 @@ class SoundDB extends Component {
           reporters.dbSuccess,
         );
       },
-      last: (connection, reporters, statement, args=null) => {
+      last: (connection, reporters, statement, args = null) => {
         connection.db.transaction(
           tx => {
             tx.executeSql(
@@ -220,7 +221,7 @@ class SoundDB extends Component {
           reporters.dbError,
           reporters.dbSuccess,
         );
-      }
+      },
     };
     let timestamp = new Date();
     let _connection = this.connection;
@@ -236,4 +237,4 @@ class SoundDB extends Component {
 }
 
 
-export { SoundDB }
+export { SoundDB };

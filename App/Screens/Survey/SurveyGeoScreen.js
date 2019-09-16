@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { ImageBackground, Button } from 'react-native';
+import { Button,ImageBackground } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
-import { RootView, CenterColView, PadView } from '../../Components/Views';
-import { HeadingText } from '../../Components/Text/HeadingText';
+
 import { CheckButton } from '../../Components/Button/CheckButton';
+import { HeadingText } from '../../Components/Text/HeadingText';
+import { CenterColView, PadView,RootView } from '../../Components/Views';
 import { Theme } from '../../Theme';
 const _assets = Theme.Assets;
 const _colors = Theme.Colors;
@@ -84,7 +85,7 @@ class SurveyGeoScreen extends Component {
               accessibilityLabel="Go to next"
               onPress={() => {
                 let _survey_data = this.getSurveyState();
-                navigate('SurveyAnt', { survey_data: _survey_data })
+                navigate('SurveyAnt', { survey_data: _survey_data });
               }}
             />
           </PadView>
@@ -100,4 +101,4 @@ SurveyGeoScreen.navigationOptions = {
   title: 'SurveyGeoScreen',
 };
 
-export { SurveyGeoScreen }
+export { SurveyGeoScreen };

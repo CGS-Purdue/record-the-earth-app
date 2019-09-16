@@ -8,6 +8,7 @@ import {
   UIManager,
   View,
 } from 'react-native';
+
 import { AnExSet } from './AnExSet';
 
 const CIRCLE_SIZE = 80;
@@ -380,4 +381,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export { AnExApp }
+export { AnExApp };

@@ -1,6 +1,6 @@
+import { HeadingText } from './HeadingText';
 import { MonoText } from './MonoText';
 import { TitleText } from './TitleText';
-import { HeadingText } from './HeadingText';
 
 const TextComponents = {
   MonoText,

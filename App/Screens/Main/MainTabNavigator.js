@@ -1,12 +1,13 @@
 import React, { createRef } from 'react';
 import { Platform } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
+
 import { TabBarIcon } from '../../Components/TabBar/TabBarIcon';
+import { Theme } from '../../Theme';
 import { SurveyEndScreen } from '../Survey/SurveyEndScreenDev';
+import { ConfigScreen } from './ConfigScreen';
 import { HomeScreen } from './HomeScreen';
 import { LinksScreen } from './LinksScreen';
-import { ConfigScreen } from './ConfigScreen';
-import { Theme } from '../../Theme';
 
 const _colors = Theme.Colors;
 const _styles = Theme.Styles;

@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import { Image, Text, Platform, ImageBackground, TouchableOpacity, View } from 'react-native';
-import { NavigationScreenProp, SwitchActions, NavigationActions } from 'react-navigation';
-import { CenterColView, RootView, PadView } from '../../Components/Views';
-import { Theme } from '../../Theme';
-import { Log } from '../../Utilities/Log';
+import { Image,  ImageBackground, TouchableOpacity, View } from 'react-native';
 
+import { CenterColView, PadView,RootView } from '../../Components/Views';
+import { Theme } from '../../Theme';
 
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
 
-const LogoStyles={
+const LogoStyles = {
   flex: 1,
   width: 300,
   height: '20%',
@@ -18,10 +16,12 @@ const LogoStyles={
   resizeMode: 'contain',
 };
 
+
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
   }
+
 
   handleSurveyButtonPress() {
     console.log('handling survey button');
@@ -35,43 +35,42 @@ class HomeScreen extends Component {
   // componentDidUpdate(prevProps, prevState)
 
   render() {
-    Log._info('HomeScreen');
     const { navigate } = this.props.navigation;
 
     return (
-      <ImageBackground style={_styles.bgImg} source={_assets.images.img_background}>
-      <RootView>
-         <PadView padding={(2, 3)}>
-            <CenterColView>
-            <Image style={LogoStyles} source={_assets.logos.logo_large}/>
-            <View style={_styles.BtnContainer}>
-               <TouchableOpacity
-                 style={_styles.BtnBox}
-                 onPress={() => navigate({ routeName: 'Survey', params: { name: 'Test' } })}
-               >
+        <ImageBackground
+          style={_styles.bgImg}
+          source={_assets.images.img_background}>
+          <RootView>
+            <PadView padding={(2, 3)}>
+              <CenterColView>
+              <Image source={_assets.logos.logo_large} style={LogoStyles}/>
+              <View style={_styles.BtnContainer}>
+                <TouchableOpacity style={_styles.BtnBox} onPress={
+                  () => navigate({ routeName: 'Survey', params: { name: 'Test' } })
+                }>
+                  <View>
+                    <Text style={_styles.BtnTxt}>Try Suvery</Text>
+                    <Image style={_styles.BtnImg} source={_assets.icons.icon_list} />
+                   </View>
+                </TouchableOpacity>
+              </View>
+              <View style={_styles.BtnContainer}>
+                <TouchableOpacity style={_styles.BtnBox} onPress={
+                  () => navigate({ routeName: 'Record', params: { name: 'Test' }}
+                )}>
                  <View>
-                   <Text style={_styles.BtnTxt}>Try Suvery</Text>
-                   <Image style={_styles.BtnImg} source={_assets.icons.icon_list} />
-                 </View>
-               </TouchableOpacity>
-             </View>
-             <View style={_styles.BtnContainer}>
-               <TouchableOpacity
-                 style={_styles.BtnBox}
-                 onPress={() => navigate({ routeName: 'Record', params: { name: 'Test' } })}
-               >
-                 <View>
-                   <Text style={_styles.BtnTxt}>Record Test</Text>
-                   <Image style={_styles.BtnImg} source={_assets.icons.icon_record} />
-                 </View>
-               </TouchableOpacity>
-             </View>
-           </CenterColView>
-           </PadView>
-      </RootView>
+                  <Text style={_styles.BtnTxt}>Record Test</Text>
+                  <Image style={_styles.BtnImg} source={_assets.icons.icon_record} />
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </CenterColView>
+          </PadView>
+        </RootView>
       </ImageBackground>
     );
   }
 }
 
-export { HomeScreen }
+export { HomeScreen };

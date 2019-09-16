@@ -4,7 +4,7 @@ import Modal from "react-native-modal";
 
 class ModalRecordEndScreen extends Component {
   state = {
-    isModalVisible: false
+    isModalVisible: false,
   };
   toggleModal = () => {
     this.setState({ isModalVisible: !this.state.isModalVisible });
@@ -29,4 +29,4 @@ class ModalRecordEndScreen extends Component {
   }
 }
 
-export { ModalRecordEndScreen }
+export { ModalRecordEndScreen };

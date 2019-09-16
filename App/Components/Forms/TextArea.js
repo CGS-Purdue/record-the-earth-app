@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { TextInput, View} from 'react-native';
+
 import { Theme } from '../../Theme';
 /// https://github.com/facebook/react-native/blob/master/Libraries/vendor/document/selection/DocumentSelectionState.js
 // https://github.com/facebook/react-native/commit/3b7067a62ddf8dace0fd2e197718cf435a246a83
@@ -106,7 +107,7 @@ export default class StyledTextArea extends Component {
       error: false,
     };
 
-    this.getText = this.getText.bind(this)
+    this.getText = this.getText.bind(this);
   }
 
  _handleTextChange = inputValue => {
@@ -134,7 +135,7 @@ export default class StyledTextArea extends Component {
   }
 }
 
-export { StyledTextArea }
+export { StyledTextArea };
 
 
 

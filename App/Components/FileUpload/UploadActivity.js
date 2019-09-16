@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, Button, View } from 'react-native';
-
 import * as FileSystem from 'expo-file-system';
+import React, { Component } from 'react';
+import { Button, Platform, StyleSheet, Text, View } from 'react-native';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -21,7 +20,7 @@ var tagText = {
   tagVehicles: 'Vehicles',
   tagSirens: 'Sirens / Alarms',
   tagTalk: 'Talking',
-  tagMachines: 'Machines'
+  tagMachines: 'Machines',
 };
 
 export default class App extends Component {
@@ -79,10 +78,10 @@ function staticFormUpload() {
     method: 'post',
     body: formData,
   }).then(res => {
-    console.log('done')
-    console.log(res)
+    console.log('done');
+    console.log(res);
   }).catch(error => {
-    console.error(error)
+    console.error(error);
   });
 }
 

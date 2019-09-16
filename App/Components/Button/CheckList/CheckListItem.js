@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 export default function CheckListItem({ item: { id, title, state }, onSelectedItem }) {
   return (

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
-import { Theme } from '../../Theme'
+
+import { Theme } from '../../Theme';
 
 const _styles = Theme.Styles;
 const _fonts = Theme.Fonts;
 
 class MonoText extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       appIsReady: false,
     };
@@ -42,4 +43,4 @@ class MonoText extends Component {
 }
 
 
-export { MonoText }
+export { MonoText };

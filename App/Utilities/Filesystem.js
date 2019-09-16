@@ -22,10 +22,10 @@ async function saveAudioRecordingFile (file_uri) {
     // })
     await FileSystem.copyAsync({
       from: file_uri,
-      to: new_uri
-    })
+      to: new_uri,
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 
   let file_info = await FileSystem.getInfoAsync(new_uri, {md5: true});
@@ -35,7 +35,7 @@ async function saveAudioRecordingFile (file_uri) {
 async function createAppStorageDirectory(dirName) {
   await FileSystem.makeDirectoryAsync([
     APP_STORAGE,
-    dirName
+    dirName,
   ].join(''));
 }
 
@@ -44,11 +44,11 @@ async function checkAppDirectoriesStatus() {
   // await FileSystem.getInfoAsync(APP_STORAGE).then((result) => {)
   await FileSystem.getInfoAsync([APP_STORAGE, MEDIA_DIR].join(''))
   .then((result)=>{
-    if(!result.exists){
+    if (!result.exists){
       console.log('media storage does not exist, creating folder');
       createAppStorageDirectory(MEDIA_DIR);
     }
-  })
+  });
 }
 
 export { checkAppDirectoriesStatus, saveAudioRecordingFile };

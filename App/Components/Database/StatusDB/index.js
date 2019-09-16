@@ -1,7 +1,8 @@
 import React, { Component, createRef, useState } from 'react';
-import { DBProps } from './Props';
+
 import { Connection } from '../Connection';
 import { ConnectionQuery } from '../ConnectionQuery';
+import { DBProps } from './Props';
 
 const _config = DBProps.config;
 const _schema = DBProps.schema;
@@ -10,7 +11,7 @@ const _ref = createRef();
 
 class StatusDB extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.ref = _ref;
     this.config = _config;
     this.schema = _schema;
@@ -41,7 +42,7 @@ class StatusDB extends Component {
     this.queryReporters = {
       dbSuccess: (data) => {
         console.log('query transaction completed onSuccessfully');
-        if(data){ console.log(data); }
+        if (data){ console.log(data); }
       },
       txSuccess: (tx, result) => {
         // { insertId, rowsAffected, rows: { length, item(), _array, }, }
@@ -55,11 +56,11 @@ class StatusDB extends Component {
       },
       selectSuccess: (tx, result) => {
         this.result.data = result;
-        console.log('Selected', result._array)
+        console.log('Selected', result._array);
         return result;
       },
-      dbError: (tx, err) => { console.log('error', tx, err) },
-      txError: (tx, err ) => { console.log(tx, err) },
+      dbError: (tx, err) => { console.log('error', tx, err); },
+      txError: (tx, err ) => { console.log(tx, err); },
     };
 
     this.setConnection(this.config, this.onConnected);
@@ -121,7 +122,7 @@ class StatusDB extends Component {
   queryStore(key, args) {
 
     let _store = {
-      create: (connection, reporters, statement, args=null) => {
+      create: (connection, reporters, statement, args = null) => {
 
         console.log('create', reporters);
 
@@ -138,7 +139,7 @@ class StatusDB extends Component {
           reporters.dbSuccess,
         );
       },
-      insert: (connection, reporters, statement, args=null) => {
+      insert: (connection, reporters, statement, args = null) => {
         let timestamp = new Date();
         connection.db.transaction(
           tx => {
@@ -151,7 +152,7 @@ class StatusDB extends Component {
           }
         );
       },
-      last: (connection, reporters, statement, args=null) => {
+      last: (connection, reporters, statement, args = null) => {
         connection.db.transaction(
           tx => {
             tx.executeSql(
@@ -164,7 +165,7 @@ class StatusDB extends Component {
           reporters.dbError,
           reporters.dbSuccess,
         );
-      }
+      },
     };
     let timestamp = new Date();
     let _connection = this.connection;
@@ -179,4 +180,4 @@ class StatusDB extends Component {
   }
 }
 
-export { StatusDB }
+export { StatusDB };

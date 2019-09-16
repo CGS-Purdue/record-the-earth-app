@@ -1,0 +1,46 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/icarus/node/bin/node',
+1 verbose cli   '/home/icarus/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   '_lint',
+1 verbose cli   '--color',
+1 verbose cli   'red',
+1 verbose cli   '--cache',
+1 verbose cli   '--dirs',
+1 verbose cli   'test',
+1 verbose cli   '---print-config',
+1 verbose cli   '--debug',
+1 verbose cli   '*.js',
+1 verbose cli   '**/*.js' ]
+2 info using npm@6.10.3
+3 info using node@v10.15.3
+4 verbose run-script [ 'pre_lint', '_lint', 'post_lint' ]
+5 info lifecycle record-the-earth-react-native@0.0.2~pre_lint: record-the-earth-react-native@0.0.2
+6 info lifecycle record-the-earth-react-native@0.0.2~_lint: record-the-earth-react-native@0.0.2
+7 verbose lifecycle record-the-earth-react-native@0.0.2~_lint: unsafe-perm in lifecycle true
+8 verbose lifecycle record-the-earth-react-native@0.0.2~_lint: PATH: /home/icarus/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/data/clients/cgs/Projects/record-the-earth-react-native/App/node_modules/.bin:/data/lib/anaconda/bin:/data/lib/anaconda/condabin:/home/icarus/.gvm/bin:/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/home/icarus/bin:/home/icarus/node/bin:/home/icarus/.local/bin:/home/icarus/go/bin:/usr/local/go/bin:/home/icarus/google-cloud-sdk/bin:/snap/bin:/data/apps/bin:/bin:/data/0/bin:/data/0/git-bin:/data/0/lib/task/bin:/data/0/src/taskwarrior/bin:/data/projects/5_Android_Projects/AndroidSDK/emulator:/data/projects/5_Android_Projects/AndroidSDK/tools:/data/projects/5_Android_Projects/AndroidSDK/tools/bin:/data/projects/5_Android_Projects/AndroidSDK/platform-tools:/usr/lib/jvm/jdk-12.0.1/bin:/data/apps/android-studio/bin:/data/apps/android-studio/gradle/gradle-5.1.1/bin
+9 verbose lifecycle record-the-earth-react-native@0.0.2~_lint: CWD: /data/clients/cgs/Projects/record-the-earth-react-native/App
+10 silly lifecycle record-the-earth-react-native@0.0.2~_lint: Args: [ '-c', '.bin/_lint "red" "test" "*.js" "**/*.js"' ]
+11 silly lifecycle record-the-earth-react-native@0.0.2~_lint: Returned: code: 1  signal: null
+12 info lifecycle record-the-earth-react-native@0.0.2~_lint: Failed to exec _lint script
+13 verbose stack Error: record-the-earth-react-native@0.0.2 _lint: `.bin/_lint "red" "test" "*.js" "**/*.js"`
+13 verbose stack Exit status 1
+13 verbose stack     at EventEmitter.<anonymous> (/home/icarus/lib/node_modules/npm/node_modules/npm-lifecycle/index.js:326:16)
+13 verbose stack     at EventEmitter.emit (events.js:189:13)
+13 verbose stack     at ChildProcess.<anonymous> (/home/icarus/lib/node_modules/npm/node_modules/npm-lifecycle/lib/spawn.js:55:14)
+13 verbose stack     at ChildProcess.emit (events.js:189:13)
+13 verbose stack     at maybeClose (internal/child_process.js:970:16)
+13 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:259:5)
+14 verbose pkgid record-the-earth-react-native@0.0.2
+15 verbose cwd /data/clients/cgs/Projects/record-the-earth-react-native/App/.bin
+16 verbose Linux 4.15.0-62-generic
+17 verbose argv "/home/icarus/node/bin/node" "/home/icarus/bin/npm" "run" "_lint" "--color" "red" "--cache" "--dirs" "test" "---print-config" "--debug" "*.js" "**/*.js"
+18 verbose node v10.15.3
+19 verbose npm  v6.10.3
+20 error code ELIFECYCLE
+21 error errno 1
+22 error record-the-earth-react-native@0.0.2 _lint: `.bin/_lint "red" "test" "*.js" "**/*.js"`
+22 error Exit status 1
+23 error Failed at the record-the-earth-react-native@0.0.2 _lint script.
+23 error This is probably not a problem with npm. There is likely additional logging output above.
+24 verbose exit [ 1, true ]

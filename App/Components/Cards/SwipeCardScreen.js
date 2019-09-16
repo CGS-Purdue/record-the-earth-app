@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
-import SwipeCards from '../components/SwipeCards'
+import SwipeCards from '../components/SwipeCards';
 
 export default function HomeScreen() {
   return (

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { ImageBackground, View, Button } from 'react-native';
-// import { NavigationScreenProp } from 'react-navigation';
-import { Theme } from '../../Theme';
-import { RootView, CenterColView, PadView } from '../../Components/Views';
+import { Button,ImageBackground, View } from 'react-native';
+
+import { BlurBgView } from '../../Components/Effects/BlurView';
 import { StyledTextArea } from '../../Components/Forms/StyledTextArea';
 import { HeadingText } from '../../Components/Text/HeadingText';
-
+// import { NavigationScreenProp } from 'react-navigation';
+import { CenterColView, PadView,RootView } from '../../Components/Views';
+import { Theme } from '../../Theme';
 const _styles = Theme.Styles;
 const _assets = Theme.Assets;
 const _colors = Theme.Colors;
@@ -26,18 +27,21 @@ class SurveyDescriptionScreen extends Component {
     };
    }
 
+   // // <ImageBackground style={_styles.bgImg} }>
+   //      <CenterColView >
+   //      </CenterColView>
   handle_submit_description = () => {
     console.log('handle submit');
     console.log(this.state);
     let surveyDescription = this.state.text;
-    this.props.navigation.navigate('SurveyBio', { survey_data: { description: surveyDescription } })
+    this.props.navigation.navigate('SurveyBio', { survey_data: { description: surveyDescription } });
   }
 
   render() {
     return (
-      <ImageBackground style={_styles.bgImg} source={_assets.images.img_background}>
+      <BlurBgView src={_assets.images.img_background}>
       <RootView>
-        <CenterColView >
+
           <PadView padding={[1]}>
             <HeadingText>Describe the sounds you heard</HeadingText>
             <View>
@@ -56,9 +60,8 @@ class SurveyDescriptionScreen extends Component {
             />
             </View>
           </PadView>
-        </CenterColView>
       </RootView>
-    </ImageBackground>
+    </BlurBgView>
     );
   }
 }

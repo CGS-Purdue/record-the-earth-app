@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import { View, Button, Text, TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import React, { Component } from 'react';
+import { Button, Platform,Text, TouchableOpacity, View } from 'react-native';
+
 import { Theme } from  '../../Theme';
 
 const _styles = Theme.Styles;
@@ -13,7 +14,7 @@ const _button_container_outer_style = Object.assign(
   Object.create(null), {
     backgroundColor: _colors.TRANSPARENT,
   }
-)
+);
 
 const _button_container_inner_style = Object.assign(
   Object.create(null),
@@ -69,7 +70,7 @@ class CheckButton extends Component {
     super(props);
     this.state = {
       checked: false,
-    }
+    };
   }
 
   _toggleCheckedState = () => {
@@ -97,8 +98,8 @@ class CheckButton extends Component {
             <Text style={checkBtnStyles._checkbtn_text}>{this.props.text}</Text>
           </View>
         </TouchableOpacity>
-    )
+    );
   }
 }
 
-export { CheckButton }
+export { CheckButton };

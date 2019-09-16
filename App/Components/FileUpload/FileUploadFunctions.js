@@ -1,13 +1,13 @@
 
 function getFiles() {
-  this.state = {}
+  this.state = {};
   this.state.selectedImages.forEach((item, i) => {
     data.append("doc[]", {
       uri: item.uri,
       type: "image/jpeg",
       name: item.filename || `filename${i}.jpg`,
-    })
-  })
+    });
+  });
 }
 
 function uploadForm(config) {
@@ -27,7 +27,7 @@ function uploadForm(config) {
       { cancelable: false }
     );
   })
-  .catch(err => {ThemeColors
+  .catch(err => {ThemeColors;
     console.error("error uploading images: ", err);
   });
 }
@@ -63,4 +63,4 @@ function rnfs() {
   });
 }
 
-export { getFiles, uploadForm, rnfs }
+export { getFiles, uploadForm, rnfs };

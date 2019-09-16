@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, TouchableOpacity, TouchableHighlight } from 'react-native';
+import React, { Component } from 'react';
+import { Text, TouchableHighlight,TouchableOpacity, View } from 'react-native';
+
 import { ThemeColors } from '../Theme';
 
 
@@ -16,14 +17,14 @@ export default class TouchButton extends Component {
   constructor(props) {
     super(props);
     this.active = false;
-    this.state= {
+    this.state = {
       active: false,
 
     };
     this.text = false;
     this.image = false;
     this.disabled = false;
-    this.underlayColor = '#333'
+    this.underlayColor = '#333';
   }
 
   toggleState() {
@@ -47,8 +48,8 @@ export default class TouchButton extends Component {
           {this.props.children}
       </TouchableHighlight>
     </View>
-    )
+    );
   }
 }
 
-export { TouchButton }
+export { TouchButton };

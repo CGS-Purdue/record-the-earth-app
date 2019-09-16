@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
   Dimensions,
   Image,
   Text,
-  View
+  View,
 } from 'react-native';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 

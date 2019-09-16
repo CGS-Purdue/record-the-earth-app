@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import Constants from 'expo-constants';
+import { Constants } from 'expo-constants';
 import { SQLite } from 'expo-sqlite';
-import { SectionList, Image, StyleSheet, ScrollView, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Image, ScrollView, SectionList, StyleSheet, Text, View } from 'react-native';
+
+import { SoundDB } from '../../Components/Database/SoundDB';
 import { Theme } from '../../Theme';
 import { Log } from '../../Utilities/Log';
-import { SoundDB } from '../../Components/Database/SoundDB';
 
 const _styles = Theme.Styles;
 const _assets = Theme.Assets;
@@ -18,15 +19,15 @@ export default class ConfigScreen extends React.Component {
     // this.state = [soundscapes, setSoundscapes] = useState([]);
     // this.dataSource = new SoundDB({autoconnect: true});
     this.state = {
-        soundscapes: null
-      }
+        soundscapes: null,
+      };
 
     this.dbConnection = new SoundDB({ autoconnect: true});
 
   }
 
   getSoundscapesList(){
-    this.updateSoundscapes()
+    this.updateSoundscapes();
   }
 
   updateSoundscapes(){
@@ -34,7 +35,7 @@ export default class ConfigScreen extends React.Component {
     this.dataSource.transaction(tx => {
       tx.executeSql('select * from Soundscapes;', [], (_, { rows }) =>
         this.setState({
-          soundscapes: rows._array
+          soundscapes: rows._array,
         })
       );
     });
@@ -42,10 +43,10 @@ export default class ConfigScreen extends React.Component {
   }
 
   onComponentDidMount(){
-    this.dataSource = this.dbConnection.getConnection()
+    this.dataSource = this.dbConnection.getConnection();
     console.log('connectionStatus', this.dataSource.connectionStatus);
     console.log(this.state);
-    this.updateSoundscapes()
+    this.updateSoundscapes();
   }
   onComponentDidUpate(){
     // console.log(this.dataSource);
@@ -73,19 +74,19 @@ class ConfigView extends React.Component {
       { data: [{ value: manifest.privacy }], title: 'privacy' },
       { data: [{ value: manifest.version }], title: 'version' },
       { data: [{ value: manifest.orientation }], title: 'orientation' },
-      { data: [{ value: manifest.primaryColor, type: 'color' }], title: 'primaryColor', },
-      { data: [{ value: manifest.splash && manifest.splash.image }], title: 'splash.image', },
+      { data: [{ value: manifest.primaryColor, type: 'color' }], title: 'primaryColor'},
+      { data: [{ value: manifest.splash && manifest.splash.image }], title: 'splash.image'},
       { data: [ {
         value: manifest.splash && manifest.splash.backgroundColor,
         type: 'color',
-        },],
+        }],
         title: 'splash.backgroundColor',
       },
       { title: 'splash.resizeMode',
-        data: [ {value: manifest.splash && manifest.splash.resizeMode,},],
+        data: [ {value: manifest.splash && manifest.splash.resizeMode}],
       },
       { title: 'ios.supportsTablet',
-        data: [ { value: manifest.ios && manifest.ios.supportsTablet ? 'true' : 'false',}, ],
+        data: [ { value: manifest.ios && manifest.ios.supportsTablet ? 'true' : 'false'}],
       },
     ];
 

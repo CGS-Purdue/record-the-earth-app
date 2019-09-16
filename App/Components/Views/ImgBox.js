@@ -1,9 +1,9 @@
 import React from 'react';
 
 export default function ImgBox(props) {
-  var inner_box_style={};
-  var image_style={};
-  var outer_box_style={};
+  var inner_box_style = {};
+  var image_style = {};
+  var outer_box_style = {};
 
   function set_cover_format () {
     outer_box_style = {
@@ -14,7 +14,7 @@ export default function ImgBox(props) {
       alignItems: 'center',
       maxHeight: '100vh',
       overflow: 'hidden',
-    }
+    };
     inner_box_style = {
       position: 'relative',
       flex: [1, 1, '100%'],
@@ -30,7 +30,7 @@ export default function ImgBox(props) {
       maxHeight: '100%',
       maxWidth: '100%',
       margin: '0',
-      flex: [1, 1, '100%']
+      flex: [1, 1, '100%'],
     };
   }
 
@@ -45,7 +45,7 @@ export default function ImgBox(props) {
       minWidth: 'unset',
       minHeight: 'unset',
       maxWidth: '100%',
-      maxHeight: '100%'
+      maxHeight: '100%',
     });
   }
 
@@ -68,7 +68,7 @@ export default function ImgBox(props) {
       textAlign: 'center',
       margin: [0,0,0,0],
       padding: [0,0,0,0],
-    }
+    };
     Object.assign(outer_box_style, {flexDirection:'column'});
   } else {
     imgLabelStyle = {display:'none'};

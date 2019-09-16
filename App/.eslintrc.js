@@ -1,5 +1,12 @@
 module.exports = {
-  extends: [ '@react-native-community/eslint-config' ],
+  extends: [
+    '@react-native-community/eslint-config',
+    'plugin:prettier/recommended',
+  ],
+  plugins: [
+    'simple-import-sort',
+    "promise",
+  ],
   rules: {
    // General
    'comma-dangle': [1, 'always-multiline'], // allow or disallow trailing commas
@@ -45,7 +52,7 @@ module.exports = {
     'no-div-regex': 1, // disallow division operators explicitly at beginning of regular expression (off by default)
     'no-else-return': 0, // disallow else after a return in an if (off by default)
     'no-eq-null': 0, // disallow comparisons to null without a type-checking operator (off by default)
-    'no-eval': 2, // disallow use of eval() 
+    'no-eval': 2, // disallow use of eval()
     'no-extend-native': 1, // disallow adding to native types
     'no-extra-bind': 1, // disallow unnecessary function binding
     'no-fallthrough': 1, // disallow fallthrough of case statements
@@ -185,16 +192,29 @@ module.exports = {
     'react/react-in-jsx-scope': 1,
     'react/self-closing-comp': 1,
     'react/wrap-multilines': 0,
-
     // React-Hooks Plugin
     // The following rules are made available via `eslint-plugin-react-hooks`
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'error',
-
     // React-Native Plugin
     // The following rules are made available via `eslint-plugin-react-native`
-
     'react-native/no-inline-styles': 1,
+    // or plugin:promise/recommendeds
+    // imple-import-sort
+    "promise/always-return": "error",
+    "promise/no-return-wrap": "error",
+    "promise/param-names": "error",
+    "promise/catch-or-return": "error",
+    "promise/no-native": "off",
+    "promise/no-nesting": "warn",
+    "promise/no-promise-in-callback": "warn",
+    "promise/no-callback-in-promise": "warn",
+    "promise/avoid-new": "warn",
+    "promise/no-new-statics": "error",
+    "promise/no-return-in-finally": "warn",
+    "promise/valid-params": "warn",
 
+    //eslint-plugin-promise
+    "simple-import-sort/sort": "error",
   },
 };

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+
 import { Theme } from '../../Theme';
 
 const _styles = Theme.Styles;
@@ -20,7 +21,7 @@ export default class BoxY extends Component {
       <View style={boxyStyle}>
         <View style={boxyInStyle}>{this.props.children}</View>
       </View>
-    )
+    );
   }
 }
 const boxyStyle = {
@@ -38,4 +39,4 @@ const boxyInStyle = {
   marginBottom: 0,
 };
 
-export { BoxY }
+export { BoxY };

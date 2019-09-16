@@ -30,7 +30,7 @@ const _arguments = {
   insert : { args: 1, type: 'timestamp' , required: false },
   last : { args: 0, type: null , required: false },
   all : { args: 0, type: null , required: false },
-}
+};
 
 const dbStatements = _statements;
 dbStatements._arguments = _arguments;

@@ -2,8 +2,7 @@
 'use strict';
 // https://github.com/meteor-factory/react-native-tinder-swipe-cards
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
-
+import {Image,StyleSheet, Text, View} from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
 
 class Card extends React.Component {
@@ -16,7 +15,7 @@ class Card extends React.Component {
       <View style={[styles.card, {backgroundColor: this.props.backgroundColor}]}>
         <Text>{this.props.text}</Text>
       </View>
-    )
+    );
   }
 }
 
@@ -30,7 +29,7 @@ class NoMoreCards extends Component {
       <View>
         <Text style={styles.noMoreCardsText}>No more cards</Text>
       </View>
-    )
+    );
   }
 }
 
@@ -45,18 +44,18 @@ export default class extends React.Component {
         {text: 'Blueberry', backgroundColor: 'blue'},
         {text: 'Umm...', backgroundColor: 'cyan'},
         {text: 'orange', backgroundColor: 'orange'},
-      ]
+      ],
     };
   }
 
   handleYup (card) {
-    console.log(`Yup for ${card.text}`)
+    console.log(`Yup for ${card.text}`);
   }
   handleNope (card) {
-    console.log(`Nope for ${card.text}`)
+    console.log(`Nope for ${card.text}`);
   }
   handleMaybe (card) {
-    console.log(`Maybe for ${card.text}`)
+    console.log(`Maybe for ${card.text}`);
   }
   render() {
     // If you want a stack of cards instead of one-per-one view, activate stack mode
@@ -72,7 +71,7 @@ export default class extends React.Component {
         handleMaybe={this.handleMaybe}
         hasMaybeAction
       />
-    )
+    );
   }
 }
 
@@ -85,5 +84,5 @@ const styles = StyleSheet.create({
   },
   noMoreCardsText: {
     fontSize: 22,
-  }
-})
+  },
+});

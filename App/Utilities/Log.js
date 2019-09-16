@@ -10,7 +10,7 @@ class Log {
     if (__DEV__) {
       console.log([
         `${msg.title}`,
-        `src: ${msg.src}`
+        `src: ${msg.src}`,
       ].join('\n'));
       console.log(msg.data);
     }
@@ -44,4 +44,4 @@ class Log {
   }
 }
 
-export { Log }
+export { Log };

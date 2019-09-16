@@ -1,6 +1,7 @@
+import assert from 'power-assert';
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
-import assert from 'power-assert';
+
 import Modal from '../src/index';
 
 describe('Modal', () => {

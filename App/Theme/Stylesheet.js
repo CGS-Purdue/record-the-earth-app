@@ -1,13 +1,13 @@
-import { TextClasses, FontClasses } from './Styles/TypographyStyles';
-import { MainStyles } from './Styles/MainStyles';
+import { ButtonStyles } from './Styles/ButtonStyles';
 import { DebugStyles } from './Styles/DebugStyles';
+import { FormStyles } from './Styles/FormStyles';
+import { HomeStyles } from './Styles/HomeStyles';
+import { LayoutStyles } from './Styles/LayoutStyles';
+import { MainStyles } from './Styles/MainStyles';
+import { RecordStyles } from './Styles/RecordStyles';
+import { FontClasses,TextClasses } from './Styles/TypographyStyles';
 import { UtilityStyles } from './Styles/UtilityStyles';
 import { ViewStyles } from './Styles/ViewStyles';
-import { FormStyles } from './Styles/FormStyles';
-import { ButtonStyles } from './Styles/ButtonStyles';
-import { LayoutStyles } from './Styles/LayoutStyles';
-import { RecordStyles } from './Styles/RecordStyles';
-import { HomeStyles } from './Styles/HomeStyles';
 // import { ThemeColors } from './Colors';
 // import { StyleSheet } from 'react-native';
 

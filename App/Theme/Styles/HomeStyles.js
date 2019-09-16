@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Platform } from 'react-native';
+import { Platform,StyleSheet } from 'react-native';
+
 import { ThemeColors } from '../Colors';
 import { Layout } from '../Layout';
 import { m, p, textalign } from './LayoutStyles';

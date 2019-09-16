@@ -1,5 +1,6 @@
-import { FontAssets } from './Assets';
 import * as Font from 'expo-font';
+
+import { FontAssets } from './Assets';
 
 // =============================================================================
 // Fonts -

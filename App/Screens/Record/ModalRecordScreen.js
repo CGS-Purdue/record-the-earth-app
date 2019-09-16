@@ -1,8 +1,9 @@
 import React from 'react';
 import { NavigationScreenProp } from 'react-navigation';
+
 import { Recorder } from '../../Components/Recorder';
 import { CenterView, RootView } from '../../Components/Views';
-import { ThemeColors, Theme } from '../../Theme';
+import { Theme,ThemeColors } from '../../Theme';
 
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;

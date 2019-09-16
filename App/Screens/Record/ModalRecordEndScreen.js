@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Text, View } from 'react-native';
-import { NavigationScreenProp } from 'react-navigation';
 import Modal from 'react-native-modal';
+import { NavigationScreenProp } from 'react-navigation';
+
 import { CenterView, RootView } from '../../Components/Views';
 
 class ModalRecordEndScreen extends Component {

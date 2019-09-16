@@ -3,13 +3,14 @@ import { StyleSheet } from 'react-native';
 // height: RecordIcon.height,
 const RecordStyles = StyleSheet.create({
 
-  recordStyles: {
   recordButton: {
     resizeMode: 'contain',
     margin: 5,
   },
-  }
+  recordStyles: {
+    flex: 1,
+  },
 });
 
 
-export { RecordStyles }
+export { RecordStyles };

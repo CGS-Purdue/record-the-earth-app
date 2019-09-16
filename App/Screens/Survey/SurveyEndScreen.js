@@ -1,9 +1,10 @@
 import React, { Component, createRef } from 'react';
-import { ImageBackground, View, Button } from 'react-native';
-import { Theme } from '../../Theme';
-import { RootView, CenterView, PadView } from '../../Components/Views';
+import { Button,ImageBackground, View } from 'react-native';
+
 // import { SoundDB } from '../../Database/Model/SoundDB';
 import { MonoText } from '../../Components/Text/MonoText';
+import { CenterView, PadView,RootView } from '../../Components/Views';
+import { Theme } from '../../Theme';
 const _colors = Theme.Colors;
 const _assets = Theme.Assets;
 const _styles  = Theme.Styles;
@@ -36,7 +37,7 @@ class SurveyEndScreen extends Component {
       let taglist = [];
       for (let tag of Object.keys(values)) {
         if (values[tag]) {
-          taglist.push(tag)
+          taglist.push(tag);
         }
       }
 
@@ -46,10 +47,10 @@ class SurveyEndScreen extends Component {
       //   writable: false,
       // });
       // return returnItem;
-        return {[item]:taglist.join(',')}
+        return {[item]:taglist.join(',')};
     });
 
-    return Object.assign(...tagData)
+    return Object.assign(...tagData);
   }
 
   submitSurvey = () => {
@@ -60,7 +61,7 @@ class SurveyEndScreen extends Component {
     console.log(survey);
     let surveyString = this.dataToString(survey);
     console.log(surveyString);
-    this.setState({result : surveyString })
+    this.setState({result : surveyString });
   }
 
 

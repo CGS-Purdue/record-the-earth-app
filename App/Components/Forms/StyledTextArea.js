@@ -1,5 +1,6 @@
-import React, { Component, forwardRef, createRef } from 'react';
+import React, { Component, createRef,forwardRef } from 'react';
 import { TextInput, View} from 'react-native';
+
 import { Theme } from '../../Theme';
 
 const _styles = Theme.Styles;
@@ -7,7 +8,7 @@ const _colors = Theme.Colors;
 
 const formDefaultProps = {
   placeholderTextColor: _colors.GRA_600,
-}
+};
 
 const TextAreaStyle = Object.assign(
   {
@@ -61,4 +62,4 @@ class StyledTextArea extends Component {
 
 export default StyledTextArea;
 
-export { StyledTextArea }
+export { StyledTextArea };

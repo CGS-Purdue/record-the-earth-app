@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import {
+  Animated,
   StyleSheet,
   Text,
   View,
-  Animated
 } from "react-native";
 
 
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
 });
 
 
-export { RotateAnim }
+export { RotateAnim };

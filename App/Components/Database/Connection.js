@@ -1,5 +1,5 @@
-import { Component } from 'react';
 import { SQLite } from 'expo-sqlite';
+import { Component } from 'react';
 // import { ConnectionQuery } from './ConnectionQuery';
 
 class Connection extends Component {
@@ -91,4 +91,4 @@ class Connection extends Component {
 
 
 
-export { Connection }
+export { Connection };

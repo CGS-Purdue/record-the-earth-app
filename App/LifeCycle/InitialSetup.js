@@ -17,8 +17,8 @@ import { StatusDB }  from '../Components/Database/StatusDB';
 // }
 
 function initalAppSetup() {
-  checkAppDirectoriesStatus();
-  const statusDB = new StatusDB({autoconnect: true});
+  // checkAppDirectoriesStatus();
+  // const statusDB = new StatusDB({autoconnect: true});
     // return  initstatus;
     // __idMount = ;
     // __didConnect__,

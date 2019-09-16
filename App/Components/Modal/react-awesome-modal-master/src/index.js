@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import style from './style.js';
 
 export default class Modal extends Component {
@@ -8,13 +9,13 @@ export default class Modal extends Component {
         this.setSize(effect);
         this.state = {
             visible : props.visible,
-            style : style[effect]
-        }
+            style : style[effect],
+        };
     }
 
     componentWillReceiveProps({visible, effect = 'fadeInDown'}) {
         this.setState({
-            visible : visible
+            visible : visible,
         });
         this.setSize(effect);
         this.setStyles(effect);
@@ -24,19 +25,19 @@ export default class Modal extends Component {
         if (this.props && this.props.styles) {
             style[effect].panel = {
                 ...style[effect].panel,
-                ...this.props.styles
+                ...this.props.styles,
             };
         }
     }
 
     setSize(effect) {
         if (this.props && this.props.width) {
-            if (this.props.width.charAt(this.props.width.length-1) === '%') {
+            if (this.props.width.charAt(this.props.width.length - 1) === '%') {
                 // Use Percentage
                 const width = this.props.width.slice(0, -1);
                 style[effect].panel.width = width + '%';
 
-            } else if (this.props.width.charAt(this.props.width.length-1) === 'x') {
+            } else if (this.props.width.charAt(this.props.width.length - 1) === 'x') {
                 // Use Pixels
                 const width = this.props.width.slice(0, -2);
                 style[effect].panel.width = width + 'px';
@@ -47,12 +48,12 @@ export default class Modal extends Component {
             }
         }
         if (this.props && this.props.height) {
-            if (this.props.height.charAt(this.props.height.length-1) === '%') {
+            if (this.props.height.charAt(this.props.height.length - 1) === '%') {
                 // Use Percentage
                 const height = this.props.height.slice(0, -1);
                 style[effect].panel.height = height + 'vh';
 
-            } else if (this.props.height.charAt(this.props.height.length-1) === 'x') {
+            } else if (this.props.height.charAt(this.props.height.length - 1) === 'x') {
                 // Use Pixels
                 const height = this.props.height.slice(0, -2);
                 style[effect].panel.height = height + 'px';

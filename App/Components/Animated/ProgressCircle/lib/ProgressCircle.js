@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { View, Animated } from 'react-native'
+import React, { Component } from 'react';
+import { Animated,View } from 'react-native';
 
 
 class ErrorBoundary extends Component {
@@ -44,14 +44,14 @@ export default class ProgressCircle extends Component {
   }
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       error: false,
       animatedValue:
         props.value.constructor.name === 'AnimatedValue'
           ? null
           : new Animated.Value(props.shouldAnimateFirstValue ? 0 : props.value),
-    }
+    };
   }
 
   componentDidMount() {
@@ -60,16 +60,16 @@ export default class ProgressCircle extends Component {
       this.props.shouldAnimateFirstValue &&
       this.animationMethod
     ) {
-      this.animateChange(this.props.value)
+      this.animateChange(this.props.value);
     }
   }
 
   componentWillReceiveProps({ value }) {
-    this.handleChange(value)
+    this.handleChange(value);
   }
 
   render() {
-    const { thickness, unfilledColor, children, style } = this.props
+    const { thickness, unfilledColor, children, style } = this.props;
 
     return (
       <View style={[this.fullCircleStyle, { flexDirection: 'row' }, style]}>
@@ -89,7 +89,7 @@ export default class ProgressCircle extends Component {
         {this.renderHalfCircle()}
         {this.renderHalfCircle({ isFlipped: true })}
       </View>
-    )
+    );
   }
 
   get fullCircleStyle() {
@@ -97,7 +97,7 @@ export default class ProgressCircle extends Component {
       width: this.props.size,
       height: this.props.size,
       borderRadius: this.props.size / 2,
-    }
+    };
   }
 
   get halfCircleContainerStyle() {
@@ -105,26 +105,26 @@ export default class ProgressCircle extends Component {
       width: this.props.size / 2,
       height: this.props.size,
       overflow: 'hidden',
-    }
+    };
   }
 
   ANIMATION_TYPES = ['timing', 'spring', 'decay']
   get animationMethod() {
     return this.ANIMATION_TYPES.includes(this.props.animationMethod)
       ? this.props.animationMethod
-      : null
+      : null;
   }
 
   handleChange = (value = this.props.value) => {
    try {
-      this.props.onChange()
+      this.props.onChange();
       if (value.constructor.name === 'AnimatedValue') {
-        return
+        return;
       }
       if (this.animationMethod) {
-        this.animateChange(value)
+        this.animateChange(value);
       } else {
-        this.state.animatedValue.setValue(value)
+        this.state.animatedValue.setValue(value);
       }
     } catch (error) {
       this.setState({ error });
@@ -140,11 +140,11 @@ export default class ProgressCircle extends Component {
     }).start(this.props.onChangeAnimationEnd)
 
   renderHalfCircle = ({ isFlipped = false } = {}) => {
-    const { size, color, thickness, value, style } = this.props
+    const { size, color, thickness, value, style } = this.props;
     const valueToInterpolate =
       value.constructor.name === 'AnimatedValue'
         ? value
-        : this.state.animatedValue
+        : this.state.animatedValue;
 
     return (
       <ErrorBoundary>
@@ -187,9 +187,9 @@ export default class ProgressCircle extends Component {
         </Animated.View>
       </Animated.View>
     </ErrorBoundary>
-    )
+    );
   }
 }
 
 
-export { ProgressCircle }
+export { ProgressCircle };
