@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { ImageBackground, Text, View } from 'react-native';
-import { NavigationScreenProp } from 'react-navigation';
-
-import { AudioRecord } from '../../Components/Audio/AudioRecord';
+import { ImageBackground } from 'react-native';
+import { AudioRecorderPermission } from '../../Components/Audio/AudioRecordWithPermission';
 import { CenterView, RootView } from '../../Components/Views';
 import { Theme } from '../../Theme';
 const _assets = Theme.Assets;
@@ -21,7 +19,7 @@ class RecordScreen extends Component {
     <ImageBackground style={_styles.bgImg} source={_assets.images.img_background}>
       <RootView>
         <CenterView>
-          <AudioRecord />
+          <AudioRecorderPermission />
         </CenterView>
       </RootView>
     </ImageBackground>

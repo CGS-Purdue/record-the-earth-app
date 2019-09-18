@@ -1,48 +1,20 @@
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
-import * as Permissions from 'expo-permissions';
 import React, { Component } from 'react';
-import { ActivityIndicator, Alert, Image, Platform, TouchableHighlight, View } from 'react-native';
-
-import { Theme,ThemeColors, ThemeIcons } from '../../Theme';
+import { ActivityIndicator, Alert, View } from 'react-native';
+import { Theme, ThemeIcons } from '../../Theme';
 import { saveAudioRecordingFile } from '../../Utilities/Filesystem';
-import { MonoText } from '../Text';
-import { CenterColView, CenterView, RootView } from '../Views';
+import { AudioFormat } from './AudioFormat';
+import { AudioProfile } from './AudioProfile';
+import { AudioRecordTimer } from './AudioRecordTimer';
+import { AudioRecordButton } from './AudioRecordButton';
+import { askForAudioPermissions } from './AudioPermissionsCheck';
 
 const _styles = Theme.Styles;
-
+const _colors = Theme.Colors;
 let _ic_record = ThemeIcons.Icons.icon_record;
-let _ic_recording = ThemeIcons.Icons.icon_recording;
 const RecordIcon = ThemeIcons.createIcon(_ic_record.name, _ic_record.module, _ic_record.width, _ic_record.height);
-const IsRecordingIcon = ThemeIcons.createIcon(_ic_recording.name, _ic_recording.module, _ic_recording.width, _ic_recording.height);
 
-const recordStyles = {
-  recordButton: {
-    width: RecordIcon.width,
-    height: RecordIcon.height,
-    resizeMode: 'contain',
-    margin: 5,
-  },
-  recordCenterColInner:  {
-    borderColor:'blue',
-    borderWidth:1,
-    borderStyle:'solid',
-  },
-  recordCenterColInnerCentered: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-  },
-
-};
-
-const touchButtonStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  padding: 10,
-  margin: 0,
-};
 
 class AudioRecord extends Component {
   constructor(props) {
@@ -60,61 +32,46 @@ class AudioRecord extends Component {
       haveRecordingPermissions: false,
       isRecording: false,
       isLoading: false,
+      durationMillis: null,
+      duration: null,
+      recordingDuration: null,
       muted: false,
       rate: 1.0,
       recordingState: false,
-      durationMillis: null,
+      AudioRecordTimer: null,
       recordingStarted: false,
       stopRequested: false,
       soundPosition: null,
       volume: 1.0,
     };
-    this.profile = {
-      allowsRecordingIOS: true,
-      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
-      playsInSilentModeIOS: true,
-      shouldDuckAndroid: true,
-      interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
-      playThroughEarpieceAndroid: false,
-      staysActiveInBackground: true,
-    };
-    this.format = Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY;
+    this.askForAudioPermissions = askForAudioPermissions;
+    this.audioProfile = new AudioProfile();
+    this.profile = this.audioProfile.getProfile()
+
+    this.audioFormat = new AudioFormat();
+    this.format = this.audioFormat.getFormat();
+
     this.MAX_DURATION = 6000;
   }
 
   componentDidMount() {
-    this.askForPermissions();
+    console.log(this);
+    // this.askForAudioPermissions();
   }
 
   componentWillUnmount(){
+    console.log(this.state);
+
     this.recordStop();
   }
 
-  async askForPermissions(){
-    let response = {
-      status: 'granted',
-    };
-    if (Platform.OS === 'web') {
-      this.setState({
-        haveRecordingPermissions: response.status === 'granted',
-      });
-    } else {
-       response = await Permissions.askAsync(
-        Permissions.AUDIO_RECORDING,
-        Permissions.CAMERA_ROLL
-      );
-      this.setState({
-        haveRecordingPermissions: response.status === 'granted',
-      });
-
-    }
-
-  }
 
   updateRecorderState(){
     let emptyState = {
       canRecord: null,
       isRecording: null,
+      duration: null,
+      recordingDuration: null,
       isDoneRecording: null,
       durationMillis: null,
     };
@@ -126,6 +83,8 @@ class AudioRecord extends Component {
       isRecording: status.isRecording,
       isDoneRecording: status.isDoneRecording,
       durationMillis: status.durationMillis,
+      duration: status.durationMillis,
+      recordingDuration: status.durationMillis,
     });
   }
 
@@ -134,6 +93,10 @@ class AudioRecord extends Component {
     let success = await saveAudioRecordingFile(sound_file);
     console.log(success);
   }
+  //
+  // updateRecordingTimer () {
+  //
+  // }
 
   _cancelRecording(){}
 
@@ -156,14 +119,6 @@ class AudioRecord extends Component {
     );
   }
 
-  getAudioProfile() {
-    return this.profile;
-  }
-
-  getAudioFormat() {
-    return JSON.parse(JSON.stringify(this.format));
-  }
-
   async prepareAudio() {
     if (this.sound !== null) {
       await this.sound.unloadAsync();
@@ -183,8 +138,8 @@ class AudioRecord extends Component {
 
     await this.prepareAudio();
 
-    const AUDIO_PROFILE = this.getAudioProfile();
-    const RECORDING_FORMAT = this.getAudioFormat();
+    const AUDIO_PROFILE = this.profile;
+    const RECORDING_FORMAT = this.format;
     const MAX_DURATION = this.MAX_DURATION;
 
     await Audio.setAudioModeAsync(AUDIO_PROFILE);
@@ -247,22 +202,6 @@ class AudioRecord extends Component {
     this.setState({syncing: false});
   }
 
-
-  durationToTimestamp(millis) {
-    const totalSeconds = millis / 1000;
-    const seconds = Math.floor(totalSeconds % 60).toString();
-    const minutes = Math.floor(totalSeconds / 60).toString();
-    return [minutes.padStart(2,'0'),':', seconds.padStart(2,'0')].join('');
-  }
-
-  getRecordingTimestamp() {
-    if (this.state.durationMillis) {
-      return `${this.durationToTimestamp(this.state.durationMillis)}`;
-    } else {
-      return '00:00';
-    }
-  }
-
   handleRecordButton = () => {
     if (this.state.isRecording) {
       this.recordStop();
@@ -272,57 +211,23 @@ class AudioRecord extends Component {
   }
 
   render() {
-    if (!this.state.haveRecordingPermissions) {
       return (
-        <RootView>
-          <CenterView>
-            <MonoText style={[{textAlign: 'center'}]}>You must enable audio recorder permissions in order to use this app.</MonoText>
-          </CenterView>
-        </RootView>
-      );
-    } else {
-      return (
-        <CenterColView backgroundColor={ThemeColors.BLU_300}>
-          <View style={recordStyles.recordCenterColInner}>
-            <View style={recordStyles.recordCenterColInnerCentered}>
-              <ActivityIndicator
-                color={ThemeColors.GRN_300}
-                animating={true}
-                size={'large'}
-              />
-              <TouchableHighlight
-                style={[touchButtonStyle]}
-                underlayColor={ThemeColors.GRN_300}
-                onPress={this.handleRecordButton}
-                disabled={this.state.syncing}>
-                <Image
-                  style={recordStyles.recordButton}
-                  source={RecordIcon.module}
-                />
-              </TouchableHighlight>
-
-              <MonoText style={[{color: ThemeColors.MESSAGE_DANGER, textAlign:'center'}]}>
-                {this.state.isRecording ? 'LIVE' : ''}
-              </MonoText>
-
-              <Image
-                style={[{opacity: this.state.isRecording ? 1.0 : 0.0}]}
-                source={IsRecordingIcon.module}
-              />
-              <MonoText>{this.getRecordingTimestamp()}</MonoText>
-            </View>
+        <View style={_styles.record_container}>
+          <AudioRecordButton
+            onPress={this.handleRecordButton}
+            active={this.state.recordingState}
+          />
+          <View>
+            <ActivityIndicator
+              color={_colors.GRN_300}
+              animating={this.state.isRecording ? true : false}
+              size={'large'}
+            />
+            <AudioRecordTimer duration={this.state.durationMillis} />
           </View>
-        </CenterColView>
+        </View>
       );
     }
-  }
 }
-
-
-AudioRecord.defaultProps = {
-  recordingSettings: JSON.parse(JSON.stringify(
-    Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY
-  )),
-};
 
 export { AudioRecord };

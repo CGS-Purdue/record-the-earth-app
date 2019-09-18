@@ -28,6 +28,9 @@ export default class StorageManager extends Component {
   componentWillMount() {
     this.load();
 
+    // stub
+    var goalCategory = this.goalCategory;
+
     this.retrieveItem(goalCategory).then((goals) => {
       //this callback is executed when your Promise is resolved
     }).catch((error) => {

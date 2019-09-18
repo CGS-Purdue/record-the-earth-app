@@ -1,9 +1,9 @@
 import React, { Component, createRef } from 'react';
-import { Button,ImageBackground, View } from 'react-native';
+import { Button, ImageBackground, View } from 'react-native';
 
 import { SoundDB } from '../../Components/Database/SoundDB';
 import { MonoText } from '../../Components/Text/MonoText';
-import { CenterView, PadView,RootView } from '../../Components/Views';
+import { CenterView, PadView, RootView } from '../../Components/Views';
 import { Theme } from '../../Theme';
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
@@ -13,43 +13,43 @@ const _dbRef = createRef();
 let suvery = {
   tags: {
     biophony: {
-      "birds": false,
-      "frogs": false,
-      "insects": false,
-      "mammals": false,
+      birds: false,
+      frogs: false,
+      insects: false,
+      mammals: false,
     },
     suveryEmo: {
-      "curious": true,
-      "happy": true,
-      "relax": true,
-      "stress": false,
+      curious: true,
+      happy: true,
+      relax: true,
+      stress: false,
     },
     geophony: {
-      "rain": true,
-      "thunder": true,
-      "water": true,
-      "wind": false,
+      rain: true,
+      thunder: true,
+      water: true,
+      wind: false,
     },
     anthrophony: {
-      "alarms": false,
-      "machines": true,
-      "talking": true,
-      "vehicles": false,
+      alarms: false,
+      machines: true,
+      talking: true,
+      vehicles: false,
     },
   },
-  description: "test",
+  description: 'test',
 };
 
 let survey_data = {
-  "emotion": "talking,machines",
-  "biophony": "",
-  "anthrophony": "",
-  "description": "year",
-  "emo": "happy,relax,curious",
-  "geophony": "rain,water,thunder",
+  emotion: 'talking,machines',
+  biophony: '',
+  anthrophony: '',
+  description: 'year',
+  emo: 'happy,relax,curious',
+  geophony: 'rain,water,thunder',
 };
-let survery_string = '{"description":"year","bio":"","emo":"happy,relax,curious","geo":"rain,water,thunder","ant":"talking,machines"}';
-
+let survery_string =
+  '{"description":"year","bio":"","emo":"happy,relax,curious","geo":"rain,water,thunder","ant":"talking,machines"}';
 
 const surveyRecord = {
   datetime: new Date(),
@@ -67,34 +67,31 @@ const surveyRecord = {
   isUploaded: false,
 };
 
-
 class SurveyEndScreen extends Component {
   constructor(props) {
     super(props);
     this.ref = _dbRef;
     this.state = {
       upload_complete: false,
-      result : '',
+      result: '',
     };
     this.state._survey = suvery;
     this.connection = false;
-    this.dbConnection = new SoundDB({ autoconnect: true});
+    this.dbConnection = new SoundDB({ autoconnect: true });
   }
 
   dataToString = (data) => {
     return JSON.stringify(data);
-  }
+  };
 
-  onComponentDidMount(){
+  onComponentDidMount() {
     this.dbConnection.setConnection();
     let connection = this.dbConnection.getConnection();
-    console.log(connection);
-    console.log('connectionStatus', this.dbConnection.connectionStatus);
     this.connection = connection;
     return connection;
   }
 
-  saveSurvey(data){
+  saveSurvey(data) {
     const dbRecord = {
       datetime: new Date().toString(),
       path: 'na',
@@ -138,7 +135,7 @@ class SurveyEndScreen extends Component {
 
   mapSurveyToTags = (data) => {
     let items = Object.keys(data);
-    let tagData = items.map(function(item){
+    let tagData = items.map(function(item) {
       let values = data[item];
       // console.log('item', item, values);
       let taglist = [];
@@ -153,46 +150,51 @@ class SurveyEndScreen extends Component {
       //   writable: false,expo
       // });
       // return returnItem;
-        return {[item]:taglist.join(',')};
+      return { [item]: taglist.join(',') };
     });
 
     return Object.assign(...tagData);
-  }
+  };
 
   submitSurvey = () => {
     // console.log('SoundDB', SoundDB);
     let { tags, ...rest } = this.state._survey;
     let surveyTags = this.mapSurveyToTags(tags);
-    let survey = Object.assign({...rest}, surveyTags);
+    let survey = Object.assign({ ...rest }, surveyTags);
     // console.log(survey);
     this.saveSurvey(survey);
     let surveyString = this.dataToString(survey);
     console.log(surveyString);
     this.props.navigation.navigate('Home');
-    this.setState({result : surveyString });
-  }
-
+    this.setState({ result: surveyString });
+  };
 
   render() {
     const { navigate } = this.props.navigation;
     return (
-    <ImageBackground style={_styles.bgImg} source={_assets.images.img_bg_cliff}>
-      <RootView>
-        <PadView padding={[1]}>
-          <CenterView>
-            <View>
-              <Button
-                title="Submit"
-                style={[_styles.button_default,{ padding: 10, fontSize: 40, color: 'red'}]}
-                color={_colors.PRIMARY}
-                accessibilityLabel="Submit"
-                onPress={this.submitSurvey}
-              />
-              <MonoText>{this.state.result}</MonoText>
-            </View>
-          </CenterView>
-        </PadView>
-      </RootView>
+      <ImageBackground
+        style={_styles.bgImg}
+        source={_assets.images.img_bg_cliff}
+      >
+        <RootView>
+          <PadView padding={[1]}>
+            <CenterView>
+              <View>
+                <Button
+                  title="Submit"
+                  style={[
+                    _styles.button_default,
+                    { padding: 10, fontSize: 40, color: 'red' },
+                  ]}
+                  color={_colors.PRIMARY}
+                  accessibilityLabel="Submit"
+                  onPress={this.submitSurvey}
+                />
+                <MonoText>{this.state.result}</MonoText>
+              </View>
+            </CenterView>
+          </PadView>
+        </RootView>
       </ImageBackground>
     );
   }

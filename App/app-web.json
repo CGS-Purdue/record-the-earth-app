@@ -1,0 +1,77 @@
+{
+  "expo": {
+    "name": "RecordTheEarthExpoDevelopment",
+    "description": "Updating RtE react-native app to be fully managed with expo.",
+    "entryPoint": "init-web.js",
+    "icon": "./icon.png",
+    "orientation": "portrait",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "primaryColor": "#cccccc",
+    "privacy": "unlisted",
+    "sdkVersion": "34.0.0",
+    "slug": "record-the-earth-expo",
+    "androidShowExponentNotificationInShellApp": true,
+    "androidStatusBar": {
+      "barStyle": "dark-content",
+      "backgroundColor": "#000000"
+    },
+    "notification": {
+      "icon": "./icon.png",
+      "color": "#000000",
+      "androidMode": "default"
+    },
+    "splash": {
+      "image": "./splash.png",
+      "backgroundColor": "#000000",
+      "resizeMode": "contain"
+    },
+    "version": "1.0.0",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "./Theme/Assets/btn/*.png",
+      "./Theme/Assets/fonts/*.ttf",
+      "./Theme/Assets/icons/*.png",
+      "./Theme/Assets/img/*.png",
+      "./Theme/Assets/img/*.jpg",
+      "./Theme/Assets/logo/*.png",
+      "./Theme/Assets/logo/*.svg"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "splash": {
+        "backgroundColor": "#000000",
+        "resizeMode": "contain"
+      }
+    },
+    "android": {
+      "package": "org.recordtheearth.expo",
+      "permissions": [
+        "RECORD_AUDIO",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "githubUrl": "https://github.com/charrismatic/record-the-earth-expo-react-native",
+    "extra": {
+      "debug_flags": {
+        "DEBUG_OUTLINE_STYLES": true
+      }
+    },
+    "hooks": {},
+    "rnCliPath": "",
+    "packagerOpts": {
+      "assetExts": [
+        "ttf",
+        "jpg",
+        "svg",
+        "png"
+      ]
+    }
+  }
+}

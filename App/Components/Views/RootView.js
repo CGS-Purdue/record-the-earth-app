@@ -6,6 +6,16 @@ import { Theme } from  '../../Theme';
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
 
+
+const outerStyles = Object.assign(
+  _styles.rootview_container
+);
+
+const innerStyles = Object.assign(
+  _styles.stretch
+);
+
+
 export default class RootView extends Component {
   constructor(props) {
     super(props);
@@ -13,15 +23,13 @@ export default class RootView extends Component {
     this.backgroundColor = _colors.TRANSPARENT;
     this.absolute = false;
   }
-  // componentWillUnmount(){}
-
   render() {
     return (
-      <SafeAreaView style={{flex: 1}}>
-        <View ref={this.view_ref} style={_styles.rootContainer}>
+      <View ref={this.view_ref} style={outerStyles}>
+        <SafeAreaView style={innerStyles}>
           {this.props.children}
-        </View>
-      </SafeAreaView>
+        </SafeAreaView>
+      </View>
     );
   }
 }

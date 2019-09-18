@@ -1,4 +1,4 @@
-import { Constants } from 'expo-constants';
+import Constants from 'expo-constants'
 import { SQLite } from 'expo-sqlite';
 import React, { useEffect, useState } from 'react';
 import { Image, ScrollView, SectionList, StyleSheet, Text, View } from 'react-native';
@@ -46,7 +46,7 @@ export default class ConfigScreen extends React.Component {
     this.dataSource = this.dbConnection.getConnection();
     console.log('connectionStatus', this.dataSource.connectionStatus);
     console.log(this.state);
-    this.updateSoundscapes();
+    // this.updateSoundscapes();
   }
   onComponentDidUpate(){
     // console.log(this.dataSource);

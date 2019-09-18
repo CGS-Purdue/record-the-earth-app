@@ -1,0 +1,74 @@
+import React, { Component } from 'react';
+import { Asset } from 'expo-asset';
+import { AppLoading } from 'expo';
+import { Platform, StatusBar, View } from 'react-native';
+import { useScreens } from 'react-native-screens';
+// import { RootView } from './Components/Views';
+import AppNavContainer from './Screens/RootNavigation';
+import { Theme } from './Theme';
+useScreens();
+
+// {Platform.OS == 'ios' &&  <StatusBar barStyle="default" />}
+
+class App extends Component {
+  state = {isReady: false};
+
+  _appLoadingOnError = (err) => {
+    console.log("LOADING ERROR");
+    console.warn(err);
+  }
+
+  render() {
+    if (!this.state.isReady) {
+      return (
+        <AppLoading
+          startAsync={this._cacheResourcesAsync}
+          onFinish={() => this.setState({ isReady: true })}
+          onError={this._appLoadingOnError}
+          autoHideSplash={true}
+        />
+      );
+    } else {
+      return (
+        <View>
+        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        <AppNavContainer theme={"dark"} ref={nav => {this.navigator = nav;} }/>
+        </View>
+      );
+    }
+  }
+
+  async _cacheResourcesAsync(){
+
+      const _fonts = Theme.Fonts;
+      const cacheFonts = _fonts.loadFontMap(_fonts.FontMap);
+
+      const _icons = Theme.Icons;
+      const cachedIcons = _icons.load(_icons.Icons);
+
+      const _assets = Theme.Assets;
+      const _image_assets = Object.assign(
+          _assets.buttons,
+          _assets.logos,
+          _assets.images
+        );
+      const cacheImages = Object.entries(_image_assets).map(
+        function (pair) {
+          let obj = {};
+          let key = pair[0];
+          let mod = pair[1];
+          let asset = Asset.fromModule(mod).downloadAsync(key);
+          obj[key] = {
+            module: mod,
+            name: key,
+            asset: asset,
+          };
+          return obj;
+        }
+      );
+      console.log([ cacheImages, cachedIcons, cacheFonts ]);
+      return Promise.all([ cacheImages, cachedIcons, cacheFonts ]);
+   }
+}
+
+export { App };

@@ -21,3 +21,12 @@
 # --parser <string>
 # --require-pragma
 
+trailingComma = "es5"
+tabWidth = 2
+semi = true
+singleQuote = true
+useTabs = false
+jsxSingleQuote = false
+bracketSpacing = true
+jsxBracketSameLine = false
+arrowParens = "always"

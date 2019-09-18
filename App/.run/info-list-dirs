@@ -17,20 +17,24 @@ npm ls | grep -vi optional | grep -i 'unmet peer'
 ## List peer dependencies
 #npm info react-native@latest peerDependencies
 
-echo "$(find ./Components -maxdepth 3 -type d -printf \"%p\n\"
-  && find ./Config -maxdepth 3 -type d -printf \"%p\n\"
-  && find ./LifeCycle -maxdepth 3 -type d -printf \"%p\n\"
-  && find ./Model -maxdepth 3 -type d -printf \"%p\n\"
-  && find ./Screens -maxdepth 3 -type d -printf \"%p\n\"
-  && find ./Theme -maxdepth 3 -type d -printf \"%p\n\"
-  && find ./Utilities -maxdepth 3 -type d -printf \"%p\n\")"
+PROJECT_ROOT_DIRS="$(find -maxdepth 1 -type d  ! -name \".*\"  ! -name \"node_modules\" -printf \"%P\n\")"
+
+echo -e "\nProject Root Dirs:\n"
+echo "$PROJECT_ROOT_DIRS"
 
 
-LINT_DIRS="ComponAnim App.js app.json babel.config.js Components Config icon.png init.js LifeCycle Model node_modules package.json package-lock.json Screens splash.jpg Theme Utilities ents,Lib,LifeCycle,Theme,Utilities,Views,preload_modules,screens"
-find ./Components -maxdepth 3 -type d -printf \"%p\n\" \
-  && find ./Config -maxdepth 3 -type d -printf \"%p\n\" \
-  && find ./LifeCycle -maxdepth 3 -type d -printf \"%p\n\" \
-  && find ./Model -maxdepth 3 -type d -printf \"%p\n\" \
-  && find ./Screens -maxdepth 3 -type d -printf \"%p\n\" \
-  && find ./Theme -maxdepth 3 -type d -printf \"%p\n\" \
-  && find ./Utilities -maxdepth 3 -type d -printf \"%p\n\""
+# echo "$(find ./Components -maxdepth 3 -type d -printf \"%p\n\"
+#   && find ./Config -maxdepth 3 -type d -printf \"%p\n\"
+#   && find ./LifeCycle -maxdepth 3 -type d -printf \"%p\n\"
+#   && find ./Model -maxdepth 3 -type d -printf \"%p\n\"
+#   && find ./Screens -maxdepth 3 -type d -printf \"%p\n\"
+#   && find ./Theme -maxdepth 3 -type d -printf \"%p\n\"
+#   && find ./Utilities -maxdepth 3 -type d -printf \"%p\n\")"
+#
+# find ./Components -maxdepth 3 -type d -printf \"%p\n\" \
+#   && find ./Config -maxdepth 3 -type d -printf \"%p\n\" \
+#   && find ./LifeCycle -maxdepth 3 -type d -printf \"%p\n\" \
+#   && find ./Model -maxdepth 3 -type d -printf \"%p\n\" \
+#   && find ./Screens -maxdepth 3 -type d -printf \"%p\n\" \
+#   && find ./Theme -maxdepth 3 -type d -printf \"%p\n\" \
+#   && find ./Utilities -maxdepth 3 -type d -printf \"%p\n\""

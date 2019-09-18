@@ -23,7 +23,7 @@ class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, info) {
-    console.log( error, info );
+    console.log(error, info);
     // You can also log the error to an error reporting service
     // logErrorToMyService(error, info);
   }
@@ -37,11 +37,11 @@ class ErrorBoundary extends Component {
         message: 'Fatal error !',
         info: {
           error: lastError,
-        }});
+        },
+      });
       await AsyncStorage.removeItem('lastError');
     }
   }
-
 
   render() {
     // You can render any custom fallback UI
@@ -61,14 +61,17 @@ const myErrorHandler = (e, isFatal) => {
   // defaultErrorHandler(e, isFatal)
 };
 
-const defaultHandler = (ErrorUtils.getGlobalHandler && ErrorUtils.getGlobalHandler()) || ErrorUtils._globalHandler;
+const defaultHandler =
+  (ErrorUtils.getGlobalHandler && ErrorUtils.getGlobalHandler()) ||
+  ErrorUtils._globalHandler;
 const customErrorHandler = async (err, isFatal) => {
-  await AsyncStorage.setItem('lastError', JSON.stringify(err, Object.getOwnPropertyNames(err)));
+  await AsyncStorage.setItem(
+    'lastError',
+    JSON.stringify(err, Object.getOwnPropertyNames(err))
+  );
   return defaultHandler(err, isFatal);
 };
 
 ErrorUtils.setGlobalHandler(customErrorHandler);
-
-
 
 export { ErrorBoundary };

@@ -2,13 +2,17 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default class FacebookButton extends React.Component {
+class FacebookButton extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <LinearGradient
           colors={['#4c669f', '#3b5998', '#192f6a']}
-          style={{ pexpo install expo-linear-gradientadding: 15, alignItems: 'center', borderRadius: 5 }}>
+          style={{
+            padding: 15,
+            alignItems: 'center',
+            borderRadius: 5
+          }}>
           <Text
             style={{
               backgroundColor: 'transparent',
@@ -23,22 +27,26 @@ export default class FacebookButton extends React.Component {
   }
 }
 
-export default class BlackFade extends React.Component {
+// <View style={{ flex: 1 }}>
+// <View style={{ backgroundColor: 'orange', flex: 1 }} />
+// </View>
+class BlackFade extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <View style={{ backgroundColor: 'orange', flex: 1 }} />
         <LinearGradient
-          colors={['rgba(0,0,0,0.8)', 'transparent']}
+          colors={['rgba(255,0,0,.2)', 'transparent', 'rgba(0,0,0,0.4)']}
+          locations={[0, .5, 1]}
           style={{
             position: 'absolute',
             left: 0,
             right: 0,
             top: 0,
-            height: 300,
+            height: '100%',
+            width: '100%'
           }}
         />
-      </View>
     );
   }
 }
+
+export { FacebookButton, BlackFade }

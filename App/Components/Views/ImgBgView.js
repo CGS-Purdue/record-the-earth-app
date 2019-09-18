@@ -3,9 +3,10 @@ import { View, ImageBackground, SafeAreaView } from 'react-native';
 import { Theme } from  '../../Theme';
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
+const _assets = Theme.Assets;
 
-    // const {children, style, imageStyle, imageRef, ...props} = this.props;
-export default class RootView extends Component {
+// const {children, style, imageStyle, imageRef, ...props} = this.props;
+export default class ImgBgView extends Component {
   constructor(props) {
     super(props);
     this.view_ref = React.createRef();
@@ -20,10 +21,10 @@ export default class RootView extends Component {
             {this.props.children}
           </View>
         </SafeAreaView>
-      <ImageBackground>
+      </ImageBackground>
     );
   }
 }
 
 
-export { RootView }
+export { ImgBgView }

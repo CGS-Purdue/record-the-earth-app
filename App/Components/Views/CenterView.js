@@ -5,18 +5,21 @@ import { View } from 'react-native';
 import { Theme } from  '../../Theme';
 
 const _styles = Theme.Styles;
+
 function CenterRowView({ children }) {
-  return <View style={_styles.center_row}>{children}</View>;
+  return <View style={_styles.centered_row}>{children}</View>;
 }
 
 function CenterColView({ children }) {
-  return <View style={_styles.center_col}>{children}</View>;
+  return <View style={_styles.centered_col}>{children}</View>;
 }
 
-function CenterView({ children }) {
+function CenterView(props) {
+  const { children, style} = props;
+  const innerStyle = Object.assign(_styles.centered_col, style);
   return (
-    <View style={_styles.centered_outer}>
-      <View style={_styles.centered_inner}>{children}</View>
+    <View style={_styles.centered_row}>
+      <View style={innerStyle}>{children}</View>
     </View>
   );
 }

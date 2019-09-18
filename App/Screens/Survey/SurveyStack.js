@@ -8,14 +8,16 @@ import { SurveyEmoScreen } from './SurveyEmoScreen';
 import { SurveyEndScreen } from './SurveyEndScreenDev';
 import { SurveyGeoScreen } from './SurveyGeoScreen';
 
-const SurveyStack = createStackNavigator({
+const SurveyStack = createStackNavigator(
+  {
     SurveyDescription: { screen: SurveyDescriptionScreen },
     SurveyBio: { screen: SurveyBioScreen },
     SurveyEmo: { screen: SurveyEmoScreen },
     SurveyGeo: { screen: SurveyGeoScreen },
     SurveyAnt: { screen: SurveyAntScreen },
     SurveyEnd: { screen: SurveyEndScreen },
-  }, {
+  },
+  {
     headerMode: 'none',
     initialRouteName: 'SurveyDescription',
   }

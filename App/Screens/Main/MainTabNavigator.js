@@ -1,75 +1,37 @@
 import React, { createRef } from 'react';
 import { Platform } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
-
 import { TabBarIcon } from '../../Components/TabBar/TabBarIcon';
 import { Theme } from '../../Theme';
 import { SurveyEndScreen } from '../Survey/SurveyEndScreenDev';
 import { ConfigScreen } from './ConfigScreen';
+import { FileListScreen } from './FileListScreen';
+// import { TestScreen } from './TestScreen';
+import { AudioListScreen } from './AudioListScreen';
 import { HomeScreen } from './HomeScreen';
 import { LinksScreen } from './LinksScreen';
 
 const _colors = Theme.Colors;
 const _styles = Theme.Styles;
-const _layout = Theme.Layout;
-
-const TAB_BAR_SIZE = (_layout.TEXT_SIZE_3 * 3);
-const TAB_BAR_TEXT_SIZE = (TAB_BAR_SIZE * 1 / 3);
-const TAB_BAR_ICON_SIZE = (TAB_BAR_SIZE * 2 / 4 );
-
-const TabBarStyles = {
-  // TabBarBottom - Main TabNav Component
-  tabbar: {
-    // flex: 1,
-    marginBottom: 0,
-    height: TAB_BAR_SIZE,
-    backgroundColor: _colors.TAB_BAR_BG,
-  },
-
-  // TabBarIcon Applied to TabBarIcon element
-  tabbar_icon: {
-    paddingTop: 6,
-    fontSize: TAB_BAR_ICON_SIZE,
-    backgroundColor: _colors.TRANSPARENT,
-  },
-
-  tabbar_label: {
-    fontSize: TAB_BAR_TEXT_SIZE,
-  },
-
-  // Applied at "TabComponent"
-  // TouchableWithoutFeedbackWrapper
-  tabbar_tab: {
-    flex: 1,
-    paddingBottom: 0,
-    marginBottom: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-  },
-};
-
+const _layout = Theme.ThemeLayout;
+const PLATFORM_OS = Platform.OS;
 
 const mainTabRefNav = createRef();
 
 const MainTabNavigator = createBottomTabNavigator({
     Home: HomeScreen,
+    // TestScreen: TestScreen,
     Links: LinksScreen,
     SurveyTab: SurveyEndScreen,
-    Config: ConfigScreen,
+    // FileListScreen: FileListScreen,
   }, {
     navigationOptions: {
       initialRouteName: 'Home',
     },
     tabBarOptions: {
+      labelStyle: _styles.tabbar_label,
+      tabStyle: _styles.tabbar_tab,
+      style: _styles.tabbar,
       inactiveTintColor: _colors.TAB_BAR_COLOR,
       activeTintColor: _colors.TAB_BAR_ACTIVE_COLOR,
       inactiveBackgroundColor: _colors.TAB_BAR_BG,
@@ -77,22 +39,22 @@ const MainTabNavigator = createBottomTabNavigator({
       allowFontScaling: true,
       showIcon: true,
       showLabel: true,
-      labelStyle: TabBarStyles.tabbar_label,
-      tabStyle: TabBarStyles.tabbar_tab,
-      style: TabBarStyles.tabbar,
     },
 });
 MainTabNavigator.ref = mainTabRefNav;
 
 HomeScreen.navigationOptions = ({ navigation }) => ({
   tabBarIcon: ({ focused, horizontal, tintColor }) => {
-    let iconPrefix = Platform.OS === 'ios' ? 'ios' : 'md';
+    let iconPrefix = 'md';
+    if (PLATFORM_OS === 'ios'){
+      iconPrefix = 'ios';
+    }
     let iconName = `${iconPrefix}-home`;
     return (
       <TabBarIcon
         name={iconName}
-        style={TabBarStyles.tabbar_icon}
-        size={TAB_BAR_ICON_SIZE}
+        style={_styles.tabbar_icon}
+        size={_layout.TAB_BAR_ICON_SIZE}
         color={tintColor}
         focused={focused}
       />
@@ -104,13 +66,16 @@ HomeScreen.navigationOptions = ({ navigation }) => ({
 
 SurveyEndScreen.navigationOptions = ({ navigation }) => ({
   tabBarIcon: ({ focused, horizontal, tintColor }) => {
-    let iconPrefix = Platform.OS === 'ios' ? 'ios' : 'md';
+    let iconPrefix = 'md';
+    if (PLATFORM_OS === 'ios'){
+      iconPrefix = 'ios';
+    }
     let iconName = `${iconPrefix}-information-circle${focused ? '' : '-outline'}`;
     return (
       <TabBarIcon
         name={iconName}
-        style={TabBarStyles.tabbar_icon}
-        size={TAB_BAR_ICON_SIZE}
+        style={_styles.tabbar_icon}
+        size={_layout.TAB_BAR_ICON_SIZE}
         color={tintColor}
         focused={focused}
       />
@@ -124,13 +89,17 @@ SurveyEndScreen.navigationOptions = ({ navigation }) => ({
 
 LinksScreen.navigationOptions = ({ navigation }) => ({
   tabBarIcon: ({ focused, horizontal, tintColor }) => {
-    let iconPrefix = Platform.OS === 'ios' ? 'ios' : 'md';
+    let iconPrefix = 'md';
+    if (PLATFORM_OS === 'ios'){
+      iconPrefix = 'ios';
+    }
+
     let iconName = `${iconPrefix}-information-circle${focused ? '' : '-outline'}`;
     return (
       <TabBarIcon
         name={iconName}
-        style={TabBarStyles.tabbar_icon}
-        size={TAB_BAR_ICON_SIZE}
+        style={_styles.tabbar_icon}
+        size={_layout.TAB_BAR_ICON_SIZE}
         color={tintColor}
         focused={focused}
       />
@@ -142,25 +111,25 @@ LinksScreen.navigationOptions = ({ navigation }) => ({
   title: 'Links',
 });
 
-ConfigScreen.navigationOptions = ({ navigation }) => ({
-  tabBarIcon: ({ focused, horizontal, tintColor }) => {
-    let iconPrefix = Platform.OS === 'ios' ? 'ios' : 'md';
-    let iconName = `${iconPrefix}-cog`;
-    return (
-      <TabBarIcon
-        name={iconName}
-        style={TabBarStyles.tabbar_icon}
-        size={TAB_BAR_ICON_SIZE}
-        color={tintColor}
-        focused={focused}
-      />
-    );
-  },
-  tabBarLabel: 'Config',
-  title: 'Config',
-  showLabel: true,
-  tabBarVisible: true,
-});
+// ConfigScreen.navigationOptions = ({ navigation }) => ({
+//   tabBarIcon: ({ focused, horizontal, tintColor }) => {
+//     let iconPrefix = PLATFORM_OS === 'ios' ? 'ios' : 'md';
+//     let iconName = `${iconPrefix}-cog`;
+//     return (
+//       <TabBarIcon
+//         name={iconName}
+//         style={_styles.tabbar_icon}
+//         size={_layout.TAB_BAR_ICON_SIZE}
+//         color={tintColor}
+//         focused={focused}
+//       />
+//     );
+//   },
+//   tabBarLabel: 'Config',
+//   title: 'Config',
+//   showLabel: true,
+//   tabBarVisible: true,
+// });
 
 
 export { MainTabNavigator };

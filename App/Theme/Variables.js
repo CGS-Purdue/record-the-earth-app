@@ -1,5 +1,9 @@
 import { ThemeColors } from './Colors';
 import { ThemeFonts } from './Fonts';
+import { Layout } from './Fonts';
+
+const DISABLED_OPACITY = 0.5;
+const RATE_SCALE = 3.0;
 
 const ThemeVariables = {
   BASE: 'dark',
@@ -16,7 +20,7 @@ const ThemeVariables = {
 const ThemeDefaultVariables = {
   ButtonSize: 20,
   ButtonColor: '#eeeeee',
-  ButtonIconStyle: "{marginRight: 10}",
+  ButtonIconStyle: '{marginRight: 10}',
   ButtonBorderRadius: 5,
   ButtonBackgroundColor: '#007AFF',
 };

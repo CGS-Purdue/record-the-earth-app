@@ -16,7 +16,7 @@ BASE_DIR="$(npm prefix)"
 
 ANDROID_SERIAL="025abd11727717ac"
 ABD_PATH="${ANDROID_HOME}/platform-tools"
-ANDROID_SERIAL="$(${RUN_SCRIPT_DIR}/_adb_get_serial)"
+# ANDROID_SERIAL="$(${RUN_SCRIPT_DIR}/adb-get-serial)"
 
 echo "Shaking ANDROID_SERIAL $ANDROID_SERIAL"
 # ${ABD_PATH}/adb -s ${ANDROID_SERIAL} shell input keyevent 82

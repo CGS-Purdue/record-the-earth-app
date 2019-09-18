@@ -1,12 +1,8 @@
 module.exports = {
   extends: [
     '@react-native-community/eslint-config',
-    'plugin:prettier/recommended',
-  ],
-  plugins: [
-    'simple-import-sort',
-    "promise",
-  ],
+ ],
+  plugins: [],
   rules: {
    // General
    'comma-dangle': [1, 'always-multiline'], // allow or disallow trailing commas
@@ -120,10 +116,6 @@ module.exports = {
     'eslint-comments/no-unused-disable': 1, // disallow disables that don't cover any errors
     'eslint-comments/no-unused-enable': 1, // // disallow enables that don't enable anything or enable rules that weren't disabled
 
-    // Prettier Plugin
-    // https://github.com/prettier/eslint-plugin-prettier
-    'prettier/prettier': 2,
-
     // Stylistic Issues
     // These rules are purely matters of style and are quite subjective.
 
@@ -139,13 +131,13 @@ module.exports = {
     'func-names': 0, // require function expressions to have a name (off by default)
     'func-style': 0, // enforces use of function declarations or expressions (off by default)
     'new-cap': 0, // require a capital letter for constructors
-    'new-parens': 1, // disallow the omission of parentheses when invoking a constructor with no arguments
+    'new-parens': 0, // disallow the omission of parentheses when invoking a constructor with no arguments
     'no-nested-ternary': 0, // disallow nested ternary expressions (off by default)
     'no-array-constructor': 1, // disallow use of the Array constructor
     'no-empty-character-class': 1, // disallow the use of empty character classes in regular expressions
     'no-lonely-if': 0, // disallow if as the only statement in an else block (off by default)
     'no-new-object': 1, // disallow use of the Object constructor
-    'no-spaced-func': 1, // disallow space between function identifier and application
+    'no-spaced-func': 0, // disallow space between function identifier and application
     'no-ternary': 0, // disallow the use of ternary operators (off by default)
     'no-trailing-spaces': 1, // disallow trailing whitespace at the end of lines
     'no-underscore-dangle': 0, // disallow dangling underscores in identifiers
@@ -155,7 +147,7 @@ module.exports = {
     semi: 1, // require or disallow use of semicolons instead of ASI
     'sort-vars': 0, // sort variables within the same declaration block (off by default)
     'space-in-brackets': 0, // require or disallow spaces inside brackets (off by default)
-    'space-in-parens': 0, // require or disallow spaces inside parentheses (off by default)
+    'space-in-parens': [1, 'never'], // require or disallow spaces inside parentheses (off by default)
     'space-infix-ops': 1, // require spaces around operators
     'space-unary-ops': [1, {words: true, nonwords: false}], // require or disallow spaces before/after unary operators (words on by default, nonwords off by default)
     'max-nested-callbacks': 0, // specify the maximum depth callbacks can be nested (off by default)
@@ -165,12 +157,12 @@ module.exports = {
     // Legacy
     // The following rules are included for compatibility with JSHint and JSLint. While the names of the rules may not match up with the JSHint/JSLint counterpart, the functionality is the same.
 
-    'max-depth': 0, // specify the maximum depth that blocks can be nested (off by default)
-    'max-len': 0, // specify the maximum length of a line in your program (off by default)
-    'max-params': 0, // limits the number of parameters that can be used in the function declaration. (off by default)
+    'max-depth': 0,      // specify the maximum depth that blocks can be nested (off by default)
+    'max-len': 0,        // specify the maximum length of a line in your program (off by default)
+    'max-params': 0,     // limits the number of parameters that can be used in the function declaration. (off by default)
     'max-statements': 0, // specify the maximum number of statement allowed in a function (off by default)
-    'no-bitwise': 1, // disallow use of bitwise operators (off by default)
-    'no-plusplus': 0, // disallow use of unary operators, ++ and -- (off by default)
+    'no-bitwise': 1,     // disallow use of bitwise operators (off by default)
+    'no-plusplus': 0,    // disallow use of unary operators, ++ and -- (off by default)
 
     // React Plugin
     // The following rules are made available via `eslint-plugin-react`.
@@ -199,22 +191,20 @@ module.exports = {
     // React-Native Plugin
     // The following rules are made available via `eslint-plugin-react-native`
     'react-native/no-inline-styles': 1,
+
     // or plugin:promise/recommendeds
     // imple-import-sort
-    "promise/always-return": "error",
-    "promise/no-return-wrap": "error",
-    "promise/param-names": "error",
-    "promise/catch-or-return": "error",
-    "promise/no-native": "off",
-    "promise/no-nesting": "warn",
-    "promise/no-promise-in-callback": "warn",
-    "promise/no-callback-in-promise": "warn",
-    "promise/avoid-new": "warn",
-    "promise/no-new-statics": "error",
-    "promise/no-return-in-finally": "warn",
-    "promise/valid-params": "warn",
-
-    //eslint-plugin-promise
-    "simple-import-sort/sort": "error",
+    // "promise/always-return": "error",
+    // "promise/no-return-wrap": "error",
+    // "promise/param-names": "error",
+    // "promise/catch-or-return": "error",
+    // "promise/no-native": "off",
+    // "promise/no-nesting": "warn",
+    // "promise/no-promise-in-callback": "warn",
+    // "promise/no-callback-in-promise": "warn",
+    // "promise/avoid-new": "warn",
+    // "promise/no-new-statics": "error",
+    // "promise/no-return-in-finally": "warn",
+    // "promise/valid-params": "warn",
   },
 };

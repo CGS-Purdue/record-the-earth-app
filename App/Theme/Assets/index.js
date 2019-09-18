@@ -29,10 +29,10 @@ import IMG_JUNGLE_GEOMETRY from './img/jungle-geometry.png';
 import IMG_JUNGLE_GEOMETRY2 from './img/jungle-geometry2.png';
 import IMG_JUNGLE_GEOMETRY3 from './img/jungle-geometry3.png';
 import IMG_SPLASH from './img/splash.jpg';
-import LOGO_EMBLEM from './logo/logo-emblem.svg';
 import LOGO_GLOW from './logo/logo-glow.png';
 import LOGO_LONG from './logo/logo-long.png';
 import LOGO_LARGE from './logo/logo-rte-lg.png';
+import LOGO_EMBLEM from './logo/logo-emblem.png';
 
 const IconAssets = {
   icon_list: ICONS_LIST,
@@ -92,5 +92,4 @@ const ThemeAssets = {
   icons: IconAssets,
 };
 
-// ButtonAssets, LogoAssets, , ImageAssets, IconAssets
 export { ThemeAssets, IconAssets, FontAssets };

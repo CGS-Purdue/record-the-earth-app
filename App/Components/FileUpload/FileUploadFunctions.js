@@ -10,6 +10,7 @@ function getFiles() {
   });
 }
 
+
 function uploadForm(config) {
   fetch(`${config.apiBase}/load/${this.props.id}/uploadconfirmation`, {
     method: "post",
@@ -17,8 +18,9 @@ function uploadForm(config) {
       Accept: "application/x-www-form-urlencoded",
       Authorization: `Bearer ${this.props.user.token}`,
     },
-    body: data,
-  }).then(res => res.json())
+    body: config.data,
+  })
+  .then(res => res.json())
   .then(res => {
     Alert.alert(
       "Success",
@@ -27,10 +29,11 @@ function uploadForm(config) {
       { cancelable: false }
     );
   })
-  .catch(err => {ThemeColors;
+  .catch(err => {
     console.error("error uploading images: ", err);
   });
 }
+
 
 
 function rnfs() {

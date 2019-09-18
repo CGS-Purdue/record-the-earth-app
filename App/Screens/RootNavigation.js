@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-
 import { MainTabNavigator } from './Main/MainTabNavigator';
 import { RecordScreen } from './Record/RecordScreen';
 import { SurveyStack } from './Survey/SurveyStack';
@@ -18,7 +17,6 @@ const RootNavigation = createSwitchNavigator({
   }
 );
 
-
 // defaultNavigationOptions: {
 //   headerStyle: {
 //     backgroundColor: '#f4511e',
@@ -28,7 +26,7 @@ const RootNavigation = createSwitchNavigator({
 //     fontWeight: 'bold',
 //   },
 // },
-//
+
 // class ThemeAppNavContainer extends Component {
 //   render() {
 //     return (<AppNavContainer theme={"dark"}/>)
@@ -40,4 +38,5 @@ const RootNavigation = createSwitchNavigator({
 //
 //  AppNavContainer
 
-export default AppNavContainer = createAppContainer(RootNavigation);
+const AppNavContainer = createAppContainer(RootNavigation);
+export { AppNavContainer }

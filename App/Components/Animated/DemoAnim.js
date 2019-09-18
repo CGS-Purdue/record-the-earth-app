@@ -6,6 +6,49 @@ import {
 } from "react-native";
 
 
+// Animated.timing(this.state.xPosition, {
+//   toValue: 100,
+//   easing: Easing.back(),
+//   duration: 2000,
+// }).start();
+//
+
+
+// Animated.sequence([
+//   // decay, then spring to start and twirl
+//   Animated.decay(position, {
+//     // coast to a stop
+//     velocity: {x: gestureState.vx, y: gestureState.vy}, // velocity from gesture release
+//     deceleration: 0.997,
+//   }),
+//   Animated.parallel([
+//     // after decay, in parallel:
+//     Animated.spring(position, {
+//       toValue: {x: 0, y: 0}, // return to start
+//     }),
+//     Animated.timing(twirl, {
+//       // and twirl
+//       toValue: 360,
+//     }),
+//   ]),
+// ]).start(); // start the sequence group
+
+
+// Bear in mind
+// While using transform styles such as rotateY, rotateX, and others ensure the transform style perspective is in place. At this time some animations may not render on Android without it. Example below.
+//
+// <Animated.View
+//   style={{
+//     transform: [
+//       {scale: this.state.scale},
+//       {rotateY: this.state.rotateY},
+//       {perspective: 1000}, // without this line this Animation will not render on Android while working fine on iOS
+//     ],
+//   }}
+// />
+//
+
+
 class DemoAnim extends Component {
 
   componentWillMount () {

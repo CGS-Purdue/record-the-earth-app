@@ -1,5 +1,4 @@
 import React, { Component, forwardRef } from 'react';
-import { YellowBox } from 'react-native';
 
 function logProps(Wrapped) {
   class LogProps extends Component {
@@ -25,7 +24,6 @@ function logLayout(Wrapped) {
   }
 }
 
-
 function logStyle(Wrapped) {
   class LogStyle extends Component {
     componentDidMount(prevProps) {
@@ -38,18 +36,16 @@ function logStyle(Wrapped) {
   }
 }
 
-
 function _forward(Wrapped) {
   class WrappedComponent extends Component {
     constructor(props) {
       super(props);
     }
     render() {
-      const {forwardedRef, ...rest} = this.props;
+      const { forwardedRef, ...rest } = this.props;
       return <Wrapped ref={forwardedRef} {...rest} />;
     }
   }
-
   function passForward(props, ref) {
     return <WrappedComponent forwardedRef={ref} {...props} />;
   }
@@ -59,6 +55,5 @@ function _forward(Wrapped) {
 
   return forwardRef(passForward);
 }
-
 
 export { _forward, logProps, logLayout, logStyle };

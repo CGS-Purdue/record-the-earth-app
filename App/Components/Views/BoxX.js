@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { View } from 'react-native';
 
 export default function BoxX({ children }, props) {
   const boxStyle = {
@@ -20,11 +20,11 @@ export default function BoxX({ children }, props) {
   };
 
   return (
-     <div className="box" style={boxStyle}>
-       <div className="boxin" style={boxInStyle}>
+     <View className="box" style={boxStyle}>
+       <View className="boxin" style={boxInStyle}>
          {children}
-       </div>
-     </div>
+       </View>
+     </View>
    );
  }
 

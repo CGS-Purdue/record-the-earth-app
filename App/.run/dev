@@ -36,31 +36,21 @@ echo "Settings up additional devtools..."
 
 # REACTOTRON
 if [ ! -z $RUN_REACT_REACTOTRON ]; then
-
   npm run util:reactotron &
-
 fi
 
 # REACT DEBUGGER
 if [ ! -z $RUN_REACT_DEBUGGER ]; then
-
   REACT_DEBUGGER="/data/library/React_Library/react-native-debugger/npm-package/bin/rndebugger-open --expo --open"
-  REACT_DEBUGGER=${REACT_DEBUGGER} npm run util:debugger &
-
+  REACT_DEBUGGER=${REACT_DEBUGGER} npm run react:debugger &
 fi
 
 # REACT DEVTOOLS
-[[ ! -z $RUN_REACT_DEVTOOLS ]] && npm run util:devtools &
+[[ ! -z $RUN_REACT_DEVTOOLS ]] && npm run react:devtools &
 
 
 echo "
   APP_DEBUG_APPDATA  ${APP_DEBUG_APPDATA}
-  APP_REACT_DEBUGGER_RUNNING ${APP_REACT_DEBUGGER_RUNNING}
-  APP_REACT_DEVTOOLS_RUNNING ${APP_REACT_DEVTOOLS_RUNNING}
-  APP_REACT_REACTOTRON_RUNNING ${APP_REACT_REACTOTRON_RUNNING}
-  DEBUG_LOGGING  ${DEBUG_LOGGING}
-  DEV_ENV ${DEV_ENV}
-  EDITOR ${EDITOR}
   EXPO_DEBUG  ${EXPO_DEBUG}
   NODE_DEBUG  ${NODE_DEBUG}
   NODE_ENV  ${NODE_ENV}
@@ -76,7 +66,6 @@ echo "
 "
 
 DEBUG_LOGGING="${DEBUG_LOGGING}" \
-APP_DEBUG_APPDATA="${APP_DEBUG_APPDATA}" \
 NODE_PATH="${NODE_PATH}" \
 NODE_ENV="${NODE_ENV}" \
 NODE_OPTIONS="${NODE_OPTIONS}" \
@@ -89,7 +78,7 @@ REACT_EDITOR="${REACT_EDITOR}" \
 EXPO_DEBUG="${EXPO_DEBUG}" \
   node ${BASE_DIR}/node_modules/.bin/expo start \
     --clear \
-    --max-workers 8 \
+    --max-workers 6 \
     --no-minify \
     --no-https \
     --dev \

@@ -3,10 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import Svg, { SvgUri, Circle, Rect } from 'react-native-svg';
 
 
-
 // https://github.com/react-native-community/react-native-svg#use-with-content-loaded-from-uri
-
-
 
 export default class SvgExample extends React.Component {
   render() {
@@ -41,7 +38,7 @@ export default class SvgExample extends React.Component {
 }
 
 // /Use with content loaded from uri
-export const SvgUroEx () => (
+export const SvgUriEx = () => (
   <SvgUri
     width="100%"
     height="100%"
@@ -52,13 +49,14 @@ export const SvgUroEx () => (
 
 //
 // Use with svg files
-// Try react-native-svg-transformer to get compile time conversion and cached transformations. https://github.com/kristerkari/react-native-svg-transformer#installation-and-configuration https://github.com/kristerkari/react-native-svg-transformer#for-react-native-v057-or-newer--expo-sdk-v3100-or-newer
+// Try react-native-svg-transformer to get compile time conversion
+// and cached transformations.
+// https://github.com/kristerkari/react-native-svg-transformer#installation-and-configuration https://github.com/kristerkari/react-native-svg-transformer#for-react-native-v057-or-newer--expo-sdk-v3100-or-newer
 //
 // metro.config.js
 //
 
 const { getDefaultConfig } = require('metro-config');
-
 module.exports = (async () => {
   const {
     resolver: { sourceExts, assetExts },
@@ -86,12 +84,6 @@ module.exports = (async () => {
 // Alternatively, you can use SvgXml with babel-plugin-inline-import, but with transforms done at run-time.
 //
 // .babelrc
-//
-//
-// Alternatively, you can use SvgXml with babel-plugin-inline-import, but with transforms done at run-time.
-//
-// .babelrc
-//
 // {
 //   "presets": ["module:metro-react-native-babel-preset"],
 //   "plugins": [
@@ -105,19 +97,13 @@ module.exports = (async () => {
 // }
 
 
-
-
 // App.js
-//
 // import * as React from 'react';
 // import { SvgXml } from 'react-native-svg';
 // import testSvg from './test.svg';
 // export default () => <SvgXml width="200" height="200" xml={testSvg} />;
-//
 
 
-//
-//
 // Use with xml strings
 // import * as React from 'react';
 // import { SvgXml } from 'react-native-svg';
@@ -149,24 +135,24 @@ module.exports = (async () => {
 
 // Common props:
 // Name	Default	Description
-// fill	'#000'	The fill prop refers to the color inside the shape.
-// fillOpacity	1	This prop specifies the opacity of the color or the content the current object is filled with.
-// fillRule	nonzero	The fillRule prop determines what side of a path is inside a shape, which determines how fill will paint the shape, can be nonzero or evenodd
-// stroke	'none'	The stroke prop controls how the outline of a shape appears.
-// strokeWidth	1	The strokeWidth prop specifies the width of the outline on the current object.
-// strokeOpacity	1	The strokeOpacity prop specifies the opacity of the outline on the current object.
-// strokeLinecap	'square'	The strokeLinecap prop specifies the shape to be used at the end of open subpaths when they are stroked. Can be either 'butt', 'square' or 'round'.
-// strokeLinejoin	'miter'	The strokeLinejoin prop specifies the shape to be used at the corners of paths or basic shapes when they are stroked. Can be either 'miter', 'bevel' or 'round'.
-// strokeDasharray	[]	The strokeDasharray prop controls the pattern of dashes and gaps used to stroke paths.
-// strokeDashoffset	null	The strokeDashoffset prop specifies the distance into the dash pattern to start the dash.
-// x	0	Translate distance on x-axis.
-// y	0	Translate distance on y-axis.
-// rotation	0	Rotation degree value on the current object.
-// scale	1	Scale value on the current object.
-// origin	0, 0	Transform origin coordinates for the current object.
-// originX	0	Transform originX coordinates for the current object.
-// originY	0	Transform originY coordinates for the current object.
-// Supported elements:
+// - fill	'#000'	The fill prop refers to the color inside the shape.
+// - fillOpacity	1	This prop specifies the opacity of the color or the content the current object is filled with.
+// - fillRule	nonzero	The fillRule prop determines what side of a path is inside a shape, which determines how fill will paint the shape, can be nonzero or evenodd
+// - stroke	'none'	The stroke prop controls how the outline of a shape appears.
+// - strokeWidth	1	The strokeWidth prop specifies the width of the outline on the current object.
+// - strokeOpacity	1	The strokeOpacity prop specifies the opacity of the outline on the current object.
+// - strokeLinecap	'square'	The strokeLinecap prop specifies the shape to be used at the end of open subpaths when they are stroked. Can be either 'butt', 'square' or 'round'.
+// - strokeLinejoin	'miter'	The strokeLinejoin prop specifies the shape to be used at the corners of paths or basic shapes when they are stroked. Can be either 'miter', 'bevel' or 'round'.
+// - strokeDasharray	[]	The strokeDasharray prop controls the pattern of dashes and gaps used to stroke paths.
+// - strokeDashoffset	null	The strokeDashoffset prop specifies the distance into the dash pattern to start the dash.
+// - x	0	Translate distance on x-axis.
+// - y	0	Translate distance on y-axis.
+// - rotation	0	Rotation degree value on the current object.
+// - scale	1	Scale value on the current object.
+// - origin	0, 0	Transform origin coordinates for the current object.
+// - originX	0	Transform originX coordinates for the current object.
+// - originY	0	Transform originY coordinates for the current object.
+// - Supported elements:
 // Svg
 // <Svg height="100" width="100">
 //   <Rect x="0" y="0" width="100" height="100" fill="black" />

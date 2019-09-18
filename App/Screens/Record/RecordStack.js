@@ -1,6 +1,5 @@
 import React from 'react';
-import { createStackNavigator,  NavigationScreenProp } from 'react-navigation';
-
+import { createStackNavigator } from 'react-navigation';
 import { ModalRecordEndScreen } from './ModalRecordEndScreen';
 import { ModalRecordScreen } from './ModalRecordScreen';
 import { RecordScreen } from './RecordScreen';

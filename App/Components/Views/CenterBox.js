@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 
 export default function CenterBox({ children }) {
   const centeredStyle = {
@@ -8,9 +9,9 @@ export default function CenterBox({ children }) {
   };
 
   return (
-    <div className="box" style={centeredStyle}>
+    <View style={centeredStyle}>
       {children}
-    </div>
+    </View>
   );
 }
 

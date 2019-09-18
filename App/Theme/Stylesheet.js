@@ -5,13 +5,13 @@ import { HomeStyles } from './Styles/HomeStyles';
 import { LayoutStyles } from './Styles/LayoutStyles';
 import { MainStyles } from './Styles/MainStyles';
 import { RecordStyles } from './Styles/RecordStyles';
-import { FontClasses,TextClasses } from './Styles/TypographyStyles';
+import { FontClasses, TextClasses } from './Styles/TypographyStyles';
 import { UtilityStyles } from './Styles/UtilityStyles';
 import { ViewStyles } from './Styles/ViewStyles';
+import { TabBarStyles } from './Styles/TabBarStyles';
+import { CheckBtnStyles } from './Styles/CheckButtonStyles';
 // import { ThemeColors } from './Colors';
 // import { StyleSheet } from 'react-native';
-
-
 
 const ThemeStylesheets = {
   TextStyle: TextClasses,
@@ -29,17 +29,19 @@ const ThemeStylesheets = {
 };
 
 const ThemeStyles = Object.assign(
-   TextClasses,
-   FontClasses,
-   ButtonStyles,
-   RecordStyles,
-   FormStyles,
-   MainStyles,
-   ViewStyles,
-   HomeStyles,
-   DebugStyles,
-   UtilityStyles,
-   LayoutStyles,
+  TabBarStyles,
+  TextClasses,
+  FontClasses,
+  ButtonStyles,
+  CheckBtnStyles,
+  RecordStyles,
+  FormStyles,
+  MainStyles,
+  ViewStyles,
+  HomeStyles,
+  DebugStyles,
+  UtilityStyles,
+  LayoutStyles
 );
 
 export { ThemeStylesheets, ThemeStyles };

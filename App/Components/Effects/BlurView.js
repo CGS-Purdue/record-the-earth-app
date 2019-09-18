@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   notBlurred: {
     ...StyleSheet.absoluteFill,
-    top: Constants.statusBarHeight,
+    // top: Constants.statusBarHeight,
   },
 });
 

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Button,ImageBackground } from 'react-native';
+import { Button, ImageBackground } from 'react-native';
 
 import { CheckButton } from '../../Components/Button/CheckButton';
 import { HeadingText } from '../../Components/Text/HeadingText';
-import { CenterColView, PadView,RootView } from '../../Components/Views';
+import { CenterColView, PadView, RootView } from '../../Components/Views';
 import { Theme } from '../../Theme';
 
 const _colors = Theme.Colors;
 const _assets = Theme.Assets;
-const _styles  = Theme.Styles;
+const _styles = Theme.Styles;
 
 class SurveyEmoScreen extends Component {
   constructor(props) {
@@ -34,65 +34,73 @@ class SurveyEmoScreen extends Component {
 
     let _survey_data = this.state._survey;
     console.log(_survey_data);
-    _survey_data.tags = Object.assign(empty, this.state._survey.tags, {emo: surveyEmo});
+    _survey_data.tags = Object.assign(empty, this.state._survey.tags, {
+      emo: surveyEmo,
+    });
     return _survey_data;
-  }
+  };
 
   _setSuveryItemState = (item) => {
     let newState = Object.create(null);
     newState[item.id] = item.checked;
     this.setState(newState);
-  }
+  };
 
   _setPreviousSurveyData = (data) => {
-    this.setState({ _survey : data });
-  }
+    this.setState({ _survey: data });
+  };
 
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <ImageBackground style={_styles.bgImg} source={_assets.images.img_bg_cliff}>
-      <RootView>
-        <CenterColView>
-          <PadView padding={[1,2]}>
-            <HeadingText level={3}>
-               Did you hear any of these sounds?
-            </HeadingText>
-            <CheckButton id={'happy'}
-              onchecked={this._setSuveryItemState}
-              text={'Make me happy'}
-            />
-            <CheckButton id={'relax'}
-              onchecked={this._setSuveryItemState}
-              text={'Relax me'}
-            />
-            <CheckButton id={'curious'}
-              onchecked={this._setSuveryItemState}
-              text={'Make me curious'}
-            />
-            <CheckButton id={'stress'}
-              onchecked={this._setSuveryItemState}
-              text={'Stress me out'}
-            />
+      <ImageBackground
+        style={_styles.bgImg}
+        source={_assets.images.img_bg_cliff}
+      >
+        <RootView>
+          <CenterColView>
+            <PadView padding={[1, 2]}>
+              <HeadingText level={3}>
+                Did you hear any of these sounds?
+              </HeadingText>
+              <CheckButton
+                id={'happy'}
+                onchecked={this._setSuveryItemState}
+                text={'Make me happy'}
+              />
+              <CheckButton
+                id={'relax'}
+                onchecked={this._setSuveryItemState}
+                text={'Relax me'}
+              />
+              <CheckButton
+                id={'curious'}
+                onchecked={this._setSuveryItemState}
+                text={'Make me curious'}
+              />
+              <CheckButton
+                id={'stress'}
+                onchecked={this._setSuveryItemState}
+                text={'Stress me out'}
+              />
 
-            <Button
-              title={"Continue Button"}
-              style={_styles.button_default}
-              color={_colors.PRIMARY}
-              accessibilityLabel="Go to next"
+              <Button
+                title={'Continue Button'}
+                style={_styles.button_default}
+                color={_colors.PRIMARY}
+                accessibilityLabel="Go to next"
                 onPress={() => {
                   let _survey_data = this.getSurveyState();
                   navigate('SurveyGeo', { survey_data: _survey_data });
                 }}
-            />
-        </PadView>
-      </CenterColView>
-      </RootView>
-    </ImageBackground>
+              />
+            </PadView>
+          </CenterColView>
+        </RootView>
+      </ImageBackground>
     );
   }
 }
-
 
 SurveyEmoScreen.navigationOptions = {
   title: 'SurveyEmoScreen',

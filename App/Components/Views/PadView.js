@@ -76,7 +76,7 @@ export default class PadView extends Component {
   }
   render() {
     const padding = this.setPadding();
-    return <View style={[padding, _styles.padView]}>{this.props.children}</View>;
+    return <View style={[padding, _styles.padded_container]}>{this.props.children}</View>;
   }
 }
 

@@ -76,12 +76,6 @@ class ConnectionQuery extends Component {
       console.log(tx, error);
     };
 
-    // insertId,
-    // rowsAffected,
-    // rows: {
-    // length,
-    // item(),
-    // _array,
     const _tx_result = (tx, data, options) => {
       if (data) {
         if (data.insertId){

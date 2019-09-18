@@ -1,4 +1,3 @@
-
 import Constants from 'expo-constants';
 import { Platform } from 'react-native';
 
@@ -25,7 +24,7 @@ import { Platform } from 'react-native';
 
 // let getWebViewUserAgent = Constants.getWebViewUserAgentAsync;
 
-function getAppData () {
+function getAppData() {
   return {
     appOwnership: Constants.appOwnership,
     expoVersion: Constants.expoVersion,

@@ -5,30 +5,28 @@
 # -------------------------
 BASE_PATH="$(npm prefix)"
 
-[[ -f .npmrc ]] && source .npmrc
+[[ -f "${BASE_PATH}/./.npmrc" ]] && . ${BASE_PATH}/./.npmrc
 
-NODE_RUN_ENV=""
-NODE_RUN_FLAGS=""
+#NODE_RUN_ENV=""
+#NODE_RUN_FLAGS=""
+#LINT_DIRS="Components,Config,Model,LifeCycle,Screens,Theme,Utilities"
+RUN_LINT_DIRS="${LINT_DIRS}"
+LINT_ARGS="$@"
 
-LINT_DIRS="Config,Life,Model,Screens,Theme,Utilities,Components"
+echo "Running linter on project dirs from .npmrc"
+echo "${RUN_LINT_DIRS}"
+#${NODE_RUN_ENV} node ${NODE_RUN_FLAGS}
 
-${NODE_RUN_ENV} node ${NODE_RUN_FLAGS} \
-  $BASE_PATH/./node_modules/.bin/eslint \
-    --ext '.js' \
-    --cache \
-    --config "${BASE_PATH}/.eslintrc.js" \
-    --cache-file "$BASE_PATH/.eslintcache" \
-    --ignore-pattern '!node_modules' \
-      "$@" \
+RUN_SCRIPT_PATH="${BASE_PATH}/./node_modules/.bin"
+
+${RUN_SCRIPT_PATH}/eslint \
+  --config "${BASE_PATH}/.eslintrc.js" \
+  --ext '.js' \
+  --cache \
+  --cache-file "$BASE_PATH/.eslintcache" \
+  --ignore-pattern '!node_modules' \
+    ${LINT_ARGS} \
       -- \
-        "./*.js" \
-        "./{$LINT_DIRS}/*.js" \
-        "./{$LINT_DIRS}/**/*.js" \
-        "./{$LINT_DIRS}/**/**/*.js" \
-        "./{$LINT_DIRS}/**/**/**/*.js"
+        ${LINT_DIRS//,/ }
 
 exit 0
-
-
-
-(npm bin)/eslint --config $(npm prefix)/.eslintrc.js  --ext '.js'  ./Screens/**/*.js

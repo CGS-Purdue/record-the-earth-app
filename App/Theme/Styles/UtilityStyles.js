@@ -1,8 +1,7 @@
 import { StyleSheet } from 'react-native';
 
-
-const UtilityStyles = StyleSheet.create({
-  container: {
+const UtilityStyles = {
+  bordered_container: {
     borderRadius: 4,
     borderWidth: 0.5,
     borderColor: '#d6d7da',
@@ -31,7 +30,12 @@ const UtilityStyles = StyleSheet.create({
     borderWidth: 1,
     borderStyle: 'solid',
   },
-});
-
+  show: {
+    opacity: 1.0,
+  },
+  hide: {
+    opacity: 0.0,
+  },
+};
 
 export { UtilityStyles };

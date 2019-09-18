@@ -25,7 +25,7 @@
       "androidMode": "default"
     },
     "splash": {
-      "image": "./splash.jpg",
+      "image": "./splash.png",
       "backgroundColor": "#000000",
       "resizeMode": "contain"
     },
@@ -64,7 +64,6 @@
     "packagerOpts": {
       "assetExts": [
         "ttf",
-        "xml",
         "jpg",
         "svg",
         "png"

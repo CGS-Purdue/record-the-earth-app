@@ -1,287 +1,41 @@
 #!/bin/bash
 
-# (npm bin)/eslint --config $(npm prefix)/.eslintrc.js  --ext '.js'  ./Screens/**/*.js
-
-
 # -------------------------
-#  eslint
+# ESLINT
 # -------------------------
 BASE_PATH="$(npm prefix)"
-
-[[ -f "$BASE_PATH/.npmrc" ]] && . "$BASE_PATH/.npmrc"
-
-
+[[ -f "${BASE_PATH}/./.npmrc" ]] && . ${BASE_PATH}/./.npmrc
 NODE_RUN_ENV=
 NODE_RUN_FLAGS=
+LINT_ARGS="$@"
+# ${NODE_RUN_ENV} node ${NODE_RUN_FLAGS}
 
+run_lint () {
+  RUN_LINT_ARGS=${1:-'-- ./'}
 
-_parse_args() {
+  echo "lint --config ${BASE_PATH}/.eslintrc.js --ext '.js' --ignore-pattern '!node_modules' ${RUN_LINT_ARGS}"
 
-  RETURN_TYPE="${2:-'all'}"
-  LINT_VERBOSITY=""
-  LINT_FIX=""
-  LINT_DRYRUN=""
-  LINT_INPUTS_DIRS=""
-  LINT_INPUTS_FILES=""
-  LINT_IGNORED=""
-  LINT_CACHE=""
-  LINT_EXTRA_ARGS=""
-  LINT_POSIT_ARGS=""
-  LINT_UNMATCHED=""
-  LINT_LINTFILES_OR_PRINTCONFIG="--"
+  ${BASE_PATH}/./node_modules/.bin/eslint \
+    --config "${BASE_PATH}/.eslintrc.js" \
+    --ext '.js' \
+    --ignore-pattern '!node_modules' \
+      ${RUN_LINT_ARGS}
 
+}
 
-  while [[ $# -gt 0 ]]
-  do
-
-      key="$1"
-
-  case $key in
-    -h|--help|help)
-    shift
-        echo "--help"
-        exit 0
-        ;;
-
-    --version|-v)
-    shift
-        echo "--version"
-        exit 0
-        ;;
-
-    --input-dirs|--dirs)
-    shift
-        LINT_INPUTS_DIRS="${LINT_INPUTS_DIRS} $1"
-        shift
-        ;;
-
-    --input-file|--file)
-    shift
-        LINT_INPUTS_DIRS="${LINT_INPUTS_FILES} $1"
-        shift
-        ;;
-
-    --ignore-path|--ignore-pattern|--ignore,--ignore-dirs|--ignore-dir)
-    shift
-        LINT_INPUTS_DIRS="${LINT_IGNORED} $1"
-        shift
-        ;;
-
-    --fix-suggestion)
-    shift
-        LINT_FIX="${LINT_FIX} --fix-type suggestion"
-        ;;
-
-    --fix-layout)
-    shift
-        LINT_FIX="${LINT_FIX} --fix-type layout"
-        ;;
-
-    --fix-problem)
-    shift
-        LINT_FIX="${LINT_FIX} --fix-type problem"
-        ;;
-
-    --fix)
-    shift
-        LINT_FIX="--fix"
-        ;;
-
-    --fix-dry-run|--dry-run|--test)
-    shift
-        LINT_DRYRUN="--dry-run"
-        ;;
-
-    --cache)
-    shift
-        LINT_CACHE="--cache true"
-        ;;
-
-    --nocache|--no-cache)
-    shift
-        LINT_CACHE="--cache false "
-       ;;
-
-    --debug|--verbose)
-    shift
-        LINT_VERBOSITY="--debug"
-        ;;
-
-    --quiet)
-    shift
-        LINT_VERBOSITY="--quiet"
-        ;;
-
-    --print-config)
-    shift
-        LINT_LINTFILES_OR_PRINTCONFIG="--print-config"
-        ;;
-
-    -1|-o|--color|--no-color|--init|--no-ignore|--global|--no-eslintrc|--no-inline-config)
-        LINT_EXTRA_ARGS="$LINT_EXTRA_ARGS $key"
-        shift
-        ;;
-
-    --report-unused-disable-directives|--stdin|--cache-location)
-        LINT_EXTRA_ARGS="$LINT_EXTRA_ARGS $key"
-        shift
-        ;;
-
-    --cache-file|--output-file|--format|--env|--ext|--max-warnings|--parser|--parser-options)
-        LINT_POSIT_ARGS="$LINT_POSIT_ARGS $key"
-        shift
-        LINT_POSIT_ARGS="$LINT_POSIT_ARGS $1"
-        shift
-        ;;
-
-    --plugin|--resolve-plugins-relative-to|--rule|--stdin-filename|--rulesdir|-delimited)
-        LINT_POSIT_ARGS="$LINT_POSIT_ARGS $key"
-        shift
-        LINT_POSIT_ARGS="$LINT_POSIT_ARGS $1"
-        shift
-        ;;
-
-    -f|-c|--config|-level)
-        LINT_POSIT_ARGS="$LINT_POSIT_ARGS $key"
-        shift
-        LINT_POSIT_ARGS="$LINT_POSIT_ARGS $1"
-        shift
-        ;;
-
-    *)
-        LINT_UNMATCHED="$LINT_UNMATCHED $key"
-        shift
-        ;;
-  esac
-  done
-
-  LINT_FLAGS=""
-  [[ ! -z "${LINT_VERBOSITY}" ]] && LINT_FLAGS="${LINT_FLAG} ${LINTBOSY}"
-  [[ ! -z "${LINT_FIX}" ]] && LINT_FLAGS="${LINT_FLAG} ${LINT_FIX}"
-  [[ ! -z "${LINT_DRYRUN}" ]] && LINT_FLAGS="${LINT_FLAG} ${LINT_DRYRUN}"
-  [[ ! -z "${LINT_CACHE}" ]] && LINT_FLAGS="${LINT_FLAG} ${LINT_CACHE}"
-  [[ ! -z "${LINT_IGNORED}" ]] && LINT_FLAGS="${LINT_FLAG} ${LINT_IGNORED}"
-  [[ ! -z "${LINT_POSIT_ARGS}" ]] && LINT_FLAGS="${LINT_FLAG} ${LINT_POSIT_ARGS}"
-  [[ ! -z "${LINT_EXTRA_ARGS}" ]] && LINT_FLAGS="${LINT_FLAG} ${LINT_EXTRA_ARGS}"
-  #statements
-
-  LINT_INPUTS=""
-  [[ ! -z "${LINT_UNMATCHED}" ]]   && LINT_INPUTS="${LINT_INPUTS} $LINT_UNMATCHED"
-  [[ ! -z "${LINT_INPUTS_DIRS}" ]]  && LINT_INPUTS="${LINT_INPUTS} ${LINT_INPUTS_DIRS}"
-  [[ ! -z "${LINT_INPUTS_FILES}" ]] && LINT_INPUTS="${LINT_INPUTS} ${LINT_INPUTS_FILES}"
-
-  if [ "$RETURN_TYPE" == "flags" ];then
-    echo "$LINT_FLAGS"
-  elif [ "$RETURN_TYPE"  == "targets" ]; then
-    echo "${LINT_INPUTS_DIRS} ${LINT_INPUTS_FILES}"
-  elif [ "$RETURN_TYPE"  == "others" ]; then
-    echo "$LINT_UNMATCHED"
-  elif [ "$RETURN_TYPE"  == "LINT_LINTFILES_OR_PRINTCONFIG" ]; then
-    echo "${LINT_LINTFILES_OR_PRINTCONFIG}"
-  elif [ "$RETURN_TYPE"  == "all" ]; then
-    echo "${LINT_FLAGS} ${LINT_LINTFILES_OR_PRINTCONFIG} ${LINT_INPUTS}"
-  else
-    echo "${LINT_FLAGS} ${LINT_LINTFILES_OR_PRINTCONFIG} ${LINT_INPUTS}"
-  fi
-  exit 0
+get_proj_dirs () {
+  DEFAULT_DIRS="Config,Life,Model,Screens,Theme,Utilities,Components"
+  LINT_DIRS="${1:-$DEFAULT_DIRS}"
+  echo ${LINT_DIRS//,/ }
 }
 
 
-_get_dirs () {
-  LINT_GET_DIRS=$"( find -path \"*node_modules\" -prune -o -type d  -printf \"%p/*.js\" )"
-  echo "${LINT_GET_DIRS}"
-}
-
-
-## NO ARGUMENTS
-# -----------------------------------
-if [ $# == 0 ]; then
-
-
-    # CWD IS PROJECT HOME
-    # - SAME AS RUN LINT:PROJECT (DEFAULT)
-    # -------------------------------------
-    if [ "$BASE_PATH" == "$INIT_CWD" ]; then
-
-      LINT_DIRS="Config,Life,Model,Screens,Theme,Utilities,Components"
-
-      ${NODE_RUN_ENV} node ${NODE_RUN_FLAGS} \
-        $BASE_PATH/./node_modules/.bin/eslint \
-          --ext '.js' \
-          --cache \
-          --config "${BASE_PATH}/.eslintrc.js" \
-          --cache-file "$BASE_PATH/.eslintcache" \
-          --ignore-pattern '!node_modules' \
-            -- \
-              "./*.js" \
-              "./{$LINT_DIRS}/*.js" \
-              "./{$LINT_DIRS}/**/*.js" \
-              "./{$LINT_DIRS}/**/**/*.js" \
-              "./{$LINT_DIRS}/**/**/**/*.js"
-
-
-
- "promise/always-return": "error",
-    "promise/no-return-wrap": "error",
-    "promise/param-names": "error",
-    "promise/catch-or-return": "error",
-    "promise/no-native": "off",
-    "promise/no-nesting": "warn",
-    "promise/no-promise-in-callback": "warn",
-    "promise/no-callback-in-promise": "warn",
-    "promise/avoid-new": "warn",
-    "promise/no-new-statics": "error",
-    "promise/no-return-in-finally": "warn",
-    "promise/valid-params": "warn"
-    # CWD IS NOT PROJECT HOME
-    # SET TOP DIRS TO THE INIT_CWD (PROJECT SUB DIR)
-    # ----------------------------------------------
-    else
-
-    LINT_DIRS="${INIT_CWD}"
-
-    ${NODE_RUN_ENV} node ${NODE_RUN_FLAGS} \
-      ${BASE_PATH}/./node_modules/.bin/eslint \
-        --ext '.js' \
-        --cache \
-        --config "${BASE_PATH}/.eslintrc.js" \
-        --cache-file "$BASE_PATH/.eslintcache" \
-        --ignore-pattern '!node_modules' \
-          -- \
-            "./*.js" \
-            "${INIT_CWD}/./*.js" \
-            "${INIT_CWD}/./**/*.js" \
-            "${INIT_CWD}/./**/**/*.js" \
-            "${INIT_CWD}/./**/**/**/*.js"
-
-    fi
-
-
-## IF ARGUMENTS
-# -----------------------------------
+if [ "$BASE_PATH" == "$INIT_CWD" ]; then
+  run_lint "${LINT_ARGS}"
 else
-
-  RUN_LINT_ARGS="$#"
-  4PARSED_DATA="$(_parse_args $RUN_LINT_ARGS)"
-
-  PARSED_FLAGS="$(_parse_args \"$RUN_LINT_ARGS\" \"flags\")"
-  PARSED_TARGETS="$(_parse_args \"$RUN_LINT_ARGS\" \"tagets\")"
-  PARSED_LINTERORCONFIG="$(_parse_args \"$RUN_LINT_ARGS\" \"LINT_LINTFILES_OR_PRINTCONFIG\")"
-  PARSED_OTHERS="$(_parse_args \"$RUN_LINT_ARGS\" \"others\")"
-
-  echo"flags ${4PARSED_DATA}"
-
-  ${NODE_RUN_ENV} node ${NODE_RUN_FLAGS} \
-    $BASE_PATH/./node_modules/.bin/eslint \
-      ${PARSED_DATA}
-
-
-
-  echo "DATA HANDLING"
-  echo "------------------------------"
-  echo "PARSED_FLAGS ${PARSED_FLAGS}"
-  echo "PARSED_TARGETS ${PARSED_TARGETS}"
-  echo "PARSED_LINTERORCONFIG ${PARSED_LINTERORCONFIG}"
-  echo "PARSED_OTHERS ${PARSED_OTHERS}"
-
+  cd ${INIT_CWD}
+  run_lint "${LINT_ARGS}"
 fi
+
+
+exit 0

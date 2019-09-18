@@ -19,7 +19,6 @@ export default class TouchButton extends Component {
     this.active = false;
     this.state = {
       active: false,
-
     };
     this.text = false;
     this.image = false;
@@ -40,7 +39,7 @@ export default class TouchButton extends Component {
     this.underlayColor = this.props.color;
     this.onPress = this.props.onPress;
     return (
-      <View style={{borderColor : 'blue',borderWidth:1,borderStyle:'solid'}}>
+      <View style={{borderColor : 'blue', borderWidth:1, borderStyle:'solid'}}>
       <TouchableHighlight
         style={[touchButtonStyle]}
         underlayColor={this.props.color}

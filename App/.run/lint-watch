@@ -1,23 +1,21 @@
 #!/bin/bash
 
 # -------------------------
-# ESLINT
-# -------------------------
-BASE_PATH="$(npm prefix)"
-[[ -f .npmrc ]] && source .npmrc
-
-NODE_RUN_ENV=""
-NODE_RUN_FLAGS=""
-
 # ESLINT-WATCH - GLOBAL INSTALL
 # --plugin
 # --watch-ignore RegExp        Regex string of folders to ignore when watching - default: /.git|node_modules|bower_components/
 # --watch-delay Int            Delay(ms) for watcher to wait to trigger re-lint - default: 300
+# -------------------------
+BASE_PATH="$(npm prefix)"
+[[ -f "${BASE_PATH}/./.npmrc" ]] && echo "reading env file" && . ${BASE_PATH}/./.npmrc
 
-RUN_LINT_DIRS="Config,Life,Model,Screens,Theme,Utilities,Components"
+NODE_RUN_ENV=""
+LINT_DIRS="Config,Life,Model,Screens,Theme,Utilities,Components"
+LINT_ARGS="$@"
 
 ${NODE_RUN_ENV} \
   esw \
+    --config "${BASE_PATH}/.eslintrc.js" \
     --ext '.js' \
     --color \
     --debug \
@@ -26,9 +24,6 @@ ${NODE_RUN_ENV} \
     --cache-file "$BASE_PATH/.eslintcache" \
     --ignore-pattern '!node_modules' \
     --watch \
+    ${LINT_ARGS} \
       -- \
-      "./*.js" \
-      "./${RUN_LINT_DIRS}/*.js" \
-      "./${RUN_LINT_DIRS}/**/*.js" \
-      "./${RUN_LINT_DIRS}/**/**/*.js" \
-      "./${RUN_LINT_DIRS}/**/**/**/*.js"
+        ${LINT_DIRS//,/ }

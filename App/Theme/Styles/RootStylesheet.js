@@ -1,14 +1,9 @@
 import React from 'react';
-import { Platform,StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 const BACKGROUND_COLOR = '#FFF8ED';
 
 const RootStylesheet = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: BACKGROUND_COLOR,
-  },
-
   welcomeContainer: {
     alignItems: 'center',
     marginTop: 10,

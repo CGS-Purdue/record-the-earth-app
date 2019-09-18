@@ -1,64 +1,74 @@
 import React, { Component } from 'react';
 import { Asset } from 'expo-asset';
-import { AppLoading, SplashScreen } from 'expo';
-import { Platform, StatusBar } from 'react-native';
+import { AppLoading } from 'expo';
+import { Platform, StatusBar, View } from 'react-native';
 import { useScreens } from 'react-native-screens';
 import { RootView } from './Components/Views';
-import AppNavContainer from './Screens/RootNavigation';
+import { AppNavContainer } from './Screens/RootNavigation';
 import { Theme } from './Theme';
-useScreens();
+console.log('Platform', Platform);
+if (!Platform.OS === 'web'){
+  useScreens();
+}
 
 class App extends Component {
   state = {isReady: false};
+
+  _appLoadingOnError = (err) => {
+    console.log("LOADING ERROR");
+    console.warn(err);
+  }
 
   render() {
     if (!this.state.isReady) {
       return (
         <AppLoading
-        startAsync={this._cacheResourcesAsync}
-        onFinish={() => this.setState({ isReady: true })}
-        onError={this._appLoadingOnError}
-        autoHideSplash={true}
-        onError={console.warn}
+          startAsync={this._cacheResourcesAsync}
+          onFinish={() => this.setState({ isReady: true })}
+          onError={this._appLoadingOnError}
+          autoHideSplash={true}
         />
       );
-
-    return (
-    {`{ ${Platform.OS} == 'ios' && <StatusBar barStyle="default" />}
-          <AppNavContainer
-           theme={"dark"}
-            ref={nav => { this.navigator = nav; }}
-          />
-          </RootView>
-        );
-      }
+    } else {
+      return (
+        <View style={{flex: 1, backgroundColor: 'blue'}}>
+        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        <AppNavContainer theme={"dark"} ref={nav => {this.navigator = nav;} }/>
+        </View>
+      );
+    }
+  }
 
   async _cacheResourcesAsync(){
-      const _assets = Theme.Assets;
       const _fonts = Theme.Fonts;
       const _icons = Theme.Icons;
-      const _images = Object.assign(
-        _assets.buttons,
-        _assets.logos,
-        _assets.images
-      );
-      const cacheFonts =  _fonts.loadFontMap(_fonts.FontMap);
+      const _assets = Theme.Assets;
+
+      const _image_assets = Object.assign(
+          _assets.buttons,
+          _assets.logos,
+          _assets.images
+        );
+
+      const cacheFonts = _fonts.loadFontMap(_fonts.FontMap);
       const cachedIcons = _icons.load(_icons.Icons);
-      const cacheImages = Object.entries(mages)npm    yy
-        function() {
+      const cacheImages = Object.entries(_image_assets).map(
+        function (pair) {
           let obj = {};
           let key = pair[0];
           let mod = pair[1];
-          t atsset = Asset.fromModule(mod).downloadAsync(key);
-          obj[key] = { module: mod, name: key, asset: asset };
+          let asset = Asset.fromModule(mod).downloadAsync(key);
+          obj[key] = {
+            module: mod,
+            name: key,
+            asset: asset,
+          };
           return obj;
         }
       );
-
+      console.log([ cacheImages, cachedIcons, cacheFonts ]);
       return Promise.all([ cacheImages, cachedIcons, cacheFonts ]);
-
-     }
-
-  }
+   }
 }
+
 export { App };

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Image,  ImageBackground, TouchableOpacity, View } from 'react-native';
-
-import { CenterColView, PadView,RootView } from '../../Components/Views';
+import { Image, Text, ImageBackground, TouchableOpacity, View } from 'react-native';
+import { CenterColView, Section, CenterView, PadView,RootView } from '../../Components/Views';
+import { SvgRecord } from '../../Components/Asset/SvgRecord';
 import { Theme } from '../../Theme';
 
 const _assets = Theme.Assets;
@@ -39,21 +39,33 @@ class HomeScreen extends Component {
 
     return (
         <ImageBackground
-          style={_styles.bgImg}
-          source={_assets.images.img_background}>
+           style={_styles.bgImg}
+           source={_assets.images.img_background}>
           <RootView>
             <PadView padding={(2, 3)}>
-              <CenterColView>
-              <Image source={_assets.logos.logo_large} style={LogoStyles}/>
+            <CenterView>
+
+            <Section>
+              <Image
+                 source={_assets.logos.logo_large}
+                 style={_styles.logo_main}
+              />
+            </Section>
+
+            <Section>
+              <SvgRecord/>
+            </Section>
+
+            <Section>
               <View style={_styles.BtnContainer}>
-                <TouchableOpacity style={_styles.BtnBox} onPress={
-                  () => navigate({ routeName: 'Survey', params: { name: 'Test' } })
-                }>
-                  <View>
-                    <Text style={_styles.BtnTxt}>Try Suvery</Text>
-                    <Image style={_styles.BtnImg} source={_assets.icons.icon_list} />
-                   </View>
-                </TouchableOpacity>
+              <TouchableOpacity style={_styles.BtnBox} onPress={
+                () => navigate({ routeName: 'Survey', params: { name: 'Test' } })
+              }>
+              <View>
+              <Text style={_styles.BtnTxt}>Try Suvery</Text>
+              <Image style={_styles.BtnImg} source={_assets.icons.icon_list} />
+              </View>
+              </TouchableOpacity>
               </View>
               <View style={_styles.BtnContainer}>
                 <TouchableOpacity style={_styles.BtnBox} onPress={
@@ -64,8 +76,10 @@ class HomeScreen extends Component {
                   <Image style={_styles.BtnImg} source={_assets.icons.icon_record} />
                   </View>
                 </TouchableOpacity>
-              </View>
-            </CenterColView>
+               </View>
+            </Section>
+
+            </CenterView>
           </PadView>
         </RootView>
       </ImageBackground>
