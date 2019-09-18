@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# =================================
+
+# TITLE 
+
+
+no_emptylines () {
+  grep -v -e "^[[:space:]]*$"
+}
+select_lines () {
+  grep "^/\*\?//"
+}
+strip_markers () {
+  sed -r 's/^[*\/]+\s?//g; s/\*\/$/  /g'
+}
+line_ending_spaces () {
+  sed -r 's/\s*$/  /g'
+}
+

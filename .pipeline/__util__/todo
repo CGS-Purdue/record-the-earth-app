@@ -1,0 +1,138 @@
+#!/bin/bash
+
+
+# Parse and output TODOs and FIXMEs from comments in your files
+# tododocs();
+# ```
+# ./node_modules/.bin/leasot --help
+# Usage: leasot [options] <file ...>
+# Options:
+#   -V, --version                        output the version number
+#   -A, --associate-parser [ext,parser]  associate unknown extensions with bundled parsers (parser optional / default: defaultParser) (default: [object Object])
+#   -i, --ignore <patterns>              add ignore patterns (default: )
+#   -I, --inline-files                   parse possible inline files
+#   -r, --reporter [resporter]            use reporter (table|json|xml|markdown|vscode|raw) (default: table) (default: table)
+#   -S, --skip-unsupported               skip unsupported filetypes
+#   -t, --filetype [filetype]            force the filetype to parse. Useful for streams (default: .js)
+#   -T, --tags <tags>                    add additional comment types to find (alongside todo & fixme) (default: )
+#   -x, --exit-nicely                    exit with exit code 0 even if todos/fixmes are found
+#   -h, --help                           output usage information
+#   Examples://
+#     $ leasot index.js
+#     $ leasot **/*.php
+#     $ leasot app/**/*.js test.rb
+#     $ leasot --reporter json index.js
+#     $ leasot --tags review index.js
+#     $ leasot app/**/*.js --ignore "**/custom.js"
+#     $ leasot --tags review index.js
+#     $ cat index.coffee | leasot --filetype .coffee
+#     $ leasot tests/**/*.styl --reporter json | jq 'map(select(.kind == "TODO"))' | leasot-reporter
+#
+# ------------------
+# ```
+#
+# PROJECT MANAGEMENT
+#
+# leasot - gulp todo is built off of this
+# description = 'Generate TODO doc based on leasot';
+# https://www.npmjs.com/package/gulp-todo
+# '--format':     'additional reporter formats: json, xml, raw, table, markdown, vscode (defaults to markdown)',
+# '--filename':   'name of the output file',
+# '--src':        'file input stream glob or regex',
+# '--customTags': 'additonal tags to report',
+# '--dest':       'output directory',
+# '--verbose':    'output to screen',
+
+
+todo_debug_vars () {
+  REPORT_SRC=${1:-}
+  [[ -z $REPORT_SRC ]] && REPORT_SRC="$(todo_get_report_paths js)"
+
+  echo "  Command: ${REPORT_EXEC}
+  Tags:  ${REPORT_IGNORE}
+  Ignore:  ${REPORT_TODO_TAGS}
+  Input: ${REPORT_SRC}"
+}
+
+todo_print_scripts_report () {
+  REPORT_SRC=${1:-}
+  [[ -z $REPORT_SRC ]] && REPORT_SRC="$(todo_get_report_paths js)"
+
+  ${REPORT_EXEC} \
+    --tags $REPORT_TODO_TAGS \
+    --ignore $REPORT_IGNORE \
+    --filetype .js \
+    $REPORT_SRC
+}
+
+todo_print_stylesheet_report () {
+  REPORT_SRC=${1:-}
+  [[ -z $REPORT_SRC ]] && REPORT_SRC="$(todo_get_report_paths scss)"
+
+  ${REPORT_EXEC} \
+    --tags $REPORT_TODO_TAGS \
+    --ignore $REPORT_IGNORE \
+    --filetype .scss \
+    $REPORT_SRC
+}
+
+todo_print_theme_report () {
+  REPORT_SRC=${1:-}
+  [[ -z $REPORT_SRC ]] && REPORT_SRC="$(todo_get_report_paths php)"
+
+  ${REPORT_EXEC} \
+    --tags $REPORT_TODO_TAGS \
+    --ignore $REPORT_IGNORE \
+    --filetype .php \
+    $REPORT_SRC
+}
+
+todo_get_report_paths () {
+  REPORT_EXT=${1:-'js'}
+  REPORT_PATHS="*.${REPORT_EXT},**/*.${REPORT_EXT},**/**/*.${REPORT_EXT},**/**/**/*.${REPORT_EXT},**/**/**/**/**/*.${REPORT_EXT}"
+  echo "${REPORT_PATHS//,/ }"
+}
+
+
+# =============================================================================
+## MAIN
+BASE_DIR="$(npm prefix)"
+REPORT_USE_GLOBAL="yes"
+REPORT_IGNORE="node_modules,vendor,bower_components"
+REPORT_TODO_TAGS="TODO,FIXME,HACK,NOTE,BUG,CHANGED,REVIEW"
+
+[[ -f ./node_modules/.bin/leasot ]] && REPORT_USE_GLOBAL="no"
+
+if [ $REPORT_USE_GLOBAL == "yes" ]; then
+  REPORT_EXEC="leasot"
+else
+  REPORT_EXEC="./node_modules/.bin/leasot"
+fi
+
+# IF ENV FILE EXISTS THEN OVERWRITE DEFAULTS
+[[ -f .npmrc ]] && source .npmrc
+[[ -f .env ]] && source .env
+
+# IF PATH IS GIVEN ON COMMAND LINE THEN USE THAT INSTEAD
+[[ ! -z $2 ]] && REPORT_SRC="$2"
+
+if [ "$1" == "theme" ]; then
+  todo_print_theme_report $REPORT_SRC
+elif [ "$1" == "styles" ]; then
+  todo_print_stylesheet_report $REPORT_SRC
+elif [ "$1" == "scripts" ]; then
+  todo_print_scripts_report $REPORT_SRC
+elif [ "$1" == "test" ]; then
+  todo_debug_vars $REPORT_SRC
+else
+  echo -e "
+  Get report of TODO and other tags in project files
+
+  [usage]
+  todo <option>
+    scripts\t- get report for stylesheet source folder
+    styles\t- get report for stylesheet source folder
+    theme\t- get report for wordpress theme php files
+
+"
+fi

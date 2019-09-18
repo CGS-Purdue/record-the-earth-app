@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# EXPO HELPER
+# -------------
+BASE_DIR="$(npm prefix)"
+
+source ${BASE_DIR}/../.env
+
+tsc --removeComments \
+  --module ESNext \
+  --target ESNEXT \
+  --skipLibCheck \
+  --stripInternal \
+  --outDir tsBuild \
+  --pretty "$@"

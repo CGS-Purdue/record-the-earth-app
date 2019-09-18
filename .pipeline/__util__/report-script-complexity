@@ -1,0 +1,17 @@
+#!/bin/bash
+
+BASE_DIR="$(npm prefix)"
+REPORT_DOCS_DIR=".docs"
+REPORT_DEST_DIR="jscomplex"
+REPORT_DEST_PATH="${REPORT_DOCS_DIR}/${REPORT_DEST_DIR}"
+REPORT_INPUT_SRC="*.js,**/*.js,**/**/*.js,**/**/**/*.js"
+REPORT_EXCLUDE="node_modules"
+
+report_jscomplexity () {
+  REPORT_SRC="${2//,/ }"
+  plato -d ${REPORT_DEST} -r ${REPORT_SRC}
+}
+
+report_jscomplexity ${REPORT_DEST_PATH} "${REPORT_INPUT_SRC}"
+
+echo "Go to .docs/jscomplex and 'serve' to view the report in the browser"

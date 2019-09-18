@@ -1,0 +1,76 @@
+{
+  "name": "chrome-campaign-manager",
+  "version": "1.0.0",
+  "description": "Marketing campaign tools extension for chrome",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "dev": "rollup -c -w",
+    "build": "rollup -c --environment INCLUDE_DEPS,NODE_ENV:development",
+    "build:debug": "ROLLUP_DEBUG=true rollup -c --environment INCLUDE_DEPS,NODE_ENV:development",
+    "build:watch": "rollup -c rollup.config.js -w --environment INCLUDE_DEPS,NODE_ENV:development",
+    "build:reset": "rm -rf ./dist/chrome-devtools* && rollup -c rollup.config.all.js --environment INCLUDE_DEPS,NODE_ENV:development",
+    "build:all": "ROLLUP_COPY_DEPENDENCIES=true rollup -c --environment INCLUDE_DEPS,NODE_ENV:development",
+    "clean": "rm -rf ./build/* && cp -r ./src/modules/main/* ./build/",
+    "copy-assets": "cp -r ./source/modules/main/* ./build/",
+    "deploy": "rollup -c --environment INCLUDE_DEPS,NODE_ENV:production",
+    "deploy:dev": "rollup -c rollup.config.project_files.js --environment INCLUDE_DEPS,NODE_ENV:development",
+    "deploy:prod": "rollup rollup.config.deploy.js -c --environment INCLUDE_DEPS,NODE_ENV:production",
+    "pretest": "npm run build",
+    "test": "node test/test.js"
+  },
+  "devDependencies": {
+    "rollup": "^0.58.1",
+    "rollup-plugin-cleanup": "^2.0.1",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-copy": "^0.2.3",
+    "rollup-plugin-copy-assets": "^1.0.0",
+    "rollup-plugin-filesize": "^1.5.0",
+    "rollup-plugin-html": "^0.2.1",
+    "rollup-plugin-markdown": "^0.1.0",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-uglify": "^3.0.0"
+  },
+  "assets": [
+    {
+      "src": "./assets/bootstrap/bootstrap.min.css",
+      "dest": "./build/assets/styles/bootstrap.min.css"
+    },
+    {
+      "src": "./assets/bootstrap/bootstrap.min.js",
+      "dest": "./build/assets/scripts/bootstrap.min.js"
+    },
+    {
+      "src": "./assets/flat-ui/flat-ui.min.css",
+      "dest": "./build/assets/styles/flat-ui.min.css"
+    },
+    {
+      "src": "./assets/flat-ui/flat-ui-checkbox.js",
+      "dest": "./build/assets/scripts/flat-ui-checkbox.js"
+    },
+    {
+      "src": "./assets/jquery/jquery-1.8.3.min.js",
+      "dest": "./build/assets/scripts/jquery-1.8.3.min.js"
+    },
+    {
+      "src": "./assets/styles/panel.css",
+      "dest": "./build/assets/styles/panel.css"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charrismatic/chrome-campaign-manager.git"
+  },
+  "keywords": [
+    "chrome-extension",
+    "datatables"
+  ],
+  "author": "Matt Harris",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/charrismatic/chrome-campaign-manager/issues"
+  },
+  "homepage": "https://github.com/charrismatic/chrome-campaign-manager#readme"
+}

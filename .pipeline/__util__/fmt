@@ -1,0 +1,54 @@
+#!/bin/bash
+
+
+# ===========
+# FORMATTERS
+# ===========
+no_emptylines () {
+  grep -v -e "^[[:space:]]*$"
+}
+strip_inline_comments () {
+  sed 's/[\/][\/].*//;; '
+}
+select_inline_comments () {
+  grep -E '/[\/][\/].*//'
+}
+functions_on_newline () {
+  sed 's/^\@/\n\@/'
+}
+newline_after_function_close () {
+  sed 's/^\}/\}\n/'
+}
+strip_block_comments () {
+  tr -d '\n' \
+  | sed 's/\([\/][\*][[:space:][:alnum:]!@#$%\^&\*()_+-= ]*[\*][\/]\)/\n\n__STARTCOM__\1__ENDCOM__\n\n/g;' \
+  | grep -v '__STARTCOM__/\*\*/__ENDCOM__'
+}
+fix_multiple_spaces () {
+  sed -E 's/\s\s+/ /g'
+}
+strip_imports () {
+  grep -v "@import"
+}
+
+  cat $1 \
+  | strip_imports \
+  | no_emptylines
+  # | strip_inline_comments \
+  # | fix_multiple_spaces \
+  # | strip_block_comments \
+
+  # sed 's/[\/][\/].*//; s/\s*$//; s/^\@/\n\@/;s/^\}/\}\n/' \
+  # | grep -v -E "^[/][/]|^[[:space:]]*[\/][\/]|^[[:space:]]*$" \
+  # | grep -v -e "^[[:space:]]*$" \
+    # | grep -v "^\/\/" \
+    # | grep -v -E "^[/][/]|^[[:space:]]*[\/][\/]|^[[:space:]]*$"
+    # | grep "@import " \
+    # | sed 's/@import //; s/\.scss//' \
+    # | tr -d "'\";" \
+    # | sed 's/\//*/g; s/^/"*\//; s/$/.scss"/;'  \
+    # | xargs -n1 find $STYLE_SRC -path \
+    # | xargs cat \
+    # | grep -v -E "@import" \
+    # | grep -v -E "^[/][/]|^[[:space:]]*[\/][\/]|^[[:space:]]*$"
+#    | sed 's/[\/][\/].*//; s/\s*$//; s/^\@/\n\@/;s/^\}/\}\n/' \

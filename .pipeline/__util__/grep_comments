@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# http://www.softpanorama.org/Tools/Find/using_exec_option_and_xargs_in_find.shtml
+find ./ ! -path "*node_modules*" -name index.scss -printf "%p\n" -execdir \
+  grep -r --no-filename -E \
+    -e '\s*\/\/\/\/?.*$' \
+    && sed 's/^\s*\/\/\/\//\n---\n/; s/@group/##/g; s/\s*\/\/\/\s\{,2\}//g' {} \;
+
+find ./ ! -path "*node_modules*" \
+  -name index.scss -printf "%p\n" \
+  -execdir grep \
+    -r \
+    --no-filename z \
+    --include \
+    --files-with-matches \
+    --colo=nevernever \
+    --only-matching \
+    --exclude=GLOB \
+    --exclude-dir \
+    --null \
+      sed 's/^\s*\/\/\/\//\n---\n/; s/@group/##/g; s/\s*\/\/\/\s\{,2\}//g' \
+
+# >> $(basename $PATH).testfile
+
+
+find ./ ! -path "*node_modules*" \
+  -name index.scss \
+  -print \
+  -execdir grep -r -E --no-filename  -e '[\s]*\/\/\/.*' \;
+  # -exec dirname  {} \;

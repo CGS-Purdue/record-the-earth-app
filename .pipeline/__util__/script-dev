@@ -1,0 +1,46 @@
+#!/bin/bash
+
+BASE_DIR="$(npm prefix)"
+TMP_DIR=".tmp"
+PUBLIC_DIR="public"
+SCRIPT_SRC_PATH="src/scripts"
+SCRIPT_DEST_PATH="_dist"
+INPUT_PATH="${BASE_DIR}/${SCRIPT_SRC_PATH}"
+OUPUT_PATH="${BASE_DIR}/${SCRIPT_SRC_PATH}/${SCRIPT_DEST_PATH}"
+
+strip_inline_comments () {
+  sed  -E 's/^\s*[\/][\/].*//g'
+}
+no_emptylines () {
+  grep -v -e "^[[:space:]]*$"
+}
+
+_process__script () {
+  SCRIPT_INPUT_PATH=${1:-"input path required"}
+  SCRIPT_INPUT_PATTERN=${2:-"input pattern required"}
+  SCRIPT_OUPUT_PATH=${3:-"output path required"}
+  SCRIPT_OUPUT_NAME=${4:-"output name required"}
+
+  echo -e "\n  [SRC]  $SCRIPT_INPUT_PATH \n  [PATTERN] $SCRIPT_INPUT_PATTERN\n  [DEST] ${SCRIPT_OUPUT_PATH}/$SCRIPT_OUPUT_NAME"
+
+  find $SCRIPT_INPUT_PATH/ \
+    -name "${SCRIPT_INPUT_PATTERN}" \
+    -type f \
+    -printf "\n/* %P */\n\n" \
+      -exec js-beautify \
+        --file {} \
+        --indent-size 2 \
+        --brace-style collapse,preserve-inline \
+        --type js \; \
+          | strip_inline_comments \
+          | no_emptylines \
+            > ${SCRIPT_OUPUT_PATH}/$SCRIPT_OUPUT_NAME
+
+}
+
+
+_process__script $INPUT_PATH/components "*.component.js" $OUPUT_PATH sails.components.js
+_process__script $INPUT_PATH/utilities "*.utility.js" $OUPUT_PATH sails.utilities.js
+_process__script $INPUT_PATH/pages "*.page.js" $OUPUT_PATH sails.pages.js
+_process__script $INPUT_PATH/sails-io "*.js" $OUPUT_PATH sails-io.js
+_process__script $INPUT_PATH/sails-core "*.js" $OUPUT_PATH sails-sdk.js

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+BASE_DIR="$(npm prefix)"
+RELEASE_DATE="$(date +'%Y%m%d%H%M%S')"
+TMP_DIR=".tmp"
+PUBLIC_DIR="public"
+SYNC_FLAGS=""
+OUTPUT_DEST="${PUBLIC_DIR}"
+
+# ==============
+#   SYNC SCRIPTS
+# ==============
+
+if [[ $RUN_ENV_TEST == "yes" ]]; then
+
+  SYNC_FLAGS="--dry-run"
+
+fi
+
+if [[ $RUN_VERBOSE == "yes" ]]; then
+
+  echo -e "\n[Syncing processed script]\n"
+
+  SYNC_FLAGS="$SYNC_FLAGS --human-readable --update --info=name,stats1,misc1,flist"
+
+  echo -e "Flags: ${SYNC_FLAGS}\n"
+
+  echo -e "  [SRC] ${BASE_DIR}/src/scripts/_dist/ \n    --> ${BASE_DIR}/${TMP_DIR}/${OUTPUT_DEST}/assets/scripts/\n"
+
+else
+
+  echo -e "\n[Syncing processed scripts]\n"
+
+fi
+
+rsync ${SYNC_FLAGS} --recursive ${BASE_DIR}/src/scripts/_dist/    ${BASE_DIR}/${TMP_DIR}/${OUTPUT_DEST}/assets/scripts/

@@ -1,0 +1,90 @@
+#!/bin/bash
+
+
+SRC_PATH="src/scripts"
+INPUTS="${1:-.}"
+DEST_PATH=$SRC_PATH
+
+no_emptylines () {
+  grep -v -e "^[[:space:]]*$"
+}
+
+strip_inline_comments () {
+  sed  -E 's/^\s+[\/][\/].*//g'
+}
+
+select_inline_comments () {
+  grep -E '/[\/][\/].*//'
+}
+
+functions_on_newline () {
+  sed 's/^\@/\n\@/'
+}
+
+newline_after_function_close () {
+  sed 's/^\}/\}\n/'
+}
+
+strip_block_comments () {
+  tr -d '\n' \
+  | sed 's/\([\/][\*][[:space:][:alnum:]!@#$%\^&\*()_+-= ]*[\*][\/]\)/\n\n__STARTCOM__\1__ENDCOM__\n\n/g;' \
+  | grep -v '__STARTCOM__/\*\*/__ENDCOM__'
+}
+
+fix_multiple_spaces () {
+  sed -E 's/\s\s+/ /g'
+}
+
+beautifyjs () {
+  js-beautify --indent-size 2  --brace-style collapse,preserve-inline  --space_after_named_function  --space-after-anon-function  --jslint-happy --good-stuff --type js
+}
+
+postcss_singleline () {
+  postcss -u postcss-single-line --no-map
+}
+
+
+# node-minify --compressor uglify-js --input 'input.js' --output 'output.js'
+# babel-minify --compact --minified true
+# node-minify  clean-csss
+# postcss -u autoprefixer -u postcss-single-line -u
+if [[ $1 == 'test'  ]]; then
+
+    echo "find $SRC_PATH -path $INPUTS  -type f  -print "
+
+    find $SRC_PATH -path  "*sails-core/*" -type f -printf "%P \n"
+
+
+elif [[ $1 == 'cleandir' ]]; then
+
+   find $SRC_PATH -path "*sails-core/*" -type f -print \
+       -exec js-beautify --file {} \
+       --indent-size 2 \
+       --brace-style collapse,preserve-inline \
+       --space_after_named_function \
+       --space-after-anon-function \
+       --jslint-happy \
+       --break-chained-methods \
+       --good-stuff \
+       --type js \
+        --wrap-line-length 140 \
+       --operator-position after-newline \
+       --outfile "{}.clean.js" \;
+
+    find $SRC_PATH -path "*sails-core/*" -name "*.clean.js" -type f \
+         -exec babel --no-comments \
+         --source-maps false \
+              --out-file "{}.babel.js" \
+               "{}" \;
+
+
+else
+
+    find $SRC_PATH -path "*constants/*" -o -path "*sails-core/*"  -type f -exec cat {} \;  \
+        | beautifyjs \
+        | strip_inline_comments \
+        | no_emptylines
+
+#\> $DEST_PATH/components.bundle.js
+
+fi

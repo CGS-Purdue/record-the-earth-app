@@ -1,0 +1,11 @@
+#!/bin/bash
+
+BASE_DIR="$(npm prefix)"
+REPORT_DIR="server"
+REPORT_PATH="${DOCS_DIR}/${REPORT_DIR}"
+REPORT_INPUT=""
+REPORT_EXCLUDE=""
+SERVE_DIR="public"
+SERVE_BASE_PATH=${BASE_DIR}/${SERVE_DIR}
+
+find "${SERVE_BASE_PATH}" -type f -printf "\t%P\n" | sort

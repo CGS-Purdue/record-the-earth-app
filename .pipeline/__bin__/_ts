@@ -6,6 +6,4 @@ BASE_DIR="$(npm prefix)"
 
 source ${BASE_DIR}/../.env
 
-
-# tsc --removeComments  --module ESNext --target ESNEXT --pretty
-# ts build --removeComments  --jsx react-native --module ESNext --target ESNEXT --pretty --declaration  **/*.ts **/*.tsx
+ts build --removeComments  --jsx react-native --module ESNext --target ESNEXT --pretty --declaration  **/*.ts **/*.tsx "$@"
