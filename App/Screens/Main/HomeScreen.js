@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-import { Image, ImageBackground, View } from 'react-native';
-import { Section, CenterView,  RootView } from '../../Components/Views';
-import { RippleButton } from '../../Components/Button/RippleButton';
-import { Theme } from '../../Theme';
-
-const _assets = Theme.Assets;
+  import React, { Component } from 'react';
+  import { Image, ImageBackground, View } from 'react-native';
+  import { Section, CenterView,  RootView } from '../../Components/Views';
+  import { RippleButton } from '../../Components/Button/RippleButton';
+    import { Theme } from '../../Theme';
+  const _assets = Theme.Assets;
 const _styles = Theme.Styles;
-
 
 
 class HomeScreenScreen extends Component {
@@ -22,16 +20,14 @@ class HomeScreenScreen extends Component {
     console.log(this);
   }
 
-   handle_submit_description = () => {
-     this.props.navigation.navigate('SurveyBio');
-     let surveyDescription = this.state.text;
-     this.setState({ survey_data: { description: surveyDescription }});
+   handle_submit_description = (location) => {
+this.setState({ survey_data: { description: surveyLocation }});
    }
 
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <ImageBackground style={_styles.bgImg} source={_assets.images.img_background}>
+      <ImageBackground style={_styles.bgImg} source={_assets.images.surveyLocation}>
         <RootView>
           <CenterView>
             <Section weight={5} expand={true}>
@@ -42,17 +38,6 @@ class HomeScreenScreen extends Component {
                 />
                 </View>
             </Section>
-
-            <Section weight={5} align={'stretch'}>
-              <RippleButton
-                image={_assets.buttons.btn_record_start}
-                style={_styles.btn_rec_start}
-                onPress={() => navigate({ routeName: 'Record', params: { name: 'Test'}})}
-              />
-            </Section>
-          </CenterView>
-        </RootView>
-      </ImageBackground>
     );
   }
 }

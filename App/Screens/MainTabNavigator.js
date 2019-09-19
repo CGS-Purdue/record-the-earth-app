@@ -1,4 +1,6 @@
-import { Theme } from './.../Theme';
+
+
+import { Theme } from './../Theme';
 
 const _colors = Theme.Colors;
 const _styles = Theme.Styles;
