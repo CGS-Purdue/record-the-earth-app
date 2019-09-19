@@ -23,7 +23,7 @@ var DebugColorRange = [
   'deepskyblue','cyan','chartreuse','coral','brown','crimson','blueviolet','darkorange',
   'blue','aquamarine','dodgerblue','orangered','darkviolet','mediumblue','deeppink',
   'purple','magenta','lime','indianred','green','firebrick','slateblue','khaki',
-  'rebeccapurple','hotpink','gold','greenyellow','turquoise','tomato','yellow'
+  'rebeccapurple','hotpink','gold','greenyellow','turquoise','tomato','yellow',
 ];
 
 var RANGE_LEN = DebugColorRange.length;
@@ -46,7 +46,7 @@ const DebugStyles = {
 };
 
 const addDebugStyles = (styles, debug) => {
-  if (!styles) { return debug; } 
+  if (!styles) { return debug; }
   return Object.assign(styles, debug);
 }
 

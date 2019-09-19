@@ -7,7 +7,6 @@ import { Theme,ThemeColors } from '../../Theme';
 
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
-console.log('HomeScreen', _styles);
 
 const ModalRecordScreen = ({
   navigaion,
@@ -15,7 +14,7 @@ const ModalRecordScreen = ({
   navigation: NavigationScreenProp<NavigationState & any>,
 }) => (
   <RootView style={[_styles.DebugStyles.highlight]}>
-    <CenterView style={[{ backgroundColor: ThemeColors.GRN_300 }, _styles.DebugStyles.highlight]}>
+    <CenterView style={[{ backgroundColor: ThemeColors.BLU_300 }, _styles.DebugStyles.highlight]}>
       <Recorder />
     </CenterView>
   </RootView>

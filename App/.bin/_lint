@@ -34,6 +34,7 @@ if [ "$BASE_PATH" == "$INIT_CWD" ]; then
   run_lint "${LINT_ARGS}"
 else
   cd ${INIT_CWD}
+  
   run_lint "${LINT_ARGS}"
 fi
 

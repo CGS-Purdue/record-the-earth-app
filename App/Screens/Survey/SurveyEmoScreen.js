@@ -10,9 +10,15 @@ const _colors = Theme.Colors;
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
 
+
+
 class SurveyEmoScreen extends Component {
   constructor(props) {
     super(props);
+
+    this.surveyPosition = 4;
+    this.surveyKey = 'emo';
+
     this.state = {
       happy: true,
       relax: false,

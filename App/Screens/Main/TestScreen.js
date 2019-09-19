@@ -22,40 +22,26 @@ class TestScreen extends Component {
   constructor(props) {
     super(props);
   }
-
-  // componentWillMount()
-  // componentDidMount()
-  // componentWillReceiveProps(nextProps)
-  // shouldComponentUpdate(nextProps, nextState) -> boolean
-  // componentDidUpdate(prevProps, prevState)
-
   render() {
+    const { navigate } = this.props.navigation;
     return (
-        <ImageBackground
-          style={_styles.bgImg}
-          source={_assets.images.img_background}>
+        <ImageBackground style={_styles.bgImg} source={_assets.images.img_background}>
           <View style={{flex: 1, position: 'absolute', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%'}}>
             <BlackFade />
           </View>
           <RootView>
             <PadView padding={(2, 3)}>
               <CenterColView>
-              <FadeInView style={{ width: '100%', flex: 2, alignItems: 'center', justifyContent: 'center'}}>
-                <Image source={_assets.logos.logo_large} style={LogoStyles}/>
-              </FadeInView>
-
+                <FadeInView style={{ width: '100%', flex: 2, alignItems: 'center', justifyContent: 'center'}}>
+                  <Image source={_assets.logos.logo_large} style={LogoStyles}/>
+                </FadeInView>
                 <View style={{ width: '100%', flex: 3, alignItems: 'center', justifyContent: 'center'}}>
                   <View style={_styles.BtnContainer}>
-                    <TouchableOpacity style={_styles.BtnBox}>
-                      <View style={{
-                        flex: 0,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        width: 150,
-                        height: 150,
-                      }}>
+                    <TouchableOpacity style={_styles.BtnBox}
+                        onPress={() => navigate({ routeName: 'Survey', params: { name: 'Survey'}})} >
+                      <View style={{ flex: 0, justifyContent: 'center', alignItems: 'center', width: 150, height: 150, }}>
                         <SvgGradLogo/>
-                        <Text style={[{},_styles.BtnTxt]}>Record Test</Text>
+                        <Text style={[{},_styles.BtnTxt]}>Survey Testing</Text>
                       </View>
                     </TouchableOpacity>
                   </View>

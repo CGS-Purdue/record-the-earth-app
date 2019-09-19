@@ -8,6 +8,7 @@ import { RecordStyles } from './Styles/RecordStyles';
 import { FontClasses, TextClasses } from './Styles/TypographyStyles';
 import { UtilityStyles } from './Styles/UtilityStyles';
 import { ViewStyles } from './Styles/ViewStyles';
+import { SurveyStyles } from './Styles/SurveyStyles';
 import { TabBarStyles } from './Styles/TabBarStyles';
 import { CheckBtnStyles } from './Styles/CheckButtonStyles';
 // import { ThemeColors } from './Colors';
@@ -31,6 +32,7 @@ const ThemeStylesheets = {
 const ThemeStyles = Object.assign(
   TabBarStyles,
   TextClasses,
+  SurveyStyles,
   FontClasses,
   ButtonStyles,
   CheckBtnStyles,

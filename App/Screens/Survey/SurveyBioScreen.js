@@ -2,17 +2,22 @@ import React, { Component } from 'react';
 import { Button, ImageBackground } from 'react-native';
 import { CheckButton } from '../../Components/Button/CheckButton';
 import { HeadingText } from '../../Components/Text/HeadingText';
-import { CenterView, CenterColView, PadView, RootView } from '../../Components/Views';
+import { CenterView, CenterColView, PadView, RootView, } from '../../Components/Views';
+
 import { Theme } from '../../Theme';
+
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
 
-
-console.log(_styles);
+  console.log(_styles);
 class SurveyBioScreen extends Component {
   constructor(props) {
     super(props);
+
+    this.surveyPosition = 5;
+    this.surveyKey = 'hum';
+
     this.state = {
       insects: false,
       birds: false,
@@ -93,8 +98,8 @@ class SurveyBioScreen extends Component {
                   navigate('SurveyEmo', { survey_data: _survey_data });
                 }}
               />
-              </CenterView>
-            </PadView>
+            </CenterView>
+          </PadView>
         </RootView>
       </ImageBackground>
     );

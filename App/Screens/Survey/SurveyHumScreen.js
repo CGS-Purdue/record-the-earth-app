@@ -1,40 +1,39 @@
 import React, { Component } from 'react';
 import { Button, ImageBackground } from 'react-native';
-
 import { CheckButton } from '../../Components/Button/CheckButton';
 import { HeadingText } from '../../Components/Text/HeadingText';
 import { CenterColView, PadView, RootView } from '../../Components/Views';
 import { Theme } from '../../Theme';
+
 const _colors = Theme.Colors;
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
 
-class SurveyAntScreen extends Component {
+
+class SurveyHumScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      talking: true,
+      talking: false,
       vehicles: false,
       alarms: false,
-      machines: true,
+      machines: false,
     };
-    this.surveyAntRef = React.createRef();
+    this.SurveyHumRef = React.createRef();
     this.state._survey = this.props.navigation.state.params.survey_data;
   }
 
   getSurveyState = () => {
     let empty = Object.create(null);
-    let surveyAnt = {
+    let surveyHum = {
       talking: this.state.talking,
       vehicles: this.state.vehicles,
       alarms: this.state.alarms,
       machines: this.state.machines,
     };
-
     let _survey_data = this.state._survey;
-    console.log(_survey_data);
     _survey_data.tags = Object.assign(empty, this.state._survey.tags, {
-      ant: surveyAnt,
+      hum: surveyHum,
     });
     return _survey_data;
   };
@@ -57,8 +56,8 @@ class SurveyAntScreen extends Component {
         source={_assets.images.img_background}
       >
         <RootView>
-          <CenterColView>
             <PadView padding={[1, 2]}>
+            <CenterColView>
               <HeadingText level={3}>
                 Did you hear any of these sounds?
               </HeadingText>
@@ -93,16 +92,17 @@ class SurveyAntScreen extends Component {
                   navigate('SurveyEnd', { survey_data: _survey_data });
                 }}
               />
+              </CenterColView>
             </PadView>
-          </CenterColView>
         </RootView>
       </ImageBackground>
     );
   }
 }
 
-SurveyAntScreen.navigationOptions = {
-  title: 'SurveyAntScreen',
+
+SurveyHumScreen.navigationOptions = {
+  title: 'SurveyHumScreen',
 };
 
-export { SurveyAntScreen };
+export { SurveyHumScreen };

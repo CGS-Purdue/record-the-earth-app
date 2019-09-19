@@ -1,17 +1,10 @@
 import React, { Component } from "react";
-import {
-  Animated,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-
+import { Animated, StyleSheet, View, } from "react-native";
+import { defaults,  } from "react-native" from './utils/defaults';
 class ColorAnim extends Component {
-
   componentWillMount() {
     this._animatedValue = new Animated.Value(0);
   }
-
   componentDidMount() {
     Animated.timing(this._animatedValue, {
         toValue: 100,
@@ -23,7 +16,6 @@ class ColorAnim extends Component {
       inputRange: [0, 100],
       outputRange: ['rgba(255,255,255, 1)', 'rgba(51,156,177, 1)'],
     });
-
     return (
       <View style={styles.container}>
         <Animated.View
@@ -33,6 +25,7 @@ class ColorAnim extends Component {
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {

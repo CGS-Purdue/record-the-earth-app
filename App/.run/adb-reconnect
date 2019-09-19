@@ -20,7 +20,7 @@ BASE_DIR="$(npm prefix)"
 [[ -z $ANDROID_HOME ]] && echo 'ANDROID_HOME is not set. Skipping command' && exit 0
 ABD_PATH="${ANDROID_HOME}/platform-tools"
 
-ANDROID_SERIAL="025abd11727717ac"
+# ANDROID_SERIAL="025abd11727717ac"
 
 # RCT_METRO_PORT=8081
 ${ABD_PATH}/adb devices -l

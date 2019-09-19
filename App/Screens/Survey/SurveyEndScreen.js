@@ -3,15 +3,21 @@ import { Button, ImageBackground, View } from 'react-native';
 import { MonoText } from '../../Components/Text/MonoText';
 import { CenterView, PadView, RootView } from '../../Components/Views';
 import { Theme } from '../../Theme';
+
 const _colors = Theme.Colors;
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
 const SoundDB = {};
 const sdb = SoundDB;
 
+
+
 class SurveyEndScreen extends Component {
   constructor(props) {
     super(props);
+    this.surveyPosition = 4;
+    this.surveyKey = 'emo';
+
     this.ref = createRef();
     this.state = {
       upload_complete: false,

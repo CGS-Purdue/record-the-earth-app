@@ -8,7 +8,6 @@
     "platforms": [
       "ios",
       "android",
-      "web"
     ],
     "primaryColor": "#cccccc",
     "privacy": "unlisted",
@@ -58,7 +57,11 @@
       ]
     },
     "githubUrl": "https://github.com/charrismatic/record-the-earth-expo-react-native",
-    "extra": {},
+    "extra": {
+      "debug_flags": {
+        "DEBUG_OUTLINE_STYLES": true
+      }
+    },
     "hooks": {},
     "rnCliPath": "",
     "packagerOpts": {

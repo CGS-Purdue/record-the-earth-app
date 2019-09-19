@@ -1,9 +1,12 @@
+import { Theme } from  '../../Theme';
 import React, { Component } from 'react';
 import { View, ImageBackground, SafeAreaView } from 'react-native';
-import { Theme } from  '../../Theme';
+
+
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
 const _assets = Theme.Assets;
+
 
 // const {children, style, imageStyle, imageRef, ...props} = this.props;
 export default class ImgBgView extends Component {
@@ -13,10 +16,13 @@ export default class ImgBgView extends Component {
     this.backgroundColor = _colors.TRANSPARENT;
     this.absolute = false;
   }
+
   render() {
     return (
-      <ImageBackground style={_styles.bgImg} source={_assets.images.img_bg_cliff}>
-        <SafeAreaView style={{flex: 1}}>
+      <ImageBackground
+        style={_styles.bgImg}
+        source={_assets.images.img_bg_cliff}>
+        <SafeAreaView style={{flex : 1}}>
           <View ref={this.view_ref} style={_styles.rootContainer}>
             {this.props.children}
           </View>

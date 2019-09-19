@@ -5,12 +5,12 @@ import { ColorLib } from './ColorLib';
 /// =====================
 /// | SCALE | RED     | GREEN   | BLUE    | YELLOW  | GRAY    |
 /// | ----- | -----   | -----   | -----   | -----   | -----   |
-/// |  100  | #a60000 | #00cc00 | #04346c | #a66f00 | #e6e6e6 |
-/// |  200  | #b72e3e | #008500 | #0e7dd8 | #a67300 | #cccccc |
-/// |  300  | #bf3030 | #1d8c00 | #0e53a7 | #bf8f30 | #b3b3b3 |
-/// |  400  | #fa3e54 | #269926 | #274e7d | #ffa200 | #808080 |
-/// |  500  | #ff0000 | #41a128 | #4284d3 | #ffaa00 | #999999 |
-/// |  600  | #ff4040 | #64df85 | #6899d3 | #ffb100 | #666666 |
+/// |  100  | #a60000 | #00cc00 | #04346c | #a66f00 | #e6e6e6 | 600 | #666666
+/// |  200  | #b72e3e | #008500 | #0e7dd8 | #a67300 | #cccccc | 700 | #454545
+/// |  300  | #bf3030 | #1d8c00 | #0e53a7 | #bf8f30 | #b3b3b3 | 800 | #333333
+/// |  400  | #fa3e54 | #269926 | #274e7d | #ffa200 | #808080 | 900 | #151515
+/// |  500  | #ff0000 | #41a128 | #4284d3 | #ffaa00 | #999999 | 000 | #0F0F0F
+/// |  600  | #ff4040 | #64df85 | #6899d3 | #ffb100 |  -----> |
 
 // red ------------------------------------
 const Reds = {
@@ -59,7 +59,11 @@ const Grays = {
   GRA_300: ColorLib.nobel,
   GRA_400: ColorLib.gray,
   GRA_500: ColorLib.dustygray,
-  GRA_600: ColorLib.ovegray,
+  GRA_600: ColorLib.dovegray,
+  GRA_700: ColorLib.emperor,
+  GRA_800: ColorLib.tundora,
+  GRA_900: ColorLib.mineshaft,
+  GRA_000: ColorLib.codgray
 };
 
 // TRANSPARENT DARKER ---------------------
@@ -133,12 +137,20 @@ const Colors = {
   COLOR_SECONDARY: '#080808',
   TEXT_INVERSE_COLOR: 'rgba(255,255,255,0.9)',
 
-  // Toolbar
-  TAB_BAR_BG: Grays.GRA_100,
-  TAB_BAR_ACTIVE_BG: Grays.GRA_200,
-  TAB_BAR_COLOR: Grays.GRA_200,
-  TAB_BAR_ACTIVE_COLOR: ColorLib.dodgerblue,
-  TAB_BAR_BORDER_COLOR: '#44797D',
+  // Toolbar // LIGHT THEME
+  // TAB_BAR_BG: Grays.GRA_100,
+  // TAB_BAR_ACTIVE_BG: Grays.GRA_200,
+  // TAB_BAR_COLOR: Grays.GRA_200,
+  // TAB_BAR_ACTIVE_COLOR: ColorLib.dodgerblue,
+  // TAB_BAR_BORDER_COLOR: ColorLib.fadedjade,
+
+  // TAB BAR // DARK THEME
+  // dark grey theme : GRA_900 | GRA_800,
+  TAB_BAR_BG: '#101219' ,
+  TAB_BAR_ACTIVE_BG: '#161922',
+  TAB_BAR_COLOR: Grays.GRA_700,
+  TAB_BAR_ACTIVE_COLOR: ColorLib.azureradiance,
+  TAB_BAR_BORDER_COLOR: ColorLib.chetwodeblue,
 
   // Form colors
   INPUT_BG: '#ffffff',

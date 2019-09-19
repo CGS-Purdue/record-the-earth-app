@@ -7,7 +7,10 @@ const TEXT_COLOR = ThemeColors.YEL_200;
 const BUTTON_BG = ThemeColors.SHADE_LIGHTER_40;
 const bgImg = { width: '100%', height: '100%' };
 
-const BtnContainer = Object.assign(m.b10, m.t20);
+const BtnContainer = Object.assign(
+  m.b10,
+  m.t10,
+);
 const BtnImg = {
   width: 100,
   backgroundColor: BUTTON_BG,
@@ -34,3 +37,11 @@ const HomeGroupStyles = Object.assign(
 const HomeStyles = StyleSheet.create(HomeGroupStyles);
 
 export { HomeStyles };
+const LogoStyles = {
+  flex: 1,
+   width: 300,
+   height: '20%',
+   top: '10%',
+   position: 'absolute',
+   resizeMode: 'contain',
+ };

@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-
 import { Theme } from '../../Theme';
 
+const _colors = Theme.Colors;
 const _layout = Theme.Layout;
 const _styles = Theme.Styles;
+
+// `SPACING_UNIT_1` = (1 * FONT_SIZE) / 3
+// IS A FRACTION VALUE RELATIVE TO THE THEME
+// TEXT SIZE, THIS SHOULD PROVUDE MORE UNIFORM
+//  SCALING THROUGHOUT THE APP
 
 export default class PadView extends Component {
   constructor(props) {
     super(props);
+    this.backgroundColor = _colors.TRANSPARENT;
   }
 
   getPaddingStyle(pad) {
-    // `SPACING_UNIT_1` = (1 * FONT_SIZE) / 3
-    // IS A FRACTION VALUE RELATIVE TO THE THEME
-    // TEXT SIZE, THIS SHOULD PROVUDE MORE UNIFORM
-    //  SCALING THROUGHOUT THE APP
     switch (pad.length) {
       case 1:
         return {

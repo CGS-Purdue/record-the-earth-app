@@ -1,0 +1,47 @@
+import { ThemeColors } from './Colors';
+
+//
+// https://github.com/RafalFilipek/colors-show
+// Simplest example:
+// <ColorsShow colors={green} />
+// You're all set! Now let's see how can you customize this component:
+//
+// Props
+// colors - object / required - Map of colors where key is a name and value is a color in CSS one of css formats.
+//
+// width - number / 100 - width of the box.
+//
+// height - number / 100 - height of the box.
+//
+// space - number / 20 - space between boxes.
+//
+// lines - bool / false - if you want lines insted of boxes.
+//
+// stacked - bool / false stacked boxed with hover effect.
+//
+// name - string / "" - group name.
+//
+// showNames - bool / false - you can turn it off to show only color codes.
+//
+// containerClassName - string / "" - additional class for container.
+//
+// wrapperClassName - string / "" - additional class for wrapper.
+//
+// boxClassName - string / "" - additional class for box.
+//
+// colorInfoClassName - string / "" - additional class for color info.
+//
+// component - React.Component / null - custom Box component.
+//
+// Custom components
+
+
+<ColorsShow colors={REDS} />
+<ColorsShow colors={GREENS} />
+<ColorsShow colors={BLUES} />
+<ColorsShow colors={YELLOWS} />
+<ColorsShow colors={GRAYS} />
+<ColorsShow colors={SHADES_DARK} />
+<ColorsShow colors={SHADES_LIGH} />
+<ColorsShow colors={EMPTYCOLORS} />
+<ColorsShow colors={REDS} />

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import Svg, { Path, Defs, LinearGradient, Stop, G, Circle, Text, Tspan } from 'react-native-svg';
+// import { Svg } from 'expo';
+// const { Circle, Rect, Path, Defs, LinearGradient, Stop, G, Text, Tspan } = Svg;
 
 const SVG_FILL = '#ffffff';
 const SVG_BG = 'rgba(0,0,0,.0)';
@@ -15,13 +17,14 @@ const SvgContainerStyles = Object.assign(
     justifyContent: 'center'
 });
 
+// xmlns:xlink="http://www.w3.org/1999/xlink"
+// xlink:
 class SvgRecord extends Component {
   render() {
     return (
       <View style={SvgContainerStyles}>
         <Svg
           xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
           width="458.76"
           height="460.24"
         >
@@ -38,9 +41,9 @@ class SvgRecord extends Component {
             <Stop offset="0" stop-color="#d6270f"/>
             <Stop offset="1" stop-color="#d6270f" stop-opacity="0"/>
           </LinearGradient>
-          <LinearGradient xlink:href="#a" id="e" x1="3.63" y1="764.34" x2="462.39" y2="764.34" gradientUnits="userSpaceOnUse"/>
-          <LinearGradient xlink:href="#b" id="f" gradientUnits="userSpaceOnUse" x1="232.65" y1="558.84" x2="228.82" y2="701.39" gradientTransform="translate(-2 -8)"/>
-          <LinearGradient xlink:href="#c" id="d" x1="228.61" y1="541.5" x2="233.62" y2="981.43" gradientUnits="userSpaceOnUse"/>
+          <LinearGradient href="#a" id="e" x1="3.63" y1="764.34" x2="462.39" y2="764.34" gradientUnits="userSpaceOnUse"/>
+          <LinearGradient href="#b" id="f" gradientUnits="userSpaceOnUse" x1="232.65" y1="558.84" x2="228.82" y2="701.39" gradientTransform="translate(-2 -8)"/>
+          <LinearGradient href="#c" id="d" x1="228.61" y1="541.5" x2="233.62" y2="981.43" gradientUnits="userSpaceOnUse"/>
         </Defs>
         <G transform="translate(-3.63 -534.22)">
           <Circle cx="231.11" cy="761.97" r="222.98" fill="url(#d)" stroke="#000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>

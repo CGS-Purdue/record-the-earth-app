@@ -12,6 +12,29 @@ const touchButtonStyle = {
   padding: 10,
   margin: 0,
 };
+//
+//
+//
+// <Touchable
+//   style={RippButtonStyles.option}
+//   background={Touchable.Ripple('#ccc', false)}
+//   onPress={this.props.onPress}>
+//
+//   <View style={{flexDirection: 'row'}}>
+//     <View style={RippButtonStyles.ripplebutton_icon}>
+//       <Image
+//         source={this.props.image}
+//         resizeMode="contain"
+//         fadeDuration={0}
+//         style={{ width: 20, height: 20, marginTop: 1 }}
+//       />
+//     </View>
+//   </View>
+// </Touchable>
+//
+//
+
+
 
 export default class TouchButton extends Component {
   constructor(props) {

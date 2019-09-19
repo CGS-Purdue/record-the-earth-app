@@ -1,5 +1,7 @@
 import React from 'react';
 
+// TODO: FIX
+
 export default function ImgBox(props) {
   var inner_box_style = {};
   var image_style = {};

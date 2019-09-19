@@ -1,5 +1,6 @@
 import BTN_MICROPHONE from './btn/microphone.png';
 import BTN_RECORD_REC from './btn/record-rec.png';
+import BTN_RECORD_START from './btn/icon_record_start_2.png';
 import BTN_RECORD_STOP from './btn/record-stop.png';
 import FONTS_CUTIVEMONO_REGULAR from './fonts/CutiveMono-Regular.ttf';
 import FONTS_IONICICONS from './fonts/ionicicons.ttf';
@@ -49,6 +50,7 @@ const IconAssets = {
 };
 
 const ButtonAssets = {
+  btn_record_start: BTN_RECORD_START,
   btn_record_stop: BTN_RECORD_STOP,
   btn_record_rec: BTN_RECORD_REC,
   btn_microphone: BTN_MICROPHONE,

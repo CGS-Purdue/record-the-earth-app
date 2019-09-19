@@ -13,7 +13,7 @@ import {
 import { MonoText } from '../components/StyledText';
 import SwipeCards from '../components/SwipeCards';
 
-export default function HomeScreen() {
+export default function HomeScreenScreen() {
   return (
     <SwipeCards style={{flex: 1}}>
     <Text>Test</Text>
@@ -21,7 +21,7 @@ export default function HomeScreen() {
   );
 }
 
-HomeScreen.navigationOptions = {
+HomeScreenScreen.navigationOptions = {
   header: null,
 };
 
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 50,
   },
-  homeScreenFilename: {
+  HomeScreenScreenFilename: {
     marginVertical: 7,
   },
   codeHighlightText: {

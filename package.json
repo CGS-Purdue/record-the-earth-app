@@ -7,7 +7,7 @@
     "test": "npm run test:run -- arg1=PASS --opt1"
   },
   "projects": {
-      "record-the-earth-react-native": "./App"
+    "record-the-earth-react-native": "./App"
   },
   "eslintConfig": {
     "extends": "@react-native-community/eslint-config"
@@ -26,5 +26,10 @@
     "eslint-plugin-react": "^7.14.3",
     "react-devtools": "^3.6.3"
   },
-  "private": true
+  "private": true,
+  "bit": {
+    "env": {},
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "npm"
+  }
 }

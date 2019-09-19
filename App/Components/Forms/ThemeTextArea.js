@@ -1,6 +1,5 @@
-import React, { Component, createRef,forwardRef } from 'react';
+import React, { Component } from 'react';
 import { TextInput, View} from 'react-native';
-
 import { Theme } from '../../Theme';
 
 const _styles = Theme.Styles;
@@ -24,18 +23,13 @@ const TextAreaStyle = Object.assign(
 );
 
 
-class StyledTextArea extends Component {
+class ThemeTextArea extends Component {
   constructor(props) {
     super(props);
     this.state = {
       text: '',
     };
-    // this._handleTextChange = this._handleTextChange.bind(this);
   }
-
-  // _handleTextChange = inputValue => {
-  //    this.setState({ inputValue });
-  // }
 
   componentDidUpdate() {
     console.log('props:', this.props);
@@ -43,13 +37,13 @@ class StyledTextArea extends Component {
   }
 
   render() {
-    // const { text } = this.state;
+    const { text } = this.state;
     return (
       <View style={_styles.form_textarea_input_container_3}>
         <TextInput
           style={TextAreaStyle}
-          onChangeText={text => this.setState({ text })}
           value={this.state.text}
+          onChangeText={(text) => this.setState({ text })}
           multiline={true}
           numberOfLines={3}
           maxLength={256}
@@ -60,6 +54,4 @@ class StyledTextArea extends Component {
   }
 }
 
-export default StyledTextArea;
-
-export { StyledTextArea };
+export { ThemeTextArea };

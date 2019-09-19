@@ -1,15 +1,4 @@
-import React, { createRef } from 'react';
-import { Platform } from 'react-native';
-import { createBottomTabNavigator } from 'react-navigation';
-import { TabBarIcon } from '../../Components/TabBar/TabBarIcon';
-import { Theme } from '../../Theme';
-import { SurveyEndScreen } from '../Survey/SurveyEndScreenDev';
-import { ConfigScreen } from './ConfigScreen';
-import { FileListScreen } from './FileListScreen';
-// import { TestScreen } from './TestScreen';
-import { AudioListScreen } from './AudioListScreen';
-import { HomeScreen } from './HomeScreen';
-import { LinksScreen } from './LinksScreen';
+import { Theme } from './.../Theme';
 
 const _colors = Theme.Colors;
 const _styles = Theme.Styles;
@@ -17,33 +6,32 @@ const _layout = Theme.ThemeLayout;
 const PLATFORM_OS = Platform.OS;
 
 const mainTabRefNav = createRef();
-
 const MainTabNavigator = createBottomTabNavigator({
-    Home: HomeScreen,
-    // TestScreen: TestScreen,
-    Links: LinksScreen,
-    SurveyTab: SurveyEndScreen,
-    // FileListScreen: FileListScreen,
+  Home: HomeScreenScreen,
+  TestScreen: TestScreen,
+  Links: LinksScreen,
+  SurveyTab: SurveyEndScreen,
+  // FileListScreen: FileListScreen,
   }, {
     navigationOptions: {
-      initialRouteName: 'Home',
+    initialRouteName: 'Home',
     },
-    tabBarOptions: {
-      labelStyle: _styles.tabbar_label,
-      tabStyle: _styles.tabbar_tab,
-      style: _styles.tabbar,
-      inactiveTintColor: _colors.TAB_BAR_COLOR,
-      activeTintColor: _colors.TAB_BAR_ACTIVE_COLOR,
-      inactiveBackgroundColor: _colors.TAB_BAR_BG,
-      activeBackgroundColor: _colors.TAB_BAR_ACTIVE_BG,
-      allowFontScaling: true,
-      showIcon: true,
-      showLabel: true,
-    },
+  tabBarOptions: {
+    labelStyle: _styles.tabbar_label,
+    tabStyle: _styles.tabbar_tab,
+    style: _styles.tabbar,
+    inactiveTintColor: _colors.TAB_BAR_COLOR,
+    activeTintColor: _colors.TAB_BAR_ACTIVE_COLOR,
+    inactiveBackgroundColor: _colors.TAB_BAR_BG,
+    activeBackgroundColor: _colors.TAB_BAR_ACTIVE_BG,
+    allowFontScaling: true,
+    showIcon: true,
+    showLabel: true,
+  },
 });
 MainTabNavigator.ref = mainTabRefNav;
 
-HomeScreen.navigationOptions = ({ navigation }) => ({
+HomeScreenScreen.navigationOptions = ({ navigation }) => ({
   tabBarIcon: ({ focused, horizontal, tintColor }) => {
     let iconPrefix = 'md';
     if (PLATFORM_OS === 'ios'){
@@ -111,25 +99,25 @@ LinksScreen.navigationOptions = ({ navigation }) => ({
   title: 'Links',
 });
 
-// ConfigScreen.navigationOptions = ({ navigation }) => ({
-//   tabBarIcon: ({ focused, horizontal, tintColor }) => {
-//     let iconPrefix = PLATFORM_OS === 'ios' ? 'ios' : 'md';
-//     let iconName = `${iconPrefix}-cog`;
-//     return (
-//       <TabBarIcon
-//         name={iconName}
-//         style={_styles.tabbar_icon}
-//         size={_layout.TAB_BAR_ICON_SIZE}
-//         color={tintColor}
-//         focused={focused}
-//       />
-//     );
-//   },
-//   tabBarLabel: 'Config',
-//   title: 'Config',
-//   showLabel: true,
-//   tabBarVisible: true,
-// });
+ConfigScreen.navigationOptions = ({ navigation }) => ({
+  tabBarIcon: ({ focused, horizontal, tintColor }) => {
+    let iconPrefix = PLATFORM_OS === 'ios' ? 'ios' : 'md';
+    let iconName = `${iconPrefix}-cog`;
+    return (
+      <TabBarIcon
+        name={iconName}
+        style={_styles.tabbar_icon}
+        size={_layout.TAB_BAR_ICON_SIZE}
+        color={tintColor}
+        focused={focused}
+      />
+    );
+  },
+  tabBarLabel: 'Config',
+  title: 'Config',
+  showLabel: true,
+  tabBarVisible: true,
+});
 
 
 export { MainTabNavigator };

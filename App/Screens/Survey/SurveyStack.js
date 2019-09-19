@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
 import { createStackNavigator } from 'react-navigation';
-
-import { SurveyAntScreen } from './SurveyAntScreen';
+import { SurveyDescScreen } from './SurveyDescScreen';
 import { SurveyBioScreen } from './SurveyBioScreen';
-import { SurveyDescriptionScreen } from './SurveyDescriptionScreen';
 import { SurveyEmoScreen } from './SurveyEmoScreen';
-import { SurveyEndScreen } from './SurveyEndScreenDev';
 import { SurveyGeoScreen } from './SurveyGeoScreen';
+import { SurveyHumScreen } from './SurveyHumScreen';
+import { SurveyEndScreen } from './SurveyEndScreenDev';
+import { Theme } from '../../Theme';
+const _colors = Theme.Colors;
+const _styles = Theme.Styles;
+const _layout = Theme.ThemeLayout;
 
 const SurveyStack = createStackNavigator(
   {
-    SurveyDescription: { screen: SurveyDescriptionScreen },
+    SurveyDescription: { screen: SurveyDescScreen },
     SurveyBio: { screen: SurveyBioScreen },
     SurveyEmo: { screen: SurveyEmoScreen },
     SurveyGeo: { screen: SurveyGeoScreen },
-    SurveyAnt: { screen: SurveyAntScreen },
+    SurveyAnt: { screen: SurveyHumScreen },
     SurveyEnd: { screen: SurveyEndScreen },
   },
   {

@@ -1,6 +1,9 @@
 #!/bin/bash
 
+# -------------
 # ROLLUP MODULE BUILDER
+# BASE_DIR=$(npm prefix) source ${BASE_DIR}/../.env \
+# rollup --format=cjs --preferConst --no-interop --exports named --globals React:react,react-native:react-native --no-esModule $@
 # -------------
 BASE_DIR="$(npm prefix)"
 

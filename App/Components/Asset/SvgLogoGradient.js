@@ -7,15 +7,19 @@ import Svg, { Path, Defs, LinearGradient, Stop } from 'react-native-svg';
 // height="1059.7301"
 const SVG_FILL = '#ffffff';
 const SVG_BG = 'rgba(0,0,0,.0)';
-const SvgContainerStyles = Object.assign(
-  StyleSheet.absoluteFill, {
-    backgroundColor: SVG_BG,
-    flex: 1,
-    maxWidth: '100%',
-    maxHeight: '100%',
-    alignItems: 'center',
-    justifyContent: 'center'
-});
+var SvgContainerStyles = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  bottom: 0,
+  right: 0,
+  flex: 1,
+  maxWidth: '100%',
+  maxHeight: '100%',
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: SVG_BG,
+}
 
 class SvgGradLogo extends React.Component {
   render() {

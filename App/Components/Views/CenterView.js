@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { View } from 'react-native';
-
 import { Theme } from  '../../Theme';
 
+
 const _styles = Theme.Styles;
+
 
 function CenterRowView({ children }) {
   return <View style={_styles.centered_row}>{children}</View>;
@@ -23,6 +24,7 @@ function CenterView(props) {
     </View>
   );
 }
+
 
 CenterView.defaultProps = {
   children: null,

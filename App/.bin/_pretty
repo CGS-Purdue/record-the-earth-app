@@ -15,6 +15,8 @@ PRETTY_ARGS="$@"
 # --stdin-filepath <string>
 # --with-node-modules      Process files inside 'node_modules' directory.
 
+# prettier  --arrow-parens always --end-of-line lf --html-whitespace-sensitivity strict --jsx-single-quote --no-bracket-spacing --space-before-function-paren --no-semi --quote-props consistent --print-width 100 --prose-wrap=always --single-quote --trailing-comma none
+
 # MANUAL CONFIG WHEN NOCONFIG
 get_pretty_flags () {
   PRETTY_FLAGS=""
@@ -39,7 +41,7 @@ run_pretty () {
   RUN_PRETY_ARGS=${1:-'--help'}
   # PRETTY_FLAGS="$(get_pretty_flags)"
 
-  echo "prettier ${RUN_PRETY_ARGS}"
+  echo "prettier ${PRETTY_FLAGS} ${RUN_PRETY_ARGS}"
 
   ${BASE_PATH}/./node_modules/.bin/prettier \
     --config "${PRETTY_CONFIG_PATH}" \
@@ -47,12 +49,20 @@ run_pretty () {
       ${RUN_PRETY_ARGS}
 }
 
+
 if [ "$BASE_PATH" == "$INIT_CWD" ]; then
+
   run_pretty "${PRETTY_ARGS}"
+
 else
+
   cd ${INIT_CWD}
+
   run_pretty "${PRETTY_ARGS}"
+
 fi
+
+
 
 exit 0
 

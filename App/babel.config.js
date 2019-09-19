@@ -3,7 +3,7 @@ module.exports = function(api) {
   return {
     presets: ['babel-preset-expo'],
     plugins: [
-      ["transform-inline-environment-variables", {
+    ["transform-inline-environment-variables", {
         "include": [
           "NODE_ENV",
           'DEV_ENV',
@@ -22,3 +22,11 @@ module.exports = function(api) {
     ],
   };
 };
+
+
+
+// ["optional-require", {
+//     "blacklist": false,
+//     "whitelist": false
+//   }
+// ],

@@ -109,7 +109,9 @@ const PadView = {
 
 const Section = {
   borderBottomWidth: 1,
-  borderBottomColor: ThemeColors.SHADE_DARKER_06,
+  borderTopWidth: 1,
+  borderTopColor: ThemeColors.GRN_300,
+  borderBottomColor: ThemeColors.GRN_300,
 };
 
 const ViewStyles = {

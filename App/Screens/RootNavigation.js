@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { MainTabNavigator } from './Main/MainTabNavigator';
-import { RecordScreen } from './Record/RecordScreen';
+import { MainTabNavigator } from './MainTabNavigator';
+import { RecordScreen } from './Record/ReordScreen';
 import { SurveyStack } from './Survey/SurveyStack';
+
+import { Theme } from './.../Theme';
+
+const _styles = Theme.Styles;
+const _colors = Theme.Colors;
+const _layout = Theme.ThemeLayout;
+
+// OR GROUPS OF ACTIVITES WITHIN THE APP.
+// ROUTES ON SWITCH NAVIGATOR ARE DISCONNECTED FROM THEIR
+// SIBILINGS.  UNLIKE THE STACK NAVIGATOR WHICH CAN BE
+// MOVED UP AND DOWN ON A SWITCH NAVIGATOR SWTICHES CONTEXT
 
 const RootNavigation = createSwitchNavigator({
     Main: { screen: MainTabNavigator },
@@ -17,26 +28,5 @@ const RootNavigation = createSwitchNavigator({
   }
 );
 
-// defaultNavigationOptions: {
-//   headerStyle: {
-//     backgroundColor: '#f4511e',
-//   },
-//   headerTintColor: '#123',
-//   headerTitleStyle: {
-//     fontWeight: 'bold',
-//   },
-// },
 
-// class ThemeAppNavContainer extends Component {
-//   render() {
-//     return (<AppNavContainer theme={"dark"}/>)
-//   }
-// }
-// function createThemeAppContainer (Navigation, themeName) {
-// }
-// const ThemeAppNavContainer = createThemeAppContainer(RootNavigation);
-//
-//  AppNavContainer
-
-const AppNavContainer = createAppContainer(RootNavigation);
-export { AppNavContainer }
+export default  createAppContainer(RootNavigation);

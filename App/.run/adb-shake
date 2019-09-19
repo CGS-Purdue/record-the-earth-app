@@ -14,7 +14,7 @@ BASE_DIR="$(npm prefix)"
 [[ -f .npmrc ]] && source .npmrc
 [[ -f .env ]] && source .env
 
-ANDROID_SERIAL="025abd11727717ac"
+# ANDROID_SERIAL="025abd11727717ac"
 ABD_PATH="${ANDROID_HOME}/platform-tools"
 # ANDROID_SERIAL="$(${RUN_SCRIPT_DIR}/adb-get-serial)"
 

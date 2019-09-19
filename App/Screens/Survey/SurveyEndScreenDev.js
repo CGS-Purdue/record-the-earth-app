@@ -1,10 +1,10 @@
 import React, { Component, createRef } from 'react';
 import { Button, ImageBackground, View } from 'react-native';
-
 import { SoundDB } from '../../Components/Database/SoundDB';
 import { MonoText } from '../../Components/Text/MonoText';
 import { CenterView, PadView, RootView } from '../../Components/Views';
 import { Theme } from '../../Theme';
+
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;

@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { Button, ImageBackground } from 'react-native';
-import { NavigationScreenProp } from 'react-navigation';
-
 import { CheckButton } from '../../Components/Button/CheckButton';
 import { HeadingText } from '../../Components/Text/HeadingText';
 import { CenterColView, PadView, RootView } from '../../Components/Views';
 import { Theme } from '../../Theme';
-const _assets = Theme.Assets;
+
 const _colors = Theme.Colors;
+const _assets = Theme.Assets;
 const _styles = Theme.Styles;
+
 
 class SurveyGeoScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rain: true,
+      rain: false,
       wind: false,
       water: false,
-      thunder: true,
+      thunder: false,
     };
     this.surveyGeoRef = React.createRef();
     this.state._survey = this.props.navigation.state.params.survey_data;
@@ -32,7 +32,6 @@ class SurveyGeoScreen extends Component {
       thunder: this.state.thunder,
     };
     let _survey_data = this.state._survey;
-    console.log(_survey_data);
     _survey_data.tags = Object.assign(empty, this.state._survey.tags, {
       geo: surveyGeo,
     });
@@ -57,8 +56,8 @@ class SurveyGeoScreen extends Component {
         source={_assets.images.img_bg_cliff}
       >
         <RootView>
-        <PadView padding={[1, 2]}>
-          <CenterColView>
+          <PadView padding={[1, 2]}>
+            <CenterColView>
               <HeadingText level={3}>
                 Did you hear any of these sounds?
               </HeadingText>
@@ -89,10 +88,10 @@ class SurveyGeoScreen extends Component {
                 accessibilityLabel="Go to next"
                 onPress={() => {
                   let _survey_data = this.getSurveyState();
-                  navigate('SurveyAnt', { survey_data: _survey_data });
+                  navigate('SurveyHum', { survey_data: _survey_data });
                 }}
               />
-          </CenterColView>
+            </CenterColView>
           </PadView>
         </RootView>
       </ImageBackground>

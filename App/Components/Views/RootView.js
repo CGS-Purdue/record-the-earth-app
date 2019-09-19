@@ -1,19 +1,9 @@
 import React, { Component } from 'react';
 import { SafeAreaView,View } from 'react-native';
-
 import { Theme } from  '../../Theme';
 
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
-
-
-const outerStyles = Object.assign(
-  _styles.rootview_container
-);
-
-const innerStyles = Object.assign(
-  _styles.stretch
-);
 
 
 export default class RootView extends Component {
@@ -23,10 +13,11 @@ export default class RootView extends Component {
     this.backgroundColor = _colors.TRANSPARENT;
     this.absolute = false;
   }
+
   render() {
     return (
-      <View ref={this.view_ref} style={outerStyles}>
-        <SafeAreaView style={innerStyles}>
+      <View ref={this.view_ref} style={ _styles.rootview_container}>
+        <SafeAreaView style={_styles.stretch}>
           {this.props.children}
         </SafeAreaView>
       </View>
@@ -35,4 +26,4 @@ export default class RootView extends Component {
 }
 
 
-export { RootView };
+export { RootView }
