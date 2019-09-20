@@ -2,9 +2,9 @@
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 1801,
+  "packagerPid": 23012,
   "expoServerNgrokUrl": "https://k9-kya.matt-harris.app.exp.direct",
   "packagerNgrokUrl": "https://packager.k9-kya.matt-harris.app.exp.direct",
-  "ngrokPid": 1909,
+  "ngrokPid": 23049,
   "webpackServerPort": null
 }

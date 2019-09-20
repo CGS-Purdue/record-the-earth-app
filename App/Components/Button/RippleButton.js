@@ -49,8 +49,7 @@ class RippleButton extends Component {
           />
         </View>
       </Touchable>
-      <Text style={_styles.ripplebtn_optionText}>Ask a question on the Expo forums</Text>
-      </View>
+     </View>
     );
   }
 }

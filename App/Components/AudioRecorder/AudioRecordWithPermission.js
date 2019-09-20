@@ -1,27 +1,10 @@
 import React, { Component } from 'react';
 import * as Permissions from 'expo-permissions';
+import { Platform, Button } from 'react-native';
 import { View } from 'react-native';
-import { Platform } from 'react-native';
 import { CenterView, RootView } from '../Views';
 import { MonoText } from '../Text';
 import { AudioRecord } from './AudioRecord';
-
-async function askForAudioPermissions () {
-  if (__DEV__ && Platform.OS === 'web') {
-    let response = { status: 'granted' };
-    this.setState({
-      haveRecordingPermissions: response.status === 'granted',
-    });
-  } else {
-    let response = await Permissions.askAsync(
-      Permissions.AUDIO_RECORDING,
-      Permissions.CAMERA_ROLL
-    );
-    this.setState({
-      haveRecordingPermissions: response.status === 'granted',
-    });
-  }
-}
 
 class AudioRecordWithPermission extends Component {
   constructor(props) {
@@ -29,29 +12,72 @@ class AudioRecordWithPermission extends Component {
     this.state = {
       haveRecordingPermissions: false,
     }
-    this.askForAudioPermissions = askForAudioPermissions;
+
+    this.shouldCheckPermissions = true;
+    this.askForAudioPermissions = this.askForAudioPermissions.bind(this);
   }
+
 
   componentDidMount() {
     this.askForAudioPermissions();
   }
 
+
+  async askForAudioPermissions () {
+    console.log("GETTING PERMISSION");
+
+    if (__DEV__ && Platform.OS === 'web') {
+       { status: 'granted' };
+       console.log('skipping perms on web for development');
+      this.setState({
+        haveRecordingPermissions: 'granted',
+      });
+    }
+    else {
+      const { status, expires, permissions } = await Permissions.getAsync(
+        Permissions.AUDIO_RECORDING,
+        Permissions.CAMERA_ROLL
+      );
+
+      if (status !== 'granted') {
+        alert('Hey! You might want to enable notifications for my app, they are good.');
+      }
+
+      if (status !== 'granted') {
+        alert('Hey! You heve not enabled selected permissions');
+      }
+
+      console.log('status', status);
+
+      this.setState({
+        haveRecordingPermissions: status
+      });
+    }
+  }
+
+
+  // <Button
+  //   title={'click to enable permissions'}
+  //   onPress={this.askForAudioPermissions()}
+  //   />
   render() {
     if (!this.state.haveRecordingPermissions) {
       return (
         <RootView>
           <CenterView>
-            <MonoText>
-            {'You must enable audio recorder permissions in order to use this app.'}
+            <MonoText color={'#ffffff'}>
+              {'You must enable audio recorder permissions in order to use this app.'}
             </MonoText>
           </CenterView>
         </RootView>
       );
     } else {
       return (
-        <View>
-          <AudioRecord />
-        </View>
+        <RootView>
+          <CenterView>
+            <AudioRecord />
+          </CenterView>
+        </RootView>
       );
     }
   }

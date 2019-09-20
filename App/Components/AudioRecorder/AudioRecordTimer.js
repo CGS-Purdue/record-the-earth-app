@@ -16,7 +16,9 @@ class AudioRecordTimer extends Component {
   constructor(props) {
     super(props);
     this.duration = 10000;
-    this.recordingState = false;
+    this.state = {
+      active: false,
+    }
   }
 
   _durationToTimestamp(ms) {
@@ -37,7 +39,7 @@ class AudioRecordTimer extends Component {
   render() {
     return (
         <View>
-          <MonoText style={_styles.record_statustxt}>{this.props.recordingState ? 'Recording' : 'not recording'}</MonoText>
+          <MonoText style={_styles.record_statustxt}>{this.props.active ? 'Recording' : 'Ready'}</MonoText>
           <MonoText style={_styles.record_timestamp}>{this.getTimestamp()}</MonoText>
         </View>
     );

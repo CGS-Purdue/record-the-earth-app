@@ -110,8 +110,8 @@ const PadView = {
 const Section = {
   borderBottomWidth: 1,
   borderTopWidth: 1,
-  borderTopColor: ThemeColors.GRN_300,
-  borderBottomColor: ThemeColors.GRN_300,
+  borderTopColor: ThemeColors.TRANSPARENT,
+  borderBottomColor: ThemeColors.TRANSPARENT,
 };
 
 const ViewStyles = {
@@ -145,28 +145,5 @@ if (DebugStyleSettings.DEBUG_OUTLINE_STYLES_ENABLED){
   ViewStyles.rootview_container = addDebugStyles(ViewStyles.rootview_container, DebugStyles.debug_outline);
   ViewStyles.appview_container = addDebugStyles(ViewStyles.appview_container, DebugStyles.debug_outline);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export { ViewStyles };

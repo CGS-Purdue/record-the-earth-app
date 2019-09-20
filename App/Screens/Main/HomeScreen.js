@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Image, ImageBackground, View } from 'react-native';
-import { Section, CenterView,  RootView } from '../../Components/Views';
+import { Section, CenterView, PadView,  RootView } from '../../Components/Views';
 import { RippleButton } from '../../Components/Button/RippleButton';
 import { Theme } from '../../Theme';
 
@@ -23,7 +23,7 @@ class HomeScreen extends Component {
       <ImageBackground style={_styles.bgImg} source={_assets.images.surveyLocation}>
         <RootView>
           <CenterView>
-            <Section weight={5} expand={true}>
+            <Section weight={4} expand={true}>
               <View>
                 <Image
                   source={_assets.logos.logo_large}
@@ -31,13 +31,14 @@ class HomeScreen extends Component {
                   />
               </View>
             </Section>
-
-            <Section weight={5} align={'stretch'}>
-              <RippleButton
-                image={_assets.buttons.btn_record_start}
-                style={_styles.btn_rec_start}
-                onPress={() => navigate({ routeName: 'Record', params: { name: 'Test'}})}
-                />
+            <Section weight={5} align={'center'} >
+              <PadView padding={[5, 3]} styles={{backgroundColor:'red'}}>
+                <RippleButton
+                  image={_assets.buttons.btn_record_start}
+                  style={_styles.btn_rec_start}
+                  onPress={() => navigate({ routeName: 'Record', params: { name: 'Test'}})}
+                  />
+              </PadView>
             </Section>
           </CenterView>
         </RootView>

@@ -8,7 +8,7 @@ const _colors = Theme.Colors;
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
 const SoundDB = {};
-const sdb = SoundDB;
+// const sdb = SoundDB;
 
 
 
@@ -24,7 +24,7 @@ class SurveyEndScreen extends Component {
       result: '',
     };
     this.state._survey = this.props.navigation.state.params.survey_data;
-    sdb.create();
+    // sdb.create();
   }
 
   dataToString = (data) => {
@@ -61,6 +61,7 @@ class SurveyEndScreen extends Component {
     let survey = Object.assign({ ...rest }, surveyTags);
     let surveyString = this.dataToString(survey);
     this.setState({ result: surveyString });
+    this.props.navigation.navigate('Main');
   };
 
   render() {
@@ -81,6 +82,7 @@ class SurveyEndScreen extends Component {
                   accessibilityLabel="Submit"
                   onPress={this.submitSurvey}
                 />
+              <MonoText>{this.state.surveyText}</MonoText>
                 <MonoText>{this.state.result}</MonoText>
               </View>
             </CenterView>

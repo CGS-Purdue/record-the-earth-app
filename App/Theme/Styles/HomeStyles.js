@@ -36,7 +36,6 @@ const HomeGroupStyles = Object.assign(
 
 const HomeStyles = StyleSheet.create(HomeGroupStyles);
 
-export { HomeStyles };
 const LogoStyles = {
   flex: 1,
    width: 300,
@@ -45,3 +44,6 @@ const LogoStyles = {
    position: 'absolute',
    resizeMode: 'contain',
  };
+
+
+ export { HomeStyles };

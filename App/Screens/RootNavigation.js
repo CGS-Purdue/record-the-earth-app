@@ -3,6 +3,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { MainTabNavigator } from './MainTabNavigator';
 import { RecordScreen } from './Record/RecordScreen';
 import { SurveyStack } from './Survey/SurveyStack';
+import { SurveyEndScreen } from './Survey/SurveyEndScreen';
 
 import { Theme } from './../Theme';
 
@@ -19,6 +20,7 @@ const RootNavigation = createSwitchNavigator({
     Main: { screen: MainTabNavigator },
     Record: { screen: RecordScreen },
     Survey: { screen: SurveyStack },
+    SurveyEnd: { screen: SurveyEndScreen },
   },
   {
     initialRouteName: 'Main',

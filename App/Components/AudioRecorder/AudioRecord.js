@@ -10,7 +10,8 @@ import { AudioFormat } from './AudioFormat';
 import { AudioProfile } from './AudioProfile';
 import { AudioRecordTimer } from './AudioRecordTimer';
 import { AudioRecordButton } from './AudioRecordButton';
-import { askForAudioPermissions } from './AudioPermissionsCheck';
+import { AnimatedSpring, ProgressCircle } from '../Animated/ProgressCircle';
+// import { askForAudioPermissions } from './AudioPermissionsCheck';
 
 const _styles = Theme.Styles;
 let _ic_record = ThemeIcons.Icons.icon_record;
@@ -29,35 +30,36 @@ class AudioRecord extends Component {
     this.state = {
       syncing: false,
       disabled: false,
+      duration: 0,
       error: null,
       haveRecordingPermissions: false,
       isRecording: false,
       isLoading: false,
       durationMillis: null,
-      duration: null,
       recordingDuration: null,
       muted: false,
       rate: 1.0,
       recordingState: false,
+      statusText: "Ready",
       AudioRecordTimer: null,
       recordingStarted: false,
       stopRequested: false,
       soundPosition: null,
       volume: 1.0,
     };
-    this.askForAudioPermissions = askForAudioPermissions;
+    // this.askForAudioPermissions = askForAudioPermissions;
     this.audioProfile = new AudioProfile();
-    this.profile = this.audioProfile.getProfile()
-
+    this.profile = this.audioProfile.getProfile();
+    this._onRecordEnd = this._onRecordEnd.bind(this);
     this.audioFormat = new AudioFormat();
     this.format = this.audioFormat.getFormat();
 
-    this.MAX_DURATION = 6000;
+    this.MAX_DURATION = 20000;
   }
 
   componentDidMount() {
     console.log(this);
-    this.askForAudioPermissions();
+    // this.askForAudioPermissions();
   }
 
   componentWillUnmount(){
@@ -78,7 +80,6 @@ class AudioRecord extends Component {
     };
 
     let status = Object.assign(emptyState,this.state.recordingState);
-
     this.setState({
       canRecord: status.canRecord,
       isRecording: status.isRecording,
@@ -92,29 +93,34 @@ class AudioRecord extends Component {
   async _saveRecording() {
     let sound_file = this.recording_info.uri;
     let success = await saveAudioRecordingFile(sound_file);
-    console.log(success);
+
+    this.props.navigation.navigate('Main');
   }
 
   updateRecordingTimer () {
 
   }
 
-  _cancelRecording(){}
+  _cancelRecording(){
+      this.props.navigation.navigate('Main');
+  }
 
   _resetRecorder(){}
 
   _onRecordEnd(){
+    let oncancel = this._cancelRecording();
+    let onsave = this._saveRecording();
     console.log('ended');
     Alert.alert(
       'Recording Done',
       'Would you like to save this Soundscape',
       [{
           text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
+          onPress: this._cancelRecording,
           style: 'cancel',
       },{
           text: 'OK',
-          onPress: () => this._saveRecording(),
+          onPress: onsave,
       }],
       {cancelable: false},
     );
@@ -159,7 +165,7 @@ class AudioRecord extends Component {
         this.updateRecorderState();
       };
 
-      this.recorder.setProgressUpdateInterval(2000);
+      this.recorder.setProgressUpdateInterval(1000);
       this.recorder.setOnRecordingStatusUpdate((status)=>{statusUpdater(status);});
       await this.startAsyncRecord();
 
@@ -210,34 +216,41 @@ class AudioRecord extends Component {
       this.recordStart();
     }
   }
-
+  // <ActivityIndicator
+  //   color={ThemeColors.GRN_300}
+  //   animating={true}
+  //   size={'large'}
+  //   />
   render() {
-    if (!this.state.haveRecordingPermissions) {
-      return (
-        <RootView>
-          <CenterView>
-            <MonoText style={[{textAlign: 'center'}]}>You must enable audio recorder permissions in order to use this app.</MonoText>
-          </CenterView>
-        </RootView>
-      );
-    } else {
-      return (
-        <View style={_styles.record_container}>
-          <AudioRecordButton
-            onPress={this.handleRecordButton}
-            active={this.state.recordingState}
+    return (
+      <View style={_styles.record_container}>
+
+        <View style={{
+            display: 'flex',
+            flex:1,
+            justifyContent: 'center',
+            flexDirection: 'column',
+          }}>
+
+          <AnimatedSpring
+            value={this.state.duration / (this.MAX_DURATION + .0000001)}
           />
-          <View>
-            <ActivityIndicator
-              color={ThemeColors.GRN_300}
-              animating={this.state.isRecording ? true : false}
-              size={'large'}
-            />
-            <AudioRecordTimer duration={this.state.durationMillis} />
-          </View>
+
+          <AudioRecordTimer
+            duration={this.state.durationMillis}
+            recordingState={this.state.active}
+            active={this.state.recordingState}
+            statusText={this.state.statusText}
+          />
+
         </View>
-      );
-    }
+
+        <AudioRecordButton
+          onPress={this.handleRecordButton}
+          active={this.state.recordingState}
+          />
+      </View>
+    );
   }
 }
 

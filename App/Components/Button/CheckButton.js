@@ -27,12 +27,11 @@ class CheckButton extends Component {
     }
   };
 
-
-
   render() {
+    console.log("button", this.props);
+    console.log("_colors.CHECKBTN_ICON_COLOR_ACTIVE : _colors.CHECKBTN_ICON_COLOR", _colors.CHECKBTN_ICON_COLOR_ACTIVE, _colors.CHECKBTN_ICON_COLOR);
     return (
       <TouchableOpacity
-        backgroundColor={_colors.CHECKBTN_TOUCHABLE_BG}
         style={_styles.checkbtn_touchable}
         onPress={this._toggleCheckedState}
       >
@@ -43,12 +42,13 @@ class CheckButton extends Component {
           <Ionicons
             name={Platform.OS === 'ios' ? `ios-checkmark${this.props.focused ? '' : '-outline'}` : 'md-checkmark' }
             size={_layout.TEXT_SIZE_5}
-            style={_styles.checkbtn_icon}
+            iconStyle={_styles.CheckButtonIconStyle}
+            style={_styles.CheckButtonIconContainer}
             color={this.state.checked ? _colors.CHECKBTN_ICON_COLOR_ACTIVE : _colors.CHECKBTN_ICON_COLOR}
           />
-          <Text
-            style={_styles.checkbtn_text}
-          >{this.props.text}</Text>
+          <Text style={_styles.checkbtn_text}>
+            {this.props.text}
+           </Text>
         </View>
         </TouchableOpacity>
     );

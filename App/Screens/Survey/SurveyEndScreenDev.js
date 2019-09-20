@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import { Button, ImageBackground, View } from 'react-native';
-import { SoundDB } from '../../Components/Database/SoundDB';
+// import { SoundDB } from '../../Components/Database/SoundDB';
 import { MonoText } from '../../Components/Text/MonoText';
 import { CenterView, PadView, RootView } from '../../Components/Views';
 import { Theme } from '../../Theme';
@@ -67,7 +67,7 @@ const surveyRecord = {
   isUploaded: false,
 };
 
-class SurveyEndScreen extends Component {
+class SurveyEndScreenDev extends Component {
   constructor(props) {
     super(props);
     this.ref = _dbRef;
@@ -76,8 +76,9 @@ class SurveyEndScreen extends Component {
       result: '',
     };
     this.state._survey = suvery;
+    this.state.surveyText = JSON.stringify(suvery);
     this.connection = false;
-    this.dbConnection = new SoundDB({ autoconnect: true });
+    // this.dbConnection = new SoundDB({ autoconnect: true });
   }
 
   dataToString = (data) => {
@@ -85,10 +86,10 @@ class SurveyEndScreen extends Component {
   };
 
   onComponentDidMount() {
-    this.dbConnection.setConnection();
-    let connection = this.dbConnection.getConnection();
-    this.connection = connection;
-    return connection;
+    // // this.dbConnection.setConnection();
+    // let connection = this.dbConnection.getConnection();
+    // this.connection = connection;
+    // return connection;
   }
 
   saveSurvey(data) {
@@ -128,8 +129,8 @@ class SurveyEndScreen extends Component {
     console.log('insertArgs');
     console.log(insertArgs);
     console.log('using', this.dbConnection);
-    this.dbConnection.insert(insertArgs);
-    this.connection.insert(insertArgs);
+    // this.dbConnection.insert(insertArgs);
+    // this.connection.insert(insertArgs);
     // this.dbConnection.connection
   }
 
@@ -161,12 +162,14 @@ class SurveyEndScreen extends Component {
     let { tags, ...rest } = this.state._survey;
     let surveyTags = this.mapSurveyToTags(tags);
     let survey = Object.assign({ ...rest }, surveyTags);
+
     // console.log(survey);
-    this.saveSurvey(survey);
+    // this.saveSurvey(survey);
+
     let surveyString = this.dataToString(survey);
     console.log(surveyString);
-    this.props.navigation.navigate('Home');
     this.setState({ result: surveyString });
+    this.props.navigation.navigate('Home');
   };
 
   render() {
@@ -190,7 +193,10 @@ class SurveyEndScreen extends Component {
                   accessibilityLabel="Submit"
                   onPress={this.submitSurvey}
                 />
-                <MonoText>{this.state.result}</MonoText>
+                <View>
+                  <MonoText>{this.state.surveyText}</MonoText>
+                  <MonoText>{this.state.result}</MonoText>
+                </View>
               </View>
             </CenterView>
           </PadView>
@@ -200,4 +206,4 @@ class SurveyEndScreen extends Component {
   }
 }
 
-export { SurveyEndScreen };
+export { SurveyEndScreenDev };

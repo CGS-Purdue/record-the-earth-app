@@ -6,34 +6,46 @@ import { CenterView, RootView } from '../Views';
 import { MonoText } from '../Text';
 import { AudioRecord } from './AudioRecord';
 
-async function askForAudioPermissions () {
-  if (__DEV__ && Platform.OS === 'web') {
-    let response = { status: 'granted' };
-    this.setState({
-      haveRecordingPermissions: response.status === 'granted',
-    });
-  } else {
-    let response = await Permissions.askAsync(
-      Permissions.AUDIO_RECORDING,
-      Permissions.CAMERA_ROLL
-    );
-    this.setState({
-      haveRecordingPermissions: response.status === 'granted',
-    });
-  }
-}
-
 class AudioRecorderPermission extends Component {
   constructor(props) {
     super(props);
     this.state = {
       haveRecordingPermissions: false,
     }
-    this.askForAudioPermissions = askForAudioPermissions;
+    this.askForAudioPermissions = this.askForAudioPermissions.bind(this);
   }
 
   componentDidMount() {
     this.askForAudioPermissions();
+  }
+
+
+  async askForAudioPermissions () {
+
+    console.log("GETTING PERMISSION");
+    if (__DEV__ && Platform.OS === 'web') {
+       { status: 'granted' };
+       console.log('skipping perms on web for development');
+      this.setState({
+        haveRecordingPermissions: 'granted',
+      });
+    }
+
+    else {
+      const { status, expires, permissions } = await Permissions.getAsync(
+        Permissions.AUDIO_RECORDING,
+        Permissions.CAMERA_ROLL
+      );
+      if (status !== 'granted') {
+        alert('Hey! You might want to enable notifications for my app, they are good.');
+      }
+      if (status !== 'granted') {
+        alert('Hey! You heve not enabled selected permissions');
+      }
+      this.setState({
+        haveRecordingPermissions: status
+      });
+    }
   }
 
   render() {

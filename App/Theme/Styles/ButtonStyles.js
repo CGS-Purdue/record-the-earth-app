@@ -19,10 +19,13 @@ const ButtonStyles = {
     borderColor: ThemeColors.INPUT_BORDER,
     // backgroundColor: ThemeColors.INPUT_BG,
     color: ThemeColors.INPUT_TEXTCOLOR,
-    fontSize: Layout.TEXT_SIZE_3,
+    fontSize: Layout.TEXT_SIZE_3 * 1.2,
     width: '100%',
     height: '100%',
+    paddingTop: Layout.SPACING_UNIT_3,
+    paddingBottom: Layout.SPACING_UNIT_3,
     padding: 5,
+    marginTop: 10,
   },
   ripplebtn_container_outer: {
     flex: 1,
@@ -56,8 +59,6 @@ const ButtonStyles = {
     paddingHorizontal: 15,
     paddingVertical: 15,
     flex: 1,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#EDEDED',
   },
   ripplebtn_optionText: {
     fontSize: 15,

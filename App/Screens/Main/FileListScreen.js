@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import {
-  SafeAreaView,
-  TouchableOpacity,
-  FlatList,
-  StyleSheet,
-  Text,
-} from 'react-native';
+import { SafeAreaView, TouchableOpacity, FlatList, View, StyleSheet } from 'react-native';
+import { Section, ImgBgFill, CenterView, PadView,  RootView } from '../../Components/Views';
+import { HeadingText } from '../../Components/Text/HeadingText';
+import { Surface, Text, List, Title } from 'react-native-paper';
 import * as FileSystem from 'expo-file-system';
 import Constants from 'expo-constants';
 
@@ -18,17 +15,39 @@ import Constants from 'expo-constants';
 // const new_uri = [storage_path,file_name].join('/');
 
 
+
 function FileItem({ id, name, selected, onSelect }) {
   return (
-    <TouchableOpacity
-      onPress={() => onSelect(id)}
-      style={[
-        styles.item,
-        { backgroundColor: selected ? '#6e3b6e' : '#f9c2ff' },
-      ]}
-    >
-      <Text style={styles.title}>{name}</Text>
-    </TouchableOpacity>
+    <View style={{
+        flex: 1,
+        width: '100%',
+        backgroundColor: '#444444',
+        display: 'flex',
+      }}>
+        <TouchableOpacity
+          onPress={() => onSelect(id)}
+          style={[styles.item,
+            { backgroundColor: selected ? 'rgba(255,255,255,.5)' : 'rgba(255,255,255,.4)' },
+          ]}
+        >
+        <Surface style={styles.surface}>
+          <Text style={styles.item}>{name}</Text>
+        </Surface>
+      </TouchableOpacity>
+  </View>
+  );
+}
+
+function FListHead() {
+  return (
+    <View style={{
+        flex: 1,
+        width: '100%',
+        backgroundColor: '#444444',
+        display: 'flex',
+      }}>
+      <Title style={styles.item}>{'Files'}</Title>
+    </View>
   );
 }
 
@@ -117,17 +136,36 @@ class FileListScreen extends Component {
     //   const newSelected = new Map(selected);
     //   newSelected.set(id, !selected.get(id));
     //   this.setSelected(newSelected);
-    // }
+    // } depend on anything outside of the data prop, stick it here and treat it immutably.
+    // Type	Required
+     // any	No
     // [selected],
   }
 
   render() {
     console.log();
       return (
-        <SafeAreaView style={styles.container}>
-          <FlatList
+
+    <Surface style={{
+        backgroundColor: '#303030',
+        flex: 1,
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        paddingTop:20,
+        paddingHorizontal: 10,
+        justifyContent: 'center',
+      }}>
+        <FlatList
             data={this.state.files}
+            initialNumToRender={6}
             extraData={this.state.selected}
+            ListHeaderComponent={()=>{
+              return (
+                <View style={styles.titlebox}>
+                  <Text style={styles.title}>{"File List"}</Text>
+                </View>)}
+            }
             keyExtractor={(item)=>item.id}
             renderItem={({item}) => (
               <FileItem
@@ -139,24 +177,50 @@ class FileListScreen extends Component {
               />
             )}
           />
-        </SafeAreaView>
+        </Surface>
       );
-    }
+  }
 }
 
 const styles = StyleSheet.create({
+  titlebox: {
+      flex: 1,
+      width: '100%',
+      backgroundColor: '#222',
+      paddingVertical: 6,
+      display: 'flex',
+    },
+    title: {
+      fontSize: 28,
+      textAlign: 'center',
+      color: '#bbb',
+    },
+  surface: {
+    flex: 1,
+    padding: 8,
+    height: 80,
+    // width: ',
+    marginVertical: 5,
+    backgroundColor: 'rgba(255,255,255,.7)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 8,
+  },
   container: {
     flex: 1,
-    marginTop: Constants.statusBarHeight,
+    display: 'flex',
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#666666',
   },
   item: {
-    backgroundColor: '#f9c2ff',
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
+    backgroundColor: 'rgba(255,255,255,.1)',
+    padding: 0,
+    marginVertical: 4,
+    marginHorizontal: 5,
   },
-  title: {
-    fontSize: 32,
+  item: {
+    fontSize: 16,
   },
 });
 

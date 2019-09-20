@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
-import { Button, ImageBackground } from 'react-native';
+import { Button, View, ImageBackground } from 'react-native';
 import { CheckButton } from '../../Components/Button/CheckButton';
 import { HeadingText } from '../../Components/Text/HeadingText';
-import { CenterView, CenterColView, PadView, RootView, } from '../../Components/Views';
-
+import { CenterView, Section, PadView, RootView } from '../../Components/Views';
+import { BlackFade } from '../../Components/Effects/LinearGradient';
 import { Theme } from '../../Theme';
 
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
 
-  console.log(_styles);
+
 class SurveyBioScreen extends Component {
   constructor(props) {
     super(props);
-
-    this.surveyPosition = 5;
-    this.surveyKey = 'hum';
 
     this.state = {
       insects: false,
@@ -24,6 +21,10 @@ class SurveyBioScreen extends Component {
       mammals: false,
       frogs: false,
     };
+
+    this.surveyPosition = 2;
+    this.surveyKey = 'bio';
+
     this.surveyBioRef = React.createRef();
     this.state._survey = this.props.navigation.state.params.survey_data;
   }
@@ -61,43 +62,59 @@ class SurveyBioScreen extends Component {
         style={_styles.bgImg}
         source={_assets.images.img_bg_cliff}
       >
-        <RootView>
-          <PadView padding={[2, 2]}>
-            <CenterView>
-              <HeadingText level={3}>
-                Did you hear any of these sounds?
-              </HeadingText>
-              <CheckButton
-                id={'insects'}
-                onchecked={this._setSuveryItemState}
-                text={'Insects'}
-              />
-              <CheckButton
-                id={'Birds'}
-                onchecked={this._setSuveryItemState}
-                text={'Birds'}
-              />
-              <CheckButton
-                id={'mammals'}
-                onchecked={this._setSuveryItemState}
-                text={'Mammals'}
-              />
-              <CheckButton
-                id={'frogs'}
-                onchecked={this._setSuveryItemState}
-                text={'Frogs and Reptiles'}
-              />
+        <View style={{flex: 1, position: 'absolute', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%'}}>
+          <BlackFade />
+        </View>
+          <RootView>
+            <PadView padding={[2, 2]}>
+              <CenterView>
+                <Section weight={1} expand={true} shrink={true}>
+                  <HeadingText level={3} style={_styles.survey_screen_title}>
+                    {'Did you hear any of these sounds?'}
+                  </HeadingText>
+                </Section>
 
-              <Button
-                title={'Continue Button'}
-                style={_styles.button_default}
-                color={_colors.PRIMARY}
-                accessibilityLabel="Go to next"
-                onPress={() => {
-                  let _survey_data = this.getSurveyState();
-                  navigate('SurveyEmo', { survey_data: _survey_data });
-                }}
-              />
+                <Section
+                  weight={3}
+                  expand={true}
+                  justify={'flex-start'}
+                  align={'stretch'}
+                >
+                  <CheckButton
+                    id={'insects'}
+                    onchecked={this._setSuveryItemState}
+                    text={'Insects'}
+                  />
+                  <CheckButton
+                    id={'Birds'}
+                    onchecked={this._setSuveryItemState}
+                    text={'Birds'}
+                  />
+                  <CheckButton
+                    id={'mammals'}
+                    onchecked={this._setSuveryItemState}
+                    text={'Mammals'}
+                  />
+                  <CheckButton
+                    id={'frogs'}
+                    onchecked={this._setSuveryItemState}
+                    text={'Frogs and Reptiles'}
+                  />
+                  <View style={{
+                    height: 10,
+                    backgroundColor: _colors.TRANSPARENT,
+                  }}></View>
+                  <Button
+                    title={'Continue'}
+                    style={_styles.button_default}
+                    color={_colors.BLU_100}
+                    accessibilityLabel="Go to next"
+                    onPress={() => {
+                      let _survey_data = this.getSurveyState();
+                      navigate('SurveyEmo', { survey_data: _survey_data });
+                    }}
+                  />
+              </Section>
             </CenterView>
           </PadView>
         </RootView>
@@ -105,18 +122,9 @@ class SurveyBioScreen extends Component {
     );
   }
 }
+
 SurveyBioScreen.navigationOptions = {
   title: 'SurveyBioScreen',
 };
-
-// <View style={Styles.innerview}>
-//   <TouchableOpacity
-//     style={Styles.options}
-//     onPress={() => navigate('SurveyEmo', { data: '' })}
-//   >
-//     <Text>Continue</Text>
-//   </TouchableOpacity>
-// </View>
-//
 
 export { SurveyBioScreen };

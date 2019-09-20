@@ -5,7 +5,8 @@ import { SurveyBioScreen } from './SurveyBioScreen';
 import { SurveyEmoScreen } from './SurveyEmoScreen';
 import { SurveyGeoScreen } from './SurveyGeoScreen';
 import { SurveyHumScreen } from './SurveyHumScreen';
-import { SurveyEndScreen } from './SurveyEndScreenDev';
+import { SurveyEndScreen } from './SurveyEndScreen';
+import { SurveyEndScreenDev } from './SurveyEndScreenDev';
 import { Theme } from '../../Theme';
 const _colors = Theme.Colors;
 const _styles = Theme.Styles;
@@ -17,8 +18,9 @@ const SurveyStack = createStackNavigator(
     SurveyBio: { screen: SurveyBioScreen },
     SurveyEmo: { screen: SurveyEmoScreen },
     SurveyGeo: { screen: SurveyGeoScreen },
-    SurveyAnt: { screen: SurveyHumScreen },
+    SurveyHum: { screen: SurveyHumScreen },
     SurveyEnd: { screen: SurveyEndScreen },
+    SurveyEndDev: { screen: SurveyEndScreenDev },
   },
   {
     headerMode: 'none',

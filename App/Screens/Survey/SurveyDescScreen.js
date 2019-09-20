@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import { Button, View } from 'react-native';
 import { HeadingText } from '../../Components/Text/HeadingText';
-import {
-  PadView,
-  Section,
-  ImgBgFill,
-  CenterView,
-  RootView,
-} from '../../Components/Views';
+import { PadView, Section, ImgBgFill, CenterView, RootView } from '../../Components/Views';
 // import { BlurBgView } from '../../Components/Effects/BlurView';
 import { TextInput } from 'react-native-paper';
 import { Theme } from '../../Theme';
@@ -66,6 +60,7 @@ class SurveyDescScreen extends Component {
         <RootView>
           <PadView padding={[2, 3]}>
             <CenterView>
+
               <Section weight={1} expand={true} shrink={true}>
                 <HeadingText style={_styles.survey_desc_title}>
                   {'Describe the sounds you heard'}
@@ -104,10 +99,9 @@ class SurveyDescScreen extends Component {
                   style={_styles.button_default}
                   color={_colors.PRIMARY}
                   accessibilityLabel={'Go to next'}
-                  onPress={this.handle_submit_description}
                   onPress={() => {
                     let _survey_data = this.getSurveyDescription();
-                    this.props.navigation.navigate('SurveyGeo', {
+                    this.props.navigation.navigate('SurveyBio', {
                       survey_data: _survey_data,
                     });
                   }}

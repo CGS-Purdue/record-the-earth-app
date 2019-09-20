@@ -59,7 +59,7 @@
     "githubUrl": "https://github.com/charrismatic/record-the-earth-expo-react-native",
     "extra": {
       "debug_flags": {
-        "DEBUG_OUTLINE_STYLES": true
+        "DEBUG_OUTLINE_STYLES": false
       }
     },
     "hooks": {},

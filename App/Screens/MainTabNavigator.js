@@ -9,8 +9,7 @@ import { TabBarIcon } from '../Components/TabBar/TabBarIcon';
 
 // import { ConfigScreen } from './Main/ConfigScreen';
 // import { AudioListScreen } from './Main/AudioListScreen';
-// import { FileListScreen } from './Main/FileListScreen';
-// import { ThemeScreen } from './Main/ThemeScreen';
+import { FileListScreen } from './Main/FileListScreen';
 
 import { Theme } from './../Theme';
 const _colors = Theme.Colors;
@@ -22,9 +21,9 @@ const PLATFORM_OS = Platform.OS;
 const MainTabNavigator = createBottomTabNavigator({
   HomeTab: HomeScreen,
   TestTab: TestScreen,
-  LinksTab: LinksScreen,
+  // LinksTab: LinksScreen,
   SurveyTab: SurveyStack,
-  // FileListScreen: FileListScreen,
+  FileListScreen: FileListScreen,
   }, {
     navigationOptions: {
     initialRouteName: 'HomeTab',
@@ -126,8 +125,8 @@ TestScreen.navigationOptions = ({ navigation }) => ({
       />
     );
   },
-  tabBarLabel: 'Config',
-  title: 'Config',
+  tabBarLabel: 'Animations',
+  title: 'Animations',
   showLabel: true,
   tabBarVisible: true,
 });

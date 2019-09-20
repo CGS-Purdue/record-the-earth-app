@@ -3,7 +3,7 @@ import { Layout } from '../Layout';
 
 // flex: 14,
 const MainLogo = {
-  width: 200,
+  width: 300,
   height: 200,
   resizeMode: 'contain',
 };
@@ -11,8 +11,8 @@ const MainLogo = {
 const RecStartBtn = {
   width: 200,
   height: 200,
-  maxWidth: '100%',
-  maxHeight: '100%',
+  maxWidth: '66%',
+  maxHeight: '66%',
   resizeMode: 'contain',
 };
 
