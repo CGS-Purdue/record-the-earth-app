@@ -31,7 +31,6 @@ export default class LinksScreen extends Component {
      if (curState !== States.RESPONDER_ACTIVE_PRESS_IN &&
          curState !== States.RESPONDER_ACTIVE_LONG_PRESS_IN) {
       console.error('Attempted to transition from state `' + curState + '` to `' +
-      console.log('Attempted to transition from state Copyright (c) Copyright Holder All Rights Reserved. + curState + '` to `' +
           States.RESPONDER_ACTIVE_LONG_PRESS_IN + '`, which is not supported. This is ' +
          'most likely due to `Touchable.longPressDelayTimeout` not being cancelled.');
     } else {

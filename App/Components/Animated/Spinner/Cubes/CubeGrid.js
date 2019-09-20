@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { grid } from './utils/animations'
-import * as Animations  getColor from './utils//defaults'
+import * as Animations from './utils/defaults'
 
-export const getSize =  => (size || '40px')
+export const getSize = size => (size || '40px')
 export const getColor = color => (color || '#333')
 
 // <CubeGrid/>

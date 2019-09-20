@@ -3,9 +3,21 @@ import { Asset } from 'expo-asset';
 import { AppLoading } from 'expo';
 import { Platform, StatusBar, View } from 'react-native';
 import { useScreens } from 'react-native-screens';
-import { RootView } from './Components/Views';
-import { AppNavContainer } from './Screens/RootNavigation';
+import {
+  RootView,
+  ImgBgFill
+} from './Components/Views';
+
+import AppNavContainer from './Screens/RootNavigation';
 import { Theme } from './Theme';
+
+const _fonts = Theme.Fonts;
+const _icons = Theme.Icons;
+const _assets = Theme.Assets;
+
+// <ImageBackground style={_styles.bgImg} source={_assets.images.surveyLocation}>
+
+
 console.log('Platform', Platform);
 if (!Platform.OS === 'web'){
   useScreens();
@@ -32,18 +44,16 @@ class App extends Component {
     } else {
       return (
         <View style={{flex: 1, backgroundColor: 'blue'}}>
+        <ImgBgFill source={_assets.images.img_background}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <AppNavContainer theme={"dark"} ref={nav => {this.navigator = nav;} }/>
-        </View>
+        </ImgBgFill>
+      </View>
       );
     }
   }
 
   async _cacheResourcesAsync(){
-      const _fonts = Theme.Fonts;
-      const _icons = Theme.Icons;
-      const _assets = Theme.Assets;
-
       const _image_assets = Object.assign(
           _assets.buttons,
           _assets.logos,
@@ -66,7 +76,6 @@ class App extends Component {
           return obj;
         }
       );
-      console.log([ cacheImages, cachedIcons, cacheFonts ]);
       return Promise.all([ cacheImages, cachedIcons, cacheFonts ]);
    }
 }

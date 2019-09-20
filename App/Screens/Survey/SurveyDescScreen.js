@@ -16,12 +16,13 @@ import { Theme } from '../../Theme';
 const _colors = Theme.Colors;
 const _styles = Theme.Styles;
 const _assets = Theme.Assets;
+
 const Empty = Object.create(null);
+
+
 export default class PaperTexInput extends React.Component {
   constructor (props){
       super(props)
-      this.surveyPosition = 1;
-      this.surveyKey = 'description';
       this.state = {survey_data : {Empty}}
   }
 
@@ -35,19 +36,28 @@ export default class PaperTexInput extends React.Component {
   }
 }
 
+
 class SurveyDescScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       text: '',
     };
+    this.surveyPosition = 1;
+    this.surveyKey = 'description';
   }
 
-  handle_submit_description = () => {
+  handleSurveyButtonPress() {
+    console.log('handling survey button');
+    console.log(this);
+  }
+
+  getSurveyDescription = () => {
     let surveyDescription = this.state.text;
-    this.setState({
-      survey_data: { description: surveyDescription },
-    });
+    let surveyKey = this.surveyKey;
+    let survey_data = { [surveyKey] : surveyDescription };
+    // this.setState({ });
+    return survey_data;
   };
 
   render() {
@@ -96,7 +106,7 @@ class SurveyDescScreen extends Component {
                   accessibilityLabel={'Go to next'}
                   onPress={this.handle_submit_description}
                   onPress={() => {
-                    let _survey_data = this.getSurveyState();
+                    let _survey_data = this.getSurveyDescription();
                     this.props.navigation.navigate('SurveyGeo', {
                       survey_data: _survey_data,
                     });

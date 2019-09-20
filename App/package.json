@@ -38,6 +38,8 @@
     "react:devtools": ".run/react-devtools",
     "react:debugger": ".run/react-debugger",
     "format": "prettier-eslint \"src/**/*.js\"",
+    "metro:export" : "node_modules/.bin/metro build app.json --out .build/bundle.js",
+    "metro" : "node_modules/.bin/metro",
     "eslint-check": "./node_modules/.bin/eslint --print-config ./App.js |  ./node_modules/.bin/eslint-config-prettier-check"
   },
   "react-devtool": "react-devtools",

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Animated, StyleSheet, View, } from "react-native";
-import { defaults,  } from "react-native" from './utils/defaults';
+import { defaults  } from './utils/defaults';
+
 class ColorAnim extends Component {
   componentWillMount() {
     this._animatedValue = new Animated.Value(0);

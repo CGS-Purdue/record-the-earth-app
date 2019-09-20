@@ -88,15 +88,15 @@ class SurveyHumScreen extends Component {
                 color={_colors.PRIMARY}
                 accessibilityLabel="Go to next"
                 onPress={() => {
-                  let _survey_data = this.getSurveyState();
-                  navigate('SurveyEnd', { survey_data: _survey_data });
-                }}
-              />
-              </CenterColView>
-            </PadView>
-        </RootView>
-      </ImageBackground>
-    );
+                let _survey_data = this.getSurveyState();
+                navigate('SurveyEnd', { survey_data: _survey_data });
+              }}
+            />
+          </CenterColView>
+        </PadView>
+      </RootView>
+    </ImageBackground>
+  );
   }
 }
 

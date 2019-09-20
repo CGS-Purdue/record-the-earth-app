@@ -1,22 +1,33 @@
+import React, { Component } from 'react';
+import { Platform } from 'react-native';
+import { createBottomTabNavigator } from 'react-navigation';
+import { HomeScreen } from './Main/HomeScreen';
+import { TestScreen } from './Main/TestScreen';
+import { LinksScreen } from './Main/LinksScreen';
+import { SurveyStack } from './Survey/SurveyStack';
+import { TabBarIcon } from '../Components/TabBar/TabBarIcon';
 
+// import { ConfigScreen } from './Main/ConfigScreen';
+// import { AudioListScreen } from './Main/AudioListScreen';
+// import { FileListScreen } from './Main/FileListScreen';
+// import { ThemeScreen } from './Main/ThemeScreen';
 
 import { Theme } from './../Theme';
-
 const _colors = Theme.Colors;
 const _styles = Theme.Styles;
 const _layout = Theme.ThemeLayout;
+
 const PLATFORM_OS = Platform.OS;
 
-const mainTabRefNav = createRef();
 const MainTabNavigator = createBottomTabNavigator({
-  Home: HomeScreenScreen,
-  TestScreen: TestScreen,
-  Links: LinksScreen,
-  SurveyTab: SurveyEndScreen,
+  HomeTab: HomeScreen,
+  TestTab: TestScreen,
+  LinksTab: LinksScreen,
+  SurveyTab: SurveyStack,
   // FileListScreen: FileListScreen,
   }, {
     navigationOptions: {
-    initialRouteName: 'Home',
+    initialRouteName: 'HomeTab',
     },
   tabBarOptions: {
     labelStyle: _styles.tabbar_label,
@@ -31,9 +42,9 @@ const MainTabNavigator = createBottomTabNavigator({
     showLabel: true,
   },
 });
-MainTabNavigator.ref = mainTabRefNav;
 
-HomeScreenScreen.navigationOptions = ({ navigation }) => ({
+
+HomeScreen.navigationOptions = ({ navigation }) => ({
   tabBarIcon: ({ focused, horizontal, tintColor }) => {
     let iconPrefix = 'md';
     if (PLATFORM_OS === 'ios'){
@@ -54,7 +65,7 @@ HomeScreenScreen.navigationOptions = ({ navigation }) => ({
   tabBarVisible: true,
 });
 
-SurveyEndScreen.navigationOptions = ({ navigation }) => ({
+SurveyStack.navigationOptions = ({ navigation }) => ({
   tabBarIcon: ({ focused, horizontal, tintColor }) => {
     let iconPrefix = 'md';
     if (PLATFORM_OS === 'ios'){
@@ -101,7 +112,7 @@ LinksScreen.navigationOptions = ({ navigation }) => ({
   title: 'Links',
 });
 
-ConfigScreen.navigationOptions = ({ navigation }) => ({
+TestScreen.navigationOptions = ({ navigation }) => ({
   tabBarIcon: ({ focused, horizontal, tintColor }) => {
     let iconPrefix = PLATFORM_OS === 'ios' ? 'ios' : 'md';
     let iconName = `${iconPrefix}-cog`;

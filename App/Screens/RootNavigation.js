@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { MainTabNavigator } from './MainTabNavigator';
-import { RecordScreen } from './Record/ReordScreen';
+import { RecordScreen } from './Record/RecordScreen';
 import { SurveyStack } from './Survey/SurveyStack';
 
-import { Theme } from './.../Theme';
+import { Theme } from './../Theme';
 
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
