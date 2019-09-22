@@ -1,9 +1,18 @@
 #!/bin/bash
 
 # EXPO HELPER
+# https://developer.android.com/studio/command-line/variables
 # -------------
+# ANDROID_SDK_ROOT
+# ANDROID_EMULATOR_HOME
+# ANDROID_AVD_HOME
+# ANDROID_LOG_TAGS ADB_TRACE
+# HTTP_PROXY
+# ANDROID_SERIAL
+# ANDROID_VERBOSE	See ANDROID_VERBOSE.
+# ANDROID_EMULATOR_HOME	See ANDROID_EMULATOR_HOME.
+# ANDROID_SDK_ROOT	See ANDROID_SDK_ROOT.
 # BUILD THE ANDROID PROJECT FROM THE ./android directory
-
 # comma-separated list of debug info to log:
 # ADB_TRACE | all,adb,sockets,packets,rwx,usb,sync,sysdeps,transport,jdwp
 # ADB_VENDOR_KEYS    |    colon-separated list of keys (files or directories)
@@ -19,7 +28,7 @@
 #     --host localhost \
 #     --dev \
 #     --android
-# #
+# #adb shell "date `date +%m%d%H%M%Y.%S`"
 # sync [all|data|odm|oem|product|system|system_ext|vendor]
 #     sync a local build from $ANDROID_PRODUCT_OUT to the device (default all)
 #     -l: list but don't copy
@@ -32,7 +41,6 @@ BASE_DIR="$(npm prefix)"
 [[ -z $ANDROID_HOME ]] && echo 'ANDROID_HOME is not set. Skipping command' && exit 0
 
 ABD_PATH="${ANDROID_HOME}/platform-tools"
-ANDROID_SERIAL="025abd11727717ac"
 
 $ANDROID_HOME/platform-tools/adb "$@"
 

@@ -18,6 +18,8 @@ unset REACT_EDITOR
 unset REACT_DEBUGGER
 set -a REACT_DEBUGGER
 
+
+EXPO_HOST="localhost"
 BASE_DIR="$(npm prefix)"
 ABD_PATH="${ANDROID_HOME}/platform-tools"
 
@@ -26,17 +28,23 @@ ABD_PATH="${ANDROID_HOME}/platform-tools"
 
 NODE_ENV="development"
 
+echo "Settings up device:"
+
 echo "Checking Android path ..."
 
 [[ -z $ANDROID_HOME ]] && echo 'ANDROID_HOME is not set. Skipping command' && exit 0
 
 npm run adb:reverse
 
+# TRYING TO CATCH ERRORS HERE SO WE CAN RECONNECT DEVICES
+# BEFORE EXPO FAILS TO CONNECT AND WE END UP IN A BAD STATE.
+[[ $? > 0 ]] && echo "Problem Connecting to device: $? - exiting early..." && exit 0
+
 echo "Settings up additional devtools..."
 
 # REACTOTRON
 if [ ! -z $RUN_REACT_REACTOTRON ]; then
-  npm run util:reactotron &
+  npm run react:reactotron &
 fi
 
 # REACT DEBUGGER
@@ -52,6 +60,7 @@ fi
 echo "
   APP_DEBUG_APPDATA  ${APP_DEBUG_APPDATA}
   EXPO_DEBUG  ${EXPO_DEBUG}
+  EXPO_HOST ${EXPO_HOST}
   NODE_DEBUG  ${NODE_DEBUG}
   NODE_ENV  ${NODE_ENV}
   NODE_OPTIONS  ${NODE_OPTIONS}
@@ -82,5 +91,5 @@ EXPO_DEBUG="${EXPO_DEBUG}" \
     --no-minify \
     --no-https \
     --dev \
-    --host localhost \
+    --host ${EXPO_HOST} \
     --android

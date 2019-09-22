@@ -76,6 +76,7 @@ class App extends Component {
           return obj;
         }
       );
+      console.log(cacheFonts);
       return Promise.all([ cacheImages, cachedIcons, cacheFonts ]);
    }
 }

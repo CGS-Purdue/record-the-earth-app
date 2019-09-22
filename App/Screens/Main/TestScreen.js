@@ -37,11 +37,14 @@ class TestScreen extends Component {
                 </FadeInView>
                 <View style={{ width: '100%', flex: 3, alignItems: 'center', justifyContent: 'center'}}>
                   <View style={_styles.BtnContainer}>
+                    <Text style={[_styles.BtnTxt, {
+                        color: 'rgba(225,225,225,.6)',
+                        fontSize: 18
+                      }]}>{"Alternative Home Screen\n (with animation)"}</Text>
                     <TouchableOpacity style={_styles.BtnBox}
                         onPress={() => navigate({ routeName: 'Survey', params: { name: 'Survey'}})} >
                       <View style={{ flex: 0, justifyContent: 'center', alignItems: 'center', width: 150, height: 150, }}>
                         <SvgGradLogo/>
-                        <Text style={[{},_styles.BtnTxt]}>Survey Testing</Text>
                       </View>
                     </TouchableOpacity>
                   </View>

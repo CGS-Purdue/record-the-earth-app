@@ -3,6 +3,17 @@ import { View } from 'react-native';
 import { Theme } from '../../Theme';
 
 
+
+// defaultProps
+//   weight    - 1
+//   align     - center
+//   justify   - center
+//   expand    - true
+//   collapse  - false
+//   maxWidth  - 100%
+//   flex      - 1,
+
+
 const _styles = Theme.Styles;
 
 var SectionStyle = Object.assign({

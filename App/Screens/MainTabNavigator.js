@@ -6,10 +6,11 @@ import { TestScreen } from './Main/TestScreen';
 import { LinksScreen } from './Main/LinksScreen';
 import { SurveyStack } from './Survey/SurveyStack';
 import { TabBarIcon } from '../Components/TabBar/TabBarIcon';
-
+import { FileListScreen } from './Main/FileListScreenDev';
+import { PlayerScreen } from './Main/AudioPlayerTestScreen';
 // import { ConfigScreen } from './Main/ConfigScreen';
 // import { AudioListScreen } from './Main/AudioListScreen';
-import { FileListScreen } from './Main/FileListScreen';
+// import { FileListScreen } from './Main/FileListScreen';
 
 import { Theme } from './../Theme';
 const _colors = Theme.Colors;
@@ -20,10 +21,11 @@ const PLATFORM_OS = Platform.OS;
 
 const MainTabNavigator = createBottomTabNavigator({
   HomeTab: HomeScreen,
+  PlayerTab: PlayerScreen,
   TestTab: TestScreen,
   // LinksTab: LinksScreen,
-  SurveyTab: SurveyStack,
-  FileListScreen: FileListScreen,
+  // SurveyTab: SurveyStack,
+  SoundFilesTab: FileListScreen,
   }, {
     navigationOptions: {
     initialRouteName: 'HomeTab',
@@ -42,6 +44,11 @@ const MainTabNavigator = createBottomTabNavigator({
   },
 });
 
+
+PlayerScreen.navigationOptions = ({ navigation }) => ({
+  tabBarLabel: 'player',
+  tabBarVisible: true,
+});
 
 HomeScreen.navigationOptions = ({ navigation }) => ({
   tabBarIcon: ({ focused, horizontal, tintColor }) => {
@@ -63,6 +70,8 @@ HomeScreen.navigationOptions = ({ navigation }) => ({
   tabBarLabel: 'Home',
   tabBarVisible: true,
 });
+
+
 
 SurveyStack.navigationOptions = ({ navigation }) => ({
   tabBarIcon: ({ focused, horizontal, tintColor }) => {

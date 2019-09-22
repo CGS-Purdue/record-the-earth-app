@@ -36,15 +36,25 @@ async function createAppStorageDirectory(dirName) {
 }
 
 async function checkAppDirectoriesStatus() {
-  // await FileSystem.getInfoAsync(APP_STORAGE).then((result) => {)
+  let fsStatus = {
+    appDir: false,
+    mediaDir: false,
+  }
+  this.fsStatus = fsStatus;
+  await FileSystem.getInfoAsync(APP_STORAGE).then((result) => {
+    this.fsStatus.appDir  = true;
+  });
+
   await FileSystem.getInfoAsync([APP_STORAGE, MEDIA_DIR].join('')).then(
     (result) => {
       if (!result.exists) {
         console.log('media storage does not exist, creating folder');
         createAppStorageDirectory(MEDIA_DIR);
+        this.fsStatus.mediaDir = true;
       }
     }
   );
+  return this.fsStatus;
 }
 
 export { checkAppDirectoriesStatus, saveAudioRecordingFile };

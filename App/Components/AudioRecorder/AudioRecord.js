@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { ActivityIndicator, Alert, Image, TouchableHighlight, View } from 'react-native';
 import { Theme, ThemeColors, ThemeIcons } from '../../Theme';
 import { saveAudioRecordingFile } from '../../Utilities/Filesystem';
+import * as Permissions from 'expo-permissions';
 import { MonoText } from '../Text';
 import { CenterView, RootView } from '../Views';
 import { AudioFormat } from './AudioFormat';
@@ -16,6 +17,8 @@ import { AnimatedSpring, ProgressCircle } from '../Animated/ProgressCircle';
 const _styles = Theme.Styles;
 let _ic_record = ThemeIcons.Icons.icon_record;
 const RecordIcon = ThemeIcons.createIcon(_ic_record.name, _ic_record.module, _ic_record.width, _ic_record.height);
+
+
 
 
 class AudioRecord extends Component {
@@ -47,7 +50,7 @@ class AudioRecord extends Component {
       soundPosition: null,
       volume: 1.0,
     };
-    // this.askForAudioPermissions = askForAudioPermissions;
+    this.askForAudioPermissions = this.askForAudioPermissions.bind(this);
     this.audioProfile = new AudioProfile();
     this.profile = this.audioProfile.getProfile();
     this._onRecordEnd = this._onRecordEnd.bind(this);
@@ -59,15 +62,25 @@ class AudioRecord extends Component {
 
   componentDidMount() {
     console.log(this);
-    // this.askForAudioPermissions();
+    this.askForAudioPermissions();
   }
 
   componentWillUnmount(){
     console.log(this.state);
-
     this.recordStop();
   }
 
+  async askForAudioPermissions () {
+
+    let response = await Permissions.askAsync(
+      Permissions.AUDIO_RECORDING,
+      Permissions.CAMERA_ROLL
+    );
+
+    this.setState({
+      haveRecordingPermissions: response.status === 'granted',
+    });
+  }
 
   updateRecorderState(){
     let emptyState = {
@@ -90,39 +103,44 @@ class AudioRecord extends Component {
     });
   }
 
-  async _saveRecording() {
-    let sound_file = this.recording_info.uri;
-    let success = await saveAudioRecordingFile(sound_file);
-
-    this.props.navigation.navigate('Main');
-  }
 
   updateRecordingTimer () {
 
   }
+  _onDone() {
+    if (this.props.onRecordingFinished){
+      this.props.onRecordingFinished();
 
+      this.props.navigation.goBack()
+    }
+  }
+
+  async _saveRecording() {
+    let sound_file = this.recording_info.uri;
+    let success = await saveAudioRecordingFile(sound_file);
+    sucess.then(this._onDone());
+  }
   _cancelRecording(){
-      this.props.navigation.navigate('Main');
+      this._onDone();
   }
 
   _resetRecorder(){}
 
   _onRecordEnd(){
-    let oncancel = this._cancelRecording();
-    let onsave = this._saveRecording();
+
     console.log('ended');
     Alert.alert(
       'Recording Done',
       'Would you like to save this Soundscape',
       [{
           text: 'Cancel',
-          onPress: this._cancelRecording,
+          onPress: ()=>{ return false },
           style: 'cancel',
       },{
-          text: 'OK',
-          onPress: onsave,
+          text: 'SAVE',
+          onPress: () => this._saveRecording(),
       }],
-      {cancelable: false},
+      {cancelable: true},
     );
   }
 
@@ -222,9 +240,19 @@ class AudioRecord extends Component {
   //   size={'large'}
   //   />
   render() {
-    return (
-      <View style={_styles.record_container}>
-
+    if (!this.state.haveRecordingPermissions) {
+        return (
+          <RootView>
+            <CenterView>
+              <MonoText>
+              {'You must enable audio recorder permissions in order to use this app.'}
+              </MonoText>
+            </CenterView>
+          </RootView>
+        );
+      } else {
+        return (
+        <View style={_styles.record_container}>
         <View style={{
             display: 'flex',
             flex:1,
@@ -250,7 +278,9 @@ class AudioRecord extends Component {
           active={this.state.recordingState}
           />
       </View>
-    );
+
+      );
+    }
   }
 }
 

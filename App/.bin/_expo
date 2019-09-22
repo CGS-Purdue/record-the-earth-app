@@ -2,6 +2,17 @@
 
 # EXPO HELPER
 # -------------
+# --optimize
+# --host | --localhost
+# --dev
+# --android --web
+# doctor
+#
+# build
+# expo build:android --release-channel develop --type apk --config app.json
+# node_modules/.bin/expo build --help
+# expo build:android
+# expo start --android --no-dev --minify
 # device reverse tunnel        exp://127.0.0.1:19000
 # Metro Bundler on                        port 19001
 # Expo DevTools is running at http://localhost:19002

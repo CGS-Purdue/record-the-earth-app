@@ -14,7 +14,10 @@ const ModalRecordScreen = ({
   navigation: NavigationScreenProp<NavigationState & any>,
 }) => (
   <RootView style={[_styles.DebugStyles.highlight]}>
-    <CenterView style={[{ backgroundColor: ThemeColors.BLU_300 }, _styles.DebugStyles.highlight]}>
+    <CenterView style={[
+      { backgroundColor: ThemeColors.BLU_300 },
+       _styles.DebugStyles.highlight
+     ]}>
       <Recorder />
     </CenterView>
   </RootView>

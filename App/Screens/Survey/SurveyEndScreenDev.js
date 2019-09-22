@@ -169,7 +169,7 @@ class SurveyEndScreenDev extends Component {
     let surveyString = this.dataToString(survey);
     console.log(surveyString);
     this.setState({ result: surveyString });
-    this.props.navigation.navigate('Home');
+    this.props.navigation.navigate('Main');
   };
 
   render() {

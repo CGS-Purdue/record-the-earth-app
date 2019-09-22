@@ -24,30 +24,35 @@ import { FontAssets } from './Assets';
 function _getFont(name) {
   const _font_assets = FontAssets;
   const font_map = {
-    cutivemono_regular: {
+    'cutivemono-regular': {
       src: _font_assets.cutivemono_regular,
       name: 'cutive-mono-regular',
       file: 'CutiveMono-Regular.ttf',
+      isLoaded: false,
     },
-    ionicicons: {
+    'ionicicons': {
       src: _font_assets.ionicicons,
       name: 'ionicicons',
       file: 'ionicicons.ttf',
+      isLoaded: false,
     },
-    opensans_light_webfont: {
+    'opensans-light-webfont': {
       src: _font_assets.opensans_light_webfont,
       name: 'opensans-light-webfont',
       file: 'OpenSans-Light-webfont.ttf',
+      isLoaded: false,
     },
-    opensans_regular_webfont: {
+    'opensans-regular-webfont': {
       src: _font_assets.opensans_regular_webfont,
       name: 'opensans-regular-webfont',
       file: 'OpenSans-Regular-webfont.ttf',
+      isLoaded: false,
     },
-    spacemono_regular: {
+    'spacemono-regular': {
       src: _font_assets.spacemono_regular,
       name: 'spacemono-regular',
       file: 'SpaceMono-Regular.ttf',
+      isLoaded: false,
     },
   };
 
@@ -72,10 +77,10 @@ function _getThemeFonts(fonts) {
 }
 
 const loadFont = (font_set) => {
-  return {
-    name: Object.keys(font_set)[0],
-    asset: Promise.resolve(Font.loadAsync(font_set)),
-  };
+  let name = Object.keys(font_set)[0];
+  let src = Font.loadAsync(font_set);
+  // return { [name] : Promise.resolve(src) };
+  return  Promise.resolve(src);
 };
 
 const loadFontMap = (fontMap) => {
@@ -84,6 +89,8 @@ const loadFontMap = (fontMap) => {
   });
   return fonts;
 };
+
+
 
 const FontDictionary = {
   WEIGHT_100: { weight: 100, name: 'thin' },
@@ -119,8 +126,8 @@ const FONT_TYPEFACE = {
   BODY_FONT: 'cutive-mono-regular',
   SANS_FONT: 'opensans-regular-webfont',
   SANS_LIGHT_FONT: 'opensans-light-webfont',
-  ICON_FONT: 'ionicons',
   MONO_FONT: 'spacemono-regular',
+  ICON_FONT: 'ionicons',
 };
 
 const FONT_WEIGHTS = getFontWeights(FontDictionary);
@@ -131,18 +138,21 @@ const FontVariables = {
 };
 
 const ThemeFontMap = _getThemeFonts([
-  'cutivemono_regular',
+  'opensans-regular-webfont',
+  'opensans-light-webfont',
+  'cutivemono-regular',
+  'spacemono-regular',
   'ionicicons',
-  'opensans_light_webfont',
-  'opensans_regular_webfont',
-  'spacemono_regular',
 ]);
 
 const ThemeFonts = {
   FontMap: ThemeFontMap,
   FontType: FONT_TYPEFACE,
+  FontAssets: '',
+  fonts: _getFont(),
   FontWeights: FONT_WEIGHTS,
   loadFontMap: loadFontMap,
+  getFont: _getFont,
   loadFont: loadFont,
   Variables: FontVariables,
 };

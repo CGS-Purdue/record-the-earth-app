@@ -9,3 +9,5 @@ f.changed
 
 find . -type f -printf "%G %U %M %m %P \n"
 find . -type f ! -perm 644 -printf "%G %U %M %m %P \n"
+
+git diff --dirstat=changes,files

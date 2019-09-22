@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "RecordTheEarthExpoDevelopment",
+    "name": "RecordTheEarth3 Demo",
     "description": "Updating RtE react-native app to be fully managed with expo.",
     "entryPoint": "init.js",
     "icon": "./icon.png",
@@ -12,7 +12,7 @@
     "primaryColor": "#cccccc",
     "privacy": "unlisted",
     "sdkVersion": "34.0.0",
-    "slug": "record-the-earth-expo",
+    "slug": "record-the-earth-v3-demo",
     "androidShowExponentNotificationInShellApp": true,
     "androidStatusBar": {
       "barStyle": "dark-content",
@@ -28,7 +28,7 @@
       "backgroundColor": "#000000",
       "resizeMode": "contain"
     },
-    "version": "1.0.0",
+    "version": "0.0.9",
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -59,7 +59,8 @@
     "githubUrl": "https://github.com/charrismatic/record-the-earth-expo-react-native",
     "extra": {
       "debug_flags": {
-        "DEBUG_OUTLINE_STYLES": false
+        "DEBUG_OUTLINE_STYLES": true,
+        "DEV_DATA_MOCK_SOUNDFILES": false
       }
     },
     "hooks": {},

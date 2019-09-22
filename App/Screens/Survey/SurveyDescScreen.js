@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, View } from 'react-native';
+import { Button, View, Text } from 'react-native';
 import { HeadingText } from '../../Components/Text/HeadingText';
 import { PadView, Section, ImgBgFill, CenterView, RootView } from '../../Components/Views';
 // import { BlurBgView } from '../../Components/Effects/BlurView';
@@ -90,7 +90,6 @@ class SurveyDescScreen extends Component {
               <Section
                 justify={'flex-start'}
                 shrink={true}
-                shrink={true}
                 align={'stretch'}
                 weight={1}
               >
@@ -107,6 +106,10 @@ class SurveyDescScreen extends Component {
                   }}
                 />
               </Section>
+              <Text style={[_styles.BtnTxt, {
+                  color: 'rgba(225,225,225,.6)',
+                  fontSize: 18
+                }]}>{"Soundscape Survey Preview"}</Text>
             </CenterView>
           </PadView>
         </RootView>

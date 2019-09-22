@@ -1,3 +1,4 @@
+import { Alert } from 'react-native';
 
 function getFiles() {
   this.state = {};

@@ -25,15 +25,6 @@ class AudioRecordWithPermission extends Component {
 
   async askForAudioPermissions () {
     console.log("GETTING PERMISSION");
-
-    if (__DEV__ && Platform.OS === 'web') {
-       { status: 'granted' };
-       console.log('skipping perms on web for development');
-      this.setState({
-        haveRecordingPermissions: 'granted',
-      });
-    }
-    else {
       const { status, expires, permissions } = await Permissions.getAsync(
         Permissions.AUDIO_RECORDING,
         Permissions.CAMERA_ROLL
@@ -52,7 +43,6 @@ class AudioRecordWithPermission extends Component {
       this.setState({
         haveRecordingPermissions: status
       });
-    }
   }
 
 

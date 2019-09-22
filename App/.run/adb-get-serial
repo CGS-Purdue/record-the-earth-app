@@ -8,6 +8,8 @@ BASE_DIR="$(npm prefix)"
 ABD_PATH="${ANDROID_HOME}/platform-tools"
 ANDROID_SERIAL="$(${ABD_PATH}/adb devices | grep -e '\bdevice\b' | awk '{print $1}')"
 
+DEVICE_STATE="$(adb get-state)"
+
 export ANDROID_SERIAL
 
 echo "$ANDROID_SERIAL"
