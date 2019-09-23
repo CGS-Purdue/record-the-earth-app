@@ -7,7 +7,7 @@
     "orientation": "portrait",
     "platforms": [
       "ios",
-      "android",
+      "android"
     ],
     "primaryColor": "#cccccc",
     "privacy": "unlisted",
@@ -49,6 +49,7 @@
       }
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "package": "org.recordtheearth.expo",
       "permissions": [
         "RECORD_AUDIO",

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView,View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import { ErrorBoundary } from '../../Utilities/ErrorBoundary';
 import { Theme } from  '../../Theme';
 

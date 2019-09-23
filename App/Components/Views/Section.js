@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { ErrorBoundary } from '../../Utilities/ErrorBoundary';
 import { Theme } from '../../Theme';
-
 
 
 // defaultProps
@@ -76,9 +76,11 @@ class Section extends Component {
 
   render() {
     return (
+    <ErrorBoundary>
       <View style={this.sectionStyle}>
         {this.props.children}
       </View>
+    </ErrorBoundary>
     );
   }
 }

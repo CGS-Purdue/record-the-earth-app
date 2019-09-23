@@ -20,14 +20,14 @@ if (__DEV__) {
 //
 // AppRegistry.registerComponent('main', () => Main);
 
-  // 
-  // YellowBox.ignoreWarnings([
-  //   'Warning: ...',
-  //   'Warning: Async Storage',
-  //   'Warning: NetInfo',
-  //   'Warning: getConstants',
-  //   "Accessing view manager configs directly off UIManager via UIManager['getConstants'] is no longer supported. Use UIManager.getViewManagerConfig('getConstants') instead."
-  // ]);
+
+YellowBox.ignoreWarnings([
+  'Warning: ...',
+  'Warning: Async Storage',
+  'Warning: NetInfo',
+  'Warning: getConstants',
+  "Accessing view manager configs directly off UIManager via UIManager['getConstants'] is no longer supported. Use UIManager.getViewManagerConfig('getConstants') instead."
+]);
 
 
   activateKeepAwake();

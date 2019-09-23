@@ -1,5 +1,7 @@
 import { Alert } from 'react-native';
 
+
+
 function getFiles() {
   this.state = {};
   this.state.selectedImages.forEach((item, i) => {
@@ -10,6 +12,8 @@ function getFiles() {
     });
   });
 }
+
+
 
 
 function uploadForm(config) {
@@ -34,6 +38,8 @@ function uploadForm(config) {
     console.error("error uploading images: ", err);
   });
 }
+
+
 
 
 
@@ -67,4 +73,7 @@ function rnfs() {
   });
 }
 
+
+
 export { getFiles, uploadForm, rnfs };
+

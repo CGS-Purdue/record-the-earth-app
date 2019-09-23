@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import { View } from 'react-native';
+import PropTypes from 'prop-types';
 import { Theme } from  '../../Theme';
-
 
 const _styles = Theme.Styles;
 
