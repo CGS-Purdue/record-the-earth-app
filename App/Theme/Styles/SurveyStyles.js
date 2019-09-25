@@ -1,11 +1,11 @@
-import { StyleSheet     } from 'react-native'
-import { ThemeColors    } from '../Colors'
-import { Layout         } from '../Layout'
-import { UtilityStyles  } from './UtilityStyles'
-import { br, m, p       } from './LayoutStyles'
+import { StyleSheet     } from 'react-native';
+import { ThemeColors    } from '../Colors';
+import { Layout         } from '../Layout';
+import { UtilityStyles  } from './UtilityStyles';
+import { br, m, p       } from './LayoutStyles';
 
 const SurveyDescTitleText = {
-   color: ThemeColors.WHITE
+   color: ThemeColors.WHITE,
 };
 
 const TextInputStyle = Object.assign({
@@ -65,4 +65,4 @@ const SurveyStyles = StyleSheet.create({
 });
 
 
-export { SurveyStyles }
+export { SurveyStyles };

@@ -29,4 +29,4 @@ export default class RootView extends Component {
 }
 
 
-export { RootView }
+export { RootView };

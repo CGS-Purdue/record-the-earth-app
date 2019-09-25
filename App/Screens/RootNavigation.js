@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { MainTabNavigator } from './MainTabNavigator';
-import { RecordScreen } from './Record/RecordScreen';
+import { RecordScreen } from './Main/RecordScreen';
 import { SurveyStack } from './Survey/SurveyStack';
 import { SurveyEndScreen } from './Survey/SurveyEndScreen';
 import { FileListScreen } from './Main/FileListScreenDev';
@@ -16,12 +16,28 @@ const _layout = Theme.ThemeLayout;
 // SIBILINGS.  UNLIKE THE STACK NAVIGATOR WHICH CAN BE
 // MOVED UP AND DOWN ON A SWITCH NAVIGATOR SWTICHES CONTEXT
 
-const RootNavigation = createSwitchNavigator({
-    Main: { screen: MainTabNavigator },
-    Record: { screen: RecordScreen },
-    Survey: { screen: SurveyStack },
-    SurveyEnd: { screen: SurveyEndScreen },
-    SoundFiles: { screen: FileListScreen },
+const RootNavigation = createSwitchNavigator(
+  {
+    Main: {
+      screen: MainTabNavigator,
+      path: 'main',
+    },
+    Record: {
+      screen: RecordScreen,
+      path: 'record',
+    },
+    Survey: {
+      screen: SurveyStack,
+      path: 'survey',
+    },
+    SurveyEnd: {
+      screen: SurveyEndScreen,
+      path: 'survey/e6nd',
+    },
+    SoundFiles: {
+      screen: FileListScreen,
+      path: 'library',
+    },
   },
   {
     initialRouteName: 'Main',
@@ -31,5 +47,4 @@ const RootNavigation = createSwitchNavigator({
   }
 );
 
-
-export default  createAppContainer(RootNavigation);
+export default createAppContainer(RootNavigation);

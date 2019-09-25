@@ -1,22 +1,32 @@
 
 module.exports = {
+  extends: [
+    'plugin:import/warnings',
+    'plugin:import/errors',
+  ],
   plugins: [
   'eslint-comments',
-  'prettier',
+  'import',
   'react',
   'react-hooks',
   'react-native',
-  'jest' ],
+  'jest',
+  'prettier',
+  ],
   settings: { react: { version: 'detect' } },
   overrides: [ { files: [ '*.js' ],
     parser: 'babel-eslint',
     plugins: [ 'flowtype' ],
     rules: { 'flowtype/define-flow-type': 1, 'flowtype/use-flow-type': 1 } },
-  { files: [ '*.ts', '*.tsx' ],
+  {
+    files: [ '*.ts', '*.tsx' ],
     parser: '@typescript-eslint/parser',
     plugins: [ '@typescript-eslint/eslint-plugin' ],
-    rules: { '@typescript-eslint/no-unused-vars': [
-       'error', { argsIgnorePattern: '^_' } ], 'no-unused-vars': 'off', } },
+    rules: {
+      '@typescript-eslint/no-unused-vars': [ 'error', { argsIgnorePattern: '^_' }],
+      'no-unused-vars': 'off',
+    },
+  },
   { files: [ '*.{spec,test}.{js,ts,tsx}', '**/__tests__/**/*.{js,ts,tsx}' ],
     env: { jest: true, 'jest/globals': true } } ],
   globals:   {
@@ -51,7 +61,7 @@ module.exports = {
     setInterval: false,
     setTimeout: false,
     window: false,
-    XMLHttpRequest: false
+    XMLHttpRequest: false,
   },
   rules: {
     'comma-dangle': [ 1, 'always-multiline' ],
@@ -211,6 +221,6 @@ module.exports = {
     'jest/no-disabled-tests': 1,
     'jest/no-focused-tests': 1,
     'jest/no-identical-title': 1,
-    'jest/valid-expect': 1
+    'jest/valid-expect': 1,
   },
 };

@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Text, TouchableHighlight,TouchableOpacity, View } from 'react-native';
-
-import { ThemeColors } from '../Theme';
+import { ThemeColors } from '../../Theme';
 
 
 const touchButtonStyle = {
@@ -12,29 +11,6 @@ const touchButtonStyle = {
   padding: 10,
   margin: 0,
 };
-//
-//
-//
-// <Touchable
-//   style={RippButtonStyles.option}
-//   background={Touchable.Ripple('#ccc', false)}
-//   onPress={this.props.onPress}>
-//
-//   <View style={{flexDirection: 'row'}}>
-//     <View style={RippButtonStyles.ripplebutton_icon}>
-//       <Image
-//         source={this.props.image}
-//         resizeMode="contain"
-//         fadeDuration={0}
-//         style={{ width: 20, height: 20, marginTop: 1 }}
-//       />
-//     </View>
-//   </View>
-// </Touchable>
-//
-//
-
-
 
 export default class TouchButton extends Component {
   constructor(props) {
@@ -50,13 +26,12 @@ export default class TouchButton extends Component {
   }
 
   toggleState() {
-      if (this.state.active) {
-        this.setState(false);
-      } else {
-        this.setState(true);
-      }
+    if (this.state.active) {
+      this.setState(false);
+    } else {
+      this.setState(true);
+    }
   }
-
 
   render() {
     this.underlayColor = this.props.color;
@@ -66,8 +41,9 @@ export default class TouchButton extends Component {
       <TouchableHighlight
         style={[touchButtonStyle]}
         underlayColor={this.props.color}
-        onPress={this.props.onPress}>
-          {this.props.children}
+        onPress={this.props.onPress}
+      >
+        {this.props.children}
       </TouchableHighlight>
     </View>
     );

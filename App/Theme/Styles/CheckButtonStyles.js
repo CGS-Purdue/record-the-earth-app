@@ -28,7 +28,7 @@ const CheckButtonTouchable = {
   borderColor : ThemeColors.CHECKBTN_CONTAINER_INNER_BORDER,
   borderStyle:'solid',
   backgroundColor: ThemeColors.CHECKBTN_CONTAINER_BG,
-}
+};
 
 const CheckButtonInner = {
   display: 'flex',
@@ -60,13 +60,13 @@ const CheckButtonIconContainer = {
     backgroundColor: ThemeColors.CHECKBTN_ICON_BG_COLOR,
     width: Layout.TEXT_SIZE_5 * 1.2,
     height: Layout.TEXT_SIZE_5 * 1.2,
-}
+};
 
 const CheckButtonIconStyle = {
     backgroundColor: ThemeColors.CHECKBTN_ICON_BG_COLOR,
     width: Layout.TEXT_SIZE_5 * 1.2,
     height: Layout.TEXT_SIZE_5 * 1.2,
-}
+};
 
 const CheckButtonText = {
   flex: 1,

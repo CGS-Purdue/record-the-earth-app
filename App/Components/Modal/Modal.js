@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { Button, Text, View } from "react-native";
-import Modal from "react-native-modal";
+import { Button, Text, View } from 'react-native';
+import Modal from 'react-native-modal';
 
 class ModalRecordEndScreen extends Component {
   state = {

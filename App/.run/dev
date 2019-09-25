@@ -87,7 +87,7 @@ REACT_EDITOR="${REACT_EDITOR}" \
 EXPO_DEBUG="${EXPO_DEBUG}" \
   node ${BASE_DIR}/node_modules/.bin/expo start \
     --clear \
-    --max-workers 6 \
+    --max-workers 7 \
     --no-minify \
     --no-https \
     --dev \

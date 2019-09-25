@@ -45,4 +45,4 @@ const imgbgfill_style = {
   flex: 1,
 };
 
-export { ImgBgFill }
+export { ImgBgFill };

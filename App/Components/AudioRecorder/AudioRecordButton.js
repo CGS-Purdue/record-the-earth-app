@@ -22,7 +22,7 @@ class AudioRecordButton extends Component {
     this.active = false;
     this.disabled = false;
     this.state = {
-      statusText : "status: Not Recording",
+      statusText : 'status: Not Recording',
     };
   }
 

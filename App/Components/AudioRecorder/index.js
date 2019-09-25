@@ -1,1 +1,1 @@
-import { AudioRecorderWithPermission } from './AudioRecorderWithPermission';
+import { AudioRecordWithPermission } from './AudioRecordWithPermission';

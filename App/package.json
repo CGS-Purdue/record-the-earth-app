@@ -41,6 +41,7 @@
     "format": "prettier-eslint \"src/**/*.js\"",
     "metro:export": "node_modules/.bin/metro build app.json --out .build/bundle.js",
     "metro": "node_modules/.bin/metro",
+    "jest": "node_modules/.bin/jest",
     "eslint-check": "./node_modules/.bin/eslint --print-config ./App.js |  ./node_modules/.bin/eslint-config-prettier-check"
   },
   "react-devtool": "react-devtools",
@@ -80,8 +81,6 @@
     "react-native-vector-icons": "^6.6.0",
     "react-native-web": "^0.11.4",
     "react-navigation": "^3.11.0",
-    "styled-components": "^4.3.2",
-    "ts-pnp": "^1.1.4",
     "typescript": "^3.6.3"
   },
   "bugs": {
@@ -98,17 +97,18 @@
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-eslint-comments": "^3.1.2",
+    "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-native": "^3.7.0",
     "eslint-plugin-simple-import-sort": "^4.0.0",
     "expo": "^34.0.4",
-    "expo-cli": "^3.1.0",
+    "expo-cli": "^3.1.2",
     "prettier-eslint": "^9.0.0",
-    "react-devtools": "^3.6.3",
     "react-native-svg": "^9.9.4",
-    "redux": "^4.0.4"
+    "redux": "^4.0.4",
+    "ts-pnp": "^1.1.4"
   },
   "private": true,
   "bit": {

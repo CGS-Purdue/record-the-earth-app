@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, ImageBackground, StyleSheet, Text, View } from 'react-native';
-import { AnimatedSpring, ProgressCircle } from '../../Components/Animated/ProgressCircle';
+import { AnimatedProgressCircle, ProgressCircle } from '../../Components/ProgressCircle';
 // import * as WebBrowser from 'expo-web-browser';
 
 import { Theme } from '../../Theme';
@@ -10,15 +10,17 @@ const _assets = Theme.Assets;
 
 export default class LinksScreen extends Component {
   state = {
-    progressValue : 0,
+    progressValue: 0,
     syncing: false,
-  }
+  };
 
   _handlePressButton = () => {
-    if (this.state.syncing) {return false;}
+    if (this.state.syncing) {
+      return false;
+    }
     this.setState({ syncing: true });
     try {
-      this.setState({progressValue: ((this.state.progressValue + 0.13) % 1)});
+      this.setState({ progressValue: (this.state.progressValue + 0.13) % 1 });
     } catch (error) {
       this.setState({ error });
     }
@@ -27,48 +29,53 @@ export default class LinksScreen extends Component {
 
   _handleLongDelay = (e) => {
     this.longPressDelayTimeout = null;
-      var curState = this.state.touchable.touchState;
-     if (curState !== States.RESPONDER_ACTIVE_PRESS_IN &&
-         curState !== States.RESPONDER_ACTIVE_LONG_PRESS_IN) {
-      console.error('Attempted to transition from state `' + curState + '` to `' +
-          States.RESPONDER_ACTIVE_LONG_PRESS_IN + '`, which is not supported. This is ' +
-         'most likely due to `Touchable.longPressDelayTimeout` not being cancelled.');
+    var curState = this.state.touchable.touchState;
+    if (
+      curState !== States.RESPONDER_ACTIVE_PRESS_IN &&
+      curState !== States.RESPONDER_ACTIVE_LONG_PRESS_IN
+    ) {
+      console.error(
+        'Attempted to transition from state `' +
+          curState +
+          '` to `' +
+          States.RESPONDER_ACTIVE_LONG_PRESS_IN +
+          '`, which is not supported. This is ' +
+          'most likely due to `Touchable.longPressDelayTimeout` not being cancelled.'
+      );
     } else {
-       this._receiveSignal(Signals.LONG_PRESS_DETECTED, e);
+      this._receiveSignal(Signals.LONG_PRESS_DETECTED, e);
     }
-  }
+  };
 
   render() {
     return (
-      <ImageBackground style={_styles.bgImg} source={_assets.images.img_background}>
-      <View>
-        <Text style={LinksScreenStyles.optionsTitleText}>Test Area</Text>
-        <ProgressCircle
-          value={this.state.progressValue}
-        />
-        <AnimatedSpring
-          value={this.state.progressValue}
-        />
-        <Button
-          title={'button'}
-          _handleLongDelay={this._handleLongDelay}
-          onPress={this._handlePressButton}
-          onPressIn ={()=>{
-            console.log('TouchableOpacity onPressIn');
-            console.log(Date.now());
-          }}
-          onLongPress ={(e)=>{
-           console.log(' onLongPress');
-           console.log(Date.now());
-           console.log(e.type);
-          }}
-        />
-      </View>
+      <ImageBackground
+        style={_styles.bgImg}
+        source={_assets.images.img_background}
+      >
+        <View>
+          <Text style={LinksScreenStyles.optionsTitleText}>Test Area</Text>
+          <ProgressCircle value={this.state.progressValue} />
+          <AnimatedProgressCircle value={this.state.progressValue} />
+          <Button
+            title={'button'}
+            _handleLongDelay={this._handleLongDelay}
+            onPress={this._handlePressButton}
+            onPressIn={() => {
+              console.log('TouchableOpacity onPressIn');
+              console.log(Date.now());
+            }}
+            onLongPress={(e) => {
+              console.log(' onLongPress');
+              console.log(Date.now());
+              console.log(e.type);
+            }}
+          />
+        </View>
       </ImageBackground>
     );
   }
 }
-
 
 const LinksScreenStyles = StyleSheet.create({
   container: {
@@ -97,6 +104,5 @@ const LinksScreenStyles = StyleSheet.create({
     marginTop: 1,
   },
 });
-
 
 export { LinksScreen };

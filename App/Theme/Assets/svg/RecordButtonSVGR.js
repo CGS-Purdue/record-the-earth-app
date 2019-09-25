@@ -1,5 +1,5 @@
-import React from 'react'
-import Svg, { Defs, LinearGradient, Stop, G, Circle, Path, Text, TSpan } from 'react-native-svg'
+import React from 'react';
+import Svg, { Defs, LinearGradient, Stop, G, Circle, Path, Text, TSpan } from 'react-native-svg';
 
 const RecordButtonSvgr = ({ svgRef, title, ...props }) => (
   <Svg {...props} width={458.76} height={460.24} ref={svgRef}>
@@ -71,12 +71,12 @@ const RecordButtonSvgr = ({ svgRef, title, ...props }) => (
       </Text>
     </G>
   </Svg>
-)
+);
 
 const ForwardRef = React.forwardRef((props, ref) => (
   <RecordButtonSvgr svgRef={ref} {...props} />
-))
-export default ForwardRef
+));
+export default ForwardRef;
 
 
-export { RecordButtonSvgr }
+export { RecordButtonSvgr };

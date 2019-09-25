@@ -63,10 +63,10 @@ const ButtonStyles = {
   ripplebtn_optionText: {
     fontSize: 15,
     marginTop: 1,
-    textAlign: 'center'
+    textAlign: 'center',
   },
 };
 
 
 
-export { ButtonStyles, TouchButtonHighlightStyles,  };
+export { ButtonStyles, TouchButtonHighlightStyles  };

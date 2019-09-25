@@ -28,8 +28,6 @@ class CheckButton extends Component {
   };
 
   render() {
-    console.log("button", this.props);
-    console.log("_colors.CHECKBTN_ICON_COLOR_ACTIVE : _colors.CHECKBTN_ICON_COLOR", _colors.CHECKBTN_ICON_COLOR_ACTIVE, _colors.CHECKBTN_ICON_COLOR);
     return (
       <TouchableOpacity
         style={_styles.checkbtn_touchable}
@@ -56,6 +54,3 @@ class CheckButton extends Component {
 }
 
 export { CheckButton };
-
-// <View style={_styles.checkbtn_container_outer}>
-// </View>

@@ -1,7 +1,14 @@
-import Constants from 'expo-constants'
+import Constants from 'expo-constants';
 import { SQLite } from 'expo-sqlite';
 import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, SectionList, StyleSheet, Text, View } from 'react-native';
+import {
+  Image,
+  ScrollView,
+  SectionList,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 import { SoundDB } from '../../Components/Database/SoundDB';
 import { Theme } from '../../Theme';
@@ -9,7 +16,6 @@ import { Log } from '../../Utilities/Log';
 
 const _styles = Theme.Styles;
 const _assets = Theme.Assets;
-
 
 export default class ConfigScreen extends React.Component {
   constructor(props) {
@@ -19,20 +25,19 @@ export default class ConfigScreen extends React.Component {
     // this.state = [soundscapes, setSoundscapes] = useState([]);
     // this.dataSource = new SoundDB({autoconnect: true});
     this.state = {
-        soundscapes: null,
-      };
+      soundscapes: null,
+    };
 
-    this.dbConnection = new SoundDB({ autoconnect: true});
-
+    this.dbConnection = new SoundDB({ autoconnect: true });
   }
 
-  getSoundscapesList(){
+  getSoundscapesList() {
     this.updateSoundscapes();
   }
 
-  updateSoundscapes(){
+  updateSoundscapes() {
     // let _soundData = this.soundData
-    this.dataSource.transaction(tx => {
+    this.dataSource.transaction((tx) => {
       tx.executeSql('select * from Soundscapes;', [], (_, { rows }) =>
         this.setState({
           soundscapes: rows._array,
@@ -42,20 +47,20 @@ export default class ConfigScreen extends React.Component {
     console.log(this.state);
   }
 
-  onComponentDidMount(){
+  onComponentDidMount() {
     this.dataSource = this.dbConnection.getConnection();
     console.log('connectionStatus', this.dataSource.connectionStatus);
     console.log(this.state);
     // this.updateSoundscapes();
   }
-  onComponentDidUpate(){
+  onComponentDidUpate() {
     // console.log(this.dataSource);
     // this.updateSoundscapes()
     // console.log('connectionStatus', this.dataSource.connectionStatus);
     console.log(this.state);
   }
 
- render() {
+  render() {
     return (
       <ScrollView style={ConfigScreenStyles.container}>
         <ConfigView />
@@ -64,29 +69,43 @@ export default class ConfigScreen extends React.Component {
   }
 }
 
-
 class ConfigView extends React.Component {
   render() {
-
     const { manifest = {} } = Constants;
-      const sections = [
+    const sections = [
       { data: [{ value: manifest.sdkVersion }], title: 'sdkVersion' },
       { data: [{ value: manifest.privacy }], title: 'privacy' },
       { data: [{ value: manifest.version }], title: 'version' },
       { data: [{ value: manifest.orientation }], title: 'orientation' },
-      { data: [{ value: manifest.primaryColor, type: 'color' }], title: 'primaryColor'},
-      { data: [{ value: manifest.splash && manifest.splash.image }], title: 'splash.image'},
-      { data: [ {
-        value: manifest.splash && manifest.splash.backgroundColor,
-        type: 'color',
-        }],
+      {
+        data: [{ value: manifest.primaryColor, type: 'color' }],
+        title: 'primaryColor',
+      },
+      {
+        data: [{ value: manifest.splash && manifest.splash.image }],
+        title: 'splash.image',
+      },
+      {
+        data: [
+          {
+            value: manifest.splash && manifest.splash.backgroundColor,
+            type: 'color',
+          },
+        ],
         title: 'splash.backgroundColor',
       },
-      { title: 'splash.resizeMode',
-        data: [ {value: manifest.splash && manifest.splash.resizeMode}],
+      {
+        title: 'splash.resizeMode',
+        data: [{ value: manifest.splash && manifest.splash.resizeMode }],
       },
-      { title: 'ios.supportsTablet',
-        data: [ { value: manifest.ios && manifest.ios.supportsTablet ? 'true' : 'false'}],
+      {
+        title: 'ios.supportsTablet',
+        data: [
+          {
+            value:
+              manifest.ios && manifest.ios.supportsTablet ? 'true' : 'false',
+          },
+        ],
       },
     ];
 
@@ -109,17 +128,22 @@ class ConfigView extends React.Component {
 
   _renderItem = ({ item }) => {
     if (item.type === 'color') {
-      return <SectionContent>{item.value && <Color value={item.value} />}</SectionContent>;
+      return (
+        <SectionContent>
+          {item.value && <Color value={item.value} />}
+        </SectionContent>
+      );
     } else {
       return (
         <SectionContent>
-          <Text style={ConfigScreenStyles.sectionContentText}>{item.value}</Text>
+          <Text style={ConfigScreenStyles.sectionContentText}>
+            {item.value}
+          </Text>
         </SectionContent>
       );
     }
   };
 }
-
 
 const ListHeader = () => {
   const { manifest } = Constants;
@@ -139,7 +163,9 @@ const ListHeader = () => {
           {manifest.slug}
         </Text>
 
-        <Text style={ConfigScreenStyles.descriptionText}>{manifest.description}</Text>
+        <Text style={ConfigScreenStyles.descriptionText}>
+          {manifest.description}
+        </Text>
       </View>
     </View>
   );
@@ -153,16 +179,27 @@ const SectionHeader = ({ title }) => {
   );
 };
 
-const SectionContent = props => {
-  return <View style={ConfigScreenStyles.sectionContentContainer}>{props.children}</View>;
+const SectionContent = (props) => {
+  return (
+    <View style={ConfigScreenStyles.sectionContentContainer}>
+      {props.children}
+    </View>
+  );
 };
 
 const AppIconPreview = ({ iconUrl }) => {
   if (!iconUrl) {
-    iconUrl = 'https://s3.amazonaws.com/exp-brand-assets/ExponentEmptyManifest_192.png';
+    iconUrl =
+      'https://s3.amazonaws.com/exp-brand-assets/ExponentEmptyManifest_192.png';
   }
 
-  return <Image source={{ uri: iconUrl }} style={{ width: 64, height: 64 }} resizeMode="cover" />;
+  return (
+    <Image
+      source={{ uri: iconUrl }}
+      style={{ width: 64, height: 64 }}
+      resizeMode="cover"
+    />
+  );
 };
 
 const Color = ({ value }) => {
@@ -171,7 +208,9 @@ const Color = ({ value }) => {
   } else {
     return (
       <View style={ConfigScreenStyles.colorContainer}>
-        <View style={[ConfigScreenStyles.colorPreview, { backgroundColor: value }]} />
+        <View
+          style={[ConfigScreenStyles.colorPreview, { backgroundColor: value }]}
+        />
         <View style={ConfigScreenStyles.colorTextContainer}>
           <Text style={ConfigScreenStyles.sectionContentText}>{value}</Text>
         </View>
@@ -244,6 +283,5 @@ const ConfigScreenStyles = StyleSheet.create({
     flex: 1,
   },
 });
-
 
 export { ConfigScreen };

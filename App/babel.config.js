@@ -3,10 +3,10 @@ module.exports = function(api) {
   return {
     presets: ['babel-preset-expo'],
     plugins: [
-      "@babel/plugin-transform-runtime",
-      ["transform-inline-environment-variables", {
-        "include": [
-          "NODE_ENV",
+      '@babel/plugin-transform-runtime',
+      ['transform-inline-environment-variables', {
+        'include': [
+          'NODE_ENV',
           'DEV_ENV',
           'DEBUG_LOGGING',
           'RUN_REACT_DEVTOOLS',

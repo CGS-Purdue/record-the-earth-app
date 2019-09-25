@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { AsyncStorage, StyleSheet,Text, View } from 'react-native';
-
-import Input from './Input';
-
+import { TextInput, AsyncStorage, StyleSheet,Text, View } from 'react-native';
 const STORAGE_KEY = 'ASYNC_STORAGE_NAME_EXAMPLE';
 
 // API
@@ -106,7 +103,7 @@ _retrieveData = async () => {
     const {name} = this.state;
     return (
       <View>
-        <Input
+        <TextInput
           placeholder={'Type your name, hit enter, and refresh!'}
           onSubmitEditing={this.save}
         />

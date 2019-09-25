@@ -1,17 +1,17 @@
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
+import * as Permissions from 'expo-permissions';
 import React, { Component } from 'react';
 import { ActivityIndicator, Alert, Image, TouchableHighlight, View } from 'react-native';
 import { Theme, ThemeColors, ThemeIcons } from '../../Theme';
-import { saveAudioRecordingFile } from '../../Utilities/Filesystem';
-import * as Permissions from 'expo-permissions';
+import { discardAudioRecordingFile, saveTempAudioFile } from '../../Utilities/Filesystem';
 import { MonoText } from '../Text';
 import { CenterView, RootView } from '../Views';
-import { AudioFormat } from './AudioFormat';
-import { AudioProfile } from './AudioProfile';
+import { AudioRecorderFormat } from './AudioRecorderFormat';
+import { AudioRecorderProfile } from './AudioRecorderProfile';
 import { AudioRecordTimer } from './AudioRecordTimer';
 import { AudioRecordButton } from './AudioRecordButton';
-import { AnimatedSpring, ProgressCircle } from '../Animated/ProgressCircle';
+import { AnimatedProgressCircle, ProgressCircle } from '../ProgressCircle';
 // import { askForAudioPermissions } from './AudioPermissionsCheck';
 
 const _styles = Theme.Styles;
@@ -20,58 +20,81 @@ const RecordIcon = ThemeIcons.createIcon(_ic_record.name, _ic_record.module, _ic
 
 
 
-
 class AudioRecord extends Component {
   constructor(props) {
     super(props);
     this.myRef = React.createRef();
+    this.state = {
+      AudioRecordTimer: null,
+      disabled: false,
+      duration: 0,
+      durationMillis: null,
+      error: null,
+      haveRecordingPermissions: false,
+      isLoading: false,
+      isRecording: false,
+      muted: false,
+      rate: 1.0,
+      recordingDuration: null,
+      recordingStarted: false,
+      recordingState: false,
+      shouldContinue: true,
+      soundPosition: null,
+      statusText: 'Ready',
+      stopRequested: false,
+      syncing: false,
+      volume: 1.0,
+    };
+
     this.recorder = null;
     this.sound = null;
     this.recording_info = null;
     this.isRecording = null;
+    this.soundfile = null;
     this.onRecordEnd = null;
-    this.state = {
-      syncing: false,
-      disabled: false,
-      duration: 0,
-      error: null,
-      haveRecordingPermissions: false,
-      isRecording: false,
-      isLoading: false,
-      durationMillis: null,
-      recordingDuration: null,
-      muted: false,
-      rate: 1.0,
-      recordingState: false,
-      statusText: "Ready",
-      AudioRecordTimer: null,
-      recordingStarted: false,
-      stopRequested: false,
-      soundPosition: null,
-      volume: 1.0,
-    };
     this.askForAudioPermissions = this.askForAudioPermissions.bind(this);
-    this.audioProfile = new AudioProfile();
-    this.profile = this.audioProfile.getProfile();
     this._onRecordEnd = this._onRecordEnd.bind(this);
-    this.audioFormat = new AudioFormat();
-    this.format = this.audioFormat.getFormat();
+    this._onDone = this._onDone.bind(this);
+
+    let recorder_profile = new AudioRecorderProfile();
+    this.profile = recorder_profile.getProfile();
+
+    let recorder_format = new AudioRecorderFormat();
+    this.format = recorder_format.getFormat();
 
     this.MAX_DURATION = 20000;
   }
 
+
+
   componentDidMount() {
-    console.log(this);
     this.askForAudioPermissions();
+    this._setAudioRecorderMode();
   }
 
   componentWillUnmount(){
-    console.log(this.state);
-    this.recordStop();
+    if (this.state.isRecording) {
+      this.stopAsyncRecord();
+    }
+    console.log('[AudioRecord] Exiting', JSON.stringify(this.state));
   }
 
-  async askForAudioPermissions () {
+  _setAudioRecorderMode = async () => {
+    let AUDIO_PROFILE = this.profile;
+    await Audio.setAudioModeAsync(AUDIO_PROFILE);
+    // await Audio.setAudioModeAsync({
+    //   allowsRecordingIOS: false,
+    //   shouldDuckAndroid: true,
+    //   staysActiveInBackground: false,
+    //   playsInSilentModeIOS: true,
+    //   playThroughEarpieceAndroid: false,
+    //   playsInSilentLockedModeIOS: true,
+    //   interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+    //   interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+    // });
+  }
 
+  askForAudioPermissions = async () => {
     let response = await Permissions.askAsync(
       Permissions.AUDIO_RECORDING,
       Permissions.CAMERA_ROLL
@@ -82,92 +105,136 @@ class AudioRecord extends Component {
     });
   }
 
-  updateRecorderState(){
-    let emptyState = {
-      canRecord: null,
-      isRecording: null,
-      duration: null,
-      recordingDuration: null,
-      isDoneRecording: null,
-      durationMillis: null,
-    };
+  _resetRecorder = async () => {
+    if (this.recorder !== null) {
+      await this.recorder.stopAndUnloadAsync();
+      this.recorder.setOnRecordingStatusUpdate(null);
+      console.log('[AudioRecord] removing existing recorder', this.recorder);
+      this.recorder = null;
+    }
+  }
 
-    let status = Object.assign(emptyState,this.state.recordingState);
-    this.setState({
-      canRecord: status.canRecord,
-      isRecording: status.isRecording,
-      isDoneRecording: status.isDoneRecording,
-      durationMillis: status.durationMillis,
-      duration: status.durationMillis,
-      recordingDuration: status.durationMillis,
+  _resetRecorderState = () => {
+     this.setState({
+      recorderState: {
+        canRecord: null,
+        duration: null,
+        durationMillis: null,
+        isDoneRecording: null,
+        isRecording: null,
+        recordingDuration: null,
+      },
     });
   }
 
+  prepareAudioRecorder = async () => {
+    await this._resetRecorder();
+    this._resetRecorderState();
+  }
+
+  updateRecorderState(){
+    let emptyState = {
+        canRecord: null,
+        isRecording: null,
+        duration: null,
+        recordingDuration: null,
+        isDoneRecording: null,
+        durationMillis: null,
+      };
+
+    let _recordingState = Object.assign(emptyState, this.state.recordingState);
+
+    this.setState({
+      canRecord: _recordingState.canRecord,         //  status.canRecord,
+      isRecording: _recordingState.isRecording,         //  status.isRecording,
+      isDoneRecording: _recordingState.isDoneRecording,         //  status.isDoneRecording,
+      durationMillis: _recordingState.durationMillis,         //  status.durationMillis,
+      duration: _recordingState.duration,         //  status.durationMillis,
+      recordingDuration: _recordingState.recordingDuration,         //  status.durationMillis,
+    });
+  }
 
   updateRecordingTimer () {
 
   }
-  _onDone() {
-    if (this.props.onRecordingFinished){
-      this.props.onRecordingFinished();
 
-      this.props.navigation.goBack()
+  _onDone = () => {
+    console.log(this.state);
+    if (this.state.shouldContinue) {
+      let recording_uri = this.recording_info.uri;
+      let soundfile = recording_uri.split('/').slice(-1)[0];
+      if (this.props.onCompleted){
+        this.props.onCompleted(soundfile);
+      }
+    } else {
+      if (this.props.onCanceled){
+        this.props.onCanceled();
+      }
     }
   }
 
-  async _saveRecording() {
+  _saveRecordingTemp = async () => {
     let sound_file = this.recording_info.uri;
-    let success = await saveAudioRecordingFile(sound_file);
-    sucess.then(this._onDone());
-  }
-  _cancelRecording(){
-      this._onDone();
+    // POSTPONE SAVING UNTIL AFTER SURVEY
+    let success = await saveTempAudioFile(sound_file);
+    if (success) {
+      console.log(success);
+      discardAudioRecordingFile(sound_file);
+    }
   }
 
-  _resetRecorder(){}
+  _saveRecording = () => {
+    // POSTPONE SAVING UNTIL AFTER SURVEY
+    this._saveRecordingTemp();
+  }
+
+  _discardRecording = async () => {
+    console.log('DISCARDING AUDIO FILE');
+    let sound_file = this.recording_info.uri;
+    let success = await discardAudioRecordingFile(sound_file);
+  }
+
+
+  _shouldCancel(){
+    console.log('CANCEL');
+    this.setState({shouldContinue: false});
+    this._discardRecording();
+    this._onDone();
+  }
+
+  _shouldContinue(){
+    console.log('CONTINUE');
+    this.setState({shouldContinue: true});
+    this._saveRecording();
+    this._onDone();
+  }
 
   _onRecordEnd(){
-
-    console.log('ended');
     Alert.alert(
       'Recording Done',
       'Would you like to save this Soundscape',
       [{
-          text: 'Cancel',
-          onPress: ()=>{ return false },
+          text: 'DISCARD',
+          onPress: ()=> this._shouldCancel(),
           style: 'cancel',
       },{
           text: 'SAVE',
-          onPress: () => this._saveRecording(),
+          onPress: () => this._shouldContinue(),
       }],
-      {cancelable: true},
+      {cancelable: false},
     );
   }
 
-  async prepareAudio() {
-    if (this.sound !== null) {
-      await this.sound.unloadAsync();
-      this.sound.setOnPlaybackStatusUpdate(null);
-      this.sound = null;
-    }
-    if (this.recorder !== null) {
-      await this.recorder.stopAndUnloadAsync();
-      this.recorder.setOnRecordingStatusUpdate(null);
-      this.recorder = null;
-    }
-  }
 
   async recordStart() {
     if (this.state.syncing){return false;}
     this.setState({syncing:true});
 
-    await this.prepareAudio();
+    await this.prepareAudioRecorder();
 
-    const AUDIO_PROFILE = this.profile;
     const RECORDING_FORMAT = this.format;
     const MAX_DURATION = this.MAX_DURATION;
 
-    await Audio.setAudioModeAsync(AUDIO_PROFILE);
     this.recorder = new Audio.Recording();
 
     try {
@@ -195,26 +262,36 @@ class AudioRecord extends Component {
   }
 
   async startAsyncRecord(){
+    console.log(this.state);
     await this.recorder.startAsync();
     this.setState({recordingStarted:true});
   }
 
   async stopAsyncRecord(){
-    await this.recorder.stopAndUnloadAsync();
-    this.setState({
-      recordingStarted:false,
-      stopRequested:false,
-    });
+    if (this.state.isRecording) {
+      await this.recorder.stopAndUnloadAsync();
+      this.setState({
+        isRecording: false,
+        recordingStarted: false,
+        stopRequested: false,
+      });
+    } else {
+      console.log('Recorder is not recording, nothing to do');
+    }
   }
 
   async recordStop () {
     if (this.state.syncing){return false;}
     this.setState({syncing:true});
-    this.setState({stopRequested:true});
+    this.setState({
+      stopRequested:true,
+    });
+
 
     try {
       this.recorder.setProgressUpdateInterval(0);
       this.recorder.setOnRecordingStatusUpdate(null);
+      console.log('recorder', this.recorder);
       await this.stopAsyncRecord();
     } catch (error) {
       console.log(error);
@@ -222,8 +299,8 @@ class AudioRecord extends Component {
 
     const info = await FileSystem.getInfoAsync(this.recorder.getURI());
     this.recording_info = info;
+    console.log(info);
     this._onRecordEnd();
-    console.log({info});
     this.setState({syncing: false});
   }
 
@@ -260,8 +337,8 @@ class AudioRecord extends Component {
             flexDirection: 'column',
           }}>
 
-          <AnimatedSpring
-            value={this.state.duration / (this.MAX_DURATION + .0000001)}
+          <AnimatedProgressCircle
+            value={this.state.duration / (this.MAX_DURATION + 0.0000001)}
           />
 
           <AudioRecordTimer

@@ -129,8 +129,6 @@ const ViewStyles = {
   appview_container: RootViewContainer,
 };
 
-console.log(ViewStyles);
-
 if (DebugStyleSettings.DEBUG_OUTLINE_STYLES_ENABLED){
   ViewStyles.container = addDebugStyles(ViewStyles.container, DebugStyles.debug_outline);
   ViewStyles.section = addDebugStyles(ViewStyles.section, DebugStyles.debug_outline);

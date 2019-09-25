@@ -33,4 +33,4 @@ export default class ImgBgView extends Component {
 }
 
 
-export { ImgBgView }
+export { ImgBgView };

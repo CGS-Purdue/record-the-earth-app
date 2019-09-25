@@ -1,18 +1,18 @@
 
 const DB_CONFIG = {
-  NAME: "Soundscape",
+  NAME: 'Soundscape',
   DESCRIPTION: 'Soundscape recording meta data and tag collection',
   VERSION: '1.0.0',
 };
 
 const CHECKDB_CONFIG = {
-  NAME: "SystemCheck",
+  NAME: 'SystemCheck',
   DESCRIPTION: 'Minimal database connection check',
   VERSION: '1.0.0',
 };
 
 const METADB_CONFIG = {
-  NAME: "Metadata",
+  NAME: 'Metadata',
   DESCRIPTION: 'Key Value storage for application related properties',
   VERSION: '1.0.0',
 };

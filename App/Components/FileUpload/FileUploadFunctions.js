@@ -5,9 +5,9 @@ import { Alert } from 'react-native';
 function getFiles() {
   this.state = {};
   this.state.selectedImages.forEach((item, i) => {
-    data.append("doc[]", {
+    data.append('doc[]', {
       uri: item.uri,
-      type: "image/jpeg",
+      type: 'image/jpeg',
       name: item.filename || `filename${i}.jpg`,
     });
   });
@@ -18,9 +18,9 @@ function getFiles() {
 
 function uploadForm(config) {
   fetch(`${config.apiBase}/load/${this.props.id}/uploadconfirmation`, {
-    method: "post",
+    method: 'post',
     headers: {
-      Accept: "application/x-www-form-urlencoded",
+      Accept: 'application/x-www-form-urlencoded',
       Authorization: `Bearer ${this.props.user.token}`,
     },
     body: config.data,
@@ -28,14 +28,14 @@ function uploadForm(config) {
   .then(res => res.json())
   .then(res => {
     Alert.alert(
-      "Success",
-      "Bill of Loading Uploaded Successfully!",
-      [{ text: "OK", onPress: () => that.props.close() }],
+      'Success',
+      'Bill of Loading Uploaded Successfully!',
+      [{ text: 'OK', onPress: () => that.props.close() }],
       { cancelable: false }
     );
   })
   .catch(err => {
-    console.error("error uploading images: ", err);
+    console.error('error uploading images: ', err);
   });
 }
 

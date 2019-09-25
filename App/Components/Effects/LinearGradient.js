@@ -11,7 +11,7 @@ class FacebookButton extends React.Component {
           style={{
             padding: 15,
             alignItems: 'center',
-            borderRadius: 5
+            borderRadius: 5,
           }}>
           <Text
             style={{
@@ -35,18 +35,18 @@ class BlackFade extends React.Component {
     return (
         <LinearGradient
           colors={['rgba(255,0,0,.2)', 'transparent', 'rgba(0,0,0,0.4)']}
-          locations={[0, .5, 1]}
+          locations={[0, 0.5, 1]}
           style={{
             position: 'absolute',
             left: 0,
             right: 0,
             top: 0,
             height: '100%',
-            width: '100%'
+            width: '100%',
           }}
         />
     );
   }
 }
 
-export { FacebookButton, BlackFade }
+export { FacebookButton, BlackFade };

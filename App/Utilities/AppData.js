@@ -44,22 +44,5 @@ function getAppData() {
 }
 
 const EXPO_CONSTANTS = Constants;
-console.log('Constants', EXPO_CONSTANTS);
-//
-// const APP_DATA = {
-//   appOwnership: Constants.appOwnership,
-//   expoVersion: Constants.expoVersion,
-//   installationId: Constants.installationId,
-//   deviceName: Constants.deviceName,
-//   deviceYearClass: Constants.deviceYearClass,
-//   isDevice: Constants.isDevice,
-//   nativeAppVersion: Constants.nativeAppVersion,
-//   nativeBuildVersion: Constants.nativeBuildVersion,
-//   platform: Constants.platform,
-//   sessionId: Constants.sessionId,
-//   statusBarHeight: Constants.statusBarHeight,
-//   systemFonts: Constants.systemFonts,
-//   manifest: Constants.manifest,
-// }
 
 export { getAppData, EXPO_CONSTANTS };

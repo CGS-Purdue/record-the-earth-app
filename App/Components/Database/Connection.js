@@ -72,10 +72,10 @@ class Connection extends Component {
 
   disconnect() {
     if (this.connection === 'undefined') {
-      return Promise.reject("Database was not open; unable to close.");
+      return Promise.reject('Database was not open; unable to close.');
     }
     return this.connection.close().then(status => {
-      console.log("[connection] Database closed.");
+      console.log('[connection] Database closed.');
       this.connection = undefined;
     });
   }

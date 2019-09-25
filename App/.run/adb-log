@@ -92,6 +92,7 @@
 # adb logcat -v thread,color,printable -b all *:E
 # adb logcat -v threadtime,monotonic,color,printable -b all WifiService:S sysui_multi_action:S CarrierServices:S
 # adb logcat -v threadtime,monotonic,color,printable -b all WifiService:S sysui_multi_action:S CarrierServices:S
+# -v process,monotonic,color,printable \
 BASE_DIR="$(npm prefix)"
 
 [[ -f .npmrc ]] && source .npmrc
@@ -102,12 +103,11 @@ BASE_DIR="$(npm prefix)"
 ABD_PATH="${ANDROID_HOME}/platform-tools"
 
 # SUPPRESS ALL '*:S'
-RUN_ABD_LOG_EXCLUDE="WifiService:S wpa_supplicant:S ConnectivityService:S"
+RUN_ABD_LOG_EXCLUDE="WifiService,wpa_supplicant,ConnectivityService,getConnectionInfo,getWifiEnabledState,sysui_multi_action"
 RUN_ABD_LOG_INCLUDE="ReactNative:V ReactNativeJS:V"
-RUN_ABD_LOG_FILTERS="${RUN_ABDLOG_EXCLUDE} ${RUN_ABDLOG_INCLUDE}"
-
+RUN_ABD_LOG_FILTERS="${RUN_ABD_LOG_EXCLUDE//,/\:S }:S ${RUN_ABD_LOG_INCLUDE//,/\:\* }"
+RUN_ABD_LOG_EXCLUDE="WifiService,wpa_supplicant,ConnectivityService,getConnectionInfo,getWifiEnabledState" echo "${RUN_ABDLOG_EXCLUDE//,/\:S }"
 # -s supress everything (then add tags you want to see)
-
 # ALL WARNINGS/ERRORS
 # -b all *:W
 # -b all *:E
@@ -115,5 +115,4 @@ RUN_ABD_LOG_FILTERS="${RUN_ABDLOG_EXCLUDE} ${RUN_ABDLOG_INCLUDE}"
 ${ABD_PATH}/adb logcat \
   --buffer=crash,main,security,events \
   -v threadtime,monotonic,color,printable \
-  -v process,monotonic,color,printable \
   ${RUN_ABD_LOG_FILTERS}

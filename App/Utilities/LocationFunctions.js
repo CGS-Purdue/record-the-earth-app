@@ -1,10 +1,28 @@
 import Constants from 'expo-constants';
-import * as Location from 'expo-location';
-import * as Permissions from 'expo-permissions';
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 
-export default class LocationFunctions extends Component {
+import * as Location from 'expo-location';
+import * as Permissions from 'expo-permissions';
+
+const getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      console.log('Permission to access location was denied');
+      return false;
+    }
+
+    try {
+      console.log('Location', Location);
+      const location = await Location.getCurrentPositionAsync({});
+      return location;
+    } catch (e) {
+        console.log('location error', e);
+    }
+};
+
+
+export default class LocationComponent extends Component {
   state = {
     location: null,
     errorMessage: null,
@@ -63,3 +81,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+
+export { LocationComponent, getLocationAsync };

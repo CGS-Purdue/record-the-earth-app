@@ -21,7 +21,7 @@ const TextAreaStyle = Object.assign({
 
 export default class ThemeTextInput extends React.Component {
   state = {
-    text: ''
+    text: '',
   };
 
   render(){
@@ -36,9 +36,9 @@ export default class ThemeTextInput extends React.Component {
         maxLength={256}
       />
      </View>
-    )
+    );
   }
 }
 
 
-export { ThemeTextInput }
+export { ThemeTextInput };

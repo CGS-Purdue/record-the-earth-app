@@ -16,7 +16,7 @@ FROM Status
 ORDER BY id
 DESC LIMIT 1;`;
 
-const _all = `SELECT * FROM Status;`;
+const _all = 'SELECT * FROM Status;';
 
 const _statements = {
   create: _create.trim().replace(/\n/g,' ').replace(/\s\s+/g,' '),

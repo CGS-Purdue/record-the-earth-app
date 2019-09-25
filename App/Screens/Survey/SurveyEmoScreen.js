@@ -10,40 +10,44 @@ const _colors = Theme.Colors;
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
 
-
 class SurveyEmoScreen extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      soundscape_data: this.props.navigation.state.params.soundscape_data,
       happy: true,
       relax: false,
       stress: false,
       curious: true,
     };
 
-    this.surveyPosition = 4;
-    this.surveyKey = 'emo';
+    this.surveyPosition = 3;
+    this.surveyKey = 'emotion';
 
-    this.surveyEmoRef = React.createRef();
-    this.state._survey = this.props.navigation.state.params.survey_data;
+    this.ref = React.createRef();
   }
 
-  getSurveyState = () => {
-    let empty = Object.create(null);
-    let surveyEmo = {
+  updateSoundscapeData = (key, data) => {
+    let soundscapeData = this.state.soundscape_data;
+    // this.setState({soundscape_data: soundscapeData});
+    Object.assign({}, soundscapeData, { [key]: data });
+
+    return soundscapeData;
+  };
+
+  getSurveyData = () => {
+    let surveyData = {
       happy: this.state.happy,
       relax: this.state.relax,
       stress: this.state.stress,
       curious: this.state.curious,
     };
-
-    let _survey_data = this.state._survey;
-    console.log(_survey_data);
-    _survey_data.tags = Object.assign(empty, this.state._survey.tags, {
-      emo: surveyEmo,
-    });
-    return _survey_data;
+    let surveyKey = this.surveyKey;
+    return {
+      key: surveyKey,
+      data: surveyData,
+    };
   };
 
   _setSuveryItemState = (item) => {
@@ -59,13 +63,22 @@ class SurveyEmoScreen extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-    <ImageBackground
-      style={_styles.bgImg}
-      source={_assets.images.img_bg_lilyflower}
-    >
-      <View style={{flex: 1, position: 'absolute', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%'}}>
-        <BlackFade />
-      </View>
+      <ImageBackground
+        style={_styles.bgImg}
+        source={_assets.images.img_bg_lilyflower}
+      >
+        <View
+          style={{
+            flex: 1,
+            position: 'absolute',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            height: '100%',
+          }}
+        >
+          <BlackFade />
+        </View>
         <RootView>
           <PadView padding={[1, 2]}>
             <CenterView>
@@ -81,39 +94,47 @@ class SurveyEmoScreen extends Component {
                 justify={'flex-start'}
                 align={'stretch'}
               >
-
-              <CheckButton
-                id={'happy'}
-                onchecked={this._setSuveryItemState}
-                text={'Make me happy'}
-              />
-              <CheckButton
-                id={'relax'}
-                onchecked={this._setSuveryItemState}
-                text={'Relax me'}
-              />
-              <CheckButton
-                id={'curious'}
-                onchecked={this._setSuveryItemState}
-                text={'Make me curious'}
-              />
-              <CheckButton
-                id={'stress'}
-                onchecked={this._setSuveryItemState}
-                text={'Stress me out'}
-              />
-              <View style={{
-                  height: 10,
-                  backgroundColor: _colors.TRANSPARENT,
-                }}></View>
-              <Button
-                title={'Continue '}
-                style={_styles.button_default}
-                color={_colors.PRIMARY}
-                accessibilityLabel="Go to next"
-                onPress={() => {
-                  let _survey_data = this.getSurveyState();
-                  navigate('SurveyGeo', { survey_data: _survey_data });
+                <CheckButton
+                  id={'happy'}
+                  onchecked={this._setSuveryItemState}
+                  text={'Make me happy'}
+                />
+                <CheckButton
+                  id={'relax'}
+                  onchecked={this._setSuveryItemState}
+                  text={'Relax me'}
+                />
+                <CheckButton
+                  id={'curious'}
+                  onchecked={this._setSuveryItemState}
+                  text={'Make me curious'}
+                />
+                <CheckButton
+                  id={'stress'}
+                  onchecked={this._setSuveryItemState}
+                  text={'Stress me out'}
+                />
+                <View
+                  style={{
+                    height: 10,
+                    backgroundColor: _colors.TRANSPARENT,
+                  }}
+                />
+                <Button
+                  title={'Continue '}
+                  style={_styles.button_default}
+                  color={_colors.PRIMARY}
+                  accessibilityLabel="Go to next"
+                  onPress={() => {
+                    let _currSurvey = this.getSurveyData();
+                    let _updatedSoundscape = this.updateSoundscapeData(
+                      _currSurvey.key,
+                      _currSurvey.data
+                    );
+                    console.log('_updatedSoundscape', _updatedSoundscape);
+                    this.props.navigation.navigate('SurveyGeo', {
+                      soundscape_data: _updatedSoundscape,
+                    });
                   }}
                 />
               </Section>

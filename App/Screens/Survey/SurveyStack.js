@@ -6,7 +6,7 @@ import { SurveyEmoScreen } from './SurveyEmoScreen';
 import { SurveyGeoScreen } from './SurveyGeoScreen';
 import { SurveyHumScreen } from './SurveyHumScreen';
 import { SurveyEndScreen } from './SurveyEndScreen';
-import { SurveyEndScreenDev } from './SurveyEndScreenDev';
+// import { SurveyEndScreenDev } from './SurveyEndScreenDev';
 import { Theme } from '../../Theme';
 const _colors = Theme.Colors;
 const _styles = Theme.Styles;
@@ -14,13 +14,30 @@ const _layout = Theme.ThemeLayout;
 
 const SurveyStack = createStackNavigator(
   {
-    SurveyDescription: { screen: SurveyDescScreen },
-    SurveyBio: { screen: SurveyBioScreen },
-    SurveyEmo: { screen: SurveyEmoScreen },
-    SurveyGeo: { screen: SurveyGeoScreen },
-    SurveyHum: { screen: SurveyHumScreen },
-    SurveyEnd: { screen: SurveyEndScreen },
-    SurveyEndDev: { screen: SurveyEndScreenDev },
+    SurveyDescription: {
+      screen: SurveyDescScreen,
+      path: 'soundscape/survey/descrption',
+    },
+    SurveyBio: {
+      screen: SurveyBioScreen,
+      path: 'soundscape/survey/bio',
+    },
+    SurveyEmo: {
+      screen: SurveyEmoScreen,
+      path: 'soundscape/survey/emo',
+    },
+    SurveyGeo: {
+      screen: SurveyGeoScreen,
+      path: 'soundscape/survey/geo',
+    },
+    SurveyHum: {
+      screen: SurveyHumScreen,
+      path: 'soundscape/survey/hum',
+    },
+    SurveyEnd: {
+      screen: SurveyEndScreen,
+      path: 'soundscape/survey/end',
+    },
   },
   {
     headerMode: 'none',

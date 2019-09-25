@@ -1,23 +1,32 @@
 import React, { Component } from 'react';
 import { Button, View, Text } from 'react-native';
+import {
+  PadView,
+  Section,
+  ImgBgFill,
+  CenterView,
+  RootView,
+} from '../../Components/Views';
 import { HeadingText } from '../../Components/Text/HeadingText';
-import { PadView, Section, ImgBgFill, CenterView, RootView } from '../../Components/Views';
+import {
+  SoundscapeSchemaKeys,
+  SoundscapeSchema,
+} from '../../Components/Database/SurveyModel/SurveySchema3';
 // import { BlurBgView } from '../../Components/Effects/BlurView';
 import { TextInput } from 'react-native-paper';
 import { Theme } from '../../Theme';
 
-
 const _colors = Theme.Colors;
 const _styles = Theme.Styles;
 const _assets = Theme.Assets;
-
-const Empty = Object.create(null);
-
-
+const soundscapeSchema = SoundscapeSchema;
+// const APP_STORAGE
 export default class PaperTexInput extends React.Component {
-  constructor (props){
-      super(props)
-      this.state = {survey_data : {Empty}}
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: '',
+    };
   }
 
   render() {
@@ -30,28 +39,40 @@ export default class PaperTexInput extends React.Component {
   }
 }
 
-
 class SurveyDescScreen extends Component {
   constructor(props) {
     super(props);
+    let timestamp = new Date();
+    this.soundscape = Object.assign({}, soundscapeSchema);
+    this.soundscape.datetime = timestamp.toISOString();
+    this.soundscape.filename = this.props.navigation.state.params.soundfile;
+    this.soundscape.LatLong = this.props.navigation.state.params.location;
+    this.soundscape.duration = 20;
     this.state = {
+      soundscape_data: this.soundscape,
       text: '',
     };
+
     this.surveyPosition = 1;
     this.surveyKey = 'description';
   }
 
-  handleSurveyButtonPress() {
-    console.log('handling survey button');
-    console.log(this);
-  }
+  updateSoundscapeData = (key, data) => {
+    let currentData = this.state.soundscape_data;
+    let newSoundscapeData = Object.assign(Object.create(null), currentData, {
+      [key]: data,
+    });
+    this.setState({ soundscape_data: newSoundscapeData });
+    return newSoundscapeData;
+  };
 
-  getSurveyDescription = () => {
-    let surveyDescription = this.state.text;
+  getData = () => {
+    let surveyData = this.state.text;
     let surveyKey = this.surveyKey;
-    let survey_data = { [surveyKey] : surveyDescription };
-    // this.setState({ });
-    return survey_data;
+    return {
+      key: surveyKey,
+      data: surveyData,
+    };
   };
 
   render() {
@@ -60,7 +81,6 @@ class SurveyDescScreen extends Component {
         <RootView>
           <PadView padding={[2, 3]}>
             <CenterView>
-
               <Section weight={1} expand={true} shrink={true}>
                 <HeadingText style={_styles.survey_desc_title}>
                   {'Describe the sounds you heard'}
@@ -99,17 +119,17 @@ class SurveyDescScreen extends Component {
                   color={_colors.PRIMARY}
                   accessibilityLabel={'Go to next'}
                   onPress={() => {
-                    let _survey_data = this.getSurveyDescription();
+                    let _data = this.getData();
+                    let _updatedSoundscape = this.updateSoundscapeData(
+                      _data.key,
+                      _data.data
+                    );
                     this.props.navigation.navigate('SurveyBio', {
-                      survey_data: _survey_data,
+                      soundscape_data: _updatedSoundscape,
                     });
                   }}
                 />
               </Section>
-              <Text style={[_styles.BtnTxt, {
-                  color: 'rgba(225,225,225,.6)',
-                  fontSize: 18
-                }]}>{"Soundscape Survey Preview"}</Text>
             </CenterView>
           </PadView>
         </RootView>

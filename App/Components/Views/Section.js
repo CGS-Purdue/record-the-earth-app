@@ -70,7 +70,7 @@ class Section extends Component {
         flexGrow : this.props.expand ? (1 * wt) : 0,
         flexShrink : this.props.collapse ? 1 : 0,
       }
-    )
+    );
     return style;
   }
 

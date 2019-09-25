@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
-import { SafeAreaView, TouchableOpacity, FlatList, View, StyleSheet } from 'react-native';
-import { Section, ImgBgFill, CenterView, PadView,  RootView } from '../../Components/Views';
+import {
+  SafeAreaView,
+  TouchableOpacity,
+  FlatList,
+  View,
+  StyleSheet,
+} from 'react-native';
+import {
+  Section,
+  ImgBgFill,
+  CenterView,
+  PadView,
+  RootView,
+} from '../../Components/Views';
 import { HeadingText } from '../../Components/Text/HeadingText';
 import { Surface, Text, List, Title } from 'react-native-paper';
 import * as FileSystem from 'expo-file-system';
 import Constants from 'expo-constants';
-
 
 // const APP_TEMP = FileSystem.cacheDirectory;
 // const DATA_DIR = 'data';
@@ -14,43 +25,49 @@ import Constants from 'expo-constants';
 // const file_name = file_uri.split('/').slice(-1);
 // const new_uri = [storage_path,file_name].join('/');
 
-
-
 function FileItem({ id, name, selected, onSelect }) {
   return (
-    <View style={{
+    <View
+      style={{
         flex: 1,
         width: '100%',
         backgroundColor: '#444444',
         display: 'flex',
-      }}>
-        <TouchableOpacity
-          onPress={() => onSelect(id)}
-          style={[styles.item,
-            { backgroundColor: selected ? 'rgba(255,255,255,.5)' : 'rgba(255,255,255,.4)' },
-          ]}
-        >
+      }}
+    >
+      <TouchableOpacity
+        onPress={() => onSelect(id)}
+        style={[
+          styles.item,
+          {
+            backgroundColor: selected
+              ? 'rgba(255,255,255,.5)'
+              : 'rgba(255,255,255,.4)',
+          },
+        ]}
+      >
         <Surface style={styles.surface}>
           <Text style={styles.item}>{name}</Text>
         </Surface>
       </TouchableOpacity>
-  </View>
+    </View>
   );
 }
 
 function FListHead() {
   return (
-    <View style={{
+    <View
+      style={{
         flex: 1,
         width: '100%',
         backgroundColor: '#444444',
         display: 'flex',
-      }}>
+      }}
+    >
       <Title style={styles.item}>{'Files'}</Title>
     </View>
   );
 }
-
 
 class FileListScreen extends Component {
   constructor(props) {
@@ -58,8 +75,8 @@ class FileListScreen extends Component {
     this.state = {
       intialized: false,
       files: new Map(),
-      selected: { id: 0},
-    }
+      selected: { id: 0 },
+    };
 
     let APP_PATH = FileSystem.documentDirectory;
     let SOUND_DIR = 'media';
@@ -69,18 +86,20 @@ class FileListScreen extends Component {
       appPath: APP_PATH,
       soundDir: SOUND_DIR,
       soundPath: SOUND_PATH,
-    }
+    };
 
     this.updateFiles = this.updateFiles.bind(this);
     this.getFileList = this.getFileList.bind(this);
   }
 
-
-  updateFiles(items){
+  updateFiles(items) {
     let location = this.config.soundPath;
-    let _files = items.map(function(item, num){
-    let name = item.split('/').slice(-1).join('');
-    let obj = Object.create(null);
+    let _files = items.map(function(item, num) {
+      let name = item
+        .split('/')
+        .slice(-1)
+        .join('');
+      let obj = Object.create(null);
       obj.id = name.replace('.m4a', '');
       obj.name = name;
       obj.location = location;
@@ -93,22 +112,21 @@ class FileListScreen extends Component {
       };
     });
     console.log('updateFiles', _files);
-    this.setState({files: _files});
+    this.setState({ files: _files });
   }
 
-  async getFileList (location) {
+  async getFileList(location) {
     let storagePath = this.config.soundPath;
     this.filePromise = await FileSystem.readDirectoryAsync(storagePath);
-    Promise.resolve(this.filePromise).then(
-      (result) => {
-        if (!result){ console.log('no files');}
-        else {
-          console.log('resolve', result);
-          this.updateFiles(result);
-       }
-    })
+    Promise.resolve(this.filePromise).then((result) => {
+      if (!result) {
+        console.log('no files');
+      } else {
+        console.log('resolve', result);
+        this.updateFiles(result);
+      }
+    });
   }
-
 
   componentWillMount() {
     if (!this.state.intialized) {
@@ -127,8 +145,8 @@ class FileListScreen extends Component {
 
   setSelected(newSelected) {
     this.setState({
-      selected: newSelected
-    })
+      selected: newSelected,
+    });
   }
 
   onSelect = (id) => {
@@ -138,63 +156,65 @@ class FileListScreen extends Component {
     //   this.setSelected(newSelected);
     // } depend on anything outside of the data prop, stick it here and treat it immutably.
     // Type	Required
-     // any	No
+    // any	No
     // [selected],
-  }
+  };
 
   render() {
     console.log();
-      return (
-
-    <Surface style={{
-        backgroundColor: '#303030',
-        flex: 1,
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        paddingTop:20,
-        paddingHorizontal: 10,
-        justifyContent: 'center',
-      }}>
+    return (
+      <Surface
+        style={{
+          backgroundColor: '#303030',
+          flex: 1,
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          paddingTop: 20,
+          paddingHorizontal: 10,
+          justifyContent: 'center',
+        }}
+      >
         <FlatList
-            data={this.state.files}
-            initialNumToRender={6}
-            extraData={this.state.selected}
-            ListHeaderComponent={()=>{
-              return (
-                <View style={styles.titlebox}>
-                  <Text style={styles.title}>{"File List"}</Text>
-                </View>)}
-            }
-            keyExtractor={(item)=>item.id}
-            renderItem={({item}) => (
-              <FileItem
-                id={item.id}
-                selected={!!this.state.id}
-                name={item.name}
-                data={item.data}
-                onSelect={this.onSelect}
-              />
-            )}
-          />
-        </Surface>
-      );
+          data={this.state.files}
+          initialNumToRender={6}
+          extraData={this.state.selected}
+          ListHeaderComponent={() => {
+            return (
+              <View style={styles.titlebox}>
+                <Text style={styles.title}>{'File List'}</Text>
+              </View>
+            );
+          }}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <FileItem
+              id={item.id}
+              selected={!!this.state.id}
+              name={item.name}
+              data={item.data}
+              onSelect={this.onSelect}
+            />
+          )}
+        />
+      </Surface>
+    );
   }
 }
 
 const styles = StyleSheet.create({
   titlebox: {
-      flex: 1,
-      width: '100%',
-      backgroundColor: '#222',
-      paddingVertical: 6,
-      display: 'flex',
-    },
-    title: {
-      fontSize: 28,
-      textAlign: 'center',
-      color: '#bbb',
-    },
+    flex: 1,
+    width: '100%',
+    backgroundColor: '#222',
+    paddingVertical: 6,
+    display: 'flex',
+  },
+  title: {
+    fontSize: 28,
+    textAlign: 'center',
+    color: '#bbb',
+  },
   surface: {
     flex: 1,
     padding: 8,

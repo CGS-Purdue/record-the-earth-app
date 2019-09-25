@@ -5,7 +5,7 @@ import { Platform, StatusBar, View } from 'react-native';
 import { useScreens } from 'react-native-screens';
 import {
   RootView,
-  ImgBgFill
+  ImgBgFill,
 } from './Components/Views';
 
 import AppNavContainer from './Screens/RootNavigation';
@@ -27,7 +27,7 @@ class App extends Component {
   state = {isReady: false};
 
   _appLoadingOnError = (err) => {
-    console.log("LOADING ERROR");
+    console.log('LOADING ERROR');
     console.warn(err);
   }
 
@@ -46,7 +46,7 @@ class App extends Component {
         <View style={{flex: 1, backgroundColor: 'blue'}}>
         <ImgBgFill source={_assets.images.img_background}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavContainer theme={"dark"} ref={nav => {this.navigator = nav;} }/>
+        <AppNavContainer theme={'dark'} ref={nav => {this.navigator = nav;} }/>
         </ImgBgFill>
       </View>
       );
@@ -59,7 +59,6 @@ class App extends Component {
           _assets.logos,
           _assets.images
         );
-
       const cacheFonts = _fonts.loadFontMap(_fonts.FontMap);
       const cachedIcons = _icons.load(_icons.Icons);
       const cacheImages = Object.entries(_image_assets).map(
@@ -76,7 +75,6 @@ class App extends Component {
           return obj;
         }
       );
-      console.log(cacheFonts);
       return Promise.all([ cacheImages, cachedIcons, cacheFonts ]);
    }
 }

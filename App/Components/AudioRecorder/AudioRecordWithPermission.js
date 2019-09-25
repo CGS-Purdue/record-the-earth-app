@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as Permissions from 'expo-permissions';
-import { Platform, Button } from 'react-native';
-import { View } from 'react-native';
+import { Platform, Button , View } from 'react-native';
+
 import { CenterView, RootView } from '../Views';
 import { MonoText } from '../Text';
 import { AudioRecord } from './AudioRecord';
@@ -11,7 +11,7 @@ class AudioRecordWithPermission extends Component {
     super(props);
     this.state = {
       haveRecordingPermissions: false,
-    }
+    };
 
     this.shouldCheckPermissions = true;
     this.askForAudioPermissions = this.askForAudioPermissions.bind(this);
@@ -24,7 +24,7 @@ class AudioRecordWithPermission extends Component {
 
 
   async askForAudioPermissions () {
-    console.log("GETTING PERMISSION");
+    console.log('GETTING PERMISSION');
       const { status, expires, permissions } = await Permissions.getAsync(
         Permissions.AUDIO_RECORDING,
         Permissions.CAMERA_ROLL
@@ -41,7 +41,7 @@ class AudioRecordWithPermission extends Component {
       console.log('status', status);
 
       this.setState({
-        haveRecordingPermissions: status
+        haveRecordingPermissions: status,
       });
   }
 

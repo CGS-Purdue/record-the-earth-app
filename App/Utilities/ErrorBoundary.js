@@ -32,7 +32,7 @@ class ErrorBoundary extends Component {
       error: error,
       errorInfo: errorInfo,
       lastError : JSON.stringify(error),
-    })
+    });
 
     if (__DEV__) {
       console.log(error, errorInfo);
@@ -45,7 +45,7 @@ class ErrorBoundary extends Component {
   // dispatch error to logs
   async componentWillMount() {
     const lastError = await AsyncStorage.getItem('lastError');
-    if(__DEV__){
+    if (__DEV__){
       if (lastError) {
         console.log({
           sender: 'mobile-ops',
@@ -64,7 +64,7 @@ class ErrorBoundary extends Component {
     if (this.state.hasError) {
       return (
         <Text>Something went wrong.</Text>
-      )
+      );
     }
 
     return this.props.children;

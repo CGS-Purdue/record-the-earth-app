@@ -6,11 +6,7 @@ import { Theme } from '../../Theme';
 const _styles = Theme.Styles;
 const _fonts = Theme.Fonts;
 
-const TITLE_FONT =_fonts.getFont(_fonts.FontType.TITLE_FONT);
-
-console.log(_fonts);
-console.log(_fonts.FontMap[_fonts.FontType.TITLE_FONT]);
-console.log(TITLE_FONT);
+const TITLE_FONT = _fonts.getFont(_fonts.FontType.TITLE_FONT);
 
 // color // fontSize // lineHeight
 
@@ -46,8 +42,7 @@ class HeadingText extends Component {
 
   async _loadFontAsync() {
       try {
-        console.log('headingFont', {[TITLE_FONT.name ] : TITLE_FONT.src });
-        let headingFont = await _fonts.loadFont({[TITLE_FONT.name ] : TITLE_FONT.src })
+        let headingFont = await _fonts.loadFont({[TITLE_FONT.name ] : TITLE_FONT.src });
       } catch (e) {
         console.log(e.message);
       }
@@ -63,7 +58,7 @@ class HeadingText extends Component {
         style={[
           this.props.style,
           { fontFamily: this.state.fontFamily },
-          this.getHeadingStyle()
+          this.getHeadingStyle(),
       ]}/>
     );
   }

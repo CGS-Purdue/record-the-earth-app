@@ -1,6 +1,7 @@
 import { ThemeColors } from './Colors';
-import { ThemeFonts } from './Fonts';
-import { Layout } from './Fonts';
+import { ThemeFonts  } from './Fonts';
+import { Layout } from './Layout';
+
 
 const DISABLED_OPACITY = 0.5;
 const RATE_SCALE = 3.0;

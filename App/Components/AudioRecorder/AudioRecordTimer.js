@@ -18,7 +18,7 @@ class AudioRecordTimer extends Component {
     this.duration = 10000;
     this.state = {
       active: false,
-    }
+    };
   }
 
   _durationToTimestamp(ms) {

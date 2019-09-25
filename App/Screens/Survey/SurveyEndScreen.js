@@ -1,71 +1,264 @@
 import React, { Component, createRef } from 'react';
-import { Button, ImageBackground, View } from 'react-native';
+import { Button, ImageBackground } from 'react-native';
+import { SoundscapeSchema} from '../../Components/Database/SurveyModel/SurveySchema3';
+import { CenterView, PadView, Section, RootView } from '../../Components/Views';
+import { HttpsUpload } from '../../Components/FileUpload/HttpsUpload';
 import { MonoText } from '../../Components/Text/MonoText';
-import { CenterView, PadView, RootView } from '../../Components/Views';
+import { getAudioFileFromTemp } from '../../Utilities/Filesystem';
+import { Base64 } from '../../Utilities/Base64';
+import {
+  isPromise,
+  isDefined,
+  isArray,
+  isObject,
+  isString,
+} from '../../Utilities/Valid';
+import ServerConfig from '../../Config/Server';
+import * as StorageConfig from '../../Config/Storage';
 import { Theme } from '../../Theme';
-
+import * as FileSystem from 'expo-file-system';
+// import * as Device from 'expo-device';
 const _colors = Theme.Colors;
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
-const SoundDB = {};
-// const sdb = SoundDB;
 
+// FileSystem.getInfoAsync
+const APP_STORAGE = FileSystem.documentDirectory;
+const MEDIA_DIR = 'media';
+const MEDIA_TEMP = 'soundscape_temp';
+const APPSTORAGE_TEMP_PATH = [APP_STORAGE, MEDIA_TEMP].join('');
+// const APPSTORAGE_MEDIA_PATH = [APP_STORAGE, MEDIA_DIR].join('');
+
+
+// const FILE_NAME = file_path.split('/').slice(-1);
+// const TEMP_PATH = [ storage_path, file_name].join('/');
+// console.log(temp_path);
+
+// const DATA_DIR = 'data';
+// const DB_DIR = 'SQLite';
+// const prefix = 'file://';
+
+// const SoundDB = {};
+// const sdb = SoundDB`;
+
+///  appVersion   , "v3.0.0"
+///  bio          , "Birds, Insects, Frogs and Reptiles, Mammals"
+///  description  , "upload from new rte3"
+///  datetime     , "08/04/2019 01:52"
+///  emotion      , "Make me curious, Amaze me, Stress me out, Make me happy, Relax me"
+///  filename     , 'FILE_NAME'
+///  geo          , "Wind, Water, Thunder, Rain"
+///  anthro       , "Machines, Vehicles, Sirens Alarms, Talking"
+///  LatLong      , "40.422968,-86.922710"
+///  duration     , "20"
+///  deviceModel  , "motorola one X"
+///  file         , file://sound_file
+///  osVersion    , "Android OS 4.1.2 / API-16 (JZO54K/S7710XXAND2)"
+
+const UploaderRef = createRef('SoundscapeSurveyFormUploadRef');
 
 
 class SurveyEndScreen extends Component {
   constructor(props) {
     super(props);
-    this.surveyPosition = 4;
-    this.surveyKey = 'emo';
-
     this.ref = createRef();
     this.state = {
-      upload_complete: false,
-      result: '',
+      soundscape_data: this.props.navigation.state.params.soundscape_data,
+      survey_data_clean: null,
+      survey_data_string: '',
+      survey_data_formdata: false,
+      upload_disabled: false,
+      upload_ready: false,
+      upload_completed: false,
+      upload_failed: false,
+      upload_progress: false,
+      fileinfo_uri: false,
+      fileinfo_ext: false,
     };
-    this.state._survey = this.props.navigation.state.params.survey_data;
-    // sdb.create();
+
+    this.soundscape_data = this.props.navigation.state.params.soundscape_data;
+  }
+
+  componentDidUpdate(prevProps) {
+
+  }
+
+  componentDidMount() {
+    this.parseSurveyData();
   }
 
   dataToString = (data) => {
     return JSON.stringify(data);
   };
 
-  mapSurveyToTags = (data) => {
-    let items = Object.keys(data);
-    let tagData = items.map(function(item) {
-      let values = data[item];
-      console.log('item', item, values);
-      let taglist = [];
-      for (let tag of Object.keys(values)) {
-        if (values[tag]) {
-          taglist.push(tag);
-        }
+  object_keys_checksum = (obj) => {
+    return Object.getOwnPropertyNames(obj)
+    .join('')
+    .split('')
+    .map((a) => {
+      return a.codePointAt(0) - 96;
+    })
+    .reduce((a, b) => {
+      return a + b;
+    });
+  };
+
+  validatePreFlightCheck = (data) => {
+    if (Object.keys(data) === Object.keys(SoundscapeSchema)) {
+      console.log('tested:', Object.keys(data).length, 'expected');
+      console.log(data, SoundscapeSchema);
+      return false;
+    }
+    // if (
+      //   object_keys_checksum(data) !==
+      //   {
+      //     object_keys_checksum,
+      //   }(SoundscapeSchema)
+      // ) {
+      //   this.setState({
+      //     upload_ready: false,
+      //     reason: 'keys missing or invalid',
+      //   });
+      //   console.log(' validatePreFlightCheck keys missing or invalid');
+      //   return false;
+    // }
+
+    console.log('data input looks good, sending forwa');
+    this.setState({ survey_data_clean: data });
+    this.getFormData(data);
+  };
+
+  reduceTagList(tagList) {
+    var keylist = [];
+    var result = Object.entries(tagList).forEach(function(tag) {
+      if (tag[1]) {
+        keylist.push(tag[0]);
+      }
+    });
+    return JSON.stringify(keylist.join(','));
+  }
+
+  asyncGetFileFromTemp = async (name) => {
+    try {
+      let response = await getAudioFileFromTemp(name);
+      console.log('response', response);
+      let file_info = await response.uri;
+      console.log('file_info', file_info);
+
+      // this.updateState(file_info);
+
+      this.setState({
+        soundfile_uri: file_info.uri,
+        soundfile_status: 'file-loaded',
+      });
+      console.log('file_info', file_info);
+    } catch (error) {
+      console.error(error);
+    }
+    return file_info;
+  };
+
+
+
+  getFormDataFileParts = (form, file_name) => {
+    const target_uri = [
+      'file:/',
+       APPSTORAGE_TEMP_PATH,
+       file_name,
+    ].join('/');
+
+    return form.append('file', target_uri, file_name);
+  };
+
+
+  _xhrFormUpload = () => {
+  const { hostname, pathname } = JSON.parse(Base64.decode(ServerConfig));
+  let address = ['https:/', hostname, pathname].join('/');
+  console.log('[_xhrFormUpload] hostname pathname', address);
+
+  const formData = this.getFormData();
+  console.log('formData', formData);
+
+  var request = new XMLHttpRequest();
+  request.onreadystatechange = (e) => {
+    if (request.readyState !== 4) {
+      console.warn(e);
+      return;
+    }
+    if (request.status === 200) {
+      console.log('success', request.responseText);
+    } else {
+      console.warn('error', e);
+    }
+    request.open('POST', address);
+    console.log(formData, address);
+    request.send(formData);
+  };
+};
+
+
+  getFormDataExtraData = () => {
+    const { data } = JSON.parse(Base64.decode(ServerConfig));
+    console.log('data', data);
+    console.log('data', typeof data, { data });
+    return  [data[2], data[0], data[1], data[3]].join('-');
+  }
+
+
+  getSurvey2FormData = (data) => {
+
+    const formData = new FormData();
+
+    for (let entry of Object.entries(data)) {
+      if (!typeof entry[0] === 'string') {
+        console.log(`issue with form key ${entry[0]}`);
       }
 
-      // let returnItem = Object.create({});
-      // Object.defineProperty(returnItem, `${item}`, {
-      //   value: taglist.join(','),
-      //   writable: false,
-      // });
-      // return returnItem;
-      return { [item]: taglist.join(',') };
+      formData.append(entry[0], entry[1]);
+      console.log('formData', formData);
+    }
+    let extra = this.getFormDataExtraData();
+    formData.append('uploadToken',  extra);
+
+    console.log('[getSurvey2FormData] FormData', fileUpload);
+    return formData;
+  }
+
+  getFormData() {
+    let surveydata = this.state.survey_data_clean;
+    let upload_form_data = this.getSurvey2FormData(surveydata);
+
+    this.setState({
+      survey_data_formdata: upload_form_data,
+      upload_ready: true,
     });
+  }
 
-    return Object.assign(...tagData);
+  parseSurveyData = () => {
+    var clean = this.state.soundscape_data;
+    // let resultfile = this.asyncGetFileFromTemp();
+    // resultfile.then((resolved) => {
+    // this.setState({
+    //   upload_ready: true,
+    //   fileinfo_uri: null,
+    //   fileinfo_ext: false,
+    // });
+    // this.getFormData();
+    // return resolved;
+    // });
+    clean.bio = this.reduceTagList(this.state.soundscape_data.bio);
+    clean.emotion = this.reduceTagList(this.state.soundscape_data.emotion);
+    clean.geo = this.reduceTagList(this.state.soundscape_data.geo);
+    clean.anthro = this.reduceTagList(this.state.soundscape_data.anthro);
+    clean.deviceModel = 'motorola one X';
+    clean.osVersion = 'Android OS 4.1.2 / API-16 (JZO54K/S7710XXAND2)';
+    // this.setState({ upload_ready: true, });
+    this.validatePreFlightCheck(clean);
   };
 
-  submitSurvey = () => {
-    let { tags, ...rest } = this.state._survey;
-    let surveyTags = this.mapSurveyToTags(tags);
-    let survey = Object.assign({ ...rest }, surveyTags);
-    let surveyString = this.dataToString(survey);
-    this.setState({ result: surveyString });
-    this.props.navigation.navigate('Main');
-  };
+
 
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <ImageBackground
         style={_styles.bgImg}
@@ -74,17 +267,31 @@ class SurveyEndScreen extends Component {
         <RootView>
           <PadView padding={[1]}>
             <CenterView>
-              <View>
+              <Section justify={'center'} align={'stretch'} weight={1}>
+                <HttpsUpload
+                  ref={UploaderRef}
+                  dataBus={this.state.upload_data}
+                  uploadDisabled={this.state.upload_disabled}
+                />
+              </Section>
+
+              <Section justify={'center'} align={'stretch'} weight={1}>
                 <Button
-                  title="Submit"
+                  title={'Submit'}
+                  onPress={this.parseSurveyData}
                   style={_styles.button_default}
                   color={_colors.PRIMARY}
-                  accessibilityLabel="Submit"
-                  onPress={this.submitSurvey}
+                  accessibilityLabel={'Submit'}
                 />
-              <MonoText>{this.state.surveyText}</MonoText>
-                <MonoText>{this.state.result}</MonoText>
-              </View>
+                <MonoText style={{ color: 'white' }}>
+                  {this.state.survey_data_formdata
+                    ? JSON.stringify(this.stat.survey_data_formdata)
+                    : JSON.stringify(this.state.soundscape_data)}
+                </MonoText>
+                <MonoText style={{ color: 'white' }}>
+                  {this.survey_json_string}
+                </MonoText>
+              </Section>
             </CenterView>
           </PadView>
         </RootView>

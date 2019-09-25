@@ -17,7 +17,7 @@ import { Layout } from '../Layout';
 const TAB_BAR_SIZE = Layout.TEXT_SIZE * 3;
 const TAB_BAR_TEXT_SIZE = (TAB_BAR_SIZE * 1) / 5;
 const TAB_BAR_ICON_SIZE = (TAB_BAR_SIZE * 2) / 5;
-const TAB_BAR_PADDING = (TAB_BAR_SIZE * 1) / 5 ;
+const TAB_BAR_PADDING = (TAB_BAR_SIZE * 1) / 5;
 
 
 // TabBarBottom - Main TabNav Component

@@ -63,7 +63,7 @@ const Grays = {
   GRA_700: ColorLib.emperor,
   GRA_800: ColorLib.tundora,
   GRA_900: ColorLib.mineshaft,
-  GRA_000: ColorLib.codgray
+  GRA_000: ColorLib.codgray,
 };
 
 // TRANSPARENT DARKER ---------------------

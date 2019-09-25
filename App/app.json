@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "RecordTheEarth3 Demo",
-    "description": "Updating RtE react-native app to be fully managed with expo.",
+    "name": "RecordTheEarth3",
+    "description": "Record the Earth Native build for iOS and Android",
     "entryPoint": "init.js",
     "icon": "./icon.png",
     "orientation": "portrait",
@@ -28,18 +28,15 @@
       "backgroundColor": "#000000",
       "resizeMode": "contain"
     },
-    "version": "0.0.9",
+    "version": "0.1.0",
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
-      "./Theme/Assets/btn/*.png",
-      "./Theme/Assets/fonts/*.ttf",
-      "./Theme/Assets/icons/*.png",
-      "./Theme/Assets/img/*.png",
-      "./Theme/Assets/img/*.jpg",
-      "./Theme/Assets/logo/*.png",
-      "./Theme/Assets/logo/*.svg"
+      "./Theme/Assets/**/*.ttf",
+      "./Theme/Assets/**/*.jpg",
+      "./Theme/Assets/**/**.png",
+      "./Theme/Assets/**/*.svg"
     ],
     "ios": {
       "supportsTablet": false,
@@ -59,6 +56,7 @@
     },
     "githubUrl": "https://github.com/charrismatic/record-the-earth-expo-react-native",
     "extra": {
+      "ExtraKey": "3102",
       "debug_flags": {
         "DEBUG_OUTLINE_STYLES": true,
         "DEV_DATA_MOCK_SOUNDFILES": false

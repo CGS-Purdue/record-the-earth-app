@@ -17,7 +17,7 @@ IF NOT EXISTS Soundscapes (
   pid text,
   isUploaded text not null);`;
 
-const _drop = `DROP TABLE IF EXISTS Soundscapes;`;
+const _drop = 'DROP TABLE IF EXISTS Soundscapes;';
 
 const _insert = `INSERT
 INTO Soundscapes (

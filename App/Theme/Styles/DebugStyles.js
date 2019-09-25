@@ -48,6 +48,6 @@ const DebugStyles = {
 const addDebugStyles = (styles, debug) => {
   if (!styles) { return debug; }
   return Object.assign(styles, debug);
-}
+};
 
 export { DebugStyles, DebugStyleSettings, addDebugStyles};
