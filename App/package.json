@@ -1,6 +1,6 @@
 {
   "name": "record-the-earth-react-native",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "record the earth react native project files for expo and snack",
   "author": "Matt Harris <charrismatic@protonmail.com> (https://charrismatic.github.io/)",
   "scripts": {
