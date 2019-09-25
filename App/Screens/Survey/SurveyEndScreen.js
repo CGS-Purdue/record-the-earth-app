@@ -2,7 +2,6 @@ import React, { Component, createRef } from 'react';
 import { Button, ImageBackground } from 'react-native';
 import { SoundscapeSchema} from '../../Components/Database/SurveyModel/SurveySchema3';
 import { CenterView, PadView, Section, RootView } from '../../Components/Views';
-import { HttpsUpload } from '../../Components/FileUpload/HttpsUpload';
 import { MonoText } from '../../Components/Text/MonoText';
 import { getAudioFileFromTemp } from '../../Utilities/Filesystem';
 import { Base64 } from '../../Utilities/Base64';
@@ -79,12 +78,35 @@ class SurveyEndScreen extends Component {
     this.soundscape_data = this.props.navigation.state.params.soundscape_data;
   }
 
-  componentDidUpdate(prevProps) {
+  _xhrFormUpload(data){
 
-  }
+    const { hostname, pathname } = JSON.parse(Base64.decode(ServerConfig));
+    let address = ['https:/', hostname, pathname].join('/');
 
-  componentDidMount() {
-    this.parseSurveyData();
+    console.log('[_xhrFormUpload] hostname pathname', address);
+
+    console.log('data', data);
+
+    if (!hostname) {
+      return false
+    }
+
+    let formData = this.getFormData(data);
+    console.log('formData', formData);;
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = e => {
+      if (request.readyState !== 4) {
+        return;
+      }
+      if (request.status === 200) {
+        console.log('success', request.responseText);
+      } else {
+        console.warn('error', e);
+      }
+      request.open('POST', address);
+      request.send(formData);
+    }
   }
 
   dataToString = (data) => {
@@ -109,6 +131,7 @@ class SurveyEndScreen extends Component {
       console.log(data, SoundscapeSchema);
       return false;
     }
+
     // if (
       //   object_keys_checksum(data) !==
       //   {
@@ -124,8 +147,8 @@ class SurveyEndScreen extends Component {
     // }
 
     console.log('data input looks good, sending forwa');
-    this.setState({ survey_data_clean: data });
-    this.getFormData(data);
+    this.setState({ dataIsValid: true });
+    return true;
   };
 
   reduceTagList(tagList) {
@@ -160,52 +183,24 @@ class SurveyEndScreen extends Component {
 
 
 
-  getFormDataFileParts = (form, file_name) => {
-    const target_uri = [
-      'file:/',
-       APPSTORAGE_TEMP_PATH,
-       file_name,
-    ].join('/');
-
-    return form.append('file', target_uri, file_name);
+  getFormDataFilePath = (file_name) => {
+    return [APPSTORAGE_TEMP_PATH, file_name ].join('/');
   };
-
-
-  _xhrFormUpload = () => {
-  const { hostname, pathname } = JSON.parse(Base64.decode(ServerConfig));
-  let address = ['https:/', hostname, pathname].join('/');
-  console.log('[_xhrFormUpload] hostname pathname', address);
-
-  const formData = this.getFormData();
-  console.log('formData', formData);
-
-  var request = new XMLHttpRequest();
-  request.onreadystatechange = (e) => {
-    if (request.readyState !== 4) {
-      console.warn(e);
-      return;
-    }
-    if (request.status === 200) {
-      console.log('success', request.responseText);
-    } else {
-      console.warn('error', e);
-    }
-    request.open('POST', address);
-    console.log(formData, address);
-    request.send(formData);
-  };
-};
 
 
   getFormDataExtraData = () => {
     const { data } = JSON.parse(Base64.decode(ServerConfig));
-    console.log('data', data);
-    console.log('data', typeof data, { data });
     return  [data[2], data[0], data[1], data[3]].join('-');
   }
 
 
-  getSurvey2FormData = (data) => {
+  getFormData(data) {
+    if (!data) {
+      console.log('[getSurvey2FormData] no data', data);
+    }
+
+    console.log('form data', data);
+    const fileUploadName = data.filename;
 
     const formData = new FormData();
 
@@ -213,49 +208,65 @@ class SurveyEndScreen extends Component {
       if (!typeof entry[0] === 'string') {
         console.log(`issue with form key ${entry[0]}`);
       }
-
       formData.append(entry[0], entry[1]);
-      console.log('formData', formData);
+      console.log('apend formData', entry);
     }
-    let extra = this.getFormDataExtraData();
-    formData.append('uploadToken',  extra);
+    let formExtra = this.getFormDataExtraData();
+    formData.append('uploadToken',  formExtra);
 
-    console.log('[getSurvey2FormData] FormData', fileUpload);
-    return formData;
-  }
+    let formFile = this.getFormDataFilePath( fileUploadName );
 
-  getFormData() {
-    let surveydata = this.state.survey_data_clean;
-    let upload_form_data = this.getSurvey2FormData(surveydata);
+    console.log(formFile)
+
+    formData.append('file',  formFile);
+
+    console.log('[getSurvey2FormData] FormData', JSON.stringify(formData));
 
     this.setState({
-      survey_data_formdata: upload_form_data,
+      survey_formdata: formData,
       upload_ready: true,
     });
+    return formData;
+
   }
 
   parseSurveyData = () => {
     var clean = this.state.soundscape_data;
     // let resultfile = this.asyncGetFileFromTemp();
     // resultfile.then((resolved) => {
-    // this.setState({
-    //   upload_ready: true,
-    //   fileinfo_uri: null,
-    //   fileinfo_ext: false,
-    // });
-    // this.getFormData();
-    // return resolved;
-    // });
     clean.bio = this.reduceTagList(this.state.soundscape_data.bio);
     clean.emotion = this.reduceTagList(this.state.soundscape_data.emotion);
     clean.geo = this.reduceTagList(this.state.soundscape_data.geo);
     clean.anthro = this.reduceTagList(this.state.soundscape_data.anthro);
     clean.deviceModel = 'motorola one X';
     clean.osVersion = 'Android OS 4.1.2 / API-16 (JZO54K/S7710XXAND2)';
-    // this.setState({ upload_ready: true, });
-    this.validatePreFlightCheck(clean);
-  };
+    this.setState({
+      soundscape_data_clean: clean,
+    });
+    return clean;
+  }
 
+  getParsedData() {
+    let parsed = this.state.soundscape_data_clean;
+    return parsed;
+  }
+
+  initUpload = () => {
+    let clean = this.getParsedData();
+    console.log('CLEAN ', clean);
+    let valid = this.validatePreFlightCheck(clean);
+    if (!valid){
+      console.log('issue with survey data', valid);
+      return false;
+    }
+    console.log('sending');
+    this._xhrFormUpload(clean);
+
+  }
+
+  componentDidMount() {
+    this.parseSurveyData();
+  }
 
 
   render() {
@@ -268,17 +279,13 @@ class SurveyEndScreen extends Component {
           <PadView padding={[1]}>
             <CenterView>
               <Section justify={'center'} align={'stretch'} weight={1}>
-                <HttpsUpload
-                  ref={UploaderRef}
-                  dataBus={this.state.upload_data}
-                  uploadDisabled={this.state.upload_disabled}
-                />
+
               </Section>
 
               <Section justify={'center'} align={'stretch'} weight={1}>
                 <Button
                   title={'Submit'}
-                  onPress={this.parseSurveyData}
+                  onPress={this.initUpload}
                   style={_styles.button_default}
                   color={_colors.PRIMARY}
                   accessibilityLabel={'Submit'}
@@ -301,3 +308,8 @@ class SurveyEndScreen extends Component {
 }
 
 export { SurveyEndScreen };
+// <HttpsUpload
+//   ref={UploaderRef}
+//   dataBus={this.state.upload_data}
+//   uploadDisabled={this.state.upload_disabled}
+// />

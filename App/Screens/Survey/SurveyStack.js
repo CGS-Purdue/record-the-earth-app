@@ -6,7 +6,7 @@ import { SurveyEmoScreen } from './SurveyEmoScreen';
 import { SurveyGeoScreen } from './SurveyGeoScreen';
 import { SurveyHumScreen } from './SurveyHumScreen';
 import { SurveyEndScreen } from './SurveyEndScreen';
-// import { SurveyEndScreenDev } from './SurveyEndScreenDev';
+
 import { Theme } from '../../Theme';
 const _colors = Theme.Colors;
 const _styles = Theme.Styles;

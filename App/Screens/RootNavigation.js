@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { MainTabNavigator } from './MainTabNavigator';
-import { RecordScreen } from './Main/RecordScreen';
-import { SurveyStack } from './Survey/SurveyStack';
-import { SurveyEndScreen } from './Survey/SurveyEndScreen';
-import { FileListScreen } from './Main/FileListScreenDev';
+import { SoundscapeSwitch } from './SoundscapeSwitch';
+// import { RecordScreen } from './Main/RecordScreen';
+// import { SurveyStack } from './Survey/SurveyStack';
+// import { SurveyEndScreen } from './Survey/SurveyEndScreen';
+// import { FileListScreen } from './Main/FileListScreenDev';
 import { Theme } from './../Theme';
 
 const _styles = Theme.Styles;
@@ -22,22 +23,22 @@ const RootNavigation = createSwitchNavigator(
       screen: MainTabNavigator,
       path: 'main',
     },
-    Record: {
-      screen: RecordScreen,
-      path: 'record',
+    Soundscape: {
+      screen: SoundscapeSwitch,
+      path: 'soundscape',
     },
-    Survey: {
-      screen: SurveyStack,
-      path: 'survey',
-    },
-    SurveyEnd: {
-      screen: SurveyEndScreen,
-      path: 'survey/e6nd',
-    },
-    SoundFiles: {
-      screen: FileListScreen,
-      path: 'library',
-    },
+    // Survey: {
+    //   screen: SurveyStack,
+    //   path: 'survey',
+    // },
+    // SurveyEnd: {
+    //   screen: SurveyEndScreen,
+    //   path: 'survey/e6nd',
+    // },
+    // SoundFiles: {
+    //   screen: FileListScreen,
+    //   path: 'library',
+    // },
   },
   {
     initialRouteName: 'Main',

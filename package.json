@@ -4,7 +4,11 @@
   "description": "record-the-earth-react-native-project-root",
   "author": "Matt Harris <charrismatic@protonmail.com> (https://charrismatic.github.io/)",
   "scripts": {
-    "test": "npm run test:run -- arg1=PASS --opt1"
+    "test": "npm run test:run -- arg1=PASS --opt1",
+    "bump": "npm version patch",
+    "outdated": "npm outdated",
+    "expo:login": ". ../.env && expo login -u ${EXPO_AUTH_ID} -p ${EXPO_AUTH_KEY}",
+    "deps": "npm ls"
   },
   "projects": {
     "record-the-earth-react-native": "./App"

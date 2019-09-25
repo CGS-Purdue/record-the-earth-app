@@ -5,12 +5,13 @@ import { AudioListScreen } from './Main/AudioListScreen';
 import { ConfigScreen } from './Main/ConfigScreen';
 import { FileListScreen } from './Main/FileListScreen';
 // import { FileListScreen } from './Main/FileListScreenDev';
-import { HttpsUpload } from '../Components/FileUpload/HttpsUpload';
+import { HttpUploadScreen } from './Main/HttpUploadScreen';
 import { LinksScreen } from './Main/LinksScreen';
 import { PlayerScreen } from './Main/AudioPlayerTestScreen';
 import { TestScreen } from './Main/TestScreen';
 import { TabBarIcon } from '../Components/TabBar/TabBarIcon';
-import { SoundscapeSwitch } from './SoundscapeSwitch';
+// import { SoundscapeSwitch } from './SoundscapeSwitch';
+import { AppHomeScreen } from './Main/AppHomeScreen';
 import { SurveyStack } from './Survey/SurveyStack';
 
 import { Theme } from './../Theme';
@@ -22,17 +23,26 @@ const PLATFORM_OS = Platform.OS;
 
 const MainTabNavigator = createBottomTabNavigator(
   {
-    SounscapeTab: SoundscapeSwitch,
-    HttpsUpload: HttpsUpload,
-    PlayerTab: PlayerScreen,
+    HomeTab: {
+      screen: AppHomeScreen,
+      path: 'main/home',
+    },
+    FilesTab: {
+      screen: FileListScreen,
+      path: 'main/sounds',
+    },
+    UploadTab: {
+      screen: HttpUploadScreen,
+      path: 'main/player',
+    },
+    LinksTab: LinksScreen,
+    // HttpsUpload: HttpsUpload,
     // TestTab: TestScreen,
-    // LinksTab: LinksScreen,
-    Upload: HttpsUpload,
-    SoundFilesTab: FileListScreen,
+    // Upload: HttpsUpload,
   },
   {
     navigationOptions: {
-      initialRouteName: 'SounscapeTab',
+      initialRouteName: 'HomeTab',
       labelStyle: _styles.tabbar_label,
       tabStyle: _styles.tabbar_tab,
       style: _styles.tabbar,
@@ -61,7 +71,7 @@ PlayerScreen.navigationOptions = ({ navigation }) => ({
   tabBarVisible: true,
 });
 
-SoundscapeSwitch.navigationOptions = ({ navigation }) => ({
+AppHomeScreen.navigationOptions = ({ navigation }) => ({
   tabBarIcon: ({ focused, horizontal, tintColor }) => {
     let iconPrefix = 'md';
     if (PLATFORM_OS === 'ios') {
@@ -79,7 +89,7 @@ SoundscapeSwitch.navigationOptions = ({ navigation }) => ({
     );
   },
   tabBarLabel: 'Home',
-  tabBarVisible: false,
+  tabBarVisible: true,
 });
 
 //

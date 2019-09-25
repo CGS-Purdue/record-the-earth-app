@@ -12,17 +12,21 @@ ABD_PATH="${ANDROID_HOME}/platform-tools"
 
 
 # REACT-NATIVE CLI
-echo "Setting TCP:19001 For [EXPO-SERVER]"
+echo "Setting TCP:19000 For [EXPO-SERVER]"
 ${ABD_PATH}/adb reverse tcp:19000 tcp:19000
 
 ERROR_CODE="$?"
 [[ $ERROR_CODE > 0 ]] && echo "Problem with tcp reserve: $ERROR_CODE - exiting..." && exit ${ERROR_CODE}
 
-echo "Setting TCP:19000 For [EXPO-BUNDLER]"
+echo "Setting TCP:19001 For [EXPO-BUNDLER]"
 ${ABD_PATH}/adb reverse tcp:19001 tcp:19001
 
-echo "Setting TCP:19000 For [EXPO-BUNDLER]"
+echo "Setting TCP:19003 For [EXPO-BUNDLER]"
 ${ABD_PATH}/adb reverse tcp:19003 tcp:19003
+
+echo "Setting TCP:19005 For [METRO BUNDLER]
+]"
+${ABD_PATH}/adb reverse tcp:19004 tcp:19004
 
 
 

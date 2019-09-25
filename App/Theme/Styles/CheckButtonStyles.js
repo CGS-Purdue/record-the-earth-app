@@ -7,8 +7,8 @@ import { DebugStyles, DebugStyleSettings, addDebugStyles } from './DebugStyles';
 // if (!Platform.OS === 'web'){
 // }
 
-const Empty = Object.create(null);
 
+// const Empty = Object.create(null);
 //
 // const CheckButtonOuter = Object.assign(
 //   Empty, {

@@ -3,11 +3,7 @@ import { Asset } from 'expo-asset';
 import { AppLoading } from 'expo';
 import { Platform, StatusBar, View } from 'react-native';
 import { useScreens } from 'react-native-screens';
-import {
-  RootView,
-  ImgBgFill,
-} from './Components/Views';
-
+import { RootView, ImgBgFill } from './Components/Views';
 import AppNavContainer from './Screens/RootNavigation';
 import { Theme } from './Theme';
 
@@ -16,10 +12,8 @@ const _icons = Theme.Icons;
 const _assets = Theme.Assets;
 
 // <ImageBackground style={_styles.bgImg} source={_assets.images.surveyLocation}>
-
-
-console.log('Platform', Platform);
 if (!Platform.OS === 'web'){
+  console.log('Platform', Platform);
   useScreens();
 }
 
