@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   FlatList,
   View,
+  Text,
   StyleSheet,
 } from 'react-native';
 import {
@@ -14,7 +15,6 @@ import {
   RootView,
 } from '../../Components/Views';
 import { HeadingText } from '../../Components/Text/HeadingText';
-import { Surface, Text, List, Title } from 'react-native-paper';
 import * as FileSystem from 'expo-file-system';
 import Constants from 'expo-constants';
 
@@ -46,9 +46,9 @@ function FileItem({ id, name, selected, onSelect }) {
           },
         ]}
       >
-        <Surface style={styles.surface}>
+        <View style={styles.surface}>
           <Text style={styles.item}>{name}</Text>
-        </Surface>
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -64,7 +64,7 @@ function FListHead() {
         display: 'flex',
       }}
     >
-      <Title style={styles.item}>{'Files'}</Title>
+      <Text style={styles.item}>{'Files'}</Text>
     </View>
   );
 }
@@ -163,7 +163,7 @@ class FileListScreen extends Component {
   render() {
     console.log();
     return (
-      <Surface
+      <View
         style={{
           backgroundColor: '#303030',
           flex: 1,
@@ -197,7 +197,7 @@ class FileListScreen extends Component {
             />
           )}
         />
-      </Surface>
+      </View>
     );
   }
 }

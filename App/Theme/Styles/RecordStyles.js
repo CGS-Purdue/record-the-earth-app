@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { ThemeColors } from '../Colors';
-import { Layout } from '../Layout';
+import { ThemeLayout } from '../Layout';
 import { TouchButtonHighlightStyles } from './ButtonStyles';
 
 const RecordButton = TouchButtonHighlightStyles;
@@ -23,13 +23,13 @@ const RecordContainer = {
 
 const RecordStatusText = {
   color: ThemeColors.WHITE,
-  fontSize: Layout.TEXT_SIZE_3,
+  fontSize: ThemeLayout.TEXT_SIZE_3,
   textAlign: 'center',
 };
 
 const RecordStatusTimestamp = {
   color: ThemeColors.WHITE,
-  fontSize: Layout.TEXT_SIZE_3,
+  fontSize: ThemeLayout.TEXT_SIZE_3,
   textAlign: 'center',
 };
 

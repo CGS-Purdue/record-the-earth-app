@@ -23,7 +23,7 @@ export default class ImgBgView extends Component {
         style={_styles.bgImg}
         source={_assets.images.img_bg_cliff}>
         <SafeAreaView style={{flex : 1}}>
-          <View ref={this.view_ref} style={_styles.rootContainer}>
+          <View ref={this.view_ref} style={_styles.rootview_container}>
             {this.props.children}
           </View>
         </SafeAreaView>

@@ -11,3 +11,5 @@ ABD_PATH="${ANDROID_HOME}/platform-tools"
 [[ -f .env ]] && source .env
 
 ${ABD_PATH}/adb devices
+
+exit 0

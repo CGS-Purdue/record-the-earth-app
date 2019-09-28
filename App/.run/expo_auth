@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# EXPO HELPER
-# -------------
-BASE_DIR="$(npm prefix)"
-
-source ${BASE_DIR}/../.env
-
-${BASE_DIR}/node_modules/.bin/expo login -u "${EXPO_AUTH_ID}" -p "${EXPO_AUTH_KEY}"

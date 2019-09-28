@@ -1,30 +1,36 @@
 import { StyleSheet } from 'react-native';
 
 import { ThemeColors } from '../Colors';
-import { Layout } from '../Layout';
+import { ThemeLayout } from '../Layout';
 
 const FormStyles = StyleSheet.create({
   form_text_input: {
     flex: 1,
     width: '100%',
-    height: Layout.SPACING_UNIT_2 + Layout.SPACING_UNIT_2 + Layout.TEXT_SIZE,
+    height:
+      ThemeLayout.SPACING_UNIT_2 +
+      ThemeLayout.SPACING_UNIT_2 +
+      ThemeLayout.TEXT_SIZE,
     borderColor: ThemeColors.INPUT_BORDER,
     backgroundColor: ThemeColors.INPUT_BG,
     color: ThemeColors.BLU_200,
-    fontSize: Layout.TEXT_SIZE,
-    lineHeight: Layout.LINE_HEIGHT_1,
-    marginLeft: Layout.SPACING_UNIT_1,
-    marginTop: Layout.SPACING_UNIT_2,
-    marginBottom: Layout.SPACING_UNIT_2,
-    marginRight: Layout.SPACING_UNIT_1,
+    fontSize: ThemeLayout.TEXT_SIZE,
+    lineHeight: ThemeLayout.LINE_HEIGHT_1,
+    marginLeft: ThemeLayout.SPACING_UNIT_1,
+    marginTop: ThemeLayout.SPACING_UNIT_2,
+    marginBottom: ThemeLayout.SPACING_UNIT_2,
+    marginRight: ThemeLayout.SPACING_UNIT_1,
     paddingLeft: 0,
-    paddingRight: Layout.SPACING_UNIT_2,
-    paddingTop: Layout.SPACING_UNIT_2,
-    paddingBottom: Layout.SPACING_UNIT_2,
+    paddingRight: ThemeLayout.SPACING_UNIT_2,
+    paddingTop: ThemeLayout.SPACING_UNIT_2,
+    paddingBottom: ThemeLayout.SPACING_UNIT_2,
   },
   form_text_input_container: {
     flex: 1,
-    height: Layout.SPACING_UNIT_2 + Layout.SPACING_UNIT_2 + Layout.TEXT_SIZE,
+    height:
+      ThemeLayout.SPACING_UNIT_2 +
+      ThemeLayout.SPACING_UNIT_2 +
+      ThemeLayout.TEXT_SIZE,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     flexDirection: 'row',
@@ -35,25 +41,25 @@ const FormStyles = StyleSheet.create({
     flex: 1,
     width: '100%',
     height:
-    Layout.SPACING_UNIT_2 +
-    Layout.SPACING_UNIT_2 +
-    Layout.TEXT_SIZE +
-    Layout.TEXT_SIZE +
-    Layout.TEXT_SIZE,
+      ThemeLayout.SPACING_UNIT_2 +
+      ThemeLayout.SPACING_UNIT_2 +
+      ThemeLayout.TEXT_SIZE +
+      ThemeLayout.TEXT_SIZE +
+      ThemeLayout.TEXT_SIZE,
     borderColor: ThemeColors.INPUT_BORDER,
     backgroundColor: ThemeColors.INPUT_BG,
     color: ThemeColors.BLU_200,
-    fontSize: Layout.TEXT_SIZE,
+    fontSize: ThemeLayout.TEXT_SIZE,
     textAlignVertical: 'top',
-    lineHeight: Layout.LINE_HEIGHT_1,
-    marginLeft: Layout.SPACING_UNIT_1,
-    marginTop: Layout.SPACING_UNIT_2,
-    marginBottom: Layout.SPACING_UNIT_2,
-    marginRight: Layout.SPACING_UNIT_1,
-    paddingLeft: Layout.SPACING_UNIT_1,
-    paddingRight: Layout.SPACING_UNIT_2,
-    paddingTop: Layout.SPACING_UNIT_2,
-    paddingBottom: Layout.SPACING_UNIT_2,
+    lineHeight: ThemeLayout.LINE_HEIGHT_1,
+    marginLeft: ThemeLayout.SPACING_UNIT_1,
+    marginTop: ThemeLayout.SPACING_UNIT_2,
+    marginBottom: ThemeLayout.SPACING_UNIT_2,
+    marginRight: ThemeLayout.SPACING_UNIT_1,
+    paddingLeft: ThemeLayout.SPACING_UNIT_1,
+    paddingRight: ThemeLayout.SPACING_UNIT_2,
+    paddingTop: ThemeLayout.SPACING_UNIT_2,
+    paddingBottom: ThemeLayout.SPACING_UNIT_2,
   },
 
   // THREE LINE TEXT INPUT CONTAINER
@@ -61,19 +67,17 @@ const FormStyles = StyleSheet.create({
   form_textarea_input_container_3: {
     flex: 1,
     backgroundColor: ThemeColors.SHADE_LIGHTER_50,
-    width: Layout.PERCENT_100,
+    width: ThemeLayout.PERCENT_100,
     height:
-      Layout.SPACING_UNIT_2 +
-      Layout.SPACING_UNIT_2 +
-      Layout.TEXT_SIZE +
-      Layout.TEXT_SIZE +
-      Layout.TEXT_SIZE,
+      ThemeLayout.SPACING_UNIT_2 +
+      ThemeLayout.SPACING_UNIT_2 +
+      ThemeLayout.TEXT_SIZE +
+      ThemeLayout.TEXT_SIZE +
+      ThemeLayout.TEXT_SIZE,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     flexDirection: 'row',
   },
-
 });
-
 
 export { FormStyles };

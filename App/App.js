@@ -2,34 +2,36 @@ import React, { Component } from 'react';
 import { Asset } from 'expo-asset';
 import { AppLoading } from 'expo';
 import { Platform, StatusBar, View } from 'react-native';
-import { useScreens } from 'react-native-screens';
-import { RootView, ImgBgFill } from './Components/Views';
-import AppNavContainer from './Screens/RootNavigation';
+import { AppContainer, ThemeAppContainer } from './Containers/AppContainer';
+
 import { Theme } from './Theme';
+import { initalAppSetup } from './Utilities/InitialSetup';
+import { Ionicons } from '@expo/vector-icons';
 
 const _fonts = Theme.Fonts;
 const _icons = Theme.Icons;
 const _assets = Theme.Assets;
+// function cacheFonts(fonts) {
+//   return fonts.map(font => Font.loadAsync(font));
+// }
 
-// <ImageBackground style={_styles.bgImg} source={_assets.images.surveyLocation}>
-if (!Platform.OS === 'web'){
-  console.log('Platform', Platform);
-  useScreens();
-}
-
-class App extends Component {
+export default class App extends Component {
   state = {isReady: false};
-
   _appLoadingOnError = (err) => {
-    console.log('LOADING ERROR');
-    console.warn(err);
+    console.log('LOADING ERROR', err);
+  }
+
+  componentDidMount() {
+    const isSetup = initalAppSetup();
+    // console.log('exporting theme cache');
+    // console.log('\n\n\n' , JSON.stringify(Theme.styles), '\n\n\n');
   }
 
   render() {
     if (!this.state.isReady) {
       return (
         <AppLoading
-          startAsync={this._cacheResourcesAsync}
+          startAsync={this.cacheResourcesAsync}
           onFinish={() => this.setState({ isReady: true })}
           onError={this._appLoadingOnError}
           autoHideSplash={true}
@@ -37,24 +39,19 @@ class App extends Component {
       );
     } else {
       return (
-        <View style={{flex: 1, backgroundColor: 'blue'}}>
-        <ImgBgFill source={_assets.images.img_background}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavContainer theme={'dark'} ref={nav => {this.navigator = nav;} }/>
-        </ImgBgFill>
-      </View>
+        <AppContainer />
       );
     }
   }
 
-  async _cacheResourcesAsync(){
+   async cacheResourcesAsync() {
       const _image_assets = Object.assign(
-          _assets.buttons,
-          _assets.logos,
-          _assets.images
+          Theme.Assets.buttons,
+          Theme.Assets.logos,
+          Theme.Assets.images,
+          Theme.Assets.icons,
         );
-      const cacheFonts = _fonts.loadFontMap(_fonts.FontMap);
-      const cachedIcons = _icons.load(_icons.Icons);
+
       const cacheImages = Object.entries(_image_assets).map(
         function (pair) {
           let obj = {};
@@ -69,8 +66,10 @@ class App extends Component {
           return obj;
         }
       );
-      return Promise.all([ cacheImages, cachedIcons, cacheFonts ]);
-   }
-}
 
-export { App };
+      const _font_map = Theme.Fonts.FontMap;
+      const cacheFonts = Theme.Fonts.loadFontMap(_font_map);
+
+      return Promise.all([ cacheImages, cacheFonts ]);
+  }
+}

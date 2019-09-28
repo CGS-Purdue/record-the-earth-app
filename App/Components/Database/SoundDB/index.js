@@ -47,13 +47,12 @@ class SoundDB extends Component {
         if (data){ console.log(data); }
       },
       txSuccess: (tx, result) => {
-        // { insertId, rowsAffected, rows: { length, item(), _array, }, }
         console.log('tx resultset', tx, result);
       },
+      // { insertId, rowsAffected, rows: { length, item(), _array, }, }
       insertSuccess: (tx, result) => {
         console.log(
-          'Insert Successful',
-          `id: ${result.insertId}, rowsAffected: ${result.rowsAffected}`
+          [['Insert Successful'].join(' '), [id: result.insertId].join(' '), [rowsAffected: result.rowsAffected].join(' ')].join(''),
         );
       },
       selectSuccess: (tx, result) => {
@@ -92,7 +91,7 @@ class SoundDB extends Component {
     console.log('\n\nconnected\n\n' ,conn);
     this.connectionStatus.isConnecting = false;
     this.connectionStatus.connected = true;
-    this.checkStatus();
+    this.existsOrCreate();
   }
 
   connect(){
@@ -119,8 +118,8 @@ class SoundDB extends Component {
     console.log(error);
   }
 
-  checkStatus(){
-    console.log('checkStatus', this);
+  existsOrCreate(){
+    console.log('existsOrCreate', this);
     this.queryStore('create');
   }
 
@@ -142,7 +141,7 @@ class SoundDB extends Component {
     this.queryStore('drop');
     this.queryStore('create');
   }
-  queryStore(key, args) {
+  quer_createyStore(key, args) {
     let _store = {
       create: (connection, reporters, statement, args = null) => {
         console.log('create', reporters);
@@ -187,7 +186,7 @@ class SoundDB extends Component {
           },
           reporters.dbError,
           reporters.dbSuccess,
-        );
+      _create  );
       },
       insert: (connection, reporters, statement, args) => {
           console.log(this, connection);

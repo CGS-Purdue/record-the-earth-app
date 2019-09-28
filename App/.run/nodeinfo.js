@@ -1,4 +1,4 @@
-module.exports = (function (event) {
+module.exports = (function(event) {
   // var chained = require('./process-watch');
   var nodeinfo = require('./nodeinfo');
   // this.global.nodeinfo = nodeinfo;
@@ -23,4 +23,4 @@ module.exports = (function (event) {
   // ].join('\n'))
   // return (this.debug_log = console.log)
   return nodeinfo;
-})(this)
+})(this);

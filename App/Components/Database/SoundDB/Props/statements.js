@@ -36,11 +36,9 @@ INTO Soundscapes (
   isUploaded
 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
 
-
 const _delete = `DELETE
 FROM Soundscapes
 WHERE id = ?;`;
-
 
 const _select = `SELECT
   id,
@@ -96,9 +94,6 @@ SET (
   isUploaded
 ) VALUES ?
 WHERE id = ?;`;
-
-
-
 
 
 function StatementCleanString(statement) {

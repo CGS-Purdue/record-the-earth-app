@@ -1,10 +1,10 @@
 {
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "packagerPid": 21585,
+  "expoServerNgrokUrl": "https://e6-auy.matt-harris.app.exp.direct",
+  "packagerNgrokUrl": "https://packager.e6-auy.matt-harris.app.exp.direct",
+  "ngrokPid": 21641,
   "webpackServerPort": null
 }

@@ -14,7 +14,7 @@ const SvgContainerStyles = Object.assign(
     maxWidth: '100%',
     maxHeight: '100%',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
 });
 
 // xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -58,4 +58,4 @@ class SvgRecord extends Component {
   }
 }
 
-export { SvgRecord }
+export { SvgRecord };

@@ -1,27 +1,5 @@
+
 import React, { Component } from 'react';
-
-class ConnectionQuery extends Component {
-  constructor(props) {
-    super(props);
-    this.querystate = {
-      hasError: false,
-      hasResult: false,
-      isError: false,
-      hasNewResult: false,
-      resultCache : [],
-      lastError: null,
-    };
-
-    // this.dbSuccess = this.onConnect.bind(this);
-    // this.dbError = this.onSuccess.bind(this);
-    // this.txResult = this.onTxResult.bind(this);
-    // this.txError = this.txError.bind(this);
-    console.log('query', this);
-
-    // this.setQuery()
-  }
-
-  configCb(callbackFn, cbOptions){
     if (!cbOptions) { return callbackFn; }
     if (cbOptions.disabled) {
       return false;

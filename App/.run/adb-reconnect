@@ -36,3 +36,5 @@ ${ABD_PATH}/adb devices -l
 # /data/apps/reactotron/Reactotron.2.17.0.AppImage
 # DEBUG_LOGGING="yes"
 # export DEBUG_LOGGING
+
+exit 0

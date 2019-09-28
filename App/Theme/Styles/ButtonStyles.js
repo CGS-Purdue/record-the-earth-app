@@ -1,5 +1,5 @@
 import { ThemeColors } from '../Colors';
-import { Layout } from '../Layout';
+import { ThemeLayout } from '../Layout';
 import { StyleSheet } from 'react-native';
 
 const TouchButtonHighlightStyles = {
@@ -11,7 +11,6 @@ const TouchButtonHighlightStyles = {
   flex: 1,
 };
 
-
 const ButtonStyles = {
   button_touchbutton: TouchButtonHighlightStyles,
   button_default: {
@@ -19,11 +18,11 @@ const ButtonStyles = {
     borderColor: ThemeColors.INPUT_BORDER,
     // backgroundColor: ThemeColors.INPUT_BG,
     color: ThemeColors.INPUT_TEXTCOLOR,
-    fontSize: Layout.TEXT_SIZE_3 * 1.2,
+    fontSize: ThemeLayout.TEXT_SIZE_3 * 1.2,
     width: '100%',
     height: '100%',
-    paddingTop: Layout.SPACING_UNIT_3,
-    paddingBottom: Layout.SPACING_UNIT_3,
+    paddingTop: ThemeLayout.SPACING_UNIT_3,
+    paddingBottom: ThemeLayout.SPACING_UNIT_3,
     padding: 5,
     marginTop: 10,
   },
@@ -43,10 +42,10 @@ const ButtonStyles = {
     marginRight: 9,
   },
   ripplebtn_image: {
-     flex: 1 ,
-     marginTop: 1,
-     width: '100%',
-     height: '100%',
+    flex: 1,
+    marginTop: 1,
+    width: '100%',
+    height: '100%',
   },
   ripplebtn_text: {
     fontSize: 16,
@@ -67,6 +66,4 @@ const ButtonStyles = {
   },
 };
 
-
-
-export { ButtonStyles, TouchButtonHighlightStyles  };
+export { ButtonStyles, TouchButtonHighlightStyles };

@@ -1,5 +1,5 @@
-import { SQLite } from 'expo-sqlite';
-import { Component } from 'react';
+import React, { Component } from 'react';
+import * as SQLite from 'expo-sqlite';
 // import { ConnectionQuery } from './ConnectionQuery';
 
 class Connection extends Component {

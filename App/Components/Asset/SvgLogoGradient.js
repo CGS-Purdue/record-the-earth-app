@@ -19,7 +19,7 @@ var SvgContainerStyles = {
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: SVG_BG,
-}
+};
 
 class SvgGradLogo extends React.Component {
   render() {
@@ -49,4 +49,4 @@ class SvgGradLogo extends React.Component {
   }
 }
 
-export { SvgGradLogo }
+export { SvgGradLogo };

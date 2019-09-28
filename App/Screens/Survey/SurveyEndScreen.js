@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import { Button, ImageBackground } from 'react-native';
-import { SoundscapeSchema} from '../../Components/Database/SurveyModel/SurveySchema3';
+import { SoundscapeSchema } from '../../Components/Database/SurveyModel/SurveySchema3';
 import { CenterView, PadView, Section, RootView } from '../../Components/Views';
 import { MonoText } from '../../Components/Text/MonoText';
 import { getAudioFileFromTemp } from '../../Utilities/Filesystem';
@@ -13,7 +13,7 @@ import {
   isString,
 } from '../../Utilities/Valid';
 import ServerConfig from '../../Config/Server';
-import * as StorageConfig from '../../Config/Storage';
+import { StorageConfig } from '../../Config/Storage';
 import { Theme } from '../../Theme';
 import * as FileSystem from 'expo-file-system';
 // import * as Device from 'expo-device';
@@ -22,12 +22,8 @@ const _assets = Theme.Assets;
 const _styles = Theme.Styles;
 
 // FileSystem.getInfoAsync
-const APP_STORAGE = FileSystem.documentDirectory;
-const MEDIA_DIR = 'media';
-const MEDIA_TEMP = 'soundscape_temp';
-const APPSTORAGE_TEMP_PATH = [APP_STORAGE, MEDIA_TEMP].join('');
-// const APPSTORAGE_MEDIA_PATH = [APP_STORAGE, MEDIA_DIR].join('');
-
+const APP_STORAGE = StorageConfig.APP_STORAGE;
+const APPSTORAGE_TEMP_PATH = StorageConfig.STORAGE_TEMP_PATH;
 
 // const FILE_NAME = file_path.split('/').slice(-1);
 // const TEMP_PATH = [ storage_path, file_name].join('/');
@@ -56,7 +52,6 @@ const APPSTORAGE_TEMP_PATH = [APP_STORAGE, MEDIA_TEMP].join('');
 
 const UploaderRef = createRef('SoundscapeSurveyFormUploadRef');
 
-
 class SurveyEndScreen extends Component {
   constructor(props) {
     super(props);
@@ -78,8 +73,7 @@ class SurveyEndScreen extends Component {
     this.soundscape_data = this.props.navigation.state.params.soundscape_data;
   }
 
-  _xhrFormUpload(data){
-
+  _xhrFormUpload(data) {
     const { hostname, pathname } = JSON.parse(Base64.decode(ServerConfig));
     let address = ['https:/', hostname, pathname].join('/');
 
@@ -88,14 +82,14 @@ class SurveyEndScreen extends Component {
     console.log('data', data);
 
     if (!hostname) {
-      return false
+      return false;
     }
 
     let formData = this.getFormData(data);
-    console.log('formData', formData);;
+    console.log('formData', formData);
 
     var request = new XMLHttpRequest();
-    request.onreadystatechange = e => {
+    request.onreadystatechange = (e) => {
       if (request.readyState !== 4) {
         return;
       }
@@ -106,7 +100,7 @@ class SurveyEndScreen extends Component {
       }
       request.open('POST', address);
       request.send(formData);
-    }
+    };
   }
 
   dataToString = (data) => {
@@ -115,14 +109,14 @@ class SurveyEndScreen extends Component {
 
   object_keys_checksum = (obj) => {
     return Object.getOwnPropertyNames(obj)
-    .join('')
-    .split('')
-    .map((a) => {
-      return a.codePointAt(0) - 96;
-    })
-    .reduce((a, b) => {
-      return a + b;
-    });
+      .join('')
+      .split('')
+      .map((a) => {
+        return a.codePointAt(0) - 96;
+      })
+      .reduce((a, b) => {
+        return a + b;
+      });
   };
 
   validatePreFlightCheck = (data) => {
@@ -133,17 +127,17 @@ class SurveyEndScreen extends Component {
     }
 
     // if (
-      //   object_keys_checksum(data) !==
-      //   {
-      //     object_keys_checksum,
-      //   }(SoundscapeSchema)
-      // ) {
-      //   this.setState({
-      //     upload_ready: false,
-      //     reason: 'keys missing or invalid',
-      //   });
-      //   console.log(' validatePreFlightCheck keys missing or invalid');
-      //   return false;
+    //   object_keys_checksum(data) !==
+    //   {
+    //     object_keys_checksum,
+    //   }(SoundscapeSchema)
+    // ) {
+    //   this.setState({
+    //     upload_ready: false,
+    //     reason: 'keys missing or invalid',
+    //   });
+    //   console.log(' validatePreFlightCheck keys missing or invalid');
+    //   return false;
     // }
 
     console.log('data input looks good, sending forwa');
@@ -162,37 +156,36 @@ class SurveyEndScreen extends Component {
   }
 
   asyncGetFileFromTemp = async (name) => {
+    let file_info = {};
+
     try {
-      let response = await getAudioFileFromTemp(name);
-      console.log('response', response);
-      let file_info = await response.uri;
+      file_info = await getAudioFileFromTemp(name)
+        .then((response) => {
+          console.log('response', response);
+          return response.uri;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
       console.log('file_info', file_info);
-
-      // this.updateState(file_info);
-
       this.setState({
         soundfile_uri: file_info.uri,
         soundfile_status: 'file-loaded',
       });
-      console.log('file_info', file_info);
     } catch (error) {
       console.error(error);
     }
     return file_info;
   };
 
-
-
   getFormDataFilePath = (file_name) => {
-    return [APPSTORAGE_TEMP_PATH, file_name ].join('/');
+    return [APPSTORAGE_TEMP_PATH, file_name].join('/');
   };
-
 
   getFormDataExtraData = () => {
     const { data } = JSON.parse(Base64.decode(ServerConfig));
-    return  [data[2], data[0], data[1], data[3]].join('-');
-  }
-
+    return [data[2], data[0], data[1], data[3]].join('-');
+  };
 
   getFormData(data) {
     if (!data) {
@@ -212,13 +205,13 @@ class SurveyEndScreen extends Component {
       console.log('apend formData', entry);
     }
     let formExtra = this.getFormDataExtraData();
-    formData.append('uploadToken',  formExtra);
+    formData.append('uploadToken', formExtra);
 
-    let formFile = this.getFormDataFilePath( fileUploadName );
+    let formFile = this.getFormDataFilePath(fileUploadName);
 
-    console.log(formFile)
+    console.log(formFile);
 
-    formData.append('file',  formFile);
+    formData.append('file', formFile);
 
     console.log('[getSurvey2FormData] FormData', JSON.stringify(formData));
 
@@ -227,7 +220,6 @@ class SurveyEndScreen extends Component {
       upload_ready: true,
     });
     return formData;
-
   }
 
   parseSurveyData = () => {
@@ -244,7 +236,7 @@ class SurveyEndScreen extends Component {
       soundscape_data_clean: clean,
     });
     return clean;
-  }
+  };
 
   getParsedData() {
     let parsed = this.state.soundscape_data_clean;
@@ -255,19 +247,17 @@ class SurveyEndScreen extends Component {
     let clean = this.getParsedData();
     console.log('CLEAN ', clean);
     let valid = this.validatePreFlightCheck(clean);
-    if (!valid){
+    if (!valid) {
       console.log('issue with survey data', valid);
       return false;
     }
     console.log('sending');
     this._xhrFormUpload(clean);
-
-  }
+  };
 
   componentDidMount() {
     this.parseSurveyData();
   }
-
 
   render() {
     return (
@@ -278,9 +268,7 @@ class SurveyEndScreen extends Component {
         <RootView>
           <PadView padding={[1]}>
             <CenterView>
-              <Section justify={'center'} align={'stretch'} weight={1}>
-
-              </Section>
+              <Section justify={'center'} align={'stretch'} weight={1} />
 
               <Section justify={'center'} align={'stretch'} weight={1}>
                 <Button

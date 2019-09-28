@@ -2,7 +2,9 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Button,TouchableNativeFeedback } from 'react-native';
 
-import { ThemeDefaultVariables } from '../../Theme/Variables';
+import { Theme } from '../../Theme';
+
+const _var = Theme.Variables;
 
 // Props
 // accessibilityLabel
@@ -27,11 +29,11 @@ export default function TouchableNativeButton({ onPress, children }) {
 TouchableNativeButton.defaultProps = {
   children: null,
   onPress: null,
-  size: ThemeDefaultVariables.ButtonSize,
-  color: ThemeDefaultVariables.ButtonColor,
-  iconStyle: ThemeDefaultVariables.ButtonIconStyle,
-  borderRadius: ThemeDefaultVariables.ButtonBorderRadius,
-  backgroundColor: ThemeDefaultVariables.ButtonBackgroundColor,
+  size: _var.BUTTON_SIZE,
+  color: _var.BUTTON_COLOR,
+  iconStyle: _var.BUTTON_ICON_STYLE,
+  borderRadius: _var.BUTTON_BORDER_RADIUS,
+  backgroundColor: _var.BUTTON_BGCOLOR,
 };
 
 TouchableNativeButton.propTypes = {
@@ -67,11 +69,11 @@ ThemeButton.defaultProps = {
   children: null,
   onPress: null,
   onClick: () => { console.log('clicked');},
-  size: ThemeDefaultVariables.ButtonSize,
-  color: ThemeDefaultVariables.ButtonColor,
-  iconStyle: ThemeDefaultVariables.ButtonIconStyle,
-  borderRadius: ThemeDefaultVariables.ButtonBorderRadius,
-  backgroundColor: ThemeDefaultVariables.ButtonBackgroundColor,
+  size: _var.BUTTON_SIZE,
+  color: _var.BUTTON_COLOR,
+  iconStyle:  _var.BUTTON_ICON_STYLE,
+  borderRadius: _var.BUTTON_BORDER_RADIUS,
+  backgroundColor: _var.BUTTON_BGCOLOR,
 };
 ThemeButton.displayName = 'Button';
 

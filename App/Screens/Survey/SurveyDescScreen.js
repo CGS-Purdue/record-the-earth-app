@@ -13,25 +13,26 @@ import {
   SoundscapeSchema,
 } from '../../Components/Database/SurveyModel/SurveySchema3';
 // import { BlurBgView } from '../../Components/Effects/BlurView';
-import { TextInput } from 'react-native-paper';
+import { ThemeTextInput } from '../../Components/Forms/TextInput';
 import { Theme } from '../../Theme';
 
 const _colors = Theme.Colors;
 const _styles = Theme.Styles;
 const _assets = Theme.Assets;
+
 const soundscapeSchema = SoundscapeSchema;
+
 // const APP_STORAGE
-export default class PaperTexInput extends React.Component {
+export default class CustomTexInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       text: '',
     };
   }
-
   render() {
     return (
-      <TextInput
+      <ThemeTextInput
         value={this.state.text}
         onChangeText={(text) => this.setState({ text })}
       />
@@ -49,7 +50,7 @@ class SurveyDescScreen extends Component {
     this.soundscape.LatLong = this.props.navigation.state.params.location;
     this.soundscape.duration = 20;
     this.state = {
-      soundscape_data: this.soundscape,
+      soundscape_data: tshis.soundscape,
       text: '',
     };
 
@@ -79,6 +80,7 @@ class SurveyDescScreen extends Component {
     return (
       <ImgBgFill source={_assets.images.img_background}>
         <RootView>
+          /Database
           <PadView padding={[2, 3]}>
             <CenterView>
               <Section weight={1} expand={true} shrink={true}>
@@ -94,7 +96,7 @@ class SurveyDescScreen extends Component {
                 align={'stretch'}
               >
                 <View style={_styles.survey_desc_textinput_container}>
-                  <TextInput
+                  <ThemeTextInput
                     label={'Description'}
                     style={_styles.survey_desc_textinput}
                     value={this.state.text}
@@ -138,10 +140,10 @@ class SurveyDescScreen extends Component {
   }
 }
 
-SurveyDescScreen.DisplayName = 'Survey-Description-Screen';
+SurveyDescScreen.DisplayName = 'Survey Submit Screen';
 
 SurveyDescScreen.navigationOptions = {
-  title: 'SurveyDescription',
+  title: 'SurveySubmi',
 };
 
 export { SurveyDescScreen };

@@ -4,6 +4,7 @@ import { Alert } from 'react-native';
 
 function getFiles() {
   this.state = {};
+  let data = new FormData();
   this.state.selectedImages.forEach((item, i) => {
     data.append('doc[]', {
       uri: item.uri,
@@ -17,6 +18,7 @@ function getFiles() {
 
 
 function uploadForm(config) {
+  let  that = this;
   fetch(`${config.apiBase}/load/${this.props.id}/uploadconfirmation`, {
     method: 'post',
     headers: {
@@ -76,4 +78,3 @@ function rnfs() {
 
 
 export { getFiles, uploadForm, rnfs };
-

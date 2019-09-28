@@ -3,9 +3,9 @@
     "name": "RecordTheEarth3",
     "slug": "record-the-earth-v3",
     "description": "Record the Earth Native build for iOS and Android",
-    "entryPoint": "node_modules/expo/AppEntry.js",
+    "entryPoint": "./init.js",
     "version": "0.2.0",
-    "icon": "./assets/icon.png",
+    "icon": "./Assets/icon.png",
     "orientation": "portrait",
     "platforms": [
       "ios",
@@ -20,12 +20,12 @@
       "backgroundColor": "#000000"
     },
     "notification": {
-      "icon": "./assets/icon.png",
+      "icon": "./Assets/icon.png",
       "color": "#000000",
       "androidMode": "default"
     },
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./Assets/splash.png",
       "backgroundColor": "#000000",
       "resizeMode": "contain"
     },
@@ -34,7 +34,13 @@
     },
     "assetBundlePatterns": [
       "**/*",
-      "./Theme/Assets/**/*"
+      "./Assets/**/*",
+      "./Assets/fonts/*.ttf",
+      "./Assets/img/*.png",
+      "./Assets/icons/*.png",
+      "./Assets/btn/*.png",
+      "./Assets/img/*.jpg",
+      "./Assets/logo/*.png"
     ],
     "ios": {
       "supportsTablet": false,
@@ -63,6 +69,7 @@
     "hooks": {},
     "rnCliPath": "",
     "packagerOpts": {
+      "host": "localhost",
       "assetExts": [
         "ttf",
         "jpg",

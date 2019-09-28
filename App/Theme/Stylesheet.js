@@ -15,20 +15,20 @@ import { CheckBtnStyles } from './Styles/CheckButtonStyles';
 // import { ThemeColors } from './Colors';
 // import { StyleSheet } from 'react-native';
 
-const ThemeStylesheets = {
-  TextStyle: TextClasses,
-  Font: FontClasses,
-  Button: ButtonStyles,
-  Forms: FormStyles,
-  Home: HomeStyles,
-  Main: MainStyles,
-  Views: ViewStyles,
-  Theme: HomeStyles,
-  Debug: DebugStyles,
-  Record: RecordStyles,
-  Utility: UtilityStyles,
-  Layout: LayoutStyles,
-};
+// const ThemeStylesheets = {
+//   TextStyle: TextClasses,
+//   Font: FontClasses,
+//   Button: ButtonStyles,
+//   Forms: FormStyles,
+//   Home: HomeStyles,
+//   Main: MainStyles,
+//   Views: ViewStyles,
+//   Theme: HomeStyles,
+//   Debug: DebugStyles,
+//   Record: RecordStyles,
+//   Utility: UtilityStyles,
+//   Layout: LayoutStyles,
+// };
 
 const ThemeStyles = Object.assign(
   TabBarStyles,
@@ -48,4 +48,4 @@ const ThemeStyles = Object.assign(
   LayoutStyles
 );
 
-export { ThemeStylesheets, ThemeStyles };
+export { ThemeStyles };

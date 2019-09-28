@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, View, ImageBackground } from 'react-native';
 import { CheckButton } from '../../Components/Button/CheckButton';
 import { HeadingText } from '../../Components/Text/HeadingText';
+import { filterFalse } from '../../Utilities/Functions';
 import { CenterView, Section, PadView, RootView } from '../../Components/Views';
 import { BlackFade } from '../../Components/Effects/LinearGradient';
 import { Theme } from '../../Theme';
@@ -28,13 +29,42 @@ class SurveyHumScreen extends Component {
     this.ref = React.createRef();
   }
 
+  navigateForward = () => {
+    let _currSurvey = this.getSurveyData();
+
+    let _updatedSoundscape = this.updateSoundscapeData(
+      _currSurvey.key,
+      _currSurvey.data
+    );
+
+    console.log('_updatedSoundscape', _updatedSoundscape);
+    this.props.navigation.navigate('SoundscapeSubmit', {
+      soundscape_data: _updatedSoundscape,
+    });
+
+    this.props.navigation.dispatch(
+      SwitchActions.jumpTo({
+        routeName: 'SoundscapeSubmit',
+      })
+    );
+    // action: NavigationActions.navigate({
+    //   routeName: 'SurveyDescription',
+    //   params: {
+    //     location: LatLong,
+    //     locationIsFake: locationIsMocked,
+    //     soundfile: _soundfile,
+    //   },
+    // }),
+    // });
+    // })
+  };
+
   updateSoundscapeData = (key, data) => {
     let soundscapeData = this.state.soundscape_data;
     let { survey, ...rest } = soundscapeData;
     this.soundscape_data = Object.assign({}, this.soundscape_data, {
       [key]: data,
     });
-    // soundscapeData.survey = Object.assign(Object.create(null), survey,);
 
     this.setState({ soundscape_data: soundscapeData });
     return soundscapeData;
@@ -48,9 +78,10 @@ class SurveyHumScreen extends Component {
       machines: this.state.machines,
     };
     let surveyKey = this.surveyKey;
+
     return {
       key: surveyKey,
-      data: surveyData,
+      data: filterFalse(surveyData),
     };
   };
 
@@ -139,15 +170,7 @@ class SurveyHumScreen extends Component {
                   color={_colors.PRIMARY}
                   accessibilityLabel="Go to next"
                   onPress={() => {
-                    let _currSurvey = this.getSurveyData();
-                    let _updatedSoundscape = this.updateSoundscapeData(
-                      _currSurvey.key,
-                      _currSurvey.data
-                    );
-                    console.log('_updatedSoundscape', _updatedSoundscape);
-                    this.props.navigation.navigate('SurveyEnd', {
-                      soundscape_data: _updatedSoundscape,
-                    });
+                    this.navigateForward();
                   }}
                 />
               </Section>

@@ -5,12 +5,10 @@ module.exports = {
    },
    parserOptions: {
      sourceType: 'module',
+     ecmaVersion: 2018,
    },
 
-  extends: [
-    'plugin:import/warnings',
-    'plugin:import/errors',
-  ],
+  extends: [],
   plugins: [
   'eslint-comments',
   'import',
@@ -270,5 +268,15 @@ module.exports = {
     'jest/no-focused-tests': 1,
     'jest/no-identical-title': 1,
     'jest/valid-expect': 1,
+
+    // Import Plugin
+    'import/no-unresolved': 2,
+    'import/default': 2,
+    'import/export': 2,
+    'import/named': 2,
+    'import/namespace': 2,
+    'import/no-duplicates': 1,
+    'import/no-named-as-default-member': 1,
+    'import/no-named-as-default': 1,
   },
 };

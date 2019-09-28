@@ -1,7 +1,6 @@
 import { Platform } from 'react-native';
 import { ThemeColors } from '../Colors';
-import { Layout } from '../Layout';
-
+import { ThemeLayout } from '../Layout';
 
 // # IOS
 // Prop	Description	Default
@@ -12,19 +11,16 @@ import { Layout } from '../Layout';
 // selectedIconColor - Color of the selected icon.	iconColor
 // Note: using iconColor and selectedIconColor requires the attribute renderAsOriginal to be set to true on Icon.TabBarItemIOS.
 
-
-
-const TAB_BAR_SIZE = Layout.TEXT_SIZE * 3;
+const TAB_BAR_SIZE = ThemeLayout.TEXT_SIZE * 3;
 const TAB_BAR_TEXT_SIZE = (TAB_BAR_SIZE * 1) / 5;
 const TAB_BAR_ICON_SIZE = (TAB_BAR_SIZE * 2) / 5;
 const TAB_BAR_PADDING = (TAB_BAR_SIZE * 1) / 5;
 
-
 // TabBarBottom - Main TabNav Component
 const TabBarBottom = {
   marginTop: 1,
-  marginBottom: 0,
-  paddingBottom: 0,
+  marginBottom: 1,
+  paddingBottom: TAB_BAR_PADDING,
   height: TAB_BAR_SIZE,
   backgroundColor: ThemeColors.TAB_BAR_BG,
 };
@@ -60,8 +56,6 @@ const TabBarTab = {
     },
   }),
 };
-
-
 
 const TabBarStyles = {
   tabbar: TabBarBottom,

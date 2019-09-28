@@ -1,12 +1,11 @@
 import { ThemeColors } from '../Colors';
-import { Layout } from '../Layout';
+import { ThemeLayout } from '../Layout';
 import { Platform, StatusBar, View } from 'react-native';
 import { DebugStyles, DebugStyleSettings, addDebugStyles } from './DebugStyles';
 
-          // backgroundColor={_colors.CHECKBTN_INNER_CONTAINER_BG}
+// backgroundColor={_colors.CHECKBTN_INNER_CONTAINER_BG}
 // if (!Platform.OS === 'web'){
 // }
-
 
 // const Empty = Object.create(null);
 //
@@ -21,12 +20,11 @@ import { DebugStyles, DebugStyleSettings, addDebugStyles } from './DebugStyles';
 //     borderWidth: 1,
 // });
 
-
 const CheckButtonTouchable = {
-  width: Layout.PERCENT_100,
+  width: ThemeLayout.PERCENT_100,
   borderWidth: 1,
-  borderColor : ThemeColors.CHECKBTN_CONTAINER_INNER_BORDER,
-  borderStyle:'solid',
+  borderColor: ThemeColors.CHECKBTN_CONTAINER_INNER_BORDER,
+  borderStyle: 'solid',
   backgroundColor: ThemeColors.CHECKBTN_CONTAINER_BG,
 };
 
@@ -35,45 +33,44 @@ const CheckButtonInner = {
   flexDirection: 'row',
   flexGrow: 1,
   flexShrink: 0,
-  width: Layout.PERCENT_100,
-  height:Layout.TEXT_SIZE_5,
+  width: ThemeLayout.PERCENT_100,
+  height: ThemeLayout.TEXT_SIZE_5,
   marginTop: 0,
   marginBottom: 0,
-  paddingLeft: Layout.SPACING_UNIT_1,
-  paddingRight: Layout.SPACING_UNIT_3,
-  paddingTop: (Layout.SPACING_UNIT_2 * 2),
-  paddingBottom: (Layout.SPACING_UNIT_2 * 2),
+  paddingLeft: ThemeLayout.SPACING_UNIT_1,
+  paddingRight: ThemeLayout.SPACING_UNIT_3,
+  paddingTop: ThemeLayout.SPACING_UNIT_2 * 2,
+  paddingBottom: ThemeLayout.SPACING_UNIT_2 * 2,
   backgroundColor: ThemeColors.PRIMARY,
-  borderColor : ThemeColors.CHECKBTN_CONTAINER_INNER_BORDER,
+  borderColor: ThemeColors.CHECKBTN_CONTAINER_INNER_BORDER,
   borderWidth: 1,
   borderBottomWidth: 2,
   borderBottomColor: ThemeColors.CHECKBTN_CONTAINER_INNER_BORDER,
-  borderStyle:'solid',
+  borderStyle: 'solid',
   alignItems: 'center',
   justifyContent: 'flex-start',
 };
 
-
 const CheckButtonIconContainer = {
-    flexGrow: 0,
-    flexShrink: 0,
-    backgroundColor: ThemeColors.CHECKBTN_ICON_BG_COLOR,
-    width: Layout.TEXT_SIZE_5 * 1.2,
-    height: Layout.TEXT_SIZE_5 * 1.2,
+  flexGrow: 0,
+  flexShrink: 0,
+  backgroundColor: ThemeColors.CHECKBTN_ICON_BG_COLOR,
+  width: ThemeLayout.TEXT_SIZE_5 * 1.2,
+  height: ThemeLayout.TEXT_SIZE_5 * 1.2,
 };
 
 const CheckButtonIconStyle = {
-    backgroundColor: ThemeColors.CHECKBTN_ICON_BG_COLOR,
-    width: Layout.TEXT_SIZE_5 * 1.2,
-    height: Layout.TEXT_SIZE_5 * 1.2,
+  backgroundColor: ThemeColors.CHECKBTN_ICON_BG_COLOR,
+  width: ThemeLayout.TEXT_SIZE_5 * 1.2,
+  height: ThemeLayout.TEXT_SIZE_5 * 1.2,
 };
 
 const CheckButtonText = {
   flex: 1,
   textAlign: 'left',
   color: ThemeColors.CHECKBTN_TEXT_COLOR,
-  marginLeft: Layout.SPACING_UNIT_1,
-  fontSize: Layout.TEXT_SIZE_3 * 1.2,
+  marginLeft: ThemeLayout.SPACING_UNIT_1,
+  fontSize: ThemeLayout.TEXT_SIZE_3 * 1.2,
 };
 
 const CheckBtnStyles = {

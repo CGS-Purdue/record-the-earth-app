@@ -11,4 +11,4 @@ const SvgFromUri = () => (
   />
 );
 
-export{ SvgFromUri }
+export { SvgFromUri };

@@ -18,7 +18,7 @@ class SvgLogo extends React.Component {
           maxWidth: '100%',
           maxHeight: '100%',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
       }]}>
         <Svg
           xmlns="http://www.w3.org/2000/svg"
@@ -37,4 +37,4 @@ class SvgLogo extends React.Component {
   }
 }
 
-export { SvgLogo }
+export { SvgLogo };

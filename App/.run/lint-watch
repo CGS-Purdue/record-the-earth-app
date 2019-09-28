@@ -1,4 +1,4 @@
-#!/bin/bash
+d#!/bin/bash
 
 # -------------------------
 # ESLINT-WATCH - GLOBAL INSTALL
@@ -12,18 +12,18 @@ BASE_PATH="$(npm prefix)"
 NODE_RUN_ENV=""
 LINT_DIRS="Config,Life,Model,Screens,Theme,Utilities,Components"
 LINT_ARGS="$@"
-
-${NODE_RUN_ENV} \
-  esw \
-    --config "${BASE_PATH}/.eslintrc.js" \
-    --ext '.js' \
-    --color \
-    --debug \
-    --changed \
-    --cache \
-    --cache-file "$BASE_PATH/.eslintcache" \
-    --ignore-pattern '!node_modules' \
-    --watch \
-    ${LINT_ARGS} \
-      -- \
-        ${LINT_DIRS//,/ }
+#
+# ${NODE_RUN_ENV} \
+#   esw \
+#     --config "${BASE_PATH}/.eslintrc.js" \
+#     --ext '.js' \
+#     --color \
+#     --debug \
+#     --changed \
+#     --cache \
+#     --cache-file "$BASE_PATH/.eslintcache" \
+#     --ignore-pattern '!node_modules' \
+#     --watch \
+#     ${LINT_ARGS} \
+#       -- \
+#         ${LINT_DIRS//,/ }

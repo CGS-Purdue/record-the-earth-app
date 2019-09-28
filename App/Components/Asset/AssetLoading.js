@@ -24,11 +24,6 @@ async function loadResourcesAsync() {
   const cacheFonts = _fonts.loadFontMap(_fonts.FontMap);
   const cachedIcons = _icons.load(_icons.Icons);
 
-  await Promise.all([
-    cachedIcons,
-    cacheFonts,
-    Asset.loadAsync([...cacheImages]),
-  ]);
 
   // const cacheImages = Object.entries(_image_assets).map(
   //   function (pair) {
@@ -44,6 +39,11 @@ async function loadResourcesAsync() {
   //     return obj;
   //   }
 
+  await Promise.all([
+    cachedIcons,
+    cacheFonts,
+    Asset.loadAsync([...cacheImages]),
+  ]);
 }
 
 function cacheImages(images) {

@@ -1,11 +1,11 @@
 import { ThemeColors } from '../Colors';
-import { Layout } from '../Layout';
+import { ThemeLayout } from '../Layout';
 import { DebugStyles, DebugStyleSettings, addDebugStyles } from './DebugStyles';
 
 //// --------------------------------------------------------------------------
 /// # View Style Props
 /// ---------------------------------------------------------------------------
-///  - Layout Props
+///  - ThemeLayout Props
 ///  - Shadow Props
 ///  - Transforms
 ///  - borderWidth    [borderLeftWidth borderBottomWidth
@@ -30,26 +30,25 @@ const Container = {
 const FlexContainer = {
   backgroundColor: ThemeColors.TRANSPARENT,
   flex: 1,
-  width: Layout.PERCENT_100,
-  height: Layout.PERCENT_100,
+  width: ThemeLayout.PERCENT_100,
+  height: ThemeLayout.PERCENT_100,
   display: 'flex',
 };
 
 const FlexColContainer = {
   backgroundColor: ThemeColors.TRANSPARENT,
   flex: 1,
-  width: Layout.PERCENT_100,
-  height: Layout.PERCENT_100,
+  width: ThemeLayout.PERCENT_100,
+  height: ThemeLayout.PERCENT_100,
   display: 'flex',
   flexDirection: 'column',
 };
 
-
 const CeneretedFlexContainer = {
   backgroundColor: ThemeColors.TRANSPARENT,
   flex: 1,
-  width: Layout.PERCENT_100,
-  height: Layout.PERCENT_100,
+  width: ThemeLayout.PERCENT_100,
+  height: ThemeLayout.PERCENT_100,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -59,8 +58,8 @@ const CeneretedFlexContainer = {
 const CeneretedFlexColContainer = {
   backgroundColor: ThemeColors.TRANSPARENT,
   flex: 1,
-  width: Layout.PERCENT_100,
-  height: Layout.PERCENT_100,
+  width: ThemeLayout.PERCENT_100,
+  height: ThemeLayout.PERCENT_100,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'stretch',
@@ -69,9 +68,9 @@ const CeneretedFlexColContainer = {
 
 const RootViewContainer = {
   backgroundColor: ThemeColors.TRANSPARENT,
-  flexBasis: Layout.PERCENT_100,
-  height: Layout.PERCENT_100,
-  width: Layout.PERCENT_100,
+  flexBasis: ThemeLayout.PERCENT_100,
+  height: ThemeLayout.PERCENT_100,
+  width: ThemeLayout.PERCENT_100,
   flexShrink: 0,
   flexGrow: 1,
   padding: 0,
@@ -85,17 +84,16 @@ const RootViewContainer = {
 const Stretch = {
   flexGrow: 1,
   flexShrink: 0,
-  flexBasis: Layout.PERCENT_100,
-  height: Layout.PERCENT_100,
-  width: Layout.PERCENT_100,
+  flexBasis: ThemeLayout.PERCENT_100,
+  height: ThemeLayout.PERCENT_100,
+  width: ThemeLayout.PERCENT_100,
 };
-
 
 const PadView = {
   backgroundColor: ThemeColors.TRANSPARENT,
-  flexBasis: Layout.PERCENT_100,
-  width: Layout.PERCENT_100,
-  height: Layout.PERCENT_100,
+  flexBasis: ThemeLayout.PERCENT_100,
+  width: ThemeLayout.PERCENT_100,
+  height: ThemeLayout.PERCENT_100,
   position: 'relative',
   display: 'flex',
   flexShrink: 0,
@@ -129,19 +127,55 @@ const ViewStyles = {
   appview_container: RootViewContainer,
 };
 
-if (DebugStyleSettings.DEBUG_OUTLINE_STYLES_ENABLED){
-  ViewStyles.container = addDebugStyles(ViewStyles.container, DebugStyles.debug_outline);
-  ViewStyles.section = addDebugStyles(ViewStyles.section, DebugStyles.debug_outline);
-  ViewStyles.stretch = addDebugStyles(ViewStyles.stretch, DebugStyles.debug_outline);
-  ViewStyles.padded_container = addDebugStyles(ViewStyles.padded_container, DebugStyles.debug_outline);
-  ViewStyles.centered_row = addDebugStyles(ViewStyles.centered_row, DebugStyles.debug_outline);
-  ViewStyles.centered_col = addDebugStyles(ViewStyles.centered_col, DebugStyles.debug_outline);
-  ViewStyles.centered_inner = addDebugStyles(ViewStyles.centered_inner, DebugStyles.debug_outline);
-  ViewStyles.centered_outer = addDebugStyles(ViewStyles.centered_outer, DebugStyles.debug_outline);
-  ViewStyles.flex_container = addDebugStyles(ViewStyles.flex_container, DebugStyles.debug_outline);
-  ViewStyles.flexcol_container = addDebugStyles(ViewStyles.flexcol_container, DebugStyles.debug_outline);
-  ViewStyles.rootview_container = addDebugStyles(ViewStyles.rootview_container, DebugStyles.debug_outline);
-  ViewStyles.appview_container = addDebugStyles(ViewStyles.appview_container, DebugStyles.debug_outline);
+if (DebugStyleSettings.DEBUG_OUTLINE_STYLES_ENABLED) {
+  ViewStyles.container = addDebugStyles(
+    ViewStyles.container,
+    DebugStyles.debug_outline
+  );
+  ViewStyles.section = addDebugStyles(
+    ViewStyles.section,
+    DebugStyles.debug_outline
+  );
+  ViewStyles.stretch = addDebugStyles(
+    ViewStyles.stretch,
+    DebugStyles.debug_outline
+  );
+  ViewStyles.padded_container = addDebugStyles(
+    ViewStyles.padded_container,
+    DebugStyles.debug_outline
+  );
+  ViewStyles.centered_row = addDebugStyles(
+    ViewStyles.centered_row,
+    DebugStyles.debug_outline
+  );
+  ViewStyles.centered_col = addDebugStyles(
+    ViewStyles.centered_col,
+    DebugStyles.debug_outline
+  );
+  ViewStyles.centered_inner = addDebugStyles(
+    ViewStyles.centered_inner,
+    DebugStyles.debug_outline
+  );
+  ViewStyles.centered_outer = addDebugStyles(
+    ViewStyles.centered_outer,
+    DebugStyles.debug_outline
+  );
+  ViewStyles.flex_container = addDebugStyles(
+    ViewStyles.flex_container,
+    DebugStyles.debug_outline
+  );
+  ViewStyles.flexcol_container = addDebugStyles(
+    ViewStyles.flexcol_container,
+    DebugStyles.debug_outline
+  );
+  ViewStyles.rootview_container = addDebugStyles(
+    ViewStyles.rootview_container,
+    DebugStyles.debug_outline
+  );
+  ViewStyles.appview_container = addDebugStyles(
+    ViewStyles.appview_container,
+    DebugStyles.debug_outline
+  );
 }
 
 export { ViewStyles };

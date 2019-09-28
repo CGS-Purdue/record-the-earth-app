@@ -162,7 +162,7 @@ const LayoutUtilities = {
   logLayoutValues: log_layout_values,
 };
 
-const Layout = {
+const ThemeLayout = {
   DeveicePixelReport: {
     device_layout_size: device_layout_size,
     device_width: device_width,
@@ -258,14 +258,4 @@ const Layout = {
   ASPECT_RATIO_RECT: { width: '100%', height: 0, paddingBottom: '66.66%' },
 };
 
-const tabbar_size = Layout.TEXT_SIZE_3 * 3;
-const tabbar_text_size = (Layout.TEXT_SIZE_3 * 3 * 1) / 3;
-const tabbar_icon_size = (Layout.TEXT_SIZE_3 * 3 * 2) / 4;
-
-const ThemeLayout = {
-  TAB_BAR_SIZE: tabbar_size,
-  TAB_BAR_TEXT_SIZE: tabbar_text_size,
-  TAB_BAR_ICON_SIZE: tabbar_icon_size,
-};
-
-export { Layout, LayoutUtilities, ThemeLayout };
+export { LayoutUtilities, ThemeLayout };

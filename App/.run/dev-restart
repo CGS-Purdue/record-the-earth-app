@@ -29,9 +29,9 @@ echo "Checking Android path ..."
 
 [[ -z $ANDROID_HOME ]] && echo 'ANDROID_HOME is not set. Skipping command' && exit 0
 
-npm run adb:reconnect
+npm run adb.reconnect
 
-npm run adb:reverse
+npm run adb.reverse
 
 [[ -f $BASE_DIR/.devtools-lock ]] && echo "Clearing devtools lockfiles" && rm $BASE_DIR/.devtools-lock
 
@@ -39,32 +39,32 @@ echo "Settings up additional devtools..."
 
 # REACTOTRON
 if [ ! -z $RUN_REACT_REACTOTRON ]; then
-  npm run util:reactotron &
+  npm run react:reactotron &
 fi
 # REACT DEBUGGER
 if [ ! -z $RUN_REACT_DEBUGGER ]; then
-  REACT_DEBUGGER="/data/library/React_Library/react-native-debugger/npm-package/bin/rndebugger-open --expo --open"
+  REACT_DEBUGGER="/"
   REACT_DEBUGGER=${REACT_DEBUGGER} npm run react:debugger &
 fi
 # REACT DEVTOOLS
 [[ ! -z $RUN_REACT_DEVTOOLS ]] && npm run react:devtools &
-
-
-echo "
-  APP_DEBUG_APPDATA  ${APP_DEBUG_APPDATA}
-  EXPO_DEBUG  ${EXPO_DEBUG}
-  NODE_DEBUG  ${NODE_DEBUG}
-  NODE_ENV  ${NODE_ENV}
-  NODE_OPTIONS  ${NODE_OPTIONS}
-  NODE_PATH $NODE_PATH
-  REACT_DEBUGGER ${REACT_DEBUGGER}
-  REACT_EDITOR  ${REACT_EDITOR}
-  RUN_CHROMEDEVTOOLS ${RUN_CHROMEDEVTOOLS}
-  RUN_REACT_REACTOTRON ${RUN_REACT_REACTOTRON}
-  RUN_REACT_DEBUGGER ${RUN_REACT_DEBUGGER}
-  RUN_REACT_DEVTOOLS ${RUN_REACT_DEVTOOLS}
-  RUN_ENV ${RUN_ENV}
-"
+#
+#
+# echo "
+#   APP_DEBUG_APPDATA  ${APP_DEBUG_APPDATA}
+#   EXPO_DEBUG  ${EXPO_DEBUG}
+#   NODE_DEBUG  ${NODE_DEBUG}
+#   NODE_ENV  ${NODE_ENV}
+#   NODE_OPTIONS  ${NODE_OPTIONS}
+#   NODE_PATH $NODE_PATH
+#   REACT_DEBUGGER ${REACT_DEBUGGER}
+#   REACT_EDITOR  ${REACT_EDITOR}
+#   RUN_CHROMEDEVTOOLS ${RUN_CHROMEDEVTOOLS}
+#   RUN_REACT_REACTOTRON ${RUN_REACT_REACTOTRON}
+#   RUN_REACT_DEBUGGER ${RUN_REACT_DEBUGGER}
+#   RUN_REACT_DEVTOOLS ${RUN_REACT_DEVTOOLS}
+#   RUN_ENV ${RUN_ENV}
+# "
 
 DEBUG_LOGGING="${DEBUG_LOGGING}" \
 NODE_PATH="${NODE_PATH}" \

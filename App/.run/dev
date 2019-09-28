@@ -18,7 +18,6 @@ unset REACT_EDITOR
 unset REACT_DEBUGGER
 set -a REACT_DEBUGGER
 
-
 EXPO_HOST="localhost"
 BASE_DIR="$(npm prefix)"
 ABD_PATH="${ANDROID_HOME}/platform-tools"
@@ -28,17 +27,31 @@ ABD_PATH="${ANDROID_HOME}/platform-tools"
 
 NODE_ENV="development"
 
-echo "Settings up device:"
 
 echo "Checking Android path ..."
 
 [[ -z $ANDROID_HOME ]] && echo 'ANDROID_HOME is not set. Skipping command' && exit 0
 
-npm run adb:reverse
+echo "Settings up device:"
+
+npm run adb.devices
 
 # TRYING TO CATCH ERRORS HERE SO WE CAN RECONNECT DEVICES
 # BEFORE EXPO FAILS TO CONNECT AND WE END UP IN A BAD STATE.
-[[ $? > 0 ]] && echo "Problem Connecting to device: $? - exiting early..." && exit 0
+DEVICE_EXIT_STATUS="$?"
+# else
+# fi
+# if [ "$DEVICE_EXIT_STATUS" === "1" ]; ThemeScreen
+# exit 0
+
+if [ $DEVICE_EXIT_STATUS > 0 ]; then
+  echo "Problem Connecting to device: $?"
+  echo "Trying to fix the problem and reconnect automatically"
+    npm run adb.reconnect
+fi
+
+
+npm run adb.reverse
 
 echo "Settings up additional devtools..."
 
@@ -49,7 +62,6 @@ fi
 
 # REACT DEBUGGER
 if [ ! -z $RUN_REACT_DEBUGGER ]; then
-  REACT_DEBUGGER="/data/library/React_Library/react-native-debugger/npm-package/bin/rndebugger-open --expo --open"
   REACT_DEBUGGER=${REACT_DEBUGGER} npm run react:debugger &
 fi
 
@@ -58,30 +70,21 @@ fi
 
 
 echo "
-  APP_DEBUG_APPDATA  ${APP_DEBUG_APPDATA}
-  EXPO_DEBUG  ${EXPO_DEBUG}
-  EXPO_HOST ${EXPO_HOST}
   NODE_DEBUG  ${NODE_DEBUG}
   NODE_ENV  ${NODE_ENV}
   NODE_OPTIONS  ${NODE_OPTIONS}
   NODE_PATH $NODE_PATH
+  EXPO_DEBUG  ${EXPO_DEBUG}
+  EXPO_HOST ${EXPO_HOST}
   REACT_DEBUGGER ${REACT_DEBUGGER}
   REACT_EDITOR  ${REACT_EDITOR}
-  RUN_CHROMEDEVTOOLS ${RUN_CHROMEDEVTOOLS}
-  RUN_REACT_REACTOTRON ${RUN_REACT_REACTOTRON}
-  RUN_REACT_DEBUGGER ${RUN_REACT_DEBUGGER}
-  RUN_REACT_DEVTOOLS ${RUN_REACT_DEVTOOLS}
   RUN_ENV ${RUN_ENV}
 "
 
-DEBUG_LOGGING="${DEBUG_LOGGING}" \
 NODE_PATH="${NODE_PATH}" \
 NODE_ENV="${NODE_ENV}" \
 NODE_OPTIONS="${NODE_OPTIONS}" \
 NODE_DEBUG="${NODE_DEBUG}" \
-RUN_REACT_REACTOTRON="${RUN_REACT_REACTOTRON}" \
-RUN_REACT_DEBUGGER="${RUN_REACT_DEBUGGER}" \
-RUN_REACT_DEVTOOLS="${RUN_REACT_DEVTOOLS}" \
 REACT_DEBUGGER=${REACT_DEBUGGER} \
 REACT_EDITOR="${REACT_EDITOR}" \
 EXPO_DEBUG="${EXPO_DEBUG}" \

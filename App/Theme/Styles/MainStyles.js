@@ -1,5 +1,5 @@
 import { ThemeColors } from '../Colors';
-import { Layout } from '../Layout';
+import { ThemeLayout } from '../Layout';
 
 // flex: 14,
 const MainLogo = {

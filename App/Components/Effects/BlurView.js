@@ -23,7 +23,7 @@ export default class BlurBgView extends React.Component {
         <BlurView tint="light" intensity={50} style={styles.notBlurred}>
           <Image style={{ width: '100%', height: '100%' }} source={this.props.src} />
         </BlurView>
-        <View style={_styles.rootContainer}>
+        <View style={_styles.rootview_container}>
           {this.props.children}
         </View>
     </View>

@@ -156,7 +156,7 @@ const Colors = {
 
   // TAB BAR // DARK THEME
   // dark grey theme : GRA_900 | GRA_800,
-  TAB_BAR_BG: '#101219' ,
+  TAB_BAR_BG: '#101219',
   TAB_BAR_ACTIVE_BG: '#161922',
   TAB_BAR_COLOR: Grays.GRA_700,
   TAB_BAR_ACTIVE_COLOR: ColorLib.azureradiance,
@@ -182,7 +182,6 @@ const Colors = {
   CHECKBTN_ICON_COLOR: ShadeDark.SHADE_DARKER_07,
   CHECKBTN_ICON_COLOR_ACTIVE: Greens.GRN_100,
   // CHECKBTN_TOUCHABLE_BG: ShadeDark.SHADE_DARKER_04,
-
 
   // BRAND COLORS
   BG_MAIN: ColorLib.bayfany,

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Button, ImageBackground, StyleSheet, Text, View } from 'react-native';
-import { AnimatedProgressCircle, ProgressCircle } from '../../Components/ProgressCircle';
+import {
+  AnimatedProgressCircle,
+  ProgressCircle,
+} from '../../Components/ProgressCircle';
 // import * as WebBrowser from 'expo-web-browser';
 
 import { Theme } from '../../Theme';

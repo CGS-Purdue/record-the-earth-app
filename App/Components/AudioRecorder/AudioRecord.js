@@ -3,7 +3,7 @@ import * as FileSystem from 'expo-file-system';
 import * as Permissions from 'expo-permissions';
 import React, { Component } from 'react';
 import { ActivityIndicator, Alert, Image, TouchableHighlight, View } from 'react-native';
-import { Theme, ThemeColors, ThemeIcons } from '../../Theme';
+import { Theme } from '../../Theme';
 import { discardAudioRecordingFile, saveTempAudioFile } from '../../Utilities/Filesystem';
 import { MonoText } from '../Text';
 import { CenterView, RootView } from '../Views';
@@ -15,8 +15,6 @@ import { AnimatedProgressCircle, ProgressCircle } from '../ProgressCircle';
 // import { askForAudioPermissions } from './AudioPermissionsCheck';
 
 const _styles = Theme.Styles;
-let _ic_record = ThemeIcons.Icons.icon_record;
-const RecordIcon = ThemeIcons.createIcon(_ic_record.name, _ic_record.module, _ic_record.width, _ic_record.height);
 
 
 
