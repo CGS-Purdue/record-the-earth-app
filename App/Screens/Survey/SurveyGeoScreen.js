@@ -39,6 +39,11 @@ class SurveyGeoScreen extends Component {
     return this.state.soundscape_data;
   };
 
+  getNavigationParams() {
+    return this.props.navigation.state.params || {}
+  }
+
+  
   getSurveyData = () => {
     let surveyData = {
       rain: this.state.rain,

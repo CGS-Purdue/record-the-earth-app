@@ -55,7 +55,7 @@ const _select = `SELECT
   cultural,
   pid,
   isuploaded
-FROMT Soundscapes
+FROM Soundscapes
 ORDER BY id DESC
 WHERE id = ?;`;
 

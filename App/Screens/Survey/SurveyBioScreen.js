@@ -30,6 +30,10 @@ class SurveyBioScreen extends Component {
     this.ref = surveyBioRef;
   }
 
+  getNavigationParams() {
+    return this.props.navigation.state.params || {}
+  }
+
   updateSoundscapeData = (key, data) => {
     let soundscapeData = this.state.soundscape_data;
     let { survey, ...rest } = soundscapeData;

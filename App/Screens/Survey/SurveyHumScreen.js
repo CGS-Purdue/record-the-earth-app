@@ -3,6 +3,7 @@ import { Button, View, ImageBackground } from 'react-native';
 import { CheckButton } from '../../Components/Button/CheckButton';
 import { HeadingText } from '../../Components/Text/HeadingText';
 import { filterFalse } from '../../Utilities/Functions';
+import { NavigationActions } from 'react-navigation';
 import { CenterView, Section, PadView, RootView } from '../../Components/Views';
 import { BlackFade } from '../../Components/Effects/LinearGradient';
 import { Theme } from '../../Theme';
@@ -29,6 +30,11 @@ class SurveyHumScreen extends Component {
     this.ref = React.createRef();
   }
 
+  getNavigationParams() {
+    return this.props.navigation.state.params || {}
+  }
+
+  
   navigateForward = () => {
     let _currSurvey = this.getSurveyData();
 
@@ -36,17 +42,15 @@ class SurveyHumScreen extends Component {
       _currSurvey.key,
       _currSurvey.data
     );
-
     console.log('_updatedSoundscape', _updatedSoundscape);
     this.props.navigation.navigate('SoundscapeSubmit', {
       soundscape_data: _updatedSoundscape,
     });
-
-    this.props.navigation.dispatch(
-      SwitchActions.jumpTo({
-        routeName: 'SoundscapeSubmit',
-      })
-    );
+    // this.props.navigation.dispatch(
+    //   SwitchActions.jumpTo({
+    //     routeName: 'SoundscapeSubmit',
+    //   })
+    // );
     // action: NavigationActions.navigate({
     //   routeName: 'SurveyDescription',
     //   params: {

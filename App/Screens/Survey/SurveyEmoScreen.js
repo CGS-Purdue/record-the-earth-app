@@ -36,6 +36,11 @@ class SurveyEmoScreen extends Component {
     return soundscapeData;
   };
 
+  getNavigationParams() {
+    return this.props.navigation.state.params || {}
+  }
+
+  
   getSurveyData = () => {
     let surveyData = {
       happy: this.state.happy,

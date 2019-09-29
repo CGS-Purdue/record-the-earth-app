@@ -15,31 +15,30 @@ class SoundDB extends Component {
     this.schema = _schema;
     this.statements =  _statements;
     this.state = {
+      isConnecting: false,
       isConnected : false,
       isError: false,
-      dataStore: false,
-    };
-    this.connectionStatus = {
-      isConnecting: false,
       isLoaded: false,
+      dataStore: false,
       connected: false,
+      connectionStatus: 'disconnected',
     };
-
+    this.connectionStatus = false;
     this.connection = null;
-    this.setConnection = this.setConnection.bind(this);
     this.autoconnect = this.props.autoconnect ? true : false;
-    this.connect = this.connect.bind(this);
+    // this.setConnection = this.setConnection.bind(this);
+    // this.connect = this.connect.bind(this);
     this.onConnected = this.onConnected.bind(this);
-    this.onError = this.onError.bind(this);
-    this.onSuccess = this.onSuccess.bind(this);
+    // this.onError = this.onError.bind(this);
+    // this.onSuccess = this.onSuccess.bind(this);
     this.queryStore = this.queryStore.bind(this);
     this.insert = this.insert.bind(this);
-    this.queryStoreData = false;
-    // this.db = SQLite.openDatabase(_db_name, _db_ver, _db_desc, _db_size);
     // this.onConnect = this.onConnect.bind(this);
     // this.onUpgradeVersion = this.onUpgradeVersion.bind(this);
     // this.setConfig = this.setConfig.bind(this);
     // this._transact = this._transact.bind(this);
+    // this.db = SQLite.openDatabase(_db_name, _db_ver, _db_desc, _db_size);
+    this.queryStoreData = false;
 
     this.queryReporters = {
       dbSuccess: (data) => {
@@ -52,7 +51,11 @@ class SoundDB extends Component {
       // { insertId, rowsAffected, rows: { length, item(), _array, }, }
       insertSuccess: (tx, result) => {
         console.log(
-          [['Insert Successful'].join(' '), [id: result.insertId].join(' '), [rowsAffected: result.rowsAffected].join(' ')].join(''),
+          [
+            ['Insert Success:'],
+            ['(','id:', result.insertId].join(''),
+            ['rowsAffected:', result.rowsAffected,')'].join(''),
+          ].join(' '),
         );
       },
       selectSuccess: (tx, result) => {
@@ -71,7 +74,6 @@ class SoundDB extends Component {
     return this.connection;
   }
 
-
   setConnection(config) {
     console.log('setting connection');
     this.connection = new Connection({
@@ -89,8 +91,7 @@ class SoundDB extends Component {
 
   onConnected(conn) {
     console.log('\n\nconnected\n\n' ,conn);
-    this.connectionStatus.isConnecting = false;
-    this.connectionStatus.connected = true;
+    this.connectionStatus = 'connected';
     this.existsOrCreate();
   }
 
@@ -98,7 +99,7 @@ class SoundDB extends Component {
     console.log('conecting');
     console.log(this.connection);
     this.connection.connect();
-    this.connectionStatus.isConnecting = true;
+    this.connectionStatus = 'connecting';
   }
 
   onComponentDidMount () {
@@ -141,7 +142,7 @@ class SoundDB extends Component {
     this.queryStore('drop');
     this.queryStore('create');
   }
-  quer_createyStore(key, args) {
+  queryStore(key, args) {
     let _store = {
       create: (connection, reporters, statement, args = null) => {
         console.log('create', reporters);
@@ -191,14 +192,27 @@ class SoundDB extends Component {
       insert: (connection, reporters, statement, args) => {
           console.log(this, connection);
           console.log(this.connection);
+          console.log(args);
 
           connection.db.transaction(
           tx => {
-            console.log('args', args);
-            console.log('statement', statement);
+            console.log('statement', statement, args);
             tx.executeSql(
               statement,
-              args,
+               [ args.datetime,
+                args.filepath,
+                args.filename,
+                args.description,
+                args.duration,
+                args.LatLong,
+                args.emotion,
+                args.bio,
+                args.geo,
+                args.anthro,
+                args.cultural,
+                args.pid,
+                args.isUploaded,
+              ],
               reporters.insertSuccess,
               reporters.txError,
             );

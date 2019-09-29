@@ -1,6 +1,10 @@
-
 import React, { Component } from 'react';
-    if (!cbOptions) { return callbackFn; }
+
+
+class ConnectionQuery extends Component {
+  constructor(props) {
+
+  if (!cbOptions) { return callbackFn; }
     if (cbOptions.disabled) {
       return false;
     }

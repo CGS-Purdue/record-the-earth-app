@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
 import { Button, View, Text } from 'react-native';
-import {
-  PadView,
-  Section,
-  ImgBgFill,
-  CenterView,
-  RootView,
-} from '../../Components/Views';
+import { PadView, Section, ImgBgFill, CenterView, RootView } from '../../Components/Views';
+import { SoundscapeSchemaKeys, SoundscapeSchema } from '../../Components/Database/SurveyModel/SurveySchema3';
 import { HeadingText } from '../../Components/Text/HeadingText';
-import {
-  SoundscapeSchemaKeys,
-  SoundscapeSchema,
-} from '../../Components/Database/SurveyModel/SurveySchema3';
 // import { BlurBgView } from '../../Components/Effects/BlurView';
 import { ThemeTextInput } from '../../Components/Forms/TextInput';
 import { Theme } from '../../Theme';
@@ -50,12 +41,16 @@ class SurveyDescScreen extends Component {
     this.soundscape.LatLong = this.props.navigation.state.params.location;
     this.soundscape.duration = 20;
     this.state = {
-      soundscape_data: tshis.soundscape,
+      soundscape_data: this.soundscape,
       text: '',
     };
 
     this.surveyPosition = 1;
     this.surveyKey = 'description';
+  }
+
+  getNavigationParams() {
+    return this.props.navigation.state.params || {}
   }
 
   updateSoundscapeData = (key, data) => {
@@ -80,13 +75,10 @@ class SurveyDescScreen extends Component {
     return (
       <ImgBgFill source={_assets.images.img_background}>
         <RootView>
-          /Database
           <PadView padding={[2, 3]}>
             <CenterView>
               <Section weight={1} expand={true} shrink={true}>
-                <HeadingText style={_styles.survey_desc_title}>
-                  {'Describe the sounds you heard'}
-                </HeadingText>
+                <HeadingText style={_styles.survey_desc_title}>{'Describe the sounds you heard'}</HeadingText>
               </Section>
 
               <Section
@@ -122,13 +114,8 @@ class SurveyDescScreen extends Component {
                   accessibilityLabel={'Go to next'}
                   onPress={() => {
                     let _data = this.getData();
-                    let _updatedSoundscape = this.updateSoundscapeData(
-                      _data.key,
-                      _data.data
-                    );
-                    this.props.navigation.navigate('SurveyBio', {
-                      soundscape_data: _updatedSoundscape,
-                    });
+                    let _updatedSoundscape = this.updateSoundscapeData( _data.key, _data.data);
+                    this.props.navigation.navigate('SurveyBio', { soundscape_data: _updatedSoundscape});
                   }}
                 />
               </Section>
@@ -141,9 +128,8 @@ class SurveyDescScreen extends Component {
 }
 
 SurveyDescScreen.DisplayName = 'Survey Submit Screen';
-
 SurveyDescScreen.navigationOptions = {
-  title: 'SurveySubmi',
+  title: 'SurveySubmit',
 };
 
 export { SurveyDescScreen };

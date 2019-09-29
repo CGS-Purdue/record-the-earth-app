@@ -21,17 +21,15 @@ ${ABD_PATH}/adb reverse tcp:19000 tcp:19000
 # echo "Setting TCP:19001 For [EXPO-BUNDLER]"
 # ${ABD_PATH}/adb reverse tcp:19001 tcp:19001
 #
-# echo "Setting TCP:19003 For [EXPO-BUNDLER]"
-# ${ABD_PATH}/adb reverse tcp:19003 tcp:19003
-#
-# echo "Setting TCP:19002 For [EXPO-DEVTOOLS]"
-# ${ABD_PATH}/adb reverse tcp:19003 tcp:19002
-#
+echo "Setting TCP:19003 For [EXPO-BUNDLER]"
+${ABD_PATH}/adb reverse tcp:19003 tcp:19003
+
+echo "Setting TCP:19002 For [EXPO-DEVTOOLS]"
+${ABD_PATH}/adb reverse tcp:19003 tcp:19002
+
 # echo "Setting TCP:19005 For [METRO BUNDLER]"
 # ${ABD_PATH}/adb reverse tcp:19004 tcp:19004
 
-
-exit 0
 # REACTOTRON
 [[ ! -z $RUN_REACT_REACTOTRON ]] &&  echo "Setting TCP:9090 For [REACTOTRON]" && ${ABD_PATH}/adb reverse tcp:9090 tcp:9090
 # REACT DEVTOOLS

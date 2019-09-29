@@ -40,12 +40,12 @@ const FontMap = (name) => {
     },
   };
 
-  var Font = {
-    src: '',
-    name: '',
-    file: '',
-    isLoaded: '',
-  };
+  // var Font = {
+  //   src: '',
+  //   name: '',
+  //   file: '',
+  //   isLoaded: '',
+  // };
 
   let _getFont = ((name) => {
      if (_map[name]) {
@@ -57,7 +57,7 @@ const FontMap = (name) => {
    });
 
   return _getFont(name);
-}
+};
 
 
 var getFont = (map, name) => {
@@ -83,8 +83,6 @@ function _getThemeFonts(fonts) {
 }
 
 const loadFont = (FontSet) => {
-
-  console.log('[loadFont]', FontSet);
   let font = Object.create(null);
   let key = FontSet[0];
   let name = FontSet[1].name;
@@ -93,7 +91,7 @@ const loadFont = (FontSet) => {
   font.name = name;
   try {
     let src = Font.loadAsync({ [name] : module });
-    console.log('loading font', name, src)
+    console.log('loading font', name, src);
     let isLoaded = Promise.resolve(src);
     font.src = src;
     font.isLoaded = isLoaded;
@@ -104,10 +102,7 @@ const loadFont = (FontSet) => {
 };
 
 const loadFontMap = (fontMap) => {
-  console.log('fontMap', fontMap);
-
   let fonts = Object.entries(fontMap).map((font_set) => {
-
     return loadFont(font_set);
   });
   return fonts;
@@ -178,16 +173,6 @@ var ThemeFontMap = _getThemeFonts([
 //   Asset.loadAsync([...cacheImages]),,
 // ])
 
-function cacheImages(images) {
-  return images.map((image) => {
-    if (typeof image === 'string') {
-      return Image.prefetch(image);
-    } else {
-      return Asset.fromModule(image).downloadAsync();
-    }
-  });
-}
-
 function cacheFonts(fonts) {
   return fonts.map((font) => Font.loadAsync(font));
 }
@@ -210,5 +195,5 @@ var ThemeFonts = {
 
 export {
   ThemeFonts,
-  FontVariables
-}
+  FontVariables,
+};

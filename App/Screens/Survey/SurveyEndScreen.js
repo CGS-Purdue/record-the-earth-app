@@ -23,11 +23,10 @@ const _styles = Theme.Styles;
 
 // FileSystem.getInfoAsync
 const APP_STORAGE = StorageConfig.APP_STORAGE;
-const APPSTORAGE_TEMP_PATH = StorageConfig.STORAGE_TEMP_PATH;
+const APP_STORAGE_TEMP_PATH = StorageConfig.PENDING_SOUNDFILE_PATH;
 
 // const FILE_NAME = file_path.split('/').slice(-1);
 // const TEMP_PATH = [ storage_path, file_name].join('/');
-// console.log(temp_path);
 
 // const DATA_DIR = 'data';
 // const DB_DIR = 'SQLite';
@@ -73,113 +72,33 @@ class SurveyEndScreen extends Component {
     this.soundscape_data = this.props.navigation.state.params.soundscape_data;
   }
 
+  getNavigationParams() {
+    return this.props.navigation.state.params || {}
+  }
+
+  
   _xhrFormUpload(data) {
     const { hostname, pathname } = JSON.parse(Base64.decode(ServerConfig));
     let address = ['https:/', hostname, pathname].join('/');
-
-    console.log('[_xhrFormUpload] hostname pathname', address);
-
-    console.log('data', data);
-
     if (!hostname) {
       return false;
     }
-
     let formData = this.getFormData(data);
-    console.log('formData', formData);
-
     var request = new XMLHttpRequest();
     request.onreadystatechange = (e) => {
       if (request.readyState !== 4) {
         return;
       }
       if (request.status === 200) {
-        console.log('success', request.responseText);
       } else {
-        console.warn('error', e);
       }
       request.open('POST', address);
       request.send(formData);
     };
   }
 
-  dataToString = (data) => {
-    return JSON.stringify(data);
-  };
-
-  object_keys_checksum = (obj) => {
-    return Object.getOwnPropertyNames(obj)
-      .join('')
-      .split('')
-      .map((a) => {
-        return a.codePointAt(0) - 96;
-      })
-      .reduce((a, b) => {
-        return a + b;
-      });
-  };
-
-  validatePreFlightCheck = (data) => {
-    if (Object.keys(data) === Object.keys(SoundscapeSchema)) {
-      console.log('tested:', Object.keys(data).length, 'expected');
-      console.log(data, SoundscapeSchema);
-      return false;
-    }
-
-    // if (
-    //   object_keys_checksum(data) !==
-    //   {
-    //     object_keys_checksum,
-    //   }(SoundscapeSchema)
-    // ) {
-    //   this.setState({
-    //     upload_ready: false,
-    //     reason: 'keys missing or invalid',
-    //   });
-    //   console.log(' validatePreFlightCheck keys missing or invalid');
-    //   return false;
-    // }
-
-    console.log('data input looks good, sending forwa');
-    this.setState({ dataIsValid: true });
-    return true;
-  };
-
-  reduceTagList(tagList) {
-    var keylist = [];
-    var result = Object.entries(tagList).forEach(function(tag) {
-      if (tag[1]) {
-        keylist.push(tag[0]);
-      }
-    });
-    return JSON.stringify(keylist.join(','));
-  }
-
-  asyncGetFileFromTemp = async (name) => {
-    let file_info = {};
-
-    try {
-      file_info = await getAudioFileFromTemp(name)
-        .then((response) => {
-          console.log('response', response);
-          return response.uri;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-      console.log('file_info', file_info);
-      this.setState({
-        soundfile_uri: file_info.uri,
-        soundfile_status: 'file-loaded',
-      });
-    } catch (error) {
-      console.error(error);
-    }
-    return file_info;
-  };
-
   getFormDataFilePath = (file_name) => {
-    return [APPSTORAGE_TEMP_PATH, file_name].join('/');
+    return [APP_STORAGE_TEMP_PATH, file_name].join('/');
   };
 
   getFormDataExtraData = () => {
@@ -188,37 +107,18 @@ class SurveyEndScreen extends Component {
   };
 
   getFormData(data) {
-    if (!data) {
-      console.log('[getSurvey2FormData] no data', data);
-    }
-
-    console.log('form data', data);
+    if (!data) {  }
     const fileUploadName = data.filename;
-
     const formData = new FormData();
-
     for (let entry of Object.entries(data)) {
       if (!typeof entry[0] === 'string') {
-        console.log(`issue with form key ${entry[0]}`);
       }
       formData.append(entry[0], entry[1]);
-      console.log('apend formData', entry);
     }
     let formExtra = this.getFormDataExtraData();
     formData.append('uploadToken', formExtra);
-
     let formFile = this.getFormDataFilePath(fileUploadName);
-
-    console.log(formFile);
-
     formData.append('file', formFile);
-
-    console.log('[getSurvey2FormData] FormData', JSON.stringify(formData));
-
-    this.setState({
-      survey_formdata: formData,
-      upload_ready: true,
-    });
     return formData;
   }
 
@@ -245,13 +145,10 @@ class SurveyEndScreen extends Component {
 
   initUpload = () => {
     let clean = this.getParsedData();
-    console.log('CLEAN ', clean);
     let valid = this.validatePreFlightCheck(clean);
     if (!valid) {
-      console.log('issue with survey data', valid);
       return false;
     }
-    console.log('sending');
     this._xhrFormUpload(clean);
   };
 
