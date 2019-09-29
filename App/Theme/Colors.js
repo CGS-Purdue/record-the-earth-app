@@ -156,11 +156,15 @@ const Colors = {
 
   // TAB BAR // DARK THEME
   // dark grey theme : GRA_900 | GRA_800,
+  // TAB_BAR_BG:Grays.GRA_900, // '#101219',
   TAB_BAR_BG: '#101219',
+  // TAB_BAR_ACTIVE_BG: Grays.GRA_800, // '#161922',
   TAB_BAR_ACTIVE_BG: '#161922',
   TAB_BAR_COLOR: Grays.GRA_700,
-  TAB_BAR_ACTIVE_COLOR: ColorLib.azureradiance,
-  TAB_BAR_BORDER_COLOR: ColorLib.chetwodeblue,
+  TAB_BAR_ACTIVE_COLOR: '#188daa',
+  // TAB_BAR_ACTIVE_COLOR: ColorLib.azureradiance,
+  TAB_BAR_BORDER_COLOR: '00ccff',
+
 
   // Form colors
   INPUT_BG: ShadeLight.SHADE_LIGHTER_70,

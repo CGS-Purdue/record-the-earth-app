@@ -17,8 +17,6 @@ const AppBgImg = Theme.Variables.APP_CONTAINER_BGIMG;
 const AppContainer = createAppContainer(RootNavigation);
 
 export default class App extends Component {
-  state = {isReady: false};
-
   constructor(props) {
     super(props);
     const { navigation }  = this.props;
@@ -28,6 +26,9 @@ export default class App extends Component {
     this._layout = Theme.Layout;
     this._styles = Theme.Styles;
     this._vars = Theme.Variables;
+    this.state = {
+      isReady: false
+    }
   }
 
   componentDidMount() {
@@ -58,7 +59,6 @@ export default class App extends Component {
           startAsync={this.cacheResourcesAsync}
           onFinish={() => this.setState({ isReady: true })}
           onError={this._appLoadingOnError}
-          autoHideSplash={true}
           />
       );
     } else {
@@ -66,12 +66,12 @@ export default class App extends Component {
         <View style={AppRootStyles.app_rootview}>
           <View style={AppRootStyles.app_inner_wrap}>
             <Image style={AppRootStyles.app_bgimg} source={AppBgImg} />
-              <SafeAreaView style={AppRootStyles.app_safearearoot}>
-                <View style={AppRootStyles.app_bg}>
-                  <AppContainer
-                    theme="dark"
-                    ref={(nav) => {this.navigator = nav;}}
-                    onNavigationStateChange={this._handleNavigationChange}
+            <SafeAreaView style={AppRootStyles.app_safearearoot}>
+              <View style={AppRootStyles.app_bg}>
+                <AppContainer
+                  theme="dark"
+                  ref={(nav) => {this.navigator = nav;}}
+                  onNavigationStateChange={this._handleNavigationChange}
                   />
               </View>
             </SafeAreaView>
@@ -82,31 +82,39 @@ export default class App extends Component {
   }
 
 
- cacheResourcesAsync = async () => {
+  cacheResourcesAsync = async () => {
     const _image_assets = Object.assign(
-        Theme.Assets.buttons,
-        Theme.Assets.logos,
-        Theme.Assets.images,
-        Theme.Assets.icons,
-      );
-    const cacheImages = Object.entries(_image_assets).map(
-      function (pair) {
-        let obj = {};
-        let key = pair[0];
-        let mod = pair[1];
-        let asset = Asset.fromModule(mod).downloadAsync(key);
-        obj[key] = {
-          module: mod,
-          name: key,
-          asset: asset,
-        };
-        return obj;
-      }
+      Theme.Assets.buttons,
+      Theme.Assets.logos,
+      Theme.Assets.images,
+      Theme.Assets.icons,
     );
-    const _font_map = Theme.Fonts.FontMap;
-    const cacheFonts = Theme.Fonts.loadFontMap(_font_map);
 
-    return Promise.all([ cacheImages, cacheFonts ]);
+    let cachePromises = [];
+    try {
+
+      const cacheImages = Object.entries(_image_assets)
+        .map((pair) => {
+          let obj = {};
+          let key = pair[0];
+          let mod = pair[1];
+          let asset = Asset.fromModule(mod).downloadAsync(key);
+          obj[key] = {
+            module: mod,
+            name: key,
+            asset: asset,
+          };
+          return obj;
+        });
+      cachePromises.push(cacheImages);
+      const _font_map = Theme.Fonts.FontMap;
+      const cacheFonts = Theme.Fonts.loadFontMap(_font_map);
+      cachePromises.push(cacheFonts);
+    } catch (e) {
+      console.log('load error', e);
+    } finally {
+      return Promise.all(cachePromises);
+    }
   }
 }
 
@@ -131,13 +139,11 @@ const AppRootStyles = {
     position: 'relative',
     borderColor: 'yellow',
     borderWidth: 1,
-    backgroundColor: Theme.Variables.APP_CONTAINER_BGCOLOR,
+    backgroundColor: Theme.Variables.TRANSPARENT,
   },
    app_safearearoot: {
     display: 'flex',
     flex: 1,
-    borderWidth: 1,
-    borderColor: 'red',
   },
    app_rootview: {
     display: 'flex',
@@ -149,12 +155,12 @@ const AppRootStyles = {
     margin: 0,
     padding: 0,
     position: 'relative',
-    backgroundColor: 'rgba(299,0,30,.4)',
+    backgroundColor: Theme.Variables.APP_CONTAINER_BGCOLOR, //'rgba(29,36,38,1)',
   },
    app_bgimg: {
     width: '100%',
     height: '100%',
-    left: '40%',
+    left: 0,
     position: 'absolute',
     display: 'flex',
     flex: 1,
@@ -163,18 +169,19 @@ const AppRootStyles = {
     position: 'absolute',
     height: '100%',
     width: '100%',
-    flexBasis: '100%',
-    backgroundColor: 'cyan',
-    top: 0,
     left: 0,
+    top: 0,
+    flexBasis: '100%',
+    backgroundColor: Theme.Variables.TRANSPARENT,
     flex: 1,
   },
    app_bgimgbg_fill: {
+    backgroundColor: 'rgba(299,0,30,.4)',
     position: 'absolute',
     height: '100%',
-    width: '100%',
-    top: 0,
     left: 0,
+    top: 0,
+    width: '100%',
     flex: 1,
   },
 }

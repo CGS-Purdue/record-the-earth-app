@@ -1,4 +1,4 @@
-import * as Font from 'expo-font';
+import * as ExpoFont from 'expo-font';
 
 import FONTS_IONICONS from '../Assets/fonts/ionicons.ttf';
 import FONTS_OPENSANS_LIGHT from '../Assets/fonts/OpenSans-Light-webfont.ttf';
@@ -60,7 +60,7 @@ const FontMap = (name) => {
 };
 
 
-var getFont = (map, name) => {
+var _getFont = (map, name) => {
   if (map[name]) {
    return map[name];
   }
@@ -73,7 +73,7 @@ var getFont = (map, name) => {
 function _getThemeFonts(fonts) {
   var map = [];
   for (var item of fonts) {
-    var font = getFont(item);
+    var font = _getFont(item);
     var fontname = font.name;
     var obj = {};
     obj[fontname] = font.src;
@@ -82,30 +82,24 @@ function _getThemeFonts(fonts) {
   return map;
 }
 
-const loadFont = (FontSet) => {
-  let font = Object.create(null);
-  let key = FontSet[0];
-  let name = FontSet[1].name;
-  let module = FontSet[1].src;
-  font.key = key;
-  font.name = name;
-  try {
-    let src = Font.loadAsync({ [name] : module });
-    console.log('loading font', name, src);
-    let isLoaded = Promise.resolve(src);
-    font.src = src;
-    font.isLoaded = isLoaded;
-  } catch (e) {
-    console.log('problem loading font', e);
-  }
-  return font;
+const _loadFont = (pair) => {
+  let font = {};
+  let name = pair[0];
+  Object.keys(pair[1]);
+  let module = pair[1].src
+  let src = ExpoFont.loadAsync({ [name] : module });
+  return Promise.resolve(src);
 };
 
-const loadFontMap = (fontMap) => {
+const _loadFontMap = (fontMap) => {
+  let fontCache = [];
   let fonts = Object.entries(fontMap).map((font_set) => {
-    return loadFont(font_set);
+    fontLoading = _loadFont(font_set);
+    fontCache.push(fontLoading);
+    return { [font_set[0]] : font_set[1] };
+
   });
-  return fonts;
+  return fontCache;
 };
 
 // ThemeFontMap.forEach( function(fon){ console.log(fon) } )
@@ -174,7 +168,7 @@ var ThemeFontMap = _getThemeFonts([
 // ])
 
 function cacheFonts(fonts) {
-  return fonts.map((font) => Font.loadAsync(font));
+  return Object.entries(fonts).map((font) => ExpoFont.loadAsync(font));
 }
 
 
@@ -184,12 +178,10 @@ var ThemeFonts = {
   FontAssets: FontAssets,
   FontWeights: FONT_WEIGHTS,
   FontVariables: FontVariables,
-  FontConfig: {
-    ICON_FONT: FontMap('ionicons'),
-  },
-  loadFontMap: loadFontMap,
-  getFont: getFont,
-  loadFont: loadFont,
+  FontConfig: { ICON_FONT: FontMap('ionicons') },
+  loadFontMap: _loadFontMap,
+  getFont: _getFont,
+  loadFont: _loadFont,
 };
 
 

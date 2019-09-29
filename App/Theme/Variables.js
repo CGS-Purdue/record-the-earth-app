@@ -20,6 +20,7 @@ const _var = {
 
 const ThemeVariables = {
   BASE: 'dark',
+  TRANSPARENT: ThemeColors.TRANSPARENT,
   FONTCODE: ThemeFonts.MONO_FONT,
   FONTBASE: ThemeFonts.SANS_FONT,
   BRANDTITLE: 'Record the Earth',
