@@ -194,7 +194,7 @@ const Colors = {
   COLOR_MAIN: ColorLib.bayfany,
 };
 
-const EmptyColors = Object.create(null);
+const EmptyColors = {};
 
 const ColorScheme = Object.assign(
   EmptyColors,

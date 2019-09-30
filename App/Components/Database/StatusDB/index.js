@@ -67,7 +67,6 @@ class StatusDB extends Component {
   }
 
   setConnection(config) {
-    console.log('setting connection');
     this.connection = new Connection({
       name: config.name,
       version : config.version,
@@ -82,21 +81,20 @@ class StatusDB extends Component {
   }
 
   onConnected(conn) {
-    console.log('\n\nconnected\n\n' ,conn);
+    // console.log('\n\nconnected\n\n' ,conn);
     this.connectionStatus.isConnecting = false;
     this.connectionStatus.connected = true;
     this.checkStatus();
   }
 
   connect(){
-    console.log('conecting');
-    console.log(this.connection);
+    // console.log(this.connection);
     this.connection.connect();
     this.connectionStatus.isConnecting = true;
   }
 
   onComponentDidMount () {
-    console.log('mounted');
+    // console.log('mounted');
     this.setConnection();
     if (this.autoconnect) {
       this.connection.connect();
@@ -113,7 +111,7 @@ class StatusDB extends Component {
   }
 
   checkStatus(){
-    console.log('checkStatus', this);
+    // console.log('checkStatus', this);
     this.queryStore('create');
     this.queryStore('insert');
     this.queryStore('last');
@@ -122,21 +120,18 @@ class StatusDB extends Component {
   queryStore(key, args) {
 
     let _store = {
-      create: (connection, reporters, statement, args = null) => {
-
-        console.log('create', reporters);
-
+      create: (connection, reporters, statement) => {
         connection.db.transaction(
           tx => {
             tx.executeSql(
               statement,
               null,
-              reporters.selectSuccess,
+              null,
               reporters.txError,
             );
           },
           reporters.dbError,
-          reporters.dbSuccess,
+          null,
         );
       },
       insert: (connection, reporters, statement, args = null) => {
@@ -174,7 +169,7 @@ class StatusDB extends Component {
     let _reporters = this.queryReporters;
     let resultData = this.queryStoreData;
     let result =  _store[key](_connection, _reporters, _statements[key], args);
-    console.log('query\n\n',_statements[key], _arguments[key], args);
+    // console.log('query\n\n',_statements[key], _arguments[key], args);
     console.log('result', result, this);
     return result;
   }

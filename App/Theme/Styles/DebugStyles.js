@@ -11,7 +11,7 @@ import Constants from 'expo-constants';
 //   colorRange10[i] = color;
 // }
 
-const DebugStyleSettings = Object.create(null);
+const DebugStyleSettings = {};
 
 const { debug_flags } = Constants.manifest.extra;
 if (debug_flags.DEBUG_OUTLINE_STYLES) {

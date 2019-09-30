@@ -64,7 +64,7 @@ function mergeStyles(styleArray) {
   return Object.assign(Object.create(null), ...styleArray);
 }
 
-const FontClasses = Object.create(null);
+const FontClasses = {};
 
 FontClasses.fs = fs;
 FontClasses.lh = lh;
@@ -72,7 +72,7 @@ FontClasses.fw = fw;
 FontClasses.font = font;
 // const FontStyles = StyleSheet.create(FontClasses);
 
-const TextClasses = Object.create(null);
+const TextClasses = {};
 TextClasses.BODY = mergeStyles([lh.lh_0, fs.fs_0, p.y10, m.x10]);
 TextClasses.H1 = mergeStyles([lh.lh_5, fs.fs_5, p.y35, m.x10]);
 TextClasses.H2 = mergeStyles([lh.lh_4, fs.fs_4, p.y30, m.x10]);

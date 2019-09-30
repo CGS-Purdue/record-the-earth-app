@@ -51,6 +51,7 @@ export default class LinksScreen extends Component {
   };
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <ImageBackground
         style={_styles.bgImg}

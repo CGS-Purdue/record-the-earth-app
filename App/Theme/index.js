@@ -6,7 +6,7 @@ import { ThemeLayout } from './Layout';
 import { ThemeStyles } from './Stylesheet';
 import { ThemeVariables } from './Variables';
 
-const Theme = Object.create(null);
+const Theme = {};
 Theme.Assets = ThemeAssets;
 Theme.Fonts = ThemeFonts;
 Theme.Icons = ThemeIcons;

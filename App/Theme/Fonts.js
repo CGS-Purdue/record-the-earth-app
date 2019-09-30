@@ -84,9 +84,9 @@ function _getThemeFonts(fonts) {
 
 const _loadFont = (pair) => {
   let font = {};
-  let name = pair[0];
-  Object.keys(pair[1]);
-  let module = pair[1].src
+  let key = pair[0];
+  let name = pair[1].name;
+  let module = pair[1].src;
   let src = ExpoFont.loadAsync({ [name] : module });
   return Promise.resolve(src);
 };
@@ -97,7 +97,6 @@ const _loadFontMap = (fontMap) => {
     fontLoading = _loadFont(font_set);
     fontCache.push(fontLoading);
     return { [font_set[0]] : font_set[1] };
-
   });
   return fontCache;
 };
@@ -153,24 +152,9 @@ var FontVariables = {
   type: FONT_TYPEFACE,
 };
 
-var ThemeFontMap = _getThemeFonts([
-  'ionicons',
-  'spacemono',
-  'opensans-regular',
-  'opensans-light',
-]);
-
-//
-// Promise.all([
-//   cachedIcons,
-//   cacheFonts,
-//   Asset.loadAsync([...cacheImages]),,
-// ])
-
 function cacheFonts(fonts) {
   return Object.entries(fonts).map((font) => ExpoFont.loadAsync(font));
 }
-
 
 var ThemeFonts = {
   FontMap: FontMap(),
@@ -179,6 +163,7 @@ var ThemeFonts = {
   FontWeights: FONT_WEIGHTS,
   FontVariables: FontVariables,
   FontConfig: { ICON_FONT: FontMap('ionicons') },
+  FontCache: _loadFontMap(FontMap()),
   loadFontMap: _loadFontMap,
   getFont: _getFont,
   loadFont: _loadFont,

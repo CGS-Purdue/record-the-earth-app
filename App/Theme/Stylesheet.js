@@ -9,6 +9,7 @@ import { FontClasses, TextClasses } from './Styles/TypographyStyles';
 import { UtilityStyles } from './Styles/UtilityStyles';
 import { ViewStyles } from './Styles/ViewStyles';
 import { SurveyStyles } from './Styles/SurveyStyles';
+import { SoundscapeStyles } from './Styles/SoundscapeStyles';
 import { AudioPlayerStyles } from './Styles/AudioPlayerStyles';
 import { TabBarStyles } from './Styles/TabBarStyles';
 import { CheckBtnStyles } from './Styles/CheckButtonStyles';
@@ -42,6 +43,7 @@ const ThemeStyles = Object.assign(
   FormStyles,
   MainStyles,
   ViewStyles,
+  SoundscapeStyles,
   HomeStyles,
   DebugStyles,
   UtilityStyles,

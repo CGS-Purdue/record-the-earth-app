@@ -4,6 +4,7 @@ import { ThemeLayout } from '../Layout';
 import { UtilityStyles } from './UtilityStyles';
 import { br, m, p } from './LayoutStyles';
 
+
 const SurveyDescTitleText = {
   color: ThemeColors.WHITE,
 };
@@ -62,5 +63,9 @@ const SurveyStyles = StyleSheet.create({
   survey_desc_textinput: ThreeLineMultiIinputText,
   survey_desc_textinput_container: SurveyDescInputTextContainer,
 });
+
+
+
+
 
 export { SurveyStyles };

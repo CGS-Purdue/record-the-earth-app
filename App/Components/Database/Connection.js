@@ -13,6 +13,7 @@ class Connection extends Component {
     this.connectionStatus = 'disconnected';
     this.connectionError = false;
     this.connect = this.connect.bind(this);
+    this.exitOnResult = false;
     this.disconnect = this.disconnect.bind(this);
     // this.configQuery = this.configQuery.bind(this);
   }
@@ -30,14 +31,14 @@ class Connection extends Component {
       }
 
       if (this.props.onConnect) {
-        console.log('Getting Database Connection;');
-        console.log('Connection Details: ', _dbConn);
+        // console.log('Getting Database Connection;');
+        // console.log('Connection Details: ', _dbConn);
         this.props.onConnect(this);
       }
     }
 
     catch (error) {
-      console.log('error', error);
+      // console.log('error', error);
       this.connectionStatus = false;
       this.connectionError = error;
     } finally {
@@ -48,6 +49,9 @@ class Connection extends Component {
   onSuccess(tx, result) {
     console.log(tx, result);
     this.setState({data: result.rows._array});
+    if (this.exitOnResult) {
+      this.disconnct();
+    }
   }
 
   onError(tx, error) {
@@ -79,7 +83,7 @@ class Connection extends Component {
       this.connection = undefined;
     });
   }
-  //
+
   // configQuery(statement, args, options) {
   //   return new ConnectionQuery({
   //     statement: statement,

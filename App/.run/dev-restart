@@ -43,13 +43,11 @@ if [ ! -z $RUN_REACT_REACTOTRON ]; then
 fi
 # REACT DEBUGGER
 if [ ! -z $RUN_REACT_DEBUGGER ]; then
-  REACT_DEBUGGER="/"
   REACT_DEBUGGER=${REACT_DEBUGGER} npm run react:debugger &
 fi
 # REACT DEVTOOLS
 [[ ! -z $RUN_REACT_DEVTOOLS ]] && npm run react:devtools &
-#
-#
+
 # echo "
 #   APP_DEBUG_APPDATA  ${APP_DEBUG_APPDATA}
 #   EXPO_DEBUG  ${EXPO_DEBUG}

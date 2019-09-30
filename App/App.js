@@ -27,8 +27,8 @@ export default class App extends Component {
     this._styles = Theme.Styles;
     this._vars = Theme.Variables;
     this.state = {
-      isReady: false
-    }
+      isReady: false,
+    };
   }
 
   componentDidMount() {
@@ -107,12 +107,12 @@ export default class App extends Component {
           return obj;
         });
       cachePromises.push(cacheImages);
-      const _font_map = Theme.Fonts.FontMap;
-      const cacheFonts = Theme.Fonts.loadFontMap(_font_map);
-      cachePromises.push(cacheFonts);
+      const FontCache = Theme.Fonts.FontCache;
+      cachePromises.push(...FontCache);
     } catch (e) {
       console.log('load error', e);
     } finally {
+      console.log(cachePromises);
       return Promise.all(cachePromises);
     }
   }
@@ -184,4 +184,4 @@ const AppRootStyles = {
     width: '100%',
     flex: 1,
   },
-}
+};
