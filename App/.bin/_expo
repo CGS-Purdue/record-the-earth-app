@@ -9,6 +9,7 @@
 # doctor
 # expo start --clear --max-workers 9 --android --localhost --minify --offline --config $PWD/app.json $PWD
 # build
+#  expo --help  --offline  --no-https --minify --no-dev --tunnel --android --clear
 # expo build:android --release-channel develop --type apk --config app.json
 # node_modules/.bin/expo build --help
 # expo build:android

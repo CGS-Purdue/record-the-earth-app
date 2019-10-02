@@ -1,0 +1,20 @@
+
+// soundscape 2
+// $_POST ["securityID"]
+// $_POST ["xmlName"]
+// $_POST ["wavName"]
+// $_POST ["LocationEnabled"]
+// $_POST ["Latitude"]
+// $_POST ["Longitude"]
+// $_POST ["Altitude"]
+// $_POST ["Biological"]
+// $_POST ["Geophysical"]
+// $_POST ["Human"]
+// $_POST ["Description"] )
+// $_POST ["Emotional"]
+// $_POST ["Date"]
+// $_POST ["Time"]
+// $_POST ["Length"]
+// $_POST ["AppVersion"]
+// $_POST ["OSVersion"]
+// $_POST ["DeviceModel"]

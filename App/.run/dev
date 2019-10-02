@@ -20,13 +20,11 @@ set -a REACT_DEBUGGER
 
 EXPO_HOST="localhost"
 BASE_DIR="$(npm prefix)"
-ABD_PATH="${ANDROID_HOME}/platform-tools"
 
 [[ -f .npmrc ]] && source .npmrc
 [[ -f .env ]] && source .env
 
 NODE_ENV="development"
-
 
 echo "Checking Android path ..."
 
@@ -44,7 +42,7 @@ DEVICE_EXIT_STATUS="$?"
 # if [ "$DEVICE_EXIT_STATUS" === "1" ]; ThemeScreen
 # exit 0
 
-if [ $DEVICE_EXIT_STATUS > 0 ]; then
+if [ "$DEVICE_EXIT_STATUS" != "0" ]; then
   echo "Problem Connecting to device: $?"
   echo "Trying to fix the problem and reconnect automatically"
     npm run adb.reconnect
@@ -63,17 +61,17 @@ npm run adb.reverse
 echo "Settings up additional devtools..."
 
 # REACTOTRON
-if [ ! -z $RUN_REACT_REACTOTRON ]; then
+if [ -n "$RUN_REACT_REACTOTRON" ]; then
   npm run react:reactotron &
 fi
 
 # REACT DEBUGGER
-if [ ! -z $RUN_REACT_DEBUGGER ]; then
+if [ -n "$RUN_REACT_DEBUGGER" ]; then
   REACT_DEBUGGER=${REACT_DEBUGGER} npm run react:debugger &
 fi
 
 # REACT DEVTOOLS
-[[ ! -z $RUN_REACT_DEVTOOLS ]] && npm run react:devtools &
+[[ -n "$RUN_REACT_DEVTOOLS" ]] && npm run react:devtools &
 
 
 echo "
@@ -81,22 +79,40 @@ echo "
   NODE_ENV  ${NODE_ENV}
   NODE_OPTIONS  ${NODE_OPTIONS}
   NODE_PATH $NODE_PATH
-  EXPO_DEBUG  ${EXPO_DEBUG}
   EXPO_HOST ${EXPO_HOST}
   REACT_DEBUGGER ${REACT_DEBUGGER}
   REACT_EDITOR  ${REACT_EDITOR}
   RUN_ENV ${RUN_ENV}
+  EXPO_DEBUG  ${EXPO_DEBUG}
+  node ${BASE_DIR}/node_modules/expo/bin/cli.js start \
+    --clear \
+    --max-workers 7 \
+    --no-minify \
+    --no-https \
+    --dev \
+    --host ${EXPO_HOST} \
+    --android
+
 "
 # node ${BASE_DIR}/node_modules/.bin/expo start \
+# ${BASE_DIR}/node_modules/expo-cli/bin/expo.js start \
+# node ${BASE_DIR}/node_modules/expo/bin/cli.js
+# ${BASE_DIR}/node_modules/expo-cli/bin/expo.js start \
+# --inspect[=[host:]port]
+#  --title=...
+#
+# activate inspector on host:port (default: 127.0.0.1:9229)
 
 NODE_PATH="${NODE_PATH}" \
 NODE_ENV="${NODE_ENV}" \
 NODE_OPTIONS="${NODE_OPTIONS}" \
-NODE_DEBUG="${NODE_DEBUG}" \
 REACT_DEBUGGER=${REACT_DEBUGGER} \
 REACT_EDITOR="${REACT_EDITOR}" \
-EXPO_DEBUG="${EXPO_DEBUG}" \
-  node ${BASE_DIR}/node_modules/expo/bin/cli.js start \
+NODE_DEBUG="${NODE_DEBUG}" \
+EXPO_DEBUG=${EXPO_DEBUG} \
+  node \
+  --title="expo-cli" \
+    ${BASE_DIR}/node_modules/.bin/expo start \
     --clear \
     --max-workers 7 \
     --no-minify \

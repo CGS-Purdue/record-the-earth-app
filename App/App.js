@@ -4,7 +4,8 @@ import { Ionicons } from '@expo/vector-icons';
 import React, { Component } from 'react';
 import { Image, View, SafeAreaView, Platform, StatusBar } from 'react-native';
 import { createAppContainer } from 'react-navigation';
-import { RootNavigation } from './Navigation/RootNavigation';
+import { initalAppSetup } from './Utilities/InitialSetup';
+import AppContainer from './Navigation/AppNavigator';
 
 import { Theme } from './Theme';
 
@@ -14,42 +15,59 @@ const _assets = Theme.Assets;
 
 const AppBgImg = Theme.Variables.APP_CONTAINER_BGIMG;
 
-const AppContainer = createAppContainer(RootNavigation);
+// const AppContainer = createAppContainer(RootNavigation);
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-    const { navigation }  = this.props;
-    this._assets = Theme.Assets;
-    this._colors = Theme.Colors;
-    this._fonts = Theme.Fonts;
-    this._layout = Theme.Layout;
-    this._styles = Theme.Styles;
-    this._vars = Theme.Variables;
+    // const { navigation }  = this.props;
+    // this._assets = Theme.Assets;
+    // this._colors = Theme.Colors;
+    // this._fonts = Theme.Fonts;
+    // this._layout = Theme.Layout;
+    // this._styles = Theme.Styles;
+    // this._vars = Theme.Variables;
     this.state = {
       isReady: false,
     };
+    console.log('[App] constructored');
   }
 
   componentDidMount() {
+    const isSetup = initalAppSetup();
+    // console.log('isSetup', isSetup);
+    // console.log('\n\n\n' , JSON.stringify(Theme.styles), '\n\n\n');
     console.log('[AppThemeContainer] did mount', this);
   }
 
   _handleNavigationChange = (prevState, newState, action) => {
-    console.log('nav change', newState, action);
     if (__DEV__) {
-      console.log('Navigation Change:', prevState, newState, action);
+      let logmsg = [
+        `[Navigation]`,
+        `${action.type}`,
+        `${action.routeName}`,
+      ].join(' ');
+
+      let logData =  {
+        _action: action,
+        statePrev: prevState,
+        stateNew: newState,
+      }
+
+      console.log(logmsg, logData);
+
+      if (action.params){
+        let logmsg = [
+          `[Navigation Params]`,
+        ].join(' ');
+        let logData= action.params;
+        console.log(logmsg, logData);
+      }
     }
   };
 
   _appLoadingOnError = (err) => {
     console.log('LOADING ERROR', err);
-  }
-
-  componentDidMount() {
-    // const isSetup = initalAppSetup();
-    // console.log('isSetup', isSetup);
-    // console.log('\n\n\n' , JSON.stringify(Theme.styles), '\n\n\n');
   }
 
   render() {

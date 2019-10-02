@@ -1,0 +1,37 @@
+#!/bin/bash
+
+
+# -------------------------
+# ESLINT-WATCH - GLOBAL INSTALL
+# --plugin
+# --watch-ignore RegExp        Regex string of folders to ignore when watching - default: /.git|node_modules|bower_components/
+# --watch-delay Int            Delay(ms) for watcher to wait to trigger re-lint - default: 300
+# -------------------------
+BASE_PATH="$(npm prefix)"
+
+TARGET_PATH="${1:-index.js}"
+TARGET_FILENAME="$(basename ${TARGET_PATH})"
+OUTPUT_DEST="${TARGET_FILENAME}.bundle"
+NODE_RUN_ENV=""
+
+[[ -f "${BASE_PATH}/./.npmrc" ]] && echo "reading env file" && . ${BASE_PATH}/./.npmrc
+## ENTRY_FILE="${INIT_CWD}/${TARGET_PATH}"
+## --out ${ENTRY_FILE} \
+## ${ENTRY_FILE}t"
+## # --dev
+## RUN_ARGS="$@"
+## echo BUILTINDG} "
+##   --project-roots ${BASE_PATH} \
+# platform? web, android, ios
+# NODE_RUN_ENV="" \
+
+${NODE_RUN_ENV} \
+${BASE_PATH}/node_modules/.bin/metro \
+  build \
+  --verbose \
+  --platform android \
+  --project-roots "${BASE_PATH}" \
+  --out "${OUTPUT_DEST}" \
+  "${TARGET_PATH}"
+
+exit 0

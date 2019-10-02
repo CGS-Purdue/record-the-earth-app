@@ -1,20 +1,9 @@
 import React, { Component } from 'react';
-import {
-  SafeAreaView,
-  TouchableOpacity,
-  FlatList,
-  View,
-  Text,
-  StyleSheet,
-} from 'react-native';
-import {
-  Section,
-  ImgBgFill,
-  CenterView,
-  PadView,
-  RootView,
-} from '../../Components/Views';
+import { SafeAreaView, TouchableOpacity, FlatList, View, Text, StyleSheet } from 'react-native';
+import { Section, ImgBgFill, CenterView, PadView, RootView } from '../../Components/Views';
 import { HeadingText } from '../../Components/Text/HeadingText';
+import { FlatListHeader } from '../../Components/ListViews/FlatListHeader';
+import { StorageConfig } from '../../Config/StorageConfig';
 import * as FileSystem from 'expo-file-system';
 import Constants from 'expo-constants';
 
@@ -24,6 +13,7 @@ import Constants from 'expo-constants';
 // const prefix = 'file://';
 // const file_name = file_uri.split('/').slice(-1);
 // const new_uri = [storage_path,file_name].join('/');
+
 
 function FileItem({ id, name, selected, onSelect }) {
   return (
@@ -54,20 +44,6 @@ function FileItem({ id, name, selected, onSelect }) {
   );
 }
 
-function FListHead() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        width: '100%',
-        backgroundColor: '#444444',
-        display: 'flex',
-      }}
-    >
-      <Text style={styles.item}>{'Files'}</Text>
-    </View>
-  );
-}
 
 class FileListScreen extends Component {
   constructor(props) {
@@ -78,16 +54,13 @@ class FileListScreen extends Component {
       selected: { id: 0 },
     };
 
-    let APP_PATH = FileSystem.documentDirectory;
-    let SOUND_DIR = 'media';
-    let SOUND_PATH = [APP_PATH, SOUND_DIR].join('');
-
     this.config = {
-      appPath: APP_PATH,
-      soundDir: SOUND_DIR,
-      soundPath: SOUND_PATH,
+      appPath: StorageConfig.APP_PATH,
+      pendingFiles: StorageConfig.STORAGE_PENDING_SOUNDFILES,
+      uploadedFiles: StorageConfig.STORAGE_UPLOADED_SOUNDFILES,
+      soundPath: StorageConfig.STORAGE_SOUNDFILE_PATH,
     };
-
+    console.log(this.config);
     this.updateFiles = this.updateFiles.bind(this);
     this.getFileList = this.getFileList.bind(this);
   }
@@ -111,11 +84,17 @@ class FileListScreen extends Component {
         data: obj,
       };
     });
-    console.log('updateFiles', _files);
-    this.setState({ files: _files });
+
+    console.log('updateFiles');
+    if (!_files){
+      this.setState({ files: MOCK_SOUND_FILES });
+    } else {
+      this.setState({ files: _files });
+    }
   }
 
   async getFileList(location) {
+    console.log(this.config);
     let storagePath = this.config.soundPath;
     this.filePromise = await FileSystem.readDirectoryAsync(storagePath);
     Promise.resolve(this.filePromise).then((result) => {
@@ -129,18 +108,12 @@ class FileListScreen extends Component {
   }
 
   componentWillMount() {
-    if (!this.state.intialized) {
-      this.setState({ intialized: true });
-      this.getFileList();
-      console.log('getting files early');
-    }
+    console.log('getting files early');
   }
 
   componentDidMount() {
-    if (!this.state.intialized) {
-      this.getFileList();
-      console.log('getting files');
-    }
+    console.log('[FileListScreen] did mount', this.state);
+    this.getFileList();
   }
 
   setSelected(newSelected) {
@@ -158,6 +131,7 @@ class FileListScreen extends Component {
     // Type	Required
     // any	No
     // [selected],
+    // initialNumToRender={6}
   };
 
   render() {
@@ -177,15 +151,8 @@ class FileListScreen extends Component {
       >
         <FlatList
           data={this.state.files}
-          initialNumToRender={6}
           extraData={this.state.selected}
-          ListHeaderComponent={() => {
-            return (
-              <View style={styles.titlebox}>
-                <Text style={styles.title}>{'File List'}</Text>
-              </View>
-            );
-          }}
+          ListHeaderComponent={FlatListHeader}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <FileItem
@@ -245,3 +212,13 @@ const styles = StyleSheet.create({
 });
 
 export { FileListScreen };
+
+
+
+// ListHeaderComponent={() => {
+//   return (
+//     <View style={styles.titlebox}>
+//       <Text style={styles.title}>{'File List'}</Text>
+//     </View>
+//   );
+// }}

@@ -7,7 +7,7 @@ import { Base64 } from '../Utilities/Base64';
 export default (() => {
   return Base64.encode(JSON.stringify({
     pathname: 'soundscape-android.php',
-    hostname: 'recordtheearth.org',
+    hostname: 'dev.recordtheearth.org',
     data: [['cqh7qDQSX7Q'], ['xcU7l0a'], ['AIzaSyCj'], ['Ryh4Hqkgam']],
   }));
 })();

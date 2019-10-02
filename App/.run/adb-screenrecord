@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# ANDROID-BUILD
+# -------------
+# BUILD THE ANDROID PROJECT FROM THE ./android directory
+
+BASE_DIR="$(npm prefix)"
+ABD_PATH="${ANDROID_HOME}/platform-tools"
+
+[[ -f .npmrc ]] && source .npmrc
+[[ -f .env ]] && source .env
+
+# --size widthxheight	Sets the video size: 1280x720. The default value is the device's native display resolution (if supported), 1280x720 if not. For best results, use a size supported by your device's Advanced Video Coding (AVC) encoder.
+# --bit-rate rate	Sets the video bit rate for the video, in megabits per second. The default value is 4Mbps. You can increase the bit rate to improve video quality, but doing so results in larger movie files. The following example sets the recording bit rate to 6Mbps:
+# screenrecord --bit-rate 6000000 /sdcard/demo.mp4
+#
+# --time-limit time	Sets the maximum recording time, in seconds. The default and maximum value is 180 (3 minutes).
+# --rotate	Rotates the output 90 degrees. This feature is experimental.
+# --verbose	Displays log information on the command-line screen. If you do not set this option, the utility does not display any information while running.
+
+adb shell screenrecord --verbose /sdcard/demo.mp4
+
+adb pull /sdcard/screen.png
+adb shell rm /sdcard/screen.png

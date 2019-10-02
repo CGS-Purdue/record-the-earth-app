@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# ANDROID-BUILD
+# -------------
+# BUILD THE ANDROID PROJECT FROM THE ./android directory
+
+BASE_DIR="$(npm prefix)"
+ABD_PATH="${ANDROID_HOME}/platform-tools"
+
+[[ -f .npmrc ]] && source .npmrc
+[[ -f .env ]] && source .env
+
+
+adb shell screencap -p /sdcard/screen.png
+adb pull /sdcard/screen.png
+adb shell rm /sdcard/screen.png
+
+#
+#
+# Not bad, but seems like there's some room for improvement.
+#
+# Information provided by screencap -h indicates that screen shot can be sent to stdout, but running adb shell screencap -p > screen.png results in seemingly corrupt file.
+#
+# Luckily, I wasn't the first person looking into this issue. Apparently, adb shell is performing an EOL (end-of-line) character conversion, from LF (line feed, '\n', 0x0A) to CR+LF (carriage return followed by line feed, '\r\n', 0x0D0A).
+#
+# If that sounds familiar, that's because I've dealt with this before. Unfortunately, this time we're working with binary data, so using tr -d '\r' command to remove all 0x0D will likely corrupt it by also removing bytes that aren't part of the 0x0D0A sequence. We want to only remove carriage return characters when they are followed by a line feed.
+#
+# The solution is to use sed search and replace as follows:
+#
+# adb shell screencap -p | sed 's/\r$//' > screen.png

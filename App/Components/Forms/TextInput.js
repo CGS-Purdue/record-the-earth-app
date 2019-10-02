@@ -20,17 +20,13 @@ const TextAreaStyle = Object.assign({
 
 
 export default class ThemeTextInput extends React.Component {
-  state = {
-    text: '',
-  };
-
   render(){
     return (
     <View style={_styles.form_textarea_input_container_3}>
       <TextInput
         style={TextAreaStyle}
-        onChangeText={text => this.setState({ text })}
-        value={this.state.text}
+        onChangeText={this.props.onChangeText}
+        value={this.props.value}
         multiline={true}
         numberOfLines={3}
         maxLength={256}

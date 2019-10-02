@@ -6,6 +6,19 @@ import { Theme } from '../../Theme';
 
 const _var = Theme.Variables;
 
+// 
+// Example:
+// renderButton: function() {
+//   return (
+//     <TouchableOpacity onPress={this._onPressButton}>
+//       <Image
+//         style={styles.button}
+//         source={require('./myButton.png')}
+//       />
+//     </TouchableOpacity>
+//   );
+// },
+
 // Props
 // accessibilityLabel
 // color  - Color of the text (iOS), or background color of the button (Android)
@@ -20,6 +33,8 @@ const _var = Theme.Variables;
 // testID
 // title
 // touchSoundDisabled
+
+
 
 
 export default function TouchableNativeButton({ onPress, children }) {
@@ -51,6 +66,9 @@ const button_style = {
   margin: 10,
   marginTop: 20,
 };
+
+
+
 
 const ThemeButton = ( props ) => {
   if (props.style) {

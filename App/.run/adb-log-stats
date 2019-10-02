@@ -1,0 +1,31 @@
+#!/bin/bash
+
+BASE_DIR="$(npm prefix)"
+
+[[ -f .npmrc ]] && source .npmrc
+
+# Android Debug Bridge version 1.0.41
+# Version 29.0.2-5738569
+# Installed as /data/projects/5_Android_Projects/AndroidSDK/platform-tools/adb
+#   -b <buffer>, --buffer=<buffer>         Request alternate ring buffer,
+#                   'all' or 'main', 'system', 'radio', 'events', 'crash', 'default'
+#                   (Default: main,system,crash)
+#
+[[ -z $ANDROID_HOME ]] && echo 'ANDROID_HOME is not set. Skipping command' && exit 0
+
+ABD_PATH="${ANDROID_HOME}/platform-tools"
+
+
+# ANDROID_SERIAL="025abd11727717ac"
+
+# OPTIONS
+# --buffer=all
+# -t '2018-08-01 00:00:00.00'
+# --pid=2765
+# adb logcat --statistics
+
+# adb logcat --buffer-size --buffer all
+# adb logcat --statistics --divider --buffer all | sort -u -r | grep -v "PID/UID" \
+# | grep -v "size/num" | grep -v "Chattiest"
+
+${ABD_PATH}/adb logcat --statistics

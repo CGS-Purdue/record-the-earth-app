@@ -6,8 +6,7 @@ import { Theme } from '../../Theme';
 const _styles = Theme.Styles;
 const _fonts = Theme.Fonts;
 
-const TITLE_FONT = _fonts.getFont(_fonts.FontType.TITLE_FONT);
-
+const TITLE_FONT = _fonts.getFont('TITLE_FONT');
 // color // fontSize // lineHeight
 
 class HeadingText extends Component {

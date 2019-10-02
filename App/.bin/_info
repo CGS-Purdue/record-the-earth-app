@@ -110,6 +110,7 @@ const parse_arg = (arg) => {
 // ----------------------------------------------------------------------------
 const mainpkg = require('../package');
 const appconfig = require('../app');
+
 const command_list = [
   "app",
   "config",
@@ -117,6 +118,8 @@ const command_list = [
   "paths",
   "scripts",
 ];
+
+
 if (process.stdin.isTTY) {
   process.stdin.setEncoding(encoding);
   var buf = Buffer.from(process.argv[2] || '').toString(encoding);

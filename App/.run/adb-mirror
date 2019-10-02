@@ -1,0 +1,18 @@
+#!/bin/bash
+
+BASE_DIR="$(npm prefix)"
+
+[[ -f .npmrc ]] && source .npmrc
+[[ -f .env ]] && source .env
+
+ABD_PATH="${ANDROID_HOME}/platform-tools"
+DEVICE_STATE="$(adb get-state)"
+
+
+[[ "${DEVICE_STATE}" == "device" ]] \
+    && echo "ADB_DEVICE_STATE=${DEVICE_STATE}"
+
+
+[[ -d "${ANDROID_PROJECT_DIR}/utilities/scrcpy" ]] \
+    && cd ${ANDROID_PROJECT_DIR}/utilities/scrcpy \
+    && ${ANDROID_PROJECT_DIR}/utilities/scrcpy/run ${ANDROID_PROJECT_DIR}/utilities/scrcpy/x

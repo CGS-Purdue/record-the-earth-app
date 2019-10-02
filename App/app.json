@@ -3,8 +3,7 @@
     "name": "RecordTheEarth3",
     "slug": "record-the-earth-v3",
     "description": "Record the Earth Native build for iOS and Android",
-    "entryPoint": "./init.js",
-    "version": "0.2.0",
+    "version": "0.9.0",
     "icon": "./Assets/icon.png",
     "orientation": "portrait",
     "platforms": [
@@ -61,8 +60,9 @@
     "githubUrl": "https://github.com/charrismatic/record-the-earth-expo-react-native",
     "extra": {
       "ExtraKey": "3102",
+      "EXPO_DEBUG": true,
       "debug_flags": {
-        "DEBUG_OUTLINE_STYLES": true,
+        "DEBUG_OUTLINE_STYLES": false,
         "DEV_DATA_MOCK_SOUNDFILES": false
       }
     },

@@ -9,8 +9,7 @@ const formDefaultProps = {
   placeholderTextColor: _colors.GRA_600,
 };
 
-const TextAreaStyle = Object.assign(
-  {
+const TextAreaStyle = Object.assign({
     borderBottomLeftRadius: 1 ,
     borderBottomRightRadius: 1 ,
     borderTopLeftRadius: 1 ,
@@ -30,12 +29,6 @@ class ThemeTextArea extends Component {
       text: '',
     };
   }
-
-  componentDidUpdate() {
-    console.log('props:', this.props);
-    console.log('props:', this.state);
-  }
-
   render() {
     const { text } = this.state;
     return (
@@ -43,7 +36,10 @@ class ThemeTextArea extends Component {
         <TextInput
           style={TextAreaStyle}
           value={this.state.text}
-          onChangeText={(text) => this.setState({ text })}
+          onChangeText={(text)=>{
+            console.log('ThemeTextArea', this.state);
+            this.setState({text})
+          }}
           multiline={true}
           numberOfLines={3}
           maxLength={256}

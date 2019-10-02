@@ -194,6 +194,19 @@ const Colors = {
   COLOR_MAIN: ColorLib.bayfany,
 };
 
+// DEFAULT
+// -------
+// tintColor,
+// tabIconDefault: '#ccc',
+// tabIconSelected: tintColor,
+// tabBar: '#fefefe',
+// errorBackground: 'red',
+// errorText: '#fff',
+// warningBackground: '#EAEB5E',
+// warningText: '#666804',
+// noticeBackground: tintColor,
+// noticeText: '#fff',
+
 const EmptyColors = {};
 
 const ColorScheme = Object.assign(

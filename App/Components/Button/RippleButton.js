@@ -5,6 +5,8 @@ import Touchable from 'react-native-platform-touchable';
 
 import { Theme } from '../../Theme';
 
+
+// TODO: ANDROID ONLY
 const _styles = Theme.Styles;
 const _assets = Theme.Assets;
 
@@ -38,6 +40,7 @@ class RippleButton extends Component {
       <Touchable
         style={_styles.ripplebtn_option}
         onPress={this.props.onPress}
+        delayLongPress={1000} 
         background={Touchable.Ripple('#ccc', false)}
       >
         <View style={_styles.ripplebtn_container_inner}>
@@ -84,7 +87,7 @@ class IonicRippleButton extends React.Component {
                  />
             </View>
             <View style={_styles.ripplebtn_option}>
-              <Text style={_styles.ripplebtn_optionText}>Ask a question on the Expo forums</Text>
+              <Text style={_styles.ripplebtn_optionText}>{this.props.title}</Text>
             </View>
           </View>
         </Touchable>

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+BASE_DIR="$(npm prefix)"
+
+[[ -f .npmrc ]] && source .npmrc
+[[ -f .env ]] && source .env
+
+ABD_PATH="${ANDROID_HOME}/platform-tools"
+ANDROID_SERIAL="$(${ABD_PATH}/adb devices | grep -e '\bdevice\b' | awk '{print $1}')"
+
+# https://developer.android.com/studio/command-line/adb
+#
+adb shell ls /system/bin
+
+# Call package manager (pm)
+
+adb shell pm list packages | sort
+
+# Call activity manager (am)
+
+exit 0

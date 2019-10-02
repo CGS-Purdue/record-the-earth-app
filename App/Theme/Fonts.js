@@ -47,7 +47,7 @@ const FontMap = (name) => {
   //   isLoaded: '',
   // };
 
-  let _getFont = ((name) => {
+  let get = ((name) => {
      if (_map[name]) {
       return _map[name];
      }
@@ -56,16 +56,24 @@ const FontMap = (name) => {
      }
    });
 
-  return _getFont(name);
+  return get(name);
 };
 
+var FontTypes = {
+  TITLE_FONT: 'spacemono',
+  HEADING_FONT: 'spacemono',
+  BODY_FONT: 'opensans-regular',
+  SANS_FONT: 'opensans-regular',
+  SANS_LIGHT_FONT: 'opensans-light',
+  MONO_FONT: 'spacemono',
+  ICON_FONT: 'ionicons',
+};
 
-var _getFont = (map, name) => {
-  if (map[name]) {
-   return map[name];
-  }
-  else {
-    return map;
+var _getFont = (name) => {
+  if (FontTypes[name]) {
+   return  (FontTypes[name]);
+  } else {
+    return false;
   }
 };
 
@@ -73,7 +81,7 @@ var _getFont = (map, name) => {
 function _getThemeFonts(fonts) {
   var map = [];
   for (var item of fonts) {
-    var font = _getFont(item);
+    var font = FontMap(item);
     var fontname = font.name;
     var obj = {};
     obj[fontname] = font.src;
@@ -134,22 +142,13 @@ var FONT_STYLES = {
   NORMAL: { name: 'normal' },
 };
 
-var FONT_TYPEFACE = {
-  TITLE_FONT: 'spacemono',
-  HEADING_FONT: 'spacemono',
-  BODY_FONT: 'opensans-regular',
-  SANS_FONT: 'opensans-regular',
-  SANS_LIGHT_FONT: 'opensans-light',
-  MONO_FONT: 'spacemono',
-  ICON_FONT: 'ionicons',
-};
 
 var FONT_WEIGHTS = getFontWeights(FontDictionary);
 
 var FontVariables = {
   weights: FONT_WEIGHTS,
   styles: FONT_STYLES,
-  type: FONT_TYPEFACE,
+  type: FontTypes,
 };
 
 function cacheFonts(fonts) {
@@ -158,11 +157,14 @@ function cacheFonts(fonts) {
 
 var ThemeFonts = {
   FontMap: FontMap(),
-  FontType: FONT_TYPEFACE,
+  FontType: FontTypes,
   FontAssets: FontAssets,
   FontWeights: FONT_WEIGHTS,
   FontVariables: FontVariables,
-  FontConfig: { ICON_FONT: FontMap('ionicons') },
+  FontConfig: {
+    ICON_FONT: FontMap('ionicons'),
+    TITLE_FONT: FontMap('opensans-regular'),
+  },
   FontCache: _loadFontMap(FontMap()),
   loadFontMap: _loadFontMap,
   getFont: _getFont,

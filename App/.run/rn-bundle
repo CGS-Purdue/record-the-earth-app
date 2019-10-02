@@ -1,0 +1,31 @@
+#!/bin/bash
+
+BASE_PATH="$(npm prefix)"
+
+[[ -f .npmrc ]] && source .npmrc
+
+# react-native
+ENTRYFILE="${1:-App.js}"
+
+
+echo "
+${BASE_PATH}/./node_modules/.bin/react-native bundle \
+  --entry-file index.js \
+  --platform android \
+  --dev true \
+  --reset-cache \
+  --projectRoot $BASE_PATH \
+  --bundle-output .dev/main.jsbundle \
+  --assets-dest android \
+  --entry-file "$ENTRYFILE"
+"
+
+${BASE_PATH}/./node_modules/react-native/local-cli/cli.js bundle \
+    --entry-file index.js \
+    --platform android \
+    --dev true \
+    --reset-cache \
+    --projectRoot $BASE_PATH \
+    --bundle-output .dev/main.jsbundle \
+    --assets-dest android \
+    --entry-file "$ENTRYFILE"

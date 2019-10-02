@@ -1,0 +1,20 @@
+
+// _soundscape
+// $_POST ["LocationEnable"], FILTER_SANITIZE_STRING;
+// $_POST ["Latitude"] ,      FILTER_SANITIZE_STRING)
+// $_POST ["Longitude"] ,     FILTER_SANITIZE_STRING)
+// $_POST ["Altitude"] ,      FILTER_SANITIZE_STRING)
+// $_POST ["Biological"] ,    FILTER_SANITIZE_STRING)
+// $_POST ["Geophysical"] ,   FILTER_SANITIZE_STRING)
+// $_POST ["Human"] ,         FILTER_SANITIZE_STRING)
+// $_POST ["Description"] ,   FILTER_SANITIZE_STRING)
+// $_POST ["Emotional"] ,     FILTER_SANITIZE_STRING)
+// $_POST ["Date"] ,          FILTER_SANITIZE_STRING)
+// $_POST ["Time"] ,          FILTER_SANITIZE_STRING)
+// $_POST ["Length"] ,        FILTER_SANITIZE_STRING)
+// $_POST ["AppVersion"] ,    FILTER_SANITIZE_STRING)
+// $_POST ["OSVersion"] ,     FILTER_SANITIZE_STRING)
+// $_POST ["DeviceModel"] ,   FILTER_SANITIZE_STRING)
+// $_POST ["securityID"],     FILTER_SANITIZE_STRING)
+// $_POST ["xmlName"],        FILTER_SANITIZE_STRING)
+// $_POST ["wavName"],        FILTER_SANITIZE_STRING)

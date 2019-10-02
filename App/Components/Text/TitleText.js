@@ -5,22 +5,27 @@ import { Text } from 'react-native';
 import { Theme } from '../../Theme';
 
 const _fonts = Theme.Fonts;
-
-function getpreloadFontByType ( ){
-  if (_fonts.FontConfig.TITLE_FONT) {
-    return _fonts.FontConfig.TITLE_FONT;
+console.log(_fonts);
+function getpreloadFontByType (type ){
+  if (typeof(_fonts.FontConfig[type]) !== 'undefined') {
+    return _fonts.FontConfig[type];
   } else {
-    return loadFontMap(_fonts.FontType.TITLE_FONT);
+    let font = loadFontMap(_fonts.FontType[type]);
+    return font.name;
   }
 }
+let titleFont = getpreloadFontByType('TITLE_FONT');
 
 const TitleTextFontStyle = {
-  fontFamily: _fonts.type.TITLE_FONT,
-};
+  fontFamily: titleFont
+}
+
+console.log(TitleTextFontStyle);
+
 
 
 export default function TitleText(props) {
- return (<Text {...this.props} style={[this.props.style, { TitleTextFontStyle }]} />);
+ return (<Text style={[this.props.style, { TitleTextFontStyle }]} {...this.props} />);
 }
 
 export { TitleText };
