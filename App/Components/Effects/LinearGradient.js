@@ -2,24 +2,15 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-class FacebookButton extends React.Component {
+class GradientButton extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <LinearGradient
           colors={['#4c669f', '#3b5998', '#192f6a']}
-          style={{
-            padding: 15,
-            alignItems: 'center',
-            borderRadius: 5,
-          }}>
-          <Text
-            style={{
-              backgroundColor: 'transparent',
-              fontSize: 15,
-              color: '#fff',
-            }}>
-            Sign in with Facebook
+          style={{ padding: 15, alignItems: 'center', borderRadius: 5, }}>
+          <Text style={{ backgroundColor: 'transparent', fontSize: 15, color: '#fff', }}>
+            {'Click'}
           </Text>
         </LinearGradient>
       </View>
@@ -33,20 +24,28 @@ class FacebookButton extends React.Component {
 class BlackFade extends React.Component {
   render() {
     return (
-        <LinearGradient
-          colors={['rgba(255,0,0,.2)', 'transparent', 'rgba(0,0,0,0.4)']}
-          locations={[0, 0.5, 1]}
-          style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            top: 0,
-            height: '100%',
-            width: '100%',
-          }}
-        />
+      <LinearGradient
+        locations={[0, 0.5, 1]}
+        colors={['rgba(255,0,0,.2)', 'transparent', 'rgba(0,0,0,0.4)']}
+        style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '100%', width: '100%'}}
+      />
+    );
+  }
+}
+// <View style={{ flex: 1 }}>
+// <View style={{ backgroundColor: 'orange', flex: 1 }} />
+// </View>
+class MirageGrad extends React.Component {
+  render() {
+    return (
+
+      <LinearGradient
+        locations={[0, 1]}
+        colors={['#3A6073', '#16222A']}
+        style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '100%', width: '100%'}}
+      />
     );
   }
 }
 
-export { FacebookButton, BlackFade };
+export { GradientButton, BlackFade };

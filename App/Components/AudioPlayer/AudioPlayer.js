@@ -20,7 +20,7 @@ const initialState = {
   debugStatements: 'debug info will appear here',
 };
 
-export class Player extends Component {
+export default class AudioPlayer extends Component {
   constructor(props) {
     super(props);
     this.sound = null;
@@ -56,7 +56,7 @@ export class Player extends Component {
       this.sound = sound;
     } catch (error) {
       // An error occurred!
-      console.warn(`Player.js loadSound error : ${error}`);
+      console.warn(`AudioPlayer.js loadSound error : ${error}`);
     }
   };
 
@@ -181,7 +181,7 @@ export class Player extends Component {
   //           this.setState({ playStatus: 'PLAYING' });
   //         })
   //         .catch((err) => {
-  //           console.warn(`Player.js onPlayPress error: ${err}`);
+  //           console.warn(`AudioPlayer.js onPlayPress error: ${err}`);
   //         });
   //     }
   //   }
@@ -265,7 +265,7 @@ export class Player extends Component {
   }
 }
 
-Player.propTypes = {
+AudioPlayer.propTypes = {
   onComplete: PropTypes.func,
   completeButtonText: PropTypes.string,
   audioMode: PropTypes.object,
@@ -287,7 +287,7 @@ Player.propTypes = {
   }),
 };
 
-Player.defaultProps = {
+AudioPlayer.defaultProps = {
   audioMode: {
     allowsRecordingIOS: true,
     interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,

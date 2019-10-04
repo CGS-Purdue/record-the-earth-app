@@ -14,25 +14,25 @@ var FontAssets = {
 
 const FontMap = (name) => {
   let _map = {
-    ionicons: {
+    'ionicons': {
       src: FontAssets.ionicons,
       name: 'ionicons',
       file: 'ionicons.ttf',
       isLoaded: false,
     },
-    opensanslight: {
+    'opensanslight': {
       src: FontAssets.opensans_light,
       name: 'opensans-light',
       file: 'OpenSans-Light-webfont.ttf',
       isLoaded: false,
     },
-    opensansregular: {
+    'opensansregular': {
       src: FontAssets.opensans_regular,
       name: 'opensans-regular',
       file: 'OpenSans-Regular-webfont.ttf',
       isLoaded: false,
     },
-    spacemono: {
+    'spacemono': {
       src: FontAssets.spacemono,
       name: 'spacemono',
       file: 'SpaceMono-Regular.ttf',
@@ -47,9 +47,9 @@ const FontMap = (name) => {
   //   isLoaded: '',
   // };
 
-  let get = ((name) => {
-     if (_map[name]) {
-      return _map[name];
+  let get = ((_name) => {
+     if (_map[_name]) {
+      return _map[_name];
      }
      else {
      return _map;
@@ -69,7 +69,15 @@ var FontTypes = {
   ICON_FONT: 'ionicons',
 };
 
-var _getFont = (name) => {
+var _getFont = (key) => {
+  if (FontMap(key)) {
+   return  (FontMap(key));
+  } else {
+    return false;
+  }
+};
+
+var _getFontKey = (name) => {
   if (FontTypes[name]) {
    return  (FontTypes[name]);
   } else {
@@ -102,7 +110,7 @@ const _loadFont = (pair) => {
 const _loadFontMap = (fontMap) => {
   let fontCache = [];
   let fonts = Object.entries(fontMap).map((font_set) => {
-    fontLoading = _loadFont(font_set);
+  let fontLoading = _loadFont(font_set);
     fontCache.push(fontLoading);
     return { [font_set[0]] : font_set[1] };
   });
@@ -152,7 +160,8 @@ var FontVariables = {
 };
 
 function cacheFonts(fonts) {
-  return Object.entries(fonts).map((font) => ExpoFont.loadAsync(font));
+  return Object.entries(fonts)
+    .map((font) => ExpoFont.loadAsync(font))
 }
 
 var ThemeFonts = {
@@ -167,6 +176,7 @@ var ThemeFonts = {
   },
   FontCache: _loadFontMap(FontMap()),
   loadFontMap: _loadFontMap,
+  getFontKey: _getFontKey,
   getFont: _getFont,
   loadFont: _loadFont,
 };

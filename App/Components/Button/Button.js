@@ -6,7 +6,7 @@ import { Theme } from '../../Theme';
 
 const _var = Theme.Variables;
 
-// 
+//
 // Example:
 // renderButton: function() {
 //   return (

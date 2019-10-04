@@ -6,6 +6,7 @@ import BTN_RECORD_REC from '../Assets/btn/record-rec.png';
 import ICON_EMBLEM from '../Assets/icons/icon-emblem.png';
 
 import IMG_BG from '../Assets/bg.jpg';
+import IMG_BG_SOLID_DARK from '../Assets/img/bg-solid-dark.svg';
 import IMG_BG_CAR from '../Assets/img/BG_Car.png';
 import IMG_BG_CHEER from '../Assets/img/BG_Cheer.jpg';
 import IMG_BG_CLIFF from '../Assets/img/BG_Cliff.png';
@@ -42,6 +43,7 @@ const LogoAssets = {
 
 const ImageAssets = {
   img_background: IMG_BG,
+  img_bg_solid_dark: IMG_BG_SOLID_DARK,
   img_bg_car: IMG_BG_CAR,
   img_bg_cheer: IMG_BG_CHEER,
   img_bg_cliff: IMG_BG_CLIFF,

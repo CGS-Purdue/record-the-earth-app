@@ -6,7 +6,21 @@ import { Theme } from '../../Theme';
 const _styles = Theme.Styles;
 const _fonts = Theme.Fonts;
 
-const TITLE_FONT = _fonts.getFont('TITLE_FONT');
+
+// import { Font } from 'expo-font';
+// async componentWillMount() {
+//   await Font.loadAsync({
+//     Roboto: require('native-base/Fonts/Roboto.ttf'),
+//     Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+//   });
+//   this.setState({ loading: false });
+// }
+
+
+const fontKey =_fonts.getFontKey('TITLE_FONT');
+const TitleFont = _fonts.getFont(fontKey);
+
+// const TITLE_FONT = _fonts.FontMap(_fonts.FontConfig.TITLE_FONT);
 // color // fontSize // lineHeight
 
 class HeadingText extends Component {
@@ -29,25 +43,29 @@ class HeadingText extends Component {
     return HeadStyles[level];
   }
   componentDidMount() {
-    (async () => {
-      // await Font.loadAsync({});
-      await this._loadFontAsync();
-      // this.setState({
-        // loaded: false,
-        // fontProps: null,
-      // });
-    })();
+    this._loadFontAsync();
+    // (async () => {
+    //   // await Font.loadAsync({});
+    //   await this._loadFontAsync();
+    //   // this.setState({
+    //     // loaded: false,
+    //     // fontProps: null,
+    //   // });
+    // })();
   }
-
   async _loadFontAsync() {
       try {
-        let headingFont = await _fonts.loadFont({[TITLE_FONT.name ] : TITLE_FONT.src });
+        // let headingFont = await _fonts.loadFont({[TitleFont.name ] : TitleFont.src });
+        let headingFont = await _fonts.loadFont({[TitleFont.name ] : TitleFont.src });
+        console.log('\n\n[fontKey]\n\n', fontKey);
+        console.log('\n\n[headingFont]\n\n', TitleFont);
+        console.log('\n\n\n');
       } catch (e) {
         console.log(e.message);
       }
       this.setState({
         loaded: true,
-        fontFamily: TITLE_FONT.name,
+        fontFamily: TitleFont.name,
       });
     }
 

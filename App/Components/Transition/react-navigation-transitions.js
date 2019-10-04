@@ -1,3 +1,5 @@
+import { Easing, Animated, Platform } from 'react-native';
+
 
 export function fromLeft(duration = 300) {
   return {
@@ -18,8 +20,8 @@ export function fromLeft(duration = 300) {
 
       const opacity = position.interpolate({
         inputRange: [index - 1, index - 0.99, index],
-        outputRange: [0, 1, 1]
-      };
+        outputRange: [0, 1, 1],
+      });
 
       return { opacity, transform: [{ translateX }] };
     },

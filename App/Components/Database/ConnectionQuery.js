@@ -4,22 +4,25 @@ import React, { Component } from 'react';
 class ConnectionQuery extends Component {
   constructor(props) {
 
-  if (!cbOptions) { return callbackFn; }
-    if (cbOptions.disabled) {
+    if (!this.props.cbOptions) {
+      return this.callbackFn;
+    }
+
+    if (this.props.cbOptions.disabled) {
       return false;
     }
 
-    if (cbOptions.wrapCb) {
-      let _preQuery = cbOptions.preQuery;
-      return () => { return _preQuery(callbackFn); };
+    if (this.props.cbOptions.wrapCb) {
+      let _preQuery = this.props.cbOptions.preQuery;
+      return () => { return _preQuery(this.callbackFn); };
     }
 
-    if (cbOptions.returnCb) {
-      let _returnCb = cbOptions.preQuery;
-      return ()=>{ return callbackFn(_returnCb); };
+    if (this.props.cbOptions.returnCb) {
+      let _returnCb = this.props.cbOptions.preQuery;
+      return ()=>{ return this.callbackFn(_returnCb); };
 
     } else {
-      return callbackFn(this.querystate);
+      return this.callbackFn(this.querystate);
     }
   }
 
@@ -34,24 +37,18 @@ class ConnectionQuery extends Component {
     this.arguments = args;
 
     this.options = options;
-
-    console.log('setting query');
-
     const _db_success = (data, options) => {
-      console.log('query transaction completed onSuccessfully');
-      console.log('data', data);
+      console.log('tcransaction completed successfully');
       this.querystate.data = data.result.rows._array;
     };
 
-    const _tx_success = (tx, result, options) => {
-       // { insertId, rowsAffected, rows: { length, item(), _array, }, }
-      console.log('resultset', result);
-      console.log('tx resultset', result);
-      this.querystate.data = result.rows._array;
+    const _db_error = (tx, error) => {
+      console.log('db_error', tx, error);
     };
 
-    const _db_error = (tx, error) => {
-      console.log(tx, error);
+    const _tx_success = (tx, result, options) => {
+      console.log('tx_success',tx, result);
+      this.querystate.data = result.rows._array;
     };
 
     const _tx_error = (tx, error) => {
@@ -61,7 +58,7 @@ class ConnectionQuery extends Component {
     const _tx_result = (tx, data, options) => {
       if (data) {
         if (data.insertId){
-           console.log(data.insertId + 'iwas inserted',
+           console.log(
            data.insertId,
            data.rowsAffected,
            data.rows,
@@ -79,7 +76,6 @@ class ConnectionQuery extends Component {
       }
     };
 
-
     let dbSuccess = this.configCb(dbSuccess, options.callbackDb);
     let dbError = this.configCb(dbError, options.callbackDb);
     let txResult = this.configCb(txResult, options.callbackTx);
@@ -90,8 +86,6 @@ class ConnectionQuery extends Component {
     this.txResult = txResult;
     this.txError = txError;
 
-    console.log('result');
-
     const execute = () => {
       conn.transaction(
         tx => {
@@ -100,7 +94,7 @@ class ConnectionQuery extends Component {
             args,
             txResult,
             txError,
-          );
+          )
         },
         dbError,
         dbSuccess,
@@ -113,7 +107,6 @@ class ConnectionQuery extends Component {
     this.execute = execute;
 
   }
-
 }
 
 export { ConnectionQuery };

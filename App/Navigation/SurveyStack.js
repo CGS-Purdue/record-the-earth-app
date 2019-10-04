@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Animated, Easing } from 'react-native';
-import { StackViewTransitionConfigs } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-
-import { SoundscapeSurveyDescScreen } from '../Screens/Survey/SoundscapeSurveyDescScreen';
-import { SoundscapeSurveyBioScreen } from '../Screens/Survey/SoundscapeSurveyBioScreen';
-import { SoundscapeSurveyEmoScreen } from '../Screens/Survey/SoundscapeSurveyEmoScreen';
-import { SoundscapeSurveyGeoScreen } from '../Screens/Survey/SoundscapeSurveyGeoScreen';
-import { SoundscapeSurveyHumScreen } from '../Screens/Survey/SoundscapeSurveyHumScreen';
-import { SoundscapeSubmitScreen } from '../Screens/Survey/SoundscapeSubmitScreen';
+// import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from '../node_modules/react-navigation-stack/lib/module';
+import { SurveyDescScreen } from '../Screens/Survey/SurveyDescScreen';
+import { SurveyBioScreen } from '../Screens/Survey/SurveyBioScreen';
+import { SurveyEmoScreen } from '../Screens/Survey/SurveyEmoScreen';
+import { SurveyGeoScreen } from '../Screens/Survey/SurveyGeoScreen';
+import { SurveyHumScreen } from '../Screens/Survey/SurveyHumScreen';
+import { SurveySubmitScreen } from '../Screens/Survey/SurveySubmitScreen';
 import { SoundscapeSchema } from '../Components/Database/SurveyModel/SurveySchema3';
 
 const initSoundscape = () => {
@@ -16,18 +15,20 @@ const initSoundscape = () => {
   let timestamp = new Date();
   soundscape.datetime = timestamp.toISOString();
   return soundscape;
-}
+};
 
 const SurveyTemplate = initSoundscape();
 
-const SurveyStack = createStackNavigator({
-    SoundscapeSurveyDescription: { screen: SoundscapeSurveyDescScreen },
-    SoundscapeSurveyBio: { screen: SoundscapeSurveyBioScreen },
-    SoundscapeSurveyEmo: { screen: SoundscapeSurveyEmoScreen },
-    SoundscapeSurveyGeo: { screen: SoundscapeSurveyGeoScreen },
-    SoundscapeSurveyHum: { screen: SoundscapeSurveyHumScreen },
-    SoundscapeSubmit: { screen: SoundscapeSubmitScreen },
-  },  {
+const SurveyStack = createStackNavigator(
+  {
+    SoundscapeSurveyDescription: { screen: SurveyDescScreen },
+    SoundscapeSurveyBio: { screen: SurveyBioScreen },
+    SoundscapeSurveyEmo: { screen: SurveyEmoScreen },
+    SoundscapeSurveyGeo: { screen: SurveyGeoScreen },
+    SoundscapeSurveyHum: { screen: SurveyHumScreen },
+    SoundscapeSubmit: { screen: SurveySubmitScreen },
+  },
+  {
     initialRouteName: 'SoundscapeSurveyDescription',
     initialRouteParams: { soundscape_data2: SurveyTemplate },
     initialRouteKey: 'SurveyStart',
@@ -44,7 +45,7 @@ const SurveyStack = createStackNavigator({
         easing: Easing.out(Easing.poly(4)),
         timing: Animated.timing,
       },
-      screenInterpolator: sceneProps => {
+      screenInterpolator: (sceneProps) => {
         const { layout, position, scene } = sceneProps;
         const { index } = scene;
         const height = layout.initHeight;

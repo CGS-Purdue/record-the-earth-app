@@ -40,7 +40,7 @@ class RippleButton extends Component {
       <Touchable
         style={_styles.ripplebtn_option}
         onPress={this.props.onPress}
-        delayLongPress={1000} 
+        delayLongPress={1000}
         background={Touchable.Ripple('#ccc', false)}
       >
         <View style={_styles.ripplebtn_container_inner}>

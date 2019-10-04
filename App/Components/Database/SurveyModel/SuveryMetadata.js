@@ -1,7 +1,5 @@
-import { obMerge } from '../../../Utilities/Functions';
 
-
-const Soundfile = {
+const SurveyDefaults = {
   datetime: '',
   path: '',
   filename: '',
@@ -12,37 +10,24 @@ const Soundfile = {
   isUploaded: false,
 };
 
-class SurveySoundfile {
+class Survey {
   constructor(options) {
-    this.datetime = '';
-    this.path = '';
-    this.filename = '';
-    this.description = '';
-    this.duration = 0;
-    this.location = '0,0';
-    this.pid = null;
-    this.isUploaded = false;
+    this.datetime = SurveyDefaults.datetime;
+    this.path = SurveyDefaults.path;
+    this.filename = SurveyDefaults.filename;
+    this.description = SurveyDefaults.description;
+    this.duration = SurveyDefaults.duration;
+    this.location = SurveyDefaults.location;
+    this.pid = SurveyDefaults.pid;
+    this.isUploaded = SurveyDefaults.isUploaded;
   }
 }
 
-
-
-
-function NewSoundscapeSuvey () {
-  timestamp = Date.toISOString();
-  let soundscapeSchema = Object.create(null);
-  soundscapeSchema.datetime = timestamp.toISOString();
-  soundscapeSchema.location = '0,0';
-  soundscapeSchema.pid = null;
-  soundscapeSchema.isUploaded = false;
-  soundscapeSchema.duration = 0;
-  soundscapeSchema.filename = '';
-  soundscapeSchema.path = '';
-  soundscapeSchema.description = '';
+function initSoundscapeSuvey () {
+  let survey = new Survey();
+  let timestamp = Date.toISOString();
+  survey.datetime = timestamp.toISOString();
+  return survey;
 }
 
-
-
-
-
-export { SurveySoundfile };
+export { Survey, initSoundscapeSuvey };

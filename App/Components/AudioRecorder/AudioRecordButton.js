@@ -43,7 +43,7 @@ class AudioRecordButton extends Component {
     return (
       <TouchableOpacity
         onPress={this.handleButton}
-        style={_styles.record_button}
+        style={_styles.button_touchable}
         disabled={this.state.syncing}
       >
         <Image

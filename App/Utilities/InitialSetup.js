@@ -1,6 +1,13 @@
 import { checkAppDirectoriesStatus, getAppStorageContent }  from '../Utilities/Filesystem';
+import { Image} from 'react-native';
+import { Icon } from 'expo';
 import * as Font from 'expo-font';
+import { Asset } from 'expo-asset';
+import { Theme } from '../Theme';
 
+const _assets = Theme.Assets;
+const _styles = Theme.Styles;
+const _colors = Theme.Colors;
 
 // import { StatusDB }  from '../Components/Database/StatusDB';
 // class SystemCheck  extends Component {

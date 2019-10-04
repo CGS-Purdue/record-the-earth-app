@@ -45,36 +45,30 @@ class SoundDBActions extends Component {
   }
 
   _resetDb(){
-    console.log('get all local soundcape', result);
+    console.log('get all local soundcape');
     // todo: cache a backup before doing this
     // ${FileSystem.documentDirectory}/SQLite/${name}
     this.queryStore('drop');
     this.queryStore('create');
   }
 
+   create (connection, reporters, statement, args = null) {
+      console.log('create', reporters);
+      connection.db.transaction(
+        tx => {
+          tx.executeSql(
+            statement,
+            null,
+            null,
+            reporters.txError,
+          );
+        },
+        reporters.dbError,
+        null,
+      );
+   }
 
-
-
- fconst) {= () => {
-  let _store = {
-   create: (connection, reporters, statement, args = null) => {
-        console.log('create', reporters);
-        connection.db.transaction(
-          tx => {
-            tx.executeSql(
-              statement,
-              null,
-              null,
-              reporters.txError,
-            );
-          },
-          reporters.dbError,
-          null,
-        );
-    },
-
-
-    drop:(connection, reporters, statement, args = null) => {
+   drop (connection, reporters, statement, args = null) {
       console.log('drop', reporters);
       connection.db.transaction(
         tx => {
@@ -88,9 +82,9 @@ class SoundDBActions extends Component {
         reporters.dbError,
         reporters.dbSuccess,
       );
-    },
+    }
 
-  all:(connection, reporters, statement, args = null) => {
+  all(connection, reporters, statement, args = null) {
       console.log('all', connection, reporters, statement);
       connection.db.transaction(
         tx => {
@@ -104,58 +98,54 @@ class SoundDBActions extends Component {
         reporters.dbError,
         reporters.dbSuccess,
       );
-  },
+  }
 
-  insert:(connection, reporters, statement, args) => {
-          console.log(this, connection);
-          console.log(this.connection);
-
-          connection.db.transaction(
-          tx => {
-            console.log('args', args);
-            console.log('statement', statement);
-            tx.executeSql(
-              statement,
-              args,
-              reporters.insertSuccess,
-              reporters.txError,
-            );
-          },
-          reporters.dbError,
-          reporters.dbSuccess,
-        );
-    },
-
-
-    last:(connection, reporters, statement, args = null) => {
-        connection.db.transaction(
-          tx => {
-            tx.executeSql(
-              statement,
-              null,
-              reporters.selectSuccess,
-              reporters.txError,
-            );
-          },
-          reporters.dbError,
-          reporters.dbSuccess,
+  insertRow(connection, reporters, statement, args){
+    connection.db.transaction(
+      tx => {
+        tx.executeSql(
+          statement,
+          args,
+          reporters.insertSuccess,
+          reporters.txError,
         );
       },
-    },
+      reporters.dbError,
+      reporters.dbSuccess,
+    )
   }
 
-  const ActionStore = (key) =>{
-    let timestamp = new Date();
-    let _connection = this.connection;
-    let _statements = this.statements;
-    let _arguments = _statements._arguments;
-    let _reporters = this.queryReporters;
-    let resultData = this.queryStoreData;
-    let result =  _store[key](_connection, _reporters, _statements[key], args);
-    // console.log('query\n\n',_statements[key], _arguments[key], args);
-    // console.log('result', result, this);
-    return prepared_action;
-  }
+
+    last(connection, reporters, statement, args = null){
+      connection.db.transaction(
+        tx => {
+          tx.executeSql(
+            statement,
+            null,
+            reporters.selectSuccess,
+            reporters.txError,
+          );
+        },
+        reporters.dbError,
+        reporters.dbSuccess,
+      );
+    }
 }
 
-export { SoundDB, ActionStore, TxManager }
+
+// const ActionStore = (key, args) =>{
+//   let _store = this.queryStore;
+//   let timestamp = new Date();
+//   let _connection = this.connection;
+//   let _statements = this.statements;
+//   let _arguments = _statements._arguments;
+//   let _reporters = this.queryReporters;
+//   let resultData = this.queryStoreData;
+//   let result =  _store[key](_connection, _reporters, _statements[key], args);
+//   // console.log('query\n\n',_statements[key], _arguments[key], args);
+//   // console.log('result', result, this);
+//   return prepared_action;
+// }
+
+
+export { SoundDBActions }

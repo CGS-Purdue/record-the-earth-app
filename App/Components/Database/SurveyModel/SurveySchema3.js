@@ -62,7 +62,6 @@ const TagsSchema = obMerge(
   { anthro },
 );
 
-const SurveyTags = obMerge({survey: TagsSchema });
 
 const SounscapeData = obMerge(
   TagsSchema, {

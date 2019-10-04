@@ -15,7 +15,7 @@ const initSoundscape = () => {
   let timestamp = new Date();
   soundscape.datetime = timestamp.toISOString();
   return soundscape;
-}
+};
 
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
@@ -34,7 +34,7 @@ class RecordScreen extends Component {
   }
 
   _getLocationAsync = async () => {
-    let location = await getLocationAsync()
+    let location = await getLocationAsync();
     this.setState({ location });
   };
 

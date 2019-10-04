@@ -6,7 +6,7 @@ import { Animated, Easing } from 'react-native';
 var DefaultTransitionSpec = {
   duration: 250,
   easing: Easing.inOut(Easing.ease),
-  timing: Animated.timing
+  timing: Animated.timing,
 };
 
 

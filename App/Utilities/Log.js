@@ -35,7 +35,7 @@ class Log {
         value: { message, args },
         important: true,
       });
-    }EXPO_CLI_PASSWORD
+    }
   }
 }
 

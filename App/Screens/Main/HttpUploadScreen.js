@@ -111,7 +111,7 @@ class HttpUploadScreen extends Component {
           });
         })
         .catch((er) => {
-          console.log(err);
+          console.log(er);
         })
         .done(() => {
           xhrPost(formData);

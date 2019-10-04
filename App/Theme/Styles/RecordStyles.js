@@ -1,9 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { ThemeColors } from '../Colors';
 import { ThemeLayout } from '../Layout';
-import { TouchButtonHighlightStyles } from './ButtonStyles';
-
-const RecordButton = TouchButtonHighlightStyles;
 
 const RecordButtonIcon = {
   width: 100,
@@ -12,6 +9,13 @@ const RecordButtonIcon = {
   margin: 5,
 };
 
+const RecStartBtn = {
+  width: 200,
+  height: 200,
+  maxWidth: '66%',
+  maxHeight: '66%',
+  resizeMode: 'contain',
+};
 const RecordContainer = {
   borderColor: 'blue',
   borderWidth: 1,
@@ -34,7 +38,7 @@ const RecordStatusTimestamp = {
 };
 
 const RecordStyles = StyleSheet.create({
-  record_button: RecordButton,
+  btn_rec_start: RecStartBtn,
   record_buttonicon: RecordButtonIcon,
   record_container: RecordContainer,
   record_statustxt: RecordStatusText,

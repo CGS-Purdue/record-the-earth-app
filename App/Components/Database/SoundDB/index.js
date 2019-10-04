@@ -187,7 +187,7 @@ class SoundDB extends Component {
           },
           reporters.dbError,
           reporters.dbSuccess,
-      _create  );
+      );
       },
       insert: (connection, reporters, statement, args) => {
           console.log(this, connection);

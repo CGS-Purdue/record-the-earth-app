@@ -199,7 +199,7 @@ async function existOrCreateAppDirectory(dirName, options) {
           return false;
         }
 
-        existOrCreateAppDirectory(dirName, { final: true })
+        existOrCreateAppDirectory(dirName, { final: true });
       });
 
   } catch (e) {

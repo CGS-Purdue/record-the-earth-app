@@ -109,7 +109,7 @@ const MaterialTabBarTab = {
     android: {
       elevation: 20,
     },
-  })
+  }),
 };
 
 const TabBarStyles = {

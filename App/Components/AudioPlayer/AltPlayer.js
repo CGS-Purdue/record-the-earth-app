@@ -99,29 +99,6 @@ class AltPlayer extends React.Component {
     });
   }
 
-
-  _debugFileSystem = async () => {
-    console.log({
-    constants: {
-      APP_STORAGE_PATH: APP_STORAGE_PATH,
-      APP_TEMPSTORAGE_PATH: APP_TEMPSTORAGE_PATH,
-      APP_DB_DIR: APP_DB_DIR,
-      APP_MEDIA_DIR: APP_MEDIA_DIR,
-      APP_DATA_DIR: APP_DATA_DIR,
-      APP_MEDIA_PATH: APP_MEDIA_PATH,
-      FILE_PREFIX: FILE_PREFIX,
-      TEST_FILE_NAME: TEST_FILE_NAME,
-      TEST_FILE_PATH: TEST_FILE_PATH,
-      },
-    });
-    let storage_info = await FileSystem.getInfoAsync(APP_STORAGE_PATH, { md5: false });
-    console.log('storage_info', storage_info);
-    let media_info = await FileSystem.getInfoAsync(APP_MEDIA_PATH, { md5: false });
-    console.log('media_info', APP_MEDIA_PATH, media_info);
-    let file_info = await FileSystem.getInfoAsync(TEST_FILE_PATH, { md5: false });
-    console.log('file_info', TEST_FILE_PATH, file_info);
-  }
-
   getSoundFile = async () => {
     let file_info = await FileSystem.getInfoAsync(TEST_FILE_PATH, { md5: false });
     console.log('file_info', file_info);
@@ -176,7 +153,6 @@ class AltPlayer extends React.Component {
   componentDidMount() {
     this._setAudioMode();
     this.getSoundFile();
-    // this._debugFileSystem();
   }
 
 
@@ -190,7 +166,6 @@ class AltPlayer extends React.Component {
         soundDuration: status.durationMillis,
         soundPosition: status.positionMillis,
         shouldPlay: status.shouldPlay,
-        isPlaying: status.isPlaying,
         isPlaying: status.isPlaying,
         rate: status.rate,
         muted: status.isMuted,
@@ -239,7 +214,7 @@ class AltPlayer extends React.Component {
         rate: this.state.rate,
         shouldCorrectPitch: this.state.shouldCorrectPitch,
       },
-      this._updateScreenForSoundStatus
+        this._updateScreenForSoundStatus
     );
     this.sound = sound;
 
@@ -374,20 +349,9 @@ class AltPlayer extends React.Component {
 
       <ImgBgFill>
 
-        <View style={{
-            backgroundColor: '#303030',
-            flex: 1,
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            paddingTop: 20,
-            paddingHorizontal: 10,
-            justifyContent: 'center',
-          }}>
+        <View style={{backgroundColor: '#303030', flex: 1, width: '100%', height: '100%', display: 'flex', paddingTop: 20, paddingHorizontal: 10, justifyContent: 'center'}}>
           <RootView>
             <CenterView>
-
-
             <Section weight={1} expand={true} shrink={true}>
               <View style={styles.playStopContainer}>
                 <IonicFontIcon
@@ -395,7 +359,6 @@ class AltPlayer extends React.Component {
                   size={(_layout.TEXT_SIZE_5 * 2)}
                   style={_styles.audioplayer_icons}
                   color={this.state.soundFileExists ? _colors.GRN_400 : _colors.GRA_400}
-
                 />
               </View>
               <HeadingText>{'Audio Player'}</HeadingText>
@@ -471,19 +434,15 @@ class AltPlayer extends React.Component {
                 </Section>
 
                 <Section justify={'flex-start'} shrink={true} align={'stretch'} weight={3} >
-                <View style={{
-                    flex: 1,
-                    display: 'flex',
-                    flexDirection: 'row',
-                  }}>
+                <View style={{ flex: 1, display: 'flex', flexDirection: 'row',}}>
 
                 <View style={styles.volumeContainer}>
-                   <Slider
-                      style={styles.volumeSlider}
-                      value={0.76}
-                      onValueChange={this._onVolumeSliderValueChange}
-                      disabled={!this.state.isPlaybackAllowed || this.state.isLoading}
-                    />
+                 <Slider
+                    style={styles.volumeSlider}
+                    value={0.76}
+                    onValueChange={this._onVolumeSliderValueChange}
+                    disabled={!this.state.isPlaybackAllowed || this.state.isLoading}
+                  />
                 </View>
                   <IonicFontIcon
                       name={'trash'}

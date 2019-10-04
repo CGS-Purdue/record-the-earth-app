@@ -6,7 +6,9 @@ const TouchButtonHighlightStyles = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  padding: 10,
+  padding: 2,
+  width: '90%',
+  height: '90%',
   margin: 0,
   flex: 1,
 };

@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Slider, Text } from 'react-native';
-import { Font } from 'expo-font';
+import {  View, Slider, Text } from 'react-native';
 import AudioPlayer from './AudioPlayer';
+
 const AUDIO_CLIP_URL = '';
+
+
+
+
+
 export default class AudioPlayerScreen extends Component {
   constructor(props) {
     super(props);
@@ -11,13 +16,6 @@ export default class AudioPlayerScreen extends Component {
       viewToShow: 'HOME',
       loading: true,
     };
-  }
-  async componentWillMount() {
-    await Font.loadAsync({
-      Roboto: require('native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-    });
-    this.setState({ loading: false });
   }
 
   playerComplete = () => {
@@ -31,12 +29,7 @@ export default class AudioPlayerScreen extends Component {
 
   render() {
     return (
-      <View
-        style={{
-          display: 'flex',
-          flex: 1,
-        }}
-      >
+      <View style={styles.audioplayer_screen}>
         <Text>Sound Player</Text>
         <AudioPlayer
           style={{ flex: 1 }}
@@ -62,5 +55,13 @@ export default class AudioPlayerScreen extends Component {
         />
       </View>
     );
+  }
+}
+
+
+const styles = {
+   audioplayer_screen: {
+   display: 'flex',
+   flex: 1,
   }
 }

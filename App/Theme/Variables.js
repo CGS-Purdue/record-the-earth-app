@@ -39,6 +39,7 @@ const ThemeVariables = {
   BUTTON_ICON_STYLE: _var.button_icon_style,
   BUTTON_BORDER_RADIUS: _var.button_border_radius,
   BUTTON_BGCOLOR: _var.button_bgcolor,
+  LIBRARY_PLAY_BTN_SIZE: ThemeLayout.LIBRARY_PLAY_BTN_SIZE,
 };
 
 export { ThemeVariables };

@@ -38,7 +38,7 @@ class ThemeTextArea extends Component {
           value={this.state.text}
           onChangeText={(text)=>{
             console.log('ThemeTextArea', this.state);
-            this.setState({text})
+            this.setState({text});
           }}
           multiline={true}
           numberOfLines={3}

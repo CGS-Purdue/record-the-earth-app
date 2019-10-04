@@ -1,67 +1,30 @@
 import React, { Component } from 'react';
 import { SafeAreaView, TouchableOpacity, FlatList, View, Text, StyleSheet } from 'react-native';
-import { Section, ImgBgFill, CenterView, PadView, RootView } from '../../Components/Views';
-import { HeadingText } from '../../Components/Text/HeadingText';
-import { FlatListHeader } from '../../Components/ListViews/FlatListHeader';
-import { FileListEmptyItem } from '../../Components/ListViews/FileListEmptyItem';
-import { StorageConfig } from '../../Config/Storage';
+// import { Section, ImgBgFill, CenterView, PadView, RootView } from '../../Components/Views';
+import { FileListViewSoundItem, FileListViewItem } from '../../Components/ListViews/FileListViewItem';
+import { ListViewEmpty } from '../../Components/ListViews/ListViewEmpty';
+import { SoundscapeListViewHeader } from '../../Components/ListViews/SoundscapeListViewHeader';
 import * as FileSystem from 'expo-file-system';
-import Constants from 'expo-constants';
-import { MOCK_SOUND_FILES } from '../../Config/MockSoundFiles';
+// import Constants from 'expo-constants';
+// import { HeadingText } from '../../Components/Text/HeadingText';
+import { StorageConfig } from '../../Config/Storage';
+// import { MOCK_SOUND_FILES } from '../../Config/MockSoundFiles';
+
+import { FileListViewHeader } from '../../Components/ListViews/FileListViewHeader';
+import { SoundDB } from '../../Components/Database/SoundDB';
 import { Theme } from '../../Theme';
+
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
+const _vars = Theme.Variables;
 
-function FileItem({ id, name, selected, onSelect }) {
-  return (
-    <View
-      style={{
-        flex: 1,
-        width: '100%',
-        backgroundColor: '#444444',
-        display: 'flex',
-      }}
-    >
-      <TouchableOpacity
-        onPress={() => onSelect(id)}
-        style={[
-          styles.item,
-          {
-            backgroundColor: selected
-              ? 'rgba(255,255,255,.5)'
-              : 'rgba(255,255,255,.4)',
-          },
-        ]}
-      >
-        <View style={styles.surface}>
-          <Text style={styles.item}>{name}</Text>
-        </View>
-      </TouchableOpacity>
-    </View>
-  );
-}
-
-
-function FListHead() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        width: '100%',
-        backgroundColor: '#444444',
-        display: 'flex',
-      }}
-    >
-      <Text style={styles.item}>{'Files'}</Text>
-    </View>
-  );
-}
 
 class SoundFileLibraryScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      refreshing: true,
       intialized: false,
       files: new Map(),
       selected: { id: 0 },
@@ -73,11 +36,14 @@ class SoundFileLibraryScreen extends Component {
       uploadedFiles: StorageConfig.STORAGE_UPLOADED_SOUNDFILES,
       soundPath: StorageConfig.STORAGE_SOUNDFILE_PATH,
     };
-    console.log(this.config);
+
     this.updateFiles = this.updateFiles.bind(this);
     this.getFileList = this.getFileList.bind(this);
   }
 
+  setRefreshingState(isRefreshing){
+    this.setState({refreshing: isRefreshing});
+  }
 
   getNavigationParams() {
     return this.props.navigation.state.params || {};
@@ -102,7 +68,7 @@ class SoundFileLibraryScreen extends Component {
         data: obj,
       };
     });
-    this.setState({ files: _files });
+    this.setState({ files: _files, refreshing: false });
   }
 
   async getFileList(location) {
@@ -112,72 +78,36 @@ class SoundFileLibraryScreen extends Component {
       if (!result) {
         console.log('no files');
       } else {
+        this.setState({refreshing: true})
         this.updateFiles(result);
       }
     });
   }
 
-  componentWillMount() {
-    if (!this.state.intialized) {
-      this.setState({ intialized: true });
-      this.getFileList();
-      console.log('getting files early');
-    }
-  }
-
   componentDidMount() {
-    if (!this.state.intialized) {
-      this.getFileList();
-      console.log('getting files');
-    }
+    this.getFileList();
   }
 
   setSelected(newSelected) {
     this.setState({
-      selected: newSelected,
+      selected: newSelected,SoundscapeListViewHeader
     });
   }
 
-  onSelect = (id) => {
-    console.log('id', id);
-    //   const newSelected = new Map(selected);
-    //   newSelected.set(id, !selected.get(id));
-    //   this.setSelected(newSelected);
-    // } depend on anything outside of the data prop, stick it here and treat it immutably.
-    // Type	Required
-    // any	No
-    // [selected],
-  };
 
   render() {
-    console.log();
     return (
-      <View
-        style={{
-          backgroundColor: '#303030',
-          flex: 1,
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          paddingTop: 20,
-          paddingHorizontal: 10,
-          justifyContent: 'center',
-        }}
-      >
+      <View style={_styles.listview_screen_container}>
         <FlatList
           data={this.state.files}
-          initialNumToRender={6}
+          refrshing={this.state.refreshing}
+          initialNumToRender={8}
           extraData={this.state.selected}
-          ListEmptyComponent={()=>{
-            return (
-              <FileListEmptyItem
-              onActionButton={()=>{ console.log('test') }}
-          />)
-          }}
-          ListHeaderComponent={FlatListHeader}
+          ListEmptyComponent={ListViewEmpty}
+          ListHeaderComponent={FileListViewHeader}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <FileItem
+          renderItem={({ item, index, seperators }) => (
+            <FileListViewSoundItem
               id={item.id}
               selected={!!this.state.id}
               name={item.name}
@@ -190,47 +120,5 @@ class SoundFileLibraryScreen extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  titlebox: {
-    flex: 1,
-    width: '100%',
-    backgroundColor: '#222',
-    paddingVertical: 6,
-    display: 'flex',
-  },
-  title: {
-    fontSize: 28,
-    textAlign: 'center',
-    color: '#bbb',
-  },
-  surface: {
-    flex: 1,
-    padding: 8,
-    height: 80,
-    // width: ',
-    marginVertical: 5,
-    backgroundColor: 'rgba(255,255,255,.7)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 8,
-  },
-  container: {
-    flex: 1,
-    display: 'flex',
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#666666',
-  },
-  item: {
-    backgroundColor: 'rgba(255,255,255,.1)',
-    padding: 0,
-    marginVertical: 4,
-    marginHorizontal: 5,
-  },
-  item: {
-    fontSize: 16,
-  },
-});
 
 export { SoundFileLibraryScreen };

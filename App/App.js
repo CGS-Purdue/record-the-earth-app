@@ -1,21 +1,22 @@
 import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
-import { Ionicons } from '@expo/vector-icons';
 import React, { Component } from 'react';
-import { Image, View, SafeAreaView, Platform, StatusBar } from 'react-native';
-import { createAppContainer } from 'react-navigation';
+import { Image, View, SafeAreaView } from 'react-native';
 import { initalAppSetup } from './Utilities/InitialSetup';
 import AppContainer from './Navigation/AppNavigator';
+// import { Ionicons } from '@expo/vector-icons';
+// import { Platform, StatusBar } from 'react-native';
 
 import { Theme } from './Theme';
 
 const _fonts = Theme.Fonts;
 const _icons = Theme.Icons;
 const _assets = Theme.Assets;
+const _styles = Theme.Styles;
+
+console.log('\n\nstyles.AboutStyles\n\n', _styles.AboutStyles);
 
 const AppBgImg = Theme.Variables.APP_CONTAINER_BGIMG;
-
-// const AppContainer = createAppContainer(RootNavigation);
 
 export default class App extends Component {
   constructor(props) {
@@ -27,9 +28,7 @@ export default class App extends Component {
     // this._layout = Theme.Layout;
     // this._styles = Theme.Styles;
     // this._vars = Theme.Variables;
-    this.state = {
-      isReady: false,
-    };
+    this.state = { isReady: false };
     console.log('[App] constructored');
   }
 
@@ -43,7 +42,7 @@ export default class App extends Component {
   _handleNavigationChange = (prevState, newState, action) => {
     if (__DEV__) {
       let logmsg = [
-        `[Navigation]`,
+        '[Navigation]',
         `${action.type}`,
         `${action.routeName}`,
       ].join(' ');
@@ -52,15 +51,11 @@ export default class App extends Component {
         _action: action,
         statePrev: prevState,
         stateNew: newState,
-      }
-
-      console.log(logmsg, logData);
+      };
 
       if (action.params){
-        let logmsg = [
-          `[Navigation Params]`,
-        ].join(' ');
-        let logData= action.params;
+        let logmsg = ['[Navigation Params]'].join(' ');
+        let logData = action.params;
         console.log(logmsg, logData);
       }
     }
@@ -77,7 +72,7 @@ export default class App extends Component {
           startAsync={this.cacheResourcesAsync}
           onFinish={() => this.setState({ isReady: true })}
           onError={this._appLoadingOnError}
-          />
+        />
       );
     } else {
       return (
@@ -130,7 +125,6 @@ export default class App extends Component {
     } catch (e) {
       console.log('load error', e);
     } finally {
-      console.log(cachePromises);
       return Promise.all(cachePromises);
     }
   }

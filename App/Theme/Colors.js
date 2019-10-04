@@ -82,6 +82,12 @@ const ShadeDark = {
   SHADE_DARKER_30: 'rgba(0,0,0,0.30)',
   SHADE_DARKER_40: 'rgba(0,0,0,0.40)',
   SHADE_DARKER_50: 'rgba(0,0,0,0.50)',
+  SHADE_DARKER_60: 'rgba(0,0,0,0.60)',
+  SHADE_DARKER_70: 'rgba(0,0,0,0.70)',
+  SHADE_DARKER_80: 'rgba(0,0,0,0.80)',
+  SHADE_DARKER_90: 'rgba(0,0,0,0.90)',
+  SHADE_DARKER_95: 'rgba(0,0,0,0.95)',
+  SHADE_DARKER_99: 'rgba(0,0,0,0.99)',
 };
 
 // TRANSPARENT LIGHTER ---------------------

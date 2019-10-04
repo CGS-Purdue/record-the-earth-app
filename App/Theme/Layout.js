@@ -1,4 +1,4 @@
-import { Dimensions, PixelRatio } from 'react-native';
+import { Dimensions, PixelRatio, StyleSheet } from 'react-native';
 
 function log_layout_values() {
   console.log('normalizeText pixel_ratio ->', device_pixelratio);
@@ -174,6 +174,7 @@ const ThemeLayout = {
   H0: 0,
   PR0: '0%',
   LAYOUT_UNITS: 'pts',
+  HAIRLINE: StyleSheet.hairlineWidth,
   DEVICE_PIXEL_RATIO: device_pixelratio,
   TEXT_SCALING_FACTOR: device_fontscale,
   DEVICE_DIMENSIONS: { device_width, device_height },
@@ -246,6 +247,7 @@ const ThemeLayout = {
   ASPECT_RATIO_08x05: { width: '100%', height: 0, paddingBottom: '62.50%' },
   ASPECT_RATIO_09x16: { width: '100%', height: 0, paddingBottom: '177.77%' },
   ASPECT_RATIO_RECT: { width: '100%', height: 0, paddingBottom: '66.66%' },
+  LIBRARY_PLAY_BTN_SIZE: BASE_TEXT_SIZE * 2.5,
 };
 
 export { LayoutUtilities, ThemeLayout };
