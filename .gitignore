@@ -26,8 +26,6 @@ App/node_modules/
 .tmp/
 .gbit
 .bit/objects
-*
-./.bit
-
+/.bit
 App/.bit/objects
 AppExpo-v34/

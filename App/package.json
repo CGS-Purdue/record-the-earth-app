@@ -1,5 +1,15 @@
 {
+  "name": "record-the-earth-react-native",
+  "version": "0.9.1",
+  "description": "record the earth react native project files for expo and snack",
+  "author": "Matt Harris <charrismatic@protonmail.com> (https://charrismatic.github.io/)",
   "main": "node_modules/expo/AppEntry.js",
+  "keywords": [
+    "react-native",
+    "sound-recording",
+    "expo",
+    "snack"
+  ],
   "scripts": {
     "adb": ".bin/_adb",
     "dev": ". ./.npmrc && expo start --localhost --android --dev --minify --max-workers 8 --config ./app.json",
@@ -12,8 +22,11 @@
     "bundle": "metro build --verbose --project--roots $PWD --dev --platform android --out ./bundle.js",
     "lint": ".bin/_lint",
     "pretty": ".bin/_pretty",
+    "bump": "npm version patch",
     "lint:project": ".run/lint-project",
     "lint:watch": ".run/lint-watch",
+    "metro:export": "node_modules/.bin/metro build app.json --out .build/bundle.js",
+    "metro": "node_modules/.bin/metro",
     "rn:debugger": ".run/react-debugger",
     "start": "expo start",
     "android": "expo start --android",
@@ -75,6 +88,14 @@
     "prettier": "^1.18.2",
     "prettier-eslint": "^9.0.0",
     "typescript": "^3.6.3"
+  },
+  "bugs": {
+    "url": "https://github.com/charrismatic/record-the-earth-react-native-snack/issues"
+  },
+  "bit": {
+    "env": {},
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "npm"
   },
   "private": true
 }
