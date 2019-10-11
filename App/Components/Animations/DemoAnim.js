@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Animated,
-  StyleSheet,
-  View,
-} from 'react-native';
-
+import { Animated, StyleSheet, View } from 'react-native';
 
 // Animated.timing(this.state.xPosition, {
 //   toValue: 100,
@@ -12,7 +7,6 @@ import {
 //   duration: 2000,
 // }).start();
 //
-
 
 // Animated.sequence([
 //   // decay, then spring to start and twirl
@@ -33,7 +27,6 @@ import {
 //   ]),
 // ]).start(); // start the sequence group
 
-
 // Bear in mind
 // While using transform styles such as rotateY, rotateX, and others ensure the transform style perspective is in place. At this time some animations may not render on Android without it. Example below.
 //
@@ -48,22 +41,20 @@ import {
 // />
 //
 
-
 class DemoAnim extends Component {
-
-  componentWillMount () {
+  componentWillMount() {
     this._animatedValue = new Animated.Value(0);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     Animated.timing(this._animatedValue, {
-        toValue: 100,
-        duration: 3000,
+      toValue: 100,
+      duration: 3000,
     }).start();
   }
 
-  render () {
- const interpolatedRotateAnimation = this._animatedValue.interpolate({
+  render() {
+    const interpolatedRotateAnimation = this._animatedValue.interpolate({
       inputRange: [0, 100],
       outputRange: ['0deg', '360deg'],
     });
@@ -75,18 +66,18 @@ class DemoAnim extends Component {
 
     return (
       <View style={styles.container}>
-       <Animated.View
-        style={[
-          styles.box,
-          {
-            backgroundColor: interpolatedColorAnimation,
-            transform: [
-              {translateY: this._animatedValue},
-              {rotate: interpolatedRotateAnimation},
-            ],
-          },
-        ]}
-      />
+        <Animated.View
+          style={[
+            styles.box,
+            {
+              backgroundColor: interpolatedColorAnimation,
+              transform: [
+                { translateY: this._animatedValue },
+                { rotate: interpolatedRotateAnimation },
+              ],
+            },
+          ]}
+        />
       </View>
     );
   }
@@ -105,6 +96,5 @@ const styles = StyleSheet.create({
     height: 100,
   },
 });
-
 
 export { DemoAnim };

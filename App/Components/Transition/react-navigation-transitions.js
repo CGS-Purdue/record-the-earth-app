@@ -1,6 +1,5 @@
 import { Easing, Animated, Platform } from 'react-native';
 
-
 export function fromLeft(duration = 300) {
   return {
     transitionSpec: {
@@ -46,9 +45,9 @@ export function fromTop(duration = 300) {
       });
 
       const opacity = position.interpolate({
-          inputRange: [index - 1, index - 0.99, index],
-          outputRange: [0, 1, 1],
-        });
+        inputRange: [index - 1, index - 0.99, index],
+        outputRange: [0, 1, 1],
+      });
 
       return { opacity, transform: [{ translateY }] };
     },
@@ -73,15 +72,14 @@ export function fromRight(duration = 300) {
       });
 
       const opacity = position.interpolate({
-          inputRange: [index - 1, index - 0.99, index],
-          outputRange: [0, 1, 1],
-        });
+        inputRange: [index - 1, index - 0.99, index],
+        outputRange: [0, 1, 1],
+      });
 
       return { opacity, transform: [{ translateX }] };
     },
   };
 }
-
 
 export function fromBottom(duration = 300) {
   return {
@@ -101,16 +99,14 @@ export function fromBottom(duration = 300) {
       });
 
       const opacity = position.interpolate({
-          inputRange: [index - 1, index - 0.99, index],
-          outputRange: [0, 1, 1],
-        });
+        inputRange: [index - 1, index - 0.99, index],
+        outputRange: [0, 1, 1],
+      });
 
       return { opacity, transform: [{ translateY }] };
     },
   };
 }
-
-
 
 export function fadeIn(duration = 300) {
   return {
@@ -153,8 +149,6 @@ export function fadeOut(duration = 300) {
     },
   };
 }
-
-
 
 export function zoomIn(duration = 300) {
   return {

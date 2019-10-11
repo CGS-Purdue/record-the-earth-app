@@ -14,16 +14,13 @@ class FadeInView extends React.Component {
   }
 
   componentDidMount() {
-    Animated.timing(
-      this.state.fadeInAnim,
-      {
-        delay: 300,
-        toValue: 1,
-        easing: EASE_IN,
-        isInteraction: false,
-        duration: 2200,
-      }
-    ).start();
+    Animated.timing(this.state.fadeInAnim, {
+      delay: 300,
+      toValue: 1,
+      easing: EASE_IN,
+      isInteraction: false,
+      duration: 2200,
+    }).start();
   }
 
   render() {
@@ -33,13 +30,13 @@ class FadeInView extends React.Component {
         style={{
           ...this.props.style,
           opacity: fadeInAnim,
-        }}>
+        }}
+      >
         {this.props.children}
       </Animated.View>
     );
   }
 }
-
 
 class FadeOutView extends React.Component {
   constructor(props) {
@@ -50,15 +47,12 @@ class FadeOutView extends React.Component {
   }
 
   componentDidMount() {
-    Animated.timing(
-      this.state.fadeOutAnim,
-      {
-        delay: 300,
-        toValue: 0,
-        isInteraction: false,
-        duration: 2200,
-      }
-    ).start();
+    Animated.timing(this.state.fadeOutAnim, {
+      delay: 300,
+      toValue: 0,
+      isInteraction: false,
+      duration: 2200,
+    }).start();
   }
 
   render() {
@@ -68,14 +62,13 @@ class FadeOutView extends React.Component {
         style={{
           ...this.props.style,
           opacity: fadeOutAnim,
-        }}>
+        }}
+      >
         {this.props.children}
       </Animated.View>
     );
   }
 }
-
-
 
 class FadeInOutView extends React.Component {
   constructor(props) {
@@ -85,31 +78,26 @@ class FadeInOutView extends React.Component {
     };
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   goHide() {
-    Animated.timing(
-      this.state.visibility,  {
-        delay: 300,
-        toValue: 1,
-        easing: EASE_IN,
-        isInteraction: false,
-        duration: 2200,
-      }
-    ).start();
+    Animated.timing(this.state.visibility, {
+      delay: 300,
+      toValue: 1,
+      easing: EASE_IN,
+      isInteraction: false,
+      duration: 2200,
+    }).start();
   }
 
   showUp() {
-   Animated.timing(
-     this.state.visibility,  {
-       delay: 300,
-       toValue: 1,
-       easing: EASE_OUT,
-       isInteraction: false,
-       duration: 2200,
-     }
-   ).start();
+    Animated.timing(this.state.visibility, {
+      delay: 300,
+      toValue: 1,
+      easing: EASE_OUT,
+      isInteraction: false,
+      duration: 2200,
+    }).start();
   }
 
   render() {
@@ -119,12 +107,12 @@ class FadeInOutView extends React.Component {
         style={{
           ...this.props.style,
           opacity: fadeInAnim,
-        }}>
+        }}
+      >
         {this.props.children}
       </Animated.View>
     );
   }
 }
-
 
 export { FadeInView, FadeOutView };

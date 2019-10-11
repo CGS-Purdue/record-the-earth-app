@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput, View} from 'react-native';
+import { TextInput, View } from 'react-native';
 import { Theme } from '../../Theme';
 
 const _styles = Theme.Styles;
@@ -9,11 +9,12 @@ const formDefaultProps = {
   placeholderTextColor: _colors.GRA_600,
 };
 
-const TextAreaStyle = Object.assign({
-    borderBottomLeftRadius: 1 ,
-    borderBottomRightRadius: 1 ,
-    borderTopLeftRadius: 1 ,
-    borderTopRightRadius: 1 ,
+const TextAreaStyle = Object.assign(
+  {
+    borderBottomLeftRadius: 1,
+    borderBottomRightRadius: 1,
+    borderTopLeftRadius: 1,
+    borderTopRightRadius: 1,
     width: '100%',
     margin: 1,
   },
@@ -21,13 +22,10 @@ const TextAreaStyle = Object.assign({
   _styles.form_input_multiline_text_3
 );
 
-
 class ThemeTextArea extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      text: '',
-    };
+    this.state = { text: '' };
   }
   render() {
     const { text } = this.state;
@@ -36,9 +34,9 @@ class ThemeTextArea extends Component {
         <TextInput
           style={TextAreaStyle}
           value={this.state.text}
-          onChangeText={(text)=>{
+          onChangeText={(text) => {
             console.log('ThemeTextArea', this.state);
-            this.setState({text});
+            this.setState({ text });
           }}
           multiline={true}
           numberOfLines={3}

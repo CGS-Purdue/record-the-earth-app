@@ -1,11 +1,10 @@
 import { Ionicons } from '@expo/vector-icons';
-import { View, Platform, Text }  from 'react-native';
-import React, { Component }  from 'react';
+import { View, Platform, Text } from 'react-native';
+import React, { Component } from 'react';
 import * as Font from 'expo-font';
 import { Icon } from 'expo';
 
 import { Theme } from '../../Theme';
-
 
 const PLATFORM_OS = Platform.OS;
 const _colors = Theme.Colors;
@@ -14,7 +13,7 @@ const _styles = Theme.Styles;
 const _assets = Theme.Assets;
 const _fonts = Theme.Fonts;
 
-
+let iconFont = _fonts.ICON_FONT;
 
 // EXAMPLE
 // export default function TabBarIcon(props) {
@@ -28,12 +27,6 @@ const _fonts = Theme.Fonts;
 //   );
 // }
 
-
-
-
-
-let iconFont = _fonts.FontConfig.ICON_FONT;
-
 const iconPlaceholderStyle = {
   flex: 1,
   flexGrow: 1,
@@ -42,9 +35,8 @@ const iconPlaceholderStyle = {
   borderWidth: 1,
 };
 
-
-function getIconPrefix () {
-  if (PLATFORM_OS === 'ios'){
+function getIconPrefix() {
+  if (PLATFORM_OS === 'ios') {
     return 'ios';
   } else {
     return 'md';
@@ -54,17 +46,17 @@ function getIconPrefix () {
 const iconPrefix = getIconPrefix();
 
 class PlaceholderIcon extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       fontIsLoaded: false,
+      fontFamily: false,
     };
   }
 
-
   render() {
     if (!this.state.fontLoaded) {
-      return <View style={iconPlaceholderStyle}/>;
+      return <View style={iconPlaceholderStyle} />;
     } else {
       return false;
     }
@@ -82,6 +74,7 @@ const _icon_with_badge_inner_container_styles = {
   justifyContent: 'center',
   alignItems: 'center',
 };
+
 const _icon_with_badge_text_styles = {
   color: 'white',
   fontSize: 10,
@@ -93,29 +86,21 @@ const _icon_with_badge_container_styles = {
   margin: 5,
 };
 
-
-
 // // EXAMPLE
 // const TabBarNotificationIcon  = (props) => {
 //   const notifications = 1;
 //   return <TabBarIconWithBadge {...props} badgeCount={notifications} />;
 // };
 
-
 class TabBarIconWithBadge extends Component {
   render() {
     const { focused, name, badgeCount } = this.props;
     return (
       <View style={_icon_with_badge_container_styles}>
-        <TabBarIcon
-          name={name}
-          focused={focused}
-        />
+        <TabBarIcon name={name} focused={focused} />
         {badgeCount > 0 && (
           <View style={_icon_with_badge_inner_container_styles}>
-            <Text style={_icon_with_badge_text_styles}>
-              {badgeCount}
-            </Text>
+            <Text style={_icon_with_badge_text_styles}>{badgeCount}</Text>
           </View>
         )}
       </View>
@@ -137,6 +122,7 @@ const iconFocusedStyles = {
   color: _colors.TAB_BAR_ACTIVE_COLOR,
   borderColor: _colors.TAB_BAR_ACTIVE_COLOR,
 };
+
 const iconDefaultStyle = {
   fontSize: _layout.TEXT_SIZE_4,
   paddingTop: 0,
@@ -159,27 +145,31 @@ const _icon_container_styles = {
 // backgroundColor={focused ?  _colors.TAB_BAR_ACTIVE_BG : _colors.TAB_BAR_BG }
 
 export default class TabBarIcon extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       fontIsLoaded: false,
     };
   }
   render() {
-    const {focused, size, name, style, ...rest} = this.props;
+    const { focused, size, name, style, ...rest } = this.props;
     return (
-    <View style={[_icon_container_styles, focused ? iconFocusedStyles : iconUnfocuseStyles  ]}>
-      <Ionicons
-        name={`${iconPrefix}-${name}`}
-        size={size ? size : _layout.TEXT_SIZE_4}
-        style={{backgroundColor: _colors.TRANSPARENT}}
-        iconStyle={MaterialTabBarIconStyles}
-        {...rest}
-      />
-    </View>
+      <View
+        style={[
+          _icon_container_styles,
+          focused ? iconFocusedStyles : iconUnfocuseStyles,
+        ]}
+      >
+        <Ionicons
+          name={`${iconPrefix}-${name}`}
+          size={size ? size : _layout.TEXT_SIZE_4}
+          style={{ backgroundColor: _colors.TRANSPARENT }}
+          iconStyle={MaterialTabBarIconStyles}
+          {...rest}
+        />
+      </View>
     );
   }
 }
-
 
 export { TabBarIcon };

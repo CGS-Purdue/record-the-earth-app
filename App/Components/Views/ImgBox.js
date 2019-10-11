@@ -7,7 +7,7 @@ export default function ImgBox(props) {
   var image_style = {};
   var outer_box_style = {};
 
-  function set_cover_format () {
+  function set_cover_format() {
     outer_box_style = {
       display: 'flex',
       position: 'relative',
@@ -36,13 +36,13 @@ export default function ImgBox(props) {
     };
   }
 
-  function set_hero_format () {
+  function set_hero_format() {
     set_cover_format();
-    Object.assign(outer_box_style, {maxHeight: '80vh'});
+    Object.assign(outer_box_style, { maxHeight: '80vh' });
   }
-  function set_contain_format () {
+  function set_contain_format() {
     set_cover_format();
-    Object.assign(outer_box_style, {overflow: 'visible'});
+    Object.assign(outer_box_style, { overflow: 'visible' });
     Object.assign(inner_box_style, {
       minWidth: 'unset',
       minHeight: 'unset',
@@ -53,7 +53,7 @@ export default function ImgBox(props) {
 
   if (props.format) {
     var format = props.format;
-      // TODO: SET DEFAULT FORMAT INITIALLY
+    // TODO: SET DEFAULT FORMAT INITIALLY
     if (format === 'hero') {
       set_hero_format();
     } else if (format === 'contain') {
@@ -64,26 +64,29 @@ export default function ImgBox(props) {
     }
   }
 
-  if (props.label){
+  if (props.label) {
     var imgLabelStyle = {
       display: 'block',
       textAlign: 'center',
-      margin: [0,0,0,0],
-      padding: [0,0,0,0],
+      margin: [0, 0, 0, 0],
+      padding: [0, 0, 0, 0],
     };
-    Object.assign(outer_box_style, {flexDirection:'column'});
+    Object.assign(outer_box_style, { flexDirection: 'column' });
   } else {
-    imgLabelStyle = {display:'none'};
+    imgLabelStyle = { display: 'none' };
   }
 
   if (props.style) {
     Object.assign(image_style, props.style);
   }
   return (
-    <div className="imgbox" style={outer_box_style}>
-      <h3 style={imgLabelStyle} className="imgbox__label">{props.label}</h3>
-      <div className="imgboxin" style={inner_box_style}>
-        <img className="imgbox__img"
+    <div className='imgbox' style={outer_box_style}>
+      <h3 style={imgLabelStyle} className='imgbox__label'>
+        {props.label}
+      </h3>
+      <div className='imgboxin' style={inner_box_style}>
+        <img
+          className='imgbox__img'
           src={props.source}
           alt={props.alt}
           style={image_style}

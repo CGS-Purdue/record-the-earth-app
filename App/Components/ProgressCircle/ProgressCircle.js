@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Animated,View } from 'react-native';
-
+import { Animated, View } from 'react-native';
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -15,7 +14,7 @@ class ErrorBoundary extends Component {
 
   componentDidCatch(error, errorInfo) {
     // You can also log the error to an error reporting service
-      console.log('err', error, errorInfo);
+    console.log('err', error, errorInfo);
   }
 
   render() {
@@ -41,7 +40,7 @@ export default class ProgressCircle extends Component {
     shouldAnimateFirstValue: false,
     onChange() {},
     onChangeAnimationEnd() {},
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -55,7 +54,11 @@ export default class ProgressCircle extends Component {
   }
 
   componentDidMount() {
-    if (this.props.value.constructor.name !== 'AnimatedValue' && this.props.shouldAnimateFirstValue && this.animationMethod) {
+    if (
+      this.props.value.constructor.name !== 'AnimatedValue' &&
+      this.props.shouldAnimateFirstValue &&
+      this.animationMethod
+    ) {
       this.animateChange(this.props.value);
     }
   }
@@ -70,7 +73,7 @@ export default class ProgressCircle extends Component {
     return (
       <View style={[this.fullCircleStyle, { flexDirection: 'row' }, style]}>
         <View
-          pointerEvents="box-none"
+          pointerEvents='box-none'
           style={{
             ...this.fullCircleStyle,
             borderWidth: thickness,
@@ -104,7 +107,7 @@ export default class ProgressCircle extends Component {
     };
   }
 
-  ANIMATION_TYPES = ['timing', 'spring', 'decay']
+  ANIMATION_TYPES = ['timing', 'spring', 'decay'];
   get animationMethod() {
     return this.ANIMATION_TYPES.includes(this.props.animationMethod)
       ? this.props.animationMethod
@@ -112,7 +115,7 @@ export default class ProgressCircle extends Component {
   }
 
   handleChange = (value = this.props.value) => {
-   try {
+    try {
       this.props.onChange();
       if (value.constructor.name === 'AnimatedValue') {
         return;
@@ -125,15 +128,14 @@ export default class ProgressCircle extends Component {
     } catch (error) {
       this.setState({ error });
     }
+  };
 
-  }
-
-  animateChange = value =>
+  animateChange = (value) =>
     Animated[this.animationMethod](this.state.animatedValue, {
       toValue: value,
       useNativeDriver: true,
       ...this.props.animationConfig,
-    }).start(this.props.onChangeAnimationEnd)
+    }).start(this.props.onChangeAnimationEnd);
 
   renderHalfCircle = ({ isFlipped = false } = {}) => {
     const { size, color, thickness, value, style } = this.props;
@@ -144,48 +146,47 @@ export default class ProgressCircle extends Component {
 
     return (
       <ErrorBoundary>
-      <Animated.View
-        pointerEvents="none"
-        style={[
-          {
-            ...this.halfCircleContainerStyle,
-            transform: [{ scaleX: isFlipped ? -1 : 1 }],
-          },
-          style,
-        ]}
-      >
         <Animated.View
-          style={{
-            width: size,
-            height: size,
-            transform: [
-              {
-                rotate: valueToInterpolate.interpolate({
-                  inputRange: isFlipped ? [0, 0.5] : [0.5, 1],
-                  outputRange: isFlipped
-                    ? ['180deg', '0deg']
-                    : ['-180deg', '0deg'],
-                  extrapolate: 'clamp',
-                }),
-              },
-            ],
-          }}
+          pointerEvents='none'
+          style={[
+            {
+              ...this.halfCircleContainerStyle,
+              transform: [{ scaleX: isFlipped ? -1 : 1 }],
+            },
+            style,
+          ]}
         >
-          <View style={this.halfCircleContainerStyle}>
-            <View
-              style={{
-                ...this.fullCircleStyle,
-                borderWidth: thickness,
-                borderColor: color,
-              }}
-            />
-          </View>
+          <Animated.View
+            style={{
+              width: size,
+              height: size,
+              transform: [
+                {
+                  rotate: valueToInterpolate.interpolate({
+                    inputRange: isFlipped ? [0, 0.5] : [0.5, 1],
+                    outputRange: isFlipped
+                      ? ['180deg', '0deg']
+                      : ['-180deg', '0deg'],
+                    extrapolate: 'clamp',
+                  }),
+                },
+              ],
+            }}
+          >
+            <View style={this.halfCircleContainerStyle}>
+              <View
+                style={{
+                  ...this.fullCircleStyle,
+                  borderWidth: thickness,
+                  borderColor: color,
+                }}
+              />
+            </View>
+          </Animated.View>
         </Animated.View>
-      </Animated.View>
-    </ErrorBoundary>
+      </ErrorBoundary>
     );
-  }
+  };
 }
-
 
 export { ProgressCircle };

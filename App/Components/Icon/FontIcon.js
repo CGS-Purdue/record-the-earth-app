@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
-import React, { Component }  from 'react';
-import { Platform }  from 'react-native';
+import React, { Component } from 'react';
+import { Platform } from 'react-native';
 import { Theme } from '../../Theme';
 
 const _colors = Theme.Colors;
@@ -17,8 +17,10 @@ const PLATFORM_OS = Platform.OS;
 
 function IonicFontIcon(props) {
   let iconPrefix = 'md';
-  if (PLATFORM_OS === 'ios'){ iconPrefix = 'ios';  }
-    let iconName = `${iconPrefix}-${props.name}`;
+  if (PLATFORM_OS === 'ios') {
+    iconPrefix = 'ios';
+  }
+  let iconName = `${iconPrefix}-${props.name}`;
   const iconSize = props.size ? props.size : _layout.TEXT_SIZE_4;
   const iconColor = props.color ? props.color : _colors.TEXT_COLOR;
   const iconDefaultStyle = {
@@ -38,6 +40,5 @@ function IonicFontIcon(props) {
     />
   );
 }
-
 
 export { IonicFontIcon };

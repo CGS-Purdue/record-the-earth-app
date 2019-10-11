@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Text, TouchableHighlight,TouchableOpacity, View } from 'react-native';
+import { Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 import { ThemeColors } from '../../Theme';
-
 
 const touchButtonStyle = {
   display: 'flex',
@@ -37,15 +36,17 @@ export default class TouchButton extends Component {
     this.underlayColor = this.props.color;
     this.onPress = this.props.onPress;
     return (
-      <View style={{borderColor : 'blue', borderWidth:1, borderStyle:'solid'}}>
-      <TouchableHighlight
-        style={[touchButtonStyle]}
-        underlayColor={this.props.color}
-        onPress={this.props.onPress}
+      <View
+        style={{ borderColor: 'blue', borderWidth: 1, borderStyle: 'solid' }}
       >
-        {this.props.children}
-      </TouchableHighlight>
-    </View>
+        <TouchableHighlight
+          style={[touchButtonStyle]}
+          underlayColor={this.props.color}
+          onPress={this.props.onPress}
+        >
+          {this.props.children}
+        </TouchableHighlight>
+      </View>
     );
   }
 }

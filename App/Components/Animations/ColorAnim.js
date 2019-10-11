@@ -7,8 +7,8 @@ class ColorAnim extends Component {
   }
   componentDidMount() {
     Animated.timing(this._animatedValue, {
-        toValue: 100,
-        duration: 3000,
+      toValue: 100,
+      duration: 3000,
     }).start();
   }
   render() {
@@ -19,13 +19,12 @@ class ColorAnim extends Component {
     return (
       <View style={styles.container}>
         <Animated.View
-          style={[styles.box, {backgroundColor: interpolatedColorAnimation}]}
+          style={[styles.box, { backgroundColor: interpolatedColorAnimation }]}
         />
       </View>
     );
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {

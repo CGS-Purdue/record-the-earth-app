@@ -16,23 +16,19 @@ import * as IntentLauncher from 'expo-intent-launcher';
 // />
 const getShareFile = async (fileUri) => {
   try {
-    await FileSystem.getContentUriAsync(fileUri)
-      .then((content) => {
-        console.log(content);
-        IntentLauncher.startActivityAsync('android.intent.action.VIEW', {
-          data: content.uri,
-          flags: 1,
-        });
+    await FileSystem.getContentUriAsync(fileUri).then((content) => {
+      console.log(content);
+      IntentLauncher.startActivityAsync('android.intent.action.VIEW', {
+        data: content.uri,
+        flags: 1,
       });
+    });
   } catch (e) {
     console.log('[getShareFile] error', e);
   }
 };
 
-export {
-  getShareFile,
-};
-
+export { getShareFile };
 
 //  Constants are from the source code of Settings:
 //  https://developer.android.com/reference/android/provider/Settings.html

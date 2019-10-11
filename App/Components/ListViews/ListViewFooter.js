@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity,View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,7 +22,10 @@ const styles = StyleSheet.create({
 
 const Footer = (props) => (
   <View style={styles.container}>
-    <TouchableOpacity style={styles.button} onPress={() => console.log('load more')}>
+    <TouchableOpacity
+      style={styles.button}
+      onPress={() => console.log('load more')}
+    >
       <Text style={styles.text}>Load More</Text>
     </TouchableOpacity>
   </View>

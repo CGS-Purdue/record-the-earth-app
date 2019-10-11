@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as Permissions from 'expo-permissions';
-import { Platform, Button , View } from 'react-native';
+import { Platform, Button, View } from 'react-native';
 
 import { CenterView, RootView } from '../Views';
 import { MonoText } from '../Text';
@@ -17,34 +17,33 @@ class AudioRecordWithPermission extends Component {
     this.askForAudioPermissions = this.askForAudioPermissions.bind(this);
   }
 
-
   componentDidMount() {
     this.askForAudioPermissions();
   }
 
-
-  async askForAudioPermissions () {
+  async askForAudioPermissions() {
     console.log('GETTING PERMISSION');
-      const { status, expires, permissions } = await Permissions.getAsync(
-        Permissions.AUDIO_RECORDING,
-        Permissions.CAMERA_ROLL
+    const { status, expires, permissions } = await Permissions.getAsync(
+      Permissions.AUDIO_RECORDING,
+      Permissions.CAMERA_ROLL
+    );
+
+    if (status !== 'granted') {
+      alert(
+        'Hey! You might want to enable notifications for my app, they are good.'
       );
+    }
 
-      if (status !== 'granted') {
-        alert('Hey! You might want to enable notifications for my app, they are good.');
-      }
+    if (status !== 'granted') {
+      alert('Hey! You heve not enabled selected permissions');
+    }
 
-      if (status !== 'granted') {
-        alert('Hey! You heve not enabled selected permissions');
-      }
+    console.log('status', status);
 
-      console.log('status', status);
-
-      this.setState({
-        haveRecordingPermissions: status,
-      });
+    this.setState({
+      haveRecordingPermissions: status,
+    });
   }
-
 
   // <Button
   //   title={'click to enable permissions'}
@@ -56,7 +55,9 @@ class AudioRecordWithPermission extends Component {
         <RootView>
           <CenterView>
             <MonoText color={'#ffffff'}>
-              {'You must enable audio recorder permissions in order to use this app.'}
+              {
+                'You must enable audio recorder permissions in order to use this app.'
+              }
             </MonoText>
           </CenterView>
         </RootView>

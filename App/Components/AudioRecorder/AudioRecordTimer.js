@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { MonoText } from '../Text';
 import { Theme } from '../../Theme';
-
-
 
 const _styles = Theme.Styles;
 
@@ -15,17 +13,15 @@ const _styles = Theme.Styles;
 class AudioRecordTimer extends Component {
   constructor(props) {
     super(props);
+    this.state = { active: false };
     this.duration = 10000;
-    this.state = {
-      active: false,
-    };
   }
 
   _durationToTimestamp(ms) {
     const totalSeconds = ms / 1000;
     const seconds = Math.floor(totalSeconds % 60).toString();
     const minutes = Math.floor(totalSeconds / 60).toString();
-    return [minutes.padStart(2,'0'),':', seconds.padStart(2,'0')].join('');
+    return [minutes.padStart(2, '0'), ':', seconds.padStart(2, '0')].join('');
   }
 
   getTimestamp() {
@@ -38,10 +34,14 @@ class AudioRecordTimer extends Component {
 
   render() {
     return (
-        <View>
-          <MonoText style={_styles.record_statustxt}>{this.props.active ? 'Recording' : 'Ready'}</MonoText>
-          <MonoText style={_styles.record_timestamp}>{this.getTimestamp()}</MonoText>
-        </View>
+      <View>
+        <MonoText style={_styles.record_statustxt}>
+          {this.props.active ? 'Recording' : 'Ready'}
+        </MonoText>
+        <MonoText style={_styles.record_timestamp}>
+          {this.getTimestamp()}
+        </MonoText>
+      </View>
     );
   }
 }

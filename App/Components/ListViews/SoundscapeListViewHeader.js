@@ -13,7 +13,9 @@ class SoundscapeListViewHeader extends Component {
   render() {
     return (
       <View style={_styles.listview_header_container}>
-        <HeadingText style={_styles.listview_header_text}>{'Soundscapes'}</HeadingText>
+        <HeadingText style={_styles.listview_header_text}>
+          {'Soundscapes'}
+        </HeadingText>
       </View>
     );
   }

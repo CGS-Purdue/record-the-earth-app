@@ -33,8 +33,6 @@ export default class AudioPlayer extends Component {
     this.loadSound();
   };
 
-
-
   loadSound = async () => {
     let sound = new Audio.Sound();
     try {
@@ -70,13 +68,15 @@ export default class AudioPlayer extends Component {
     this.setState({ ...initialState });
     this.sound.setOnPlaybackStatusUpdate(null);
   };
-  /*
-  Function used to update the UI during playback
-  Playback Status Order:
-  1. isLoaded: false
-  2. isLoaded: true, isBuffering: true, duration 1st available
-  3. isloaded: true, isBuffering: false
-  */
+
+  //
+  // Function used to update the UI during playback
+  // Playback Status Order:
+  // 1. isLoaded: false
+  // 2. isLoaded: true, isBuffering: true, duration 1st available
+  // 3. isloaded: true, isBuffering: false
+  //
+
   onPlaybackStatusUpdate = (playbackStatus) => {
     let that = this;
     this.setState({
@@ -127,9 +127,7 @@ export default class AudioPlayer extends Component {
       // Update the UI for the loaded state
       if (playbackStatus.isPlaying) {
         this.addDebugStatement(
-          `playbackStatus.positionMillis (here): ${
-            playbackStatus.positionMillis
-          }`
+          `playbackStatus.positionMillis (here): ${playbackStatus.positionMillis}`
         );
 
         // Update  UI for the playing state
@@ -212,11 +210,10 @@ export default class AudioPlayer extends Component {
               alignItems: 'center',
               justifyContent: 'space-between',
               margin: 5,
-              width:'100%',
-
+              width: '100%',
             }}
           >
-           {this.props.playbackSlider({
+            {this.props.playbackSlider({
               maximumValue: this.state.maxSliderValue,
               onValueChange: this.onSliderValueChange,
               value: this.state.currentSliderValue,

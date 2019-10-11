@@ -1,27 +1,19 @@
 import React, { Component } from 'react';
-import {
-  Animated,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-
+import { Animated, StyleSheet, Text, View } from 'react-native';
 
 class RotateAnim extends Component {
-
-  componentWillMount () {
+  componentWillMount() {
     this._animatedValue = new Animated.Value(0);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     Animated.timing(this._animatedValue, {
-        toValue: 100,
-        duration: 3000,
+      toValue: 100,
+      duration: 3000,
     }).start();
   }
 
-  render () {
-
+  render() {
     const interpolatedRotateAnimation = this._animatedValue.interpolate({
       inputRange: [0, 100],
       outputRange: ['0deg', '360deg'],
@@ -30,7 +22,10 @@ class RotateAnim extends Component {
     return (
       <View style={styles.container}>
         <Animated.View
-          style={[styles.box, {transform: [{rotate: interpolatedRotateAnimation}]}]}
+          style={[
+            styles.box,
+            { transform: [{ rotate: interpolatedRotateAnimation }] },
+          ]}
         />
       </View>
     );
@@ -50,6 +45,5 @@ const styles = StyleSheet.create({
     height: 100,
   },
 });
-
 
 export { RotateAnim };

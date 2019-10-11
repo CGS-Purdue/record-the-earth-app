@@ -2,11 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Svg, { SvgUri, Circle, Rect } from 'react-native-svg';
 
-
-
 // https://github.com/react-native-community/react-native-svg#use-with-content-loaded-from-uri
-
-
 
 export default class SvgExample extends React.Component {
   render() {
@@ -15,33 +11,31 @@ export default class SvgExample extends React.Component {
         style={[
           StyleSheet.absoluteFill,
           { alignItems: 'center', justifyContent: 'center' },
-        ]}>
-        <Svg height="50%" width="50%" viewBox="0 0 100 100">
+        ]}
+      >
+        <Svg height='50%' width='50%' viewBox='0 0 100 100'>
           <Circle
-            cx="50"
-            cy="50"
-            r="45"
-            stroke="blue"
-            strokeWidth="2.5"
-            fill="green"
+            cx='50'
+            cy='50'
+            r='45'
+            stroke='blue'
+            strokeWidth='2.5'
+            fill='green'
           />
           <Rect
-            x="15"
-            y="15"
-            width="70"
-            height="70"
-            stroke="red"
-            strokeWidth="2"
-            fill="yellow"
+            x='15'
+            y='15'
+            width='70'
+            height='70'
+            stroke='red'
+            strokeWidth='2'
+            fill='yellow'
           />
         </Svg>
       </View>
     );
   }
 }
-
-
-
 
 //
 // Use with svg files
@@ -61,14 +55,11 @@ module.exports = (async () => {
       babelTransformerPath: require.resolve('react-native-svg-transformer'),
     },
     resolver: {
-      assetExts: assetExts.filter(ext => ext !== 'svg'),
+      assetExts: assetExts.filter((ext) => ext !== 'svg'),
       sourceExts: [...sourceExts, 'svg'],
     },
   };
 })();
-
-
-
 
 // Import your .svg file inside a React component:
 //
@@ -97,9 +88,6 @@ module.exports = (async () => {
 //   ]
 // }
 
-
-
-
 // App.js
 //
 // import * as React from 'react';
@@ -107,7 +95,6 @@ module.exports = (async () => {
 // import testSvg from './test.svg';
 // export default () => <SvgXml width="200" height="200" xml={testSvg} />;
 //
-
 
 //
 //

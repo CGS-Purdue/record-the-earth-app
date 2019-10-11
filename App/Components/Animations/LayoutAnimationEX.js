@@ -1,7 +1,18 @@
 import React from 'react';
-import { Animated, Button, LayoutAnimation, Platform,StyleSheet, Text, TextInput, UIManager, View } from 'react-native';
+import {
+  Animated,
+  Button,
+  LayoutAnimation,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  UIManager,
+  View,
+} from 'react-native';
 
-UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+UIManager.setLayoutAnimationEnabledExperimental &&
+  UIManager.setLayoutAnimationEnabledExperimental(true);
 
 const AnimationTypeEnum = {
   spring: true,
@@ -15,58 +26,79 @@ const AnimationTypeEnum = {
 const AnimationType = keyMirror(AnimationTypeEnum);
 
 const animationConfigs = new Map([
-  [AnimationType.spring, {
-    duration: 300,
-    update: {
-      type: LayoutAnimation.Types.spring,
-      springDamping: 0.5,
+  [
+    AnimationType.spring,
+    {
+      duration: 300,
+      update: {
+        type: LayoutAnimation.Types.spring,
+        springDamping: 0.5,
+      },
     },
-  }],
-  [AnimationType.linear, {
-    duration: 300,
-    create: {
-      initialVelocity: 1000,
-      property: LayoutAnimation.Properties.opacity,
-      type: LayoutAnimation.Types.linear,
+  ],
+  [
+    AnimationType.linear,
+    {
+      duration: 300,
+      create: {
+        initialVelocity: 1000,
+        property: LayoutAnimation.Properties.opacity,
+        type: LayoutAnimation.Types.linear,
+      },
+      update: {
+        type: LayoutAnimation.Types.linear,
+      },
     },
-    update: {
-      type: LayoutAnimation.Types.linear,
+  ],
+  [
+    AnimationType.ease,
+    {
+      duration: 800,
+      update: {
+        type: LayoutAnimation.Types.easeInEaseOut,
+      },
     },
-  }],
-  [AnimationType.ease, {
-    duration: 800,
-    update: {
-      type: LayoutAnimation.Types.easeInEaseOut,
+  ],
+  [
+    AnimationType.keyboard,
+    {
+      duration: 10000, // Doesn't matter
+      update: {
+        type: LayoutAnimation.Types.keyboard,
+      },
     },
-  }],
-  [AnimationType.keyboard, {
-    duration: 10000, // Doesn't matter
-    update: {
-      type: LayoutAnimation.Types.keyboard,
+  ],
+  [
+    AnimationType.scaleLinear,
+    {
+      duration: 600,
+      update: {
+        type: LayoutAnimation.Types.linear,
+        property: LayoutAnimation.Properties.scaleXY,
+      },
     },
-  }],
-  [AnimationType.scaleLinear, {
-    duration: 600,
-    update: {
-      type: LayoutAnimation.Types.linear,
-      property: LayoutAnimation.Properties.scaleXY,
+  ],
+  [
+    AnimationType.scaleSpring,
+    {
+      duration: 600,
+      update: {
+        type: LayoutAnimation.Types.spring,
+        property: LayoutAnimation.Properties.scaleXY,
+        springDamping: 0.6,
+      },
     },
-  }],
-  [AnimationType.scaleSpring, {
-    duration: 600,
-    update: {
-      type: LayoutAnimation.Types.spring,
-      property: LayoutAnimation.Properties.scaleXY,
-      springDamping: 0.6,
+  ],
+  [
+    AnimationType.fade,
+    {
+      duration: 600,
+      update: {
+        type: LayoutAnimation.Types.linear,
+        property: LayoutAnimation.Properties.opacity,
+      },
     },
-  }],
-  [AnimationType.fade, {
-    duration: 600,
-    update: {
-      type: LayoutAnimation.Types.linear,
-      property: LayoutAnimation.Properties.opacity,
-    },
-  }],
+  ],
 ]);
 
 function keyMirror(obj) {
@@ -75,10 +107,10 @@ function keyMirror(obj) {
   var invariant = require('invariant');
 
   !(obj instanceof Object && !Array.isArray(obj))
-      ? process.env.NODE_ENV !== 'production'
+    ? process.env.NODE_ENV !== 'production'
       ? invariant(false, 'keyMirror(...): Argument must be an object.')
       : invariant(false)
-      : void 0;
+    : void 0;
 
   for (key in obj) {
     if (!obj.hasOwnProperty(key)) {
@@ -90,7 +122,6 @@ function keyMirror(obj) {
 }
 
 export default class App extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -105,32 +136,38 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TextInput style={styles.hiddenTextInput} ref={ref => this.hiddenTextInput = ref} />
-        <Text style={styles.currentAnimationText}>Current animation: {this.state.animation}</Text>
+        <TextInput
+          style={styles.hiddenTextInput}
+          ref={(ref) => (this.hiddenTextInput = ref)}
+        />
+        <Text style={styles.currentAnimationText}>
+          Current animation: {this.state.animation}
+        </Text>
         <View style={styles.typeButtonContainer}>
-          {
-            Object.keys(AnimationType).map(animation => {
-              return (
-                <Button
-                  key={animation}
-                  title={animation.charAt(0).toUpperCase() + animation.substr(1)}
-                  onPress={() => {
-                    if (Platform.OS === 'android' && animation === AnimationType.keyboard) {
-                      alert('Keyboard is not supported on Android');
-                    } else {
-                      this.setState({animation});
-                    }
-                  }}
-                />
-              );
-            })
-          }
+          {Object.keys(AnimationType).map((animation) => {
+            return (
+              <Button
+                key={animation}
+                title={animation.charAt(0).toUpperCase() + animation.substr(1)}
+                onPress={() => {
+                  if (
+                    Platform.OS === 'android' &&
+                    animation === AnimationType.keyboard
+                  ) {
+                    alert('Keyboard is not supported on Android');
+                  } else {
+                    this.setState({ animation });
+                  }
+                }}
+              />
+            );
+          })}
         </View>
         <View style={styles.animatedViewContainer}>
           <Animated.View
             style={[
               styles.animatedView,
-              this.state.isViewOnTheLeft ?  {left: 32} : {right: 32},
+              this.state.isViewOnTheLeft ? { left: 32 } : { right: 32 },
               {
                 height: this.state.scaled ? 60 : 40,
                 width: this.state.scaled ? 120 : 80,
@@ -142,9 +179,11 @@ export default class App extends React.Component {
         <Button
           title={'Animate'}
           onPress={() => {
-            LayoutAnimation.configureNext(animationConfigs.get(this.state.animation));
+            LayoutAnimation.configureNext(
+              animationConfigs.get(this.state.animation)
+            );
 
-            let newState = {isViewOnTheLeft: !this.state.isViewOnTheLeft};
+            let newState = { isViewOnTheLeft: !this.state.isViewOnTheLeft };
 
             // Other special behavior
             switch (this.state.animation) {
@@ -156,7 +195,9 @@ export default class App extends React.Component {
                 newState.scaled = !this.state.scaled;
                 break;
               case AnimationType.keyboard:
-                this.hiddenTextInput.isFocused() ? this.hiddenTextInput.blur() : this.hiddenTextInput.focus();
+                this.hiddenTextInput.isFocused()
+                  ? this.hiddenTextInput.blur()
+                  : this.hiddenTextInput.focus();
                 break;
             }
 
@@ -166,7 +207,6 @@ export default class App extends React.Component {
       </View>
     );
   }
-
 }
 
 const styles = StyleSheet.create({

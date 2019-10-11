@@ -1,7 +1,6 @@
 import { Linking, Text } from 'react-native';
 import React, { Component } from 'react';
 
-
 ///
 // __URL__
 // ```
@@ -28,5 +27,4 @@ class Anchor extends React.Component {
   }
 }
 
-
-export { Anchor }
+export { Anchor };

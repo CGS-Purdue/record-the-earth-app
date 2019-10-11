@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { SafeAreaView, View } from 'react-native';
 import { ErrorBoundary } from '../../Utilities/ErrorBoundary';
-import { Theme } from  '../../Theme';
+import { Theme } from '../../Theme';
 
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
-
 
 export default class RootView extends Component {
   constructor(props) {
@@ -17,16 +16,13 @@ export default class RootView extends Component {
 
   render() {
     return (
-      <View ref={this.view_ref} style={ _styles.rootview_container}>
-          <SafeAreaView style={_styles.stretch}>
-            <ErrorBoundary>
-              {this.props.children}
-            </ErrorBoundary>
-          </SafeAreaView>
+      <View ref={this.view_ref} style={_styles.rootview_container}>
+        <SafeAreaView style={_styles.stretch}>
+          <ErrorBoundary>{this.props.children}</ErrorBoundary>
+        </SafeAreaView>
       </View>
     );
   }
 }
-
 
 export { RootView };

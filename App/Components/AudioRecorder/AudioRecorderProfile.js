@@ -2,16 +2,17 @@ import { Audio } from 'expo-av';
 
 class AudioRecorderProfile {
   constructor(options) {
-    const _profile = Object.create(null);
-    _profile.allowsRecordingIOS = true;
-    _profile.interruptionModeIOS = Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX;
-    _profile.playsInSilentModeIOS = true;
-    _profile.shouldDuckAndroid = true;
-    _profile.interruptionModeAndroid = Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX;
-    _profile.playThroughEarpieceAndroid = false;
-    _profile.staysActiveInBackground = true;
+    const profile = Object.create(null);
+    profile.allowsRecordingIOS = true;
+    profile.interruptionModeIOS = Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX;
+    profile.playsInSilentModeIOS = true;
+    profile.shouldDuckAndroid = true;
+    profile.interruptionModeAndroid =
+      Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX;
+    profile.playThroughEarpieceAndroid = false;
+    profile.staysActiveInBackground = true;
 
-    this.profile = Object.assign(_profile, options);
+    this.profile = Object.assign(profile, options);
   }
 
   getProfile() {

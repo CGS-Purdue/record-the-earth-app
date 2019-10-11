@@ -39,7 +39,12 @@ export function loadThemeIcons(set) {
   let icons = {};
   for (let key of Object.keys(set)) {
     let icon = set[key];
-    icons[key] = new ModuleIcon(icon.name, icon.module, icon.width, icon.height);
+    icons[key] = new ModuleIcon(
+      icon.name,
+      icon.module,
+      icon.width,
+      icon.height
+    );
   }
   return icons;
 }

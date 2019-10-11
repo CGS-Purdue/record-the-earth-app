@@ -8,11 +8,7 @@ export default function CenterBox({ children }) {
     alignItems: 'center',
   };
 
-  return (
-    <View style={centeredStyle}>
-      {children}
-    </View>
-  );
+  return <View style={centeredStyle}>{children}</View>;
 }
 
 export { CenterBox };

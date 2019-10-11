@@ -1,8 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import React, { Component } from 'react';
-import { Button, Platform,Text, TouchableOpacity, View } from 'react-native';
+import { Button, Platform, Text, TouchableOpacity, View } from 'react-native';
 
-import { Theme } from  '../../Theme';
+import { Theme } from '../../Theme';
 
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
@@ -18,7 +18,7 @@ class CheckButton extends Component {
 
   _toggleCheckedState = () => {
     let newState = !this.state.checked;
-    this.setState({checked: newState});
+    this.setState({ checked: newState });
     if (this.props.onchecked) {
       this.props.onchecked({
         id: this.props.id,
@@ -38,17 +38,23 @@ class CheckButton extends Component {
           style={_styles.checkbtn_container_inner}
         >
           <Ionicons
-            name={Platform.OS === 'ios' ? `ios-checkmark${this.props.focused ? '' : '-outline'}` : 'md-checkmark' }
+            name={
+              Platform.OS === 'ios'
+                ? `ios-checkmark${this.props.focused ? '' : '-outline'}`
+                : 'md-checkmark'
+            }
             size={_layout.TEXT_SIZE_5}
             iconStyle={_styles.CheckButtonIconStyle}
             style={_styles.CheckButtonIconContainer}
-            color={this.state.checked ? _colors.CHECKBTN_ICON_COLOR_ACTIVE : _colors.CHECKBTN_ICON_COLOR}
+            color={
+              this.state.checked
+                ? _colors.CHECKBTN_ICON_COLOR_ACTIVE
+                : _colors.CHECKBTN_ICON_COLOR
+            }
           />
-          <Text style={_styles.checkbtn_text}>
-            {this.props.text}
-           </Text>
+          <Text style={_styles.checkbtn_text}>{this.props.text}</Text>
         </View>
-        </TouchableOpacity>
+      </TouchableOpacity>
     );
   }
 }

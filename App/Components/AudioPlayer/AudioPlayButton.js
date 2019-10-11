@@ -20,28 +20,28 @@ class AudioPlayButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      active : false,
-      disabled : false,
+      active: false,
+      disabled: false,
     };
     this.active = false;
     this.disabled = false;
     this.state = {
-      statusText : 'status: Not Recording',
+      statusText: 'status: Not Recording',
     };
   }
 
   toggleState() {
     if (this.state.active) {
-      this.setState({active: false});
+      this.setState({ active: false });
     } else {
-      this.setState({active: true});
+      this.setState({ active: true });
     }
   }
 
   handleButton = () => {
     this.toggleState();
     this.props.onPress();
-  }
+  };
 
   render() {
     return (
@@ -55,7 +55,7 @@ class AudioPlayButton extends Component {
           size={this.props.size ? this.props.size : AudioPlayButtonSize}
           style={_styles.button_touchable}
           color={this.props.color ? this.props.color : _colors.BLACK}
-          />
+        />
       </TouchableOpacity>
     );
   }

@@ -9,7 +9,6 @@ var DefaultTransitionSpec = {
   timing: Animated.timing,
 };
 
-
 const scale = this.state.scrollY.interpolate({
   extrapolate: 'clamp',
   inputRange: [-450, 0, 100],

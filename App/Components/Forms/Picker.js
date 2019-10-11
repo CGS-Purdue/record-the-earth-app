@@ -10,7 +10,6 @@
 // - prompt
 // - itemStyle
 
-
 // <Picker
 //   selectedValue={this.state.language}
 //   style={{height: 50, width: 100}}

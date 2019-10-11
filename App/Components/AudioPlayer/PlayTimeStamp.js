@@ -1,6 +1,6 @@
 import React from 'react';
 import BlinkView from './BlinkView';
-import {Text} from 'react-native';
+import { Text } from 'react-native';
 
 const PlaybackTimeStamp = (props) => {
   const getMMSSFromMillis = (millis) => {

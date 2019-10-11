@@ -1,14 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { Theme } from '../../Theme';
 
+const _styles = Theme.Styles;
 const _fonts = Theme.Fonts;
+const TitleFont = _fonts.TITLE_FONT;
 
-const fontKey =_fonts.getFontKey('TITLE_FONT');
-const TitleFont = _fonts.getFont(fontKey);
-const TitleFontStyle = { fontFamily: TitleFont.name, };
+class TitleText extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loaded: false,
+      fontFamily: 'System',
+    };
+  }
 
-export default function TitleText(props) {
- return (<Text style={[this.props.style,  TitleFontStyle ]} {...this.props} />);}
+  componentDidMount() {
+    this._loadFontAsync(TitleFont);
+  }
+
+  async _loadFontAsync(font) {
+    try {
+      font = await _fonts.loadFont(font);
+    } catch (e) {
+      console.log(e.message);
+    }
+    this.setState({
+      loaded: true,
+      fontFamily: font.name,
+    });
+  }
+
+  render() {
+    return (<Text {...this.props}/>);
+  }
+}
 
 export { TitleText };
+
+// return (<Text style={[ this.props.style, { fontFamily: this.state.fontFamily, }, ]} {...this.props}/>);

@@ -3,24 +3,21 @@ import * as FileSystem from 'expo-file-system';
 import * as Permissions from 'expo-permissions';
 import { Asset } from 'expo-asset';
 import { Audio } from 'expo-av';
-import { Dimensions,
+import {
+  Dimensions,
   Image,
   Slider,
   StyleSheet,
   Text,
   TouchableHighlight,
-  View } from 'react-native';
-import { HeadingText } from   '../Text/HeadingText';
+  View,
+} from 'react-native';
+import { HeadingText } from '../Text/HeadingText';
 import { IonicFontIcon } from '../Icon/FontIcon';
 import { BlackFade } from '../Effects/LinearGradient';
 import { AnimatedProgressCircle, ProgressCircle } from '../ProgressCircle';
-import { CenterView,
-  Section,
-  PadView,
-  ImgBgFill,
-  RootView } from '../Views';
+import { CenterView, Section, PadView, ImgBgFill, RootView } from '../Views';
 import { Theme, ThemeIcons } from '../../Theme';
-
 
 const _colors = Theme.Colors;
 const _styles = Theme.Styles;
@@ -48,8 +45,7 @@ const APP_DATA_DIR = 'data';
 const APP_MEDIA_PATH = [APP_STORAGE_PATH, APP_MEDIA_DIR].join('');
 const FILE_PREFIX = 'file://';
 const TEST_FILE_NAME = 'recording-b4965459-7825-4ac9-9fb9-c9a17f313fe5.m4a';
-const TEST_FILE_PATH =  [APP_MEDIA_PATH, TEST_FILE_NAME].join('/');
-
+const TEST_FILE_PATH = [APP_MEDIA_PATH, TEST_FILE_NAME].join('/');
 
 class AltPlayer extends React.Component {
   constructor(props) {
@@ -77,7 +73,6 @@ class AltPlayer extends React.Component {
       soundFileExists: false,
       soundFilePath: null,
       soundFileSize: null,
-
     };
     this.MAX_DURATION = 20000;
     this.soundpath = APP_MEDIA_PATH;
@@ -97,22 +92,26 @@ class AltPlayer extends React.Component {
       interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
       interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
     });
-  }
+  };
 
   getSoundFile = async () => {
-    let file_info = await FileSystem.getInfoAsync(TEST_FILE_PATH, { md5: false });
+    let file_info = await FileSystem.getInfoAsync(TEST_FILE_PATH, {
+      md5: false,
+    });
     console.log('file_info', file_info);
-    if (file_info.exists) { this.loadSound(file_info.uri); }
+    if (file_info.exists) {
+      this.loadSound(file_info.uri);
+    }
     this.setState({
       soundFileExists: file_info.exists,
       soundFilePath: file_info.uri,
       soundFileSize: file_info.size,
     });
-  }
+  };
 
   loadSound = async (soundFileUri) => {
     let sound = new Audio.Sound();
-      console.log('soundFileUri', soundFileUri  );
+    console.log('soundFileUri', soundFileUri);
     try {
       sound.setOnPlaybackStatusUpdate(this.onPlaybackStatusUpdate);
 
@@ -137,28 +136,23 @@ class AltPlayer extends React.Component {
         this.setState({
           isLoading: false,
           isPlaybackAllowed: true,
-      });
+        });
       }
-
 
       this.sound = sound;
       console.log(this.state);
-
     } catch (error) {
       // An error occurred!
       console.warn(`Player.js loadSound error : ${error}`);
     }
-  }
+  };
 
   componentDidMount() {
     this._setAudioMode();
     this.getSoundFile();
   }
 
-
-  _askForPermissions = async () => {
-
-  };
+  _askForPermissions = async () => {};
 
   _updateScreenForSoundStatus = (status) => {
     if (status.isLoaded) {
@@ -185,7 +179,7 @@ class AltPlayer extends React.Component {
     }
   };
 
-  _updateScreenForRecordingStatus = status => {};
+  _updateScreenForRecordingStatus = (status) => {};
 
   async _stopPlaybackAndBeginRecording() {
     this.setState({ isLoading: true });
@@ -202,23 +196,24 @@ class AltPlayer extends React.Component {
       this.sound.setOnPlaybackStatusUpdate(null);
       this.sound = null;
     }
-  }
+  };
 
   async _stopRecordingAndEnablePlayback() {
     this.setState({ isLoading: true });
 
-    const { sound, status } = await this.createNewLoadedSoundAsync({
+    const { sound, status } = await this.createNewLoadedSoundAsync(
+      {
         isLooping: true,
         isMuted: this.state.muted,
         volume: this.state.volume,
         rate: this.state.rate,
         shouldCorrectPitch: this.state.shouldCorrectPitch,
       },
-        this._updateScreenForSoundStatus
+      this._updateScreenForSoundStatus
     );
     this.sound = sound;
 
-    this.setState({isLoading: false});
+    this.setState({ isLoading: false });
   }
 
   _onStopPressed = () => {
@@ -233,7 +228,7 @@ class AltPlayer extends React.Component {
     }
   };
 
-  _onVolumeSliderValueChange = value => {
+  _onVolumeSliderValueChange = (value) => {
     if (this.sound != null) {
       this.sound.setVolumeAsync(value);
     }
@@ -274,9 +269,11 @@ class AltPlayer extends React.Component {
   };
 
   _getSeekSliderPosition() {
-    if ( this.sound != null
-      && this.state.soundPosition != null
-      && this.state.soundDuration != null) {
+    if (
+      this.sound != null &&
+      this.state.soundPosition != null &&
+      this.state.soundDuration != null
+    ) {
       return this.state.soundPosition / this.state.soundDuration;
     }
     return 0;
@@ -287,7 +284,7 @@ class AltPlayer extends React.Component {
     const seconds = Math.floor(totalSeconds % 60);
     const minutes = Math.floor(totalSeconds / 60);
 
-    const padWithZero = number => {
+    const padWithZero = (number) => {
       const string = number.toString();
       if (number < 10) {
         return '0' + string;
@@ -303,14 +300,14 @@ class AltPlayer extends React.Component {
       this.state.soundPosition != null &&
       this.state.soundDuration != null
     ) {
-      return `${this._getMMSSFromMillis(this.state.soundPosition)} / ${this._getMMSSFromMillis(
-        this.state.soundDuration
-      )}`;
+      return `${this._getMMSSFromMillis(
+        this.state.soundPosition
+      )} / ${this._getMMSSFromMillis(this.state.soundDuration)}`;
     }
     return '00:00';
   }
 
-  _getRecordingTimestamp() {  }
+  _getRecordingTimestamp() {}
 
   _onPlayPressed = () => {
     if (this.sound != null) {
@@ -328,48 +325,59 @@ class AltPlayer extends React.Component {
             this.setState({ playerStatus: 'PLAYING' });
           });
         });
-
       } else {
-
         // PLAY FROM CURRENT POS
-        this.sound.playAsync().then(() => {
+        this.sound
+          .playAsync()
+          .then(() => {
             this.setState({ playerStatus: 'PLAYING' });
           })
           .catch((err) => {
             console.warn(`Player.js onPlayPress error: ${err}`);
           });
-
       }
     }
   };
 
-
   render() {
     return (
-
       <ImgBgFill>
-
-        <View style={{backgroundColor: '#303030', flex: 1, width: '100%', height: '100%', display: 'flex', paddingTop: 20, paddingHorizontal: 10, justifyContent: 'center'}}>
+        <View
+          style={{
+            backgroundColor: '#303030',
+            flex: 1,
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            paddingTop: 20,
+            paddingHorizontal: 10,
+            justifyContent: 'center',
+          }}
+        >
           <RootView>
             <CenterView>
-            <Section weight={1} expand={true} shrink={true}>
-              <View style={styles.playStopContainer}>
-                <IonicFontIcon
-                  name={'pulse'}
-                  size={(_layout.TEXT_SIZE_5 * 2)}
-                  style={_styles.audioplayer_icons}
-                  color={this.state.soundFileExists ? _colors.GRN_400 : _colors.GRA_400}
-                />
-              </View>
-              <HeadingText>{'Audio Player'}</HeadingText>
-            </Section>
+              <Section weight={1} expand={true} shrink={true}>
+                <View style={styles.playStopContainer}>
+                  <IonicFontIcon
+                    name={'pulse'}
+                    size={_layout.TEXT_SIZE_5 * 2}
+                    style={_styles.audioplayer_icons}
+                    color={
+                      this.state.soundFileExists
+                        ? _colors.GRN_400
+                        : _colors.GRA_400
+                    }
+                  />
+                </View>
+                <HeadingText>{'Audio Player'}</HeadingText>
+              </Section>
 
               <Section
                 weight={3}
                 expand={true}
                 justify={'flex-start'}
                 align={'stretch'}
-                >
+              >
                 <Text style={styles.playbackTimestamp}>
                   {this._getPlaybackTimestamp()}
                 </Text>
@@ -379,99 +387,118 @@ class AltPlayer extends React.Component {
                   value={this._getSeekSliderPosition()}
                   onValueChange={this._onSeekSliderValueChange}
                   onSlidingComplete={this._onSeekSliderSlidingComplete}
-                  disabled={!this.state.isPlaybackAllowed || this.state.isLoading}
-                  />
-                </Section>
+                  disabled={
+                    !this.state.isPlaybackAllowed || this.state.isLoading
+                  }
+                />
+              </Section>
 
-                <Section weight={1} expand={true} shrink={true}>
-                  <View style={[styles.buttonsContainerBase, styles.buttonsContainerTopRow]}>
-                    <View style={styles.playStopContainer}>
+              <Section weight={1} expand={true} shrink={true}>
+                <View
+                  style={[
+                    styles.buttonsContainerBase,
+                    styles.buttonsContainerTopRow,
+                  ]}
+                >
+                  <View style={styles.playStopContainer}>
+                    <TouchableHighlight
+                      onPress={this._onPlayPressed}
+                      underlayColor={BACKGROUND_COLOR}
+                      style={styles.wrapper}
+                      disabled={
+                        !this.state.isPlaybackAllowed || this.state.isLoading
+                      }
+                    >
+                      <IonicFontIcon
+                        name={this.state.isPlaying ? 'pause' : 'play'}
+                        size={_layout.TEXT_SIZE_5 * 2}
+                        style={_styles.audioplayer_icons}
+                        color={_colors.GRN_400}
+                      />
+                    </TouchableHighlight>
 
-                      <TouchableHighlight
-                        onPress={this._onPlayPressed}
-                        underlayColor={BACKGROUND_COLOR}
-                        style={styles.wrapper}
-                        disabled={!this.state.isPlaybackAllowed || this.state.isLoading}>
+                    <TouchableHighlight
+                      underlayColor={BACKGROUND_COLOR}
+                      style={styles.wrapper}
+                      onPress={this._onStopPressed}
+                      disabled={
+                        !this.state.isPlaybackAllowed || this.state.isLoading
+                      }
+                    >
+                      <IonicFontIcon
+                        name={this.state.isPlaying ? 'square' : 'square'}
+                        size={_layout.TEXT_SIZE_5 * 2}
+                        style={_styles.audioplayer_icons}
+                        color={
+                          this.state.isLoaded
+                            ? _colors.GRN_400
+                            : _colors.GRA_400
+                        }
+                      />
+                    </TouchableHighlight>
 
-                        <IonicFontIcon
-                          name={this.state.isPlaying ? 'pause' : 'play'}
-                          size={(_layout.TEXT_SIZE_5 * 2)}
-                          style={_styles.audioplayer_icons}
-                          color={_colors.GRN_400}
-                          />
-                      </TouchableHighlight>
-
-                      <TouchableHighlight
-                        underlayColor={BACKGROUND_COLOR}
-                        style={styles.wrapper}
-                        onPress={this._onStopPressed}
-                        disabled={!this.state.isPlaybackAllowed || this.state.isLoading}>
-                        <IonicFontIcon
-                          name={this.state.isPlaying ? 'square' : 'square'}
-                          size={(_layout.TEXT_SIZE_5 * 2)}
-                          style={_styles.audioplayer_icons}
-                          color={this.state.isLoaded ? _colors.GRN_400 : _colors.GRA_400}
-                          />
-                      </TouchableHighlight>
-
-
-                      <TouchableHighlight
-                        underlayColor={BACKGROUND_COLOR}
-                        style={styles.wrapper}
-                        onPress={this._onMutePressed}
-                        disabled={!this.state.isPlaybackAllowed || this.state.isLoading}>
-                        <IonicFontIcon
-                          name={this.state.isPlaying ? 'volume-high' : 'volume-off'}
-                          size={(_layout.TEXT_SIZE_5 * 2)}
-                          style={_styles.audioplayer_icons}
-                          color={_colors.GRN_100}
-                        />
-                      </TouchableHighlight>
-
-                    </View>
-                    <View />
+                    <TouchableHighlight
+                      underlayColor={BACKGROUND_COLOR}
+                      style={styles.wrapper}
+                      onPress={this._onMutePressed}
+                      disabled={
+                        !this.state.isPlaybackAllowed || this.state.isLoading
+                      }
+                    >
+                      <IonicFontIcon
+                        name={
+                          this.state.isPlaying ? 'volume-high' : 'volume-off'
+                        }
+                        size={_layout.TEXT_SIZE_5 * 2}
+                        style={_styles.audioplayer_icons}
+                        color={_colors.GRN_100}
+                      />
+                    </TouchableHighlight>
                   </View>
-                </Section>
+                  <View />
+                </View>
+              </Section>
 
-                <Section justify={'flex-start'} shrink={true} align={'stretch'} weight={3} >
-                <View style={{ flex: 1, display: 'flex', flexDirection: 'row',}}>
+              <Section
+                justify={'flex-start'}
+                shrink={true}
+                align={'stretch'}
+                weight={3}
+              >
+                <View
+                  style={{ flex: 1, display: 'flex', flexDirection: 'row' }}
+                >
+                  <View style={styles.volumeContainer}>
+                    <Slider
+                      style={styles.volumeSlider}
+                      value={0.76}
+                      onValueChange={this._onVolumeSliderValueChange}
+                      disabled={
+                        !this.state.isPlaybackAllowed || this.state.isLoading
+                      }
+                    />
+                  </View>
+                  <IonicFontIcon
+                    name={'trash'}
+                    size={_layout.TEXT_SIZE_5 * 2}
+                    style={_styles.audioplayer_icons}
+                    color={_colors.GRN_600}
+                  />
 
-                <View style={styles.volumeContainer}>
-                 <Slider
-                    style={styles.volumeSlider}
-                    value={0.76}
-                    onValueChange={this._onVolumeSliderValueChange}
-                    disabled={!this.state.isPlaybackAllowed || this.state.isLoading}
+                  <IonicFontIcon
+                    name={'share'}
+                    size={_layout.TEXT_SIZE_5 * 2}
+                    style={_styles.audioplayer_icons}
+                    color={_colors.GRN_300}
                   />
                 </View>
-                  <IonicFontIcon
-                      name={'trash'}
-                      size={(_layout.TEXT_SIZE_5 * 2)}
-                      style={_styles.audioplayer_icons}
-                      color={_colors.GRN_600}
-                    />
+              </Section>
 
-                  <IonicFontIcon
-                      name={'share'}
-                      size={(_layout.TEXT_SIZE_5 * 2)}
-                      style={_styles.audioplayer_icons}
-                      color={_colors.GRN_300}
-                    />
-
-
-                </View>
-
-
-                </Section>
-
-
-
-
-                <Section weight={1} expand={true} shrink={true}>
-                  <AnimatedProgressCircle
-                    value={this.state.duration / (this.MAX_DURATION + 0.0000001)}
-                  />
-                  <PadView padding={[2, 3]} />
+              <Section weight={1} expand={true} shrink={true}>
+                <AnimatedProgressCircle
+                  value={this.state.duration / (this.MAX_DURATION + 0.0000001)}
+                />
+                <PadView padding={[2, 3]} />
               </Section>
             </CenterView>
           </RootView>
@@ -590,10 +617,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingLeft: 20,
   },
-  rateSlider: {
-  },
+  rateSlider: {},
 });
-
-
 
 export { AltPlayer };

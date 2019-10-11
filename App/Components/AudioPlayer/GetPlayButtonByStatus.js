@@ -15,15 +15,11 @@ const ICON_SIZE = 40;
 const GetPlayButtonByStatus = (props) => {
   if (props.recordStatus === 'RECORDING') {
     return (
-      <Button
-        disabled
-        style={{ ...buttonStyle }}
-        onPress={() => {}}
-      >
+      <Button disabled style={{ ...buttonStyle }} onPress={() => {}}>
         <Icon
-          type="FontAwesome"
-          name="play"
-          color="white"
+          type='FontAwesome'
+          name='play'
+          color='white'
           style={{ fontSize: ICON_SIZE }}
         />
       </Button>
@@ -37,40 +33,32 @@ const GetPlayButtonByStatus = (props) => {
       return (
         <Button disabled style={[buttonStyle]} onPress={() => {}}>
           <Icon
-            type="FontAwesome"
-            name="hourglass"
-            color="white"
+            type='FontAwesome'
+            name='hourglass'
+            color='white'
             style={{ fontSize: ICON_SIZE - 6 }}
           />
         </Button>
       );
     } else if (props.playStatus === 'PAUSED') {
       return (
-        <Button
-          success
-          style={[buttonStyle]}
-          onPress={props.onPlayPress}
-        >
+        <Button success style={[buttonStyle]} onPress={props.onPlayPress}>
           <Icon
-            type="FontAwesome"
-            name="play"
-            color="white"
+            type='FontAwesome'
+            name='play'
+            color='white'
             style={{ fontSize: ICON_SIZE }}
           />
         </Button>
       );
     } else if (props.playStatus === 'STOPPED') {
       return (
-        <Button
-          success
-          style={[buttonStyle]}
-          onPress={props.onPlayPress}
-        >
+        <Button success style={[buttonStyle]} onPress={props.onPlayPress}>
           <Icon
-            type="FontAwesome"
-            name="play"
-            color="white"
-            style={{ fontSize: ICON_SIZE  }}
+            type='FontAwesome'
+            name='play'
+            color='white'
+            style={{ fontSize: ICON_SIZE }}
           />
         </Button>
       );
@@ -78,9 +66,9 @@ const GetPlayButtonByStatus = (props) => {
       return (
         <Button danger style={buttonStyle} onPress={props.onPausePress}>
           <Icon
-            type="FontAwesome"
-            name="pause"
-            color="white"
+            type='FontAwesome'
+            name='pause'
+            color='white'
             style={{ fontSize: ICON_SIZE - 6 }}
           />
         </Button>
@@ -89,10 +77,10 @@ const GetPlayButtonByStatus = (props) => {
       return (
         <Button danger style={buttonStyle} onPress={() => {}}>
           <Icon
-            type="FontAwesome"
-            name="exclamation-triangle"
-            color="white"
-            style={{ fontSize: ICON_SIZE - 10}}
+            type='FontAwesome'
+            name='exclamation-triangle'
+            color='white'
+            style={{ fontSize: ICON_SIZE - 10 }}
           />
         </Button>
       );
@@ -103,9 +91,9 @@ const GetPlayButtonByStatus = (props) => {
       return (
         <Button danger style={buttonStyle} onPress={() => {}}>
           <Icon
-            type="FontAwesome"
-            name="question-circle"
-            color="white"
+            type='FontAwesome'
+            name='question-circle'
+            color='white'
             style={{ fontSize: ICON_SIZE }}
           />
         </Button>

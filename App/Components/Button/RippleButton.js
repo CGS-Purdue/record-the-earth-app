@@ -1,10 +1,9 @@
 import { Ionicons } from '@expo/vector-icons';
 import React, { Component } from 'react';
-import { Image,  Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 
 import { Theme } from '../../Theme';
-
 
 // TODO: ANDROID ONLY
 const _styles = Theme.Styles;
@@ -14,8 +13,8 @@ class RippleButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      active : false,
-      disabled : false,
+      active: false,
+      disabled: false,
     };
     this.active = false;
     this.disabled = false;
@@ -23,48 +22,46 @@ class RippleButton extends Component {
 
   toggleState() {
     if (this.state.active) {
-      this.setState({active: false});
+      this.setState({ active: false });
     } else {
-      this.setState({active: true});
+      this.setState({ active: true });
     }
   }
 
   handleButton = () => {
     this.toggleState();
     this.props.onPress();
-  }
+  };
 
   render() {
     return (
       <View style={_styles.ripplebtn_container_outer}>
-      <Touchable
-        style={_styles.ripplebtn_option}
-        onPress={this.props.onPress}
-        delayLongPress={1000}
-        background={Touchable.Ripple('#ccc', false)}
-      >
-        <View style={_styles.ripplebtn_container_inner}>
-          <Image
-            style={_styles.ripplebtn_image}
-            source={this.props.image}
-            resizeMode="contain"
-            fadeDuration={0}
-          />
-        </View>
-      </Touchable>
-     </View>
+        <Touchable
+          style={_styles.ripplebtn_option}
+          onPress={this.props.onPress}
+          delayLongPress={1000}
+          background={Touchable.Ripple('#ccc', false)}
+        >
+          <View style={_styles.ripplebtn_container_inner}>
+            <Image
+              style={_styles.ripplebtn_image}
+              source={this.props.image}
+              resizeMode='contain'
+              fadeDuration={0}
+            />
+          </View>
+        </Touchable>
+      </View>
     );
   }
 }
-
-
 
 class IonicRippleButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      active : false,
-      disabled : false,
+      active: false,
+      disabled: false,
     };
     this.active = false;
     this.disabled = false;
@@ -81,13 +78,12 @@ class IonicRippleButton extends React.Component {
         >
           <View style={{ flexDirection: 'row' }}>
             <View style={_styles.ripplebutton_icon}>
-              <Ionicons name={this.props.name}
-                 size={22}
-                 color="#ccc"
-                 />
+              <Ionicons name={this.props.name} size={22} color='#ccc' />
             </View>
             <View style={_styles.ripplebtn_option}>
-              <Text style={_styles.ripplebtn_optionText}>{this.props.title}</Text>
+              <Text style={_styles.ripplebtn_optionText}>
+                {this.props.title}
+              </Text>
             </View>
           </View>
         </Touchable>
@@ -95,7 +91,5 @@ class IonicRippleButton extends React.Component {
     );
   }
 }
-
-
 
 export { RippleButton, IonicRippleButton };

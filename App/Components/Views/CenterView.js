@@ -1,10 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import { Theme } from  '../../Theme';
+import { Theme } from '../../Theme';
 
 const _styles = Theme.Styles;
-
 
 function CenterRowView({ children }) {
   return <View style={_styles.centered_row}>{children}</View>;
@@ -15,7 +14,7 @@ function CenterColView({ children }) {
 }
 
 function CenterView(props) {
-  const { children, style} = props;
+  const { children, style } = props;
   const innerStyle = Object.assign(_styles.centered_col, style);
   return (
     <View style={_styles.centered_row}>
@@ -23,7 +22,6 @@ function CenterView(props) {
     </View>
   );
 }
-
 
 CenterView.defaultProps = {
   children: null,

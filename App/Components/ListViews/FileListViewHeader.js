@@ -13,7 +13,9 @@ class FileListViewHeader extends Component {
   render() {
     return (
       <View style={_styles.listview_soundheader_container}>
-        <HeadingText style={_styles.listview_header_text}>{'Files'}</HeadingText>
+        <HeadingText style={_styles.listview_header_text}>
+          {'Files'}
+        </HeadingText>
       </View>
     );
   }

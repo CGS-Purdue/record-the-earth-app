@@ -4,7 +4,7 @@ class AudioRecorderFormat {
   constructor(options) {
     this.presets = {
       high: Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY,
-      low:  Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY,
+      low: Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY,
     };
 
     this.format = Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY;

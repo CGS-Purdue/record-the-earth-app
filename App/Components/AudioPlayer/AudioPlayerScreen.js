@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import {  View, Slider, Text } from 'react-native';
+import { View, Slider, Text } from 'react-native';
 import AudioPlayer from './AudioPlayer';
 
 const AUDIO_CLIP_URL = '';
-
-
-
-
 
 export default class AudioPlayerScreen extends Component {
   constructor(props) {
@@ -39,7 +35,7 @@ export default class AudioPlayerScreen extends Component {
           showDebug={true}
           showBackButton={true}
           playbackSlider={(renderProps) => {
-            console.log({'maximumValue: ': renderProps.maximumValue});
+            console.log({ 'maximumValue: ': renderProps.maximumValue });
             return (
               <Slider
                 minimimValue={0}
@@ -58,10 +54,9 @@ export default class AudioPlayerScreen extends Component {
   }
 }
 
-
 const styles = {
-   audioplayer_screen: {
-   display: 'flex',
-   flex: 1,
-  }
-}
+  audioplayer_screen: {
+    display: 'flex',
+    flex: 1,
+  },
+};

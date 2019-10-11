@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Button,TouchableNativeFeedback } from 'react-native';
+import { Button, TouchableNativeFeedback } from 'react-native';
 
 import { Theme } from '../../Theme';
 
@@ -34,11 +34,12 @@ const _var = Theme.Variables;
 // title
 // touchSoundDisabled
 
-
-
-
 export default function TouchableNativeButton({ onPress, children }) {
-  return <TouchableNativeFeedback onPress={onPress}>{children}</TouchableNativeFeedback>;
+  return (
+    <TouchableNativeFeedback onPress={onPress}>
+      {children}
+    </TouchableNativeFeedback>
+  );
 }
 
 TouchableNativeButton.defaultProps = {
@@ -56,7 +57,6 @@ TouchableNativeButton.propTypes = {
   onPress: PropTypes.func,
 };
 
-
 const button_style = {
   border: '1px solid #eee',
   borderRadius: 3,
@@ -67,18 +67,13 @@ const button_style = {
   marginTop: 20,
 };
 
-
-
-
-const ThemeButton = ( props ) => {
+const ThemeButton = (props) => {
   if (props.style) {
     Object.assign(button_style, props.style);
   }
   return (
-    <Button
-      onClick={props.onClick}
-      style={button_style}>
-        {props.children}
+    <Button onClick={props.onClick} style={button_style}>
+      {props.children}
     </Button>
   );
 };
@@ -86,20 +81,20 @@ const ThemeButton = ( props ) => {
 ThemeButton.defaultProps = {
   children: null,
   onPress: null,
-  onClick: () => { console.log('clicked');},
+  onClick: () => {
+    console.log('clicked');
+  },
   size: _var.BUTTON_SIZE,
   color: _var.BUTTON_COLOR,
-  iconStyle:  _var.BUTTON_ICON_STYLE,
+  iconStyle: _var.BUTTON_ICON_STYLE,
   borderRadius: _var.BUTTON_BORDER_RADIUS,
   backgroundColor: _var.BUTTON_BGCOLOR,
 };
 ThemeButton.displayName = 'Button';
 
-
 ThemeButton.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
 };
-
 
 export { ThemeButton, TouchableNativeButton };

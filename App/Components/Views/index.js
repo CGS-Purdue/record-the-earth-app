@@ -10,27 +10,27 @@ import { Section } from './Section';
 import { RootView } from './RootView';
 
 const UtilityViews = {
- // CenterBox: CenterBox,
+  // CenterBox: CenterBox,
   RootView: RootView,
-//  ImgBox: ImgBox,
+  //  ImgBox: ImgBox,
   PadView: PadView,
- // BoxX: BoxX,
- // BoxY: BoxY,
+  // BoxX: BoxX,
+  // BoxY: BoxY,
 };
 
 export default UtilityViews;
 
 export {
   Section,
-//  BoxX,
-///  BoxY,
-//  CenterBox,
+  //  BoxX,
+  ///  BoxY,
+  //  CenterBox,
   CenterColView,
   CenterRowView,
   CenterView,
   ImgBgFill,
   ImgBgView,
-//  ImgBox,
+  //  ImgBox,
   PadView,
   RootView,
 };

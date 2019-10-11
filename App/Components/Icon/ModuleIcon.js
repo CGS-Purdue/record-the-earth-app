@@ -1,6 +1,5 @@
 import { Asset } from 'expo-asset';
 
-
 // class Icon {
 //   constructor(name, module, width, height) {
 //     this.name = name
@@ -10,7 +9,6 @@ import { Asset } from 'expo-asset';
 //     Asset.fromModule(this.module).downloadAsync();
 //   }
 // };
-
 
 export default class ModuleIcon {
   constructor(name, module, width, height) {
