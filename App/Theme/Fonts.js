@@ -12,58 +12,68 @@ var FontAssets = {
   opensans_regular: FONTS_OPENSANS_REGULAR,
 };
 
-const FontMap = (name) => {
+const FontMap = (key, autoload=false) => {
   let _map = {
-    'ionicons': {
-      src: FontAssets.ionicons,
+    ionicons: {
+      module: FontAssets.ionicons,
       name: 'ionicons',
-      file: 'ionicons.ttf',
-      isLoaded: false,
     },
-    'opensanslight': {
-      src: FontAssets.opensans_light,
+    opensanslight: {
+      module: FontAssets.opensans_light,
       name: 'opensans-light',
-      file: 'OpenSans-Light-webfont.ttf',
-      isLoaded: false,
     },
-    'opensansregular': {
-      src: FontAssets.opensans_regular,
+    opensansregular: {
+      module: FontAssets.opensans_regular,
       name: 'opensans-regular',
-      file: 'OpenSans-Regular-webfont.ttf',
-      isLoaded: false,
     },
-    'spacemono': {
-      src: FontAssets.spacemono,
+    spacemono: {
+      module: FontAssets.spacemono,
       name: 'spacemono',
-      file: 'SpaceMono-Regular.ttf',
-      isLoaded: false,
     },
   };
 
-  // var Font = {
-  //   src: '',
-  //   name: '',
-  //   file: '',
-  //   isLoaded: '',
-  // };
+  let get = (_key) => {
+    if (_map[_key]) {
+      return _map[_key];
+    } else {
+      return _map;
+    }
+  };
 
-  let get = ((_name) => {
-     if (_map[_name]) {
-      return _map[_name];
-     }
-     else {
-     return _map;
-     }
-   });
+  let load = async (_font) => {
+    const { module, name } = _font;
+    if (!module) { return false }
 
-  return get(name);
+    let Font = await ExpoFont.loadAsync({ [name]: module });
+    return Font;
+  }
+
+  if (autoload){
+
+    try {
+      var _font = get(key);
+      const { module, name } = _font;
+      return ExpoFont.loadAsync({ [name]: module });
+      // return load(_font);
+    } catch (e) {
+      console.log(e);
+      if (_font) {
+        return _font;
+      } else {
+        return e;
+      }
+    }
+  } else {
+    return get(key);
+  }
 };
 
 var FontTypes = {
-  TITLE_FONT: 'spacemono',
-  HEADING_FONT: 'spacemono',
+  TITLE_FONT: 'opensans-regular',
+  HEADING_FONT: 'opensans-regular',
   BODY_FONT: 'opensans-regular',
   SANS_FONT: 'opensans-regular',
+  LIGHT_FONT: 'opensans-light',
   SANS_LIGHT_FONT: 'opensans-light',
   MONO_FONT: 'spacemono',
   ICON_FONT: 'ionicons',
@@ -71,53 +81,63 @@ var FontTypes = {
 
 var _getFont = (key) => {
   if (FontMap(key)) {
-   return  (FontMap(key));
+    return FontMap(key);
   } else {
     return false;
   }
 };
 
-var _getFontKey = (name) => {
-  if (FontTypes[name]) {
-   return  (FontTypes[name]);
-  } else {
-    return false;
+// var _getFontKey = (name) => {
+//   if (FontTypes[name]) {
+//    return  (FontTypes[name]);
+//   } else {
+//     return false;
+//   }
+// };
+
+const _loadFont = (_font) => {
+  let name = _font.name;
+  let module = _font.module;
+  let src = ExpoFont.loadAsync({ [name]: module });
+  _font.src = Promise.resolve(src);
+  _font.isLoaded = true;
+  return _font;
+};
+
+const _loadFontMap = async (fontMap) => {
+  // cacheFonts[name] = { src }
+  // name = font.name;
+  // mod = font.module;
+  var font, name, mod, src;
+  const cacheFonts = {};
+  const fontArray = [];
+  try {
+    for (var fontKey of Object.keys(fontMap)) {
+      font = fontMap[fontKey];
+      mod = font.module;
+      name = font.name ? font.name : fontKey;
+      src = await ExpoFont.loadAsync(name , mod);
+      // font.src = Promise.resolve(src);
+      cacheFonts[name] = font;
+      fontArray.push({[name]: src});
+    };
+    return Promise.all([cacheFonts, ...fontArray]);
+
+
+  } catch (e) {
+    console.log('ExpoFont.loadAsync error', e);
   }
+  // let fontCache = Object.entries(fontMap).map((set) => {
+  //   let font = {};
+  //   font.key = set[0];
+  //   font.name = set[1].name;
+  //   font.module = set[1].module;
+  //   font.src = ExpoFont.loadAsync({ [font.name]: module });
+  //   return { [font.key]: font };
+  // });
+  // console.log('[_loadFontMap] fontCache', fontCache);
+  // return fontCache;
 };
-
-
-function _getThemeFonts(fonts) {
-  var map = [];
-  for (var item of fonts) {
-    var font = FontMap(item);
-    var fontname = font.name;
-    var obj = {};
-    obj[fontname] = font.src;
-    map.push(obj);
-  }
-  return map;
-}
-
-const _loadFont = (pair) => {
-  let font = {};
-  let key = pair[0];
-  let name = pair[1].name;
-  let module = pair[1].src;
-  let src = ExpoFont.loadAsync({ [name] : module });
-  return Promise.resolve(src);
-};
-
-const _loadFontMap = (fontMap) => {
-  let fontCache = [];
-  let fonts = Object.entries(fontMap).map((font_set) => {
-  let fontLoading = _loadFont(font_set);
-    fontCache.push(fontLoading);
-    return { [font_set[0]] : font_set[1] };
-  });
-  return fontCache;
-};
-
-// ThemeFontMap.forEach( function(fon){ console.log(fon) } )
 
 function getFontWeights(fw_dict) {
   var result = [];
@@ -129,9 +149,6 @@ function getFontWeights(fw_dict) {
   });
   return Object.assign(empty, ...result);
 }
-
-// polyfill
-
 
 var FontDictionary = {
   WEIGHT_100: { weight: 100, name: 'thin' },
@@ -150,7 +167,6 @@ var FONT_STYLES = {
   NORMAL: { name: 'normal' },
 };
 
-
 var FONT_WEIGHTS = getFontWeights(FontDictionary);
 
 var FontVariables = {
@@ -159,30 +175,43 @@ var FontVariables = {
   type: FontTypes,
 };
 
-function cacheFonts(fonts) {
-  return Object.entries(fonts)
-    .map((font) => ExpoFont.loadAsync(font))
-}
-
 var ThemeFonts = {
+  ICON_FONT: _loadFont(FontMap('ionicons')),
+  TITLE_FONT: _loadFont(FontMap('opensansregular')),
+  HEADING_FONT: _loadFont(FontMap('opensansregular')),
+  MONO_FONT: _loadFont(FontMap('spacemono')),
+  LIGHT_FONT: _loadFont(FontMap('opensanslight')),
+
   FontMap: FontMap(),
+  FontMap0: FontMap,
+  // PreloadedFonts: [
+  //   {'ionicons': FontMap('ionicons',true)},
+  //   {'opensanslight': FontMap('opensanslight',true)},
+  //   {'opensansregular': FontMap('opensansregular',true)},
+  //   {'spacemono': FontMap('spacemono',true)},
+  // ],
+  PreloadedFonts: [
+    FontMap('ionicons',true),
+    FontMap('opensanslight',true),
+    FontMap('opensansregular',true),
+    FontMap('spacemono',true),
+  ],
   FontType: FontTypes,
   FontAssets: FontAssets,
   FontWeights: FONT_WEIGHTS,
   FontVariables: FontVariables,
   FontConfig: {
-    ICON_FONT: FontMap('ionicons'),
-    TITLE_FONT: FontMap('opensans-regular'),
+    ICON_FONT: _loadFont(FontMap('ionicons')),
+    TITLE_FONT: FontMap('opensansregular'),
+    HEADING_FONT: FontMap('opensansregular'),
+    MONO_FONT: _loadFont(FontMap('spacemono')),
+    LIGHT_FONT: _loadFont(FontMap('opensanslight')),
   },
   FontCache: _loadFontMap(FontMap()),
   loadFontMap: _loadFontMap,
-  getFontKey: _getFontKey,
+  // getFontKey: _getFontKey,
   getFont: _getFont,
   loadFont: _loadFont,
 };
 
-
-export {
-  ThemeFonts,
-  FontVariables,
-};
+export { ThemeFonts, FontVariables };

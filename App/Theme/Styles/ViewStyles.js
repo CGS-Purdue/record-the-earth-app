@@ -55,7 +55,7 @@ const CeneretedFlexContainer = {
   flexDirection: 'row',
 };
 
-const CeneretedFlexColContainer = {
+const CenteretedFlexColContainer = {
   backgroundColor: ThemeColors.TRANSPARENT,
   flex: 1,
   width: ThemeLayout.PERCENT_100,
@@ -118,9 +118,9 @@ const ViewStyles = {
   stretch: Stretch,
   padded_container: PadView,
   centered_row: CeneretedFlexContainer,
-  centered_col: CeneretedFlexColContainer,
+  centered_col: CenteretedFlexColContainer,
   centered_inner: CeneretedFlexContainer,
-  centered_outer: CeneretedFlexColContainer,
+  centered_outer: CenteretedFlexColContainer,
   flex_container: FlexContainer,
   flexcol_container: FlexColContainer,
   rootview_container: RootViewContainer,

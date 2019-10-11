@@ -11,22 +11,21 @@ import ServerConfig from '../../Config/Server';
 
 const FILE_NAME = 'recording-f395faf1-ae31-49f2-9a81-214a75560362.m4a.mp4';
 const FILE_URI = [ServerConfig.STORAGE_PENDING_SOUNDFILES, FILE_NAME].join('/');
-
-// try {
-//   const filedata = await FileSystem.readAsStringAsync(FILE_URI, {
-//   encoding: FileSystem.EncodingType.Base64,
-// })
-// const formData = getFormData();
-// formData.append('file', _data);
-// formData.append('file', ab2str(ab2str(data));
-// formData.append('file', datxa);
-// let transport = new Blob([data]);
-// formData.append('file', encodeURI(data), 'filename.mp4');
-// formData.append('file', {
-//  uri: FILE_URI,
-//  type: 'audio/m4a',
-//  name: FILE_NAME
-// });
+/// try {
+///   const filedata = await FileSystem.readAsStringAsync(FILE_URI, {
+///   encoding: FileSystem.EncodingType.Base64,
+/// })
+/// const formData = getFormData();
+/// formData.append('file', _data);
+/// formData.append('file', ab2str(ab2str(data));
+/// formData.append('file', datxa);
+/// let transport = new Blob([data]);
+/// formData.append('file', encodeURI(data), 'filename.mp4');
+/// formData.append('file', {
+///  uri: FILE_URI,
+///  type: 'audio/m4a',
+///  name: FILE_NAME
+/// });
 function getFormData() {
   let formData = new FormData();
   formData.append('uploadToken', 'AIzaSyCj-xcU7l0a-Ryh4Hqkgam-cqh7qDQSX7Q');
@@ -106,7 +105,7 @@ class HttpUploadScreen extends Component {
           formData.append('file', {
             uri: FILE_URI,
             type: 'audio/m4a',
-            // type: 'text/plain'
+
             name: FILE_NAME,
           });
         })

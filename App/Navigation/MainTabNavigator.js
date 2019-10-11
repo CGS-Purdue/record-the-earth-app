@@ -12,7 +12,7 @@ import { AppHomeScreen } from '../Screens/Main/AppHomeScreen';
 import { AppHomeAnimatedScreen } from '../Screens/Main/AppHomeAnimatedScreen';
 import { SoundscapeLibraryScreen } from '../Screens/Library/SoundscapeLibraryScreen';
 // import { AudioPlayerScreen } from '../Screens/Main/AudioPlayerScreen';
-// import { HttpUploadScreen } from '../Screens/Main/HttpUploadScreen';
+import { SurveyDescScreen } from '../Screens/Survey/SurveyDescScreen';
 // import { InfoPageStack } from './InfoPageStack';
 import { AboutScreen } from '../Screens/Infopages/AboutScreen';
 import { LibraryStack } from './LibraryStack';
@@ -84,52 +84,54 @@ const MainTabNavigator = createMaterialTopTabNavigator(
         },
       },
     },
-    LibraryTab: {
-      screen: LibraryStack,
-      navigationOptions: {
-        title: 'Library',
-        tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
-          return (
-            <TabBarIcon name={'list'} focused={focused} color={tintColor} />
-          );
-        },
-      },
-    },
-    SoundscapesTab: {
-      screen: SoundscapeLibraryScreen,
-      navigationOptions: {
-        title: 'Soundscapes',
-        showLabel: false,
-        tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
-          return (
-            <TabBarIcon name={'globe'} focused={focused} color={tintColor} />
-          );
-        },
-      },
-    },
 
-    AnimatedHomeTab: {
-      screen: AppHomeAnimatedScreen,
-      navigationOptions: {
-        title: 'Extra',
-        tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
-          return (
-            <TabBarIcon name={'pulse'} focused={focused} color={tintColor} />
-          );
+      LibraryTab: {
+        screen: LibraryStack,
+        navigationOptions: {
+          title: 'Library',
+          tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
+            return (
+              <TabBarIcon name={'list'} focused={focused} color={tintColor} />
+            );
+          },
         },
       },
-    },
-    AboutTab: {
-      screen: AboutScreen,
-      navigationOptions: {
-        title: 'About',
-        tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
-          return (
-            <TabBarIcon name={'book'} focused={focused} color={tintColor} />
-          );
+    //   SoundscapesTab: {
+    //     screen: SurveyDescScreen,
+    //     navigationOptions: {
+    //       title: 'Soundscapes',
+    //       showLabel: false,
+    //       tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
+    //         return (
+    //           <TabBarIcon name={'globe'} focused={focused} color={tintColor} />
+    //         );
+    //       },
+    //     },
+    //   },
+    //
+      AnimatedHomeTab: {
+        screen: AppHomeAnimatedScreen,
+        navigationOptions: {
+          title: 'Extra',
+          tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
+            return (
+              <TabBarIcon name={'pulse'} focused={focused} color={tintColor} />
+            );
+          },
         },
       },
-    },
+
+      AboutTab: {
+        screen: AboutScreen,
+        navigationOptions: {
+          title: 'About',
+          tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
+            return (
+              <TabBarIcon name={'book'} focused={focused} color={tintColor} />
+            );
+          },
+        },
+      },
   },
   {
     navigationOptions: {
@@ -154,7 +156,7 @@ const MainTabNavigator = createMaterialTopTabNavigator(
       activeTintColor: _colors.TAB_BAR_ACTIVE_COLOR,
       showIcon: true,
       showLabel: true,
-      // keyboardHidesTabBar: true,
+      keyboardHidesTabBar: true,
       // indicatorStyle: {
       //   backgroundColor:_colors.transparent,
       // },
@@ -163,101 +165,5 @@ const MainTabNavigator = createMaterialTopTabNavigator(
     swipeEnabled: true,
   }
 );
-
-// AudioPlayerScreen.navigationOptions = ({ navigation }) => ({
-//   title: 'player',
-//   headerStyle: { backgroundColor: '#f4511e' },
-//   headerTintColor: '#fff',
-//   headerTitleStyle: { fontWeight: 'bold' },
-//   tabBarLabel: 'player',
-//   tabBarVisible: true,
-//   tabBarIcon: ({ focused, horizontal, tintColor }) => {
-//     let iconPrefix = PLATFORM_OS === 'ios' ? 'ios' : 'md';
-//     let iconBaseName = NavIconNames.play;
-//     let iconName = `${iconPrefix}-${iconBaseName}`;
-//     return (
-//       <TabBarIcon
-//         name={iconName}
-//         size={_layout.TAB_BAR_ICON_SIZE}
-//         color={tintColor}
-//         focused={focused}
-//       />
-//     );
-//   },
-// });
-//
-// AppHomeScreen.navigationOptions = ({ navigation }) => ({
-//   tabBarIcon: ({ focused, horizontal, tintColor }) => {
-//     let iconName = `${NavIconNames.home}`;
-//     return (
-//       <TabBarIcon
-//         name={iconName}
-//         size={_layout.TAB_BAR_ICON_SIZE}
-//         color={tintColor}
-//         focused={focused}
-//       />
-//     );
-//   },
-//   tabBarLabel: 'Home',
-//   tabBarVisible: true,
-// });
-// AppHomeAnimatedScreen.navigationOptions = AppHomeScreen.navigationOptions;
-
-// LibraryStack.navigationOptions = ({ navigation }) => ({
-//   tabBarIcon: ({ focused, horizontal, tintColor }) => {
-//     let iconName = NavIconNames.pulse;
-//     return (
-//       <TabBarIcon
-//         style={_styles.tabbar_icon}
-//         name={iconName}
-//         size={_layout.TAB_BAR_ICON_SIZE}
-//         color={tintColor}
-//         focused={focused}
-//       />
-//     );
-//   },
-//   tabBarLabel: 'Library',
-//   tabBarVisible: true,
-//   title: 'Library',
-// });
-//
-// HttpUploadScreen.navigationOptions = ({ navigation }) => ({
-//   tabBarIcon: ({ focused, horizontal, tintColor }) => {
-//     let iconName = NavIconNames.map;
-//     return (
-//       <TabBarIcon
-//         style={_styles.tabbar_icon}
-//         name={iconName}
-//         size={_layout.TAB_BAR_ICON_SIZE}
-//         color={tintColor}
-//         focused={focused}
-//       />
-//     );
-//   },
-//   tabBarLabel: 'Library',
-//   tabBarVisible: true,
-//   title: 'Library',
-// });
-//
-// AppHomeAnimatedScreen.navigationOptions = ({ navigation }) => ({
-//   tabBarIcon: ({ focused, horizontal, tintColor }) => {
-//     let iconName = NavIconNames.globe;
-//     return (
-//       <TabBarIcon
-//         style={_styles.tabbar_icon}
-//         name={iconName}
-//         size={_layout.TAB_BAR_ICON_SIZE}
-//         color={tintColor}
-//         focused={focused}
-//       />
-//     );
-//   },
-//   tabBarLabel: 'globe',
-//   title: 'globe',
-//   showLabel: true,
-//   tabBarVisible: true,
-// });
-
-// HttpUploadScreen.navigationOptions = AppHomeAnimatedScreen.navigationOptions;
 
 export { MainTabNavigator };

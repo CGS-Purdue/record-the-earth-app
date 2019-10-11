@@ -35,49 +35,6 @@ const FormStyles = StyleSheet.create({
     alignItems: 'flex-start',
     flexDirection: 'row',
   },
-
-  // THREE LINE TEXT INPUT BOX
-  form_input_multiline_text_3: {
-    flex: 1,
-    width: '100%',
-    height:
-      ThemeLayout.SPACING_UNIT_2 +
-      ThemeLayout.SPACING_UNIT_2 +
-      ThemeLayout.TEXT_SIZE +
-      ThemeLayout.TEXT_SIZE +
-      ThemeLayout.TEXT_SIZE,
-    borderColor: ThemeColors.INPUT_BORDER,
-    backgroundColor: ThemeColors.INPUT_BG,
-    color: ThemeColors.BLU_200,
-    fontSize: ThemeLayout.TEXT_SIZE,
-    textAlignVertical: 'top',
-    lineHeight: ThemeLayout.LINE_HEIGHT_1,
-    marginLeft: ThemeLayout.SPACING_UNIT_1,
-    marginTop: ThemeLayout.SPACING_UNIT_2,
-    marginBottom: ThemeLayout.SPACING_UNIT_2,
-    marginRight: ThemeLayout.SPACING_UNIT_1,
-    paddingLeft: ThemeLayout.SPACING_UNIT_1,
-    paddingRight: ThemeLayout.SPACING_UNIT_2,
-    paddingTop: ThemeLayout.SPACING_UNIT_2,
-    paddingBottom: ThemeLayout.SPACING_UNIT_2,
-  },
-
-  // THREE LINE TEXT INPUT CONTAINER
-  // PROVIDES BORDER, BACKGROUND_COLOR, SIZE
-  form_textarea_input_container_3: {
-    flex: 1,
-    backgroundColor: ThemeColors.SHADE_LIGHTER_50,
-    width: ThemeLayout.PERCENT_100,
-    height:
-      ThemeLayout.SPACING_UNIT_2 +
-      ThemeLayout.SPACING_UNIT_2 +
-      ThemeLayout.TEXT_SIZE +
-      ThemeLayout.TEXT_SIZE +
-      ThemeLayout.TEXT_SIZE,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    flexDirection: 'row',
-  },
 });
 
 export { FormStyles };

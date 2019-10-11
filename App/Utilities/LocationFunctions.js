@@ -1,87 +1,65 @@
-import Constants from 'expo-constants';
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-
+import React from 'react';
+import { Platform } from 'react-native';
+import { AppConfig } from '../Config/Application';
+import { getKey, setKey } from './AsyncStorage';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
+const storageKey = AppConfig.StorageKey;
+
+const setLocationReference = async () => {
+  var RefLocation = '0,0';
+  let isLocationEnabled = await Location.hasServicesEnabledAsync();
+  if (!isLocationEnabled) {
+    return false;
+  } else {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      console.log('Permission [location] denied');
+      return false;
+    } else {
+      let location = await Location.getCurrentPositionAsync({});
+      setKey(`${storageKey}:LocationReference`, {
+        accuracy: location.coords.accuracy,
+        timestamp: location.timestamp,
+        LatLong: [location.coords.latitude, location.coords.longitude].join(
+          ','
+        ),
+      });
+    }
+  }
+};
+
+// Location:
+// .coords
+//    - latitude
+//    - longitude
+//    - altitude
+//    - accuracy
+//    - altitudeAccuracy
+//    - heading
+//    - speed
+// .timestamp
 const getLocationAsync = async () => {
+  let isLocationEnabled = await Location.hasServicesEnabledAsync();
+  if (isLocationEnabled) {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== 'granted') {
       console.log('Permission to access location was denied');
       return '0,0';
     }
-
     try {
-      console.log('Location', Location);
       const location = await Location.getCurrentPositionAsync({});
+      console.log('Location', location);
       return location;
     } catch (e) {
-        console.log('location error', e);
-        return '-1,-1';
+      console.log('location error', e);
+      return '-1,-1';
     }
+  } else {
+    console.log('location service is not enabled');
+    return false;
+  }
 };
 
-
-export default class LocationComponent extends Component {
-  state = {
-    location: null,
-    errorMessage: null,
-  };
-
-  componentWillMount() {
-    if (Platform.OS === 'android' && !Constants.isDevice) {
-      this.setState({
-        errorMessage:
-          'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
-      });
-    } else {
-      this._getLocationAsync();
-    }
-  }
-
-  _getLocationAsync = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== 'granted') {
-      this.setState({
-        errorMessage: 'Permission to access location was denied',
-      });
-    }
-
-    let location = await Location.getCurrentPositionAsync({});
-    this.setState({ location });
-  };
-
-  render() {
-    let text = 'Waiting..';
-    if (this.state.errorMessage) {
-      text = this.state.errorMessage;
-    } else if (this.state.location) {
-      text = JSON.stringify(this.state.location);
-    }
-
-    return (
-      <View style={styles.container}>
-        <Text style={styles.paragraph}>{text}</Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
-  },
-  paragraph: {
-    margin: 24,
-    fontSize: 18,
-    textAlign: 'center',
-  },
-});
-
-
-export { LocationComponent, getLocationAsync };
+export { getLocationAsync, setLocationReference };

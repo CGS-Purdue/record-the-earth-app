@@ -34,7 +34,7 @@ const ThemeStyles = Object.assign(
   TabBarStyles,
   TextClasses,
   UtilityStyles,
-  ViewStyles,
+  ViewStyles
 );
 
 export { ThemeStyles };

@@ -13,14 +13,24 @@ const TouchButtonHighlightStyles = {
   flex: 1,
 };
 
+
+const AwesomeButtonStyles = {
+  paddingTop: 0,
+  paddingBottom: 3,
+  // flex: 1,
+  // fontSize: 12,
+  marginTop: 0,
+  marginBottom: 0,
+};
+
 const ButtonStyles = {
   button_touchbutton: TouchButtonHighlightStyles,
+  button_awesome: AwesomeButtonStyles,
   button_default: {
     flex: 1,
     borderColor: ThemeColors.INPUT_BORDER,
     // backgroundColor: ThemeColors.INPUT_BG,
     color: ThemeColors.INPUT_TEXTCOLOR,
-    fontSize: ThemeLayout.TEXT_SIZE_3 * 1.2,
     width: '100%',
     height: '100%',
     paddingTop: ThemeLayout.SPACING_UNIT_3,

@@ -8,11 +8,22 @@ BASE_DIR="$(npm prefix)"
 ABD_PATH="${ANDROID_HOME}/platform-tools"
 DEVICE_STATE="$(adb get-state)"
 
+# AS ONE COMMAND
+# [[ -d "${ANDROID_PROJECT_DIR}/utilities/scrcpy" ]] &&  ${ANDROID_PROJECT_DIR}/utilities/scrcpy/run ${ANDROID_PROJECT_DIR}/utilities/scrcpy/x
+
+ANDROID_PROJECT_DIR="${ANDROID_HOME}/../utilities"
 
 [[ "${DEVICE_STATE}" == "device" ]] \
     && echo "ADB_DEVICE_STATE=${DEVICE_STATE}"
 
+echo "Checking directory exists  ${ANDROID_PROJECT_DIR}/scrcpy"
 
-[[ -d "${ANDROID_PROJECT_DIR}/utilities/scrcpy" ]] \
-    && cd ${ANDROID_PROJECT_DIR}/utilities/scrcpy \
-    && ${ANDROID_PROJECT_DIR}/utilities/scrcpy/run ${ANDROID_PROJECT_DIR}/utilities/scrcpy/x
+[[ ! -d "${ANDROID_PROJECT_DIR}/scrcpy" ]] && exit 1
+
+echo "Changing directories  ${ANDROID_PROJECT_DIR}/scrcpy"
+
+cd ${ANDROID_PROJECT_DIR}/scrcpy
+
+echo "Running command"
+
+./run x

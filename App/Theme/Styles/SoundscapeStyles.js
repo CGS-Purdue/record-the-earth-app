@@ -4,7 +4,6 @@ import { ThemeLayout } from '../Layout';
 import { UtilityStyles } from './UtilityStyles';
 import { br, m, p } from './LayoutStyles';
 
-
 const SoundscapeStyles = {
   soundscape_inner_wrap: {
     display: 'flex',
@@ -71,10 +70,5 @@ const SoundscapeStyles = {
     flex: 1,
   },
 };
-
-
-
-
-
 
 export { SoundscapeStyles };

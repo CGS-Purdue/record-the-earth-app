@@ -10,6 +10,14 @@ import { Theme } from '../../Theme';
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
 
+
+const recIntroTextStyle = Object.assign({},
+    _styles.BtnTxt, {
+    color: 'rgba(225,225,225,.6)',
+    fontSize: 18
+  }
+)
+
 const LogoStyles = {
   flex: 1,
   width: '70%',
@@ -17,12 +25,40 @@ const LogoStyles = {
   resizeMode: 'contain',
 };
 
+const GradientFillContainerStyle = {
+  flex: 1,
+  position: 'absolute',
+  justifyContent: 'center',
+  alignItems: 'center',
+   width:'100%',
+  height:'100%',
+};
+const FadeInViewContainerStyles = {
+  width: '100%',
+  flex: 2,
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
+const GradLogoSvgStyle = {
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: 150,
+  height: 150,
+  flex: 0,
+}
+
 class AppHomeAnimatedScreen extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isloaded: false,
+    }
+    this._isMounted = false;
   }
 
   componentDidMount() {
+    this._isMounted = true;
     console.log('[SoundscapeHomeScreen] did mount', this.state);
   }
 
@@ -33,53 +69,19 @@ class AppHomeAnimatedScreen extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <ImageBackground
-        style={_styles.bgImg}
-        source={_assets.images.img_background}
-      >
-        <View
-          style={{
-            flex: 1,
-            position: 'absolute',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100%',
-            height: '100%',
-          }}
-        >
+      <ImageBackground style={_styles.bgImg} source={_assets.images.img_background}>
+        <View style={GradientFillContainerStyle}>
           <BlackFade />
         </View>
         <RootView>
           <PadView padding={(2, 3)}>
             <CenterColView>
-              <FadeInView
-                style={{
-                  width: '100%',
-                  flex: 2,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
+              <FadeInView style={FadeInViewContainerStyles}>
                 <Image source={_assets.logos.logo_large} style={LogoStyles} />
               </FadeInView>
-              <View
-                style={{
-                  width: '100%',
-                  flex: 3,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
+              <View style={{ width: '100%', flex: 3, alignItems: 'center', justifyContent: 'center'}}>
                 <View style={_styles.BtnContainer}>
-                  <Text
-                    style={[
-                      _styles.BtnTxt,
-                      {
-                        color: 'rgba(225,225,225,.6)',
-                        fontSize: 18,
-                      },
-                    ]}
-                  >
+                  <Text style={recIntroTextStyle}>
                     {'(Press the Rec button to start)'}
                   </Text>
                   <TouchableOpacity
@@ -89,17 +91,9 @@ class AppHomeAnimatedScreen extends Component {
                         routeName: 'Survey',
                         params: { name: 'Survey' },
                       })
-                    }
-                  >
-                    <View
-                      style={{
-                        flex: 0,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        width: 150,
-                        height: 150,
-                      }}
-                    >
+                    }>
+
+                    <View style={GradLogoSvgStyle}>
                       <SvgGradLogo />
                     </View>
                   </TouchableOpacity>

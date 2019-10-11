@@ -21,7 +21,6 @@ BASE_DIR="$(npm prefix)"
 ABD_PATH="${ANDROID_HOME}/platform-tools"
 
 # 025abd11727717ac       device usb:3-3 product:bullhead model:Nexus_5X device:bullhead transport_id:11
-ANDROID_SERIAL="025abd11727717ac"
 ADB_DEVICE_IP="192.168.1.53"
 ADB_DEVICE_PORT="5555"
 
@@ -29,9 +28,8 @@ _set_device_tcpip_port () {
   ${ABD_PATH}/adb tcpip ${ADB_DEVICE_PORT}
 }
 
-
 _connect_device_tcpip () {
-  ${ABD_PATH}/adb connect ${ADB_DEVICE_IP}
+  ${ABD_PATH}/adb connect ${ADB_DEVICE_IP}:${ADB_DEVICE_PORT}
 }
 
 
@@ -46,4 +44,5 @@ _connect_device_tcpip
 # else
 #${ABD_PATH}/adb kill-server
 #${ABD_PATH}/adb start-server
-${ABD_PATH}/adb reconnect
+
+# ${ABD_PATH}/adb reconnect

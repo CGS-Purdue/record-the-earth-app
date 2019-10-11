@@ -203,11 +203,21 @@ const ThemeLayout = {
   LINE_HEIGHT_3: BASE_TEXT_SIZE * TYPOGRAPHIC_SCALE.scale_2,
   LINE_HEIGHT_4: BASE_TEXT_SIZE * TYPOGRAPHIC_SCALE.scale_3,
   LINE_HEIGHT_5: BASE_TEXT_SIZE * TYPOGRAPHIC_SCALE.scale_4,
-  line_height_scale_100: (_size) => { return _size * 1.0; },
-  line_height_scale_125: (_size) => { return _size * 1.25; },
-  line_height_scale_150: (_size) => { return _size * 1.5; },
-  line_height_scale_175: (_size) => { return _size * 1.75; },
-  line_height_scale_200: (_size) => { return _size * 2.0; },
+  line_height_scale_100: (_size) => {
+    return _size * 1.0;
+  },
+  line_height_scale_125: (_size) => {
+    return _size * 1.25;
+  },
+  line_height_scale_150: (_size) => {
+    return _size * 1.5;
+  },
+  line_height_scale_175: (_size) => {
+    return _size * 1.75;
+  },
+  line_height_scale_200: (_size) => {
+    return _size * 2.0;
+  },
   SPACING_UNIT_1: 1 * (BASE_TEXT_SIZE / 3),
   SPACING_UNIT_2: 2 * (BASE_TEXT_SIZE / 3),
   SPACING_UNIT_3: 3 * (BASE_TEXT_SIZE / 3),

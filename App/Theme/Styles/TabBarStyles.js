@@ -16,7 +16,6 @@ const TAB_BAR_TEXT_SIZE = (TAB_BAR_SIZE * 1) / 5;
 const TAB_BAR_ICON_SIZE = (TAB_BAR_SIZE * 2) / 5;
 const TAB_BAR_PADDING = (TAB_BAR_SIZE * 1) / 5;
 
-
 // TabBarBottom - Main TabNav Component
 const TabBarBottom = {
   marginTop: 1,
@@ -31,10 +30,9 @@ const TabBarBottom = {
   alignItems: 'center',
 };
 
-
 // TabBarIcon Applied to TabBarIcon element
 const TabBarIcon = {
-  paddingTop: TAB_BAR_PADDING / 3 ,
+  paddingTop: TAB_BAR_PADDING / 3,
   fontSize: TAB_BAR_ICON_SIZE,
   flex: 1,
   height: TAB_BAR_ICON_SIZE,
@@ -49,7 +47,7 @@ const TabBarLabel = {
   width: '100%',
   // fontSize: TAB_BAR_TEXT_SIZE,
   paddingTop: TAB_BAR_PADDING / 3,
-  paddingBottom: TAB_BAR_PADDING  / 2 * 1.2,
+  paddingBottom: (TAB_BAR_PADDING / 2) * 1.2,
 };
 
 const TabBarTab = {
@@ -91,7 +89,7 @@ const MaterialTabBarLabel = {
   width: '100%',
   textAlign: 'center',
   padding: 0,
-  margin:0,
+  margin: 0,
   fontSize: TAB_BAR_TEXT_SIZE,
 };
 

@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
-import { Button, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { PadView, Section, ImgBgFill, CenterView, RootView } from '../../Components/Views';
 import { HeadingText } from '../../Components/Text/HeadingText';
-import { ThemeTextInput } from '../../Components/Forms/TextInput';
-import { BlackFade } from '../../Components/Effects/LinearGradient';
+import { MultilineTextInput } from '../../Components/Forms/MultilineTextInput';
+import { BlackFade, Scrim, MirageGrad } from '../../Components/Effects/LinearGradient';
+import { AwesomeButton, AwesomeBlueButton, AwesomeButtonBojack, AwesomeButtonBruce  } from '../../Components/Button/AwesomeButton';
 import { Theme } from '../../Theme';
 
 const _colors = Theme.Colors;
 const _styles = Theme.Styles;
 const _assets = Theme.Assets;
-
+const _layout = Theme.Layout;
 
 class SurveyDescScreen extends Component {
   constructor(props) {
     super(props);
-
-    const surveyIncoming = this.props.navigation.state.params.soundscape_data;
-
     this.state = {
-      soundscape_data: surveyIncoming,
+      soundscape_data: {},
       surveyData: '',
     };
     this.surveyPosition = 1;
@@ -26,35 +24,29 @@ class SurveyDescScreen extends Component {
     this.navigateForward = this.navigateForward.bind(this);
   }
 
-
-
   componentDidMount() {
-    this.getIncomingSurveyData();
-  }
-
-  getIncomingSurveyData() {
-    let params = this.getNavigationParams();
-    this.incoming_data = params;
-    if (params.soundscape_data) {
-      let soundscape_data = params.soundscape_data;
-      return this.soundscape_data;
-    }
-    return params;
+    this.setIncomingSurveyData();
   }
 
   getNavigationParams() {
     return this.props.navigation.state.params || {};
   }
 
+  setIncomingSurveyData() {
+    let params = this.getNavigationParams();
+    this.incoming_data = params;
+    if (params.soundscape_data) {
+      this.soundscape_data = params.soundscape_data;
+    }
+  }
+
   updateSurveyData(data){
-    console.log('update updateSurveyData', this.state);
     this.setState({ surveyData: data });
   }
 
   getSurveyData = () => {
     let surveyData = this.state.surveyData;
     let surveyKey = this.surveyKey;
-    console.log( 'getSurveyData', surveyData);
     return {
       key: surveyKey,
       data: surveyData,
@@ -62,25 +54,19 @@ class SurveyDescScreen extends Component {
   };
 
   updateSoundscapeData = (key, data) => {
-    let current = this.state.soundscape_data;
+    let current = this.soundscape_data;
     let surveyData = this.getSurveyData();
-    let update =  { [surveyData.key]: surveyData.data };
-    console.log( 'updateSurveyData getSurveyData', surveyData, update  );
+    let update = { [surveyData.key]: surveyData.data };
     let soundscapeData = Object.assign({}, current, update);
-    console.log( 'updateSurveyData soundscapeData', soundscapeData  );
     this.setState({ soundscape_data: soundscapeData });
     return soundscapeData;
   };
 
   navigateForward() {
-    console.log( 'navigateForward', this  );
     let data = this.updateSoundscapeData();
     this.props.navigation.navigate({
-      // key: 'Soundscape',
       routeName: 'SoundscapeSurveyBio',
-      params: {
-        soundscape_data: data,
-      },
+      params: { soundscape_data: data },
     });
   }
 
@@ -89,6 +75,7 @@ class SurveyDescScreen extends Component {
     return (
       <ImgBgFill source={_assets.images.img_background}>
         <RootView>
+          <BlackFade />
           <PadView padding={[2, 3]}>
             <CenterView>
               <Section weight={1} expand={true} shrink={true}>
@@ -104,32 +91,87 @@ class SurveyDescScreen extends Component {
                 align={'stretch'}
               >
                 <View style={_styles.survey_desc_textinput_container}>
-                  <ThemeTextInput
+                  <MultilineTextInput
                     label={'Description'}
                     style={_styles.survey_desc_textinput}
                     value={this.state.surveyData}
                     onChangeText={text => this.updateSurveyData(text)}
                     mode={'outlined'}
-                    placeholder={'Descript the sound you just recorded'}
+                    placeholder={'Describe the sound you just recorded'}
                     multiline={true}
+                    ExtraContent={<MirageGrad/>}
                     numberOfLines={3}
                   />
                 </View>
               </Section>
+              <Section justify={'space-around'} align={'stretch'} weight={4}>
 
-              <Section
-                justify={'flex-start'}
-                shrink={true}
-                align={'stretch'}
-                weight={1}
-              >
-                <Button
-                  title={'Continue'}
-                  style={_styles.button_default}
-                  color={_colors.PRIMARY}
-                  accessibilityLabel={'Go to next'}
-                  onPress={this.navigateForward}
-                />
+
+                  <AwesomeBlueButton
+                    activeOpacity={0.75}
+                    backgroundActive="rgba(0,0,0,0)"
+                    backgroundColor={_colors.BLU_200}
+                    backgroundDarker={_colors.BLU_400}
+                    borderRadius={1}
+                    borderColor={_colors.GRA_100}
+                    ExtraContent={<Scrim/>}
+                    raiseLevel={0}
+                    size="small"
+                    progress={true}
+                    progressLoadingTime={360}
+                    textSize={12}
+                    stretch={true}
+                    style={_styles.button_awesome}
+                    textColor={_colors.SHADE_LIGHTER_80}
+                    type="anchor"
+                    width={null}
+                   >
+                <Text style={{color: _colors.SHADE_LIGHTER_80}}>{'Continue'}</Text>
+                  </AwesomeBlueButton>
+
+
+                  <AwesomeButtonBruce
+                    size="small"
+                    progress={true}
+                    progressLoadingTime={360}
+                    textSize={12}
+                    type="primary"
+                    borderRadius={1}
+                    backgroundColor={'springgreen'}
+                    backgroundDarker={'teal'}
+                    backgroundActive="rgba(0,0,0,0)"
+                    activeOpacity={0.75}
+                    width={null}
+                    textColor={_colors.SHADE_LIGHTER_80}
+                    style={_styles.button_awesome}
+                    raiseLevel={1}
+                    ExtraContent={<MirageGrad/>}
+                    stretch={true}
+                   >
+                    {'Continue'}
+                  </AwesomeButtonBruce>
+
+
+                  <AwesomeButtonBojack
+                    size="small"
+                    progress={true}
+                    progressLoadingTime={360}
+                    textSize={12}
+                    type="secondary"
+                    backgroundColor={_colors.RED_200}
+                    backgroundDarker={_colors.RED_400}
+                    borderRadius={1}
+                    backgroundActive="rgba(0,0,0,0)"
+                    activeOpacity={0.75}
+                    width={null}
+                    textColor={_colors.SHADE_LIGHTER_80}
+                    stretch={true}
+                    raiseLevel={1}
+                    ExtraContent={<MirageGrad/>}
+                    style={_styles.button_awesome}
+                   >
+                    {'Continue'}
+                  </AwesomeButtonBojack>
               </Section>
             </CenterView>
           </PadView>
@@ -139,6 +181,20 @@ class SurveyDescScreen extends Component {
   }
 }
 
-SurveyDescScreen.DisplayName = 'Survey Submit Screen';
-
 export { SurveyDescScreen };
+
+// <AwesomeButtonRick
+//   size="small"
+//   type="primaryFlat"
+//   backgroundActive="rgba(0,0,0,0)"
+//   activeOpacity={0.75}
+//   width={null}
+//   stretch={true}
+//  >
+// <Button
+//   title={'Continue'}
+//   style={_styles.button_awesome}
+//   color={_colors.PRIMARY}
+//   accessibilityLabel={'Go to next'}
+//   onPress={this.navigateForward}
+// />

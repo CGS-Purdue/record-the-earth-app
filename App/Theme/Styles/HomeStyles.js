@@ -23,7 +23,82 @@ const BtnTxt = Object.assign(textalign.center, {
   lineHeight: ThemeLayout.line_height_scale_150(ThemeLayout.TEXT_SIZE_2),
 });
 
+const LogoStyles = {
+  flex: 1,
+  width: 300,
+  height: '20%',
+  top: '10%',
+  position: 'absolute',
+  resizeMode: 'contain',
+};
+
+const AppRootStyles = {
+  app_inner_wrap: {
+    display: 'flex',
+    width: '100%',
+    height: '100%',
+    flex: 1,
+  },
+  app_bg: {
+    flex: 1,
+    display: 'flex',
+    flexGrow: 1,
+    flexShrink: 0,
+    flexBasis: '100%',
+    height: '100%',
+    width: '100%',
+    margin: 0,
+    padding: 0,
+    position: 'relative',
+    backgroundColor: ThemeColors.TRANSPARENT,
+  },
+  app_safearearoot: {
+    display: 'flex',
+    flex: 1,
+  },
+  app_rootview: {
+    display: 'flex',
+    flexGrow: 1,
+    flexShrink: 0,
+    flexBasis: '100%',
+    height: '100%',
+    width: '100%',
+    margin: 0,
+    padding: 0,
+    position: 'relative',
+    backgroundColor: ThemeColors.APP_CONTAINER_BGCOLOR, //'rgba(29,36,38,1)',
+  },
+  app_bgimg: {
+    width: '100%',
+    height: '100%',
+    left: 0,
+    position: 'absolute',
+    display: 'flex',
+    flex: 1,
+  },
+  app_bgimg_wrap: {
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+    left: 0,
+    top: 0,
+    flexBasis: '100%',
+    backgroundColor: ThemeColors.TRANSPARENT,
+    flex: 1,
+  },
+  app_bgimgbg_fill: {
+    backgroundColor: 'rgba(299,0,30,.4)',
+    position: 'absolute',
+    height: '100%',
+    left: 0,
+    top: 0,
+    width: '100%',
+    flex: 1,
+  },
+};
+
 const HomeGroupStyles = Object.assign(
+  AppRootStyles,
   { BtnContainer },
   { bgImg },
   { BtnImg },
@@ -33,13 +108,6 @@ const HomeGroupStyles = Object.assign(
 
 const HomeStyles = StyleSheet.create(HomeGroupStyles);
 
-const LogoStyles = {
-  flex: 1,
-  width: 300,
-  height: '20%',
-  top: '10%',
-  position: 'absolute',
-  resizeMode: 'contain',
-};
+
 
 export { HomeStyles };

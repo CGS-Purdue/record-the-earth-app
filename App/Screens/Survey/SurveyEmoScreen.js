@@ -1,4 +1,3 @@
-import { BlackFade } from '../../Components/Effects/LinearGradient';
 import { Button, View, ImageBackground } from 'react-native';
 import { CenterView, Section, PadView, RootView } from '../../Components/Views';
 import { CheckButton } from '../../Components/Button/CheckButton';
@@ -6,6 +5,8 @@ import { HeadingText } from '../../Components/Text/HeadingText';
 import { filterFalse } from '../../Utilities/Functions';
 import { Theme } from '../../Theme';
 import React, { Component } from 'react';
+import { BlackFade, Scrim, MirageGrad } from '../../Components/Effects/LinearGradient';
+import { AwesomeButton, AwesomeBlueButton, AwesomeButtonBojack, AwesomeButtonCartman, AwesomeButtonBruce  } from '../../Components/Button/AwesomeButton';
 
 const _colors = Theme.Colors;
 const _assets = Theme.Assets;
@@ -63,9 +64,7 @@ class SurveyEmoScreen extends Component {
       stress: this.state.stress,
       curious: this.state.curious,
     });
-    if (!_surveyData){
-      _surveyData = 'none';
-    }
+    if (!_surveyData){ _surveyData = 'none'; }
     this.setState({ surveyData: _surveyData });
   }
 
@@ -111,16 +110,7 @@ class SurveyEmoScreen extends Component {
         style={_styles.bgImg}
         source={_assets.images.img_bg_lilyflower}
       >
-        <View
-          style={{
-            flex: 1,
-            position: 'absolute',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100%',
-            height: '100%',
-          }}
-        >
+        <View style={{ flex: 1, position: 'absolute', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%', }} >
           <BlackFade />
         </View>
         <RootView>
@@ -158,9 +148,7 @@ class SurveyEmoScreen extends Component {
                   onchecked={this._setSuveryItemState}
                   text={'Stress me out'}
                 />
-                <View
-                  style={{ height: 10, backgroundColor: _colors.TRANSPARENT }}
-                />
+                <View style={{ height: 10, backgroundColor: _colors.TRANSPARENT }} />
                 <Button
                   title={'Continue '}
                   style={_styles.button_default}
@@ -168,6 +156,32 @@ class SurveyEmoScreen extends Component {
                   accessibilityLabel="Go to next"
                   onPress={this.onTaskCompleted}
                 />
+
+                  <AwesomeButtonCartman
+                    size="small"
+                    progress={true}
+                    progressLoadingTime={360}
+                    textSize={12}
+                    type="anchor"
+                    borderColor={_colors.GRA_200}
+                    borderTopRadius={0}
+                    borderTopWidth={0}
+                    borderBottomColor={_colors.GRA_500}
+                    borderBottomRadius={0}
+                    borderBottomWidth={5}
+                    backgroundColor={'green'}
+                    backgroundDarker={'darkslategrey'}
+                    backgroundActive="rgba(0,0,0,0)"
+                    activeOpacity={0.75}
+                    width={null}
+                    textColor={'#ffffff'}
+                    raiseLevel={1}
+                    onPress={this.onTaskCompleted}
+                    ExtraContent={<Scrim/>}
+                    stretch={true}
+                   >
+                    {'Continue'}
+                  </AwesomeButtonCartman>
               </Section>
             </CenterView>
           </PadView>

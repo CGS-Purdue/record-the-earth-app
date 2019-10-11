@@ -7,7 +7,6 @@ import { DebugStyles, DebugStyleSettings, addDebugStyles } from './DebugStyles';
 /// # [NAME] StyleSheet
 /// ---------------------------------------------------------------------------
 
-
 const _c = ThemeColors;
 const _l = ThemeLayout;
 
@@ -34,9 +33,7 @@ const FontType = {
   emphasis: 'opensans-light',
 };
 // leave off @2x/@3x
-const Images = {
-
-};
+const Images = {};
 
 const FontSize = {
   h1: 38,
@@ -108,7 +105,6 @@ const metrics = {
     large: 45,
     xl: 50,
   },
-
 
   images: {
     logo: 200,
@@ -184,46 +180,45 @@ const ApplicationStyles = {
   },
 };
 
-
 const PresentationnStyles = StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
     marginBottom: 36,
-    paddingTop: Metrics.section
+    paddingTop: Metrics.section,
   },
   logo: {
     height: Metrics.images.logo,
     width: Metrics.images.logo,
     resizeMode: 'contain',
-    marginTop: Metrics.doubleBaseMargin
+    marginTop: Metrics.doubleBaseMargin,
   },
   buttonsContainer: {
     flexDirection: 'row',
-    flex: 1
+    flex: 1,
   },
   centered: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   componentButton: {
     borderColor: Colors.border,
     borderTopWidth: 1,
     borderRightWidth: 1,
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   apiButton: {
     borderColor: Colors.border,
     borderRightWidth: 1,
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   usageButton: {
     borderColor: Colors.border,
     borderTopWidth: 1,
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   deviceButton: {
     borderColor: Colors.border,
     borderRightWidth: 1,
-    borderTopWidth: 1
+    borderTopWidth: 1,
   },
   sectionText: {
     textAlign: 'center',
@@ -232,7 +227,7 @@ const PresentationnStyles = StyleSheet.create({
     marginHorizontal: Metrics.baseMargin,
     lineHeight: 30,
     marginVertical: Metrics.doubleBaseMargin,
-    color: Colors.text
+    color: Colors.text,
   },
   banner: {
     position: 'absolute',
@@ -243,18 +238,17 @@ const PresentationnStyles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: 36
+    height: 36,
   },
   bannerLabel: {
     ...Fonts.style.h5,
     fontSize: 12,
-    color: Colors.snow
-  }
-})
-
+    color: Colors.snow,
+  },
+});
 
 const AboutStyles = StyleSheet.create({
-    ...ApplicationStyles.screen,
+  ...ApplicationStyles.screen,
   sectionText: {
     ...Fonts.base,
     color: Colors.text,
@@ -282,9 +276,8 @@ const AboutStyles = StyleSheet.create({
     paddingTop: 30,
     paddingHorizontal: 5,
     zIndex: 10,
-  }
+  },
 });
-
 
 const ButtonBoxStyles = StyleSheet.create({
   buttonbox_container: {
@@ -292,28 +285,26 @@ const ButtonBoxStyles = StyleSheet.create({
     aspectRatio: 0.9,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors.eggplant
+    backgroundColor: Colors.eggplant,
   },
   buttonbox_image: {
     width: Metrics.icons.xl,
     height: Metrics.icons.xl,
-    margin: Metrics.baseMargin
+    margin: Metrics.baseMargin,
   },
   buttonbox_label: {
     ...Fonts.style.h2,
     fontSize: 14,
-    color: Colors.text
-  }
-})
+    color: Colors.text,
+  },
+});
 
 const InfoPageStyles = Object.assign(
   Object.create(null),
-  {AboutStyles},
-  {PresentationnStyles},
-  ButtonBoxStyles,
+  { AboutStyles },
+  { PresentationnStyles },
+  ButtonBoxStyles
 );
-
-
 
 /// # OPTIONAL - ADD DEBUG STYLES TO YOUR COMPONENTS BEFORE EXPORTING
 /// ---------------------------------------------------------------------------
@@ -322,4 +313,4 @@ const InfoPageStyles = Object.assign(
 /// }
 ///
 
-export { InfoPageStyles }
+export { InfoPageStyles };

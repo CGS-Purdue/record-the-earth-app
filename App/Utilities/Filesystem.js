@@ -15,30 +15,30 @@ import { StorageConfig } from '../Config/Storage';
 // FileSystem.getInfoAsync
 
 const APP_STORAGE = StorageConfig.APP_STORAGE;
+// const APP_TEMP = StorageConfig.APP_TEMP;
+const PENDING_SOUNDFILES = StorageConfig.STORAGE_PENDING_SOUNDFILES;
+const UPLOADED_SOUNDFILES = StorageConfig.STORAGE_UPLOADED_SOUNDFILES;
 const MEDIA_PATH = StorageConfig.STORAGE_MEDIA_PATH;
 const DATABASE_PATH = StorageConfig.STORAGE_DATABASE_PATH;
 const SOUNDFILE_PATH = StorageConfig.STORAGE_SOUNDFILE_PATH;
-const PENDING_SOUNDFILES = StorageConfig.STORAGE_PENDING_SOUNDFILES;
-const UPLOADED_SOUNDFILES = StorageConfig.STORAGE_UPLOADED_SOUNDFILES;
+
 const DIR_DATA = StorageConfig.DIR_DATA;
 const DIR_DB = StorageConfig.DIR_DB;
-const DIR_MEDIA = StorageConfig.DIR_MEDIA;
 const DIR_PENDING = StorageConfig.DIR_PENDING;
 const DIR_SOUND = StorageConfig.DIR_SOUND;
 const DIR_UPLOADED = StorageConfig.DIR_UPLOADED;
 
-
-
 async function getAudioFileFromTemp(file_name) {
-    const target_uri = [PENDING_SOUNDFILES, file_name].join('/');
-    try {
-      const file_info = await FileSystem.getInfoAsync(target_uri, { md5: true })
-          .then(({ uri }) => {
-             console.log(uri);
-            return uri;
-          });
+  const target_uri = [PENDING_SOUNDFILES, file_name].join('/');
+  try {
+    const file_info = await FileSystem.getInfoAsync(target_uri, {
+      md5: true,
+    }).then(({ uri }) => {
+      console.log(uri);
+      return uri;
+    });
 
-      return file_info;
+    return file_info;
     // await FileSystem.moveAsync({
     //   from: file_path,
     //   to: storage_path
@@ -53,6 +53,7 @@ async function getAudioFileFromTemp(file_name) {
 }
 
 const saveTempAudioFile = async (file_path) => {
+  console.log('[saveTempAudioFile]');
   const file_name = file_path.split('/').slice(-1);
   const temp_path = [PENDING_SOUNDFILES, file_name].join('/');
   try {
@@ -60,6 +61,8 @@ const saveTempAudioFile = async (file_path) => {
     //   from: file_path,
     //   to: storage_path
     // })
+    console.log('[saveTempAudioFile] from', file_path);
+    console.log('[saveTempAudioFile] to', temp_path);
     const result = await FileSystem.copyAsync({
       from: file_path,
       to: temp_path,
@@ -71,7 +74,6 @@ const saveTempAudioFile = async (file_path) => {
   }
 };
 
-
 const updatePendingtToUploaded = async (filename) => {
   const src_path = [PENDING_SOUNDFILES, filename].join('/');
   const dest_path = [UPLOADED_SOUNDFILES, filename].join('/');
@@ -81,7 +83,7 @@ const updatePendingtToUploaded = async (filename) => {
       from: src_path,
       to: dest_path,
     });
-    console.log('[updatePendingtToUploaded]',result);
+    console.log('[updatePendingtToUploaded]', result);
     // await FileSystem.copyAsync({ from: src_path, to: dest_path, });
     return result;
   } catch (error) {
@@ -89,7 +91,6 @@ const updatePendingtToUploaded = async (filename) => {
     return false;
   }
 };
-
 
 const getFileInfo = async (fileUri) => {
   try {
@@ -102,159 +103,205 @@ const getFileInfo = async (fileUri) => {
   }
 };
 
-
 const asyncGetFileFromTemp = async (name) => {
-    let fileInfo = {};
-    try {
-      fileInfo = await getAudioFileFromTemp(name)
+  let fileInfo = {};
+  try {
+    fileInfo = await getAudioFileFromTemp(name)
       .then((response) => {
         return response.uri;
       })
       .catch((error) => {
         console.error(error);
       });
-    } catch (error) {
-      console.error(error);
-    }
-    return fileInfo;
+  } catch (error) {
+    console.error(error);
+  }
+  return fileInfo;
 };
-
 
 const inspectSoundfile = async (fileUri) => {
   console.log('Inspecting Sound File', fileUri);
   await FileSystem.readAsStringAsync(fileUri, {
-      // encoding: FileSystem.EncodingType.Base64,
+    // encoding: FileSystem.EncodingType.Base64,
   })
-  .then((filedata) => {
-    try {
-      console.log(filedata.trim().slice(0,1000));
-      console.log('File length:', filedata.length);
-      console.log('File uri: ', fileUri);
-
-    } catch (e) {console.log('error', e);}
-  })
-  .catch((er) => {console.log(er);})
-  .done(() => {
-    console.log('file data received');
-  });
+    .then((filedata) => {
+      try {
+        console.log(filedata.trim().slice(0, 1000));
+        console.log('File length:', filedata.length);
+        console.log('File uri: ', fileUri);
+      } catch (e) {
+        console.log('error', e);
+      }
+    })
+    .catch((er) => {
+      console.log(er);
+    })
+    .done(() => {
+      console.log('file data received');
+    });
 };
 
-
 async function saveAudioRecordingFile(file_uri) {
-  const storage_path = [APP_STORAGE, DIR_MEDIA].join('');
   const file_name = file_uri.split('/').slice(-1);
-  const new_uri = [storage_path, file_name].join('/');
-  // console.log("trying save audio file", file_uri);
-  // console.log("\n\ntolocation\t", new_uri);
-
+  const new_uri = [PENDING_SOUNDFILES, file_name].join('/');
   try {
-    // await FileSystem.moveAsync({
-    //   from: file_uri,
-    //   to: storage_path
-    // })
-    await FileSystem.copyAsync({
-      from: file_uri,
-      to: new_uri,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-
-  let file_info = await FileSystem.getInfoAsync(new_uri, { md5: true });
-}
-
-
-async function discardAudioRecordingFile(_file) {
-  const storage_path = [APP_STORAGE, DIR_MEDIA].join('');
-  const file_name = _file.split('/').slice(-1);
-  try {
-    await FileSystem.deleteAsync(_file);
+    // await FileSystem.moveAsync({ from: file_uri, to: storage_path })
+    let result = await FileSystem.copyAsync({ from: file_uri, to: new_uri });
+    console.log('copying audio to pending files', result);
+    return result;
   } catch (error) {
     console.log(error);
   }
 }
 
-
-async function createAppStorageDirectory(dirName) {
-  let result = await FileSystem.makeDirectoryAsync([APP_STORAGE, dirName].join(''));
-  return result;
-}
-
-
-async function existOrCreateAppDirectory(dirName, options) {
-  let status_check = false;
-
+async function discardUploadedSoundfile(filename) {
+  const filepath = [UPLOADED_SOUNDFILES, filename].join('');
   try {
-    status_check = await FileSystem.getInfoAsync([APP_STORAGE, dirName].join(''))
-     .then((result) => {
-        if (!result.exists) {
-          console.log(dirName + ' does not exist, creating folder...');
-          return createAppStorageDirectory(dirName);
-        } else {
-          return true;
-        }
-      }).catch((err) => { console.log(err);
-      }).done(()=>{
-        if (options.final){
-          return false;
-        }
-
-        existOrCreateAppDirectory(dirName, { final: true });
-      });
-
-  } catch (e) {
-    console.log(e);
-    return false;
-  } finally {
-    console.log(status_check);
-    return true;
+    let result = await FileSystem.deleteAsync(filepath);
+    return result;
+  } catch (error) {
+    console.log(error);
   }
 }
 
+async function discardPendingSoundfile(filename) {
+  const filepath = [PENDING_SOUNDFILES, filename].join('');
+  try {
+    let result = await FileSystem.deleteAsync(filepath);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function discardAudioRecording(filepath) {
+  try {
+    let result = await FileSystem.deleteAsync(filepath);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 async function getAppStorageContent(path) {
   try {
-    await FileSystem.readDirectoryAsync([APP_STORAGE, path].join('')).then(
-      (result) => {
-        if (!result) {
-          console.log(`no content found at '${path}'`);
-        }
-        console.log(`Contents at '${path}':`);
-        console.log(result);
-      });
+    let contents = await FileSystem.readDirectoryAsync(
+      [APP_STORAGE, path].join('')
+    );
+    if (!contents) {
+      console.log(`no content found at '${path}'`);
+      return false;
+    } else {
+      console.log(`Contents at '${path}':`);
+      console.log(contents);
+      return contents;
+    }
   } catch (error) {
     console.log(error);
+  }
+}
+
+async function setupFirstLoadAppStorageDirectories() {
+  let result0 = await existOrCreateAppDirectory(DIR_SOUND);
+  let result1 = await existOrCreateAppDirectory(DIR_DB);
+  let result2 = await existOrCreateAppDirectory(
+    [DIR_SOUND, DIR_PENDING].join('/')
+  );
+  let result3 = await existOrCreateAppDirectory(
+    [DIR_SOUND, DIR_UPLOADED].join('/')
+  );
+  console.log('setupFirstLoadAppStorageDirectories', [
+    result0,
+    result1,
+    result2,
+    result3,
+  ]);
+}
+
+async function createAppStorageDirectory(dirName) {
+  let result;
+  try {
+    result = await FileSystem.makeDirectoryAsync(
+      [APP_STORAGE, dirName].join('')
+    );
+    return result;
+  } catch (e) {
+    console.log(e);
+    return e;
+  } finally {
+    return result;
+  }
+}
+
+async function existOrCreateAppDirectory(dirName, options) {
+  try {
+    let dirInfo = await FileSystem.getInfoAsync(
+      [APP_STORAGE, dirName].join('')
+    );
+    if (!dirInfo.exists) {
+      console.log(dirName + ' does not exist, creating...', dirInfo);
+      return createAppStorageDirectory(dirName);
+    } else {
+      return true;
+    }
+  } catch (e) {
+    console.log(e);
+    return false;
   }
 }
 
 async function checkAppDirectoriesStatus() {
+  let paths = {
+    pendingSoundfiles: [DIR_SOUND, DIR_PENDING].join('/'),
+    uploadedSoundfiles: [DIR_SOUND, DIR_UPLOADED].join('/'),
+    soundfiles: DIR_SOUND,
+  };
+
   try {
-    await existOrCreateAppDirectory(DIR_SOUND,  {final: false})
-    .then((result) => {
-      if (!result.exists) {
-          console.log('Soundfile storage directories do not exist, creating folder', result);
-          console.log('result', DIR_SOUND, result);
-          existOrCreateAppDirectory([DIR_SOUND, DIR_PENDING].join('/'), {final: false});
-          existOrCreateAppDirectory([DIR_SOUND, DIR_UPLOADED].join('/'), {final: false});
-        }
+    let exists = await existOrCreateAppDirectory(paths.soundfiles, {
+      final: false,
     });
+    if (!exists) {
+      console.log(
+        'Soundfile storage directories do not exist, creating folder',
+        exists
+      );
+      console.log('exists', DIR_SOUND, exists);
+      await existOrCreateAppDirectory(paths.pendingSoundfiles, {
+        final: false,
+      });
+      await existOrCreateAppDirectory(paths.uploadedSoundfiles, {
+        final: false,
+      });
+    }
+    return true;
   } catch (e) {
-      console.log(e);
+    console.log(e);
     return false;
   } finally {
     return true;
   }
 }
 
-
-
 export {
-  checkAppDirectoriesStatus,
+  setupFirstLoadAppStorageDirectories,
   saveAudioRecordingFile,
-  saveTempAudioFile,
+  discardUploadedSoundfile,
+  discardPendingSoundfile,
+  discardAudioRecording,
   getAppStorageContent,
+  createAppStorageDirectory,
+  existOrCreateAppDirectory,
+  checkAppDirectoriesStatus,
+  saveTempAudioFile,
   inspectSoundfile,
   updatePendingtToUploaded,
   getAudioFileFromTemp,
-  discardAudioRecordingFile,
+  MEDIA_PATH,
+  DATABASE_PATH,
+  SOUNDFILE_PATH,
+  DIR_DATA,
+  DIR_DB,
+  asyncGetFileFromTemp,
+  getFileInfo,
 };

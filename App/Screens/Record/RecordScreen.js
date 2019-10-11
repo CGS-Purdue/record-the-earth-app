@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { ImageBackground } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { CenterView, RootView } from '../../Components/Views';
-import { filterFalse } from '../../Utilities/Functions';
 import { getLocationAsync } from '../../Utilities/LocationFunctions';
 import { AudioRecord } from '../../Components/AudioRecorder/AudioRecord';
 import { Theme } from '../../Theme';
@@ -25,28 +24,83 @@ class RecordScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: '0,0',
+      location: {
+        coords: {
+          latitude: '',
+          longitude: '',
+          altitude: '',
+          accuracy: '',
+          altitudeAccuracy: '',
+          heading: '',
+          speed: '',
+        },
+        timestamp: 0,
+      },
+      LatLong: '0,0',
     };
+    this.location_data = {};
+    this.soundscape_data = {};
+    this._isMounted = false;
   }
 
   componentDidMount() {
+    this._isMounted = true;
+    this.soundscape_data = initSoundscape();
     this._getLocationAsync();
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  _handleLocationUpdate = async (_location) => {
+      let _LatLong;
+      if (_location.coords) {
+        _LatLong = [
+          _location.coords.latitude,
+          _location.coords.longitude,
+        ].join(',');
+      } else {
+        _LatLong = '-1,-1';
+      }
+
+    this.location_data = {
+      location: _location,
+      LatLong: _LatLong
+    };
+
+    if (this._isMounted) {
+      this.setState({
+        location: _location,
+        LatLong: _LatLong
+      })
+    }
   }
 
   _getLocationAsync = async () => {
     let location = await getLocationAsync();
-    this.setState({ location });
-  };
+    this._handleLocationUpdate(location);
+  }
 
-  navigateToStackChild(data) {
+  updateActivityData(soundData) {
+    let soundscapeData = this.soundscape_data;
+    soundscapeData.filename = soundData.soundfile;
+    soundscapeData.duration = soundData.duration;
+    soundscapeData.LatLong = this.state.LatLong;
+    this.navigateForward(soundscapeData);
+  }
+
+  navigateForward(data) {
+    console.log('navigating forward description', data);
     this.props.navigation.navigate({
       routeName: 'Survey',
       action: NavigationActions.navigate({
-        routeName: 'SoundscapeSurveyDescription',
-        params: data,
+        routeName: 'SurveyDescScreen',
+        params: { soundscape_data: data },
       }),
     });
   }
+
 
   navigateToStart() {
     this.props.navigation.navigate('Main');
@@ -65,21 +119,8 @@ class RecordScreen extends Component {
         <RootView>
           <CenterView>
             <AudioRecord
-              onCompleted={(_soundfile) => {
-                let soundscapeData = initSoundscape();
-                let location = this.state.location;
-                let _LatLong = [
-                  location.coords.latitude,
-                  location.coords.latitude,
-                ].join(',');
-
-                // if mocked is true then do not add the data to the db
-                let locationIsMocked = location.mocked;
-                if (!locationIsMocked){
-                  soundscapeData.LatLong = _LatLong;
-                }
-                soundscapeData.filename = _soundfile,
-                this.navigateToStackChild({ soundscape_data: soundscapeData });
+              onCompleted={(soundData) => {
+                this.updateActivityData(soundData);
               }}
               onCanceled={() => {
                 this.navigateToStart();

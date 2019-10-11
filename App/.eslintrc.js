@@ -194,7 +194,7 @@ module.exports = {
 
 
     // Prettier Plugin
-    'prettier/prettier': "error",
+    'prettier/prettier': 1,
 
     // Stylistic Issues
     'key-spacing': 0,

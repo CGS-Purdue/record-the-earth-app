@@ -1,4 +1,3 @@
-
 const json2FormData = (json) => {
   let form = new FormData();
   for (let entry of Object.entries(json)) {
@@ -9,8 +8,6 @@ const json2FormData = (json) => {
   }
   return form;
 };
-
-
 
 const fetchPostForm = async (url, formData) => {
   let result = null;
@@ -32,8 +29,6 @@ const fetchPostForm = async (url, formData) => {
     console.log('result', result);
   });
 };
-
-
 
 // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 // 'Accept': 'application/json',
@@ -58,13 +53,13 @@ const xhrPost = (url, data, options) => {
     console.log("The transfer finished (although we don't know if it succeeded or not).");
   }
 
-  const onProgress = (event) => {
-    console.log(`Uploaded ${event.loaded} of ${event.total}`);
-  };
+  // const onProgress = (event) => {
+  //   console.log(`Uploaded ${event.loaded} of ${event.total}`);
+  // };
 
-  function updateProgress (event) {
+  function updateProgress(event) {
     if (event.lengthComputable) {
-      var percentComplete = event.loaded / event.total * 100;
+      var percentComplete = (event.loaded / event.total) * 100;
       console.log('sent: ', event.loaded);
       console.log('perecent complete: ', percentComplete);
       console.log(`Uploaded ${event.loaded} of ${event.total}`);
@@ -108,7 +103,7 @@ const xhrPost = (url, data, options) => {
   //   or xhr.upload.onprogress
 
   xhr.onloadend = function() {
-    if (xhr.status == 200) {
+    if (xhr.status === 200) {
       console.log('success');
     } else {
       console.log('error ' + this.status);
@@ -136,9 +131,4 @@ const xhrPost = (url, data, options) => {
   xhr.send(data);
 };
 
-
-export {
-  json2FormData,
-  xhrPost,
-  fetchPostForm,
-};
+export { json2FormData, xhrPost, fetchPostForm };

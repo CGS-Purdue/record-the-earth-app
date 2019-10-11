@@ -1,4 +1,3 @@
-
 const MainLogo = {
   width: 300,
   height: 200,
@@ -7,7 +6,6 @@ const MainLogo = {
 
 const LogoStyles = {
   logo_main: MainLogo,
-
 };
 
 export { LogoStyles };

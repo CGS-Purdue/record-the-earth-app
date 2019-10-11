@@ -62,16 +62,17 @@ echo "Settings up additional devtools..."
 
 # REACTOTRON
 if [ -n "$RUN_REACT_REACTOTRON" ]; then
-  npm run react:reactotron &
+  npm run rn:reactotron &
 fi
 
 # REACT DEBUGGER
 if [ -n "$RUN_REACT_DEBUGGER" ]; then
-  REACT_DEBUGGER=${REACT_DEBUGGER} npm run react:debugger &
+  export REACT_DEBUGGER
+  REACT_DEBUGGER=${REACT_DEBUGGER} npm run rn:debugger &
 fi
 
 # REACT DEVTOOLS
-[[ -n "$RUN_REACT_DEVTOOLS" ]] && npm run react:devtools &
+[[ -n "$RUN_REACT_DEVTOOLS" ]] && npm run rn:devtools &
 
 
 echo "

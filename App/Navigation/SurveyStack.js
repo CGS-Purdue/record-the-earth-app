@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Animated, Easing } from 'react-native';
-// import { createStackNavigator } from 'react-navigation';
 import { createStackNavigator } from '../node_modules/react-navigation-stack/lib/module';
 import { SurveyDescScreen } from '../Screens/Survey/SurveyDescScreen';
 import { SurveyBioScreen } from '../Screens/Survey/SurveyBioScreen';
@@ -21,7 +20,7 @@ const SurveyTemplate = initSoundscape();
 
 const SurveyStack = createStackNavigator(
   {
-    SoundscapeSurveyDescription: { screen: SurveyDescScreen },
+    SurveyDescScreen: { screen: SurveyDescScreen },
     SoundscapeSurveyBio: { screen: SurveyBioScreen },
     SoundscapeSurveyEmo: { screen: SurveyEmoScreen },
     SoundscapeSurveyGeo: { screen: SurveyGeoScreen },
@@ -29,7 +28,7 @@ const SurveyStack = createStackNavigator(
     SoundscapeSubmit: { screen: SurveySubmitScreen },
   },
   {
-    initialRouteName: 'SoundscapeSurveyDescription',
+    initialRouteName: 'SurveyDescScreen',
     initialRouteParams: { soundscape_data2: SurveyTemplate },
     initialRouteKey: 'SurveyStart',
     headerMode: 'none',

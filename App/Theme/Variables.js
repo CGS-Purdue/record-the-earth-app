@@ -7,7 +7,6 @@ import { ImageAssets } from './Assets';
 // AND SETUP CONVENIENT NAMES
 const _var = {
   app_container_bgimg: ImageAssets.img_background,
-  app_container_bgcolor: ThemeColors.GRAY_800,
   tabbar_size: ThemeLayout.TEXT_SIZE_3 * 3,
   tabbar_text_size: (ThemeLayout.TEXT_SIZE_3 * 3 * 1) / 3,
   tabbar_icon_size: (ThemeLayout.TEXT_SIZE_3 * 3 * 2) / 4,
@@ -28,7 +27,6 @@ const ThemeVariables = {
   INPUTBORDERRADIUS: 4,
   APPBORDERRADIUS: 4,
   APP_CONTAINER_BGIMG: _var.app_container_bgimg,
-  APP_CONTAINER_BGCOLOR: _var.app_container_bgcolor,
   RATE_SCALE: 3.0,
   DISABLED_OPACITY: 0.5,
   TAB_BAR_SIZE: _var.tabbar_size,

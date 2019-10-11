@@ -1,35 +1,18 @@
 {
   "expo": {
-    "name": "RecordTheEarth3",
-    "slug": "record-the-earth-v3",
-    "description": "Record the Earth Native build for iOS and Android",
-    "version": "0.9.0",
-    "icon": "./Assets/icon.png",
-    "orientation": "portrait",
-    "platforms": [
-      "ios",
-      "android"
-    ],
-    "primaryColor": "#cccccc",
-    "privacy": "unlisted",
-    "sdkVersion": "35.0.0",
+    "android": {
+      "googleServicesFile": "./google-services.json",
+      "package": "org.recordtheearth.expo",
+      "permissions": [
+        "RECORD_AUDIO",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    },
     "androidShowExponentNotificationInShellApp": true,
     "androidStatusBar": {
-      "barStyle": "dark-content",
-      "backgroundColor": "#000000"
-    },
-    "notification": {
-      "icon": "./Assets/icon.png",
-      "color": "#000000",
-      "androidMode": "default"
-    },
-    "splash": {
-      "image": "./Assets/splash.png",
       "backgroundColor": "#000000",
-      "resizeMode": "contain"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
+      "barStyle": "dark-content"
     },
     "assetBundlePatterns": [
       "**/*",
@@ -41,41 +24,58 @@
       "./Assets/img/*.jpg",
       "./Assets/logo/*.png"
     ],
-    "ios": {
-      "supportsTablet": false,
-      "splash": {
-        "backgroundColor": "#000000",
-        "resizeMode": "contain"
-      }
-    },
-    "android": {
-      "googleServicesFile": "./google-services.json",
-      "package": "org.recordtheearth.expo",
-      "permissions": [
-        "RECORD_AUDIO",
-        "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE"
-      ]
-    },
-    "githubUrl": "https://github.com/charrismatic/record-the-earth-expo-react-native",
+    "description": "Record the Earth Native build for iOS and Android",
     "extra": {
-      "ExtraKey": "3102",
       "EXPO_DEBUG": true,
+      "ExtraKey": "3102",
       "debug_flags": {
         "DEBUG_OUTLINE_STYLES": false,
         "DEV_DATA_MOCK_SOUNDFILES": false
       }
     },
+    "githubUrl": "https://github.com/charrismatic/record-the-earth-expo-react-native",
     "hooks": {},
-    "rnCliPath": "",
+    "icon": "./Assets/icon.png",
+    "ios": {
+      "splash": {
+        "backgroundColor": "#000000",
+        "resizeMode": "contain"
+      },
+      "supportsTablet": false
+    },
+    "name": "RecordTheEarth3",
+    "notification": {
+      "androidMode": "default",
+      "color": "#000000",
+      "icon": "./Assets/icon.png"
+    },
+    "orientation": "portrait",
     "packagerOpts": {
-      "host": "localhost",
       "assetExts": [
         "ttf",
         "jpg",
         "svg",
         "png"
-      ]
-    }
+      ],
+      "host": "localhost"
+    },
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "primaryColor": "#cccccc",
+    "privacy": "unlisted",
+    "rnCliPath": "",
+    "sdkVersion": "35.0.0",
+    "slug": "record-the-earth-v3",
+    "splash": {
+      "backgroundColor": "#000000",
+      "image": "./Assets/splash.png",
+      "resizeMode": "contain"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "version": "0.9.0"
   }
 }

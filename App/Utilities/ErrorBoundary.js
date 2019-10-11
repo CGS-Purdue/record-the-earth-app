@@ -15,7 +15,7 @@ class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      errorInfo: null ,
+      errorInfo: null,
       hasError: false,
       lastError: '',
     };
@@ -31,7 +31,7 @@ class ErrorBoundary extends Component {
     this.setState({
       error: error,
       errorInfo: errorInfo,
-      lastError : JSON.stringify(error),
+      lastError: JSON.stringify(error),
     });
 
     if (__DEV__) {
@@ -42,11 +42,10 @@ class ErrorBoundary extends Component {
     // logErrorToMyService(error, info);
   }
 
-
   // dispatch error to logs
   async componentWillMount() {
     const lastError = await AsyncStorage.getItem('lastError');
-    if (__DEV__){
+    if (__DEV__) {
       if (lastError) {
         console.log({
           sender: 'mobile-ops',
@@ -63,9 +62,7 @@ class ErrorBoundary extends Component {
   // You can render any custom fallback UI
   render() {
     if (this.state.hasError) {
-      return (
-        <Text>Something went wrong.</Text>
-      );
+      return <Text>Something went wrong.</Text>;
     }
 
     return this.props.children;
@@ -89,7 +86,5 @@ class ErrorBoundary extends Component {
 // };
 //
 // ErrorUtils.setGlobalHandler(customErrorHandler);
-
-
 
 export { ErrorBoundary };

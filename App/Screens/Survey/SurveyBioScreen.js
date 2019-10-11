@@ -1,9 +1,11 @@
-import { BlackFade } from '../../Components/Effects/LinearGradient';
 import { Button, View, ImageBackground } from 'react-native';
 import { CenterView, Section, PadView, RootView } from '../../Components/Views';
 import { CheckButton } from '../../Components/Button/CheckButton';
 import { HeadingText } from '../../Components/Text/HeadingText';
 import { filterFalse } from '../../Utilities/Functions';
+import { BlackFade, Scrim, MirageGrad } from '../../Components/Effects/LinearGradient';
+import { AwesomeButton } from '../../Components/Button/AwesomeButton';
+
 import { Theme } from '../../Theme';
 import React, { Component } from 'react';
 
@@ -63,9 +65,9 @@ class SurveyBioScreen extends Component {
       mammals: this.state.mammals,
       frogs: this.state.frogs,
     });
-    if (!_surveyData){
-      _surveyData = 'none';
-    }
+
+    if (!_surveyData){ _surveyData = 'none' }
+
     this.setState({ surveyData: _surveyData });
   }
 
@@ -96,31 +98,19 @@ class SurveyBioScreen extends Component {
   navigateForward(data) {
     this.props.navigation.navigate({
       routeName: 'SoundscapeSurveyEmo',
-      params: {
-        soundscape_data: data,
-      },
+      params: { soundscape_data: data },
     });
   }
 
 
   render() {
     const { navigate } = this.props.navigation;
-
     return (
       <ImageBackground
         style={_styles.bgImg}
         source={_assets.images.img_bg_frog}
       >
-        <View
-          style={{
-            flex: 1,
-            position: 'absolute',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100%',
-            height: '100%',
-          }}
-        >
+        <View style={{flex: 1, position: 'absolute', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%', }} >
           <BlackFade />
         </View>
         <RootView>
@@ -158,12 +148,7 @@ class SurveyBioScreen extends Component {
                   onchecked={this._setSuveryItemState}
                   text={'Frogs and Reptiles'}
                 />
-                <View
-                  style={{
-                    height: 10,
-                    backgroundColor: _colors.TRANSPARENT,
-                  }}
-                />
+                <View style={{height: 10, backgroundColor: _colors.TRANSPARENT}}/>
                 <Button
                   title={'Continue'}
                   style={_styles.button_default}
@@ -171,6 +156,29 @@ class SurveyBioScreen extends Component {
                   accessibilityLabel="Go to next"
                   onPress={this.onTaskCompleted}
                 />
+                <AwesomeButton
+                  activeOpacity={0.75}
+                  backgroundActive="rgba(0,0,0,0)"
+                  backgroundColor={_colors.BLU_200}
+                  backgroundDarker={_colors.BLU_400}
+                  borderRadius={1}
+                  ExtraContent={<Scrim/>}
+                  height={45}
+                  raiseLevel={1}
+                  size="small"
+                  progress={true}
+                  progressLoadingTime={360}
+                  textSize={12}
+                  stretch={true}
+                  onPress={this.onTaskCompleted}
+                  style={_styles.button_awesome}
+                  textColor={_colors.SHADE_LIGHTER_80}
+                  type="primary"
+                  width={null}
+                  >
+                  {'Continue'}
+                </AwesomeButton>
+
               </Section>
             </CenterView>
           </PadView>

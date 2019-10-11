@@ -10,6 +10,9 @@
 const encoding = 'utf-8';
 let data;
 let options={};
+let spreader = "\t    ";
+const RESET =  '0m',
+const COLUMN_MAX_LENGTH = 50;
 const COLOR = {
   bg_black: '40m',
   bg_blue: '44m',
@@ -42,24 +45,29 @@ const COLOR = {
   white: '37m',
   yellow: '33m',
 };
-const fmt = (s) => { return `\x1b[${s}` };
-let spreader = "\t    ";
-const COLUMN_MAX_LENGTH = 50;
-const print_titleline = (titleline) => {console.log([fmt(COLOR.brightred), titleline, fmt(COLOR.reset)].join(''))};
+const _c = (s) => { return  `\x1b[${s}` };
+const fmt = (style, text) => {return [_c(RESET), _c(style), key, _c(RESET)].join('')};
+const print_titleline = (titleline) => {console.log([fmt(COLOR.brightred, titleline)].join(''))};
+
 const get_titleline = (title) => { return `--- ${title.toUpperCase()} --- \n` };
 const print_title = (title) => { print_titleline(get_titleline(title))};
+
 const print_item = (key, value) => {console.log(
-    '  ',
-    [fmt(COLOR.reset), fmt(COLOR.brightgreen), key, fmt(COLOR.reset)].join(''),
-    spreader.slice(key.length),
-    [fmt(COLOR.reset), value, fmt(COLOR.reset)].join(''),
+    ['  ',
+      fmt(COLOR.brightgreen, key),
+      spreader.slice(key.length),
+      value
+    ].join(' ')
 )};
+
 const sort_keys = (data) => {
   return data.sort(function(a,b){
     return a[0].localeCompare( b[0], { caseFirst: false, numeric: true })
   })
 };
+
 const filter_item = (s, filter) => {return (s.indexOf(filter) > -1)};
+
 const print_loop = (iterable) => {
   if (! iterable) { return }
   var formatted=[];
@@ -76,14 +84,17 @@ const print_loop = (iterable) => {
   formatted.forEach(function(item){print_item(item[0], item[1])});
   return;
 };
-const print_info = (name, data) => { print_title(name); print_loop(data); };
+
+const print_info = (name, data) => {
+  print_title(name);
+  print_loop(data);
+};
 
 // =====================================================
 // HANDLE STDIN AND PROCESS
 // =====================================================
 const read_file_sync=(filepath)=>{
   const fs = require('fs');
-  console.log('Reading file from:' ,filepath);
   return fs.readFile(filepath,
     function read(err, data) {
       if (err) { console.log(data ,err); throw err; }

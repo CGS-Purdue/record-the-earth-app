@@ -171,7 +171,6 @@ const Colors = {
   // TAB_BAR_ACTIVE_COLOR: ColorLib.azureradiance,
   TAB_BAR_BORDER_COLOR: '00ccff',
 
-
   // Form colors
   INPUT_BG: ShadeLight.SHADE_LIGHTER_70,
   INPUT_BORDER: ShadeDark.SHADE_DARKER_05,
@@ -194,6 +193,7 @@ const Colors = {
   // CHECKBTN_TOUCHABLE_BG: ShadeDark.SHADE_DARKER_04,
 
   // BRAND COLORS
+  APP_CONTAINER_BGCOLOR: Grays.GRA_800,
   BG_MAIN: ColorLib.bayfany,
   TINT_COLOR: Blues.BLU_300,
   LIVE_COLOR: Reds.RED_600,

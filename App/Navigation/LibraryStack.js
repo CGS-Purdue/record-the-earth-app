@@ -1,4 +1,3 @@
-// import { createStackNavigator } from 'react-navigation-stack';
 import { createStackNavigator } from '../node_modules/react-navigation-stack/lib/module';
 import { SoundFileLibraryScreen } from '../Screens/Library/SoundFileLibraryScreen';
 import { SoundscapeLibraryScreen } from '../Screens/Library/SoundscapeLibraryScreen';

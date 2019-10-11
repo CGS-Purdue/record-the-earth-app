@@ -1,0 +1,56 @@
+#!/bin/bash
+
+#   -e <expr>, --regex=<expr>  Only print lines where the log message matches <expr>
+#   -v type, ...mod
+#       type:    brief help long process raw tag thread threadtime time
+#       mod:     color descriptive epoch monotonic printable uid usec UTC year zone
+#   --format=<format>
+#        frmt |  brief help long process raw tag thread threadtime time
+#        mods |  color descriptive epoch monotonic printable uid usec UTC year zone
+#   -f <file>, --file=<file>
+#   --id=<id>       If the signature id for logging to file changes, then clear the fileset and continue
+#   -D, --dividers  Print dividers between each log buffer
+#   -c, --clear     Clear (flush) the entire log and exit if Log to File specified, clear fileset instead
+#   -d              Dump the log and then exit (don't block)
+#   -e <expr>,
+#   --regex=<expr>   print lines where the log message matches <expr>
+#   -m <count> |
+#   --max-count=<count>   Quit after printing <count> lines. meant to be paired with --regex, but will work on its own.
+#   --print         Paired with --regex and --max-count to let content bypass regex filter but still stop at number of matches.
+#   -t <count>      Print only the most recent <count> lines (implies -d)
+#   -T <count>      Print only the most recent <count> lines (does not imply -d)
+#   -t '<time>'     Print most recent lines since specified time (implies -d)
+#   -T '<time>'     Print most recent lines since specified time (not imply -d) count is pure numerical
+#                       - 'MM-DD hh:mm:ss.mmm...'
+#                       - 'YYYY-MM-DD hh:mm:ss.mmm...'
+#                       - 'sssss.mmm...' format
+#   -b <buffer>    'all' or 'main', 'system', 'radio', 'events', 'crash', 'default'
+#                   (Default: main,system,crash)
+#   -B, --binary          Output the log in binary.
+
+# adb logcat -v process,color,printable -b main -b crash -b events WifiService:S sysui_multi_action:S CarrierServices:S
+# adb logcat -v threadtime,color,monotonic,printable,uid -b main -b crash -b events WifiService:S sysui_multi_action:S CarrierServices:S
+# adb logcat -v thread,color,monotonic,printable,uid -b main -b crash -b events WifiService:S sysui_multi_action:S CarrierServices:S
+# adb logcat -v thread,color,printable -b all *:E
+# -v process,monotonic,color,printable \
+BASE_DIR="$(npm prefix)"
+
+[[ -f .npmrc ]] && source .npmrc
+
+[[ -z $ANDROID_HOME ]] && echo 'ANDROID_HOME is not set. Skipping command' && exit 0
+
+ABD_PATH="${ANDROID_HOME}/platform-tools"
+
+RUN_ABD_LOG_INCLUDE="ReactNative,ReactNativeJS,ActivityThread"
+RUN_ABD_LOG_FILTERS="*:S ${RUN_ABD_LOG_INCLUDE//,/\:\V }:V"
+
+# ALL WARNINGS/ERRORS
+# -s supress everything (then add tags you want to see)
+# -b all *:W
+# -b all *:E
+echo "$RUN_ABD_LOG_FILTERS"
+#
+${ABD_PATH}/adb logcat \
+  --buffer=crash,main,security,events \
+  -v raw,color,printable \
+  ${RUN_ABD_LOG_FILTERS}
