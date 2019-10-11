@@ -1,5 +1,5 @@
 import { dbConfig } from './config';
-import { dbSchema }  from './schema';
+import { dbSchema } from './schema';
 import { dbStatements } from './statements';
 
 export const DBProps = {

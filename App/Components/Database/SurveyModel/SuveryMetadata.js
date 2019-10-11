@@ -1,4 +1,3 @@
-
 const SurveyDefaults = {
   datetime: '',
   path: '',
@@ -23,7 +22,7 @@ class Survey {
   }
 }
 
-function initSoundscapeSuvey () {
+function initSoundscapeSuvey() {
   let survey = new Survey();
   let timestamp = Date.toISOString();
   survey.datetime = timestamp.toISOString();

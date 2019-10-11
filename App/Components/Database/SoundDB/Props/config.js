@@ -6,10 +6,10 @@ const ConfigVersion = '1.0.0';
 const ConfigSize = null;
 
 const dbConfig = {
-  name : ConfigName,
-  description : ConfigDescription,
-  version : ConfigVersion,
-  size : ConfigSize,
+  name: ConfigName,
+  description: ConfigDescription,
+  version: ConfigVersion,
+  size: ConfigSize,
 };
 
 export { dbConfig };

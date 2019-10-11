@@ -6,10 +6,10 @@ export const DBVersion = '1.0.0';
 export const DBSize = null;
 
 const dbConfig = {
-  name : DBName,
-  description : DBDescription,
-  version : DBVersion,
-  size : DBSize,
+  name: DBName,
+  description: DBDescription,
+  version: DBVersion,
+  size: DBSize,
 };
 
 export { dbConfig };

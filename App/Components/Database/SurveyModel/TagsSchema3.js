@@ -31,7 +31,7 @@ const TagsSchema = Object.assign(
   { biophony },
   { emotion },
   { geophony },
-  { anthrophony },
+  { anthrophony }
 );
 
 export { TagsSchema };

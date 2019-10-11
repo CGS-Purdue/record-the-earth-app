@@ -1,4 +1,3 @@
-
 // soundscape android
 //
 // $_POST ["anthro"]
@@ -55,29 +54,20 @@ const obMerge = (base, update, ...override) => {
   return Object.assign({}, base, update, ...override);
 };
 
-const TagsSchema = obMerge(
-  { bio },
-  { emotion },
-  { geo },
-  { anthro },
-);
+const TagsSchema = obMerge({ bio }, { emotion }, { geo }, { anthro });
 
-
-const SounscapeData = obMerge(
-  TagsSchema, {
-  description : '',
-  datetime : '',
-  LatLong : '0,0',
-  filename : null,
-  duration : 0,
-  appVersion : 'record-the-earth@latest',
-  deviceModel : '',
-  osVersion : '',
+const SounscapeData = obMerge(TagsSchema, {
+  description: '',
+  datetime: '',
+  LatLong: '0,0',
+  filename: null,
+  duration: 0,
+  appVersion: 'record-the-earth@latest',
+  deviceModel: '',
+  osVersion: '',
 });
 
 var SoundscapeSchema = obMerge({}, SounscapeData, TagsSchema);
 var SoundscapeSchemaKeys = Object.keys(SounscapeData);
-
-
 
 export { SoundscapeSchema, SoundscapeSchemaKeys };

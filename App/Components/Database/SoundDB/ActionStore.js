@@ -9,13 +9,12 @@ const _schema = DBProps.schema;
 const _statements = DBProps.statements;
 
 class SoundDBActions extends Component {
-
   setConnection(config) {
     this.connection = new Connection({
       name: config.name,
-      version : config.version,
-      description : config.description,
-      size : config.size,
+      version: config.version,
+      description: config.description,
+      size: config.size,
       onConnect: this.onConnected,
     });
 
@@ -26,25 +25,25 @@ class SoundDBActions extends Component {
 
   // TEMPLATE ACTIONS
 
-  exists(){
+  exists() {
     console.log('exists or create soundcape');
     this.queryStore('create');
   }
 
   // TEMPLATE ACTIONS
-  insert(args){
+  insert(args) {
     console.log('insert local soundcape');
     this.queryStore('insert', args);
   }
 
-  getAll(){
+  getAll() {
     let result = this.queryStore('all');
     console.log('get all local soundcape', result);
-    this.setState({testdata: result});
+    this.setState({ testdata: result });
     return result;
   }
 
-  _resetDb(){
+  _resetDb() {
     console.log('get all local soundcape');
     // todo: cache a backup before doing this
     // ${FileSystem.documentDirectory}/SQLite/${name}
@@ -52,86 +51,74 @@ class SoundDBActions extends Component {
     this.queryStore('create');
   }
 
-   create (connection, reporters, statement, args = null) {
-      console.log('create', reporters);
-      connection.db.transaction(
-        tx => {
-          tx.executeSql(
-            statement,
-            null,
-            null,
-            reporters.txError,
-          );
-        },
-        reporters.dbError,
-        null,
-      );
-   }
-
-   drop (connection, reporters, statement, args = null) {
-      console.log('drop', reporters);
-      connection.db.transaction(
-        tx => {
-          tx.executeSql(
-            statement,
-            null,
-            reporters.txSuccess,
-            reporters.txError,
-          );
-        },
-        reporters.dbError,
-        reporters.dbSuccess,
-      );
-    }
-
-  all(connection, reporters, statement, args = null) {
-      console.log('all', connection, reporters, statement);
-      connection.db.transaction(
-        tx => {
-          tx.executeSql(
-            statement,
-            null,
-            reporters.selectSuccess,
-            reporters.txError,
-          );
-        },
-        reporters.dbError,
-        reporters.dbSuccess,
-      );
+  create(connection, reporters, statement, args = null) {
+    console.log('create', reporters);
+    connection.db.transaction(
+      (tx) => {
+        tx.executeSql(statement, null, null, reporters.txError);
+      },
+      reporters.dbError,
+      null
+    );
   }
 
-  insertRow(connection, reporters, statement, args){
+  drop(connection, reporters, statement, args = null) {
+    console.log('drop', reporters);
     connection.db.transaction(
-      tx => {
+      (tx) => {
+        tx.executeSql(statement, null, reporters.txSuccess, reporters.txError);
+      },
+      reporters.dbError,
+      reporters.dbSuccess
+    );
+  }
+
+  all(connection, reporters, statement, args = null) {
+    console.log('all', connection, reporters, statement);
+    connection.db.transaction(
+      (tx) => {
+        tx.executeSql(
+          statement,
+          null,
+          reporters.selectSuccess,
+          reporters.txError
+        );
+      },
+      reporters.dbError,
+      reporters.dbSuccess
+    );
+  }
+
+  insertRow(connection, reporters, statement, args) {
+    connection.db.transaction(
+      (tx) => {
         tx.executeSql(
           statement,
           args,
           reporters.insertSuccess,
-          reporters.txError,
+          reporters.txError
         );
       },
       reporters.dbError,
-      reporters.dbSuccess,
-    )
+      reporters.dbSuccess
+    );
   }
 
-
-    last(connection, reporters, statement, args = null){
-      connection.db.transaction(
-        tx => {
-          tx.executeSql(
-            statement,
-            null,
-            reporters.selectSuccess,
-            reporters.txError,
-          );
-        },
-        reporters.dbError,
-        reporters.dbSuccess,
-      );
-    }
+  last(connection, reporters, statement, args = null) {
+    connection.db.transaction(
+      (tx) => {
+        tx.executeSql(
+          statement,
+          null,
+          reporters.selectSuccess,
+          reporters.txError
+        );
+      },
+      reporters.dbError,
+      reporters.dbSuccess
+    );
+  }
 }
-
 
 // const ActionStore = (key, args) =>{
 //   let _store = this.queryStore;
@@ -147,5 +134,4 @@ class SoundDBActions extends Component {
 //   return prepared_action;
 // }
 
-
-export { SoundDBActions }
+export { SoundDBActions };

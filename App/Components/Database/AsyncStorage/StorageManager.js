@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput, AsyncStorage, StyleSheet,Text, View } from 'react-native';
+import { TextInput, AsyncStorage, StyleSheet, Text, View } from 'react-native';
 const STORAGE_KEY = 'ASYNC_STORAGE_NAME_EXAMPLE';
 
 // API
@@ -21,47 +21,48 @@ const STORAGE_KEY = 'ASYNC_STORAGE_NAME_EXAMPLE';
 //  can throw errors upon failure which you'll want to handle!
 
 export default class StorageManager extends Component {
-  state = {name: 'World'}
+  state = { name: 'World' };
   componentWillMount() {
     this.load();
 
     // stub
     var goalCategory = this.goalCategory;
 
-    this.retrieveItem(goalCategory).then((goals) => {
-      //this callback is executed when your Promise is resolved
-    }).catch((error) => {
-      //this callback is executed when your Promise is rejected
-      console.log('Promise is rejected with error: ' + error);
-    });
+    this.retrieveItem(goalCategory)
+      .then((goals) => {
+        //this callback is executed when your Promise is resolved
+      })
+      .catch((error) => {
+        //this callback is executed when your Promise is rejected
+        console.log('Promise is rejected with error: ' + error);
+      });
   }
 
-_storeData = async () => {
-  try {
-    await AsyncStorage.setItem('@MySuperStore:key', 'I like to save it.');
-  } catch (error) {
-    // Error saving data
-  }
-};
-_retrieveData = async () => {
-  try {
-    const value = await AsyncStorage.getItem('TASKS');
-    if (value !== null) {
-      // We have data!!
-      console.log(value);
+  _storeData = async () => {
+    try {
+      await AsyncStorage.setItem('@MySuperStore:key', 'I like to save it.');
+    } catch (error) {
+      // Error saving data
     }
-  } catch (error) {
-    // Error retrieving data
-  }
-};
-
+  };
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('TASKS');
+      if (value !== null) {
+        // We have data!!
+        console.log(value);
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
 
   async storeItem(key, item) {
     try {
-        //we want to wait for the Promise returned by AsyncStorage.setItem()
-        //to be resolved to the actual value before returning the value
-        var jsonOfItem = await AsyncStorage.setItem(key, JSON.stringify(item));
-        return jsonOfItem;
+      //we want to wait for the Promise returned by AsyncStorage.setItem()
+      //to be resolved to the actual value before returning the value
+      var jsonOfItem = await AsyncStorage.setItem(key, JSON.stringify(item));
+      return jsonOfItem;
     } catch (error) {
       console.log(error.message);
     }
@@ -69,47 +70,44 @@ _retrieveData = async () => {
 
   //the functionality of the retrieveItem is shown below
   async retrieveItem(key) {
-      try {
-        const retrievedItem =  await AsyncStorage.getItem(key);
-        const item = JSON.parse(retrievedItem);
-        return item;
-      } catch (error) {
-        console.log(error.message);
-      }
-      return;
+    try {
+      const retrievedItem = await AsyncStorage.getItem(key);
+      const item = JSON.parse(retrievedItem);
+      return item;
+    } catch (error) {
+      console.log(error.message);
     }
-
+    return;
+  }
 
   load = async () => {
     try {
       const name = await AsyncStorage.getItem(STORAGE_KEY);
       if (name !== null) {
-        this.setState({name});
+        this.setState({ name });
       }
     } catch (e) {
       console.error('Failed to load name.');
     }
-  }
+  };
   save = async (name) => {
     try {
       await AsyncStorage.setItem(STORAGE_KEY, name);
-      this.setState({name});
+      this.setState({ name });
     } catch (e) {
       console.error('Failed to save name.');
     }
-  }
+  };
 
   render() {
-    const {name} = this.state;
+    const { name } = this.state;
     return (
       <View>
         <TextInput
           placeholder={'Type your name, hit enter, and refresh!'}
           onSubmitEditing={this.save}
         />
-        <Text style={styles.text}>
-          Hello {name}!
-        </Text>
+        <Text style={styles.text}>Hello {name}!</Text>
       </View>
     );
   }

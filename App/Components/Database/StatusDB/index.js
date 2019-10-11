@@ -15,9 +15,9 @@ class StatusDB extends Component {
     this.ref = _ref;
     this.config = _config;
     this.schema = _schema;
-    this.statements =  _statements;
+    this.statements = _statements;
     this.state = {
-      isConnected : false,
+      isConnected: false,
       isError: false,
     };
     this.connectionStatus = {
@@ -38,11 +38,12 @@ class StatusDB extends Component {
 
     this.queryStore = this.queryStore.bind(this);
 
-
     this.queryReporters = {
       dbSuccess: (data) => {
         console.log('query transaction completed onSuccessfully');
-        if (data){ console.log(data); }
+        if (data) {
+          console.log(data);
+        }
       },
       txSuccess: (tx, result) => {
         // { insertId, rowsAffected, rows: { length, item(), _array, }, }
@@ -59,8 +60,12 @@ class StatusDB extends Component {
         console.log('Selected', result._array);
         return result;
       },
-      dbError: (tx, err) => { console.log('error', tx, err); },
-      txError: (tx, err ) => { console.log(tx, err); },
+      dbError: (tx, err) => {
+        console.log('error', tx, err);
+      },
+      txError: (tx, err) => {
+        console.log(tx, err);
+      },
     };
 
     this.setConnection(this.config, this.onConnected);
@@ -69,9 +74,9 @@ class StatusDB extends Component {
   setConnection(config) {
     this.connection = new Connection({
       name: config.name,
-      version : config.version,
-      description : config.description,
-      size : config.size,
+      version: config.version,
+      description: config.description,
+      size: config.size,
       onConnect: this.onConnected,
     });
 
@@ -87,13 +92,13 @@ class StatusDB extends Component {
     this.checkStatus();
   }
 
-  connect(){
+  connect() {
     // console.log(this.connection);
     this.connection.connect();
     this.connectionStatus.isConnecting = true;
   }
 
-  onComponentDidMount () {
+  onComponentDidMount() {
     // console.log('mounted');
     this.setConnection();
     if (this.autoconnect) {
@@ -103,14 +108,14 @@ class StatusDB extends Component {
 
   onSuccess(tx, result) {
     console.log(tx, result);
-    this.setState({data: result.rows._array});
+    this.setState({ data: result.rows._array });
   }
 
   onError(tx, error) {
     console.log(error);
   }
 
-  checkStatus(){
+  checkStatus() {
     // console.log('checkStatus', this);
     this.queryStore('create');
     this.queryStore('insert');
@@ -118,47 +123,39 @@ class StatusDB extends Component {
   }
 
   queryStore(key, args) {
-
     let _store = {
       create: (connection, reporters, statement) => {
         connection.db.transaction(
-          tx => {
-            tx.executeSql(
-              statement,
-              null,
-              null,
-              reporters.txError,
-            );
+          (tx) => {
+            tx.executeSql(statement, null, null, reporters.txError);
           },
           reporters.dbError,
-          null,
+          null
         );
       },
       insert: (connection, reporters, statement, args = null) => {
         let timestamp = new Date();
-        connection.db.transaction(
-          tx => {
-            tx.executeSql(
-              statement,
-              [ timestamp ],
-              reporters.insertSuccess,
-              reporters.txError,
-            );
-          }
-        );
+        connection.db.transaction((tx) => {
+          tx.executeSql(
+            statement,
+            [timestamp],
+            reporters.insertSuccess,
+            reporters.txError
+          );
+        });
       },
       last: (connection, reporters, statement, args = null) => {
         connection.db.transaction(
-          tx => {
+          (tx) => {
             tx.executeSql(
               statement,
               null,
               reporters.txSuccess,
-              reporters.txError,
+              reporters.txError
             );
           },
           reporters.dbError,
-          reporters.dbSuccess,
+          reporters.dbSuccess
         );
       },
     };
@@ -168,7 +165,7 @@ class StatusDB extends Component {
     let _arguments = _statements._arguments;
     let _reporters = this.queryReporters;
     let resultData = this.queryStoreData;
-    let result =  _store[key](_connection, _reporters, _statements[key], args);
+    let result = _store[key](_connection, _reporters, _statements[key], args);
     // console.log('query\n\n',_statements[key], _arguments[key], args);
     console.log('result', result, this);
     return result;
