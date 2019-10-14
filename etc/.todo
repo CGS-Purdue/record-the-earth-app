@@ -1,0 +1,26 @@
+fix mismatch between react-navigation =react-navigation-stack
+
+install react-native-screens@1.0.0-alpha
+
+ data/clients/cgs/Projects/record-the-earth-react-native/App
+├─┬ UNMET PEER DEPENDENCY react-navigation@3.13.0
+│ └── react-navigation-stack@1.5.3
+└── react-navigation-stack@1.9.3
+
+npm ERR! peer dep missing: react-navigation@^4.0.7, required by react-navigation-stack@1.9.3
+npm ERR! peer dep missing: react-navigation@^4.0.7, required by react-navigation-tabs@2.5.5
+
+
+TIP:
+
+If the expo server and your device are not syncing up with the correct settings
+it can be hard to know why your settings arent  working corretcly.
+
+Open the chrome devtools network monitor and you can see if theres a issue very quickly
+you can also send the server the inital package directly in the browser url bar
+and if you reload the device these settinsg will stick until you change them again
+
+example:
+```
+http://localhost:19001/node_modules/expo/AppEntry.delta?platform=android&dev=true&minify=false&hot=false&revisionId=1522189e5d0527b7
+```

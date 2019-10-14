@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# -------------------------
+# react-native run-android
+# -------------------------
+BASE_PATH="$(npm prefix)"
+
+[[ -f .npmrc ]] && source .npmrc
+[[ -f .env ]] && source .env
+
+# NODE_RUN_ENV=
+# NODE_RUN_FLAGS=
+[[ -z $APP_REACT_DEVTOOLS_RUNNING ]] \
+  && NODE_ENV="development" node $BASE_PATH/node_modules/.bin/react-devtools &
+
+[[ ! -z $APP_REACT_DEVTOOLS_RUNNING ]] \
+  && echo "Reac Devtools already running" 
+
+APP_REACT_DEVTOOLS_RUNNING="yes"
+export APP_REACT_DEVTOOLS_RUNNING;

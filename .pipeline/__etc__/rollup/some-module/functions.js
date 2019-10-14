@@ -11,6 +11,7 @@ function load_content_function () {
   });
 }
 
+
 // INJECT FILE
 function load_content_script () {
   chrome.runtime.onMessage.addListener(
@@ -22,6 +23,8 @@ function load_content_script () {
       }
    });
 }
+
+
 /// UTILITIES
 // ========================
 function log_to_user(string){
@@ -37,10 +40,13 @@ function log_to_user(string){
     }
   );
 }
+
 function log_status(status) {
   console.log('%c PROCESSING RESULTS', 'color:green');
   console.log(status);
 }
+
+
 function isValidPrefix(prefix) {
   var validator = /^[a-z][a-z0-9.\-_:]*$/i;
   return validator.test(prefix);

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+APK_PATH=outputs/apk/release/app-release-unsigned.apk
+
+$ANDROID_HOME/platform-tools/adb install -t $APK_PATH

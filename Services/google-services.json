@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "807183913020",
+    "firebase_url": "https://record-the-earth.firebaseio.com",
+    "project_id": "record-the-earth",
+    "storage_bucket": "record-the-earth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807183913020:android:463822a477f7cacadf3339",
+        "android_client_info": {
+          "package_name": "org.recordtheearth3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807183913020-mtfej1lg1dabm1jdljcscqg893v9hdgc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.recordtheearth3",
+            "certificate_hash": "f720d660b3be87d0b2b969941b0409f0cd6528ca"
+          }
+        },
+        {
+          "client_id": "807183913020-3e8h9sbre5j2co0l69fe4pm8ap2md16e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmrv0eQSo3LtFZ1t0vqNl_n5g_ZBHDKDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807183913020-3e8h9sbre5j2co0l69fe4pm8ap2md16e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

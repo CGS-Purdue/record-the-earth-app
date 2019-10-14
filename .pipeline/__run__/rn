@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# ----------------
+# react-native-cli
+# ----------------
+# Usage: cli [options] [command]
+## Options:
+#   --version                       Print CLI version
+#   --verbose                       Increase logging verbosity
+#   -h, --help                      output usage information
+## Commands:
+#   sta rt [options]                 starts the webserver
+#   bundle [options]                builds the javascript bundle for offline use
+#   ram-bundle [options]            builds javascript as a "Random Access Module" bundle for offline use
+#   link [options] [packageName]    links assets and optionally native modules
+#   unlink [options] <packageName>  unlink native dependency
+#   install <packageName>           install and link native dependencies
+#   uninstall <packageName>         uninstall and unlink native dependencies
+#   upgrade [options] [version]     Upgrade your app's template files to the specified or latest npm version using `rn-diff-purge` project. Only valid semver versions are allowed.
+#   info                            Get relevant version info about OS, toolchain and libraries
+#   config                          Print CLI configuration
+#   init [options] <projectName>    Initialize a new React Native project named <projectName> in a directory of the same name.
+#   log-ios                         starts iOS device syslog tail
+#   run-ios [options]               builds your app and starts it on iOS simulator
+#   log-android                     starts logkitty
+#   run-android [options]           builds your app and starts it on a connected Android emulator or device
+# node_modules/.bin/react-native log-android --help
+# react-native run-android [options]
+# builds your app and starts it on a connected Android emulator or device
+#   --install-debug
+#   --root [string]             Override the root directory for the android build (which contains the android directory) (default: "")
+#   --flavor [string]           --flavor has been deprecated. Use --variant instead
+#   --variant [string]           (default: "debug")
+#   --appFolder [string]        Specify a different application folder name for the android source. If not, we assume is "app" (default: "app")
+#   --appId [string]            Specify an applicationId to launch after build. (default: "")
+#   --appIdSuffix [string]      Specify an applicationIdSuffix to launch after build. (default: "")
+#   --main-activity [string]    Name of the activity to start (default: "MainActivity")
+#   --deviceId [string]         builds your app and starts it on a specific device/simulator with the given device id (listed by running "adb devices" on the command line).
+#   --no-packager               Do not launch packager while building
+#   --port [number]              (default: 8081)
+#   --terminal [string]         Launches the Metro Bundler in a new window using the specified terminal path. (default: "")
+#   --projectRoot [string]      Path to the root of the project
+#   --reactNativePath [string]  Path to React Native
+BASE_PATH="$(npm prefix)"
+
+[[ -f .npmrc ]] && source .npmrc
+
+NODE_RUN_ENV=""
+NODE_RUN_FLAGS=""
+REACT_NATIVE_FLAGS="$@"
+
+${NODE_RUN_ENV} node ${NODE_RUN_FLAGS} ${BASE_PATH}/./node_modules/react-native/local-cli/cli.js "${REACT_NATIVE_FLAGS}"

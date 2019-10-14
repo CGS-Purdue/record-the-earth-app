@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# ANDROID-BUILD
+# -------------
+# BUILD THE ANDROID PROJECT FROM THE ./android directory
+# For anyone who is having issues with the first command (in cases like a text input which cannot be unfocused), an alternative is adb shell
+# "input keyevent 82 && input keyevent 66 && input keyevent 66". It manually hits 'Reload' in the developer menu – Jonny Jul 10 at 19:31
+
+BASE_DIR="$(npm prefix)"
+
+[[ -f .npmrc ]] && source .npmrc
+
+ANDROID_SERIAL="025abd11727717ac"
+
+$ANDROID_HOME/platform-tools/adb devices \
+  | grep '\\t' \
+  | awk '{print $1}' \
+  | sed 's/\\s//g' \
+  | xargs -I {} "$ANDROID_HOME/platform-tools/adb" audit \
+    $HOME/platform-tools/adb -s {} shell input keyevent 82

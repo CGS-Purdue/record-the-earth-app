@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# THE SCRIPT ADDS THE COMPLETE IN THE CURRENT SESSION
+# AND PRINTS THE WORDLIST TO A FILE THAT YOU CAN
+# SOURCE IN YOUR PROFILE INIT SCRIPT (.bashrc|.bash_profile)
+# ---
+# NOTE: THE SCRIPT NEEDS TO BE RUN IN THE CURRENT SHELL SESSION
+# OR ELSE IT WILL CREATE THE COMPLETION IN ANOTHER SHELL INSTEAD OF
+# WHERE THE COMMAND WAS EXECUTED. THIS MEAN YOU SHOULD NOT USE
+# `npm run ... ` IF YOU WANT THE EFFECTS TO BE APPLIED TO YOUR CURRENT
+# SHELL. USE `. .run/config-comgen' TO RUN DIRECTLY OR RUN THE COMMAND
+# WITH NPM RUN THEN INCLUDE IT IN YOUR USER PROFILE
+
+
+RUN_COMPLETE="adb adb.devices adb.get-serial adb.log adb.ls adb.mirror adb.recon adb.reconnect adb.reverse adb.shake bump bundle config:compgen config:linters dev dev:debug dev:default dev:hot dev:restart dev:web env:reset env:user eslint-check expo:android expo:builddev expo:buildweb expo:start expo:web format info jest jsonlint lint lint.proj lint.watch metro metro:bundle metro:depends metro:export pretty pretty:check pretty:fix pretty:list rn:bundle rn:debugger test"
+complete -W "${RUN_COMPLETE}" run

@@ -1,0 +1,44 @@
+{
+  "name": "project-root",
+  "version": "0.0.2",
+  "description": "record-the-earth-react-native-project-root",
+  "author": "Matt Harris <charrismatic@protonmail.com> (https://charrismatic.github.io/)",
+  "scripts": {
+    "test": "npm run test:run -- arg1=PASS --opt1",
+    "bump": "npm version patch",
+    "cache:reset":
+    "outdated": "npm outdated  watchman watch-del-all && rm -rf $TMPDIR/react-native-packager-cache-* && rm -rf $TMPDIR/metro-bundler-cache-* && rm -rf node_modules/ && npm cache clean && npm install && npm start -- --reset-cache",
+    "expo:login": ". ../.env && expo login -u ${EXPO_AUTH_ID} -p ${EXPO_AUTH_KEY}",
+    "deps": "npm ls"
+  },
+  "projects": {
+    "record-the-earth-react-native": "./App"
+  },
+  "eslintConfig": {
+    "extends": "@react-native-community/eslint-config"
+  },
+  "dependencies": {},
+  "bugs": {
+    "url": "https://github.com/charrismatic/record-the-earth-react-native-snack/issues"
+  },
+  "devDependencies": {
+    "": "0.0.5",
+    "@typescript-eslint/parser": "^1.13.0",
+    "babel-preset-expo": "^6.0.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-eslint-comments": "^3.1.2",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.3",
+    "react-devtools": "^3.6.3",
+    "@expo/webpack-config": "^0.7.5",
+    "@babel/core": "^7.0.0",
+    "babel-jest": "24.9.0",
+    "babel-preset-expo": "^7.0.0"
+  },
+  "private": true,
+  "bit": {
+    "env": {},
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "npm"
+  }
+}
