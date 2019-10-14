@@ -1,7 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '../node_modules/react-navigation-stack/lib/module';
 import { IonicFontIcon } from '../Components/Icon/FontIcon';
-
 import { AboutScreen } from '../Screens/Infopages/AboutScreen';
 import { TermsScreen } from '../Screens/Infopages/TermsScreen';
 import { FaqScreen } from '../Screens/Infopages/FaqScreen';

@@ -88,8 +88,8 @@ export default class App extends Component {
 
 
   cacheResourcesAsync = async () => {
-    const image_assets = Object.assign(
     let cachePromises = [];
+    const image_assets = Object.assign(
       Theme.Assets.buttons,
       Theme.Assets.logos,
       Theme.Assets.images,

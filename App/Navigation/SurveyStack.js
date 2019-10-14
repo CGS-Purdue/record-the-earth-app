@@ -15,21 +15,18 @@ const initSoundscape = () => {
   soundscape.datetime = timestamp.toISOString();
   return soundscape;
 };
+// const SurveyTemplate = initSoundscape();
 
-const SurveyTemplate = initSoundscape();
-
-const SurveyStack = createStackNavigator(
-  {
-    SurveyDescScreen: { screen: SurveyDescScreen },
-    SoundscapeSurveyBio: { screen: SurveyBioScreen },
-    SoundscapeSurveyEmo: { screen: SurveyEmoScreen },
-    SoundscapeSurveyGeo: { screen: SurveyGeoScreen },
-    SoundscapeSurveyHum: { screen: SurveyHumScreen },
-    SoundscapeSubmit: { screen: SurveySubmitScreen },
-  },
-  {
+const SurveyStack = createStackNavigator({
+    SurveyDescScreen: { key: 'SurveyStep1', screen: SurveyDescScreen },
+    SoundscapeSurveyBio: { key: 'SurveyStep2',  screen: SurveyBioScreen },
+    SoundscapeSurveyEmo: { key: 'SurveyStep3',  screen: SurveyEmoScreen },
+    SoundscapeSurveyGeo: { key: 'SurveyStep4',  screen: SurveyGeoScreen },
+    SoundscapeSurveyHum: { key: 'SurveyStep5',  screen: SurveyHumScreen },
+    SoundscapeSubmit: { key: 'SurveyStep6', screen: SurveySubmitScreen },
+  }, {
     initialRouteName: 'SurveyDescScreen',
-    initialRouteParams: { soundscape_data2: SurveyTemplate },
+    initialRouteParams: { soundscape_data2: initSoundscape() },
     initialRouteKey: 'SurveyStart',
     headerMode: 'none',
     mode: 'card',
@@ -47,21 +44,28 @@ const SurveyStack = createStackNavigator(
       screenInterpolator: (sceneProps) => {
         const { layout, position, scene } = sceneProps;
         const { index } = scene;
+
         const height = layout.initHeight;
         const translateY = position.interpolate({
           inputRange: [index - 1, index, index + 1],
           outputRange: [height, 0, 0],
         });
+
         const width = layout.initWidth;
         const translateX = position.interpolate({
           inputRange: [index - 1, index, index + 1],
           outputRange: [width, 0, 0],
         });
+
         const opacity = position.interpolate({
           inputRange: [index - 1, index - 0.99, index],
           outputRange: [0, 1, 1],
         });
-        return { opacity, transform: [{ translateX }] };
+
+        return {
+          opacity,
+          transform: [{ translateX }]
+        };
       },
     }),
   }

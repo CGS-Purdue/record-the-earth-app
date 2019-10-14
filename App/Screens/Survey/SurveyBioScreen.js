@@ -13,6 +13,22 @@ const _assets = Theme.Assets;
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
 
+// <Button
+//   title={'Continue'}
+//   style={_styles.button_default}
+//   color={_colors.PRIMARY}
+//   accessibilityLabel="Go to next"
+//   onPress={this.onTaskCompleted}
+// />
+const GradFillBoxStyle = {
+  flex: 1,
+  position: 'absolute',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '100%',
+  height: '100%',
+};
+
 class SurveyBioScreen extends Component {
   constructor(props) {
     super(props);
@@ -99,20 +115,15 @@ class SurveyBioScreen extends Component {
     this.props.navigation.navigate({
       routeName: 'SoundscapeSurveyEmo',
       params: { soundscape_data: data },
-    });
+    });GradFillBoxStyle
   }
 
 
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <ImageBackground
-        style={_styles.bgImg}
-        source={_assets.images.img_bg_frog}
-      >
-        <View style={{flex: 1, position: 'absolute', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%', }} >
-          <BlackFade />
-        </View>
+      <ImageBackground style={_styles.bgImg} source={_assets.images.img_bg_frog} >
+        <View style={GradFillBoxStyle}><BlackFade /></View>
         <RootView>
           <PadView padding={[2, 2]}>
             <CenterView>
@@ -149,18 +160,12 @@ class SurveyBioScreen extends Component {
                   text={'Frogs and Reptiles'}
                 />
                 <View style={{height: 10, backgroundColor: _colors.TRANSPARENT}}/>
-                <Button
-                  title={'Continue'}
-                  style={_styles.button_default}
-                  color={_colors.PRIMARY}
-                  accessibilityLabel="Go to next"
-                  onPress={this.onTaskCompleted}
-                />
+
                 <AwesomeButton
                   activeOpacity={0.75}
                   backgroundActive="rgba(0,0,0,0)"
                   backgroundColor={_colors.BLU_200}
-                  backgroundDarker={_colors.BLU_400}
+                  backgroundDarker={_colors.PRIMARY}
                   borderRadius={1}
                   ExtraContent={<Scrim/>}
                   height={45}

@@ -1,0 +1,101 @@
+export default {
+  '@global': {
+    '.fadeout--sides::before': {
+      content: '""',
+      position: 'absolute',
+      width: 50,
+      height: '100%',
+      left: '0',
+      top: '0',
+      display: 'block',
+      zIndex: '100',
+      border: '1px solid red',
+      background: 'linear-gradient(to right, white 0%, rgba(255, 255, 255, 0) 100%)',
+      filter: 'progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#ffffff\', endColorstr=\'#00ffffff\',GradientType=1 )'
+    },
+    '.fadeout--sides::after': {
+      content: '""',
+      position: 'absolute',
+      width: 50,
+      height: '100%',
+      right: '0',
+      top: '0',
+      display: 'block',
+      zIndex: '100',
+      border: '1px solid red',
+      background: 'linear-gradient(to right, white 0%, rgba(255, 255, 255, 0) 100%)',
+      filter: 'progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#ffffff\', endColorstr=\'#00ffffff\',GradientType=1 )'
+    },
+    '.gradient': {
+      backgroundColor: '#154e7b',
+      backgroundImage: '-ms-repeating-linear-gradient(left, #151c22 0%, #1580d4 53.9%, #151c22 100%)',
+      fallbacks: [
+        {
+          backgroundImage: 'repeating-linear-gradient(to right, #151c22 0%, #1580d4 53.9%, #151c22 100%)'
+        },
+        {
+          backgroundImage: '-webkit-repeating-linear-gradient(left, #151c22 0%, #1580d4 53.9%, #151c22 100%)'
+        },
+        {
+          backgroundImage: 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0idnNnZyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjAlIj48c3RvcCBzdG9wLWNvbG9yPSIjMTUxYzIyIiBzdG9wLW9wYWNpdHk9IjEiIG9mZnNldD0iMCIvPjxzdG9wIHN0b3AtY29sb3I9IiMxNTgwZDQiIHN0b3Atb3BhY2l0eT0iMSIgb2Zmc2V0PSIwLjUzOSIvPjxzdG9wIHN0b3AtY29sb3I9IiMxNTFjMjIiIHN0b3Atb3BhY2l0eT0iMSIgb2Zmc2V0PSIxIi8+PC9saW5lYXJHcmFkaWVudD48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI3ZzZ2cpIiAvPjwvc3ZnPg==)'
+        }
+      ]
+    },
+    '@media screen': {
+      '.gradient': {
+        filter: 'progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff151c22",endColorstr="#ff151c22",GradientType=1)'
+      },
+      '.gradient2': {
+        filter: 'progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff1580d4",endColorstr="#ff1580d4",GradientType=1)'
+      },
+      '.gradient3': {
+        filter: 'progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff151c22",endColorstr="#ff1580d4",GradientType=0)'
+      }
+    },
+    '.gradient2': {
+      backgroundColor: '#154165',
+      backgroundImage: '-ms-repeating-linear-gradient(left, #1580d4 0%, #151c22 38%, #151c22 63.2%, #1580d4 100%)',
+      fallbacks: [
+        {
+          backgroundImage: 'repeating-linear-gradient(to right, #1580d4 0%, #151c22 38%, #151c22 63.2%, #1580d4 100%)'
+        },
+        {
+          backgroundImage: '-webkit-repeating-linear-gradient(left, #1580d4 0%, #151c22 38%, #151c22 63.2%, #1580d4 100%)'
+        },
+        {
+          backgroundImage: 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0idnNnZyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjAlIj48c3RvcCBzdG9wLWNvbG9yPSIjMTU4MGQ0IiBzdG9wLW9wYWNpdHk9IjEiIG9mZnNldD0iMCIvPjxzdG9wIHN0b3AtY29sb3I9IiMxNTFjMjIiIHN0b3Atb3BhY2l0eT0iMSIgb2Zmc2V0PSIwLjM4Ii8+PHN0b3Agc3RvcC1jb2xvcj0iIzE1MWMyMiIgc3RvcCvcGFjaXR5PSIxIiBvZmZzZXQ9IjAuNjMyIi8+PHN0b3Agc3RvcC1jb2xvcj0iIzE1ODBkNCIgc3RvcC1vcGFjaXR5PSIxIiBvZmZzZXQ9IjEiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjdnNnZykiIC8+PC9zdmc+)'
+        }
+      ]
+    },
+    '.gradient3': {
+      backgroundColor: '#172b3b',
+      backgroundImage: '-ms-repeating-linear-gradient(bottom, #1580d4 0%, #224057 17.6%, #151c22 36.2%, #151c22 53.7%, #151c22 100%)',
+      fallbacks: [
+        {
+          backgroundImage: 'repeating-linear-gradient(to top, #1580d4 0%, #224057 17.6%, #151c22 36.2%, #151c22 53.7%, #151c22 100%)'
+        },
+        {
+          backgroundImage: '-webkit-repeating-linear-gradient(bottom, #1580d4 0%, #224057 17.6%, #151c22 36.2%, #151c22 53.7%, #151c22 100%)'
+        },
+        {
+          backgroundImage: 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0idnNnZyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjEwMCUiIHgyPSIwJSIgeTI9IjAlIj48c3RvcCBzdG9wLWNvbG9yPSIjMTU4MGQ0IiBzdG9wLW9wYWNpdHk9IjEiIG9mZnNldD0iMCIvPjxzdG9wIHN0b3AtY29sb3I9IiMyMjQwNTciIHN0b3Atb3BhY2l0eT0iMSIgb2Zmc2V0PSIwLjE3NjAwMDAwMDAwMDAwMDAyIi8+PHN0b3Agc3RvcC1jb2xvcj0iIzE1MWMyMiIgc3RvcC1vcGFjaXR5PSIxIiBvZmZzZXQ9IjAuMzYyMDAwMDAwMDAwMDAwMDQiLz48c3RvcCBzdG9wLWNvbG9yPSIjMTUxYzIyIiBzdG9wLW9wYWNpdHk9IjEiIG9mZnNldD0iMC41MzciLz48c3RvcCBzdG9wLWNvbG9yPSIjMTUxYzIyIiBzdG9wLW9wYWNpdHk9IjEiIG9mZnNldD0iMSIvPjwvbGluZWFyR3JhZGllbnQ+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCN2c2dnKSIgLz48L3N2Zz4=)'
+        }
+      ]
+    },
+    '.hatch_1': {
+      backgroundColor: '#0f1419',
+      backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.115) 1px, transparent 1px), linear-gradient(0, rgba(0, 0, 0, 0.015) 2px, transparent 1px)',
+      backgroundSize: '10px 10px',
+      backgroundPosition: '-1px -1px, -1px -1px'
+    },
+    '.pattern_greys_striping': {
+      backgroundImage: 'repeating-linear-gradient(145deg, #1d252d, #151c22 30px, #151c22 30px, #151a1e 60px)',
+      minHeight: 50
+    },
+    '.carbon_fiber': {
+      background: 'linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px, linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0, linear-gradient(27deg, #222222 5px, transparent 5px) 0 10px, linear-gradient(207deg, #222222 5px, transparent 5px) 10px 5px, linear-gradient(90deg, #1b1b1b 10px, transparent 10px), linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424)',
+      backgroundColor: '#131313',
+      backgroundSize: '20px 20px'
+    }
+  }
+};

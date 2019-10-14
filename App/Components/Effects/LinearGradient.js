@@ -37,6 +37,22 @@ class BlackFade extends React.Component {
 // <View style={{ flex: 1 }}>
 // <View style={{ backgroundColor: 'orange', flex: 1 }} />
 // </View>
+class GreenFade extends React.Component {
+  render() {
+    let gradientStyle = {position: 'absolute', left: 0, right: 0, top: 0, height: '100%', width: '100%'};
+    return (
+      <LinearGradient
+        locations={[0, 0.5, 1]}
+        colors={['rgba(255,0,0,.2)', 'transparent', 'rgba(0,0,0,0.4)']}
+        style={gradientStyle}
+      />
+    );
+  }
+}
+
+// <View style={{ flex: 1 }}>
+// <View style={{ backgroundColor: 'orange', flex: 1 }} />
+// </View>
 class MirageGrad extends React.Component {
   render() {
     let gradientStyle = {position: 'absolute', left: 0, right: 0, top: 0, height: '100%', width: '100%'};

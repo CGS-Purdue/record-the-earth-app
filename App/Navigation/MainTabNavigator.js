@@ -132,8 +132,7 @@ const MainTabNavigator = createMaterialTopTabNavigator(
           },
         },
       },
-  },
-  {
+  }, {
     navigationOptions: {
       initialRouteName: 'HomeTab',
       allowFontScaling: true,
@@ -144,6 +143,7 @@ const MainTabNavigator = createMaterialTopTabNavigator(
         return <TabBarIcon name={'home'} focused={focused} color={tintColor} />;
       },
     },
+
     tabBarComponent: MaterialTopTabBar,
     tabBarPosition: 'bottom',
     tabBarOptions: {

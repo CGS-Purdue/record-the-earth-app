@@ -40,6 +40,7 @@ class AudioRecord extends Component {
       haveRecordingPermissions: false,
       discardAudioRecording: null,
       disabled: false,
+      recordButtonDisabled: false,
       duration: 0,
       durationMillis: 0,
       error: null,
@@ -205,8 +206,6 @@ class AudioRecord extends Component {
       duration: lastReadState.durationMillis,
       progress: lastReadState.durationMillis / (this.MAX_DURATION + 0.0000001),
     });
-
-    console.log(this.state);
   }
 
   async startAsyncRecord() {
@@ -214,7 +213,8 @@ class AudioRecord extends Component {
       this.setState({
         isRecording: true,
       });
-      await this.recorder.startAsync();
+      await this.recorder.startAsync();    console.log(this.state);
+
     }
   }
 
@@ -320,6 +320,9 @@ class AudioRecord extends Component {
   }
 
   handleRecordButton = () => {
+    if (this.state.recordButtonDisabled || this.state.syncing) {
+      return false;
+    }
     if (this.state.isRecording) {
       this.recordStop();
     } else {
@@ -357,9 +360,8 @@ class AudioRecord extends Component {
           </View>
 
           <AudioRecordButton
-            onPress={this.handleRecordButton}
+            action={this.handleRecordButton}
             active={this.state.recordingState}
-            disabled={false}
           />
         </View>
       );
