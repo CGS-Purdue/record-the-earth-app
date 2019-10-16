@@ -39,3 +39,4 @@ App/\.archive/
 App/\.eslintcache
 
 App/package-filelist\.txt
+etc/USERHOME/
