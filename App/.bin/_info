@@ -11,8 +11,9 @@ const encoding = 'utf-8';
 let data;
 let options={};
 let spreader = "\t    ";
-const RESET =  '0m',
 const COLUMN_MAX_LENGTH = 50;
+const RESET =  '0m';
+
 const COLOR = {
   bg_black: '40m',
   bg_blue: '44m',
@@ -46,7 +47,7 @@ const COLOR = {
   yellow: '33m',
 };
 const _c = (s) => { return  `\x1b[${s}` };
-const fmt = (style, text) => {return [_c(RESET), _c(style), key, _c(RESET)].join('')};
+const fmt = (style, text) => {return [_c(RESET), _c(style), text, _c(RESET)].join('')};
 const print_titleline = (titleline) => {console.log([fmt(COLOR.brightred, titleline)].join(''))};
 
 const get_titleline = (title) => { return `--- ${title.toUpperCase()} --- \n` };
@@ -76,7 +77,9 @@ const print_loop = (iterable) => {
   const items = sort_keys(Object.entries(iterable));
   if (items.length === 0 ) { return }
   for (let item of items){
-    if (item[0].length > item_len_max && item[0].length < COLUMN_MAX_LENGTH) { item_len_max = item[0].length; }
+    if (item[0].length > item_len_max && item[0].length < COLUMN_MAX_LENGTH) {
+      item_len_max = item[0].length;
+    }
     if (item[0].length < item_len_min) { item_len_min = item[0].length; }
     if (filter_item(item[0], '')) { formatted.push([item[0], item[1]]) }
   }
@@ -125,6 +128,7 @@ const appconfig = require('../app');
 const command_list = [
   "app",
   "config",
+  "dependencies",
   "env",
   "paths",
   "scripts",
@@ -141,6 +145,11 @@ if (process.stdin.isTTY) {
       case "config":  print_info(select, mainpkg.config);   break;
       case "env":     print_info(select, process.env);      break;
       case "scripts": print_info(select, mainpkg.scripts);  break;
+      case "dependencies":
+          print_info(select, mainpkg.dependencies);
+          console.log('');
+          print_info("DevDependencies", mainpkg.devDependencies);
+                                                            break;
       case "paths":   print_info(select, mainpkg.dirs);     break;
       default:
         console.log('Nothing selected. Choose a category to view.');

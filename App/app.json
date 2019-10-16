@@ -17,6 +17,7 @@
     "assetBundlePatterns": [
       "**/*",
       "./Assets/**/*",
+      "./Screens/Dev/*",
       "./Assets/fonts/*.ttf",
       "./Assets/img/*.png",
       "./Assets/icons/*.png",
@@ -61,7 +62,8 @@
     },
     "platforms": [
       "ios",
-      "android"
+      "android",
+      "web"
     ],
     "primaryColor": "#cccccc",
     "privacy": "unlisted",
@@ -77,5 +79,23 @@
       "fallbackToCacheTimeout": 0
     },
     "version": "0.9.0"
+  },
+  "web": {
+    "build": {
+      "report": {
+        "statsFilename": "stats.json",
+        "reportFilename": "report.html",
+        "analyzerMode": "static",
+        "analyzerHost": "127.0.0.1",
+        "analyzerPort": 8888,
+        "defaultSizes": "gzip",
+        "openAnalyzer": false,
+        "generateStatsFile": true,
+        "statsOptions": null,
+        "excludeAssets": null,
+        "verbose": false,
+        "path": "web-report"
+      }
+    }
   }
 }

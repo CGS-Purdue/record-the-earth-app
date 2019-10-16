@@ -1,6 +1,6 @@
 import { registerRootComponent } from 'expo';
 import { activateKeepAwake } from 'expo-keep-awake';
-import { YellowBox } from 'react-native';
+import { AppRegistry, Platform, YellowBox } from 'react-native';
 import App from './App';
 
 if (__DEV__) {
@@ -16,11 +16,11 @@ if (__DEV__) {
   activateKeepAwake();
 }
 
-// if (Platform.OS === 'web') {
-//   AppRegistry.registerComponent('RecordTheEarth3', () => App);
-//   AppRegistry.runApplication('RecordTheEarth3', {
-//     rootTag: document.getElementById('root'),
-//   });
-// }
+if (Platform.OS === 'web') {
+  AppRegistry.registerComponent('RecordTheEarth3', () => App);
+  AppRegistry.runApplication('RecordTheEarth3', {
+    rootTag: document.getElementById('root'),
+  });
+}
 
 registerRootComponent(App);

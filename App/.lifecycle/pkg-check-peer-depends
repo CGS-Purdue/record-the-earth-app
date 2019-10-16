@@ -6,6 +6,8 @@
 # "err!"
 # "peer dep missing"
 # "UNMET PEER DEPENDENCY"
+# "npm ERR! peer dep missing: [PACKAGE_NAME]@[VERSION], required by [PEER_NAME]@[PEER_VERSION]"
+#
 
 npm ls | grep -vi optional | grep -i 'unmet peer'
 
@@ -16,3 +18,4 @@ npm ls | grep -vi optional | grep -i 'unmet peer'
 
 ## List peer dependencies
 #npm info react-native@latest peerDependencies
+install-peerdeps --only-peers --silent --dev --extra-args "--no-optional" --dry-run $PACKAGE_NAME@$PACKAGE_VERSION
