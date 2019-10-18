@@ -7,7 +7,6 @@ const _assets = Theme.Assets;
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
 const _vars = Theme.Variables;
-
 const styles = _styles.AboutStyles;
 
 

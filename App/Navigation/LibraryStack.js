@@ -1,6 +1,6 @@
 import { createStackNavigator } from '../node_modules/react-navigation-stack/lib/module';
-import { SoundFileLibraryScreen } from '../Screens/Library/SoundFileLibraryScreen';
 import { SoundscapeLibraryScreen } from '../Screens/Library/SoundscapeLibraryScreen';
+import { SoundFileLibraryScreen } from '../Screens/Library/SoundFileLibraryScreen';
 import { SoundscapePlayerScreen } from '../Screens/Library/SoundscapePlayerScreen';
 
 const LibraryStack = createStackNavigator(

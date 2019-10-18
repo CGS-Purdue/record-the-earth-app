@@ -119,7 +119,7 @@ const iconUnfocuseStyles = {
 
 const iconFocusedStyles = {
   // backgroundColor: _colors.TAB_BAR_ACTIVE_BG,
-  color: _colors.TAB_BAR_ACTIVE_COLOR,
+  // color: _colors.TAB_BAR_ACTIVE_COLOR,
   borderColor: _colors.TAB_BAR_ACTIVE_COLOR,
 };
 

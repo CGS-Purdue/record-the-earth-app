@@ -1,14 +1,10 @@
 import { Image, Platform } from 'react-native';
-// import { Icon } from 'expo';
 import * as Font from 'expo-font';
 import * as Location from 'expo-location';
 import { Asset } from 'expo-asset';
 import { AppConfig } from '../Config/Application';
 import { getKey, setKey } from './AsyncStorage';
-import {
-  checkAppDirectoriesStatus,
-  setupFirstLoadAppStorageDirectories,
-} from './Filesystem';
+import { checkAppDirectoriesStatus, setupFirstLoadAppStorageDirectories } from './Filesystem';
 // import { setLocationReference }  from './LocationFunctions';
 // import { Theme } from '../Theme';
 
@@ -26,30 +22,28 @@ async function preLoadImageCache(images) {
 }
 
 async function preLoadFontCache(fonts) {
-  var font, name, mod;
   var cacheFonts = {};
   var fontArray = [];
+  var font;
+  var name;
+  var mod;
   for (var key of Object.keys(fonts)) {
     font = fonts[key];
     // name = font.name ? font.name : key;
     mod = font.module;
-    console.log('font', font);
     var src = await Font.loadAsync(font);
-    console.log('src', src);
 
     Promise.resolve(src).then((fontSrc) => {
       font.src1 = fontSrc;
       cacheFonts[key] = font;
-      console.log('ExpoFont.loadAsync', cacheFonts);
     });
 
     var src2 = await Asset.fromModule(font);
-    console.log('src2', src2);
     font.src2 = src2;
     fontArray.push({ [key]: font });
   }
 
-  console.log('ExpoFont.loadAsync', cacheFonts, fontArray);
+  // console.log('ExpoFont.loadAsync', cacheFonts, fontArray);
   return [cacheFonts, fontArray];
 
   // try {
@@ -64,13 +58,14 @@ function onAppLoaded() {
   let isFirstLoad = getKey(`${storageKey}:AppHasFirstTimeLoad`);
   if (!isFirstLoad) {
     onAppFirstTimeLoad();
+    return true;
   } else {
     let dir_status = checkAppDirectoriesStatus();
-    console.log('[InitalAppSetup] dir_status', dir_status);
+    // console.log('[InitalAppSetup] dir_status', dir_status);
     // const ionicFont = Font.loadAsync({
     //   ionicons: require('../Assets/fonts/ionicons.ttf'),
     // });
-
+    return dir_status;
     // console.log('ionicFont', ionicFont);
     // let fsData = getAppStorageContent('/');
     // fsData = getAppStorageContent('/soundfiles');
@@ -78,14 +73,13 @@ function onAppLoaded() {
 
     // const _db_StatusTests == () => {
     // }]
-    return true;
   }
 }
 
 async function onAppFirstTimeLoad() {
   let dirs = await setupFirstLoadAppStorageDirectories();
   console.log('[AppFirstTimeSetup] Creating Directories');
-  console.log('[AppFirstTimeSetup] dirs', dirs);
+  // console.log('[AppFirstTimeSetup] dirs', dirs);
 
   if (Platform.OS === 'web') {
     Location.installWebGeolocationPolyfill();
@@ -97,15 +91,13 @@ async function onAppFirstTimeLoad() {
   // Permissions.AUDIO_RECORDING,
 
   let dir_status = checkAppDirectoriesStatus();
-  console.log('[InitalAppSetup] dir_status', dir_status);
-
+  // console.log('[InitalAppSetup] dir_status', dir_status);
   console.log('[InitalAppSetup] loading font icons');
   // let fsData = getAppStorageContent('/');
   // fsData = getAppStorageContent('/soundfiles');
   // console.log('getAppStorageContent', fsData);
 
-  // const _db_StatusTests == () => {
-  // }]
+  // const _db_StatusTests == () => { }]
   return true;
 }
 
@@ -115,8 +107,6 @@ async function onAppFirstTimeLoad() {
 // // OVERWRITES (VS stores) THE PREVIOUS VALUE
 // // WAIT FOR COMPLETE LOAD ON MAIN SCREEN
 // let refLocation = setLocationReference();
-//
-
 function initalAppSetup() {
   let isFirstTime = getKey(`${storageKey}:AppHasFirstTimeLoad`);
   if (isFirstTime) {
@@ -125,19 +115,11 @@ function initalAppSetup() {
   }
 
   let dir_status = checkAppDirectoriesStatus();
-  console.log('[InitalAppSetup] dir_status', dir_status);
-
-  console.log('[InitalAppSetup] loading font icons');
-  const ionicFont = Font.loadAsync({
-    ionicons: require('../Assets/fonts/ionicons.ttf'),
-  });
-  console.log('ionicFont', ionicFont);
+  // console.log('[InitalAppSetup] dir_status', dir_status);
+  // const ionicFont = Font.loadAsync({'ionicons':require('../Assets/fonts/ionicons.ttf')});
   // let fsData = getAppStorageContent('/');
   // fsData = getAppStorageContent('/soundfiles');
-  // console.log('getAppStorageContent', fsData);
-
-  // const _db_StatusTests == () => {
-  // }]
+  // const _db_StatusTests == () => {}
   return true;
 }
 

@@ -37,13 +37,8 @@ class ConnectionQuery extends Component {
     this.arguments = args;
 
     this.options = options;
-    const _db_success = (data, options) => {
-      console.log('transaction completed successfully');
-      this.querystate.data = data.result.rows._array;
-    };
-
-    const _db_error = (tx, error) => {
-      console.log('db_error', tx, error);
+    const _db_success = (data, options) => { console.log('transaction completed successfully'); this.querystate.data = data.result.rows._array; }; const _db_error = (tx, error) => {
+       console.log('db_error', tx, error);
     };
 
     const _tx_success = (tx, result, options) => {

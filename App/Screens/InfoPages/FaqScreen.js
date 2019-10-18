@@ -5,8 +5,8 @@ import { Theme } from '../../Theme';
 
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
-const _colors = Theme.Colors;
-const _vars = Theme.Variables;
+// const _colors = Theme.Colors;
+// const _vars = Theme.Variables;
 
 const styles = _styles.AboutStyles;
 
@@ -31,8 +31,8 @@ class FaqScreen extends React.Component {
               </Text>
             </View>
             <View style={styles.sectionHeaderContainer}>
-              <Text style={styles.sectionHeader}>What are these screens?</Text>
-              <Text style={styles.sectionText}>We like to use these screens when we develop apps. They are optional and out of the way to help you along your app creation process.  Each screen has an explanation of what it provides.  More info can be found on our website http://infinite.red/ignite</Text>
+              <Text style={styles.sectionHeader}>{'What are these screens?'}</Text>
+              <Text style={styles.sectionText}>{'We like to use these screens when we develop apps. They are optional and out of the way to help you along your app creation process.  Each screen has an explanation of what it provides.  More info can be found on our website http://infinite.red/ignite'}</Text>
             </View>
             <View style={styles.sectionHeaderContainer}>
               <Text style={styles.sectionHeader}>Got Docs?</Text>

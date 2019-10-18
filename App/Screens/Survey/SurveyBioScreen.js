@@ -115,7 +115,7 @@ class SurveyBioScreen extends Component {
     this.props.navigation.navigate({
       routeName: 'SoundscapeSurveyEmo',
       params: { soundscape_data: data },
-    });GradFillBoxStyle
+    });
   }
 
 

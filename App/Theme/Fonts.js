@@ -98,8 +98,9 @@ var _getFont = (key) => {
 const _loadFont = (_font) => {
   let name = _font.name;
   let module = _font.module;
-  let src = ExpoFont.loadAsync({ [name]: module });
-  _font.src = Promise.resolve(src);
+  // _font.src = Promise.resolve(src);
+  _font.src = ExpoFont.loadAsync({ [name]: module });
+  _font.module = _font.module;
   _font.isLoaded = true;
   return _font;
 };
@@ -178,12 +179,10 @@ var FontVariables = {
 var ThemeFonts = {
   ICON_FONT: _loadFont(FontMap('ionicons')),
   TITLE_FONT: _loadFont(FontMap('opensansregular')),
-  HEADING_FONT: _loadFont(FontMap('opensansregular')),
+  HEADING_FONT: FontMap('opensansregular'),
   MONO_FONT: _loadFont(FontMap('spacemono')),
   LIGHT_FONT: _loadFont(FontMap('opensanslight')),
-
   FontMap: FontMap(),
-  FontMap0: FontMap,
   // PreloadedFonts: [
   //   {'ionicons': FontMap('ionicons',true)},
   //   {'opensanslight': FontMap('opensanslight',true)},

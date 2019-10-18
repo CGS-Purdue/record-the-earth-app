@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Text, View } from 'react-native';
+import { TouchableOpacity, Text, Button, View } from 'react-native';
 import { HeadingText } from '../../Components/Text/HeadingText';
 import { Theme } from '../../Theme';
 
@@ -9,13 +9,27 @@ const _colors = Theme.Colors;
 class SoundscapeListViewHeader extends Component {
   constructor(props) {
     super(props);
+    this._onActionButton = this._onActionButton.bind(this);
   }
+
+  _onActionButton() {
+    if (this.props.onActionButton) {
+      this.props.onActionButton();
+    }
+  }
+
   render() {
     return (
       <View style={_styles.listview_header_container}>
-        <HeadingText style={_styles.listview_header_text}>
+        <HeadingText
+          style={_styles.listview_header_text}
+        >
           {'Soundscapes'}
         </HeadingText>
+        <Button
+          title={'View File List'}
+          onPress={this._onActionButton}
+        />
       </View>
     );
   }

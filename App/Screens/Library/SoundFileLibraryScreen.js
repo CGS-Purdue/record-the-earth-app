@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView, TouchableOpacity, FlatList, View, Text, StyleSheet } from 'react-native';
-// import { Section, ImgBgFill, CenterView, PadView, RootView } from '../../Components/Views';
+import { FlatList, View } from 'react-native';
 import { FileListViewSoundItem, FileListViewItem } from '../../Components/ListViews/FileListViewItem';
 import { ListViewEmpty } from '../../Components/ListViews/ListViewEmpty';
 import { SoundscapeListViewHeader } from '../../Components/ListViews/SoundscapeListViewHeader';
@@ -9,9 +8,8 @@ import * as FileSystem from 'expo-file-system';
 // import { HeadingText } from '../../Components/Text/HeadingText';
 import { StorageConfig } from '../../Config/Storage';
 // import { MOCK_SOUND_FILES } from '../../Config/MockSoundFiles';
-
 import { FileListViewHeader } from '../../Components/ListViews/FileListViewHeader';
-import { SoundDB } from '../../Components/Database/SoundDB';
+// import { SoundDB } from '../../Components/Database/SoundDB';
 import { Theme } from '../../Theme';
 
 const _assets = Theme.Assets;
@@ -26,7 +24,7 @@ class SoundFileLibraryScreen extends Component {
     this.state = {
       refreshing: true,
       intialized: false,
-      files: new Map(),
+      files: [],
       selected: { id: 0 },
     };
 
@@ -39,10 +37,22 @@ class SoundFileLibraryScreen extends Component {
 
     this.updateFiles = this.updateFiles.bind(this);
     this.getFileList = this.getFileList.bind(this);
+    this._isMounted = false;
+  }l
+
+  componentDidMount() {
+    this._isMounted = true;
+    this.getFileList();
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   setRefreshingState(isRefreshing){
-    this.setState({refreshing: isRefreshing});
+    if (this._isMounted) {
+      this.setState({refreshing: isRefreshing});
+    }
   }
 
   getNavigationParams() {
@@ -50,6 +60,8 @@ class SoundFileLibraryScreen extends Component {
   }
 
   updateFiles(items) {
+    this.setRefreshingState(true);
+
     let location = this.config.soundPath;
     let _files = items.map(function(item, num) {
       let name = item
@@ -68,7 +80,13 @@ class SoundFileLibraryScreen extends Component {
         data: obj,
       };
     });
-    this.setState({ files: _files, refreshing: false });
+
+    this.listCache = _files;
+
+    if (this._isMounted) {
+      this.setState({ files: _files});
+    }
+    this.setRefreshingState(false);
   }
 
   async getFileList(location) {
@@ -78,20 +96,19 @@ class SoundFileLibraryScreen extends Component {
       if (!result) {
         console.log('no files');
       } else {
-        this.setState({refreshing: true})
         this.updateFiles(result);
       }
     });
   }
 
-  componentDidMount() {
-    this.getFileList();
-  }
-
   setSelected(newSelected) {
-    this.setState({
-      selected: newSelected,SoundscapeListViewHeader
-    });
+    this.lastSelected = this.state.selected;
+    this.nextSelected = newSelected;
+    if (this._isMounted) {
+      this.setState({
+        selected: newSelected,SoundscapeListViewHeader
+      })
+    }
   }
 
 
@@ -104,7 +121,13 @@ class SoundFileLibraryScreen extends Component {
           initialNumToRender={8}
           extraData={this.state.selected}
           ListEmptyComponent={ListViewEmpty}
-          ListHeaderComponent={FileListViewHeader}
+          ListHeaderComponent={() => (
+            <FileListViewHeader
+              onActionButton={()=>{
+                this.props.navigation.navigate({ routeName:'SoundscapeLibrary' })
+              }}
+            />
+          )}
           keyExtractor={(item) => item.id}
           renderItem={({ item, index, seperators }) => (
             <FileListViewSoundItem

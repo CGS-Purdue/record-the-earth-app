@@ -15,7 +15,6 @@ const initSoundscape = () => {
   soundscape.datetime = timestamp.toISOString();
   return soundscape;
 };
-// const SurveyTemplate = initSoundscape();
 
 const SurveyStack = createStackNavigator({
     SurveyDescScreen: { key: 'SurveyStep1', screen: SurveyDescScreen },
@@ -27,7 +26,7 @@ const SurveyStack = createStackNavigator({
   }, {
     initialRouteName: 'SurveyDescScreen',
     initialRouteParams: { soundscape_data2: initSoundscape() },
-    initialRouteKey: 'SurveyStart',
+    initialRouteKey: 'SurveyStep1',
     headerMode: 'none',
     mode: 'card',
     cardOverlayEnabled: false,
@@ -45,11 +44,11 @@ const SurveyStack = createStackNavigator({
         const { layout, position, scene } = sceneProps;
         const { index } = scene;
 
-        const height = layout.initHeight;
-        const translateY = position.interpolate({
-          inputRange: [index - 1, index, index + 1],
-          outputRange: [height, 0, 0],
-        });
+        // const height = layout.initHeight;
+        // const translateY = position.interpolate({
+        //   inputRange: [index - 1, index, index + 1],
+        //   outputRange: [height, 0, 0],
+        // });
 
         const width = layout.initWidth;
         const translateX = position.interpolate({

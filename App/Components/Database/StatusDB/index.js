@@ -1,5 +1,4 @@
 import React, { Component, createRef, useState } from 'react';
-
 import { Connection } from '../Connection';
 import { ConnectionQuery } from '../ConnectionQuery';
 import { DBProps } from './Props';
@@ -8,6 +7,32 @@ const _config = DBProps.config;
 const _schema = DBProps.schema;
 const _statements = DBProps.statements;
 const _ref = createRef();
+
+const _dbSuccess = (data) => {
+  console.log('query transaction completed onSuccessfully');
+  if (data) { console.log(data); }
+};
+
+// { insertId, rowsAffected, rows: { length, item(), _array, }, }
+const _txSuccess = (tx, result) => {
+  console.log('tx resultset', result);
+};
+
+const _insertSuccess = (tx, result) => {
+  console.log(
+    'Insert Successful',
+   `id: ${result.insertId}, rowsAffected: ${result.rowsAffected}`)
+};
+
+const _selectSuccess = (tx, result) => {
+  this.result.data = result;
+  console.log('Selected', result._array);
+  return result;
+};
+
+const _dbError = (err) => { console.log('db error', err) };
+const _txError = (tx, err) => { console.log('tx err', tx, err) };
+
 
 class StatusDB extends Component {
   constructor(props) {
@@ -26,49 +51,28 @@ class StatusDB extends Component {
       connected: false,
     };
 
+    this.autoconnect = this.props.autoconnect ? true : false;
     this.connection = null;
     this.setConnection = this.setConnection.bind(this);
-
-    this.autoconnect = this.props.autoconnect ? true : false;
     this.connect = this.connect.bind(this);
-
     this.onConnected = this.onConnected.bind(this);
     this.onError = this.onError.bind(this);
     this.onSuccess = this.onSuccess.bind(this);
-
     this.queryStore = this.queryStore.bind(this);
 
+
     this.queryReporters = {
-      dbSuccess: (data) => {
-        console.log('query transaction completed onSuccessfully');
-        if (data) {
-          console.log(data);
-        }
-      },
-      txSuccess: (tx, result) => {
-        // { insertId, rowsAffected, rows: { length, item(), _array, }, }
-        console.log('tx resultset', tx, result);
-      },
-      insertSuccess: (tx, result) => {
-        console.log(
-          'Insert Successful',
-          `id: ${result.insertId}, rowsAffected: ${result.rowsAffected}`
-        );
-      },
-      selectSuccess: (tx, result) => {
-        this.result.data = result;
-        console.log('Selected', result._array);
-        return result;
-      },
-      dbError: (tx, err) => {
-        console.log('error', tx, err);
-      },
-      txError: (tx, err) => {
-        console.log(tx, err);
-      },
+      dbSuccess: _dbSuccess,
+      txSuccess: _txSuccess,
+      insertSuccess: _insertSuccess,
+      selectSuccess: _selectSuccess,
+      dbError: _dbError,
+      txError: _txError,
     };
 
-    this.setConnection(this.config, this.onConnected);
+    this._isMounted = false;
+    this.connection = {};
+    this.setConnection(this.config);
   }
 
   setConnection(config) {
@@ -86,7 +90,6 @@ class StatusDB extends Component {
   }
 
   onConnected(conn) {
-    // console.log('\n\nconnected\n\n' ,conn);
     this.connectionStatus.isConnecting = false;
     this.connectionStatus.connected = true;
     this.checkStatus();
@@ -99,11 +102,8 @@ class StatusDB extends Component {
   }
 
   onComponentDidMount() {
-    // console.log('mounted');
+    this._isMounted = true;
     this.setConnection();
-    if (this.autoconnect) {
-      this.connection.connect();
-    }
   }
 
   onSuccess(tx, result) {

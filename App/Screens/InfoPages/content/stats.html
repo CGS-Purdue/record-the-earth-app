@@ -1,0 +1,140 @@
+<style>
+/* INDEX.PHP */
+
+#time-bar{
+  display:none;
+  height: 60px;
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  border: 1px solid #808080;
+  background-color: rgba(189, 189, 189, 0.71);
+  width: 100%;
+}
+
+#time-bar text.value{
+  display:none;
+}
+
+.time-title{
+  text-align: center;
+  font-size: 16px;
+  margin: 0px 0 0px 0;
+  font-style: normal;
+  text-decoration: none;
+  position: relative;
+  top: 10px;
+}
+
+
+#type-biophony{  background-image: url('images/icons/birdies.png'); background-color: #269926;}
+#type-geophony{ background-image: url('images/icons/light-rain-icon.png'); background-color: #FFAA00 ;}
+#type-anthrophony{  background-image: url('images/icons/machines.png'); background-color: #BF3030;}
+#type-emotion{  background-image: url('images/icons/happy.png'); background-color: #4284D3;}
+
+#header{
+  width:100%;
+  height:480px;
+  padding:80px 0 0 0;
+  background: url('images/jungle-bg.jpg');
+  background-size: cover;
+}
+
+#header h1{
+  font-size: 56px;
+  color: #FFF;
+  padding:0;
+  font-weight: normal;
+  margin: 0;
+}
+
+#header h2{
+  font-size: 36px;
+  padding:0;
+  font-weight: normal;
+  margin: 0;
+}
+
+
+.inner{
+  position: relative;
+  margin: 0 auto;
+}
+
+
+#upload-stats{
+  width: 420px;
+  position: relative;
+}
+
+.upload-stats{
+  margin: 20px auto;
+  width: 400px;
+  border-radius: 50px;
+  padding: 10px;
+  background: rgba(8,8,8,.8);
+  text-align: center;
+}
+
+.upload-stats h2{
+  color:#fff;
+  padding: 10px 0 10px 0;
+  font-size: 36px;
+  font-weight: normal;
+}
+
+#recording-map{
+  background-color: #101010;
+  position:relative;
+  right: 0;
+  overflow:hidden;
+  margin: 0 auto;
+  border-radius: 250px;
+  background-position-y: -40px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#header-links{
+  width: 344px;
+  position: relative;
+  margin-top: 64px;
+}
+
+.link{
+  width: 130px;
+  border-radius: 23px;
+  padding: 3px;
+  background: rgba(0,0,0, .8);
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+}
+</style>
+<div id="header">
+  <div class="inner">
+    <div id="upload-stats">
+      <h1>Join the Mission</h1>
+      <div class="upload-stats">
+        <h2><span id="soundscape-count" style="color:#F00">3,832</span> SOUNDSCAPES</h2>
+      </div>
+      <div class="upload-stats">
+        <h2><span id="minute-count" style="color:#279951">6,944</span> MINUTES</h2>
+      </div>
+      <div class="upload-stats">
+        <h2><span id="participant-count" style="color:#25B5FF">1,932</span> PARTICIPANTS</h2>
+      </div>
+    </div>
+    <div id="header-links">
+      <a href="#video-container">
+        <div id="video" class="link" style="float:left;">Watch Video</div>
+      </a>
+      <a href="#call-to-action">
+        <div id="download" class="link" style="float:right;">Download</div>
+      </a>
+    </div>
+    <img class="record-app" src="images/record-earth-app-small.png">
+  </div>
+</div>

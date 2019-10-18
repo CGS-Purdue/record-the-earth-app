@@ -34,6 +34,7 @@ const fetchPostForm = async (url, formData) => {
 // 'Accept': 'application/json',
 // 'Content-Type': 'application/x-www-form-urlencoded',
 const xhrPost = (url, data, options) => {
+  console.log('[Networking] xhrPost', url, data, options);
   let xhr = new XMLHttpRequest();
 
   function transferComplete(evt) {

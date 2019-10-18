@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
+// import * as Font from 'expo-font';
 
 import { Theme } from '../../Theme';
 
@@ -14,7 +15,45 @@ class HeadingText extends Component {
       loaded: false,
       fontFamily: 'System',
     };
+    this._loadFontAsync = this._loadFontAsync.bind(this);
+    this.fontFamily = HeadingFont.name;
+    this._isMounted = false;
+    this._isLoaded = false;
   }
+
+  async componentDidMount() {
+    this._isMounted = true;
+    await this._loadFontAsync(HeadingFont);
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  _setFontLoaded(){
+    this._isLoaded = true;
+    if (this._isMounted) {
+      this.setState({ fontLoaded: true });
+    }
+  }
+
+  _setFontFamily(name){
+    this._familyName = name;
+    if (this._isMounted) {
+      this.setState({ fontFamily: name });
+    }
+  }
+
+  _loadFontAsync = async (font) => {
+    try {
+      await _fonts.loadFont(font);
+      this._setFontLoaded();
+      this._setFontFamily(font.name);
+    } catch (e) {
+      console.log(e.message);
+    }
+  }
+
   getHeadingStyle = () => {
     const HeadStyles = [
       _styles.H1,
@@ -27,26 +66,9 @@ class HeadingText extends Component {
     return HeadStyles[level];
   };
 
-  componentDidMount() {
-    this._loadFontAsync(HeadingFont);
-  }
-
-  async _loadFontAsync(font) {
-    try {
-      font = await _fonts.loadFont(font);
-    } catch (e) {
-      console.log(e.message);
-    }
-    this.setState({
-      loaded: true,
-      fontFamily: font.name,
-    });
-  }
-
   render() {
     return (
-      <Text
-        {...this.props}
+      <Text {...this.props}
         style={[
           this.props.style,
           { fontFamily: this.state.fontFamily },

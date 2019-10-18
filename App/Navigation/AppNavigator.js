@@ -6,13 +6,11 @@ import { SurveyStack } from './SurveyStack';
 import { RecordScreen } from '../Screens/Record/RecordScreen';
 
 export default createAppContainer(
-  createSwitchNavigator(
-    {
+  createSwitchNavigator({
       Main: MainTabNavigator,
-      Survey: SurveyStack,
       Record: { screen: RecordScreen },
-    },
-    {
+      Survey: SurveyStack,
+    },  {
       mode: 'modal',
       headerMode: 'none',
       initialRouteName: 'Main',

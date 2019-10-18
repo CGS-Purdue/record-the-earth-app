@@ -65,7 +65,10 @@ export default class AudioPlayer extends Component {
   };
 
   componentWillUnmount = () => {
-    this.setState({ ...initialState });
+    this._isMounted = false;
+    this.state = {
+      ...initialState,
+    };
     this.sound.setOnPlaybackStatusUpdate(null);
   };
 

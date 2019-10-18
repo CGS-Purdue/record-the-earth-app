@@ -1,5 +1,6 @@
 import * as FileSystem from 'expo-file-system';
 import { StorageConfig } from '../Config/Storage';
+import { Platform } from 'react-native';
 
 // FileSystem.EncodingType.UTF8
 // FileSystem.EncodingType.Base64
@@ -30,11 +31,13 @@ const DIR_UPLOADED = StorageConfig.DIR_UPLOADED;
 
 async function getAudioFileFromTemp(file_name) {
   const target_uri = [PENDING_SOUNDFILES, file_name].join('/');
+  if (Platform.os === 'web') {
+    return true;
+  }
   try {
     const file_info = await FileSystem.getInfoAsync(target_uri, {
       md5: true,
     }).then(({ uri }) => {
-      console.log(uri);
       return uri;
     });
 
@@ -53,21 +56,13 @@ async function getAudioFileFromTemp(file_name) {
 }
 
 const saveTempAudioFile = async (file_path) => {
-  console.log('[saveTempAudioFile]');
   const file_name = file_path.split('/').slice(-1);
   const temp_path = [PENDING_SOUNDFILES, file_name].join('/');
   try {
-    // await FileSystem.moveAsync({
-    //   from: file_path,
-    //   to: storage_path
-    // })
-    console.log('[saveTempAudioFile] from', file_path);
-    console.log('[saveTempAudioFile] to', temp_path);
-    const result = await FileSystem.copyAsync({
-      from: file_path,
-      to: temp_path,
-    });
-    console.log('result', result);
+    // await FileSystem.moveAsync({ from: file_path, to: storage_path })
+    const result = await FileSystem.copyAsync({ from: file_path, to: temp_path});
+    // console.log('[saveTempAudioFile] result', result);
+    return result;
   } catch (error) {
     console.log(error);
     return false;
@@ -78,7 +73,6 @@ const updatePendingtToUploaded = async (filename) => {
   const src_path = [PENDING_SOUNDFILES, filename].join('/');
   const dest_path = [UPLOADED_SOUNDFILES, filename].join('/');
   try {
-    console.log('moving pending file to complete', filename);
     let result = await FileSystem.moveAsync({
       from: src_path,
       to: dest_path,
@@ -93,10 +87,14 @@ const updatePendingtToUploaded = async (filename) => {
 };
 
 const getFileInfo = async (fileUri) => {
+  if (Platform.os === 'web') {
+    return true;
+  }
   try {
     const _info = await FileSystem.getInfoAsync(fileUri);
-    console.log('fileinfo', _info, this);
+    // console.log('fileinfo', _info, this);
     // this.setState({ fileinfo: _info.uri });
+    return _info;
   } catch (er) {
     console.error(er);
     return false;
@@ -120,15 +118,15 @@ const asyncGetFileFromTemp = async (name) => {
 };
 
 const inspectSoundfile = async (fileUri) => {
-  console.log('Inspecting Sound File', fileUri);
+  // console.log('Inspecting Sound File', fileUri);
   await FileSystem.readAsStringAsync(fileUri, {
     // encoding: FileSystem.EncodingType.Base64,
   })
     .then((filedata) => {
       try {
-        console.log(filedata.trim().slice(0, 1000));
-        console.log('File length:', filedata.length);
-        console.log('File uri: ', fileUri);
+        // console.log(filedata.trim().slice(0, 1000));
+        // console.log('File length:', filedata.length);
+        // console.log('File uri: ', fileUri);
       } catch (e) {
         console.log('error', e);
       }
@@ -147,7 +145,7 @@ async function saveAudioRecordingFile(file_uri) {
   try {
     // await FileSystem.moveAsync({ from: file_uri, to: storage_path })
     let result = await FileSystem.copyAsync({ from: file_uri, to: new_uri });
-    console.log('copying audio to pending files', result);
+    // console.log('copying audio to pending files', result);
     return result;
   } catch (error) {
     console.log(error);
@@ -192,8 +190,8 @@ async function getAppStorageContent(path) {
       console.log(`no content found at '${path}'`);
       return false;
     } else {
-      console.log(`Contents at '${path}':`);
-      console.log(contents);
+      // console.log(`Contents at '${path}':`);
+      // console.log(contents);
       return contents;
     }
   } catch (error) {
@@ -210,20 +208,17 @@ async function setupFirstLoadAppStorageDirectories() {
   let result3 = await existOrCreateAppDirectory(
     [DIR_SOUND, DIR_UPLOADED].join('/')
   );
-  console.log('setupFirstLoadAppStorageDirectories', [
-    result0,
-    result1,
-    result2,
-    result3,
-  ]);
+  // console.log(
+  //   'setupFirstLoadAppStorageDirectories',
+  //   [ result0, result1, result2, result3, ]
+  // );
+  return [ result0, result1, result2, result3 ];
 }
 
 async function createAppStorageDirectory(dirName) {
   let result;
   try {
-    result = await FileSystem.makeDirectoryAsync(
-      [APP_STORAGE, dirName].join('')
-    );
+    result = await FileSystem.makeDirectoryAsync([APP_STORAGE, dirName].join(''));
     return result;
   } catch (e) {
     console.log(e);
@@ -234,6 +229,9 @@ async function createAppStorageDirectory(dirName) {
 }
 
 async function existOrCreateAppDirectory(dirName, options) {
+  if (Platform.os === 'web') {
+    return true;
+  }
   try {
     let dirInfo = await FileSystem.getInfoAsync(
       [APP_STORAGE, dirName].join('')

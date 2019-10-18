@@ -5,17 +5,21 @@ import * as SQLite from 'expo-sqlite';
 class Connection extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      connected: false,
-      isConnected: false,
-      isError: false,
-    };
+    // this.state = {
+    //   connected: false,
+    //   isConnected: false,
+    //   isError: false,
+    //   connectionStatus: 'disconnected',
+    //   connectionError: false,
+    // };
+
     this.connectionStatus = 'disconnected';
     this.connectionError = false;
     this.connect = this.connect.bind(this);
     this.exitOnResult = false;
+    this._isMounted = false;
     this.disconnect = this.disconnect.bind(this);
-    // this.configQuery = this.configQuery.bind(this);
+    this.transaction = false;
   }
 
   connect() {
@@ -26,50 +30,31 @@ class Connection extends Component {
     try {
       const _dbConn = SQLite.openDatabase(_name, _version, _description, _size);
       this.db = _dbConn;
+
       if (this.db) {
         this.connectionStatus = 'connected';
       }
 
-      if (this.props.onConnect) {
-        // console.log('Getting Database Connection;');
-        // console.log('Connection Details: ', _dbConn);
-        this.props.onConnect(this);
-      }
+
     } catch (error) {
-      // console.log('error', error);
       this.connectionStatus = false;
       this.connectionError = error;
     } finally {
-      console.log('connection status changed');
+      if (this.props.onConnect) {
+        this.props.onConnect(this.db);
+        console.log('on connect', this.connectionStatus);
+      }
+      console.log('connection status changed', this.connectionStatus);
     }
   }
 
   onSuccess(tx, result) {
-    console.log(tx, result);
-    this.setState({ data: result.rows._array });
+    console.log('onSuccess', tx, result);
+    this.resultCache.lastResult = result.rows._array;
+    this.resultCache.results.push(result);
     if (this.exitOnResult) {
-      this.disconnct();
+      this.disconnect();
     }
-  }
-
-  onError(tx, error) {
-    console.log(error);
-  }
-
-  dbSuccess(data, options) {
-    console.log('query transaction completed onSuccessfully');
-    console.log('data', data);
-    this.querystate.data = data.result.rows._array;
-  }
-
-  txSuccess(tx, result, options) {
-    // { insertId, rowsAffected, rows: { length, item(), _array, }, }
-    console.log('result set', result);
-    console.log('tx resultset', result);
-    this.querystate.data = result.rows._array;
-  }
-  txError(tx, error) {
-    console.log(tx, error);
   }
 
   disconnect() {
@@ -77,10 +62,29 @@ class Connection extends Component {
       return Promise.reject('Database was not open; unable to close.');
     }
     return this.connection.close().then((status) => {
-      console.log('[connection] Database closed.');
+      console.log('[connection] Database closed.', status);
       this.connection = undefined;
     });
   }
+
+  // onError(tx, error) {
+  //   console.log('onError', tx, error);
+  // }
+  //
+  // dbSuccess(data, options) {
+  //   console.log('query transaction success', data, options);
+  //   this.querystate.data = data.result.rows._array;
+  // }
+  //
+  // txSuccess(tx, result, options) {
+  //   // { insertId, rowsAffected, rows: { length, item(), _array, }, }
+  //   console.log('result set', tx, result, options);
+  //   this.querystate.data = result.rows._array;
+  // }
+  //
+  // txError(tx, error) {
+  //   console.log(tx, error);
+  // }
 
   // configQuery(statement, args, options) {
   //   return new ConnectionQuery({

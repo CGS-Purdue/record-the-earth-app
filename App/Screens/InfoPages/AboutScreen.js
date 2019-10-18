@@ -7,7 +7,7 @@ import { Theme } from '../../Theme';
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
-const _vars = Theme.Variables;
+// const _vars = Theme.Variables;
 
 export default class ButtonBox extends React.Component {
   static propTypes = {
@@ -46,6 +46,7 @@ const Images = {
 let styles = _styles.PresentationnStyles
 
 class AboutScreen extends React.Component {
+  c
   openStart = () => {
     this.props.navigation.navigate('AboutPage')
   }
@@ -58,18 +59,17 @@ class AboutScreen extends React.Component {
     this.props.navigation.navigate('TermsPage')
   }
 
-  openTheme = () => {
-    this.props.navigation.navigate('FaqScreen')
+  openLoader = () => {
+    this.props.navigation.navigate('LoaderPage')
   }
 
   openDevice = () => {
-    this.props.navigation.navigate('FaqScreen')
+    this.props.navigation.navigate('FaqPage')
   }
 
 
   handleClose(e){
     console.log('test', e);
-     console.log(this.props);
   }
 
   render () {
@@ -101,7 +101,7 @@ class AboutScreen extends React.Component {
 
           <View style={styles.buttonsContainer}>
             <ButtonBox onPress={this.openApi} style={styles.apiButton} image={Images.api} text='API Testing' />
-            <ButtonBox onPress={this.openTheme} image={Images.theme} text='Theme' />
+            <ButtonBox onPress={this.openLoader} image={Images.theme} text='Loader' />
           </View>
           <View style={styles.buttonsContainer}>
             <ButtonBox onPress={this.openDevice} style={styles.deviceButton} image={Images.deviceInfo} text='Device Info' />

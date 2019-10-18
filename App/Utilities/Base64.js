@@ -12,24 +12,21 @@ const Base64 = {
       enc3,
       enc4 = '';
     var i = 0;
-
     do {
       chr1 = input.charCodeAt(i++);
       chr2 = input.charCodeAt(i++);
       chr3 = input.charCodeAt(i++);
-
       enc1 = chr1 >> 2;
       enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
       enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
       enc4 = chr3 & 63;
-
       if (isNaN(chr2)) {
         enc3 = enc4 = 64;
       } else if (isNaN(chr3)) {
         enc4 = 64;
       }
 
-      output =
+     output =
         output +
         keyStr.charAt(enc1) +
         keyStr.charAt(enc2) +
@@ -56,9 +53,9 @@ const Base64 = {
     // remove all characters that are not A-Z, a-z, 0-9, +, /, or =
     var base64test = /[^A-Za-z0-9\+\/\=]/g;
     if (base64test.exec(input)) {
-      console.log([`There were invalid base64 characters in the input text.`,
-        `Valid base64 characters are A-Z, a-z, 0-9, '+', '/',and '='`,
-        `Expect errors in decoding.`].join(' '));
+      console.log(['There were invalid base64 characters in the input text.',
+        'Valid base64 characters are A-Z, a-z, 0-9, \'+\', \'/\',and \'=\'',
+        'Expect errors in decoding.'].join(' '));
     }
 
     input = input.replace(/[^A-Za-z0-9\+\/\=]/g, '');

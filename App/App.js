@@ -29,9 +29,8 @@ export default class App extends Component {
 
   componentDidMount() {
     this._isMounted = true;
+    console.log('[App] did mount');
     const isSetup = initalAppSetup();
-    console.log('isSetup', isSetup);
-    console.log('[AppThemeContainer] did mount');
   }
 
   _handleNavigationChange = (prevState, newState, action) => {
@@ -73,9 +72,9 @@ export default class App extends Component {
             <Image style={_styles.app_bgimg} source={AppBgImg} />
             <SafeAreaView style={_styles.app_safearearoot}>
               <View style={_styles.app_bg}>
-                <AppContainer theme={'dark'} ref={
-                    (nav) => {this.navigator = nav;}
-                  }
+                <AppContainer
+                  theme={'dark'}
+                  ref={(nav) => {this.navigator = nav;}}
                   onNavigationStateChange={this._handleNavigationChange}
                 />
               </View>
@@ -88,6 +87,7 @@ export default class App extends Component {
 
 
   cacheResourcesAsync = async () => {
+    console.log('[App] cacheResourcesAsync');
     let cachePromises = [];
     const image_assets = Object.assign(
       Theme.Assets.buttons,
@@ -98,26 +98,24 @@ export default class App extends Component {
 
     const _fonts = Theme.Fonts;
     let preloadsFonts = await _fonts.PreloadedFonts;
-    let fontMap0 = await _fonts.FontMap0;
-    console.log('[_FONTS, PRELOADEDFONTS]', preloadsFonts);
-    console.log('fontMap0', fontMap0);
-    let fontsLoaded = Promise.all([...preloadsFonts]);
-    console.log('fontsloaded', fontsLoaded);
+    // let fontsLoaded = await Promise.all([...preloadsFonts]);
+    // console.log('fontsloaded', fontsLoaded);
 
     try {
       let cacheImages = await preLoadImageCache(image_assets);
       cachePromises.push(JSON.parse(cacheImages));
-
+      // console.log('cachePromises', cachePromises);
       // const loadFontMap = Theme.Fonts.loadFontMap;
       // loadFontMap(theme_fonts);
       // const theme_fonts = Theme.Fonts.FontMap;
       // let cacheFonts = await preLoadFontCache(theme_fonts)
       // console.log('cacheFonts', cacheFonts);
-      // cachePromises.push(...cacheFonts);
+      cachePromises.push(...preloadsFonts);
+      // console.log('cachePromises', cachePromises);
       // for (let font of Theme.Fonts.FontCache){
       //   FontCache.push(font.src);
       // }
-      const done = await Promise.all(...cachePromises, ...preloadsFonts);
+      const done = await Promise.all(...cachePromises);
       console.log('done', done);
       return done;
     } catch (e) {
