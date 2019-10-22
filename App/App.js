@@ -98,8 +98,9 @@ export default class App extends Component {
 
     const _fonts = Theme.Fonts;
     let preloadsFonts = await _fonts.PreloadedFonts;
-    // let fontsLoaded = await Promise.all([...preloadsFonts]);
-    // console.log('fontsloaded', fontsLoaded);
+    console.log('preloadsFonts', preloadsFonts);
+    let fontsLoaded = await Promise.all(preloadsFonts);
+    console.log('fontsloaded', fontsLoaded);
 
     try {
       let cacheImages = await preLoadImageCache(image_assets);
@@ -110,19 +111,19 @@ export default class App extends Component {
       // const theme_fonts = Theme.Fonts.FontMap;
       // let cacheFonts = await preLoadFontCache(theme_fonts)
       // console.log('cacheFonts', cacheFonts);
-      cachePromises.push(...preloadsFonts);
+      // cachePromises.push(...preloadsFonts);
       // console.log('cachePromises', cachePromises);
-      // for (let font of Theme.Fonts.FontCache){
-      //   FontCache.push(font.src);
-      // }
-      const done = await Promise.all(...cachePromises);
-      console.log('done', done);
-      return done;
+      for (var font of Theme.Fonts.FontCache){
+        console.log('font.src', font.src);
+        cachePromises.push(font.src);
+      }
+      await Promise.all(...cachePromises);
+      console.log('done', cachePromises);
+      return cachePromises;
     } catch (e) {
       console.log('load error', e);
     } finally {
       console.log('load fonts');
-      return cachePromises;
     }
   }
 }

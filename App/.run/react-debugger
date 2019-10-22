@@ -12,23 +12,29 @@ _devtools_lockfile () {
 }
 
 if [ ! -z $RUN_REACT_DEBUGGER ]; then
-
   REACT_DEBUGGER="node /data/library/React_Library/react-native-debugger/npm-package/bin/rndebugger-open --expo --open"
+  REACT_DEBUGGER_PID="$(pgrep react-debugger)"
 
-  [[ -f $BASE_DIR/.devtools-lock ]] && echo "React Devtools already running" && exit 0
+  if [ -f ${BASE_DIR}/.devtools-lock ]; then 
 
-  [[ ! -z $APP_REACT_DEBUGGER_RUNNING ]] \
+    [[ -n $REACT_DEBUGGER_PID ]] && echo "Debugger is still running ${REACT_DEBUGGER_PID}" && exit 0
+
+    echo "React Devtools already running"
+  fi
+
+  [[ -n $APP_REACT_DEBUGGER_RUNNING ]] \
       && echo "React Devtools already running"
 
   [[ -z $APP_REACT_DEBUGGER_RUNNING ]] \
-      && APP_REACT_DEBUGGER_RUNNING="yes" \
       && ${APP_DIR}/react-native-debugger/react-native-debugger &
+
 fi
 
+_devtools_lockfile
+APP_REACT_DEBUGGER_RUNNING="yes"
 
 export APP_REACT_DEBUGGER_RUNNING
 export REACT_DEBUGGER
 
-_devtools_lockfile
 
 echo "REACT_DEBUGGER=${REACT_DEBUGGER}"

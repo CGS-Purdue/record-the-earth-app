@@ -107,7 +107,8 @@ RUN_ABD_LOG_EXCLUDE="CarrierServices,WifiService,wpa_supplicant,ConnectivityServ
 RUN_ABD_LOG_INCLUDE="ReactNative:V ReactNativeJS:V"
 RUN_ABD_LOG_FILTERS="${RUN_ABD_LOG_EXCLUDE//,/\:S }:S ${RUN_ABD_LOG_INCLUDE//,/\:\* }"
 
-echo "${RUN_ABD_LOG_FILTERS//,/\:S }"
+# echo "${RUN_ABD_LOG_FILTERS//,/\:S }"
+# -v threadtime,monotonic,color,printable \
 # -s supress everything (then add tags you want to see)
 # ALL WARNINGS/ERRORS
 # -b all *:W
@@ -115,5 +116,5 @@ echo "${RUN_ABD_LOG_FILTERS//,/\:S }"
 
 ${ABD_PATH}/adb logcat \
   --buffer=crash,main,security,events \
-  -v threadtime,monotonic,color,printable \
-  *:W ReactNative:V ReactNativeJS:V
+  -v process,monotonic,color,printable \
+  *:E ReactNative:V ReactNativeJS:V ViewManager:V RecyclerView:V setLayoutManager:V LayoutManager:V

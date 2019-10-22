@@ -1,0 +1,126 @@
+#!/bin/bash
+
+# EXPO HELPER
+# -------------
+# device reverse tunnel        exp://127.0.0.1:19000
+# Metro Bundler on                        port 19001
+# RCT_METRO_PORTL                              :8081
+# Expo DevTools is            http://localhost:19002
+# --redirect-warnings=...                   write warnings to file instead of stderr
+# --title=...                               the process title to use on startup
+# --require=...                             module to preload (option can be repeated)
+# --inspect[=[host:]port]                   activate inspector on host:port (default: 127.0.0.1:9229)
+# --inspect-brk[=[host:]port]               activate inspector on host:port and break at start of user script
+# --debug-port, --inspect-port=[host:]port  set host:port for inspector
+# -                                         script read from stdin (default if no file name is provided, interactive mode if a tty)
+# --                                        indicate the end of node options
+unset REACT_EDITOR
+unset REACT_DEBUGGER
+set -a REACT_DEBUGGER
+
+EXPO_HOST="localhost"
+BASE_DIR="$(npm prefix)"
+
+[[ -f .npmrc ]] && source .npmrc
+[[ -f .env ]] && source .env
+
+NODE_ENV="development"
+
+echo "Checking Android path ..."
+
+[[ -z $ANDROID_HOME ]] && echo 'ANDROID_HOME is not set. Skipping command' && exit 0
+
+echo "Settings up device:"
+
+npm run adb.devices
+
+# TRYING TO CATCH ERRORS HERE SO WE CAN RECONNECT DEVICES
+# BEFORE EXPO FAILS TO CONNECT AND WE END UP IN A BAD STATE.
+DEVICE_EXIT_STATUS="$?"
+# else
+# fi
+# if [ "$DEVICE_EXIT_STATUS" === "1" ]; ThemeScreen
+# exit 0
+
+if [ "$DEVICE_EXIT_STATUS" != "0" ]; then
+  echo "Problem Connecting to device: $?"
+  echo "Trying to fix the problem and reconnect automatically"
+    npm run adb.reconnect
+fi
+
+# TODO: @ISSUE SOMETIMES THE METRO PACKAGER WILL CHANGE PORTS
+#  AFTER CRASHING DURING A BUILD FOLLOWED BY SOME SEQUENCE OF
+#  RESTART AND TRYING TO RECONNECT THE DEVICE.
+#  WHEN THIS HAPPENS THE EXPO CONFIG FILE DOES NOT UPDATE AUTOMATICALLY
+#  SO THE DEVICE CANNOT RESYNC RIGHT AWAY, IF YOU WAIT AND RESTART THE
+#  PACKAGER AGAIN IT WILL FALL BACK TO THE ORIGNAL PORT, BUT
+#  THERE SHULD BE A WAY TO RECOVER THE STATE WITHOUT STOPPING AS LONG
+#  AS YOU ALWAYS USE THE BRIDGE CONTROLS TO MANAGE THE DEVICE STATE.
+npm run adb.reverse
+
+echo "Settings up additional devtools..."
+
+# REACTOTRON
+if [ -n "$RUN_REACT_REACTOTRON" ]; then
+  npm run rn:reactotron &
+fi
+
+# REACT DEBUGGER
+if [ -n "$RUN_REACT_DEBUGGER" ]; then
+  export REACT_DEBUGGER
+  REACT_DEBUGGER=${REACT_DEBUGGER} npm run rn:debugger &
+fi
+
+# REACT DEVTOOLS
+[[ -n "$RUN_REACT_DEVTOOLS" ]] && npm run rn:devtools &
+
+
+echo "
+  NODE_DEBUG  ${NODE_DEBUG}
+  NODE_ENV  ${NODE_ENV}
+  NODE_OPTIONS  ${NODE_OPTIONS}
+  NODE_PATH $NODE_PATH
+  EXPO_HOST ${EXPO_HOST}
+  REACT_DEBUGGER ${REACT_DEBUGGER}
+  REACT_EDITOR  ${REACT_EDITOR}
+  RUN_ENV ${RUN_ENV}
+  EXPO_DEBUG  ${EXPO_DEBUG}
+  node ${BASE_DIR}/node_modules/expo/bin/cli.js start \
+    --clear \
+    --max-workers 7 \
+    --no-minify \
+    --no-https \
+    --dev \
+    --host ${EXPO_HOST} \
+    --android
+
+"
+# node ${BASE_DIR}/node_modules/.bin/expo start \
+# ${BASE_DIR}/node_modules/expo-cli/bin/expo.js start \
+# node ${BASE_DIR}/node_modules/expo/bin/cli.js
+# ${BASE_DIR}/node_modules/expo-cli/bin/expo.js start \
+# --inspect[=[host:]port]
+#  --title=...
+#
+# activate inspector on host:port (default: 127.0.0.1:9229)
+
+NODE_PATH="${NODE_PATH}" \
+NODE_ENV="${NODE_ENV}" \
+NODE_OPTIONS="${NODE_OPTIONS}" \
+REACT_DEBUGGER=${REACT_DEBUGGER} \
+REACT_EDITOR="${REACT_EDITOR}" \
+NODE_DEBUG="${NODE_DEBUG}" \
+EXPO_DEBUG=${EXPO_DEBUG} \
+  node \
+  --inspect-port=9229 \
+  --title="expo-cli" \
+    ./expo.js
+    
+      # ./expo.js start \
+      # --clear \
+      # --max-workers 7 \
+      # --no-minify \
+      # --no-https \
+      # --dev \
+      # --host ${EXPO_HOST} \
+      # --android
