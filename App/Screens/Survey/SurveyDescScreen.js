@@ -109,8 +109,6 @@ class SurveyDescScreen extends Component {
               <Section justify={'space-around'} align={'stretch'} weight={1}>
                 <AwesomeButtonBruce
                     size="small"
-                    progress={true}
-                    progressLoadingTime={360}
                     textSize={12}
                     type="primary"
                     borderRadius={1}

@@ -30,6 +30,13 @@ const UtilityStyles = {
     borderWidth: 1,
     borderStyle: 'solid',
   },
+  stretch: {
+    flexGrow: 1,
+    flexShrink: 0,
+    flexBasis: '100%',
+    height: '100%',
+    width: '100%',
+  },
   show: {
     opacity: 1.0,
   },

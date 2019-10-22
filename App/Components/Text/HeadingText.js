@@ -1,29 +1,29 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
-// import * as Font from 'expo-font';
+import { Text, View } from 'react-native';
+import * as Font from 'expo-font';
 
 import { Theme } from '../../Theme';
 
 const _styles = Theme.Styles;
 const _fonts = Theme.Fonts;
-const HeadingFont = _fonts.HEADING_FONT;
 
 class HeadingText extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loaded: false,
-      fontFamily: 'System',
+      fontFamily: 'System'
     };
+
+    this._font = _fonts.HEADING_FONT;
     this._loadFontAsync = this._loadFontAsync.bind(this);
-    this.fontFamily = HeadingFont.name;
     this._isMounted = false;
     this._isLoaded = false;
   }
 
   async componentDidMount() {
     this._isMounted = true;
-    await this._loadFontAsync(HeadingFont);
+    await this._loadFontAsync(_fonts.HEADING_FONT);
   }
 
   componentWillUnmount() {
@@ -44,11 +44,16 @@ class HeadingText extends Component {
     }
   }
 
-  _loadFontAsync = async (font) => {
+  async _loadFontAsync(font) {
     try {
-      await _fonts.loadFont(font);
-      this._setFontLoaded();
+      // await _fonts.loadFont(font);
+      // let font =_fonts.HEADING_FONT
+      let name = font.name;
+      let module = font.module;
+      let src = await Font.loadAsync({ [name]: module });
+      console.log(src);
       this._setFontFamily(font.name);
+      this._setFontLoaded();
     } catch (e) {
       console.log(e.message);
     }
@@ -68,13 +73,16 @@ class HeadingText extends Component {
 
   render() {
     return (
-      <Text {...this.props}
-        style={[
-          this.props.style,
-          { fontFamily: this.state.fontFamily },
-          this.getHeadingStyle(),
-        ]}
-      />
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        {
+          this.state.fontLoaded ? (
+            <Text
+              style={[this.props.style, { fontFamily: this.state.fontFamily }, this.getHeadingStyle()] }
+              {...this.props}/>
+          ) : null
+        }
+      </View>
+
     );
   }
 }

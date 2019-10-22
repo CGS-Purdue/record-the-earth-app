@@ -11,7 +11,7 @@ class UrlWebView extends Component {
   render() {
       return (
       <WebView
-        source={{ uri: 'https://github.com/facebook/react-native' }}
+        source={{ uri: 'https://recordtheearth.org' }}
         style={{ marginTop: 20 }}
       />
     );

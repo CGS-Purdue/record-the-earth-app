@@ -57,6 +57,14 @@ const LibraryStyles = Object.assign(Object.create(null), {
     justifyContent: 'center',
   },
 
+  listview_item_surface: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    width: '100%',
+    backgroundColor: _c.TRANSPARENT,
+  },
+
   listview_item: {
     flex: 1,
     display: 'flex',
@@ -75,19 +83,37 @@ const LibraryStyles = Object.assign(Object.create(null), {
     elevation: 12,
   },
 
-  listview_item_surface: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'row',
-    width: '100%',
-    backgroundColor: _c.TRANSPARENT,
-  },
 
-  listview_sounditem_surface: {
+  listview_soundscape_item_surface: {
     flex: 1,
     width: '100%',
     // backgroundColor: _c.SHADE_DARKER_50,
     display: 'flex',
+  },
+
+  listview_soundscape_item: {
+    flex: 1,
+    display: 'flex',
+    paddingVertical: 2,
+    marginTop: _l.HAIRLINE,
+    paddingHorizontal: 1,
+    borderBottomWidth: _l.HAIRLINE,
+    borderBottomColor: _c.TRANSPARENT,
+    // height: 80,
+    // marginVertical: 4,
+    // backgroundColor: 'rgba(255,255,255,.7)',
+    backgroundColor: _c.SHADE_LIGHTER_70,
+    // backgroundColor: _c.TRANSPARENT,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 12,
+  },
+
+  listview_soundscape_item_content_box: {
+    flex: 1,
+    padding: 8,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
   },
 
   listview_sounditem_playbtn_box: {

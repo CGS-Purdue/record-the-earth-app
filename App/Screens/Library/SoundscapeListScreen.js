@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {  FlatList, View } from 'react-native';
-import { SoundscapeListViewHeader } from '../../Components/ListViews/SoundscapeListViewHeader';
-import { ListViewEmpty } from '../../Components/ListViews/ListViewEmpty';
-import { SoundscapeListViewItem } from '../../Components/ListViews/SoundscapeListViewItem';
-// import { SoundDB } from '../../Components/Database/SoundDB';
-import { StorageConfig } from '../../Config/Storage';
 import * as FileSystem from 'expo-file-system';
+import { ListViewEmpty } from '../../Components/ListViews/ListViewEmpty';
+import { StorageConfig } from '../../Config/Storage';
+import { SoundscapeListViewItem } from '../../Components/ListViews/SoundscapeListViewItem';
+import { SoundscapeListViewHeader } from '../../Components/ListViews/SoundscapeListViewHeader';
 import { Theme } from '../../Theme';
 
 import * as SQLite from 'expo-sqlite';
@@ -35,8 +34,6 @@ IF NOT EXISTS Soundscapes (
   pid text,
   isUploaded text not null);`;
 
-const selectAllQuery = 'SELECT * FROM Soundscapes ORDER BY id DESC LIMIT 50;';
-
 // const sdb = new SoundDB({autoconnect: true});
 const sdb = SQLite.openDatabase(ConfigName, ConfigVersion, ConfigDescription, null);
 
@@ -44,14 +41,14 @@ const sdb = SQLite.openDatabase(ConfigName, ConfigVersion, ConfigDescription, nu
 /// SOUNDSCAPE DATABASE LIBRARY
 /// ============================
 /// -----------------------------------------------------------------
-class SoundscapeLibraryScreen extends Component {
+class SoundscapeListScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       refreshing: true,
       intialized: false,
       items: [],
-      selected: { id: 0 },
+      selected: { id: '0' },
     };
 
     this.config = {
@@ -61,6 +58,7 @@ class SoundscapeLibraryScreen extends Component {
       soundPath: StorageConfig.STORAGE_SOUNDFILE_PATH,
     };
 
+     this._isMounted = false;
     // this.submitLocalDb = this.submitLocalDb.bind(this);
     this.updateItems = this.updateItems.bind(this);
     this.update = this.update.bind(this);
@@ -68,12 +66,13 @@ class SoundscapeLibraryScreen extends Component {
   }
 
   componentDidMount() {
-    console.log('[SoundscapeLibraryScreen] mounted');
+    this._isMounted = true;
+    console.log('[SoundscapeListScreen] mounted');
     console.log(sdb);
     sdb.transaction(tx => {
       tx.executeSql(createQuery);
     });
-    console.log('[SoundscapeLibraryScreen] update;');
+    console.log('[SoundscapeListScreen] update;');
     this.update();
     //   sdb.connection.transaction(
     //     (tx)=>{tx.executeSql('SELECT * FROM Soundscapes;', null,
@@ -86,10 +85,13 @@ class SoundscapeLibraryScreen extends Component {
   }
 
   update() {
-    console.log('[SoundscapeLibraryScreen] update;');
+
+    const selectAllQuery = 'SELECT * FROM Soundscapes ORDER BY id DESC LIMIT 50;';
+
+    console.log('[SoundscapeListScreen] update;');
     sdb.transaction(tx => {
       tx.executeSql(
-        'SELECT * FROM Soundscapes',
+        selectAllQuery,
         null,
         (_, { rows: { _array } }) => this.updateItems(_array)
       );
@@ -105,24 +107,23 @@ class SoundscapeLibraryScreen extends Component {
   }
 
   updateItems(items) {
-    console.log('update items', items);
-    // let location = this.config.soundPath;
-    // let _files = items.map(function(item, num) {
-    //   let name = item.split('/').slice(-1).join('');
-    //   let obj = Object.create(null);
-    //   obj.id = name.replace('.m4a', '');
-    //   obj.name = name;
-    //   obj.location = location;
-    //
-    //   return {
-    //     id: name.replace('.m4a', ''),
-    //     name: name,
-    //     test: num,
-    //     data: obj,
-    //   };
-    // });
+    let _items = items.map(function(item, num) {
+      return {
+        id: item.id.toString(),
+        description: item.description,
+        pid: item.pid,
+        latLong: item.location,
+        filename: item.filename,
+        tags: Array.from(
+          new Set( [item.geo, item.anthro, item.bio, item.emotion].join(',').split(',')))
+          .filter((tag)=>{return (tag && tag !== 'none')}).join(',')
+        ,
+        datetime: item.datetime,
+      };
+    });
+    console.log(_items);
     this.setState({
-      files: items,
+      items: _items,
       refreshing: false
     });
   }
@@ -131,13 +132,16 @@ class SoundscapeLibraryScreen extends Component {
   /// select all
   /// =====================================================
   getSoundscapes = () => {
-    console.log('[SoundscapeLibraryScreen] getSoundscapes');
+    console.log('[SoundscapeListScreen] getSoundscapes');
+    const selectAllQuery = 'SELECT * FROM Soundscapes ORDER BY id DESC LIMIT 50;';
+
     let connection = sdb.connection;
     var _result = null;
-     var all_result = connection.db.transaction(
+
+    var all_result = connection.db.transaction(
       (tx) => {
         tx.executeSql(
-          'SELECT * FROM Soundscapes;',
+          selectAllQuery,
           null,
           (tx, result) => {
             console.log('tx result', result);
@@ -154,10 +158,6 @@ class SoundscapeLibraryScreen extends Component {
       (err) => { console.log('query error', err) },
       () => { console.log('query successful')},
     );
-
-    console.log('_result', _result);
-    console.log('all_result', all_result);
-
   }
 
   async getFileList(location) {
@@ -181,15 +181,17 @@ class SoundscapeLibraryScreen extends Component {
     });
   }
 
-  onSelect = (id) => {
-    console.log('id', id);
-    //   const newSelected = new Map(selected);
-    //   newSelected.set(id, !selected.get(id));
-    //   this.setSelected(newSelected);
-    // } depend on anything outside of the data prop, stick it here and treat it immutably.
-    // Type	Required
-    // any	No
-    // [selected],
+  onSelect = (selected) => {
+    console.log('id', selected.id);
+    this.setSelected({
+      id: selected.id,
+      fileUri: selected.fileUri
+    });
+
+    this.props.navigation.navigate({
+      routeName:'SoundscapePlayer',
+      params: { selected: this.state.selected }
+    })
   };
 
 
@@ -197,7 +199,7 @@ class SoundscapeLibraryScreen extends Component {
     return (
       <View style={_styles.listview_screen_container}>
         <FlatList
-          data={this.state.files}
+          data={this.state.items}
           refrshing={this.state.refreshing}
           initialNumToRender={6}
           extraData={this.state.selected}
@@ -205,7 +207,7 @@ class SoundscapeLibraryScreen extends Component {
           ListHeaderComponent={() => (
             <SoundscapeListViewHeader
               onActionButton={()=>{
-                this.props.navigation.navigate({ routeName:'SoundFileLibrary' })
+                this.props.navigation.navigate({ routeName:'Soundfiles' })
               }}
             />
           )}
@@ -213,9 +215,13 @@ class SoundscapeLibraryScreen extends Component {
           renderItem={({ item, index, separators }) => (
             <SoundscapeListViewItem
               id={item.id}
+              pid={item.pid}
+              description={item.description}
+              latLong={item.location}
+              filename={item.filename}
+              tags={item.tags}
+              datetime={item.datetime}
               selected={!!this.state.id}
-              name={item.name}
-              data={item.data}
               onSelect={this.onSelect}
             />
           )}
@@ -225,14 +231,4 @@ class SoundscapeLibraryScreen extends Component {
   }
 }
 
-export { SoundscapeLibraryScreen };
-
-// renderItem={({ item }) => (
-//   <FileItem
-//     id={item.id}
-//     selected={!!this.state.id}
-//     name={item.name}
-//     data={item.data}
-//     onSelect={this.onSelect}
-//     />
-// )}
+export { SoundscapeListScreen };

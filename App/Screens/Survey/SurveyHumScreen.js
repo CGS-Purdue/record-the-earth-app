@@ -1,9 +1,10 @@
-import { BlackFade } from '../../Components/Effects/LinearGradient';
-import { Button, View, ImageBackground } from 'react-native';
+import { View, ImageBackground } from 'react-native';
 import { CenterView, Section, PadView, RootView } from '../../Components/Views';
 import { CheckButton } from '../../Components/Button/CheckButton';
 import { filterFalse } from '../../Utilities/Functions';
 import { HeadingText } from '../../Components/Text/HeadingText';
+import { BlackFade, Scrim } from '../../Components/Effects/LinearGradient';
+import { AwesomeButtonCartman } from '../../Components/Button/AwesomeButton';
 import { Theme } from '../../Theme';
 import React, { Component } from 'react';
 
@@ -110,16 +111,7 @@ class SurveyHumScreen extends Component {
         style={_styles.bgImg}
         source={_assets.images.img_bg_cuddling}
       >
-        <View
-          style={{
-            flex: 1,
-            position: 'absolute',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100%',
-            height: '100%',
-          }}
-        >
+        <View style={{ flex: 1, position: 'absolute', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }} >
           <BlackFade />
         </View>
         <RootView>
@@ -157,20 +149,33 @@ class SurveyHumScreen extends Component {
                   onchecked={this._setSuveryItemState}
                   text={'Machines'}
                 />
-                <View
-                  style={{
-                    height: 10,
-                    backgroundColor: _colors.TRANSPARENT,
-                  }}
-                />
-                <Button
-                  title={'Continue Button'}
-                  style={_styles.button_default}
-                  color={_colors.PRIMARY}
-                  accessibilityLabel="Go to next"
-                  onPress={this.onTaskCompleted}
-                />
-              </Section>
+
+                <View style={{ height: 10, backgroundColor: _colors.TRANSPARENT}} />
+
+                  <AwesomeButtonCartman
+                    size="small"
+                    textSize={12}
+                    type="anchor"
+                    borderColor={_colors.GRA_200}
+                    borderTopRadius={0}
+                    borderTopWidth={0}
+                    borderBottomColor={_colors.GRA_500}
+                    borderBottomRadius={0}
+                    borderBottomWidth={5}
+                    backgroundColor={'green'}
+                    backgroundDarker={'darkslategrey'}
+                    backgroundActive="rgba(0,0,0,0)"
+                    activeOpacity={0.75}
+                    width={null}
+                    textColor={'#ffffff'}
+                    raiseLevel={1}
+                    onPress={this.onTaskCompleted}
+                    ExtraContent={<Scrim/>}
+                    stretch={true}
+                   >
+                    {'Continue'}
+                  </AwesomeButtonCartman>
+               </Section>
             </CenterView>
           </PadView>
         </RootView>

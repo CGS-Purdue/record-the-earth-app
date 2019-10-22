@@ -1,12 +1,12 @@
-import { Button, View, ImageBackground } from 'react-native';
+import { View, ImageBackground } from 'react-native';
 import { CenterView, Section, PadView, RootView } from '../../Components/Views';
 import { CheckButton } from '../../Components/Button/CheckButton';
 import { HeadingText } from '../../Components/Text/HeadingText';
 import { filterFalse } from '../../Utilities/Functions';
 import { Theme } from '../../Theme';
 import React, { Component } from 'react';
-import { BlackFade, Scrim, MirageGrad } from '../../Components/Effects/LinearGradient';
-import { AwesomeButton, AwesomeBlueButton, AwesomeButtonBojack, AwesomeButtonCartman, AwesomeButtonBruce  } from '../../Components/Button/AwesomeButton';
+import { BlackFade, Scrim } from '../../Components/Effects/LinearGradient';
+import { AwesomeButtonCartman } from '../../Components/Button/AwesomeButton';
 
 const _colors = Theme.Colors;
 const _assets = Theme.Assets;
@@ -149,18 +149,9 @@ class SurveyEmoScreen extends Component {
                   text={'Stress me out'}
                 />
                 <View style={{ height: 10, backgroundColor: _colors.TRANSPARENT }} />
-                <Button
-                  title={'Continue '}
-                  style={_styles.button_default}
-                  color={_colors.PRIMARY}
-                  accessibilityLabel="Go to next"
-                  onPress={this.onTaskCompleted}
-                />
 
                   <AwesomeButtonCartman
                     size="small"
-                    progress={true}
-                    progressLoadingTime={360}
                     textSize={12}
                     type="anchor"
                     borderColor={_colors.GRA_200}

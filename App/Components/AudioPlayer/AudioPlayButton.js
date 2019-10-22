@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Image, TouchableOpacity } from 'react-native';
-import { RippleButton } from '../Button/RippleButton';
+import { TouchableOpacity } from 'react-native';
+// import { RippleButton } from '../Button/RippleButton';
 import { Theme } from '../../Theme';
 import { IonicFontIcon } from '../Icon/FontIcon';
 
 const _colors = Theme.Colors;
 const _styles = Theme.Styles;
-const _assets = Theme.Assets;
+// const _assets = Theme.Assets;
 const _layout = Theme.Layout;
 
 const AudioPlayButtonSize = _layout.TEXT_SIZE_5 * 2;
@@ -22,12 +22,10 @@ class AudioPlayButton extends Component {
     this.state = {
       active: false,
       disabled: false,
+      statusText: 'status: Not Playing',
     };
     this.active = false;
     this.disabled = false;
-    this.state = {
-      statusText: 'status: Not Recording',
-    };
   }
 
   toggleState() {
@@ -48,10 +46,10 @@ class AudioPlayButton extends Component {
       <TouchableOpacity
         onPress={this.handleButton}
         style={[_styles.record_button, this.props.style]}
-        disabled={this.state.syncing}
+        disabled={this.props.disabled}
       >
         <IonicFontIcon
-          name={this.state.isPlaying ? 'pause' : 'play'}
+          name={this.props.isPlaying ? 'pause' : 'play'}
           size={this.props.size ? this.props.size : AudioPlayButtonSize}
           style={_styles.button_touchable}
           color={this.props.color ? this.props.color : _colors.BLACK}

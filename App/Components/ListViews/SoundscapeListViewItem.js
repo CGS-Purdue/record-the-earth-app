@@ -13,17 +13,15 @@ class SoundscapeListViewItem extends Component {
     this.state = {
       playState: false,
     };
+    this.id = this.props.id;
+    this.filename = this.props.filename;
   }
 
   _onSelect = (id) => {
     console.log('id', id);
-    //   const newSelected = new Map(selected);
-    //   newSelected.set(id, !selected.get(id));
-    //   this.setSelected(newSelected);
-    // } depend on anything outside of the data prop, stick it here and treat it immutably.
-    // Type	Required
-    // any	No
-    // [selected],
+    // const newSelected = new Map(selected);
+    // newSelected.set(id, !selected.get(id));
+    // this.setSelected(newSelected);
   };
 
   handlePlayButton = () => {
@@ -40,8 +38,8 @@ class SoundscapeListViewItem extends Component {
   render() {
     // ({ id, name, selected, onSelect })
     return (
-      <View style={_styles.listview_item}>
-        <View style={_styles.listview_item_surface}>
+      <View style={_styles.listview_soundscape_item}>
+        <View style={_styles.listview_soundscape_item_surface}>
           <View style={_styles.listview_sounditem_playbtn_box}>
             <AudioPlayButton
               style={_styles.listview_sounditem_playbtn_icon}
@@ -63,8 +61,13 @@ class SoundscapeListViewItem extends Component {
               },
             ]}
           >
-            <View style={_styles.listview_item_text_box}>
-              <Text style={_styles.listview_item_text}>{this.props.name}</Text>
+            <View style={_styles.listview_soundscape_item_content_box}>
+              <Text style={_styles.listview_item_text}>{`${this.props.datetime}`}</Text>
+              <Text style={_styles.listview_item_text}>{`(${this.props.id}) ${this.props.description}`}</Text>
+              <Text style={_styles.listview_item_text}>{`latLong=${this.props.latLong}`}</Text>
+              <Text style={_styles.listview_item_text}>{`filename=${this.props.filename}`}</Text>
+              <Text style={_styles.listview_item_text}>{`tags=${this.props.tags}`}</Text>
+              <Text style={_styles.listview_item_text}>{`selected=${this.props.selected}`}</Text>
             </View>
           </TouchableOpacity>
         </View>

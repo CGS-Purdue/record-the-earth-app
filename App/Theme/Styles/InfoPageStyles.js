@@ -1,14 +1,14 @@
-import { StyleSheet, Platform, Dimensions } from 'react-native';
-import { ThemeColors } from '../Colors';
-import { ThemeLayout } from '../Layout';
+import { StyleSheet, Dimensions } from 'react-native';
+// import { ThemeColors } from '../Colors';
+// import { ThemeLayout } from '../Layout';
 import { DebugStyles, DebugStyleSettings, addDebugStyles } from './DebugStyles';
 
 //// --------------------------------------------------------------------------
 /// # [NAME] StyleSheet
 /// ---------------------------------------------------------------------------
-
-const _c = ThemeColors;
-const _l = ThemeLayout;
+//
+// const _c = ThemeColors;
+// const _l = ThemeLayout;
 
 const colors = {
   transparent: 'rgba(0,0,0,0)',
@@ -28,12 +28,10 @@ const colors = {
 let Colors = colors;
 
 const FontType = {
-  base: 'opensans-regular',
+  base: 'opensansregular',
   bold: 'spacemono',
-  emphasis: 'opensans-light',
+  emphasis: 'opensanslight',
 };
-// leave off @2x/@3x
-const Images = {};
 
 const FontSize = {
   h1: 38,
@@ -50,38 +48,14 @@ const FontSize = {
 };
 
 const fontStyle = {
-  h1: {
-    fontFamily: FontType.base,
-    fontSize: FontSize.h1,
-  },
-  h2: {
-    fontWeight: 'bold',
-    fontSize: FontSize.h2,
-  },
-  h3: {
-    fontFamily: FontType.emphasis,
-    fontSize: FontSize.h3,
-  },
-  h4: {
-    fontFamily: FontType.base,
-    fontSize: FontSize.h4,
-  },
-  h5: {
-    fontFamily: FontType.base,
-    fontSize: FontSize.h5,
-  },
-  h6: {
-    fontFamily: FontType.emphasis,
-    fontSize: FontSize.h6,
-  },
-  normal: {
-    fontFamily: FontType.base,
-    fontSize: FontSize.regular,
-  },
-  description: {
-    fontFamily: FontType.base,
-    fontSize: FontSize.medium,
-  },
+  h1: { fontFamily: FontType.base, fontSize: FontSize.h1, },
+  h2: { fontWeight: 'bold', fontSize: FontSize.h2, },
+  h3: { fontFamily: FontType.emphasis, fontSize: FontSize.h3, },
+  h4: { fontFamily: FontType.base, fontSize: FontSize.h4, },
+  h5: { fontFamily: FontType.base, fontSize: FontSize.h5, },
+  h6: { fontFamily: FontType.emphasis, fontSize: FontSize.h6, },
+  normal: { fontFamily: FontType.base, fontSize: FontSize.regular, },
+  description: { fontFamily: FontType.base, fontSize: FontSize.medium, },
 };
 
 const Fonts = {
@@ -101,14 +75,8 @@ const metrics = {
   doubleSection: 50,
   screenWidth: width < height ? width : height,
   screenHeight: width < height ? height : width,
-  icons: {
-    large: 45,
-    xl: 50,
-  },
-
-  images: {
-    logo: 200,
-  },
+  icons: { large: 45, xl: 50, },
+  images: { logo: 200, },
 };
 
 let Metrics = metrics;
@@ -116,148 +84,46 @@ let Metrics = metrics;
 // This file is for a reusable grouping of Theme items.
 // Similar to an XML fragment layout in Android
 
-const ApplicationStyles = {
-  screen: {
-    mainContainer: {
-      flex: 1,
-      backgroundColor: colors.transparent,
-    },
-    backgroundImage: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      bottom: 0,
-      right: 0,
-    },
-    container: {
-      flex: 1,
-      paddingTop: metrics.baseMargin,
-      backgroundColor: colors.transparent,
-    },
-    scrollContent: {
-      paddingBottom: 18,
-    },
-
-    section: {
-      margin: metrics.section,
-      padding: metrics.baseMargin,
-    },
-    sectionText: {
-      ...Fonts.normal,
-      paddingVertical: metrics.doubleBaseMargin,
-      color: colors.snow,
-      marginVertical: metrics.smallMargin,
-      textAlign: 'center',
-    },
-    subtitle: {
-      color: colors.snow,
-      padding: metrics.smallMargin,
-      marginBottom: metrics.smallMargin,
-      marginHorizontal: metrics.smallMargin,
-    },
-    titleText: {
-      ...Fonts.style.h2,
-      fontSize: 14,
-      color: colors.text,
-    },
-  },
-  darkLabelContainer: {
-    padding: metrics.smallMargin,
-    paddingBottom: metrics.doubleBaseMargin,
-    borderBottomColor: colors.border,
-    borderBottomWidth: 1,
-    marginBottom: metrics.baseMargin,
-  },
-  darkLabel: {
-    fontFamily: Fonts.type.bold,
-    color: colors.snow,
-  },
-  groupContainer: {
-    margin: metrics.smallMargin,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-};
-
 const PresentationnStyles = StyleSheet.create({
-  ...ApplicationStyles.screen,
-  container: {
-    marginBottom: 36,
-    paddingTop: Metrics.section,
-  },
-  logo: {
-    height: Metrics.images.logo,
-    width: Metrics.images.logo,
-    resizeMode: 'contain',
-    marginTop: Metrics.doubleBaseMargin,
-  },
-  buttonsContainer: {
-    flexDirection: 'row',
+  mainContainer: {
     flex: 1,
+    backgroundColor: colors.transparent,
   },
-  centered: {
-    alignItems: 'center',
+
+  backgroundImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
-  componentButton: {
-    borderColor: Colors.border,
-    borderTopWidth: 1,
-    borderRightWidth: 1,
-    borderBottomWidth: 1,
+
+  container: {
+    flex: 1,
+    backgroundColor: colors.transparent,
+    marginBottom: 24,
   },
-  apiButton: {
-    borderColor: Colors.border,
-    borderRightWidth: 1,
-    borderBottomWidth: 1,
+  scrollContainer: {
+    flex: 1,
+    paddingTop: metrics.baseMargin,
+    paddingBottom: 40,
+    marginBottom: 24,
   },
-  usageButton: {
-    borderColor: Colors.border,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-  },
-  deviceButton: {
-    borderColor: Colors.border,
-    borderRightWidth: 1,
-    borderTopWidth: 1,
+  scrollContent: {
+    paddingBottom: 40,
   },
   sectionText: {
-    textAlign: 'center',
+    ...Fonts.normal,
     fontFamily: Fonts.base,
     fontSize: 14,
-    marginHorizontal: Metrics.baseMargin,
-    lineHeight: 30,
-    marginVertical: Metrics.doubleBaseMargin,
-    color: Colors.text,
-  },
-  banner: {
-    position: 'absolute',
-    width: Metrics.screenWidth,
-    backgroundColor: Colors.banner,
-    justifyContent: 'center',
-    alignItems: 'center',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 36,
-  },
-  bannerLabel: {
-    ...Fonts.style.h5,
-    fontSize: 12,
-    color: Colors.snow,
-  },
-});
-
-const AboutStyles = StyleSheet.create({
-  ...ApplicationStyles.screen,
-  sectionText: {
-    ...Fonts.base,
-    color: Colors.text,
-    fontSize: 12,
     lineHeight: Metrics.doubleBaseMargin + 5,
+    paddingVertical: metrics.doubleBaseMargin,
+    marginVertical: Metrics.doubleBaseMargin,
+    marginHorizontal: Metrics.baseMargin,
+    color: Colors.text,
+    textAlign: 'center',
   },
-  mainContainer: {
-    paddingHorizontal: Metrics.doubleBaseMargin,
-  },
+
   description: {
     marginVertical: Metrics.doubleSection,
   },
@@ -277,15 +143,117 @@ const AboutStyles = StyleSheet.create({
     paddingHorizontal: 5,
     zIndex: 10,
   },
+
+  section: {
+    margin: metrics.section,
+    padding: metrics.baseMargin,
+  },
+  subtitle: {
+    color: colors.snow,
+    padding: metrics.smallMargin,
+    marginBottom: metrics.smallMargin,
+    marginHorizontal: metrics.smallMargin,
+  },
+  titleText: {
+    ...Fonts.style.h2,
+    fontSize: 14,
+    color: colors.text,
+  },
+  logo: {
+    height: Metrics.images.logo,
+    width: Metrics.images.logo,
+    resizeMode: 'contain',
+    marginTop: Metrics.doubleBaseMargin,
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    flex: 1,
+  },
+  centered: {
+    alignItems: 'center',
+  },
+
+  buttonTopLeft: {
+    borderColor: Colors.border,
+    borderTopWidth: 1,
+    borderRightWidth: 1,
+    borderLeftWidth: 1,
+  },
+  buttonLeft: {
+    borderColor: Colors.border,
+    borderRightWidth: 1,
+    borderLeftWidth: 1,
+  },
+  buttonBottomLeft: {
+    borderColor: Colors.border,
+    borderTopWidth: 1,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderBottomWidth: 1,
+  },
+
+  buttonTopRight: {
+    borderColor: Colors.border,
+    borderTopWidth: 1,
+    borderRightWidth: 1,
+  },
+  buttonRight: {
+    borderColor: Colors.border,
+    borderRightWidth: 1,
+  },
+  buttonBottomRight: {
+    borderColor: Colors.border,
+    borderTopWidth: 1,
+    borderRightWidth: 1,
+    borderBottomWidth: 1,
+  },
+
+  banner: {
+    position: 'absolute',
+    width: Metrics.screenWidth,
+    backgroundColor: Colors.banner,
+    justifyContent: 'center',
+    alignItems: 'center',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 36,
+  },
+  bannerLabel: {
+    ...Fonts.style.h5,
+    fontSize: 12,
+    color: Colors.snow,
+  },
+  darkLabelContainer: {
+    padding: metrics.smallMargin,
+    paddingBottom: metrics.doubleBaseMargin,
+    borderBottomColor: colors.border,
+    borderBottomWidth: 1,
+    marginBottom: metrics.baseMargin,
+  },
+  darkLabel: {
+    fontFamily: Fonts.type.bold,
+    color: colors.snow,
+  },
+  groupContainer: {
+    margin: metrics.smallMargin,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
 });
 
+// #type-biophony{ background-color: #269926;}
+// #type-geophony{ background-color: #FFAA00 ;}
+// #type-anthrophony{ background-color: #BF3030;}
+// #type-emotion{  background-color: #4284D3;}
 const ButtonBoxStyles = StyleSheet.create({
   buttonbox_container: {
     width: Metrics.screenWidth / 2,
     aspectRatio: 0.9,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors.eggplant,
+    backgroundColor: 'rgba(24,32,40,.7)',
   },
   buttonbox_image: {
     width: Metrics.icons.xl,
@@ -301,16 +269,14 @@ const ButtonBoxStyles = StyleSheet.create({
 
 const InfoPageStyles = Object.assign(
   Object.create(null),
-  { AboutStyles },
   { PresentationnStyles },
   ButtonBoxStyles
 );
 
 /// # OPTIONAL - ADD DEBUG STYLES TO YOUR COMPONENTS BEFORE EXPORTING
 /// ---------------------------------------------------------------------------
-/// if (DebugStyleSettings.DEBUG_OUTLINE_STYLES_ENABLED) {
-///   InfoPageStyles.class = addDebugStyles( InfoPageStyles.class, DebugStyles.debug_outline);
-/// }
-///
+if (DebugStyleSettings.DEBUG_OUTLINE_STYLES_ENABLED) {
+   InfoPageStyles.class = addDebugStyles(InfoPageStyles.class, DebugStyles.debug_outline);
+}
 
 export { InfoPageStyles };

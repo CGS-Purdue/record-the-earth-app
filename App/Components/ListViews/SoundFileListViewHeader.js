@@ -6,7 +6,7 @@ import { Theme } from '../../Theme';
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
 
-class FileListViewHeader extends Component {
+class SoundFileListViewHeader extends Component {
   constructor(props) {
     super(props);
     this._onActionButton = this._onActionButton.bind(this);
@@ -33,4 +33,4 @@ class FileListViewHeader extends Component {
   }
 }
 
-export { FileListViewHeader };
+export { SoundFileListViewHeader };

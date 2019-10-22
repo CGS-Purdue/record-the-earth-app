@@ -20,11 +20,11 @@ const FontMap = (key, autoload=false) => {
     },
     opensanslight: {
       module: FontAssets.opensans_light,
-      name: 'opensans-light',
+      name: 'opensanslight',
     },
     opensansregular: {
       module: FontAssets.opensans_regular,
-      name: 'opensans-regular',
+      name: 'opensansregular',
     },
     spacemono: {
       module: FontAssets.spacemono,
@@ -69,12 +69,12 @@ const FontMap = (key, autoload=false) => {
 };
 
 var FontTypes = {
-  TITLE_FONT: 'opensans-regular',
-  HEADING_FONT: 'opensans-regular',
-  BODY_FONT: 'opensans-regular',
-  SANS_FONT: 'opensans-regular',
-  LIGHT_FONT: 'opensans-light',
-  SANS_LIGHT_FONT: 'opensans-light',
+  TITLE_FONT: 'opensansregular',
+  HEADING_FONT: 'opensansregular',
+  BODY_FONT: 'opensansregular',
+  SANS_FONT: 'opensansregular',
+  LIGHT_FONT: 'opensanslight',
+  SANS_LIGHT_FONT: 'opensanslight',
   MONO_FONT: 'spacemono',
   ICON_FONT: 'ionicons',
 };
@@ -179,7 +179,7 @@ var FontVariables = {
 var ThemeFonts = {
   ICON_FONT: _loadFont(FontMap('ionicons')),
   TITLE_FONT: _loadFont(FontMap('opensansregular')),
-  HEADING_FONT: FontMap('opensansregular'),
+  HEADING_FONT: _loadFont(FontMap('opensansregular')),
   MONO_FONT: _loadFont(FontMap('spacemono')),
   LIGHT_FONT: _loadFont(FontMap('opensanslight')),
   FontMap: FontMap(),

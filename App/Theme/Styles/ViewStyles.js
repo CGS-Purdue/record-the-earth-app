@@ -81,13 +81,6 @@ const RootViewContainer = {
   display: 'flex',
 };
 
-const Stretch = {
-  flexGrow: 1,
-  flexShrink: 0,
-  flexBasis: ThemeLayout.PERCENT_100,
-  height: ThemeLayout.PERCENT_100,
-  width: ThemeLayout.PERCENT_100,
-};
 
 const PadView = {
   backgroundColor: ThemeColors.TRANSPARENT,
@@ -115,7 +108,6 @@ const Section = {
 const ViewStyles = {
   container: Container,
   section: Section,
-  stretch: Stretch,
   padded_container: PadView,
   centered_row: CeneretedFlexContainer,
   centered_col: CenteretedFlexColContainer,

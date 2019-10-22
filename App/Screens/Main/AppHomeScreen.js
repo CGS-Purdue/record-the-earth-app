@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Image, ImageBackground, View } from 'react-native';
+import { Image, ImageBackground, View , WebView } from 'react-native';
 import { Section, CenterView, PadView, RootView } from '../../Components/Views';
 import { RippleButton } from '../../Components/Button/RippleButton';
 import { Theme } from '../../Theme';
-import { WebView } from 'react-native';
+
 import { StackActions } from 'react-navigation';
 const _assets = Theme.Assets;
 const _fonts = Theme.Fonts;

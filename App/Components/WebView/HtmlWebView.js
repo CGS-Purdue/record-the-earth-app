@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { WebView } from 'react-native';
+import { WebView, View } from 'react-native';
 
 // const _assets = Theme.Assets;
 // const _styles = Theme.Styles;
@@ -18,16 +18,17 @@ class HtmlWebView extends Component {
     super(props);
   }
   render() {
-    return (
-      <WebView
-      javaScriptEnabled={false}
-      thirdPartyCookiesEnabled={false}
-      originWhitelist={['*']}
-      renderError={(err)=>{console.log(err)}}
-      style={[WebViewStyles,this.props.style]}
-      source={{ html: this.props.content }}
-      />
-    );
+      return (
+        <WebView
+          originWhitelist={['*']}
+          javaScriptEnabled={false}
+          geolocationEnabled={false}
+          thirdPartyCookiesEnabled={false}
+          renderError={(err)=>{console.log(err)}}
+          style={[WebViewStyles,this.props.style]}
+          source={{ html: this.props.content }}
+          />
+      );
   }
 }
 

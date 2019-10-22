@@ -105,7 +105,6 @@ class HttpUploadScreen extends Component {
           formData.append('file', {
             uri: FILE_URI,
             type: 'audio/m4a',
-
             name: FILE_NAME,
           });
         })

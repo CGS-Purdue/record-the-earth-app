@@ -1,16 +1,16 @@
 import { createStackNavigator } from '../node_modules/react-navigation-stack/lib/module';
-import { SoundscapeLibraryScreen } from '../Screens/Library/SoundscapeLibraryScreen';
-import { SoundFileLibraryScreen } from '../Screens/Library/SoundFileLibraryScreen';
+import { SoundscapeListScreen } from '../Screens/Library/SoundscapeListScreen';
+import { SoundFileListScreen } from '../Screens/Library/SoundFileListScreen';
 import { SoundscapePlayerScreen } from '../Screens/Library/SoundscapePlayerScreen';
 
 const LibraryStack = createStackNavigator(
   {
-    SoundFileLibrary: { screen: SoundFileLibraryScreen },
-    SoundscapeLibrary: { screen: SoundscapeLibraryScreen },
+    Soundfiles: { screen: SoundFileListScreen },
+    Soundscapes: { screen: SoundscapeListScreen },
     SoundscapePlayer: { screen: SoundscapePlayerScreen },
   },
   {
-    initialRouteName: 'SoundFileLibrary',
+    initialRouteName: 'Soundfiles',
     mode: 'card',
     headerMode: 'headerMode',
     headerBackTitleVisible: false,

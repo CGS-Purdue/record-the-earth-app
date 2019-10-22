@@ -74,8 +74,8 @@ class Scrim extends React.Component {
   render() {
     return (
       <LinearGradient
-        locations={[0, .5, .8]}
-        colors={['rgba(35,35,35,.3)', 'rgba(21,21,21,.35)', 'rgba(0,0,0,0)']}
+        locations={[0, .4, 1]}
+        colors={['rgba(0,0,0,0)', 'rgba(35,35,35,.3)', 'rgba(21,21,21,.65)']}
         style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '100%', width: '100%'}}
       />
     );
