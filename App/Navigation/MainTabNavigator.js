@@ -10,8 +10,13 @@ import { LibraryStack } from './LibraryStack';
 import { Theme } from '../Theme';
 const _colors = Theme.Colors;
 const _styles = Theme.Styles;
+const _l = Theme.Layout;
 const PLATFORM_OS = Platform.OS;
 
+const tabNavInitialLayout = {
+  height: 0,  // DEVICE_HEIGHT
+  width: _l.DEVICE_WIDTH,
+};
 
 // radio, settings, share,share-alt, stats,
 // thumbs-up, locate,, trash, Ionicons, mail,
@@ -59,16 +64,8 @@ const MaterialTabBarOptions = {
 
 // const MainTabNavigator = createBottomTabNavigator(
 const MainTabNavigator = createMaterialTopTabNavigator(
-  { HomeTab: {
-    screen: AppHomeScreen,
-    navigationOptions: {
-      title: 'Home',
-      showLabel: false,
-      tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
-        return (<TabBarIcon name={'home'} focused={focused} color={tintColor} />);
-      },
-    },
-  },
+  {
+
 
   LibraryTab: {
     screen: LibraryStack,
@@ -79,25 +76,36 @@ const MainTabNavigator = createMaterialTopTabNavigator(
       },
     },
 
-  SoundscapesTab: {
-    screen: SurveyDescScreen,
+  // SoundscapesTab: {
+  //   screen: SurveyDescScreen,
+  //   navigationOptions: {
+  //     title: 'Soundscapes',
+  //     showLabel: false,
+  //     tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
+  //       return (<TabBarIcon name={'globe'} focused={focused} color={tintColor} />)},
+  //     },
+  // },
+
+  HomeTab: {
+    screen: AppHomeScreen,
     navigationOptions: {
-      title: 'Soundscapes',
+      title: 'Home',
       showLabel: false,
       tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
-        return (<TabBarIcon name={'globe'} focused={focused} color={tintColor} />)},
+        return (<TabBarIcon name={'home'} focused={focused} color={tintColor} />);
       },
+    },
   },
 
-  AnimatedHomeTab: {
-    screen: AppHomeAnimatedScreen,
-      navigationOptions: {
-        title: 'Extra',
-        tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
-          return (<TabBarIcon name={'pulse'} focused={focused} color={tintColor} />);
-        },
-      },
-  },
+  // AnimatedHomeTab: {
+  //   screen: AppHomeAnimatedScreen,
+  //     navigationOptions: {
+  //       title: 'Extra',
+  //       tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
+  //         return (<TabBarIcon name={'pulse'} focused={focused} color={tintColor} />);
+  //       },
+  //     },
+  // },
 
   InfoPageLoader: {
     screen: InfoPageLoader,
@@ -109,31 +117,32 @@ const MainTabNavigator = createMaterialTopTabNavigator(
       },
     },
   }, {
-  navigationOptions: {
-    initialRouteName: 'HomeTab',
     allowFontScaling: true,
-  },
-  defaultNavigationOptions: {
-    tabBarIcon: ({ focused, horizontal, tintColor }) => {
-      return <TabBarIcon name={'home'} focused={focused} color={tintColor} />;
+    animationEnabled: PLATFORM_OS === 'web' ? false : true,
+    defaultNavigationOptions: {
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        return <TabBarIcon name={'home'} focused={focused} color={tintColor} />;
+      },
     },
-  },
-  tabBarComponent: MaterialTopTabBar,
-  tabBarPosition: 'bottom',
-  tabBarOptions: {
-    style: _styles.material_tabbar,
-    tabStyle: _styles.material_tabbar_tab,
-    labelStyle: _styles.material_tabbar_label,
-    activeBackgroundColor: _colors.TAB_BAR_ACTIVE_BG,
-    inactiveTintColor: _colors.TAB_BAR_COLOR,
-    activeTintColor: _colors.TAB_BAR_ACTIVE_COLOR,
-    showIcon: true,
-    showLabel: true,
-    keyboardHidesTabBar: true,
+    navigationOptions: {},
+    initialRouteName: 'HomeTab',
+    initialLayout: tabNavInitialLayout,
+    swipeEnabled: PLATFORM_OS === 'web' ? false : true,
+    order: ['InfoPageLoader', 'HomeTab', 'LibraryTab' ],
+    tabBarComponent: MaterialTopTabBar,
+    tabBarPosition: 'bottom',
+    tabBarOptions: {
+      style: _styles.material_tabbar,
+      tabStyle: _styles.material_tabbar_tab,
+      labelStyle: _styles.material_tabbar_label,
+      activeBackgroundColor: _colors.TAB_BAR_ACTIVE_BG,
+      inactiveTintColor: _colors.TAB_BAR_COLOR,
+      activeTintColor: _colors.TAB_BAR_ACTIVE_COLOR,
+      showIcon: true,
+      showLabel: true,
+      keyboardHidesTabBar: true,
       // indicatorStyle: { backgroundColor:_colors.transparent },
     },
-    animationEnabled: PLATFORM_OS === 'web' ? false : true,
-    swipeEnabled: PLATFORM_OS === 'web' ? false : true,
   }
 );
 

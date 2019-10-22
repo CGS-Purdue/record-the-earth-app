@@ -1,3 +1,5 @@
+
+
 const json2FormData = (json) => {
   let form = new FormData();
   for (let entry of Object.entries(json)) {
@@ -9,26 +11,23 @@ const json2FormData = (json) => {
   return form;
 };
 
+
+
 const fetchPostForm = async (url, formData) => {
   let result = null;
   let upload = fetch(url, {
     method: 'POST',
     body: formData,
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
+    headers: { 'Content-Type': 'multipart/form-data' },
   })
   .then((res) => {
     result = res.text();
     return Promise.resolve(result);
   })
-  .catch((error) => {
-    console.error(error);
-  })
-  .done(() => {
-    console.log('result', result);
-  });
+  .catch((error) => { console.error(error) })
+  .done(() => { console.log('result', result, upload) })
 };
+
 
 // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 // 'Accept': 'application/json',

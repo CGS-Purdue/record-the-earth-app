@@ -6,6 +6,8 @@ import * as FileSystem from 'expo-file-system';
 // import { HeadingText } from '../../Components/Text/HeadingText';
 // import { MOCK_SOUND_FILES } from '../../Config/MockSoundFiles';
 // import { SoundDB } from '../../Components/Database/SoundDB';
+import { _dev } from '../../Utilities/Log';
+
 import { StorageConfig } from '../../Config/Storage';
 import { ListViewEmpty } from '../../Components/ListViews/ListViewEmpty';
 import { SoundFileListViewItem } from '../../Components/ListViews/SoundFileListViewItem';
@@ -13,6 +15,7 @@ import { MinimalPlayer } from '../../Components/AudioPlayer/MinimalPlayer';
 import { SoundFileListViewHeader } from '../../Components/ListViews/SoundFileListViewHeader';
 import { Theme } from '../../Theme';
 
+const LOG_CTX = 'SoundFileLIstView';
 const _styles = Theme.Styles;
 // const _assets = Theme.Assets;
 // const _colors = Theme.Colors;
@@ -28,7 +31,6 @@ class SoundFileListScreen extends Component {
       selected: { id: false },
       files: [],
     };
-
     this.config = {
       appPath: StorageConfig.APP_PATH,
       pendingFiles: StorageConfig.STORAGE_PENDING_SOUNDFILES,
@@ -44,7 +46,7 @@ class SoundFileListScreen extends Component {
   componentDidMount() {
     this._isMounted = true;
     if (this.listCache.length > 0) {
-      console.log('listCache', this.listCache);
+      _dev(LOG_CTX, 'listCache', this.listCache);
     }
     this.getFileList();
   }
@@ -65,25 +67,30 @@ class SoundFileListScreen extends Component {
 
 
   async getFileList() {
-    let storagePath = this.config.uploadedFiles;
-    this.filePromise = await FileSystem.readDirectoryAsync(storagePath);
-
-    Promise.resolve(this.filePromise).then((result) => {
+    let uploadedFiles = this.config.uploadedFiles;
+    let pendingFiles = this.config.pendingFiles;
+    let soundPath = this.config.soundPath;
+    console.log('uploadedFiles path', uploadedFiles);
+    console.log('strage path', soundPath);
+    // this.filePromise = await FileSystem.readDirectoryAsync(storagePath);
+    let filelist = await FileSystem.readDirectoryAsync(pendingFiles);
+    console.log('filelist', filelist);
+    Promise.resolve(filelist).then((result) => {
       if (!result) {
-        console.log('no files');
+        _dev(LOG_CTX, 'no files');
       } else {
-        console.log('files', result);
+        _dev(LOG_CTX, 'files', result);
         this.updateFiles(result);
       }
     });
   }
+
 
   updateFiles(items) {
     this.setRefreshingState(true);
     var baseDir = this.config.uploadedFiles;
     let _files = items.map(function(item, num) {
       let name = item.split('/').slice(-1).join('');
-
       return {
         id: name.replace('.m4a', ''),
         fileUri: [baseDir, item].join('/'),
@@ -93,11 +100,9 @@ class SoundFileListScreen extends Component {
     });
 
     this.listCache = _files;
-
     if (this._isMounted) {
       this.setState({ files: _files});
     }
-
     this.setRefreshingState(false);
   }
 
@@ -113,12 +118,14 @@ class SoundFileListScreen extends Component {
     }
   }
 
+
   onSelect = (selected) => {
     this.setSelected({
       id: selected.id,
       fileUri: selected.fileUri
     });
   };
+
 
   render() {
     return (
@@ -133,7 +140,8 @@ class SoundFileListScreen extends Component {
             <SoundFileListViewHeader
               onActionButton={()=>{
                 this.props.navigation.navigate({ routeName:'Soundscapes' })
-              }}/>
+              }}
+            />
           )}
           keyExtractor={(item) => item.id}
           renderItem={

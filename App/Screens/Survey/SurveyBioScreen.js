@@ -1,12 +1,11 @@
-import { Button, View, ImageBackground } from 'react-native';
+import { AwesomeButton } from '../../Components/Button/AwesomeButton';
+import { BlackFade, Scrim } from '../../Components/Effects/LinearGradient';
 import { CenterView, Section, PadView, RootView } from '../../Components/Views';
 import { CheckButton } from '../../Components/Button/CheckButton';
-import { HeadingText } from '../../Components/Text/HeadingText';
 import { filterFalse } from '../../Utilities/Functions';
-import { BlackFade, Scrim, MirageGrad } from '../../Components/Effects/LinearGradient';
-import { AwesomeButton } from '../../Components/Button/AwesomeButton';
-
+import { HeadingText } from '../../Components/Text/HeadingText';
 import { Theme } from '../../Theme';
+import { View, ImageBackground } from 'react-native';
 import React, { Component } from 'react';
 
 const _assets = Theme.Assets;
@@ -166,13 +165,12 @@ class SurveyBioScreen extends Component {
                   backgroundActive="rgba(0,0,0,0)"
                   backgroundColor={_colors.BLU_200}
                   backgroundDarker={_colors.PRIMARY}
+                  borderBottomColor={_colors.GRA_500}
                   borderRadius={1}
                   ExtraContent={<Scrim/>}
                   height={45}
                   raiseLevel={1}
                   size="small"
-                  progress={true}
-                  progressLoadingTime={360}
                   textSize={12}
                   stretch={true}
                   onPress={this.onTaskCompleted}

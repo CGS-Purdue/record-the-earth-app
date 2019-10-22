@@ -6,6 +6,7 @@ import { StorageConfig } from '../../Config/Storage';
 import { SoundscapeListViewItem } from '../../Components/ListViews/SoundscapeListViewItem';
 import { SoundscapeListViewHeader } from '../../Components/ListViews/SoundscapeListViewHeader';
 import { Theme } from '../../Theme';
+import { _dev } from '../../Utilities/Log';
 
 import * as SQLite from 'expo-sqlite';
 
@@ -36,6 +37,7 @@ IF NOT EXISTS Soundscapes (
 
 // const sdb = new SoundDB({autoconnect: true});
 const sdb = SQLite.openDatabase(ConfigName, ConfigVersion, ConfigDescription, null);
+const LOG_CTX = 'SoundscapeListScreen';
 
 /// -----------------------------------------------------------------
 /// SOUNDSCAPE DATABASE LIBRARY
@@ -67,34 +69,26 @@ class SoundscapeListScreen extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-    console.log('[SoundscapeListScreen] mounted');
-    console.log(sdb);
-    sdb.transaction(tx => {
-      tx.executeSql(createQuery);
-    });
-    console.log('[SoundscapeListScreen] update;');
+    _dev(LOG_CTX, 'did mount');
+    sdb.transaction(tx => {tx.executeSql(createQuery)});
+    _dev(LOG_CTX, 'update');
     this.update();
-    //   sdb.connection.transaction(
-    //     (tx)=>{tx.executeSql('SELECT * FROM Soundscapes;', null,
-    //       (tx1, result) => {
-    //         if (result.rows.length > 0) {console.log('Record Exists', result.rows)}
-    //       }, txSuccess,
-    //     )}, dbError, dbSuccess,
-    //   );
+    // sdb.connection.transaction(
+    //   (tx)=>{tx.executeSql('SELECT * FROM Soundscapes;', null,
+    //     (tx1, result) => {
+    //       if (result.rows.length > 0) {console.log('Record Exists', result.rows)}
+    //     }, txSuccess,
+    //   )}, dbError, dbSuccess,
+    //  );
     // };
   }
 
   update() {
-
     const selectAllQuery = 'SELECT * FROM Soundscapes ORDER BY id DESC LIMIT 50;';
+    _dev(LOG_CTX, 'update');
 
-    console.log('[SoundscapeListScreen] update;');
     sdb.transaction(tx => {
-      tx.executeSql(
-        selectAllQuery,
-        null,
-        (_, { rows: { _array } }) => this.updateItems(_array)
-      );
+      tx.executeSql(selectAllQuery, null, (_, { rows: { _array } }) => this.updateItems(_array));
     });
   }
 
@@ -112,20 +106,20 @@ class SoundscapeListScreen extends Component {
         id: item.id.toString(),
         description: item.description,
         pid: item.pid,
-        latLong: item.location,
+        latLong: item.latLong,
         filename: item.filename,
         tags: Array.from(
-          new Set( [item.geo, item.anthro, item.bio, item.emotion].join(',').split(',')))
-          .filter((tag)=>{return (tag && tag !== 'none')}).join(',')
-        ,
+          new Set(
+              [item.geo, item.anthro, item.bio, item.emotion].join(',')
+              .split(','))
+          ).filter(
+            (tag)=>{return (tag && tag !== 'none')}
+          ).join(','),
         datetime: item.datetime,
-      };
+      }
     });
-    console.log(_items);
-    this.setState({
-      items: _items,
-      refreshing: false
-    });
+    _dev(LOG_CTX, '_items', _items);
+    this.setState({items: _items, refreshing: false});
   }
 
   /// =====================================================
@@ -134,31 +128,26 @@ class SoundscapeListScreen extends Component {
   getSoundscapes = () => {
     console.log('[SoundscapeListScreen] getSoundscapes');
     const selectAllQuery = 'SELECT * FROM Soundscapes ORDER BY id DESC LIMIT 50;';
-
     let connection = sdb.connection;
     var _result = null;
 
-    var all_result = connection.db.transaction(
-      (tx) => {
-        tx.executeSql(
-          selectAllQuery,
-          null,
-          (tx, result) => {
-            console.log('tx result', result);
-            _result = result;
-            if (result.rows .length > 0) {
-              this.queryStoreData.results.push(result.rows);
-              console.log(this.queryStoreData.results);
-            }
-            return result.rows;
-          },
-          (tx, error) => { console.log('tx error', error) }
-        )
-      },
-      (err) => { console.log('query error', err) },
-      () => { console.log('query successful')},
+    connection.db.transaction((tx) => {
+      tx.executeSql(selectAllQuery, null,
+        (tx1, result) => {
+          console.log('result', result);
+          _result = result;
+          if (result.rows.length > 0) {
+            this.queryStoreData.results.push(result.rows);
+          }
+          return result.rows;
+        },
+        (tx2, error) => { console.log('tx error', error) }
+      )},
+      (err)=>{ console.log('query error', err) },
+      ()=>{ console.log('query successful')},
     );
   }
+
 
   async getFileList(location) {
     let storagePath = this.config.uploadedFiles;
@@ -166,9 +155,9 @@ class SoundscapeListScreen extends Component {
     Promise.resolve(this.filePromise).then(
       (result) => {
       if (!result) {
-        console.log('no files');
+        console.log('no files')
       } else {
-        this.setState({refreshing: true})
+        this.setState({refreshing: true});
         this.updateFiles(result);
       }
     });
@@ -181,8 +170,9 @@ class SoundscapeListScreen extends Component {
     });
   }
 
+
   onSelect = (selected) => {
-    console.log('id', selected.id);
+    _dev(LOG_CTX, 'selected', 'id', selected.id);
     this.setSelected({
       id: selected.id,
       fileUri: selected.fileUri

@@ -1,34 +1,27 @@
-import React, { Component, createRef } from 'react';
+import React, { createRef } from 'react';
 import { Connection } from '../Connection';
-// import { ConnectionQuery } from '../ConnectionQuery';
+import { _dev } from '../../../Utilities/Log';
 import { DBProps } from './Props';
 
 const _config = DBProps.config;
 const _schema = DBProps.schema;
 const _statements = DBProps.statements;
 const _ref = createRef();
+const LOG_CTX = 'SoundDb';
 
-const _dbSuccess = () => {
-  console.log('query transaction completed onSuccessfully');
-};
+const _dbSuccess = () => { console.log('query transaction completed onSuccessfully') }
+const _onError = (tx, error) => { console.log(error) }
+const _txSuccess = (tx, result) => { console.log('tx resultset', result) }
+const _dbError = (err) => { console.log('db error', err) }
+const _txError = (tx, err) => { console.log('tx err', tx, err) }
 
-const _onError = (tx, error) => { console.log(error); }
-// { insertId, rowsAffected, rows: { length, item(), _array, }, }
-const _txSuccess = (tx, result) => {
-  console.log('tx resultset', result);
-};
-
-const _dbError = (err) => { console.log('db error', err) };
-const _txError = (tx, err) => { console.log('tx err', tx, err) };
-
-class SoundDB extends Component {
+class SoundDB extends React.Component {
   constructor(props) {
     super(props);
     this.ref = _ref;
     this.config = _config;
     this.schema = _schema;
     this.statements = _statements;
-
     this.state = {
       isConnecting: false,
       isConnected: false,
@@ -42,6 +35,7 @@ class SoundDB extends Component {
         lastResult: null,
       },
     };
+
     this.queryStoreData = {
       results: [],
       lastResult: null,
@@ -55,23 +49,24 @@ class SoundDB extends Component {
     this.onConnected = this.onConnected.bind(this);
     this.queryStore = this.queryStore.bind(this);
     this.insert = this.insert.bind(this);
+    this._isMounted = false;
 
     this._selectSuccess = (tx, result) => {
       this.result.data = result;
-      console.log('Selected', result._array);
+      _dev(LOG_CTX, 'Selected', result._array);
       return result;
     };
 
     this._insertSuccess = (tx, result) => {
-        console.log('tx resultset', result);
-        this.queryStoreData.lastResult = result;
-        this.queryStoreData.insertId = result.insertId;
-        console.log(['Insert Success:',
-            ['( id:', result.insertId].join(''),
-            ['rowsAffected:', result.rowsAffected, ')'].join(''),
-          ].join(' ')
-        );
-        return result;
+      _dev(LOG_CTX, 'tx resultset', result);
+      this.queryStoreData.lastResult = result;
+      this.queryStoreData.insertId = result.insertId;
+      _dev(LOG_CTX,  [
+        'Insert Success:',
+        ['( id:', result.insertId].join(''),
+        ['rowsAffected:', result.rowsAffected, ')'].join(''),
+      ].join(' '));
+      return result;
     };
 
     this.queryReporters = {
@@ -87,8 +82,13 @@ class SoundDB extends Component {
   }
 
   onComponentDidMount() {
-    console.log('[SoundDB] mounted');
+    this._isMounted = true;
+    _dev(LOG_CTX, 'did mount');
     this.setConnection(this.config, null);
+  }
+
+  componentWillMount() {
+    this._isMounted = false;
   }
 
   getConnection() {
@@ -97,10 +97,10 @@ class SoundDB extends Component {
 
   setConnection(config, onConnected) {
     if (typeof this.connection === 'object' && this.connectionStatus === 'connected') {
-      console.log('[SoundDB] already Connected');
+      _dev(LOG_CTX, 'already Connected');
       return false;
     }
-    console.log('[SoundDB] setting connection');
+    _dev(LOG_CTX, 'setting connection');
     this.connection = new Connection({
       name: config.name,
       version: config.version,
@@ -111,61 +111,63 @@ class SoundDB extends Component {
 
     // Wait for connection to be set before attempting to auto conect
     if (this.autoconnect) {
-      console.log('[SoundDB] autoconnect');
+      _dev(LOG_CTX, 'autoconnect');
       this.initConnection();
     }
   }
 
   initConnection() {
     if (this.connectionStatus === 'connected') {
-      console.log('[SoundDB] already Connected');
+      _dev(LOG_CTX, 'already Connected');
       return false;
     }
-    console.log('[SoundDB] initConnection');
+    _dev(LOG_CTX, 'initConnection');
     this.connectionStatus = 'connecting';
     this.connection.connect();
   }
 
   _onConnected(conn) {
-    console.log('[SoundDB] connected');
+    _dev(LOG_CTX, 'connected');
     this.connectionStatus = 'connected';
     this.existsOrCreate();
   }
 
 
   existsOrCreate() {
-    console.log('[SoundDB] existsOrCreate');
+    _dev(LOG_CTX, 'existsOrCreate');
     this.queryStore('create');
   }
 
   insert(args) {
-    console.log('[SoundDB] insert');
+    _dev(LOG_CTX, 'insert');
     let exists = this.queryStore('checkExists', args);
-    console.log('[SoundDB] checkExists result', exists);
+    _dev(LOG_CTX, 'checkExists result', exists);
     if (exists){ return false; }
     // let selectid = this.queryStore('select', args);
     let inserted = this.queryStore('insert', args);
-    console.log('[SoundDB] checkExists result', inserted);
+    _dev(LOG_CTX, 'checkExists result', inserted);
   }
 
   getAll() {
     let result = this.queryStore('all');
-    console.log('get all local soundcape', result);
+    _dev(LOG_CTX, 'get all local soundcape', result);
     // this.setState({testdata: result});
     return result;
   }
 
   select() {
     let result = this.queryStore('select');
-    console.log('[SoundDB] select local soundcape', result);
+    _dev(LOG_CTX, 'select local soundcape', result);
     // this.setState({testdata: result});
     return result;
   }
 
+
+
   queryStore(_key, _args) {
     let _store = {
       create: (connection, reporters, statement, args = null) => {
-        console.log('create', reporters);
+        _dev(LOG_CTX, 'Checking for existing database');
         connection.db.transaction(
           (tx) => {
             tx.executeSql(
@@ -179,34 +181,36 @@ class SoundDB extends Component {
           reporters.dbSuccess
         );
       },
+
+
       /// =====================================================
       /// select all
       /// - args [ OFSSET, LIMIT, ORDER ] (PAGER FUNCTION)
       /// =====================================================
       all: (connection, reporters, statement, args) => {
-        console.log('[SoundDB] getAll', [connection, reporters, statement, args]);
-        const dbSuccess = () => { console.log('[SoundDB] getAll successful'); };
+        _dev(LOG_CTX, '[SoundDB] getAll', [connection, reporters, statement, args]);
+        const dbSuccess = () => {
+          _dev(LOG_CTX, '[SoundDB] getAll successful', [connection, reporters, statement, args]);
+        };
         const dbError = (tx, err) => { console.log('[SoundDB] getAll error ', tx, err); };
         let all_result = [];
         var all_items = connection.db.transaction(
           (tx) => {
-            tx.executeSql(
-              statement,
-              null,
+            tx.executeSql(statement, null,
               (tx1, result) => {
-                console.log('[SoundDB] getAll results', result);
+                _dev(LOG_CTX, '[SoundDB] getAll results', result);
                 if (result.rows.length > 0) {
                   all_result = result.rows;
                   this.queryStoreData.results.push(result.rows);
-                  console.log(this.queryStoreData.results);
+                  _dev(LOG_CTX, this.queryStoreData.results);
                 }
                 return result.rows;
               },
-              (tx2, err) => { console.log('tx err', tx2, err) }
+              (tx2, err) => { _dev(LOG_CTX, 'tx err', tx2, err); }
             )
            }, dbError, dbSuccess );
-           console.log('all_items', all_items);
-           console.log('all_result', all_result);
+           _dev(LOG_CTX, 'all_items', all_items);
+           _dev(LOG_CTX, 'all_result', all_result);
            return all_items;
       },
 
@@ -221,19 +225,20 @@ class SoundDB extends Component {
         const txError = (tx, error) => { console.log('tx error', tx, error); };
         const _filename = args.filename;
         let exists = connection.db.transaction((tx)=>{
-          tx.executeSql('SELECT * FROM Soundscapes WHERE filename = ? ;',
+          tx.executeSql(
+            'SELECT * FROM Soundscapes WHERE filename = ? ;',
             [_filename],
             txSuccess,
             txError
           );
           }, dbError, dbSuccess);
-        console.log('check exists', exists);
+          _dev(LOG_CTX, 'check record already exists', exists);
       },
 
       insert: (connection, reporters, statement, args) => {
-        const dbSuccess = (data) => { console.log('query successful', data); };
-        const dbError = (tx, err) => { console.log('query error ', tx, err); };
-        const txSuccess = (tx, result) => { console.log('insert tx sucess', tx, result); };
+        // const dbSuccess = (data) => { console.log('query successful', data); };
+        // const dbError = (tx, err) => { console.log('query error ', tx, err); };
+        // const txSuccess = (tx, result) => { console.log('insert tx sucess', tx, result); };
         const txError = (tx, error) => { console.log('tx error', tx, error); };
         const row = [
           args.datetime,
@@ -254,46 +259,42 @@ class SoundDB extends Component {
         var recordExists = false;
         var insert_result = '';
         try {
-          connection.db.transaction(
-            (tx) => {
-              tx.executeSql(
-                'SELECT * FROM Soundscapes WHERE filename = ? ;',
-                [_filename],
-                (tx1, result) => {
-                  if (result.rows.length > 0) {
-                    console.log('Record Exists', result.rows);
-                    recordExists = true;
-                  }
-                },
-                txError
-              );
+          connection.db.transaction((tx) => {
+            tx.executeSql(
+              'SELECT * FROM Soundscapes WHERE filename = ? ;',
+              [_filename],
+              (tx1, result) => {
+                if (result.rows.length > 0) {
+                  _dev(LOG_CTX, 'Record Exists', result.rows);
+                  recordExists = true;
+                }
+              },
+              txError
+            );
 
-              console.log('recordExists' , recordExists);
-              if (recordExists) { return false; }
-              else {
-                tx.executeSql(
-                  statement,
-                  row,
-                  (_tx, _result) => {
-                    insert_result = _result;
-                    console.log('insert tx sucess', _tx, _result)
-                  },
-                  txError
-                );
-              }
-            },
-            reporters.dbError,
-            reporters.dbSuccess
-          );
+            _dev(LOG_CTX, 'recordExists' , recordExists);
+            if (recordExists) { return false; }
+            else {
+              tx.executeSql(
+                statement,
+                row,
+                (_tx, _result) => {
+                insert_result = _result;
+                _dev(LOG_CTX, 'insert tx sucess', _tx, _result);
+              }, txError )
+            }
+          },
+          reporters.dbError,
+          reporters.dbSuccess )
         } catch (e) {
-            console.log(e);
+          console.log(e);
         } finally {
-          console.log('insert_result', insert_result);
+          _dev(LOG_CTX, 'insert_result', insert_result);
         }
       },
 
       updatePid(connection, reporters, statement, args) {
-        console.log('updatePid', args, statement);
+        _dev(LOG_CTX, 'updatePid', args, statement);
         connection.db.transaction(
           (tx) => {
             tx.executeSql(
@@ -309,7 +310,7 @@ class SoundDB extends Component {
       },
 
       select(connection, reporters, statement, args) {
-        console.log('select', args, statement);
+        _dev(LOG_CTX, 'select', args, statement);
         connection.db.transaction(
           (tx) => {
             tx.executeSql(

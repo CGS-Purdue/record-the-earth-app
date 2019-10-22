@@ -9,19 +9,9 @@ import InfoPageStyles from './content/stylesheet';
 import { Theme } from '../../Theme';
 import PropTypes from 'prop-types'
 
-// const _styles = Theme.Styles;
-// const _assets = Theme.Assets;
-// const _colors = Theme.Colors;
-// const _vars = Theme.Variables;
-// const styles = _styles.AboutStyles;
-//
-
-// Screens
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
-// const _vars = Theme.Variables;
-//
 const styles = _styles.PresentationnStyles
 
 class ButtonBox extends React.Component {
@@ -52,19 +42,11 @@ class ButtonBox extends React.Component {
   }
 }
 
-
-// leave off @2x/@3x
 const Images = {
-  terms: require('./Dev/icon-terms.png'),
-  about: require('./Dev/faq-icon.png.png'),
-  list: require('./Dev/icon-list.png'),
-  usage: require('./Dev/icon-usage-examples.png'),
-  category: require('./Dev/icon-qrcode.png'),
-  closeButton: require('./Dev/close-button.png'),
-  api: require('./Dev/icon-api-testing.png'),
-  background: require('./Dev/BG.png'),
-  theme: require('./Dev/icon-theme.png'),
-  deviceInfo: require('./Dev/icon-device-information.png'),
+  terms: require('../../Assets/infopages/icon-terms.png'),
+  about: require('../../Assets/infopages/faq-icon.png.png'),
+  list: require('../../Assets/infopages/icon-list.png'),
+  category: require('../../Assets/infopages/icon-qrcode.png'),
 };
 
 const HtmlWebViewStyle = {

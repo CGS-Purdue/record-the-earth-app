@@ -32,12 +32,14 @@ class ConnectionQuery extends Component {
   setQuery(conn, query, args, options) {
     // query outline
     this.statement = query;
-
     // argument count
     this.arguments = args;
-
     this.options = options;
-    const _db_success = (data, options) => { console.log('transaction completed successfully'); this.querystate.data = data.result.rows._array; }; const _db_error = (tx, error) => {
+    const _db_success = (data, options) => {
+      console.log('transaction completed successfully'); this.querystate.data = data.result.rows._array;
+    };
+
+    const _db_error = (tx, error) => {
        console.log('db_error', tx, error);
     };
 
@@ -53,14 +55,7 @@ class ConnectionQuery extends Component {
     const _tx_result = (tx, data, options) => {
       if (data) {
         if (data.insertId) {
-          console.log(
-            data.insertId,
-            data.rowsAffected,
-            data.rows,
-            data.length,
-            data.item,
-            data._array
-          );
+          console.log( data.insertId, data.rowsAffected, data.rows, data.length, data.item, data._array);
         }
       }
 
@@ -82,8 +77,7 @@ class ConnectionQuery extends Component {
     this.txError = txError;
 
     const execute = () => {
-      conn.transaction(
-        (tx) => {
+      conn.transaction((tx) => {
           tx.executeSql(query, args, txResult, txError);
         },
         dbError,
@@ -93,8 +87,7 @@ class ConnectionQuery extends Component {
         return options.callback();
       }
     };
-
-    this.execute = execute;
+  this.execute = execute;
   }
 }
 

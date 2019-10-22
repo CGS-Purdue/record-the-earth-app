@@ -46,31 +46,15 @@ class ListViewEmpty extends Component {
 
     return (
       <View>
-        <View
-          style={{
-            flex: 1,
-            width: '100%',
-            backgroundColor: '#444444',
-            display: 'flex',
-          }}
-        >
-          <View
-            style={[styles.item, { backgroundColor: 'rgba(255,255,255,.4)' }]}
-          >
+        <View style={{ flex: 1, width: '100%', backgroundColor: '#444444', display: 'flex', }}>
+          <View style={[styles.item, { backgroundColor: 'rgba(255,255,255,.4)' }]}>
             <View style={styles.surface}>
               <Text style={styles.item}>{emptyText}</Text>
             </View>
           </View>
         </View>
 
-        <View
-          style={{
-            flex: 1,
-            width: '100%',
-            backgroundColor: '#444444',
-            display: 'flex',
-          }}
-        >
+        <View style={{ flex: 1, width: '100%', backgroundColor: '#444444', display: 'flex'}}>
           <Button
             title={actionText}
             style={_styles.button_default}

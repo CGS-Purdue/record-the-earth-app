@@ -6,7 +6,7 @@ import BTN_RECORD_REC from '../Assets/btn/record-rec.png';
 import ICON_EMBLEM from '../Assets/icons/icon-emblem.png';
 
 import IMG_BG from '../Assets/bg.jpg';
-import IMG_BG_SOLID_DARK from '../Assets/img/bg-solid-dark.svg';
+
 import IMG_BG_CAR from '../Assets/img/BG_Car.png';
 import IMG_BG_CHEER from '../Assets/img/BG_Cheer.jpg';
 import IMG_BG_CLIFF from '../Assets/img/BG_Cliff.png';
@@ -14,7 +14,8 @@ import IMG_BG_CUDDLING from '../Assets/img/BG_Cuddling.jpg';
 import IMG_BG_EARTH from '../Assets/img/BG_Earth.png';
 import IMG_BG_FROG from '../Assets/img/BG_Frog.png';
 import IMG_BG_LILYFLOWER from '../Assets/img/BG_Lilyflower.jpg';
-import IMG_JUNGLE_GEOMETRY from '../Assets/img/jungle-geometry.png';
+import IMG_BG_SOLID_DARK from '../Assets/img/bg-solid-dark.svg';
+
 import IMG_SPLASH from '../Assets/img/splash.jpg';
 
 import LOGO_GLOW from '../Assets/logo/logo-glow.png';
@@ -52,7 +53,6 @@ const ImageAssets = {
   img_bg_frog: IMG_BG_FROG,
   img_bg_lilyflower: IMG_BG_LILYFLOWER,
   img_splash: IMG_SPLASH,
-  img_jungle_geometry: IMG_JUNGLE_GEOMETRY,
   // img_jungle_geometry2: IMG_JUNGLE_GEOMETRY2,
   // img_jungle_geometry3: IMG_JUNGLE_GEOMETRY3,
 };

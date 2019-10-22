@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# EXPO HELPER
+# -------------
+BASE_DIR="$(npm prefix)"
+
+source ${BASE_DIR}/../.env
+
+# publish|p [options] [project-dir]
+# -c, --clear
+# --max-workers 6
+# --release-channel <channel>  # (default: default)
+# --config ./app.json (path to app.json)
+
+${BASE_DIR}/node_modules/.bin/expo build:android \
+  --release-channel development \
+  --no-publish \
+  --type app-bundle \
+  --no-wait \
+  --config "${BASE_DIR}/app.json" \
+  ${BASE_DIR}

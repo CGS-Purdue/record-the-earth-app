@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { PadView, Section, ImgBgFill, CenterView, RootView } from '../../Components/Views';
+import { AwesomeButtonBruce  } from '../../Components/Button/AwesomeButton';
+import { BlackFade, MirageGrad } from '../../Components/Effects/LinearGradient';
 import { HeadingText } from '../../Components/Text/HeadingText';
 import { MultilineTextInput } from '../../Components/Forms/MultilineTextInput';
-import { BlackFade, Scrim, MirageGrad } from '../../Components/Effects/LinearGradient';
-import { AwesomeButton, AwesomeBlueButton, AwesomeButtonBojack, AwesomeButtonBruce  } from '../../Components/Button/AwesomeButton';
+import { PadView, Section, ImgBgFill, CenterView, RootView } from '../../Components/Views';
 import { Theme } from '../../Theme';
+import { View } from 'react-native';
+import React, { Component } from 'react';
 
 const _colors = Theme.Colors;
 const _styles = Theme.Styles;
 const _assets = Theme.Assets;
-const _layout = Theme.Layout;
 
 class SurveyDescScreen extends Component {
   constructor(props) {
@@ -24,13 +23,16 @@ class SurveyDescScreen extends Component {
     this.navigateForward = this.navigateForward.bind(this);
   }
 
+
   componentDidMount() {
     this.setIncomingSurveyData();
   }
 
+
   getNavigationParams() {
     return this.props.navigation.state.params || {};
   }
+
 
   setIncomingSurveyData() {
     let params = this.getNavigationParams();
@@ -40,9 +42,11 @@ class SurveyDescScreen extends Component {
     }
   }
 
+
   updateSurveyData(data){
     this.setState({ surveyData: data });
   }
+
 
   getSurveyData = () => {
     let surveyData = this.state.surveyData;
@@ -51,7 +55,7 @@ class SurveyDescScreen extends Component {
       key: surveyKey,
       data: surveyData,
     };
-  };
+  }
 
   updateSoundscapeData = (key, data) => {
     let current = this.soundscape_data;
@@ -60,7 +64,8 @@ class SurveyDescScreen extends Component {
     let soundscapeData = Object.assign({}, current, update);
     this.setState({ soundscape_data: soundscapeData });
     return soundscapeData;
-  };
+  }
+
 
   navigateForward() {
     let data = this.updateSoundscapeData();
@@ -135,7 +140,6 @@ class SurveyDescScreen extends Component {
 }
 
 export { SurveyDescScreen };
-
 // <AwesomeButtonRick
 //   size="small"
 //   type="primaryFlat"

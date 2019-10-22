@@ -12,15 +12,17 @@ import ServerConfig from '../../Config/Server';
 import { MonoText } from '../../Components/Text/MonoText';
 import { SoundDB } from '../../Components/Database/SoundDB';
 import { Base64 } from '../../Utilities/Base64';
+import { _dev } from '../../Utilities/Log';
 import { Theme } from '../../Theme';
 
 // import * as Device from 'expo-device';
 const _colors = Theme.Colors;
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
-//
+
 // const sdb = new SoundDB({ autoconnect: false });
 const sdb = new SoundDB({ autoconnect: true });
+
 
 const getFormDataExtraData = () => {
   const { data } = JSON.parse(Base64.decode(ServerConfig));
@@ -33,6 +35,8 @@ const getConfigUploadUrl = (data) => {
   if (!hostname) { return false }
   return ['https:/', hostname, pathname].join('/');
 }
+
+const LOG_CTX = 'SurveySubmitScreen';
 
 
 const getSurveyFormData = (data) => {
@@ -67,7 +71,6 @@ const SoundscapeSubmitRef = createRef();
 class SurveySubmitScreen extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       parsed_data: {},
       reason: '',
@@ -75,7 +78,6 @@ class SurveySubmitScreen extends Component {
       survey_data_formdata: false,
       upload_progress: 0,
     };
-
     this.ref = SoundscapeSubmitRef;
     this.done = 0;
     this.incoming_data = null;
@@ -93,16 +95,15 @@ class SurveySubmitScreen extends Component {
   componentDidMount() {
     this._isMounted = true;
     console.log('%c[SurveySubmitScreen] component did mount', 'color:lime;font-weight:bold;');
-    console.log('[SurveySubmitScreen] state', this.state);
+    _dev(LOG_CTX, 'state', this.state);
     let soundscape_data = this.getIncomingSoundscapeData();
     this.survey_json_string = JSON.stringify(soundscape_data);
-
     this.initUpload(soundscape_data);
   }
 
   componentWillUnmount() {
     if (sdb.connectionStatus === 'connected') {
-      console.log(sdb);
+      _dev(LOG_CTX, sdb);
       // sdb.connection.disconnect();
     }
     this._isMounted = false;
@@ -111,30 +112,35 @@ class SurveySubmitScreen extends Component {
 
 
   setSoundscapeData(data) {
-    console.log('[SurveySubmitScreen] setSoundscapeData soundscape_data', data);
+    _dev([LOG_CTX, 'setSoundscapeData'], 'soundscape_data', data);
     if (!data) { return false; }
     this.soundscape_data = data || false;
   }
+
 
   setIncomingNavivationData(data) {
     this.incoming_data = data || false;
   }
 
+
   getIncomingSoundscapeData() {
     let params = this.getNavigationParams();
-    console.log('[SurveySubmitScreen] getIncomingSoundscapeData params', params);
+    _dev([LOG_CTX, 'getIncomingSoundscapeData'], 'params', params);
+
     this.setIncomingNavivationData(params);
     let soundscape_data = params.soundscape_data;
     if (soundscape_data) {
-      console.log('[SurveySubmitScreen] getIncomingSoundscapeData soundscape_data', soundscape_data);
+      _dev([LOG_CTX, 'getIncomingSoundscapeData'], 'soundscape_data', soundscape_data);
       this.setSoundscapeData(soundscape_data);
     }
     return soundscape_data;
   }
 
+
   getNavigationParams() {
     return this.props.navigation.state.params || {};
   }
+
 
   initUpload(data) {
     let parsed = this.processSurveyData(data);
@@ -142,7 +148,7 @@ class SurveySubmitScreen extends Component {
     this.setParsedDataState(parsed);
     this.initSubmitLocalDb(parsed);
     // this.initSubmitRemoteAsync(parsed);
-    console.log('[SurveySubmitScreen] initUpload state', JSON.stringify(this.state.parsed_data));
+    _dev([LOG_CTX, 'initUpload state'], 'soundscape_data', JSON.stringify(this.state.parsed_data));
   }
 
 
@@ -151,20 +157,22 @@ class SurveySubmitScreen extends Component {
       _parsed = this.getParsedData();
       this.setParsedDataState(_parsed);
     }
-    console.log('[SurveySubmitScreen] initSubmitLocalDb getParsed', _parsed);
-    if (!_parsed){ return false; }
-    this.submitLocalDb(_parsed);
+
+    _dev([LOG_CTX, 'initSubmitLocalDb'], 'getParsed', _parsed);
+    if (!_parsed){ return false }
+    this.submitLocalDb(_parsed)
   }
+
 
   initSubmitRemoteAsync(_parsed) {
     if (!_parsed){
       _parsed = this.getParsedData();
       this.setParsedDataState(_parsed);
     }
-    console.log('[SurveySubmitScreen] initSubmitRemoteAsync state', JSON.stringify(this.state.parsed_data));
+    _dev([LOG_CTX, 'initSubmitRemoteAsync'], 'state', JSON.stringify(this.state.parsed_data));
     let fileName = _parsed.filename;
     let formData = getSurveyFormData(_parsed);
-    console.log('[SurveySubmitScreen] initSubmitRemoteAsync getFormData', formData);
+    _dev([LOG_CTX, 'initSubmitRemoteAsync'], 'initSubmitRemoteAsync getFormData', formData);
 
     if (!formData || !fileName){ return false; }
     this.submitRemoteAsync(formData, fileName);
@@ -172,39 +180,40 @@ class SurveySubmitScreen extends Component {
 
 
   submitRemoteAsync = async (formData, fileName) => {
-    console.log('[SurveySubmitScreen] submitRemoteAsync', fileName, formData);
-    console.log('[SurveySubmitScreen] submitRemoteAsync state', JSON.stringify(this.state.parsed_data));
+    _dev([LOG_CTX, 'submitRemoteAsync'], fileName, formData);
+    _dev([LOG_CTX, 'submitRemoteAsync'], 'state', JSON.stringify(this.state.parsed_data));
+
     if (!fileName) {return false;}
 
-    let uploadOptions = {contentType: 'multipart/form-data'};
     let uploadResult;
-
+    let uploadOptions = {contentType: 'multipart/form-data'};
     let url = getConfigUploadUrl();
     let filePath = [StorageConfig.STORAGE_PENDING_SOUNDFILES, fileName].join('/');
-    console.log(`[SurveySubmitScreen] submitRemoteAsync to \n  ${filePath}` );
+
+    _dev([LOG_CTX, 'submitRemoteAsync'], `\n${filePath}`);
+
     try {
       let filedata = await FileSystem.readAsStringAsync(filePath);
+
       uploadOptions.contentLength = filedata.length;
-      console.log('[SurveySubmitScreen] submitRemoteAsync file.length', filedata.length);
+      _dev([LOG_CTX, 'submitRemoteAsync'], 'file.length', filedata.length);
       formData.append('file', filedata.trim(), fileName);
-      // .then((filedata) => { })
-      // .catch((err) => {  })
-      // .done(() => {
-      console.log('[SurveySubmitScreen] submitRemoteAsync.xhrPost\n');
+
+      _dev([LOG_CTX, 'submitRemoteAsync'], 'xhrPost\n');
       uploadResult = xhrPost(url, formData, uploadOptions);
+
+      _dev([LOG_CTX, 'submitRemoteAsync'], uploadResult, 'xhrPost\n');
       this.updateSoundfile(fileName);
-      console.log('[SurveySubmitScreen] submitRemoteAsync', uploadResult);
-      // })
-      // .finally(() => { console.log('uploadResult', uploadResult)});
+
     } catch (err) {
-      console.log('[readAsStringAsync]', err);
+      console.log(err);
       return false;
     }
   };
 
   submitLocalDb(data) {
     if (!data) { return false; }
-    console.log('[submitLocalDb]', data);
+    _dev([LOG_CTX, 'submitLocalDb'], data);
     let _upload_pid = data.pid ? data.pid : -1;
     let _is_uploaded = data.isUploaded ? true : false;
 
@@ -229,8 +238,8 @@ class SurveySubmitScreen extends Component {
   // USER DATA ENTRY POINT
   processSurveyData(_data) {
     if (!_data) { return false; }
+    _dev([LOG_CTX, 'SurveySubmitScreen'], 'processSurveyData data', _data);
 
-    console.log('[SurveySubmitScreen] processSurveyData data', _data);
     let datetime = new Date();
     var parsed = _data;
     parsed.filename = _data.filename;
@@ -244,33 +253,31 @@ class SurveySubmitScreen extends Component {
     parsed.appVersion = getAppData('appVersion');
     parsed.osVersion = getAppData('osVersion');
     parsed.deviceModel = getAppData('deviceModel');
+
     // CHECKS AT START INSTEAD OF REPEATING
     // AFTER EVERY FUNCTION DOWNSTREAM
     // IF THE INPUT IS GOOD HERE IT WILL BE
     // FOR ALL FOR ALL OF THE OTHER FUNCTIONS
     let valid = this.validatePreFlightCheck(parsed);
     if (!valid) {
-       console.warn('[SurveySubmitScreen] validatePreFlightCheck reason', this.state.reason);
-       return false;
+      console.warn('[SurveySubmitScreen] validatePreFlightCheck reason', this.state.reason);
+      return false;
     }
-    console.log('[SurveySubmitScreen] this', this);
+    _dev([LOG_CTX, 'SurveySubmitScreen'], 'this', this);
     return parsed;
   };
 
-  setParsedData(data) {
-    this.parsed_data = data;
-  }
-
+  setParsedData(data) { this.parsed_data = data }
   setParsedDataState(_data) {
     if (this._isMounted) {
-      console.log('[SurveySubmitScreen] setState', JSON.stringify(_data));
+      _dev([LOG_CTX, 'SurveySubmitScreen'], 'setState', JSON.stringify(_data));
       this.setState( {parsed_data: _data});
     }
   }
 
   getParsedData() {
     let parsed = this.state.parsed_data;
-    console.log('[SurveySubmitScreen] getParsedData', parsed);
+    _dev([LOG_CTX, 'SurveySubmitScreen'], 'getParsedData', parsed);
     if(!parsed) { return false; }
     return parsed;
   }
@@ -278,8 +285,7 @@ class SurveySubmitScreen extends Component {
 
   validatePreFlightCheck = (_data) => {
     let schema = SoundscapeSchema;
-    console.log('[validatePreFlightCheck] 0');
-
+    _dev([LOG_CTX, 'validatePreFlightCheck'], 'schema', schema);
     let schema_size = Object.keys(schema).length;
     let schema_sum = object_keys_checksum(schema);
 
@@ -314,6 +320,7 @@ class SurveySubmitScreen extends Component {
     this.props.navigation.navigate('Main');
   }
 
+
   updateSoundfile = (fileName) => {
     if (this._isMounted) {
       let updated = updatePendingtToUploaded(fileName);
@@ -322,6 +329,7 @@ class SurveySubmitScreen extends Component {
       }
     }
   };
+
 
   onUploadCompleted() {
     // STOP HANDLING STATE UPDATES ==========
@@ -345,9 +353,11 @@ class SurveySubmitScreen extends Component {
     }
   }
 
+
   _onFinishButton() {
     this.onActivityFinished();
   }
+
 
   onActivityFinished() {
     if (this.submitTimeout){
@@ -359,30 +369,32 @@ class SurveySubmitScreen extends Component {
     this.naviateToHome();
   }
 
+
   onActivityTimeout (){
     this.isCancelled = true;
   }
+
 
   onDoneUploadRemote () {
     this.done = this.done + 100
     this.onUploadCompleted();
   }
+
+
   onDoneSaveDatabase () {
     this.done = this.done + 10;
     this.onUploadCompleted();
   }
+
+
   onDoneUpdateLocalId () {
     this.done = this.done + 1;
     this.onUploadCompleted();
   }
 
-
-
   render() {
     return (
-      <ImageBackground style={_styles.bgImg}
-        source={_assets.images.img_bg_cliff}>
-
+      <ImageBackground style={_styles.bgImg} source={_assets.images.img_bg_cliff}>
         <RootView>
           <PadView padding={[1]}>
             <CenterView>
@@ -394,19 +406,17 @@ class SurveySubmitScreen extends Component {
                   color={_colors.PRIMARY}
                   accessibilityLabel={'Submit'}
                 />
-              <Button
+                <Button
                   title={'Finish'}
                   onPress={this._onFinishButton}
                   style={_styles.button_default}
                   color={_colors.PRIMARY}
                 />
-
                 <MonoText style={{color: 'white'}}>
                   {this.state.survey_data_formdata
                     ? JSON.stringify(this.state.survey_data_formdata)
                     : JSON.stringify(this.state.soundscape_data)}
                 </MonoText>
-
                 <MonoText style={{color: 'white'}}>
                   {this.survey_json_string}
                 </MonoText>

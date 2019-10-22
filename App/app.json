@@ -2,7 +2,7 @@
   "expo": {
     "android": {
       "googleServicesFile": "./google-services.json",
-      "package": "org.recordtheearth.expo",
+      "package": "org.recordtheearth3",
       "permissions": [
         "RECORD_AUDIO",
         "READ_EXTERNAL_STORAGE",
@@ -17,17 +17,17 @@
     "assetBundlePatterns": [
       "**/*",
       "./Assets/**/*",
-      "./Screens/Dev/*",
       "./Assets/fonts/*.ttf",
       "./Assets/img/*.png",
       "./Assets/icons/*.png",
       "./Assets/btn/*.png",
       "./Assets/img/*.jpg",
-      "./Assets/logo/*.png"
+      "./Assets/logo/*.png",
+      "./Assets/infopages/*.*"
     ],
     "description": "Record the Earth Native build for iOS and Android",
     "extra": {
-      "EXPO_DEBUG": true,
+      "EXPO_DEBUG": false,
       "ExtraKey": "3102",
       "debug_flags": {
         "DEBUG_OUTLINE_STYLES": false,
@@ -62,14 +62,13 @@
     },
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"
     ],
     "primaryColor": "#cccccc",
     "privacy": "unlisted",
     "rnCliPath": "",
     "sdkVersion": "35.0.0",
-    "slug": "record-the-earth-v3",
+    "slug": "record-the-earth-3",
     "splash": {
       "backgroundColor": "#000000",
       "image": "./Assets/splash.png",
@@ -79,23 +78,5 @@
       "fallbackToCacheTimeout": 0
     },
     "version": "0.9.0"
-  },
-  "web": {
-    "build": {
-      "report": {
-        "statsFilename": "stats.json",
-        "reportFilename": "report.html",
-        "analyzerMode": "static",
-        "analyzerHost": "127.0.0.1",
-        "analyzerPort": 8888,
-        "defaultSizes": "gzip",
-        "openAnalyzer": false,
-        "generateStatsFile": true,
-        "statsOptions": null,
-        "excludeAssets": null,
-        "verbose": false,
-        "path": "web-report"
-      }
-    }
   }
 }

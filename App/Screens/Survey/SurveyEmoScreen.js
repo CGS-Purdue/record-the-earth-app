@@ -1,12 +1,12 @@
-import { View, ImageBackground } from 'react-native';
+import { AwesomeButton } from '../../Components/Button/AwesomeButton';
+import { BlackFade, Scrim } from '../../Components/Effects/LinearGradient';
 import { CenterView, Section, PadView, RootView } from '../../Components/Views';
 import { CheckButton } from '../../Components/Button/CheckButton';
-import { HeadingText } from '../../Components/Text/HeadingText';
 import { filterFalse } from '../../Utilities/Functions';
+import { HeadingText } from '../../Components/Text/HeadingText';
 import { Theme } from '../../Theme';
+import { View, ImageBackground } from 'react-native';
 import React, { Component } from 'react';
-import { BlackFade, Scrim } from '../../Components/Effects/LinearGradient';
-import { AwesomeButtonCartman } from '../../Components/Button/AwesomeButton';
 
 const _colors = Theme.Colors;
 const _assets = Theme.Assets;
@@ -150,29 +150,27 @@ class SurveyEmoScreen extends Component {
                 />
                 <View style={{ height: 10, backgroundColor: _colors.TRANSPARENT }} />
 
-                  <AwesomeButtonCartman
-                    size="small"
-                    textSize={12}
-                    type="anchor"
-                    borderColor={_colors.GRA_200}
-                    borderTopRadius={0}
-                    borderTopWidth={0}
-                    borderBottomColor={_colors.GRA_500}
-                    borderBottomRadius={0}
-                    borderBottomWidth={5}
-                    backgroundColor={'green'}
-                    backgroundDarker={'darkslategrey'}
-                    backgroundActive="rgba(0,0,0,0)"
-                    activeOpacity={0.75}
-                    width={null}
-                    textColor={'#ffffff'}
-                    raiseLevel={1}
-                    onPress={this.onTaskCompleted}
-                    ExtraContent={<Scrim/>}
-                    stretch={true}
-                   >
-                    {'Continue'}
-                  </AwesomeButtonCartman>
+                <AwesomeButton
+                  activeOpacity={0.75}
+                  backgroundActive="rgba(0,0,0,0)"
+                  backgroundColor={_colors.BLU_200}
+                  backgroundDarker={_colors.PRIMARY}
+                  borderBottomColor={_colors.GRA_500}
+                  borderRadius={1}
+                  ExtraContent={<Scrim/>}
+                  height={45}
+                  raiseLevel={1}
+                  size="small"
+                  textSize={12}
+                  stretch={true}
+                  onPress={this.onTaskCompleted}
+                  style={_styles.button_awesome}
+                  textColor={_colors.SHADE_LIGHTER_80}
+                  type="primary"
+                  width={null}
+                  >
+                  {'Continue'}
+                </AwesomeButton>
               </Section>
             </CenterView>
           </PadView>

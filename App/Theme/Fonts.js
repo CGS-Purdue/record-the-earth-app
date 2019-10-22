@@ -43,18 +43,17 @@ const FontMap = (key, autoload=false) => {
   let load = async (_font) => {
     const { module, name } = _font;
     if (!module) { return false }
-
     let Font = await ExpoFont.loadAsync({ [name]: module });
+    console.log('font', Font);
     return Font;
   }
 
   if (autoload){
-
     try {
       var _font = get(key);
       const { module, name } = _font;
+      // load(_font);
       return ExpoFont.loadAsync({ [name]: module });
-      // return load(_font);
     } catch (e) {
       console.log(e);
       if (_font) {
