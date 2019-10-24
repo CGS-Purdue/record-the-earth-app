@@ -1,5 +1,4 @@
 import { ButtonStyles } from './Styles/ButtonStyles';
-import { DebugStyles } from './Styles/DebugStyles';
 import { FormStyles } from './Styles/FormStyles';
 import { HomeStyles } from './Styles/HomeStyles';
 import { LayoutStyles } from './Styles/LayoutStyles';
@@ -15,12 +14,13 @@ import { SoundscapeStyles } from './Styles/SoundscapeStyles';
 import { AudioPlayerStyles } from './Styles/AudioPlayerStyles';
 import { TabBarStyles } from './Styles/TabBarStyles';
 import { CheckBtnStyles } from './Styles/CheckButtonStyles';
+import { DebugStyles } from './Styles/DebugStyles';
 
 const ThemeStyles = Object.assign(
   AudioPlayerStyles,
   ButtonStyles,
   CheckBtnStyles,
-  DebugStyles,
+  __DEV__ && DebugStyles,
   FontClasses,
   FormStyles,
   HomeStyles,

@@ -19,10 +19,7 @@ class SoundscapePlayerScreen extends Component {
 
   render() {
     return (
-      <ImageBackground
-        style={_styles.bgImg}
-        source={_assets.images.img_background}
-      >
+      <ImageBackground style={_styles.bgImg} source={_assets.images.img_background}>
         <RootView>
           <CenterView>
             <ErrorBoundary>

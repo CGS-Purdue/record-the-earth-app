@@ -9,8 +9,27 @@ import { getAudioFileFromTemp } from '../../Utilities/Filesystem';
 import { StorageConfig } from '../../Config/Storage';
 import ServerConfig from '../../Config/Server';
 
-const FILE_NAME = 'recording-f395faf1-ae31-49f2-9a81-214a75560362.m4a.mp4';
-const FILE_URI = [ServerConfig.STORAGE_PENDING_SOUNDFILES, FILE_NAME].join('/');
+// const FILE_PATH = 'file:///data/user/0/host.exp.exponent/files/ExperienceData/%2540matt.harris%252Frecord-the-earth-3/soundfiles/uploaded';
+// const FILE_PATH = 'file:///data/user/0/host.exp.exponent/files/ExperienceData/%2540matt.harris%252Frecord-the-earth-3/soundfiles';
+const FILE_PATH = 'file:///data/user/0/host.exp.exponent/files/ExperienceData/%2540matt.harris%252Frecord-the-earth-3/soundfiles/pending';
+const FILE_NAME = 'recording-6894eb96-4785-4605-bd63-cdea2eec4c02.m4a';
+const FILE_URI = [FILE_PATH, FILE_NAME].join('/');
+
+function getUploadAddress() {
+  if (__DEV__) {
+    return 'https://dev.recordtheearth.org/soundscape-android.php';
+    // return 'http://localhost:5000/api/soundscape/upload-android.php';
+    // return 'http://localhost:5000/soundscape-android.php';
+  } else {
+    return 'https://recordtheearth.org/soundscape-android.php';
+  }
+}
+
+const UPLOAD_SERVER_URL = getUploadAddress();
+
+
+
+// const FILE_URI = [ServerConfig.STORAGE_PENDING_SOUNDFILES, FILE_NAME].join('/');
 /// try {
 ///   const filedata = await FileSystem.readAsStringAsync(FILE_URI, {
 ///   encoding: FileSystem.EncodingType.Base64,
@@ -18,7 +37,7 @@ const FILE_URI = [ServerConfig.STORAGE_PENDING_SOUNDFILES, FILE_NAME].join('/');
 /// const formData = getFormData();
 /// formData.append('file', _data);
 /// formData.append('file', ab2str(ab2str(data));
-/// formData.append('file', datxa);
+/// formData.append('file', data);
 /// let transport = new Blob([data]);
 /// formData.append('file', encodeURI(data), 'filename.mp4');
 /// formData.append('file', {
@@ -34,22 +53,18 @@ function getFormData() {
   formData.append('bio', 'Birds, Insects, Frogs and Reptiles, Mammals');
   formData.append('description', 'upload from new rte3');
   formData.append('datetime', '08/04/2019 01:52');
-  formData.append(
-    'emotion',
-    'Make me curious, Amaze me, Stress me out, Make me happy, Relax me'
-  );
-  formData.append('filename', FILE_NAME);
+  formData.append('emotion', 'Make me curious, Amaze me, Stress me out, Make me happy, Relax me' );
   formData.append('geo', 'Wind, Water, Thunder, Rain');
   formData.append('anthro', 'Machines, Vehicles, Sirens Alarms, Talking');
   formData.append('LatLong', '40.422968,-86.922710');
   formData.append('duration', '20');
   formData.append('deviceModel', 'Android');
-  formData.append(
-    'osVersion',
-    'Android OS 4.1.2 / API-16 (JZO54K/S7710XXAND2)'
-  );
+  formData.append('osVersion', 'Android OS 4.1.2 / API-16 (JZO54K/S7710XXAND2)');
+  formData.append('filename', FILE_NAME);
   return formData;
 }
+
+
 function getJsonData() {
   var data = {
     anthro: 'Machines, Vehicles, Sirens Alarms, Talking',
@@ -60,9 +75,8 @@ function getJsonData() {
     description: 'upload from new rte3',
     deviceModel: 'motorola one X',
     duration: '20',
-    emotion:
-      'Make me curious, Amaze me, Stress me out, Make me happy, Relax me',
-    filename: FILE_NAME,
+    emotion: 'Make me curious, Amaze me, Stress me out, Make me happy, Relax me',
+    "filename": `"${FILE_NAME}"`,
     geo: 'Wind, Water, Thunder, Rain',
     LatLong: '40.422968,-86.922710',
     osVersion: 'Android OS 4.1.2 / API-16 (JZO54K/S7710XXAND2)',
@@ -71,15 +85,7 @@ function getJsonData() {
   return data;
 }
 
-function getUploadAddress() {
-  if (__DEV__) {
-    return 'https://dev.recordtheearth.org/soundscape-android.php';
-  } else {
-    return 'https://recordtheearth.org/soundscape-android.php';
-  }
-}
 
-const UPLOAD_SERVER_URL = getUploadAddress();
 
 class HttpUploadScreen extends Component {
   constructor(props) {
@@ -90,30 +96,50 @@ class HttpUploadScreen extends Component {
       filesize: null,
       fileuri: null,
     };
+
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+
+  }
 
   initXMLForm = async () => {
-    const formData = await getFormData();
-    let uploadOptions = {};
     try {
-      await FileSystem.readAsStringAsync(FILE_URI)
-        .then((filedata) => {
-          uploadOptions.contentLength = filedata.length;
-          console.log('file length', filedata.length);
-          formData.append('file', {
-            uri: FILE_URI,
-            type: 'audio/m4a',
-            name: FILE_NAME,
-          });
-        })
-        .catch((er) => {
-          console.log(er);
-        })
-        .done(() => {
-          xhrPost(formData);
-        });
+      const jsonData = getJsonData();
+      const formData = getFormData();
+      let filedata = await FileSystem.readAsStringAsync(FILE_URI)
+      formData.append("file", { uri: FILE_URI, type: 'audio/m4a', name: FILE_NAME });
+      // formData.append("file", { uri: FILE_URI, type: 'audio/m4a', name: FILE_NAME });
+      //   // uri: FILE_URI
+      // });
+
+      // console.log('file length', filedata, filedata.length);
+      //
+      // var sendData = new Blob([
+      //   JSON.stringify(jsonData, null, 2)
+      //   ], {type : 'application/json'}
+      // );
+      let uploadOptions = {
+        // contentType: 'text/plain',
+        contentType: 'multipart/form-data',
+        // contentType: 'application/x-www-form-urlencoded',
+        // contentType: 'application/json',
+        // contentLength: filedata.length,
+      };
+      // jsonData.file = filedata;
+
+      // Display the key/value pairs
+      // let data = [];
+      // for(var pair of formData.entries()) {
+      //   console.log(pair[0]+ ', '+ encodeURI(pair[1]));
+      //   data.push(pair[0] + '='+ encodeURI(pair[1]));
+      // }
+      // xhrPost(UPLOAD_SERVER_URL, data.join("&"),  uploadOptions);
+      // xhrPost(UPLOAD_SERVER_URL, sendData,  uploadOptions);
+      xhrPost(UPLOAD_SERVER_URL, formData,  uploadOptions);
+      // xhrPost(UPLOAD_SERVER_URL, jsonData, uploadOptions);
+      // xhrPost(UPLOAD_SERVER_URL, JSON.stringify([jsonData, filedata]), uploadOptions);
+
     } catch (e) {
       console.log(e);
       return false;

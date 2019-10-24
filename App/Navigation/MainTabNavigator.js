@@ -4,6 +4,7 @@ import { createMaterialTopTabNavigator, MaterialTopTabBar } from 'react-navigati
 import { TabBarIcon } from '../Components/Icon/TabBarIcon';
 import { AppHomeScreen } from '../Screens/Main/AppHomeScreen';
 import { AppHomeAnimatedScreen } from '../Screens/Main/AppHomeAnimatedScreen';
+import { HttpUploadScreen } from '../Screens/Main/HttpUploadScreen';
 import { SurveyDescScreen } from '../Screens/Survey/SurveyDescScreen';
 import { InfoPageLoader } from '../Screens/InfoPages/InfoPageLoader';
 import { LibraryStack } from './LibraryStack';
@@ -97,15 +98,15 @@ const MainTabNavigator = createMaterialTopTabNavigator(
     },
   },
 
-  // AnimatedHomeTab: {
-  //   screen: AppHomeAnimatedScreen,
-  //     navigationOptions: {
-  //       title: 'Extra',
-  //       tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
-  //         return (<TabBarIcon name={'pulse'} focused={focused} color={tintColor} />);
-  //       },
-  //     },
-  // },
+  HttpUpload: {
+    screen: HttpUploadScreen,
+      navigationOptions: {
+        title: 'Extra',
+        tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
+          return (<TabBarIcon name={'pulse'} focused={focused} color={tintColor} />);
+        },
+      },
+  },
 
   InfoPageLoader: {
     screen: InfoPageLoader,
@@ -128,7 +129,7 @@ const MainTabNavigator = createMaterialTopTabNavigator(
     initialRouteName: 'HomeTab',
     initialLayout: tabNavInitialLayout,
     swipeEnabled: PLATFORM_OS === 'web' ? false : true,
-    order: ['InfoPageLoader', 'HomeTab', 'LibraryTab' ],
+    order: ['InfoPageLoader', 'HttpUpload', 'HomeTab', 'LibraryTab' ],
     tabBarComponent: MaterialTopTabBar,
     tabBarPosition: 'bottom',
     tabBarOptions: {

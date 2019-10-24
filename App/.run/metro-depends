@@ -32,4 +32,4 @@ ${BASE_PATH}/./node_modules/.bin/metro \
 
 
 
-  exit 0
+exit 0
