@@ -85,6 +85,16 @@ const MainTabNavigator = createMaterialTopTabNavigator({
     },
   },
 
+  // HttpUpload: {
+  //   screen: HttpUploadScreen,
+  //     navigationOptions: {
+  //       title: 'Extra',
+  //       tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
+  //         return (<TabBarIcon name={'pulse'} focused={focused} color={tintColor} />);
+  //       },
+  //     },
+  // },
+
   InfoPageLoader: {
     screen: InfoPageLoader,
       navigationOptions: {

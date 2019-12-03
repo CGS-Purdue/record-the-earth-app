@@ -36,7 +36,7 @@ const SurveyStack = createStackNavigator({
     },
     transitionConfig: () => ({
       transitionSpec: {
-        duration: 500,
+        duration: 350,
         easing: Easing.out(Easing.poly(4)),
         timing: Animated.timing,
       },

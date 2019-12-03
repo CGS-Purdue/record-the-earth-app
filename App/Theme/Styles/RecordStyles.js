@@ -16,6 +16,7 @@ const RecStartBtn = {
   maxHeight: '66%',
   resizeMode: 'contain',
 };
+
 const RecordContainer = {
   borderColor: 'blue',
   borderWidth: 1,

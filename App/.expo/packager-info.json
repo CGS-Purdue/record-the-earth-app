@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 19890,
-  "expoServerNgrokUrl": "https://zf-2rc.matt-harris.app.exp.direct",
-  "packagerNgrokUrl": "https://packager.zf-2rc.matt-harris.app.exp.direct",
-  "ngrokPid": 19950,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null
 }
