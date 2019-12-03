@@ -75,11 +75,11 @@ class SoundFileListScreen extends Component {
 
   async getFileList() {
     let uploadedFiles = this.config.uploadedFiles;
-    let pendingFiles = this.config.pendingFiles;
+    // let pendingFiles = this.config.pendingFiles;
     let soundPath = this.config.soundPath;
-    console.log('uploadedFiles path', uploadedFiles);
-    console.log('strage path', soundPath);
-    let filelist = await FileSystem.readDirectoryAsync(pendingFiles);
+    // console.log('uploadedFiles path', uploadedFiles);
+    // console.log('strage path', soundPath);
+    let filelist = await FileSystem.readDirectoryAsync(uploadedFiles);
     Promise.resolve(filelist).then((result) => {
       if (!result) {
         _dev(LOG_CTX, 'no files');
@@ -130,16 +130,19 @@ class SoundFileListScreen extends Component {
       id: _selected.id,
       fileUri: _selected.fileUri
     });
-    this.props.navigation.navigate({
-      routeName:'SoundscapePlayer',
-      params: { selected: _selected }
-    })
+    // this.props.navigation.navigate({
+    //   routeName:'SoundscapePlayer',
+    //   params: { selected: _selected }
+    // })
   };
 
 
   render() {
     return (
       <View style={_styles.listview_screen_container}>
+        <MinimalPlayer
+          fileUri={this.state.fileUri}
+          playState={this.state.playState}/>
         <FlatList
           data={this.state.files}
           refrshing={this.state.refreshing}
@@ -163,11 +166,8 @@ class SoundFileListScreen extends Component {
               fileUri={item.fileUri}
               onSelect={this.onSelect}/>
           )}/>
+        </View>
 
-      <MinimalPlayer
-        fileUri={this.state.fileUri}
-        playState={this.state.playState}/>
-      </View>
     );
   }
 }

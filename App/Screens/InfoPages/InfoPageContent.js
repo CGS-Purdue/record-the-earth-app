@@ -19,6 +19,4 @@ const InfoPageContent = (key) =>{
   }
 };
 
-
-
 export { InfoPageContent };

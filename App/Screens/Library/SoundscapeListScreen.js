@@ -32,14 +32,12 @@ IF NOT EXISTS Soundscapes (
   pid text,
   isUploaded text not null);`;
 
-// const sdb = new SoundDB({autoconnect: true});
 const sdb = SQLite.openDatabase(ConfigName, ConfigVersion, ConfigDescription, null);
 const LOG_CTX = 'SoundscapeListScreen';
 
 
 /// -----------------------------------------------------------------
 /// SOUNDSCAPE DATABASE LIBRARY
-/// ============================
 /// -----------------------------------------------------------------
 class SoundscapeListScreen extends Component {
   constructor(props) {
@@ -91,7 +89,6 @@ class SoundscapeListScreen extends Component {
       tx.executeSql(selectAllQuery, null, (_, {
         rows: { _array }
       }) => {
-        console.log('test');
         this.updateItems(_array);
       });
     });
@@ -109,7 +106,6 @@ class SoundscapeListScreen extends Component {
 
 
   updateItems(items) {
-    _dev(LOG_CTX, 'items', items);
     let _items = items.map(function(item, num) {
       return {
         id: item.id.toString(),
@@ -139,8 +135,8 @@ class SoundscapeListScreen extends Component {
     console.log('[SoundscapeListScreen] getSoundscapes');
     const selectAllQuery = 'SELECT * FROM Soundscapes ORDER BY id DESC LIMIT 50;';
     let connection = sdb.connection;
-    var _result = null;
 
+    var _result = null;
     connection.db.transaction((tx) => {
       tx.executeSql(selectAllQuery, null,
         (tx1, result) => {
@@ -189,10 +185,7 @@ class SoundscapeListScreen extends Component {
       fileUri: _selected.fileUri
     });
 
-    this.props.navigation.navigate({
-      routeName:'SoundscapePlayer',
-      params: { selected: _selected }
-    })
+
   };
 
 

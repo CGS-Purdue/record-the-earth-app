@@ -1,12 +1,13 @@
+import React, { createRef, Component } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import React, { Component } from 'react';
-import { Button, Platform, Text, TouchableOpacity, View } from 'react-native';
+import { Platform, Text, TouchableOpacity, View } from 'react-native';
 
 import { Theme } from '../../Theme';
 
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
 const _layout = Theme.Layout;
+// const touchableRef = createRef();
 
 class CheckButton extends Component {
   constructor(props) {
@@ -14,6 +15,8 @@ class CheckButton extends Component {
     this.state = {
       checked: false,
     };
+    this.activeOpacity = .5;
+    this.defautOpacity = 1;
   }
 
   _toggleCheckedState = () => {
@@ -27,10 +30,23 @@ class CheckButton extends Component {
     }
   };
 
+  _highlightTouchStart = () => {
+    // console.log('touch start', this, this.activeOpacity);
+    this.refs['touchableRef'].setOpacityTo(.20, 90);
+  };
+
+  _highlightTouchStop = () => {
+    // this.refs['touchableRef'].setOpacityTo(100, 129);
+
+  };
+
   render() {
     return (
       <TouchableOpacity
+        ref={"touchableRef"}
         style={_styles.checkbtn_touchable}
+        onPressIn={this._highlightTouchStart}
+        onPressOut={this._highlightTouchStop}
         onPress={this._toggleCheckedState}
       >
         <View

@@ -74,8 +74,13 @@ class MinimalPlayer extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('prevProps.fileUri', prevProps.fileUri, 'this.props.fileUri', this.props.fileUri);
-    console.log('this.state.fileUri', this.state.fileUri);
+    // console.log(
+    //   'prevProps.fileUri', prevProps.fileUri,
+    //   'prevState', prevState,
+    //   'this.props.fileUri', this.props.fileUri,
+    //   'this.state.fileUri', this.state.fileUri
+    // );
+
     if (this.props.fileUri !== prevProps.fileUri) {
       console.log('uri changed');
       this._updateSelectedSoundFile()
@@ -142,6 +147,7 @@ class MinimalPlayer extends Component {
         loopingType: status.isLooping ? 1 : 0,
         shouldCorrectPitch: status.shouldCorrectPitch
       });
+      // console.log('MinimalPlayer', this.state, this.props);
       if (status.didJustFinish && !status.isLooping) {
         // this._advanceIndex(true);
         this._updatePlaybackInstanceForIndex(true);
@@ -262,6 +268,7 @@ class MinimalPlayer extends Component {
   };
 
   _onPlay = () => {
+    console.log('play');
     if (this.sound != null) {
       if (this.state.isPlaying) {
         this.sound.pauseAsync();

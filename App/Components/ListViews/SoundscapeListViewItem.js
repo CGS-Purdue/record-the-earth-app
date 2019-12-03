@@ -15,7 +15,7 @@ class SoundscapeListViewItem extends Component {
     };
     this.id = this.props.id;
     this.filename = this.props.filename;
-    this._onSelect = this.props._onSelect;
+    this._onSelect = this.props.onSelect;
   }
 
 

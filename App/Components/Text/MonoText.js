@@ -38,5 +38,3 @@ class MonoText extends Component {
 }
 
 export { MonoText };
-
-// style={[this.props.style, { fontFamily: this.state.fontFamily }]}

@@ -12,13 +12,6 @@ const _assets = Theme.Assets;
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
 
-// <Button
-//   title={'Continue'}
-//   style={_styles.button_default}
-//   color={_colors.PRIMARY}
-//   accessibilityLabel="Go to next"
-//   onPress={this.onTaskCompleted}
-// />
 const GradFillBoxStyle = {
   flex: 1,
   position: 'absolute',

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { Theme } from '../../Theme';
 
-const _styles = Theme.Styles;
 const _fonts = Theme.Fonts;
 const TitleFont = _fonts.TITLE_FONT;
 
@@ -37,5 +36,3 @@ class TitleText extends Component {
 }
 
 export { TitleText };
-
-// return (<Text style={[ this.props.style, { fontFamily: this.state.fontFamily, }, ]} {...this.props}/>);

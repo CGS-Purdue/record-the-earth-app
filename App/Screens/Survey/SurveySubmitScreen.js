@@ -173,8 +173,6 @@ class SurveySubmitScreen extends Component {
     if (!fileName) {return false;}
     let uploadOptions = {
       contentType: 'multipart/form-data',
-      // contentType: 'application/x-www-form-urlencoded',
-      // accept: 'application/json',
     };
 
     let url = getConfigUploadUrl();
@@ -183,31 +181,7 @@ class SurveySubmitScreen extends Component {
     _dev([LOG_CTX, 'submitRemoteAsync'], `\n${filePath}`);
 
     try {
-      formData.append('file', filePath, { type: 'audio/m4a', name: fileName });
-      // let filedata = await FileSystem.readAsStringAsync(filePath, {
-      //   encoding: FileSystem.EncodingType.UTF8
-      // encoding: FileSystem.EncodingType.Base64
-      // });
-      // _dev([LOG_CTX, 'submitRemoteAsync'], 'file.length', filedata.length);
-      // formData.append("file", { uri: FILE_URI, type: 'audio/m4a', name: FILE_NAME });
-      // uploadOptions.contentLength = filedata.length;
-      // formData.append("file", { uri: filePath, type: 'audio/m4a', name: fileName });
-      // formData.append('file', filedata);
-      // formData.append('file', filedata, `${fileName}.mp4`);
-      // formData.append('file', {
-      //   uri: filePath,
-      //   type: 'audio/m4a',
-      //   name: fileName,
-      // });
-      // { name: fileName, uri: filePath, type: 'text/plain' }
-      // formData.append('file', filePath, {
-      //   uri: filePath,
-      //   name: fileName,
-      //   type: 'audio/m4a',
-      // });
-      // _dev([LOG_CTX, 'submitRemoteAsync'], 'xhrPost\n\n', filedata.slice(0, 300), '\n\n');
-      // let uploadResult = await fetchPostForm(url, formData);
-      // this.updateSoundfile(fileName);
+      formData.append('file', { uri: filePath, type: 'audio/m4a', name: fileName });
       let uploadResult = xhrPost(url, formData, uploadOptions);
       _dev([LOG_CTX, 'submitRemoteAsync fetch Results'], uploadResult);
 
