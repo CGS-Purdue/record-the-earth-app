@@ -50,7 +50,8 @@ class SoundFileListViewItem extends Component {
   };
 
   handlePlayButton = () => {
-    console.log('[SoundFileListViewItem] handlePlayButton', this.props.id);
+    console.log('[SoundFileListViewItem] handlePlayButton', this);
+    console.log('[SoundFileListViewItem] handlePlayButton', this.props.id, this.props.fileUri);
 
     if (!this.props.selected){
       console.log('[SoundFileListViewItem] not previusly selected');

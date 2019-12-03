@@ -88,7 +88,12 @@ class SoundscapeListScreen extends Component {
     _dev(LOG_CTX, 'update');
 
     sdb.transaction(tx => {
-      tx.executeSql(selectAllQuery, null, (_, { rows: { _array } }) => this.updateItems(_array));
+      tx.executeSql(selectAllQuery, null, (_, {
+        rows: { _array }
+      }) => {
+        console.log('test');
+        this.updateItems(_array);
+      });
     });
   }
 
@@ -101,6 +106,7 @@ class SoundscapeListScreen extends Component {
   }
 
   updateItems(items) {
+    _dev(LOG_CTX, 'items', items);
     let _items = items.map(function(item, num) {
       return {
         id: item.id.toString(),

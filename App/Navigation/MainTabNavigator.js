@@ -66,8 +66,6 @@ const MaterialTabBarOptions = {
 // const MainTabNavigator = createBottomTabNavigator(
 const MainTabNavigator = createMaterialTopTabNavigator(
   {
-
-
   LibraryTab: {
     screen: LibraryStack,
     navigationOptions: {
@@ -98,15 +96,15 @@ const MainTabNavigator = createMaterialTopTabNavigator(
     },
   },
 
-  HttpUpload: {
-    screen: HttpUploadScreen,
-      navigationOptions: {
-        title: 'Extra',
-        tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
-          return (<TabBarIcon name={'pulse'} focused={focused} color={tintColor} />);
-        },
-      },
-  },
+  // HttpUpload: {
+  //   screen: HttpUploadScreen,
+  //     navigationOptions: {
+  //       title: 'Extra',
+  //       tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
+  //         return (<TabBarIcon name={'pulse'} focused={focused} color={tintColor} />);
+  //       },
+  //     },
+  // },
 
   InfoPageLoader: {
     screen: InfoPageLoader,
@@ -129,7 +127,7 @@ const MainTabNavigator = createMaterialTopTabNavigator(
     initialRouteName: 'HomeTab',
     initialLayout: tabNavInitialLayout,
     swipeEnabled: PLATFORM_OS === 'web' ? false : true,
-    order: ['InfoPageLoader', 'HttpUpload', 'HomeTab', 'LibraryTab' ],
+    order: ['InfoPageLoader', 'HomeTab', 'LibraryTab' ],
     tabBarComponent: MaterialTopTabBar,
     tabBarPosition: 'bottom',
     tabBarOptions: {

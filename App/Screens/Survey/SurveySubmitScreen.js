@@ -50,12 +50,16 @@ const getSurveyFormData = (data) => {
 
 
 const reduceTagList = (tagObj) => {
+  if (!tagObj || tagObj.length < 1) {
+    return tagObj;
+  }
   const keylist = [];
   if (typeof (tagObj) === 'string') {
     return tagObj.trim()
       .replace(/[^a-zA-Z0-9, ]/g, '')
       .toLowerCase();
   }
+
   Object.entries(tagObj).forEach((tag) => {
     if (tag[1]) { keylist.push(tag[0]) }
   });
@@ -148,7 +152,7 @@ class SurveySubmitScreen extends Component {
     }
     _dev([LOG_CTX, 'initSubmitLocalDb'], 'getParsed', _parsed);
     if (!_parsed){ return false }
-    // this.submitLocalDb(_parsed)
+    this.submitLocalDb(_parsed)
   }
 
   initSubmitRemoteAsync(_parsed) {

@@ -53,9 +53,10 @@ class AudioRecord extends Component {
       syncing: false,
     };
 
-    this.MAX_DURATION = 20000;
     let recorder_profile = new AudioRecorderProfile();
     let recorder_format = new AudioRecorderFormat();
+
+    this.MAX_DURATION = 20000;
     this.profile = recorder_profile.getProfile();
     this.format = recorder_format.getFormat();
     this.recorder = null;

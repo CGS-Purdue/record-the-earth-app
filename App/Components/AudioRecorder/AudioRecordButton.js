@@ -86,8 +86,9 @@ class AudioRecordButton extends Component {
         style={_styles.button_touchable}
       >
         <Image
-          backgroundColor={this.state.active ? 'red' : 'green'}
+          // backgroundColor={this.state.active ? 'red' : 'green'}
           style={_styles.btn_rec_start}
+          // backgroundColor={this.state.active ? 'red' : 'green'}
           source={_assets.buttons.btn_record_start}
         />
 
