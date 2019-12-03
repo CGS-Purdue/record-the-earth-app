@@ -7,12 +7,7 @@ import Svg, { SvgUri, Circle, Rect } from 'react-native-svg';
 export default class SvgExample extends React.Component {
   render() {
     return (
-      <View
-        style={[
-          StyleSheet.absoluteFill,
-          { alignItems: 'center', justifyContent: 'center' },
-        ]}
-      >
+      <View style={[StyleSheet.absoluteFill, { alignItems: 'center', justifyContent: 'center' }]}>
         <Svg height='50%' width='50%' viewBox='0 0 100 100'>
           <Circle
             cx='50'
@@ -36,27 +31,24 @@ export default class SvgExample extends React.Component {
     );
   }
 }
-//
-// // /Use with content loaded from uri
+
+// Use with content loaded from uri
 // export const SvgUriEx = () => (
 //   <SvgUri
 //     width="100%"
 //     height="100%"
 //     uri={url}
 //   />
-// );
-//
+// )
 
-//
 // Use with svg files
 // Try react-native-svg-transformer to get compile time conversion
 // and cached transformations.
 // https://github.com/kristerkari/react-native-svg-transformer#installation-and-configuration https://github.com/kristerkari/react-native-svg-transformer#for-react-native-v057-or-newer--expo-sdk-v3100-or-newer
-//
 // metro.config.js
-//
 
 const { getDefaultConfig } = require('metro-config');
+
 module.exports = (async () => {
   const {
     resolver: { sourceExts, assetExts },
@@ -73,23 +65,18 @@ module.exports = (async () => {
 })();
 
 // Import your .svg file inside a React component:
-//
 // import Logo from './logo.svg';
 // You can then use your image as a component:
-//
 // <Logo width={120} height={40} />
-// Alternatively, you can use SvgXml with babel-plugin-inline-import, but with transforms done at run-time.
+// Alternatively, you can use SvgXml
+// with babel-plugin-inline-import, but with transforms done at run-time.
 //
-// .babelrc
-// {
+// .babelrc {
 //   "presets": ["module:metro-react-native-babel-preset"],
 //   "plugins": [
-//     [
-//       "babel-plugin-inline-import",
-//       {
-//         "extensions": [".svg"]
-//       }
-//     ]
+//    [ "babel-plugin-inline-import", {
+//      "extensions": [".svg"]
+//    }]
 //   ]
 // }
 
@@ -97,12 +84,11 @@ module.exports = (async () => {
 // import * as React from 'react';
 // import { SvgXml } from 'react-native-svg';
 // import testSvg from './test.svg';
-// export default () => <SvgXml width="200" height="200" xml={testSvg} />;
 
+// export default () => <SvgXml width="200" height="200" xml={testSvg} />;
 // Use with xml strings
 // import * as React from 'react';
 // import { SvgXml } from 'react-native-svg';
-//
 // const xml = `
 //   <svg width="32" height="32" viewBox="0 0 32 32">
 //     <path
@@ -148,7 +134,7 @@ module.exports = (async () => {
 // - originX	0	Transform originX coordinates for the current object.
 // - originY	0	Transform originY coordinates for the current object.
 // - Supported elements:
-// Svg
+
 // <Svg height="100" width="100">
 //   <Rect x="0" y="0" width="100" height="100" fill="black" />
 //   <Circle cx="50" cy="50" r="30" fill="yellow" />
@@ -156,8 +142,7 @@ module.exports = (async () => {
 //   <Circle cx="60" cy="40" r="4" fill="black" />
 //   <Path d="M 40 60 A 10 10 0 0 0 60 60" stroke="black" />
 // </Svg>
-// Colors set in the Svg element are inherited by its children:
-//
+
 // <Svg
 //   width="130"
 //   height="130"
@@ -172,11 +157,8 @@ module.exports = (async () => {
 //   />
 //   <Path d="M0,0L512,512" stroke="currentColor" strokeWidth="32" />
 // </Svg>
-//
-//
-// Touch Events
-// Touch events are supported in react-native-svg. These include:
-//
+
+// Touch events are supported in react-native-svg
 // disabled
 // onPress
 // onPressIn
@@ -205,4 +187,3 @@ module.exports = (async () => {
 //
 // # run Android: react-native run-android
 // # run iOS: react-native run-ios
-//

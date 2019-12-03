@@ -7,23 +7,23 @@ import Svg, { Path } from 'react-native-svg';
 // height="1059.7301"
 const SVG_FILL = '#ffffff';
 const SVG_BG = 'rgba(0,0,0,.0)';
-
+var SvgContainerStyles = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  bottom: 0,
+  right: 0,
+  flex: 1,
+  maxWidth: '100%',
+  maxHeight: '100%',
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: SVG_BG,
+};
 class SvgLogo extends React.Component {
   render() {
     return (
-      <View
-        style={[
-          StyleSheet.absoluteFill,
-          {
-            backgroundColor: SVG_BG,
-            flex: 1,
-            maxWidth: '100%',
-            maxHeight: '100%',
-            alignItems: 'center',
-            justifyContent: 'center',
-          },
-        ]}
-      >
+      <View style={SvgContainerStyles}>
         <Svg
           xmlns='http://www.w3.org/2000/svg'
           height='90%'

@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { FlatList, View } from 'react-native';
 import * as FileSystem from 'expo-file-system';
-// import { SoundscapeListViewHeader } from '../../Components/ListViews/SoundscapeListViewHeader';
-// import Constants from 'expo-constants';
-// import { HeadingText } from '../../Components/Text/HeadingText';
-// import { MOCK_SOUND_FILES } from '../../Config/MockSoundFiles';
-// import { SoundDB } from '../../Components/Database/SoundDB';
 import { _dev } from '../../Utilities/Log';
-
 import { StorageConfig } from '../../Config/Storage';
 import { ListViewEmpty } from '../../Components/ListViews/ListViewEmpty';
 import { SoundFileListViewItem } from '../../Components/ListViews/SoundFileListViewItem';
 import { MinimalPlayer } from '../../Components/AudioPlayer/MinimalPlayer';
 import { SoundFileListViewHeader } from '../../Components/ListViews/SoundFileListViewHeader';
+// import { SoundscapeListViewHeader } from '../../Components/ListViews/SoundscapeListViewHeader';
+// import Constants from 'expo-constants';
+// import { HeadingText } from '../../Components/Text/HeadingText';
+// import { MOCK_SOUND_FILES } from '../../Config/MockSoundFiles';
+// import { SoundDB } from '../../Components/Database/SoundDB';
 import { Theme } from '../../Theme';
 
 const LOG_CTX = 'SoundFileLIstView';
@@ -28,20 +27,25 @@ class SoundFileListScreen extends Component {
     this.state = {
       refreshing: true,
       intialized: false,
-      selected: { id: false },
+      selected: {
+        id: false,
+        fileName: false
+      },
       files: [],
     };
+
     this.config = {
       appPath: StorageConfig.APP_PATH,
       pendingFiles: StorageConfig.STORAGE_PENDING_SOUNDFILES,
       uploadedFiles: StorageConfig.STORAGE_UPLOADED_SOUNDFILES,
       soundPath: StorageConfig.STORAGE_SOUNDFILE_PATH,
     };
+    this.fileSrcpath = this.config.pendingFiles;
     this.listCache = [];
     this.updateFiles = this.updateFiles.bind(this);
     this.getFileList = this.getFileList.bind(this);
     this._isMounted = false;
-  }l
+  }
 
   componentDidMount() {
     this._isMounted = true;
@@ -51,15 +55,18 @@ class SoundFileListScreen extends Component {
     this.getFileList();
   }
 
+
   componentWillUnmount() {
     this._isMounted = false;
   }
+
 
   setRefreshingState(isRefreshing){
     if (this._isMounted) {
       this.setState({refreshing: isRefreshing});
     }
   }
+
 
   getNavigationParams() {
     return this.props.navigation.state.params || {};
@@ -72,9 +79,7 @@ class SoundFileListScreen extends Component {
     let soundPath = this.config.soundPath;
     console.log('uploadedFiles path', uploadedFiles);
     console.log('strage path', soundPath);
-    // this.filePromise = await FileSystem.readDirectoryAsync(storagePath);
     let filelist = await FileSystem.readDirectoryAsync(pendingFiles);
-    console.log('filelist', filelist);
     Promise.resolve(filelist).then((result) => {
       if (!result) {
         _dev(LOG_CTX, 'no files');
@@ -101,7 +106,7 @@ class SoundFileListScreen extends Component {
 
     this.listCache = _files;
     if (this._isMounted) {
-      this.setState({ files: _files});
+      this.setState({files: _files});
     }
     this.setRefreshingState(false);
   }
@@ -111,6 +116,7 @@ class SoundFileListScreen extends Component {
     this.lastSelected = this.state.selected;
     this.nextSelected = newSelected.id;
     if (this._isMounted && newSelected.id !== this.state.selected) {
+      console.log('item setSelected');
       this.setState({
         selected: newSelected.id,
         fileUri: newSelected.fileUri
@@ -119,11 +125,15 @@ class SoundFileListScreen extends Component {
   }
 
 
-  onSelect = (selected) => {
+  onSelect = (_selected) => {
     this.setSelected({
-      id: selected.id,
-      fileUri: selected.fileUri
+      id: _selected.id,
+      fileUri: _selected.fileUri
     });
+    this.props.navigation.navigate({
+      routeName:'SoundscapePlayer',
+      params: { selected: _selected }
+    })
   };
 
 
@@ -136,7 +146,7 @@ class SoundFileListScreen extends Component {
           initialNumToRender={8}
           extraData={this.state.selected}
           ListEmptyComponent={ListViewEmpty}
-          ListHeaderComponent={() => (
+          ListHeaderComponent={()=>(
             <SoundFileListViewHeader
               onActionButton={()=>{
                 this.props.navigation.navigate({ routeName:'Soundscapes' })

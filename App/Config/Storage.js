@@ -20,14 +20,12 @@ const _storage_soundfile_path = [_app_storage, _sound_dir].join('');
 
 const StorageConfig = {
   APP_STORAGE: _app_storage,
-
   DIR_DB: _db_dir,
   DIR_MEDIA: _media_dir,
   DIR_PENDING: _pending_dir,
   DIR_SOUND: _sound_dir,
   DIR_UPLOADED: _uploaded_dir,
   STORAGE_SOUNDFILE_PATH : _storage_soundfile_path,
-
   DIR_DATA: 'data',
   APP_TEMP: FileSystem.cacheDirectory,
   STORAGE_MEDIA_PATH : [_app_storage, _media_dir].join(''),

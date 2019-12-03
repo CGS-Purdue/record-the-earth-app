@@ -2,7 +2,7 @@
 
 const json2FormData = (json) => {
   let form = new FormData();
-  for (let entry of Object.entries(json)) {
+  for (var entry of Object.entries(json)) {
     if (!typeof entry[0] === 'string') {
       console.log(`issue with form key ${entry[0]}`);
     }
@@ -14,18 +14,16 @@ const json2FormData = (json) => {
 
 
 const fetchPostForm = async (url, formData) => {
+  // multipart/form-data|application/x-www-form-urlencoded
   let result = null;
-  let upload = fetch(url, {
+  fetch(url, {
     method: 'POST',
-    body: formData,
-    headers: { 'Content-Type': 'multipart/form-data' },
-    // headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: JSON.stringify(formData),
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
   })
-  .then((res) => {
-    return res.text();
-  })
+  .then((res) => { return res.text() })
   .catch((error) => { console.error(error) })
-  .done(() => { console.log('result', result, upload) })
+  .done(() => { console.log('result', result) })
 };
 
 
@@ -47,7 +45,6 @@ const xhrPost = (url, data, options) => {
     }
   }
 
-
   const logResHeaders = (headers) => {
     if (headers) {
       headers = headers.split('\r\n').reduce((result, current) => {
@@ -58,6 +55,7 @@ const xhrPost = (url, data, options) => {
     }
     console.log('headers', headers);
   };
+
 
   xhr.onreadystatechange = (e) => {
     if (xhr.readyState === 3) { /* loading */ }
@@ -71,12 +69,14 @@ const xhrPost = (url, data, options) => {
     } else {
       console.warn('error', xhr.status, xhr.responseText);
     }
-  };
+  }
+
 
   xhr.upload.addEventListener('load', transferComplete);
   xhr.upload.addEventListener('error', transferFailed);
   xhr.upload.addEventListener('abort', transferCanceled);
   xhr.upload.addEventListener('progress', updateProgress);
+
 
   xhr.onloadend = function() {
     if (xhr.status === 200) {
@@ -84,7 +84,8 @@ const xhrPost = (url, data, options) => {
     } else {
       console.log('error ' + this.status);
     }
-  };
+  }
+
 
   xhr.onload = function() {
     if (xhr.status !== 200) {
@@ -95,26 +96,16 @@ const xhrPost = (url, data, options) => {
       console.log(`Status ${xhr.status}: ${xhr.statusText}`);
       console.log(`Received ${xhr.response.length} bytes`);
     }
-  };
+  }
 
-  // let testUrl = 'http://localhost:5000/api/soundscape/upload-android.php';
-  // let testUrl = 'http://localhost:5000/soundscape-android.php';
-  // xhr.open('POST', testUrl, true);
 
   xhr.open('POST', url);
-
   if (options.contentType) {
     xhr.setRequestHeader('Content-Type', options.contentType);
   } else {
-    // xhr.setRequestHeader('Content-Type', 'multipart/form-data');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   }
-
-  // if (options.accept) {
-  //   xhr.setRequestHeader('Accept', options.accept);
-  // }
-
   xhr.send(data);
-};
+}
 
 export { json2FormData, xhrPost, fetchPostForm };

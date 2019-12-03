@@ -1,32 +1,29 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
-import Svg, {
-  Path,
-  Defs,
-  LinearGradient,
-  Stop,
-  G,
-  Circle,
-  Text,
-  Tspan,
-} from 'react-native-svg';
+import { View } from 'react-native';
+import Svg, { Path, Defs, LinearGradient, Stop, G, Circle, TSpan, Text } from 'react-native-svg';
 // import { Svg } from 'expo';
 // const { Circle, Rect, Path, Defs, LinearGradient, Stop, G, Text, Tspan } = Svg;
 
 const SVG_FILL = '#ffffff';
 const SVG_BG = 'rgba(0,0,0,.0)';
 
-const SvgContainerStyles = Object.assign(StyleSheet.absoluteFill, {
-  backgroundColor: SVG_BG,
+var SvgContainerStyles = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  bottom: 0,
+  right: 0,
   flex: 1,
   maxWidth: '100%',
   maxHeight: '100%',
   alignItems: 'center',
   justifyContent: 'center',
-});
+  backgroundColor: SVG_BG,
+};
 
 // xmlns:xlink="http://www.w3.org/1999/xlink"
 // xlink:
+
 class SvgRecord extends Component {
   render() {
     return (
@@ -46,8 +43,8 @@ class SvgRecord extends Component {
               <Stop offset='1' stop-color='#d6270f' stop-opacity='0' />
             </LinearGradient>
             <LinearGradient
-              href='#a'
               id='e'
+              href='#a'
               x1='3.63'
               y1='764.34'
               x2='462.39'
@@ -55,8 +52,8 @@ class SvgRecord extends Component {
               gradientUnits='userSpaceOnUse'
             />
             <LinearGradient
-              href='#b'
               id='f'
+              href='#b'
               gradientUnits='userSpaceOnUse'
               x1='232.65'
               y1='558.84'
@@ -65,8 +62,8 @@ class SvgRecord extends Component {
               gradientTransform='translate(-2 -8)'
             />
             <LinearGradient
-              href='#c'
               id='d'
+              href='#c'
               x1='228.61'
               y1='541.5'
               x2='233.62'
@@ -100,9 +97,9 @@ class SvgRecord extends Component {
               letter-spacing='0'
               word-spacing='0'
             >
-              <Tspan y='810.5' x='93.09' fill='#fff'>
+              <TSpan y='810.5' x='93.09' fill='#fff'>
                 REC
-              </Tspan>
+              </TSpan>
             </Text>
           </G>
         </Svg>

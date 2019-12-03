@@ -6,8 +6,8 @@ import { NavigationActions } from 'react-navigation';
 import { CenterView, RootView } from '../../Components/Views';
 import { getLocationAsync } from '../../Utilities/LocationFunctions';
 import { AudioRecord } from '../../Components/AudioRecorder/AudioRecord';
-import { Theme } from '../../Theme';
 import { SoundscapeSchema } from '../../Components/Database/SurveyModel/SurveySchema3';
+import { Theme } from '../../Theme';
 
 const initSoundscape = () => {
   let soundscape = Object.assign({}, SoundscapeSchema);

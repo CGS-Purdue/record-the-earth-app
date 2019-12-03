@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { TouchableOpacity, Text, View } from 'react-native';
 import { AudioPlayButton } from '../../Components/AudioPlayer/AudioPlayButton';
 import { Theme } from '../../Theme';
+
 const _styles = Theme.Styles;
 const _colors = Theme.Colors;
 const _vars = Theme.Variables;
@@ -12,24 +13,7 @@ class SoundFileListViewItem extends Component {
     this.state = {
       playState: false,
     };
-  }
-
-  togglePlayState(playing){
-    if (typeof playing === 'undefined'){
-      console.log('[SoundFileListViewItem] togglePlayState toggle', !this.state.playState);
-      this.setState({ playState : !this.state.playState })
-    } else {
-      console.log('[SoundFileListViewItem] togglePlayState set', playing);
-      this.setState({ playState : playing })
-    }
-  }
-
-  play(){
-   this.togglePlayState(true)
-  }
-
-  stop(){
-   this.togglePlayState(false)
+    this._onSelect = this._onSelect.bind(this);
   }
 
   _onSelect = () => {
@@ -48,6 +32,18 @@ class SoundFileListViewItem extends Component {
       fileUri: this.props.fileUri,
     });
   };
+
+
+  togglePlayState(playing){
+    if (typeof playing === 'undefined'){
+      console.log('[SoundFileListViewItem] togglePlayState toggle', !this.state.playState);
+      this.setState({ playState : !this.state.playState })
+    } else {
+      console.log('[SoundFileListViewItem] togglePlayState set', playing);
+      this.setState({ playState : playing })
+    }
+  }
+
 
   handlePlayButton = () => {
     console.log('[SoundFileListViewItem] handlePlayButton', this.props.id);
@@ -69,6 +65,17 @@ class SoundFileListViewItem extends Component {
       console.log('[SoundFileListViewItem] is selected');
     }
   };
+
+
+  play() {
+    this.togglePlayState(true)
+  }
+
+
+  stop() {
+    this.togglePlayState(false)
+  }
+
 
 
   render() {

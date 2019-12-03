@@ -1,0 +1,42 @@
+import * as React from 'react';
+import { SvgXml } from 'react-native-svg';
+
+const xml = `
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="458.761"
+  height="460.238">
+  <defs>
+    <linearGradient id="b">
+      <stop offset="0" stop-color="#c79691"/>
+      <stop offset="1" stop-color="#af4336"/>
+    </linearGradient>
+    <linearGradient id="c">
+      <stop offset="0" stop-color="#7b1407"/>
+      <stop offset="1" stop-color="#d92510"/>
+    </linearGradient>
+    <linearGradient id="a">
+      <stop offset="0" stop-color="#d6270f"/>
+      <stop offset="1" stop-color="#d6270f" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient xlink:href="#a" id="e" x1="3.634" y1="764.342" x2="462.395" y2="764.342" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#b" id="f" gradientUnits="userSpaceOnUse" x1="232.651" y1="558.844" x2="228.819" y2="701.387" gradientTransform="translate(-2 -8)"/>
+    <linearGradient xlink:href="#c" id="d" x1="228.606" y1="541.504" x2="233.623" y2="981.434" gradientUnits="userSpaceOnUse"/>
+  </defs>
+  <g transform="translate(-3.634 -534.223)">
+    <circle cx="231.115" cy="761.97" r="222.979"
+    fill="url(#d)" 
+      stroke="#000"
+      stroke-width="4"
+      stroke-linecap="round"
+      stroke-linejoin="round"/>
+    <path d="M230.651 550.844c-23.293.08-46.86 3.711-69.068 10.892-46.362 14.991-85.24 52.456-95.646 92.17-12.299 46.727 48.118 49.053 168.722 41.428 38.042-2.405 84.484-17.413 126.924-14.108 15.159 1.181 33.638 16.479 45.638 6.853 5.068-4.066 4.57-13.216 1.356-19.446-23.851-45.48-55.333-88.993-110.494-107.364-21.117-7.033-44.138-10.505-67.432-10.425z" fill="url(#f)" stroke="#670000"/>
+    <text y="810.505" x="93.094" style="line-height:1.25" font-weight="400" font-size="133.333" font-family="sans-serif" letter-spacing="0" word-spacing="0">
+      <tspan y="810.505" x="93.094" fill="#fff">REC</tspan>
+    </text>
+  </g>
+</svg>
+`;
+
+export default () => <SvgXml xml={xml} width="100%" height="100%" />;

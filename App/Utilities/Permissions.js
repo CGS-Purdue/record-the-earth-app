@@ -51,11 +51,14 @@ async function requestPermissions() {
 // LOOK UP ONE PERM STATUS
 async function checkPermission(permKey) {
   let permType = APP_PERMISSION[permKey];
+
   const { status, expires, permissions } = await Permissions.getAsync(permType);
+
   if (status !== 'granted') {
     console.log('Hey! You heve not enabled selected permissions');
   }
 }
+
 
 async function checkPermissions(permKeyArray) {
   // let permTypeArray = [];

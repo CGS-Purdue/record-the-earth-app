@@ -3,12 +3,12 @@ import { Platform } from 'react-native';
 import { createMaterialTopTabNavigator, MaterialTopTabBar } from 'react-navigation-tabs';
 import { TabBarIcon } from '../Components/Icon/TabBarIcon';
 import { AppHomeScreen } from '../Screens/Main/AppHomeScreen';
-import { AppHomeAnimatedScreen } from '../Screens/Main/AppHomeAnimatedScreen';
-import { HttpUploadScreen } from '../Screens/Main/HttpUploadScreen';
-import { SurveyDescScreen } from '../Screens/Survey/SurveyDescScreen';
+// import { AppHomeAnimatedScreen } from '../Screens/Main/AppHomeAnimatedScreen';
+// import { SurveyDescScreen } from '../Screens/Survey/SurveyDescScreen';
 import { InfoPageLoader } from '../Screens/InfoPages/InfoPageLoader';
 import { LibraryStack } from './LibraryStack';
 import { Theme } from '../Theme';
+
 const _colors = Theme.Colors;
 const _styles = Theme.Styles;
 const _l = Theme.Layout;
@@ -63,11 +63,8 @@ const MaterialTabBarOptions = {
   indicatorStyle: { backgroundColor: 'transparent' },
 };
 
-// const MainTabNavigator = createBottomTabNavigator(
-const MainTabNavigator = createMaterialTopTabNavigator(
-  {
 
-
+const MainTabNavigator = createMaterialTopTabNavigator({
   LibraryTab: {
     screen: LibraryStack,
     navigationOptions: {
@@ -76,16 +73,6 @@ const MainTabNavigator = createMaterialTopTabNavigator(
         return (<TabBarIcon name={'list'} focused={focused} color={tintColor} />)},
       },
     },
-
-  // SoundscapesTab: {
-  //   screen: SurveyDescScreen,
-  //   navigationOptions: {
-  //     title: 'Soundscapes',
-  //     showLabel: false,
-  //     tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
-  //       return (<TabBarIcon name={'globe'} focused={focused} color={tintColor} />)},
-  //     },
-  // },
 
   HomeTab: {
     screen: AppHomeScreen,
@@ -96,16 +83,6 @@ const MainTabNavigator = createMaterialTopTabNavigator(
         return (<TabBarIcon name={'home'} focused={focused} color={tintColor} />);
       },
     },
-  },
-
-  HttpUpload: {
-    screen: HttpUploadScreen,
-      navigationOptions: {
-        title: 'Extra',
-        tabBarIcon: ({ focused, horizontal, tintColor, ...rest }) => {
-          return (<TabBarIcon name={'pulse'} focused={focused} color={tintColor} />);
-        },
-      },
   },
 
   InfoPageLoader: {
@@ -129,7 +106,7 @@ const MainTabNavigator = createMaterialTopTabNavigator(
     initialRouteName: 'HomeTab',
     initialLayout: tabNavInitialLayout,
     swipeEnabled: PLATFORM_OS === 'web' ? false : true,
-    order: ['InfoPageLoader', 'HttpUpload', 'HomeTab', 'LibraryTab' ],
+    order: ['InfoPageLoader', 'HomeTab', 'LibraryTab' ],
     tabBarComponent: MaterialTopTabBar,
     tabBarPosition: 'bottom',
     tabBarOptions: {

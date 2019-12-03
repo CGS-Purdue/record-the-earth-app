@@ -22,6 +22,20 @@ export const isString = (__stringy) => {
   return typeof __stringy === 'string';
 };
 
+// Contents of two or more objects together into a new object, without modifying either argument.
+export const object_merge = (defaults, ...overides) => {
+  let empty = Object.create(null);
+  return Object.assign(empty, defaults, ...overides);
+};
+
+export const getEmptyObj = () => {
+  return Object.create(null);
+};
+
+export const EmtpyObj = (() => {
+  return Object.create(null);
+})();
+
 // // Native  Check to see if an object is a plain object (created using “{}” or “new Object”).
 // function isPlainObject (obj) {
 //   if (typeof (obj) !== 'object'
@@ -39,23 +53,7 @@ export const isString = (__stringy) => {
 //
 //   return true;
 // }
-
-// Contents of two or more objects together into a new object, without modifying either argument.
-export const object_merge = (defaults, ...overides) => {
-  let empty = Object.create(null);
-  return Object.assign(empty, defaults, ...overides);
-};
-
-export const getEmptyObj = () => {
-  return Object.create(null);
-};
-
-export const EmtpyObj = (() => {
-  return Object.create(null);
-})();
-
 // Check to see if an object is empty (contains no enumerable properties).
-
 // Native
 // function isFunction(item) {
 //
@@ -67,22 +65,18 @@ export const EmtpyObj = (() => {
 //     return type === '[object Function]'
 //         || type === '[object GeneratorFunction]';
 // }
-
 // Native
 // function isWindow(obj) {
 //  return obj !== null && obj !== undefined && obj === obj.window;
 // }
-
 // // Native
 // Array.isArray(array);
-
 // // Search for a specified value within an array and return its index (or -1 if not found).
 // // Native
 // Array.indexOf(item) > -1;
 //
 // // ES6-way
 // Array.includes(item);
-
 // Native
 // function isNumeric(value) {
 // return !isNaN(parseFloat(n)) && isFinite(n);

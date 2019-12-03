@@ -15,28 +15,39 @@ class SoundscapeListViewItem extends Component {
     };
     this.id = this.props.id;
     this.filename = this.props.filename;
+    this._onSelect = this.props._onSelect;
   }
 
-  _onSelect = (id) => {
-    console.log('id', id);
+
+  _onSelect = (_id) => {
+    console.log('id', _id);
     // const newSelected = new Map(selected);
     // newSelected.set(id, !selected.get(id));
     // this.setSelected(newSelected);
   };
 
+
   handlePlayButton = () => {
+    let _id = this.props.id;
+    let _name = this.props.filename;
+    let _selected = {
+        id: _id,
+        filename: _name,
+    };
+
     if (this.state.playState) {
-      this._onSelect();
+      this._onSelect(false);
     } else {
-      this._onSelect();
+      this._onSelect(true);
     }
+
     if (this.props.onSelect) {
-      this.props.onSelect();
+      this.props.onSelect(_selected);
     }
   };
 
+
   render() {
-    // ({ id, name, selected, onSelect })
     return (
       <View style={_styles.listview_soundscape_item}>
         <View style={_styles.listview_soundscape_item_surface}>
@@ -51,16 +62,13 @@ class SoundscapeListViewItem extends Component {
           </View>
 
           <TouchableOpacity
-            onPress={() => this._onSelect(this.props.id)}
-            style={[
-              _styles.listview_item_touchable,
-              {
+            onPress={this._onSelect}
+            style={[_styles.listview_item_touchable, {
                 backgroundColor: this.props.selected
                   ? _colors.SHADE_LIGHTER_40
                   : _colors.SHADE_LIGHTER_50,
               },
-            ]}
-          >
+            ]}>
             <View style={_styles.listview_soundscape_item_content_box}>
               <Text style={_styles.listview_item_text}>{`${this.props.datetime}`}</Text>
               <Text style={_styles.listview_item_text}>{`(${this.props.id}) ${this.props.description}`}</Text>

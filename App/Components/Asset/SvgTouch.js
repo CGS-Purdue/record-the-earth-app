@@ -1,13 +1,5 @@
 import React, { Component } from 'react';
-import Svg, {
-  Circle,
-  ClipPath,
-  Defs,
-  G,
-  Path,
-  Rect,
-  Text,
-} from 'react-native-svg';
+import Svg, { Circle, ClipPath, Defs, G, Path, Rect, Text } from 'react-native-svg';
 
 class PressExample extends Component {
   static title =

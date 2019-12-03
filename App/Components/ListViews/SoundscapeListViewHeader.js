@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Text, Button, View } from 'react-native';
+import { Button, View } from 'react-native';
 import { HeadingText } from '../../Components/Text/HeadingText';
 import { Theme } from '../../Theme';
 
@@ -12,7 +12,11 @@ class SoundscapeListViewHeader extends Component {
     this._onActionButton = this._onActionButton.bind(this);
   }
 
-  _onActionButton() {
+  getNavigationParams() {
+    return this.props.navigation.state.params || {};
+  }
+
+  _onActionButton(_id) {
     if (this.props.onActionButton) {
       this.props.onActionButton();
     }
@@ -21,9 +25,7 @@ class SoundscapeListViewHeader extends Component {
   render() {
     return (
       <View style={_styles.listview_header_container}>
-        <HeadingText
-          style={_styles.listview_header_text}
-        >
+        <HeadingText style={_styles.listview_header_text}>
           {'Soundscapes'}
         </HeadingText>
         <Button

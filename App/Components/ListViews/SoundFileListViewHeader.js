@@ -12,7 +12,11 @@ class SoundFileListViewHeader extends Component {
     this._onActionButton = this._onActionButton.bind(this);
   }
 
-  _onActionButton() {
+  getNavigationParams() {
+    return this.props.navigation.state.params || {};
+  }
+
+  _onActionButton(_id) {
     if (this.props.onActionButton) {
       this.props.onActionButton();
     }

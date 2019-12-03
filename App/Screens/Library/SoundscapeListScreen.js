@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {  FlatList, View } from 'react-native';
+import * as SQLite from 'expo-sqlite';
 import * as FileSystem from 'expo-file-system';
 import { ListViewEmpty } from '../../Components/ListViews/ListViewEmpty';
 import { StorageConfig } from '../../Config/Storage';
@@ -8,16 +9,12 @@ import { SoundscapeListViewHeader } from '../../Components/ListViews/SoundscapeL
 import { Theme } from '../../Theme';
 import { _dev } from '../../Utilities/Log';
 
-import * as SQLite from 'expo-sqlite';
-
-// const _assets = Theme.Assets;
 const _styles = Theme.Styles;
-// const _colors = Theme.Colors;
-// const _vars = Theme.Variables;
 
 const ConfigName = 'Soundscapes';
 const ConfigDescription = 'Soundscape database';
 const ConfigVersion = '1.0.0';
+
 const createQuery = `CREATE TABLE
 IF NOT EXISTS Soundscapes (
   id integer primary key autoincrement,
@@ -38,6 +35,7 @@ IF NOT EXISTS Soundscapes (
 // const sdb = new SoundDB({autoconnect: true});
 const sdb = SQLite.openDatabase(ConfigName, ConfigVersion, ConfigDescription, null);
 const LOG_CTX = 'SoundscapeListScreen';
+
 
 /// -----------------------------------------------------------------
 /// SOUNDSCAPE DATABASE LIBRARY
@@ -60,12 +58,14 @@ class SoundscapeListScreen extends Component {
       soundPath: StorageConfig.STORAGE_SOUNDFILE_PATH,
     };
 
-     this._isMounted = false;
-    // this.submitLocalDb = this.submitLocalDb.bind(this);
+    this._isMounted = false;
     this.updateItems = this.updateItems.bind(this);
     this.update = this.update.bind(this);
+    this.onSelect = this.onSelect.bind(this);
+    // this.submitLocalDb = this.submitLocalDb.bind(this);
     // this.getFileList = this.getFileList.bind(this);
   }
+
 
   componentDidMount() {
     this._isMounted = true;
@@ -83,22 +83,25 @@ class SoundscapeListScreen extends Component {
     // };
   }
 
+
   update() {
     const selectAllQuery = 'SELECT * FROM Soundscapes ORDER BY id DESC LIMIT 50;';
     _dev(LOG_CTX, 'update');
-
     sdb.transaction(tx => {
       tx.executeSql(selectAllQuery, null, (_, { rows: { _array } }) => this.updateItems(_array));
     });
   }
 
+
   setRefreshingState(isRefreshing){
     this.setState({refreshing: isRefreshing});
   }
 
+
   getNavigationParams() {
     return this.props.navigation.state.params || {};
   }
+
 
   updateItems(items) {
     let _items = items.map(function(item, num) {
@@ -121,6 +124,7 @@ class SoundscapeListScreen extends Component {
     _dev(LOG_CTX, '_items', _items);
     this.setState({items: _items, refreshing: false});
   }
+
 
   /// =====================================================
   /// select all
@@ -171,18 +175,20 @@ class SoundscapeListScreen extends Component {
   }
 
 
-  onSelect = (selected) => {
-    _dev(LOG_CTX, 'selected', 'id', selected.id);
+  onSelect = (_selected) => {
+    _dev(LOG_CTX, 'selected', 'id', _selected.id);
+
     this.setSelected({
-      id: selected.id,
-      fileUri: selected.fileUri
+      id: _selected.id,
+      fileUri: _selected.fileUri
     });
 
     this.props.navigation.navigate({
       routeName:'SoundscapePlayer',
-      params: { selected: this.state.selected }
+      params: { selected: _selected }
     })
   };
+
 
 
   render() {
@@ -212,6 +218,7 @@ class SoundscapeListScreen extends Component {
               tags={item.tags}
               datetime={item.datetime}
               selected={!!this.state.id}
+              onPress={this.handlePlayButton}
               onSelect={this.onSelect}
             />
           )}

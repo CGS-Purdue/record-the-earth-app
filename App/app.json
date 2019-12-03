@@ -38,6 +38,7 @@
     "hooks": {},
     "icon": "./Assets/icon.png",
     "ios": {
+      "bundleIdentifier": "org.recordtheearth3",
       "splash": {
         "backgroundColor": "#000000",
         "resizeMode": "contain"

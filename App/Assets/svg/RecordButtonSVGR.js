@@ -1,9 +1,8 @@
 import React from 'react';
 import Svg, { Defs, LinearGradient, Stop, G, Circle, Path, Text, TSpan } from 'react-native-svg';
 
-const RecordButtonSvgr = ({ svgRef, title, ...props }) => (
+const RecordButtonSvgr = ({ svgRef, ...props }) => (
   <Svg {...props} width={458.76} height={460.24} ref={svgRef}>
-    <title>{title}</title>
     <Defs>
       <LinearGradient id="prefix__b">
         <Stop offset={0} stopColor="#c79691" />
@@ -56,9 +55,7 @@ const RecordButtonSvgr = ({ svgRef, title, ...props }) => (
       <Text
         y={810.5}
         x={93.09}
-        style={{
-          lineHeight: 1.25,
-        }}
+        style={{ lineHeight: 1.25 }}
         fontWeight={400}
         fontSize={133.33}
         fontFamily="sans-serif"
@@ -66,7 +63,7 @@ const RecordButtonSvgr = ({ svgRef, title, ...props }) => (
         wordSpacing={0}
       >
         <TSpan y={810.5} x={93.09} fill="#fff">
-          {'REC'}
+          REC
         </TSpan>
       </Text>
     </G>

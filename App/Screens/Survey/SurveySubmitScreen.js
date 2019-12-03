@@ -4,7 +4,7 @@ import * as FileSystem from 'expo-file-system';
 // import { getAudioFileFromTemp, updatePendingtToUploaded } from '../../Utilities/Filesystem';
 import { updatePendingtToUploaded } from '../../Utilities/Filesystem';
 import { CenterView, PadView, Section, RootView } from '../../Components/Views';
-import { json2FormData, xhrPost, fetchPostForm } from '../../Utilities/Networking';
+import { json2FormData, xhrPost } from '../../Utilities/Networking';
 import { object_keys_checksum } from '../../Utilities/Functions';
 import { SoundscapeSchema } from '../../Components/Database/SurveyModel/SurveySchema3';
 import { StorageConfig } from '../../Config/Storage';
@@ -15,8 +15,8 @@ import { SoundDB } from '../../Components/Database/SoundDB';
 import { Base64 } from '../../Utilities/Base64';
 import { _dev } from '../../Utilities/Log';
 import { Theme } from '../../Theme';
-
 // import * as Device from 'expo-device';
+
 const _colors = Theme.Colors;
 const _assets = Theme.Assets;
 const _styles = Theme.Styles;
@@ -40,14 +40,12 @@ const getFormDataExtraData = () => {
   return [data[2], data[0], data[1], data[3]].join('-');
 }
 
-
 const getSurveyFormData = (data) => {
   let formData = json2FormData(data);
   let formExtra = getFormDataExtraData();
   formData.append('uploadToken', formExtra);
   return formData;
 };
-
 
 const reduceTagList = (tagObj) => {
   const keylist = [];
@@ -62,7 +60,6 @@ const reduceTagList = (tagObj) => {
   if (!keylist) { return 'none' }
   return keylist.join(',').trim()
 }
-
 
 class SurveySubmitScreen extends Component {
   constructor(props) {
@@ -182,18 +179,15 @@ class SurveySubmitScreen extends Component {
     _dev([LOG_CTX, 'submitRemoteAsync'], `\n${filePath}`);
 
     try {
+      formData.append('file', filePath, { type: 'audio/m4a', name: fileName });
       // let filedata = await FileSystem.readAsStringAsync(filePath, {
       //   encoding: FileSystem.EncodingType.UTF8
       // encoding: FileSystem.EncodingType.Base64
       // });
-
-        // _dev([LOG_CTX, 'submitRemoteAsync'], 'file.length', filedata.length);
+      // _dev([LOG_CTX, 'submitRemoteAsync'], 'file.length', filedata.length);
       // formData.append("file", { uri: FILE_URI, type: 'audio/m4a', name: FILE_NAME });
       // uploadOptions.contentLength = filedata.length;
-
-      formData.append("file", filePath, { type: 'audio/m4a', name: fileName });
-      formData.append("file", { uri: filePath, type: 'audio/m4a', name: fileName });
-
+      // formData.append("file", { uri: filePath, type: 'audio/m4a', name: fileName });
       // formData.append('file', filedata);
       // formData.append('file', filedata, `${fileName}.mp4`);
       // formData.append('file', {
@@ -201,18 +195,16 @@ class SurveySubmitScreen extends Component {
       //   type: 'audio/m4a',
       //   name: fileName,
       // });
-
       // { name: fileName, uri: filePath, type: 'text/plain' }
       // formData.append('file', filePath, {
       //   uri: filePath,
       //   name: fileName,
       //   type: 'audio/m4a',
       // });
-
       // _dev([LOG_CTX, 'submitRemoteAsync'], 'xhrPost\n\n', filedata.slice(0, 300), '\n\n');
-      let uploadResult = xhrPost(url, formData, uploadOptions);
       // let uploadResult = await fetchPostForm(url, formData);
       // this.updateSoundfile(fileName);
+      let uploadResult = xhrPost(url, formData, uploadOptions);
       _dev([LOG_CTX, 'submitRemoteAsync fetch Results'], uploadResult);
 
     } catch (err) {
@@ -243,7 +235,6 @@ class SurveySubmitScreen extends Component {
       isUploaded: _is_uploaded,
     });
   }
-
 
   // USER DATA ENTRY POINT
   processSurveyData(_data) {
@@ -296,6 +287,7 @@ class SurveySubmitScreen extends Component {
     if(!parsed) { return false; }
     return parsed;
   }
+
 
   validatePreFlightCheck = (_data) => {
     let schema = SoundscapeSchema;
