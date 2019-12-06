@@ -59,7 +59,6 @@
         "svg",
         "png"
       ],
-      "host": "localhost"
     },
     "platforms": [
       "ios",

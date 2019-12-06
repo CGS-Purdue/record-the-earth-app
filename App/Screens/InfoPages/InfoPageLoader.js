@@ -28,7 +28,7 @@ class ButtonBox extends React.Component {
   }
 
   _onAction(){
-    console.log('button press', this);
+    // console.log('button press', this);
     this.props.action();
   }
 
@@ -106,7 +106,6 @@ class InfoPageLoader extends React.Component {
   loadPage(key) {
     console.log('loadPage', key );
     if (key === this.state.pageKey) {
-      console.log('rejected', key , this.state.pageKey, this);
       return false;
     }
     this.setPage(key);
@@ -173,9 +172,13 @@ class InfoPageLoader extends React.Component {
       return (
       <View style={styles.mainContainer}>
         <Image source={_assets.img_bg_solid_dark} style={styles.backgroundImage} resizeMode='stretch' />
-        <ScrollView showsVerticalScrollIndicator={false} bounces={false} style={styles.scrollContainer}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          bounces={false}
+          style={styles.scrollContainer}
+          >
           <View style={styles.centered}>
-            <Image source={_assets.logos.logo_large} style={styles.logo} />
+            <Image source={_assets.logos.logo_long} style={[ styles.logo, { padding: 0 }]} />
           </View>
           <Text style={styles.sectionText}>{'Join the mission to Record the Earth. Help scientists map all the sounds of the Earth.'}</Text>
           <View style={styles.buttonsContainer}>

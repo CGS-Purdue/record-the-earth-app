@@ -87,8 +87,8 @@ const LibraryStyles = Object.assign(Object.create(null), {
   listview_soundscape_item_surface: {
     flex: 1,
     width: '100%',
-    // backgroundColor: _c.SHADE_DARKER_50,
     display: 'flex',
+    // backgroundColor: _c.SHADE_DARKER_50,
   },
 
   listview_soundscape_item: {
@@ -149,6 +149,13 @@ const LibraryStyles = Object.assign(Object.create(null), {
     flex: 1,
     // backgroundColor: 'rgba(255,255,255,.1)',
   },
+
+  listview_item_meta_box: {
+    // flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end'
+  },
   listview_item_text_box: {
     flex: 1,
     padding: 8,
@@ -160,6 +167,19 @@ const LibraryStyles = Object.assign(Object.create(null), {
     fontSize: 16,
     marginVertical: 2,
     marginHorizontal: 3,
+    padding: 0,
+  },
+  listview_soundscape_item_header: {
+    flex: 1,
+    flexDirection: 'row',
+    display: 'flex',
+    justifyContent: 'space-between',
+    // alignItems: 'center'
+  },
+  listview_item_datetext: {
+    fontSize: 16,
+    // marginVertical: 2,
+    // marginHorizontal: 3,
     padding: 0,
   },
 });

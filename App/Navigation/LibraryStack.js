@@ -5,12 +5,12 @@ import { SoundscapePlayerScreen } from '../Screens/Library/SoundscapePlayerScree
 
 const LibraryStack = createStackNavigator(
   {
-    Soundfiles: { screen: SoundFileListScreen },
     Soundscapes: { screen: SoundscapeListScreen },
+    Soundfiles: { screen: SoundFileListScreen },
     SoundscapePlayer: { screen: SoundscapePlayerScreen },
   },
   {
-    initialRouteName: 'Soundfiles',
+    initialRouteName: 'Soundscapes',
     mode: 'card',
     headerMode: 'headerMode',
     headerBackTitleVisible: false,

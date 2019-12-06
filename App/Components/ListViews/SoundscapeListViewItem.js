@@ -47,37 +47,42 @@ class SoundscapeListViewItem extends Component {
   };
 
 
+  // <Text style={_styles.listview_item_text}>{`${this.props.filename}`}</Text>
+  // <Text style={_styles.listview_item_text}>{`selected=${this.props.selected}`}</Text>
+  // <Text style={_styles.listview_item_text}>{`${this.props.latLong}`}</Text>
   render() {
     return (
       <View style={_styles.listview_soundscape_item}>
         <View style={_styles.listview_soundscape_item_surface}>
-          <View style={_styles.listview_sounditem_playbtn_box}>
-            <AudioPlayButton
-              style={_styles.listview_sounditem_playbtn_icon}
-              onPress={this.handlePlayButton}
-              size={_vars.LIBRARY_PLAY_BTN_SIZE * 0.7}
-              color={_colors.PRIMARY}
-              active={this.state.playState}
-            />
+        <TouchableOpacity
+         onPress={this._onSelect}
+         style={[_styles.listview_item_touchable, {
+             backgroundColor: this.props.selected
+               ? _colors.SHADE_LIGHTER_40
+               : _colors.SHADE_LIGHTER_50,
+           },
+         ]}>
+         <View style={_styles.listview_soundscape_item_content_box}>
+           <Text style={_styles.listview_item_text}>{`#${this.props.id} - ${this.props.description}`}</Text>
+         </View>
+        </TouchableOpacity>
+
+          <View style={_styles.listview_soundscape_item_header}>
+            <View style={_styles.listview_sounditem_playbtn_box}>
+              <AudioPlayButton
+                style={_styles.listview_sounditem_playbtn_icon}
+                onPress={this.handlePlayButton}
+                size={_vars.LIBRARY_PLAY_BTN_SIZE * 0.7}
+                color={_colors.PRIMARY}
+                active={this.state.playState}
+              />
+            </View>
+            <View style={_styles.listview_item_meta_box}>
+              <Text style={_styles.listview_item_text}>{`${this.props.datetime}`}</Text>
+              <Text style={_styles.listview_item_text}>{`${this.props.tags}`}</Text>
+            </View>
           </View>
 
-          <TouchableOpacity
-            onPress={this._onSelect}
-            style={[_styles.listview_item_touchable, {
-                backgroundColor: this.props.selected
-                  ? _colors.SHADE_LIGHTER_40
-                  : _colors.SHADE_LIGHTER_50,
-              },
-            ]}>
-            <View style={_styles.listview_soundscape_item_content_box}>
-              <Text style={_styles.listview_item_text}>{`${this.props.datetime}`}</Text>
-              <Text style={_styles.listview_item_text}>{`(${this.props.id}) ${this.props.description}`}</Text>
-              <Text style={_styles.listview_item_text}>{`latLong=${this.props.latLong}`}</Text>
-              <Text style={_styles.listview_item_text}>{`filename=${this.props.filename}`}</Text>
-              <Text style={_styles.listview_item_text}>{`tags=${this.props.tags}`}</Text>
-              <Text style={_styles.listview_item_text}>{`selected=${this.props.selected}`}</Text>
-            </View>
-          </TouchableOpacity>
         </View>
       </View>
     );

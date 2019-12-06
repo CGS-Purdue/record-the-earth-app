@@ -1,15 +1,19 @@
+import EnvConfig from '../Config/Env';
+
 class Log {
   static _log(message, ...args) {
     if (__DEV__) {
       return console.log('LOG', message, args);
     }
   }
+
   static _data(msg) {
     if (__DEV__) {
       console.log([`${msg.title}`, `src: ${msg.src}`].join('\n'));
       console.log(msg.data);
     }
   }
+
   static _info(msg) {
     if (__DEV__) {
       return console.log(msg);
@@ -41,11 +45,13 @@ class Log {
 
 
 const _dev = (context, ...msgs) => {
+  if (!EnvConfig.developerLogging) {
+    return false;
+  }
 
   if (__DEV__){
     let title_style = 'color:cyan; font-weight;bold;';
     let subtitle_style = 'color:lightcoral; font-weight;normal;';
-
     let logmsg = [];
 
     for (var msg of msgs){
